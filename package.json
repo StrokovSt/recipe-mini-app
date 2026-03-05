@@ -14,7 +14,7 @@
         "backend": "npm run dev --workspace backend",
         "frontend": "npm run dev --workspace frontend",
         "bot": "npm run dev --workspace bot",
-        "dev": "concurrently \"npm run backend\" \"npm run bot\"",
+        "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
         "lint": "npm run lint --workspace backend"
     },
     "devDependencies": {

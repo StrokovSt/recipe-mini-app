@@ -36,24 +36,24 @@ router.get("/categories", async (req: Request, res: Response) => {
 });
 
 // GET /api/recipes/:id
-router.get("/:id", async (req: Request, res: Response) => {
-    const recipe = await prisma.recipe.findFirst({
+router.get("/", async (req: Request, res: Response) => {
+    const category = req.query.category as string | undefined;
+    const search = req.query.search as string | undefined;
+
+    const recipes = await prisma.recipe.findMany({
         where: {
-        id: req.params.id,
-        userId: req.userId,
+            userId: req.userId,
+            ...(category && category !== "Все" ? { category } : {}),
+            ...(search ? { title: { contains: search } } : {}),
         },
         include: {
-        media: { orderBy: { order: "asc" } },
-        tags: { include: { tag: true } },
+            media: { orderBy: { order: "asc" } },
+            tags: { include: { tag: true } },
         },
+        orderBy: { createdAt: "desc" },
     });
 
-    if (!recipe) {
-        res.status(404).json({ error: "Рецепт не найден" });
-        return;
-    }
-
-    res.json(recipe);
+    res.json(recipes);
 });
 
 // POST /api/recipes
@@ -101,7 +101,7 @@ router.post("/", async (req: Request, res: Response) => {
 router.delete("/:id", async (req: Request, res: Response) => {
     await prisma.recipe.deleteMany({
         where: {
-            id: req.params.id,
+            id: req.params.id as string,
             userId: req.userId,
         },
     });

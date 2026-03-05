@@ -5,8 +5,13 @@ import { type ReactNode } from "react";
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-        staleTime: 1000 * 60 * 5, // 5 минут
-        retry: 1,
+            staleTime: 1000 * 60 * 5,
+            retry: 1,
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: true,
+        },
+        mutations: {
+            retry: 0,
         },
     },
 });
@@ -19,7 +24,7 @@ export function QueryProvider({ children }: Props) {
     return (
         <QueryClientProvider client={queryClient}>
             {children}
-            <ReactQueryDevtools initialIsOpen={false} />
+            {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={true} />}
         </QueryClientProvider>
     );
 }

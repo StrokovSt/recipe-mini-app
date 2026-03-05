@@ -1,6 +1,9 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 
+import { MediaType } from "../types/express";
+import { MediaItem, PinterestJsonLd } from "../types/pinterest";
+
 const USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1";
 
 const client = axios.create({
@@ -25,8 +28,33 @@ export async function fetchPage(url: string): Promise<string> {
     return data;
 }
 
+export function extractJsonLd(html: string): PinterestJsonLd[] {
+    const $ = cheerio.load(html);
+    const results: PinterestJsonLd[] = [];
+
+    $('script[type="application/ld+json"]').each((_i, el) => {
+        try {
+            const json = JSON.parse($(el).html() || "");
+            results.push(json);
+        } catch (error) {
+            console.warn("Failed to parse JSON-LD:", error instanceof Error ? error.message : error);
+        }
+    });
+
+    return results;
+}
+
 export function extractText(html: string): string {
     const $ = cheerio.load(html);
+
+    const jsonLdItems = extractJsonLd(html);
+
+    for (const item of jsonLdItems) {
+        const body = item.articleBody || item.description;
+        if (body && body.length > 100) {
+        return body.trim();
+        }
+    }
 
     $("script, style, nav, footer, header, aside, iframe").remove();
 
@@ -37,44 +65,36 @@ export function extractText(html: string): string {
     return content.replace(/\s+/g, " ").trim().slice(0, 4000);
 }
 
-export type MediaItem = {
-    url: string;
-    type: "image" | "video";
-};
-
 export function extractMedia(html: string): MediaItem[] {
     const $ = cheerio.load(html);
     const media: MediaItem[] = [];
+    const seen = new Set<string>();
 
-    // OG изображение (главное)
-    const ogImage = $('meta[property="og:image"]').attr("content");
-    if (ogImage) media.push({ url: ogImage, type: "image" });
+    const add = (url: string, type: MediaType) => {
+        if (url && !seen.has(url)) {
+        seen.add(url);
+        media.push({ url, type });
+        }
+    };
 
-    // OG видео
-    const ogVideo = $('meta[property="og:video"]').attr("content");
-    if (ogVideo) media.push({ url: ogVideo, type: "video" });
-
-    // Twitter
-    const twitterImage = $('meta[name="twitter:image"]').attr("content");
-    if (twitterImage && twitterImage !== ogImage) {
-        media.push({ url: twitterImage, type: "image" });
+    // Из JSON-LD — самое качественное медиа
+    const jsonLdItems = extractJsonLd(html);
+    for (const item of jsonLdItems) {
+        if (item.contentUrl) add(item.contentUrl, "video");
+        if (item.thumbnailUrl) add(item.thumbnailUrl, "image");
+        if (item.image) add(item.image, "image");
     }
 
-    // Все картинки из основного контента
-    $("main img, article img").each((_i, el) => {
-        const src = $(el).attr("src");
-        if (src && !media.find((m) => m.url === src)) {
-        media.push({ url: src, type: "image" });
-        }
-    });
+    // Fallback только если JSON-LD ничего не дал
+    if (media.length === 0) {
+        const ogVideo = $('meta[property="og:video"]').attr("content");
+        const ogImage = $('meta[property="og:image"]').attr("content");
+        const twitterImage = $('meta[name="twitter:image"]').attr("content");
 
-    // Видео теги
-    $("main video, article video").each((_i, el) => {
-        const src = $(el).attr("src") || $(el).find("source").attr("src");
-        if (src && !media.find((m) => m.url === src)) {
-        media.push({ url: src, type: "video" });
-        }
-    });
+        if (ogVideo) add(ogVideo, "video");
+        if (ogImage) add(ogImage, "image");
+        if (twitterImage) add(twitterImage, "image");
+    }
 
     return media;
 }
