@@ -1,0 +1,16 @@
+{
+    "eslint.useFlatConfig": true,
+    "eslint.nodePath": "node_modules",
+    "eslint.validate": [
+        "javascript",
+        "typescript",
+        "javascriptreact",
+        "typescriptreact"
+    ],
+    "eslint.workingDirectories": [
+        { "mode": "auto" }
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    }
+}

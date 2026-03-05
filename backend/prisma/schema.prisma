@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Recipe {
+  id           String   @id @default(cuid())
+  userId       String
+  title        String
+  category     String   @default("Без категории")
+  ingredients  String   // JSON строка
+  steps        String   // JSON строка
+  time         String?
+  servings     Int?
+  sourceUrl    String
+  source       String   @default("other")
+  telegraphUrl String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  media        Media[]
+  tags         RecipeTag[]
+
+  @@index([userId])
+  @@index([userId, category])
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  recipeId  String
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  url       String
+  type      String   // "image" | "video"
+  order     Int      @default(0) // порядок отображения
+  createdAt DateTime @default(now())
+}
+
+model Tag {
+  id      String      @id @default(cuid())
+  name    String      @unique
+  recipes RecipeTag[]
+}
+
+model RecipeTag {
+  recipeId String
+  tagId    String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  tag      Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([recipeId, tagId])
+}
