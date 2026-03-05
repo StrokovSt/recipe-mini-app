@@ -1,5 +1,6 @@
 import { model } from "../api/gemeni";
 import { recipePrompt } from "../prompts/recipe";
+import { ParsedRecipeAI } from "../types/express";
 import { extractMedia, extractText, fetchPage } from "../utils/scraper";
 
 const MAX_RETRIES = 3;
@@ -21,7 +22,7 @@ export async function parseRecipeFromUrl(url: string) {
     return { ...parsed, media };
 }
 
-async function generateWithRetry(text: string, attempt = 1): Promise<ParsedRecipeAI > {
+async function generateWithRetry(text: string, attempt = 1): Promise<ParsedRecipeAI> {
     try {
         const result = await model.generateContent(recipePrompt(text));
         const raw = result.response.text();
@@ -29,17 +30,26 @@ async function generateWithRetry(text: string, attempt = 1): Promise<ParsedRecip
         const parsed = JSON.parse(cleaned) as ParsedRecipeAI;
 
         if (parsed.error) {
-            throw new Error(parsed.error);
+        throw new Error(parsed.error);
         }
 
         return parsed;
-    } catch (error) {
-        const is503 = error instanceof Error && error.message.includes("503");
+    } 
+    catch (error) {
+        const message = error instanceof Error ? error.message : "";
+        const is503 = message.includes("503");
+        const is429 = message.includes("429");
 
         if (is503 && attempt < MAX_RETRIES) {
-        console.log(`Gemini 503, повтор ${attempt}/${MAX_RETRIES} через ${RETRY_DELAY}ms...`);
-        await sleep(RETRY_DELAY * attempt);
-        return generateWithRetry(text, attempt + 1);
+            console.warn(`Gemini 503, повтор ${attempt}/${MAX_RETRIES} через ${RETRY_DELAY * attempt}ms...`);
+            await sleep(RETRY_DELAY * attempt);
+            return generateWithRetry(text, attempt + 1);
+        }
+
+        if (is429) {
+            const retryMatch = message.match(/retryDelay.*?(\d+)s/);
+            const retryAfter = retryMatch ? parseInt(retryMatch[1]) * 1000 : 60000;
+            throw new Error(`QUOTA_EXCEEDED:${retryAfter}`);
         }
 
         throw error;

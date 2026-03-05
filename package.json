@@ -5,7 +5,8 @@
     "workspaces": [
         "backend",
         "frontend",
-        "bot"
+        "bot",
+        "common"
     ],
     "eslint": {
         "configFile": "eslint.config.js"

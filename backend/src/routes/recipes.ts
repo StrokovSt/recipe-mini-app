@@ -4,6 +4,14 @@ import prisma from "../lib/prisma";
 
 const router = Router();
 
+function parseRecipe(recipe: Record<string, unknown>) {
+    return {
+        ...recipe,
+        ingredients: JSON.parse(recipe.ingredients as string),
+        steps: JSON.parse(recipe.steps as string),
+    };
+}
+
 // GET /api/recipes?category=Паста&search=карб
 router.get("/", async (req: Request, res: Response) => {
     const { category, search } = req.query;
@@ -21,7 +29,7 @@ router.get("/", async (req: Request, res: Response) => {
         orderBy: { createdAt: "desc" },
     });
 
-    res.json(recipes);
+    res.json(recipes.map(parseRecipe));
 });
 
 // GET /api/recipes/categories
@@ -36,24 +44,24 @@ router.get("/categories", async (req: Request, res: Response) => {
 });
 
 // GET /api/recipes/:id
-router.get("/", async (req: Request, res: Response) => {
-    const category = req.query.category as string | undefined;
-    const search = req.query.search as string | undefined;
-
-    const recipes = await prisma.recipe.findMany({
+router.get("/:id", async (req: Request, res: Response) => {
+    const recipe = await prisma.recipe.findFirst({
         where: {
-            userId: req.userId,
-            ...(category && category !== "Все" ? { category } : {}),
-            ...(search ? { title: { contains: search } } : {}),
+        id: req.params.id as string,
+        userId: req.userId,
         },
         include: {
-            media: { orderBy: { order: "asc" } },
-            tags: { include: { tag: true } },
+        media: { orderBy: { order: "asc" } },
+        tags: { include: { tag: true } },
         },
-        orderBy: { createdAt: "desc" },
     });
 
-    res.json(recipes);
+    if (!recipe) {
+        res.status(404).json({ error: "Рецепт не найден" });
+        return;
+    }
+
+    res.json(parseRecipe(recipe));
 });
 
 // POST /api/recipes

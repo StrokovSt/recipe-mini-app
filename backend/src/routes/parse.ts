@@ -1,7 +1,7 @@
+import { createError, ErrorCode } from "@recipe/common";
 import { Request, Response,Router } from "express";
 
 import { parseRecipeFromUrl } from "../services/parser";
-import { createError,ErrorCode } from "../types/errors";
 
 const router = Router();
 
@@ -29,6 +29,17 @@ function detectSource(url: string): "pinterest" | "telegram" | "other" {
 
         if (message.includes("503") || message.includes("unavailable")) {
             res.status(503).json(createError(ErrorCode.AI_UNAVAILABLE, "AI сервис временно недоступен, попробуй позже"));
+            return;
+        }
+
+        if (message.includes("QUOTA_EXCEEDED")) {
+            const retryAfter = message.split(":")[1];
+
+            res.status(429).json(createError(
+                ErrorCode.AI_UNAVAILABLE,
+                `Превышен лимит запросов. Попробуй через ${Math.ceil(Number(retryAfter) / 1000)} секунд`
+            ));
+    
             return;
         }
 

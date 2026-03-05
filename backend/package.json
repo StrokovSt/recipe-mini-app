@@ -5,16 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec tsx --tsconfig tsconfig.json src/index.ts",
-    "start": "node dist/index.js",
+    "start": "node --experimental-strip-types src/index.ts",
+    "build": "tsc",
     "test:scraper": "tsx src/utils/test-scraper.ts",
     "test:parser": "tsx src/utils/test-parser.ts",
-    "build": "tsc"
+    "test:save": "tsx src/utils/test-save.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@recipe/common": "*",
     "@anthropic-ai/sdk": "^0.78.0",
     "@google/generative-ai": "^0.24.1",
     "@prisma/client": "^6.19.2",
