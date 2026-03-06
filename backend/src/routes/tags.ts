@@ -48,10 +48,12 @@ router.post("/", async (req: Request, res: Response) => {
 
 // PATCH /api/tags/:id
 router.patch("/:id", async (req: Request, res: Response) => {
+    const id = req.params.id as string;
+    const userId = req.userId as string;
     const { name } = req.body;
 
     const tag = await prisma.tag.updateMany({
-        where: { id: req.params.id, userId: req.userId },
+        where: { id, userId },
         data: { name },
     });
 
@@ -60,8 +62,11 @@ router.patch("/:id", async (req: Request, res: Response) => {
 
 // DELETE /api/tags/:id
 router.delete("/:id", async (req: Request, res: Response) => {
+    const id = req.params.id as string;
+    const userId = req.userId as string;
+
     await prisma.tag.deleteMany({
-        where: { id: req.params.id, userId: req.userId },
+        where: { id, userId },
     });
 
     res.json({ ok: true });
