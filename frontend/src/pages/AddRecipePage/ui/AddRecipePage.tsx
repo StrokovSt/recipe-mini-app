@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ParsedRecipe } from "@recipe/common";
+import type { ParsedRecipe } from "@recipe/common";
 
 import { AppRoute } from "@/app/router";
 import { useCreateRecipe, useParseRecipe } from "@/entities/recipe";
@@ -78,12 +78,12 @@ const AddRecipePage = () => {
 
             <h3>Ингредиенты</h3>
             <ul>
-                {parsed.ingredients.map((ing, i) => <li key={i}>{ing}</li>)}
+                {parsed.ingredients.map((ing: string, i: number) => <li key={i}>{ing}</li>)}
             </ul>
 
             <h3>Шаги</h3>
             <ol>
-                {parsed.steps.map((step, i) => <li key={i}>{step}</li>)}
+                {parsed.steps.map((step: string, i: number) => <li key={i}>{step}</li>)}
             </ol>
 
             <h3>Теги</h3>

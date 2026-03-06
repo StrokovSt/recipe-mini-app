@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec tsx --tsconfig tsconfig.json src/index.ts",
-    "start": "tsx src/index.ts",
     "build": "tsc",
+    "start": "npm run db:deploy && tsx src/index.ts",
+    "db:deploy": "npx prisma migrate deploy && npx prisma generate",
+    "db:migrate": "npx prisma migrate dev",
     "test:scraper": "tsx src/utils/test-scraper.ts",
     "test:parser": "tsx src/utils/test-parser.ts",
     "test:save": "tsx src/utils/test-save.ts"
