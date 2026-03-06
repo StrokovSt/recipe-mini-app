@@ -1,5 +1,5 @@
 import WebApp from "@twa-dev/sdk";
-import axios, { isAxiosError } from "axios";
+import axios, { isAxiosError } from 'axios';
 
 import type { AppError } from "@recipe/common";
 
