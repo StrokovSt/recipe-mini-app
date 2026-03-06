@@ -13,7 +13,7 @@ router.get("/", async (req: Request, res: Response) => {
         orderBy: { category: "asc" },
     });
 
-    res.json(categories.map((c) => c.category));
+    res.json(categories.map((c: { category: string }) => c.category));
 });
 
 // POST /api/categories — переименовать категорию для всех рецептов

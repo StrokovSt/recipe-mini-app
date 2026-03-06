@@ -16,8 +16,8 @@ router.get("/", async (req: Request, res: Response) => {
 
     if (tags.length === 0) {
         await prisma.tag.createMany({
-        data: DEFAULT_TAGS.map((name) => ({ userId, name })),
-        skipDuplicates: true,
+            data: DEFAULT_TAGS.map((name) => ({ userId, name })),
+            skipDuplicates: true,
         });
 
         tags = await prisma.tag.findMany({

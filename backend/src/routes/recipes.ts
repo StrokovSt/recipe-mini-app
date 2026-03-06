@@ -126,7 +126,7 @@ async function resolveTags(tagNames: string[], userId: string) {
         },
     });
 
-    return userTags.map((tag) => ({ tagId: tag.id }));
+    return userTags.map((tag: { id: string }) => ({ tagId: tag.id }));
 }
 
 export default router;
