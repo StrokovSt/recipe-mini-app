@@ -1,6 +1,6 @@
 import { model } from "../api/gemeni";
 import { recipePrompt } from "../prompts/recipe";
-import { ParsedRecipeAI } from "../types/express";
+import { ParsedRecipeAI } from "../types/pinterest";
 import { extractMedia, extractText, fetchPage } from "../utils/scraper";
 
 const MAX_RETRIES = 3;

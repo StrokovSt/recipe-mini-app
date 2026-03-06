@@ -40,7 +40,7 @@ router.get("/categories", async (req: Request, res: Response) => {
         distinct: ["category"],
     });
 
-    res.json(["Все", ...categories.map((c) => c.category)]);
+    res.json(["Все", ...categories.map((c: { category: string }) => c.category)]);
 });
 
 // GET /api/recipes/:id

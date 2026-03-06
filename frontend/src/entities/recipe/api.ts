@@ -1,6 +1,6 @@
-import { api } from "@/shared/api";
+import type { CreateRecipeDto, ParsedRecipe, Recipe } from "@recipe/common";
 
-import type { CreateRecipeDto, ParsedRecipe, Recipe } from "./types";
+import { api } from "@/shared/api";
 
 export const recipeApi = {
     getAll: async (params?: { category?: string; search?: string }): Promise<Recipe[]> => {
