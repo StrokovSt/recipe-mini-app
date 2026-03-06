@@ -37,6 +37,8 @@ export default [
                 "error",
                 {
                     "groups": [
+                        // Side-effects и dotenv — всегда первыми
+                        ["^dotenv", "^\\u0000"],
                         // Внешние библиотеки
                         ["^node:", "^(?!@recipe)@?\\w"],
                         // Внутренние пакеты монорепо

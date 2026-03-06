@@ -1,8 +1,8 @@
+import "dotenv/config";
+
 import * as cheerio from "cheerio";
 
 import { extractMedia, extractText, fetchPage } from "./scraper";
-
-import "dotenv/config";
 
 const url = process.argv[2];
 

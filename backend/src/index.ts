@@ -1,11 +1,12 @@
+/// <reference path="./types/express.d.ts" />
+import "dotenv/config"
+
 import cors from "cors";
 import express from "express";
 
 import { authMiddleware } from "./middleware/auth";
 import router from "./routes/parse";
 import recipesRouter from "./routes/recipes";
-
-import "dotenv/config"
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -5,5 +5,7 @@
         "rootDir": "./src",
         "typeRoots": ["./src/types", "./node_modules/@types"]
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*"],
+    "exclude": ["src/scripts", "src/utils/test-scraper.ts", "src/utils/test-parser.ts", "src/utils/test-save.ts"]
+
 }

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { ParsedRecipe } from "@recipe/common";
+
 import { AppRoute } from "@/app/router";
-import { ParsedRecipe, useCreateRecipe, useParseRecipe } from "@/entities/recipe";
+import { useCreateRecipe, useParseRecipe } from "@/entities/recipe";
 import { ApiError } from "@/shared/api";
 
 const AddRecipePage = () => {
