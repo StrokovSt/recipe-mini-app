@@ -1,26 +1,25 @@
-
 import { api } from "@/shared/api";
 
 import type { CreateRecipeDto, ParsedRecipe, Recipe } from "./types";
 
 export const recipeApi = {
     getAll: async (params?: { category?: string; search?: string }): Promise<Recipe[]> => {
-        const { data } = await api.get("/api/recipes", { params });
+        const { data } = await api.get<Recipe[]>("/api/recipes", { params });
         return data;
     },
 
     getById: async (id: string): Promise<Recipe> => {
-        const { data } = await api.get(`/api/recipes/${id}`);
+        const { data } = await api.get<Recipe>(`/api/recipes/${id}`);
         return data;
     },
 
     getCategories: async (): Promise<string[]> => {
-        const { data } = await api.get("/api/recipes/categories");
+        const { data } = await api.get<string[]>("/api/recipes/categories");
         return data;
     },
 
     create: async (recipe: CreateRecipeDto): Promise<Recipe> => {
-        const { data } = await api.post("/api/recipes", recipe);
+        const { data } = await api.post<Recipe>("/api/recipes", recipe);
         return data;
     },
 
@@ -29,7 +28,7 @@ export const recipeApi = {
     },
 
     parse: async (url: string): Promise<ParsedRecipe> => {
-        const { data } = await api.post("/api/parse", { url });
+        const { data } = await api.post<ParsedRecipe>("/api/parse", { url });
         return data;
     },
 };

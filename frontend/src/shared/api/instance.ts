@@ -1,6 +1,7 @@
-import type { AppError } from "@recipe/common";
 import WebApp from "@twa-dev/sdk";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
+
+import type { AppError } from "@recipe/common";
 
 export class ApiError extends Error {
     code: string;
@@ -24,7 +25,9 @@ api.interceptors.request.use((config) => {
     const userId =
         WebApp.initDataUnsafe?.user?.id?.toString() ?? "dev-user";
 
-    config.headers["x-user-id"] = userId;
+    if (config.headers) {
+        config.headers["x-user-id"] = userId;
+    }
 
     return config;
 });
@@ -32,7 +35,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (axios.isAxiosError(error) && error.response?.data?.code) {
+        if (isAxiosError(error) && error.response?.data?.code) {
             throw new ApiError(error.response.data as AppError, error.response.status);
         }
 
