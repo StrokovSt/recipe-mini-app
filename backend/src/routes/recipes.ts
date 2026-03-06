@@ -93,12 +93,12 @@ router.post("/", async (req: Request, res: Response) => {
             })),
         },
         tags: {
-            create: await resolveTags(tags || []),
+            create: await resolveTags(tags || [], userId),
         },
         },
         include: {
-        media: true,
-        tags: { include: { tag: true } },
+            media: true,
+            tags: { include: { tag: true } },
         },
     });
 
@@ -118,17 +118,15 @@ router.delete("/:id", async (req: Request, res: Response) => {
 });
 
 // ── Helper ─────────────────────────────────────────────────────────────────
-async function resolveTags(tagNames: string[]) {
-    return Promise.all(
-        tagNames.map(async (name: string) => {
-        const tag = await prisma.tag.upsert({
-            where: { name },
-            update: {},
-            create: { name },
-        });
-        return { tagId: tag.id };
-        })
-    );
+async function resolveTags(tagNames: string[], userId: string) {
+    const userTags = await prisma.tag.findMany({
+        where: {
+        userId,
+        name: { in: tagNames },
+        },
+    });
+
+    return userTags.map((tag) => ({ tagId: tag.id }));
 }
 
 export default router;

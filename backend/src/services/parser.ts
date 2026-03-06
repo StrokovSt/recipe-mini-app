@@ -29,10 +29,6 @@ async function generateWithRetry(text: string, attempt = 1): Promise<ParsedRecip
         const cleaned = raw.replace(/^```json\n?/, "").replace(/\n?```$/, "").trim();
         const parsed = JSON.parse(cleaned) as ParsedRecipeAI;
 
-        if (parsed.error) {
-        throw new Error(parsed.error);
-        }
-
         return parsed;
     } 
     catch (error) {
