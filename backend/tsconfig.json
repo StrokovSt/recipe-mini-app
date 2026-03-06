@@ -3,9 +3,16 @@
     "compilerOptions": {
         "outDir": "./dist",
         "rootDir": "./src",
-        "typeRoots": ["./src/types", "./node_modules/@types"]
+        "noEmit": false,
+        "strict": true,
+        "noImplicitAny": true,
     },
+    "files": ["src/types/express.d.ts"],
     "include": ["src/**/*"],
-    "exclude": ["src/scripts", "src/utils/test-scraper.ts", "src/utils/test-parser.ts", "src/utils/test-save.ts"]
-
+    "exclude": [
+        "src/scripts",
+        "src/utils/test-scraper.ts",
+        "src/utils/test-parser.ts",
+        "src/utils/test-save.ts"
+    ]
 }
