@@ -28,13 +28,6 @@ export function useRecipe(id: string) {
     });
 }
 
-export function useCategories() {
-    return useQuery({
-        queryKey: RECIPE_KEYS.categories(),
-        queryFn: recipeApi.getCategories,
-    });
-}
-
 export function useCreateRecipe() {
     const queryClient = useQueryClient();
 

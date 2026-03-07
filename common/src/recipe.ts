@@ -17,13 +17,20 @@ export interface RecipeTag {
     tag: Tag;
 }
 
+export interface Category {
+    id: string;
+    name: string;
+    userId: string;
+}
+
 export type RecipeSource = "pinterest" | "telegram" | "other";
 
 export interface Recipe {
     id: string;
     userId: string;
     title: string;
-    category: string;
+    categoryId: string | null;
+    category: Category | null;
     ingredients: string[];
     steps: string[];
     time: string | null;
@@ -37,12 +44,17 @@ export interface Recipe {
     updatedAt: string;
 }
 
-export type CreateRecipeDto = Omit<Recipe, "id" | "userId" | "telegraphUrl" | "createdAt" | "updatedAt" | "tags"> & {
+export type RecipeOmitFields = "id" | "userId" | "category" | "categoryId" | "telegraphUrl" | "createdAt" | "updatedAt" | "tags";
+
+export type CreateRecipeDto = Omit<Recipe, RecipeOmitFields> & {
+    categoryId?: string | null;
+    category?: string;
     tags: string[];
 };
 
 export interface ParsedRecipe {
     title: string;
+    category?: string;
     ingredients: string[];
     steps: string[];
     time: string | null;

@@ -1,2 +1,2 @@
 export { recipeApi } from "./api";
-export { RECIPE_KEYS, useCategories, useCreateRecipe, useDeleteRecipe, useParseRecipe, useRecipe, useRecipes } from "./hooks";
+export { RECIPE_KEYS, useCreateRecipe, useDeleteRecipe, useParseRecipe, useRecipe, useRecipes } from "./hooks";

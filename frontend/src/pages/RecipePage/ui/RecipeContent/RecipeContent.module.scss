@@ -1,0 +1,97 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 0 var(--space-5) var(--space-6);
+}
+
+.tabs {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.tab {
+    flex: 1;
+    padding: var(--space-3);
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--tg-secondary-bg);
+    box-shadow: var(--shadow-sm);
+    color: var(--tg-hint);
+    font: var(--font-sm);
+    font-family: var(--font-family-main);
+    font-weight: var(--font-weight-extrabold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+
+    &Active {
+        background: var(--color-accent);
+        color: #fff;
+    }
+}
+
+.list {
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--tg-secondary-bg);
+    box-shadow: var(--shadow-sm);
+}
+
+.empty {
+    margin: 0;
+    padding: var(--space-4);
+    color: var(--tg-hint);
+    font: var(--font-sm);
+    text-align: center;
+}
+
+.ingredientItem {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid rgb(0 0 0 / 4%);
+    color: var(--tg-text);
+    font: var(--font-sm);
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+}
+
+.stepItem {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid rgb(0 0 0 / 4%);
+    color: var(--tg-text);
+    font: var(--font-sm);
+    line-height: var(--font-line-md);
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.stepNum {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    color: #fff;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-black);
+}

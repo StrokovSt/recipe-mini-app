@@ -1,8 +1,14 @@
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
-import { AppRoute } from '@/app/router';
-import { useDeleteRecipe, useRecipe } from '@/entities/recipe';
+import { AppRoute } from "@/app/router";
+import { useDeleteRecipe, useRecipe } from "@/entities/recipe";
+import { Spinner } from "@/shared/ui/Spinner";
+
+import { RecipeContent } from "./RecipeContent/RecipeContent";
+import { RecipeHero } from "./RecipeHero/RecipeHero";
+import { RecipeMeta } from "./RecipeMeta/RecipeMeta";
+
+import styles from "./RecipePage.module.scss";
 
 const RecipePage = () => {
     const { id } = useParams<{ id: string }>();
@@ -11,79 +17,46 @@ const RecipePage = () => {
     const { data: recipe, isLoading, isError } = useRecipe(id!);
     const { mutate: deleteRecipe } = useDeleteRecipe();
 
-    if (isLoading) return <div>Загрузка...</div>;
-    if (isError || !recipe) return <div>Рецепт не найден</div>;
-
-    const handleDelete = () => {
-        deleteRecipe(recipe.id, {
-        onSuccess: () => navigate(AppRoute.Home),
-        });
-    };
+    if (isLoading) return <Spinner size="xl" />;
+    if (isError || !recipe) return <div className={styles.notFound}>Рецепт не найден</div>;
 
     const video = recipe.media.find((m) => m.type === "video");
-    const images = recipe.media.filter((m) => m.type === "image");
+    const image = recipe.media.find((m) => m.type === "image");
+    const tags = recipe.tags.map((t) => t.tag.name);
 
-    console.log('recipe: ', recipe)
+    const handleDelete = () => {
+        deleteRecipe(recipe.id, { onSuccess: () => navigate(AppRoute.Home) });
+    };
 
     return (
-        <div style={{ padding: 20, maxWidth: 600 }}>
-        <button onClick={() => navigate(AppRoute.Home)}>← Назад</button>
-
-        <h1 style={{ margin: "16px 0 8px" }}>{recipe.title}</h1>
-
-        <p>Категория: {recipe.category}</p>
-        <p>Теги: {recipe.tags.map((t) => t.tag.name).join(", ")}</p>
-
-        <div style={{ display: "flex", gap: 8, margin: "8px 0" }}>
-            {recipe.time && <span>⏱ {recipe.time}</span>}
-            {recipe.servings && <span>🍽 {recipe.servings} порций</span>}
-        </div>
-
-        {video && (
-            <video
-            src={video.url}
-            controls
-            style={{ width: "100%", borderRadius: 8, marginBottom: 12 }}
+        <main className={styles.page}>
+            <RecipeHero
+                title={recipe.title}
+                category={recipe.category?.name}
+                videoUrl={video?.url}
+                imageUrl={image?.url}
+                onBack={() => navigate(AppRoute.Home)}
             />
-        )}
 
-        {!video && images[0] && (
-            <img
-            src={images[0].url}
-            alt={recipe.title}
-            style={{ width: "100%", height: 300, objectFit: "cover", borderRadius: 8, marginBottom: 12 }}
+            <RecipeMeta
+                time={recipe.time}
+                servings={recipe.servings}
+                tags={tags}
+                sourceUrl={recipe.sourceUrl}
+                telegraphUrl={recipe.telegraphUrl}
             />
-        )}
 
-        <h3>Ингредиенты</h3>
-        <ul>
-            {recipe?.ingredients?.map((ing, i) => (
-                <li key={i}>{ing}</li>
-            ))}
-        </ul>
+            <RecipeContent
+                ingredients={recipe.ingredients}
+                steps={recipe.steps}
+            />
 
-        <h3>Приготовление</h3>
-        <ol>
-            {recipe.steps.map((step, i) => (
-            <li key={i} style={{ marginBottom: 8 }}>{step}</li>
-            ))}
-        </ol>
-
-        {recipe.telegraphUrl && (
-            <a href={recipe.telegraphUrl} target="_blank" rel="noreferrer">
-            Открыть в Telegraph
-            </a>
-        )}
-
-        <div style={{ marginTop: 20, display: "flex", gap: 8 }}>
-            <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
-            Открыть оригинал
-            </a>
-            <button onClick={handleDelete} style={{ color: "red", marginLeft: "auto" }}>
-            Удалить рецепт
-            </button>
-        </div>
-        </div>
+            <div className={styles.danger}>
+                <button className={styles.deleteBtn} onClick={handleDelete}>
+                    Удалить рецепт
+                </button>
+            </div>
+        </main>
     );
 };
 

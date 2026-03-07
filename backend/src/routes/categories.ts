@@ -1,45 +1,84 @@
 import { Request, Response, Router } from "express";
 
+import { DEFAULT_CATEGORIES } from "../config/defaults";
 import prisma from "../lib/prisma";
 
 const router = Router();
 
 // GET /api/categories
 router.get("/", async (req: Request, res: Response) => {
-    const categories = await prisma.recipe.findMany({
-        where: { userId: req.userId },
-        select: { category: true },
-        distinct: ["category"],
-        orderBy: { category: "asc" },
+    const userId = req.userId as string;
+
+    let categories = await prisma.category.findMany({
+        where: { userId },
+        orderBy: { name: "asc" },
     });
 
-    res.json(categories.map((c: { category: string }) => c.category));
+    if (categories.length === 0) {
+        await prisma.category.createMany({
+            data: DEFAULT_CATEGORIES.map((name) => ({ userId, name })),
+            skipDuplicates: true,
+        });
+
+        categories = await prisma.category.findMany({
+            where: { userId },
+            orderBy: { name: "asc" },
+        });
+    }
+
+    res.json(categories);
 });
 
-// POST /api/categories — переименовать категорию для всех рецептов
-router.post("/rename", async (req: Request, res: Response) => {
-    const { from, to } = req.body;
+// POST /api/categories
+router.post("/", async (req: Request, res: Response) => {
+    const userId = req.userId as string;
+    const { name } = req.body;
 
-    if (!from || !to) {
-        res.status(400).json({ error: "Нужны поля from и to" });
+    if (!name) {
+        res.status(400).json({ error: "Название категории обязательно" });
         return;
     }
 
-    await prisma.recipe.updateMany({
-        where: { userId: req.userId, category: from },
-        data: { category: to },
+    const category = await prisma.category.upsert({
+        where: { userId_name: { userId, name } },
+        update: {},
+        create: { userId, name },
     });
 
-    res.json({ ok: true });
+    res.status(201).json(category);
 });
 
-// DELETE /api/categories — сбросить категорию у всех рецептов
-router.delete("/", async (req: Request, res: Response) => {
+// PATCH /api/categories/:id
+router.patch("/:id", async (req: Request, res: Response) => {
+    const id = req.params.id as string;
+    const userId = req.userId as string;
     const { name } = req.body;
 
+    if (!name) {
+        res.status(400).json({ error: "Название категории обязательно" });
+        return;
+    }
+
+    const category = await prisma.category.updateMany({
+        where: { id, userId },
+        data: { name },
+    });
+
+    res.json(category);
+});
+
+// DELETE /api/categories/:id
+router.delete("/:id", async (req: Request, res: Response) => {
+    const id = req.params.id as string;
+    const userId = req.userId as string;
+
     await prisma.recipe.updateMany({
-        where: { userId: req.userId, category: name },
-        data: { category: "Без категории" },
+        where: { userId, categoryId: id },
+        data: { categoryId: null },
+    });
+
+    await prisma.category.deleteMany({
+        where: { id, userId },
     });
 
     res.json({ ok: true });

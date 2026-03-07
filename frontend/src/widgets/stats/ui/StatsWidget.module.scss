@@ -1,0 +1,24 @@
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 20px 20px;
+    padding: 20px 24px;
+    border-radius: 20px;
+    background: var(--color-accent);
+}
+
+.item {
+    text-align: center;
+}
+
+.val {
+    color: var(--tg-button-text);
+    font-size: 26px;
+    font-weight: 900;
+    }
+
+.label {
+    margin-top: 2px;
+    color: rgb(255 255 255 / 80%);
+    font-size: 11px;
+}

@@ -1,0 +1,20 @@
+.wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    background: var(--color-accent-light);
+}
+
+.icon {
+    flex-shrink: 0;
+    font-size: var(--font-size-md);
+}
+
+.text {
+    margin: 0;
+    color: #e53935;
+    font: var(--font-sm);
+    font-weight: var(--font-weight-bold);
+}

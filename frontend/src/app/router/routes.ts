@@ -4,6 +4,9 @@ export enum AppRoute {
     Home = "/",
     Recipe = "/recipe/:id",
     AddRecipe = "/add",
+    Tags = "/tags",
+    Categories = "/categories",
+    Settings ="/settings"
 }
 
 export interface RouteConfig {

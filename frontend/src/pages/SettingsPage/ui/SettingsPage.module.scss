@@ -1,0 +1,31 @@
+.page {
+    min-height: 100%;
+    background: var(--tg-bg);
+    font-family: var(--font-family-main);
+}
+
+.tabs {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5) 0;
+}
+
+.tab {
+    flex: 1;
+    padding: var(--space-3);
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--tg-secondary-bg);
+    box-shadow: var(--shadow-sm);
+    color: var(--tg-hint);
+    font: var(--font-sm);
+    font-family: var(--font-family-main);
+    font-weight: var(--font-weight-extrabold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+
+    &Active {
+        background: var(--color-accent);
+        color: #fff;
+    }
+}

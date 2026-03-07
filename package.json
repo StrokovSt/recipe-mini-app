@@ -10,7 +10,7 @@
     ],
     "eslint": {
         "configFile": "eslint.config.js"
-    }, 
+    },
     "scripts": {
         "backend": "npm run dev --workspace backend",
         "frontend": "npm run dev --workspace frontend",
@@ -18,7 +18,8 @@
         "typecheck": "npm run typecheck --workspace frontend",
         "bot": "npm run dev --workspace bot",
         "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
-        "lint": "npm run lint --workspace backend"
+        "lint": "npm run lint --workspace backend",
+        "lint:css": "npm run lint:css:fix --workspace frontend"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^8.56.1",
@@ -27,5 +28,8 @@
         "eslint": "^9.39.3",
         "eslint-plugin-import": "^2.32.0",
         "eslint-plugin-simple-import-sort": "^12.1.1"
+    },
+    "dependencies": {
+        "clsx": "^2.1.1"
     }
 }

@@ -1,0 +1,44 @@
+@use "reset";
+@use "./variables";
+@use "tailwindcss";
+
+:root {
+    --tg-bg: var(--tg-theme-bg-color, #faf9f6);
+    --tg-text: var(--tg-theme-text-color, #1a1a1a);
+    --tg-hint: var(--tg-theme-hint-color, #888);
+    --tg-link: var(--tg-theme-link-color, #ff6b35);
+    --tg-button: var(--tg-theme-button-color, #ff6b35);
+    --tg-button-text: var(--tg-theme-button-text-color, #fff);
+    --tg-secondary-bg: var(--tg-theme-secondary-bg-color, #fff);
+    --tg-header-bg: var(--tg-theme-header-bg_color, #fff);
+    --color-accent: #ff6b35;
+    --color-accent-light: #fff0eb;
+    --color-accent-shadow: rgb(255 107 53 / 40%);
+    --radius-card: 16px;
+    --radius-btn: 24px;
+    --shadow-card: 0 2px 12px rgb(0 0 0 / 7%);
+    --shadow-soft: 0 2px 8px rgb(0 0 0 / 6%);
+    --font-main: 'Nunito', sans-serif;
+}
+
+[data-theme="dark"] {
+    --tg-bg: #1a1a1a;
+    --tg-text: #fff;
+    --tg-hint: #aaa;
+    --tg-secondary-bg: #2a2a2a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#root {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    width: 100vw;
+    width: 100dvw;
+    max-width: 640px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 auto;
+}

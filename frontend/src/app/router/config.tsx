@@ -5,6 +5,7 @@ import { AppRoute, type RouteConfig } from "./routes";
 const HomePage = lazy(() => import("@/pages/HomePage").then(m => ({ default: m.HomePage })));
 const RecipePage = lazy(() => import("@/pages/RecipePage").then(m => ({ default: m.RecipePage })));
 const AddRecipePage = lazy(() => import("@/pages/AddRecipePage").then(m => ({ default: m.AddRecipePage })));
+const SettingsPage = lazy(() => import("@/pages/SettingsPage").then(m => ({ default: m.SettingsPage })));
 
 export const routeConfig: RouteConfig[] = [
     {
@@ -18,5 +19,9 @@ export const routeConfig: RouteConfig[] = [
     {
         path: AppRoute.AddRecipe,
         element: AddRecipePage,
+    },
+    {
+        path: AppRoute.Settings,
+        element: SettingsPage,
     },
 ];

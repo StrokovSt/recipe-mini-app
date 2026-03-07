@@ -4,29 +4,41 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  recipes   Recipe[]
+  createdAt DateTime @default(now())
+
+  @@unique([userId, name])
+  @@index([userId])
 }
 
 model Recipe {
-  id           String   @id @default(cuid())
+  id           String    @id @default(cuid())
   userId       String
   title        String
-  category     String   @default("Без категории")
-  ingredients  String   // JSON строка
-  steps        String   // JSON строка
+  categoryId   String?
+  category     Category? @relation(fields: [categoryId], references: [id])
+  ingredients  String
+  steps        String
   time         String?
   servings     Int?
   sourceUrl    String
-  source       String   @default("other")
+  source       String    @default("other")
   telegraphUrl String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 
   media        Media[]
   tags         RecipeTag[]
 
   @@index([userId])
-  @@index([userId, category])
+  @@index([userId, categoryId])
 }
 
 model Media {
@@ -34,8 +46,8 @@ model Media {
   recipeId  String
   recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   url       String
-  type      String   // "image" | "video"
-  order     Int      @default(0) // порядок отображения
+  type      String
+  order     Int      @default(0)
   createdAt DateTime @default(now())
 }
 

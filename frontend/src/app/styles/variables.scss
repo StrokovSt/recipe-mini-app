@@ -1,0 +1,53 @@
+:root {
+  // ─── Typography ───────────────────────────────────────────
+    --font-family-main: 'Nunito', sans-serif;
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 22px;
+    --font-size-2xl: 28px;
+    --font-line-xs: 16px;
+    --font-line-sm: 20px;
+    --font-line-md: 24px;
+    --font-line-lg: 26px;
+    --font-line-xl: 30px;
+    --font-line-2xl: 36px;
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+    --font-xs: var(--font-size-xs) / var(--font-line-xs) var(--font-family-main);
+    --font-sm: var(--font-size-sm) / var(--font-line-sm) var(--font-family-main);
+    --font-md: var(--font-size-md) / var(--font-line-md) var(--font-family-main);
+    --font-lg: var(--font-size-lg) / var(--font-line-lg) var(--font-family-main);
+    --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
+    --font-2xl: var(--font-size-2xl) / var(--font-line-2xl) var(--font-family-main);
+
+    // ─── Spacing ──────────────────────────────────────────────
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+
+    // ─── Border radius ────────────────────────────────────────
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 20px;
+    --radius-full: 50%;
+
+    // ─── Shadows ──────────────────────────────────────────────
+    --shadow-sm: 0 2px 8px rgb(0 0 0 / 6%);
+    --shadow-md: 0 2px 12px rgb(0 0 0 / 7%);
+    --shadow-accent: 0 4px 16px var(--color-accent-shadow);
+
+    // ─── Transitions ──────────────────────────────────────────
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.2s ease;
+
+    // ─── Z-index ──────────────────────────────────────────────
+    --z-above: 10;
+    --z-modal: 100;
+}

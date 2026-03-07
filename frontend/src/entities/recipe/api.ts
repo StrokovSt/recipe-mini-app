@@ -13,11 +13,6 @@ export const recipeApi = {
         return data;
     },
 
-    getCategories: async (): Promise<string[]> => {
-        const { data } = await api.get<string[]>("/api/recipes/categories");
-        return data;
-    },
-
     create: async (recipe: CreateRecipeDto): Promise<Recipe> => {
         const { data } = await api.post<Recipe>("/api/recipes", recipe);
         return data;

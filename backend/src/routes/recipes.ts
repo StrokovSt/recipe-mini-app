@@ -12,17 +12,18 @@ function parseRecipe(recipe: Record<string, unknown>) {
     };
 }
 
-// GET /api/recipes?category=Паста&search=карб
+// GET /api/recipes?categoryId=xxx&search=карб
 router.get("/", async (req: Request, res: Response) => {
-    const { category, search } = req.query;
+    const { categoryId, search } = req.query;
 
     const recipes = await prisma.recipe.findMany({
         where: {
             userId: req.userId,
-            ...(category && category !== "Все" ? { category: category as string } : {}),
-            ...(search ? { title: { contains: search as string } } : {}),
+            ...(categoryId ? { categoryId: categoryId as string } : {}),
+            ...(search ? { title: { contains: search as string, mode: "insensitive" } } : {}),
         },
         include: {
+            category: true,
             media: { orderBy: { order: "asc" } },
             tags: { include: { tag: true } },
         },
@@ -32,27 +33,17 @@ router.get("/", async (req: Request, res: Response) => {
     res.json(recipes.map(parseRecipe));
 });
 
-// GET /api/recipes/categories
-router.get("/categories", async (req: Request, res: Response) => {
-    const categories = await prisma.recipe.findMany({
-        where: { userId: req.userId },
-        select: { category: true },
-        distinct: ["category"],
-    });
-
-    res.json(["Все", ...categories.map((c: { category: string }) => c.category)]);
-});
-
 // GET /api/recipes/:id
 router.get("/:id", async (req: Request, res: Response) => {
     const recipe = await prisma.recipe.findFirst({
         where: {
-        id: req.params.id as string,
-        userId: req.userId,
+            id: req.params.id as string,
+            userId: req.userId,
         },
         include: {
-        media: { orderBy: { order: "asc" } },
-        tags: { include: { tag: true } },
+            category: true,
+            media: { orderBy: { order: "asc" } },
+            tags: { include: { tag: true } },
         },
     });
 
@@ -61,42 +52,55 @@ router.get("/:id", async (req: Request, res: Response) => {
         return;
     }
 
-    res.json(parseRecipe(recipe));
+    res.json(parseRecipe(recipe as unknown as Record<string, unknown>));
 });
 
 // POST /api/recipes
 router.post("/", async (req: Request, res: Response) => {
-    const userId = req.userId;
-    const { title, category, ingredients, steps, time, servings, sourceUrl, source, media, tags } = req.body;
+    const userId = req.userId as string;
+    const { title, category, categoryId, ingredients, steps, time, servings, sourceUrl, source, media, tags } = req.body;
 
     if (!title || !ingredients || !steps || !sourceUrl) {
         res.status(400).json({ error: "Не хватает обязательных полей" });
         return;
     }
 
+    let resolvedCategoryId: string | null = categoryId ?? null;
+
+    // Если передана строка category — находим или создаём
+    if (!resolvedCategoryId && category && category !== "Без категории") {
+        const cat = await prisma.category.upsert({
+            where: { userId_name: { userId, name: category } },
+            update: {},
+            create: { userId, name: category },
+        });
+        resolvedCategoryId = cat.id;
+    }
+
     const recipe = await prisma.recipe.create({
         data: {
-        userId,
-        title,
-        category: category || "Без категории",
-        ingredients: JSON.stringify(ingredients),
-        steps: JSON.stringify(steps),
-        time: time || null,
-        servings: servings ? Number(servings) : null,
-        sourceUrl,
-        source: source || "other",
-        media: {
-            create: (media || []).map((m: { url: string; type: string }, i: number) => ({
-            url: m.url,
-            type: m.type,
-            order: i,
-            })),
-        },
-        tags: {
-            create: await resolveTags(tags || [], userId),
-        },
+            userId,
+            title,
+            categoryId: resolvedCategoryId,
+            ingredients: JSON.stringify(ingredients),
+            steps: JSON.stringify(steps),
+            time: time || null,
+            servings: servings ? Number(servings) : null,
+            sourceUrl,
+            source: source || "other",
+            media: {
+                create: (media || []).map((m: { url: string; type: string }, i: number) => ({
+                    url: m.url,
+                    type: m.type,
+                    order: i,
+                })),
+            },
+            tags: {
+                create: await resolveTags(tags || [], userId),
+            },
         },
         include: {
+            category: true,
             media: true,
             tags: { include: { tag: true } },
         },
@@ -117,12 +121,11 @@ router.delete("/:id", async (req: Request, res: Response) => {
     res.json({ ok: true });
 });
 
-// ── Helper ─────────────────────────────────────────────────────────────────
 async function resolveTags(tagNames: string[], userId: string) {
     const userTags = await prisma.tag.findMany({
         where: {
-        userId,
-        name: { in: tagNames },
+            userId,
+            name: { in: tagNames },
         },
     });
 

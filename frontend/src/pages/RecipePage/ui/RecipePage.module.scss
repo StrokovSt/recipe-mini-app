@@ -1,0 +1,37 @@
+.page {
+    min-height: 100%;
+    padding-bottom: var(--space-6);
+    background: var(--tg-bg);
+    font-family: var(--font-family-main);
+}
+
+.notFound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--tg-hint);
+    font: var(--font-md);
+}
+
+.danger {
+    padding: 0 var(--space-5);
+}
+
+.deleteBtn {
+    width: 100%;
+    padding: var(--space-3);
+    border: 2px solid #e53935;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: #e53935;
+    font: var(--font-sm);
+    font-family: var(--font-family-main);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+
+    &:active {
+        background: rgb(229 57 53 / 8%);
+    }
+}
