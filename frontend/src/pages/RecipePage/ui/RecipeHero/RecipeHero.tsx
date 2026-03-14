@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { IconButton } from "@/shared/ui/Buttons";
 
@@ -17,6 +17,14 @@ export function RecipeHero(props: RecipeHeroProps) {
     const { title, category, videoUrl, imageUrl, onBack, onImageClick } = props;
     const [videoOpen, setVideoOpen] = useState(false);
 
+    const mediaClickHandler = useCallback(() => {
+        if (videoUrl) {
+            setVideoOpen(true);
+        } else {
+            onImageClick?.();
+        }
+    }, [videoUrl])
+
     return (
         <>
             <div className={styles.hero}>
@@ -25,7 +33,7 @@ export function RecipeHero(props: RecipeHeroProps) {
                         src={imageUrl}
                         alt={title}
                         className={styles.media}
-                        onClick={onImageClick}
+                        onClick={mediaClickHandler}
                         style={{ cursor: onImageClick ? "pointer" : "default" }}
                     />
                 ) : (
@@ -42,7 +50,7 @@ export function RecipeHero(props: RecipeHeroProps) {
                 />
 
                 {videoUrl && (
-                    <button className={styles.playBtn} onClick={() => setVideoOpen(true)}>▶</button>
+                    <button className={styles.playBtn} onClick={mediaClickHandler}>▶</button>
                 )}
 
                 <div className={styles.info}>

@@ -33,6 +33,11 @@ const RecipePage = () => {
         deleteRecipe(recipe.id, { onSuccess: () => navigate(AppRoute.Home) });
     };
 
+    const imageClickHandler = () => {
+        console.log('meow')
+        setLightboxIndex(0);
+    }
+
     return (
         <main className={styles.page}>
             <RecipeHero
@@ -41,7 +46,7 @@ const RecipePage = () => {
                 videoUrl={video?.url}
                 imageUrl={images[0]?.url}
                 onBack={() => navigate(AppRoute.Home)}
-                onImageClick={() => images.length > 0 && setLightboxIndex(0)}
+                onImageClick={imageClickHandler}
             />
 
             <RecipeMeta
