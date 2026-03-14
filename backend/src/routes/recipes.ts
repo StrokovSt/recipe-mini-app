@@ -152,7 +152,7 @@ router.patch("/:id", async (req: Request, res: Response) => {
     if (tags !== undefined) {
         const resolvedTags = await resolveTags(tags, userId);
         await prisma.recipeTag.createMany({
-            data: resolvedTags.map((t) => ({ recipeId: id, tagId: t.tagId })),
+            data: resolvedTags.map((t: { tagId: string }) => ({ recipeId: id, tagId: t.tagId })),
         });
     }
 
