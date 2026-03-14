@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { IconButton } from "@/shared/ui/Buttons";
+
 import styles from "./RecipeHero.module.scss";
 
 interface RecipeHeroProps {
@@ -8,29 +10,39 @@ interface RecipeHeroProps {
     videoUrl?: string;
     imageUrl?: string;
     onBack: () => void;
+    onImageClick?: () => void;
 }
 
 export function RecipeHero(props: RecipeHeroProps) {
-    const { title, category, videoUrl, imageUrl, onBack } = props;
+    const { title, category, videoUrl, imageUrl, onBack, onImageClick } = props;
     const [videoOpen, setVideoOpen] = useState(false);
 
     return (
         <>
             <div className={styles.hero}>
                 {imageUrl ? (
-                    <img src={imageUrl} alt={title} className={styles.media} />
+                    <img
+                        src={imageUrl}
+                        alt={title}
+                        className={styles.media}
+                        onClick={onImageClick}
+                        style={{ cursor: onImageClick ? "pointer" : "default" }}
+                    />
                 ) : (
                     <div className={styles.mediaPlaceholder} />
                 )}
 
                 <div className={styles.overlay} />
 
-                <button className={styles.backBtn} onClick={onBack}>‹</button>
+                <IconButton
+                    icon="back"
+                    type="button"
+                    className={styles.backBtn}
+                    onClick={onBack}
+                />
 
                 {videoUrl && (
-                    <button className={styles.playBtn} onClick={() => setVideoOpen(true)}>
-                        ▶
-                    </button>
+                    <button className={styles.playBtn} onClick={() => setVideoOpen(true)}>▶</button>
                 )}
 
                 <div className={styles.info}>

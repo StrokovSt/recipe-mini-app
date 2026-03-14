@@ -180,11 +180,11 @@ router.delete("/:id", async (req: Request, res: Response) => {
     res.json({ ok: true });
 });
 
-async function resolveTags(tagNames: string[], userId: string) {
+async function resolveTags(tagIds: string[], userId: string) {
     const userTags = await prisma.tag.findMany({
         where: {
             userId,
-            name: { in: tagNames },
+            id: { in: tagIds },
         },
     });
 

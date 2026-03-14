@@ -35,3 +35,10 @@
         background: rgb(229 57 53 / 8%);
     }
 }
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+}

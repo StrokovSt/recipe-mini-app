@@ -19,7 +19,8 @@ import TagsSelect from "./TagsSelect/TagsSelect";
 
 import styles from "./RecipeForm.module.scss";
 
-const RecipeForm = ({ defaultValues, submitLabel = "Сохранить" }: RecipeFormProps) => {
+const RecipeForm = (props: RecipeFormProps) => {
+    const {defaultValues, submitLabel = "Сохранить", onSubmit: onSubmitProp, isPending: isPendingProp} = props;
     const navigate = useNavigate();
     const methods = useForm<RecipeFormValues>({
         resolver: zodResolver(recipeSchema) as Resolver<RecipeFormValues>,
@@ -43,8 +44,14 @@ const RecipeForm = ({ defaultValues, submitLabel = "Сохранить" }: Recip
     ];
 
     const { mutate: createRecipe, isPending: isSaving } = useCreateRecipe();
+    const isPending = isPendingProp ?? isSaving;
 
     const handleSave = (values: RecipeFormValues) => {
+        if (onSubmitProp) {
+            onSubmitProp(values);
+            return;
+        }
+
         createRecipe(
             {
                 title: values.title,
@@ -128,7 +135,7 @@ const RecipeForm = ({ defaultValues, submitLabel = "Сохранить" }: Recip
                         className={styles.saveButton}
                         type="button"
                         label={"Сбросить форму"}
-                        disabled={isSaving}
+                        disabled={isPending}
                         onClick={handleReset}
                         icon="delete"
                     />
@@ -136,7 +143,7 @@ const RecipeForm = ({ defaultValues, submitLabel = "Сохранить" }: Recip
                         className={styles.saveButton}
                         type="submit"
                         label={submitLabel}
-                        disabled={isSaving}
+                        disabled={isPending}
                         icon="save"
                     />
                 </div>
