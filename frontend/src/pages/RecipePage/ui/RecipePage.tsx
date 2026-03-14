@@ -6,6 +6,7 @@ import { buildRoute } from "@/app/router/routes";
 import { useDeleteRecipe, useRecipe } from "@/entities/recipe";
 import { RegularButton } from "@/shared/ui/Buttons";
 import { MediaLightbox } from "@/shared/ui/MediaLightbox";
+import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { Spinner } from "@/shared/ui/Spinner";
 
 import { RecipeContent } from "./RecipeContent/RecipeContent";
@@ -39,7 +40,7 @@ const RecipePage = () => {
     }
 
     return (
-        <main className={styles.page}>
+        <PageWrapper className={styles.page}>
             <RecipeHero
                 title={recipe.title}
                 category={recipe.category?.name}
@@ -86,7 +87,7 @@ const RecipePage = () => {
                     onChange={setLightboxIndex}
                 />
             )}
-        </main>
+        </PageWrapper>
     );
 };
 

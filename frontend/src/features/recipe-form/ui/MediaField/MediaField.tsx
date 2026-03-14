@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { useUploadMedia } from "@/entities/recipe";
-import { AddButton, IconButton, OutlineButton } from "@/shared/ui/Buttons";
+import { IconButton, OutlineButton } from "@/shared/ui/Buttons";
 import { Input } from "@/shared/ui/Input";
 import { MediaLightbox } from "@/shared/ui/MediaLightbox";
 import { Spinner } from "@/shared/ui/Spinner";
@@ -114,10 +114,14 @@ const MediaField = () => {
                     className={styles.fileInput}
                     onChange={handleFileChange}
                 />
-                <AddButton
+                <OutlineButton
                     label="Добавить ссылку"
                     onClick={() => { setShowUrlInput((v) => !v); setUrlError(""); }}
-                />
+                    disabled={isUploading}
+                    type="button"
+                >
+                    {"Добавить ссылку"}
+                </OutlineButton>
             </div>
 
             {errors.media?.message && (

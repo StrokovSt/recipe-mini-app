@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import { useState } from "react";
 
+import { PageWrapper } from "@/shared/ui/PageWrapper";
+
 import CategoriesTab from "./CategoriesTab/CategoriesTab";
 import { TagsTab } from "./TagsTab/TagsTab";
 
@@ -17,7 +19,7 @@ const SettingsPage = () => {
     const [tab, setTab] = useState<Tab>("categories");
 
     return (
-        <main className={styles.page}>
+        <PageWrapper className={styles.page}>
             <div className={styles.tabs}>
                 {TABS.map((t) => (
                     <button
@@ -31,7 +33,7 @@ const SettingsPage = () => {
             </div>
 
             {tab === "categories" ? <CategoriesTab /> : <TagsTab />}
-        </main>
+        </PageWrapper>
     );
 }
 

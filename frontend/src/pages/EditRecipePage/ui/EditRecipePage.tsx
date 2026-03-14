@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { buildRoute } from "@/app/router/routes";
 import { useRecipe, useUpdateRecipe } from "@/entities/recipe";
 import { RecipeForm, type RecipeFormValues } from "@/features/recipe-form";
+import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { Spinner } from "@/shared/ui/Spinner";
 
 const EditRecipePage = () => {
@@ -33,21 +34,23 @@ const EditRecipePage = () => {
     };
 
     return (
-        <RecipeForm
-            defaultValues={{
-                title: recipe.title,
-                categoryId: recipe.categoryId,
-                ingredients: recipe.ingredients,
-                steps: recipe.steps,
-                time: recipe.time ?? undefined,
-                servings: recipe.servings ?? undefined,
-                tagIds: recipe.tags.map((t) => t.tagId),
-                media: recipe.media.map((m) => ({ url: m.url, type: m.type })),
-            }}
-            onSubmit={handleSubmit}
-            isPending={isPending}
-            submitLabel="Сохранить изменения"
-        />
+        <PageWrapper>
+            <RecipeForm
+                defaultValues={{
+                    title: recipe.title,
+                    categoryId: recipe.categoryId,
+                    ingredients: recipe.ingredients,
+                    steps: recipe.steps,
+                    time: recipe.time ?? undefined,
+                    servings: recipe.servings ?? undefined,
+                    tagIds: recipe.tags.map((t) => t.tagId),
+                    media: recipe.media.map((m) => ({ url: m.url, type: m.type })),
+                }}
+                onSubmit={handleSubmit}
+                isPending={isPending}
+                submitLabel="Сохранить изменения"
+            />
+        </PageWrapper>
     );
 };
 
