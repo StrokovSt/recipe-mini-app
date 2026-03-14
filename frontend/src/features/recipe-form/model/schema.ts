@@ -5,6 +5,12 @@ const ingredientGroupSchema = z.object({
     items: z.array(z.string().min(1, "Ингредиент не может быть пустым")).min(1, "Группа не может быть пустой"),
 });
 
+const mediaItemSchema = z.object({
+    url: z.string().url("Введите корректный URL"),
+    type: z.enum(["image", "video"]),
+});
+
+
 export const recipeSchema = z.object({
     title: z.string().min(1, "Название обязательно").max(100, "Не более 100 символов"),
     categoryId: z.string().nullable().optional(),
@@ -13,7 +19,7 @@ export const recipeSchema = z.object({
     time: z.string().nullable().optional(),
     servings: z.number().int().positive().nullable().optional(),
     tagIds: z.array(z.string()).default([]),
-    
+    media: z.array(mediaItemSchema).default([]),
 });
 
 export type RecipeFormValues = z.infer<typeof recipeSchema>;

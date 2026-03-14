@@ -21,6 +21,7 @@
         transition: width var(--transition-base);
     }
 
+    &:focus::before,
     &:hover::before {
         width: 100%;
     }

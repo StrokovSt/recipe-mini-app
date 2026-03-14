@@ -13,6 +13,7 @@ import { type RecipeFormValues,recipeSchema } from "../model/schema";
 import type { RecipeFormProps } from "../model/types";
 import FieldsetWrapper from "./FieldsetWrapper/FieldsetWrapper";
 import IngredientsField from "./IngredientsField/IngredientsField";
+import MediaField from "./MediaField/MediaField";
 import StepsField from "./StepsField/StepsField";
 import TagsSelect from "./TagsSelect/TagsSelect";
 
@@ -44,7 +45,6 @@ const RecipeForm = ({ defaultValues, submitLabel = "Сохранить" }: Recip
     const { mutate: createRecipe, isPending: isSaving } = useCreateRecipe();
 
     const handleSave = (values: RecipeFormValues) => {
-        console.log('values: ', values)
         createRecipe(
             {
                 title: values.title,
@@ -56,11 +56,9 @@ const RecipeForm = ({ defaultValues, submitLabel = "Сохранить" }: Recip
                 tags: values.tagIds,
                 source: "other",
                 sourceUrl: "",
-                media: [],
+                media: values.media,
             },
-            { onSuccess: () => {
-                navigate(AppRoute.Home);
-            }}
+            { onSuccess: () => navigate(AppRoute.Home) }
         );
     };
 
@@ -112,6 +110,8 @@ const RecipeForm = ({ defaultValues, submitLabel = "Сохранить" }: Recip
                 <IngredientsField />
 
                 <StepsField />
+
+                <MediaField />
 
                 <FieldsetWrapper legend="Теги">
                     <Controller

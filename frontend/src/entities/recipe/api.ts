@@ -41,4 +41,10 @@ export const recipeApi = {
         });
         return data;
     },
+
+    uploadMedia: async (file: File): Promise<{ url: string; type: "image" | "video" }> => {
+        const base64 = await fileToBase64(file);
+        const { data } = await api.post("/api/upload", { base64, mimeType: file.type });
+        return data;
+    },
 };

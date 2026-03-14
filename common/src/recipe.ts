@@ -7,6 +7,11 @@ export interface Media {
     order: number;
 }
 
+export interface MediaInput {
+    url: string;
+    type: MediaType;
+}
+
 export interface IngredientGroup {
     title: string | null;
     items: string[];
@@ -49,12 +54,13 @@ export interface Recipe {
     updatedAt: string;
 }
 
-export type RecipeOmitFields = "id" | "userId" | "category" | "categoryId" | "telegraphUrl" | "createdAt" | "updatedAt" | "tags";
+export type RecipeOmitFields = "id" | "userId" | "category" | "categoryId" | "telegraphUrl" | "createdAt" | "updatedAt" | "tags" | "media";
 
 export type CreateRecipeDto = Omit<Recipe, RecipeOmitFields> & {
     categoryId?: string | null;
     category?: string;
     tags: string[];
+    media: MediaInput[];
 };
 
 export interface ParsedRecipe {

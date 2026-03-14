@@ -9,6 +9,7 @@ import categoriesRouter from "./routes/categories";
 import router from "./routes/parse";
 import recipesRouter from "./routes/recipes";
 import tagsRouter from "./routes/tags";
+import uploadRouter from "./routes/upload";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,7 @@ app.use("/api/parse", router);
 app.use("/api/recipes", recipesRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/tags", tagsRouter);
+app.use("/api/upload", uploadRouter);
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

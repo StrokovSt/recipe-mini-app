@@ -1,6 +1,7 @@
 .wrap {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-2);
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-md);
@@ -14,7 +15,8 @@
 
 .text {
     margin: 0;
-    color: #e53935;
+    color: var(--color-accent);
     font: var(--font-sm);
     font-weight: var(--font-weight-bold);
+    text-align: center;
 }

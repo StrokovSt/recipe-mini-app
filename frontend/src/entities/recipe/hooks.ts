@@ -75,3 +75,9 @@ export function useParseRecipeFromImage() {
         mutationFn: (file: File) => recipeApi.parseFromImage(file),
     });
 }
+
+export function useUploadMedia() {
+    return useMutation({
+        mutationFn: (file: File) => recipeApi.uploadMedia(file),
+    });
+}

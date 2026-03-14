@@ -12,6 +12,7 @@
     --tg-secondary-bg: var(--tg-theme-secondary-bg-color, #fff);
     --tg-header-bg: var(--tg-theme-header-bg_color, #fff);
     --color-accent: #ff6b35;
+    --color-accent-hover: color-mix(in srgb, var(--color-accent) 85%, black);
     --color-accent-light: #fff0eb;
     --color-accent-shadow: rgb(255 107 53 / 40%);
     --color-error: #e53935;

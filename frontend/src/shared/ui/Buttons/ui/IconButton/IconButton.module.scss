@@ -2,17 +2,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 56px;
+    height: 56px;
     border: none;
+    border: 1px solid var(--tg-secondary-bg);
     border-radius: var(--radius-sm);
     background: none;
     cursor: pointer;
-    transition: background var(--transition-fast), color var(--transition-fast);
 
     svg {
-        width: 18px;
-        height: 18px;
+        width: 22px;
+        height: 22px;
     }
 
     &:disabled {
@@ -21,7 +21,15 @@
     }
 
     &:active:not(:disabled) {
-        transform: scale(0.9);
+        transform: scale(0.85);
+    }
+
+    &:hover {
+        transition: 0.25s ease-in-out all;
+    }
+
+    &:focus {
+        border-color: var(--color-accent);
     }
 }
 
@@ -29,7 +37,7 @@
     color: var(--tg-hint);
 
     &:hover:not(:disabled) {
-        background: color-mix(in srgb, var(--tg-secondary-bg) 85%, black);
+        background: color-mix(in srgb, var(--tg-secondary-bg) 45%, black);
         color: var(--tg-text);
     }
 }
@@ -53,10 +61,10 @@
 }
 
 .accent {
-    color: var(--tg-hint);
+    background: var(--color-accent);
+    color: var(--tg-bg);
 
     &:hover:not(:disabled) {
-        background: var(--color-accent-light);
-        color: var(--color-accent);
+        background: var(--color-accent-hover);
     }
 }

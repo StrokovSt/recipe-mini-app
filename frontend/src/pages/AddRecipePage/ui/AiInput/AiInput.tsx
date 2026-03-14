@@ -2,7 +2,9 @@ import { useRef, useState } from "react";
 
 import { ApiError } from "@/shared/api";
 import { getErrorMessage } from "@/shared/lib/errorMessages";
+import { IconButton } from "@/shared/ui/Buttons";
 import { ErrorMessage } from "@/shared/ui/ErrorMessage";
+import { Input } from "@/shared/ui/Input";
 import { Spinner } from "@/shared/ui/Spinner";
 
 import styles from "./AiInput.module.scss";
@@ -36,21 +38,20 @@ const AiInput = ({ isParsing, isParsingImage, error, onSubmitUrl, onSubmitImage 
     return (
         <div className={styles.wrap}>
             <div className={styles.bar}>
-                <input
-                    className={styles.input}
+                <Input
+                    label="Cсылка на Pinterest"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    placeholder="Вставь ссылку на Pinterest..."
                     onKeyDown={(e) => e.key === "Enter" && handleSubmitUrl()}
                     disabled={isParsing || isParsingImage}
                 />
-                <button
-                    className={styles.btn}
+                <IconButton 
+                    icon="forward"
+                    variant="accent"
+                    type="button"
                     onClick={handleSubmitUrl}
                     disabled={isParsing || isParsingImage || !url.trim()}
-                >
-                    {isParsing ? <Spinner size="sm" /> : "→"}
-                </button>
+                />
             </div>
 
             <button
