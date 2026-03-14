@@ -4,6 +4,7 @@ import { ParsedRecipe } from "@recipe/common";
 
 import { useParseRecipe, useParseRecipeFromImage } from "@/entities/recipe";
 import { RecipeForm, type RecipeFormValues } from "@/features/recipe-form";
+import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { Tabs } from "@/shared/ui/Tabs";
 
 import AiInput from "./AiInput/AiInput";
@@ -47,7 +48,7 @@ const AddRecipePage = () => {
     };
 
     return (
-        <div className={styles.page}>
+        <PageWrapper className={styles.page}>
             <Tabs tabs={TABS} active={mode} onChange={setMode} />
 
             {mode === "ai" && (
@@ -65,7 +66,7 @@ const AddRecipePage = () => {
                 defaultValues={defaultValues}
                 submitLabel="Сохранить рецепт"
             />
-        </div>
+        </PageWrapper>
     );
 };
 

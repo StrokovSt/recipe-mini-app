@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 
 import { AddButton, IconButton } from "@/shared/ui/Buttons";
-import { InputController } from "@/shared/ui/Input";
+import { TextareaController } from "@/shared/ui/Input";
 
 import type { RecipeFormValues } from "../../model/schema";
 import FieldsetWrapper from "../FieldsetWrapper/FieldsetWrapper";
@@ -26,7 +26,7 @@ const StepsField = () => {
                 <div className={styles.list}>
                     {steps.map((_, i) => (
                         <div key={i} className={styles.row}>
-                            <InputController
+                            <TextareaController
                                 name={`steps.${i}` as "steps.0"}
                                 control={control}
                                 label={`Шаг ${i + 1}`}
@@ -37,8 +37,10 @@ const StepsField = () => {
                     ))}
                 </div>
             )}
-            {errors.steps?.message && (
-                <span className={styles.error}>{errors.steps.message}</span>
+            {(errors.steps?.message || errors.steps?.root?.message) && (
+                <span className={styles.error}>
+                    {errors.steps.message ?? errors.steps.root?.message}
+                </span>
             )}
             <AddButton label="Добавить шаг" onClick={append} />
         </FieldsetWrapper>

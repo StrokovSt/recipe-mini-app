@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useLayoutEffect, useRef } from "react";
 
-import { InputProps } from "../lib/types";
+import { InputProps } from "../../lib/types";
 
 import styles from "./Input.module.scss";
 

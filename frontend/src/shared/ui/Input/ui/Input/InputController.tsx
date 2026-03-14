@@ -1,8 +1,7 @@
 import { Controller, FieldValues } from "react-hook-form";
 
-import type { InputControllerProps } from "../lib/types";
+import { InputControllerProps } from "../../lib/types";
 import { Input } from "./Input";
-
 
 export const InputController = <TForm extends FieldValues>(props: InputControllerProps<TForm>) => {
     const { name, control, rules, label, suffix, type, disabled, className } = props;

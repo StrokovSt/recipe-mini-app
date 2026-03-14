@@ -9,7 +9,7 @@ export const recipeSchema = z.object({
     title: z.string().min(1, "Название обязательно").max(100, "Не более 100 символов"),
     categoryId: z.string().nullable().optional(),
     ingredients: z.array(ingredientGroupSchema).min(1, "Добавьте хотя бы один ингредиент"),
-    steps: z.array(z.string()).default([]),
+    steps: z.array(z.string().refine(s => s.trim() !== "", "Шаг не может быть пустым")).default([]),
     time: z.string().nullable().optional(),
     servings: z.number().int().positive().nullable().optional(),
     tagIds: z.array(z.string()).default([]),

@@ -34,7 +34,7 @@ const RecipeForm = ({ defaultValues, submitLabel = "Сохранить" }: Recip
         },
     });
 
-    const { handleSubmit, control } = methods;
+    const { handleSubmit, control, reset } = methods;
     const { data: categories = [] } = useCategories();
 
     const categoryOptions = [
@@ -62,6 +62,18 @@ const RecipeForm = ({ defaultValues, submitLabel = "Сохранить" }: Recip
                 navigate(AppRoute.Home);
             }}
         );
+    };
+
+    const handleReset = () => {
+        reset({
+            title: "",
+            categoryId: null,
+            ingredients: [{ title: null, items: [""] }],
+            steps: [],
+            time: null,
+            servings: null,
+            tagIds: [],
+        });
     };
 
     return (
@@ -111,7 +123,23 @@ const RecipeForm = ({ defaultValues, submitLabel = "Сохранить" }: Recip
                     />
                 </FieldsetWrapper>
 
-                <RegularButton className={styles.saveButton} type="submit" label={submitLabel} disabled={isSaving} icon="save" />
+                <div className={styles.actions}>
+                    <RegularButton
+                        className={styles.saveButton}
+                        type="button"
+                        label={"Сбросить форму"}
+                        disabled={isSaving}
+                        onClick={handleReset}
+                        icon="delete"
+                    />
+                    <RegularButton
+                        className={styles.saveButton}
+                        type="submit"
+                        label={submitLabel}
+                        disabled={isSaving}
+                        icon="save"
+                    />
+                </div>
             </form>
         </FormProvider>
     );

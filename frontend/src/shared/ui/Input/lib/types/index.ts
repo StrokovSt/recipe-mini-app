@@ -21,3 +21,19 @@ export interface InputControllerProps<TForm extends FormValues> {
     error?: string;
     type?: string;
 }
+
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+    label: string;
+    register?: UseFormRegisterReturn;
+    error?: string;
+}
+
+export interface TextareaControllerProps<TForm extends FormValues> {
+    name: Path<TForm>;
+    control: Control<TForm>;
+    label: string;
+    rules?: RegisterOptions<TForm, Path<TForm>>;
+    className?: string;
+    disabled?: boolean;
+    error?: string;
+}
