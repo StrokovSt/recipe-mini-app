@@ -1,0 +1,79 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.bar {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.input {
+    flex: 1;
+    box-sizing: border-box;
+    padding: var(--space-3) var(--space-4);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+    outline: none;
+    background: var(--tg-secondary-bg);
+    box-shadow: var(--shadow-sm);
+    color: var(--tg-text);
+    font: var(--font-md);
+    font-family: var(--font-family-main);
+    transition: border-color var(--transition-base);
+
+    &:focus {
+        border-color: var(--color-accent);
+    }
+}
+
+.btn {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--color-accent);
+    box-shadow: 0 4px 12px var(--color-accent-shadow);
+    color: #fff;
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+.imageBtn {
+    padding: var(--space-3) var(--space-4);
+    border: 1.5px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--tg-hint);
+    font: var(--font-sm);
+    font-family: var(--font-family-main);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+
+    &:hover:not(:disabled) {
+        background: var(--color-accent-light);
+        color: var(--color-accent);
+        border-color: var(--color-accent);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+.fileInput {
+    display: none;
+}

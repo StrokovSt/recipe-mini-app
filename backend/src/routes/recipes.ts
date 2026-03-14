@@ -62,8 +62,13 @@ router.post("/", async (req: Request, res: Response) => {
     const userId = req.userId as string;
     const { title, category, categoryId, ingredients, steps, time, servings, sourceUrl, source, media, tags } = req.body;
 
-    if (!title || !ingredients || !steps || !sourceUrl) {
-        res.status(400).json({ error: "Не хватает обязательных полей" });
+    if (!title) {
+        res.status(400).json({ error: "Не хватает обязательного поля title" });
+        return;
+    }
+
+    if (!ingredients) {
+        res.status(400).json({ error: "Не хватает обязательного поля ingredients" });
         return;
     }
 
@@ -85,10 +90,10 @@ router.post("/", async (req: Request, res: Response) => {
             title,
             categoryId: resolvedCategoryId,
             ingredients: JSON.stringify(ingredients),
-            steps: JSON.stringify(steps),
+            steps: steps ? JSON.stringify(steps) : "",
             time: time || null,
             servings: servings ? Number(servings) : null,
-            sourceUrl,
+            sourceUrl: sourceUrl || "",
             source: source || "other",
             media: {
                 create: (media || []).map((m: { url: string; type: string }, i: number) => ({
