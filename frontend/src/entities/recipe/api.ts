@@ -1,6 +1,7 @@
 import type { CreateRecipeDto, ParsedRecipe, Recipe } from "@recipe/common";
 
 import { api } from "@/shared/api";
+import { fileToBase64 } from "@/shared/lib/utils";
 
 export const recipeApi = {
     getAll: async (params?: { category?: string; search?: string }): Promise<Recipe[]> => {
@@ -29,6 +30,15 @@ export const recipeApi = {
 
     parse: async (url: string): Promise<ParsedRecipe> => {
         const { data } = await api.post<ParsedRecipe>("/api/parse", { url });
+        return data;
+    },
+
+    parseFromImage: async (file: File): Promise<ParsedRecipe> => {
+        const base64 = await fileToBase64(file);
+        const { data } = await api.post<ParsedRecipe>("/api/parse/image", {
+            base64,
+            mimeType: file.type,
+        });
         return data;
     },
 };

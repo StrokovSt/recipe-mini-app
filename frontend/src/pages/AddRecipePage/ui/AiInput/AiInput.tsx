@@ -9,12 +9,13 @@ import styles from "./AiInput.module.scss";
 
 interface AiInputProps {
     isParsing: boolean;
+    isParsingImage: boolean;
     error: Error | null;
     onSubmitUrl: (url: string) => void;
     onSubmitImage: (file: File) => void;
 }
 
-const AiInput = ({ isParsing, error, onSubmitUrl, onSubmitImage }: AiInputProps) => {
+const AiInput = ({ isParsing, isParsingImage, error, onSubmitUrl, onSubmitImage }: AiInputProps) => {
     const [url, setUrl] = useState("");
     const fileRef = useRef<HTMLInputElement>(null);
 
@@ -26,6 +27,7 @@ const AiInput = ({ isParsing, error, onSubmitUrl, onSubmitImage }: AiInputProps)
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) onSubmitImage(file);
+        e.target.value = "";
     };
 
     const errorCode = error instanceof ApiError ? error.code : undefined;
@@ -40,11 +42,12 @@ const AiInput = ({ isParsing, error, onSubmitUrl, onSubmitImage }: AiInputProps)
                     onChange={(e) => setUrl(e.target.value)}
                     placeholder="Вставь ссылку на Pinterest..."
                     onKeyDown={(e) => e.key === "Enter" && handleSubmitUrl()}
+                    disabled={isParsing || isParsingImage}
                 />
                 <button
                     className={styles.btn}
                     onClick={handleSubmitUrl}
-                    disabled={isParsing || !url.trim()}
+                    disabled={isParsing || isParsingImage || !url.trim()}
                 >
                     {isParsing ? <Spinner size="sm" /> : "→"}
                 </button>
@@ -54,9 +57,9 @@ const AiInput = ({ isParsing, error, onSubmitUrl, onSubmitImage }: AiInputProps)
                 type="button"
                 className={styles.imageBtn}
                 onClick={() => fileRef.current?.click()}
-                disabled={isParsing}
+                disabled={isParsing || isParsingImage}
             >
-                {isParsing ? <Spinner size="sm" /> : "📷 Загрузить фото"}
+                {isParsingImage ? <Spinner size="sm" /> : "📷 Загрузить фото"}
             </button>
             <input
                 ref={fileRef}

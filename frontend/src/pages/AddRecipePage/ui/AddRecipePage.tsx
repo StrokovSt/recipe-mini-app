@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-import { useParseRecipe } from "@/entities/recipe";
+import { ParsedRecipe } from "@recipe/common";
+
+import { useParseRecipe, useParseRecipeFromImage } from "@/entities/recipe";
 import { RecipeForm, type RecipeFormValues } from "@/features/recipe-form";
 import { Tabs } from "@/shared/ui/Tabs";
 
@@ -20,28 +22,28 @@ const AddRecipePage = () => {
     const [formKey, setFormKey] = useState(0);
     const [defaultValues, setDefaultValues] = useState<Partial<RecipeFormValues>>({});
 
-    const { mutate: parseRecipe, isPending: isParsing, error: parseError } = useParseRecipe();
+    const { mutate: parseUrl, isPending: isParsing, error: parseUrlError } = useParseRecipe();
+    const { mutate: parseImage, isPending: isParsingImage, error: parseImageError } = useParseRecipeFromImage();
+
+    const applyParsedData = (data: ParsedRecipe) => {
+        setDefaultValues({
+            title: data.title,
+            ingredients: data.ingredients,
+            steps: data.steps,
+            time: data.time ?? undefined,
+            servings: data.servings ?? undefined,
+            tagIds: [],
+        });
+        setFormKey((k) => k + 1);
+        setMode("manual");
+    };
 
     const handleParseUrl = (url: string) => {
-        parseRecipe(url, {
-            onSuccess: (data) => {
-                setDefaultValues({
-                    title: data.title,
-                    ingredients: data.ingredients,
-                    steps: data.steps,
-                    time: data.time ?? undefined,
-                    servings: data.servings ?? undefined,
-                    tagIds: [],
-                });
-                setFormKey((k) => k + 1);
-                setMode("manual");
-            },
-        });
+        parseUrl(url, { onSuccess: applyParsedData });
     };
 
     const handleParseImage = (file: File) => {
-        // TODO: реализовать парсинг изображения
-        console.log("image:", file);
+        parseImage(file, { onSuccess: applyParsedData });
     };
 
     return (
@@ -51,7 +53,8 @@ const AddRecipePage = () => {
             {mode === "ai" && (
                 <AiInput
                     isParsing={isParsing}
-                    error={parseError}
+                    isParsingImage={isParsingImage}
+                    error={parseUrlError ?? parseImageError}
                     onSubmitUrl={handleParseUrl}
                     onSubmitImage={handleParseImage}
                 />
