@@ -1,0 +1,62 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.bar {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.input {
+    flex: 1;
+    box-sizing: border-box;
+    padding: var(--space-3) var(--space-4);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    outline: none;
+    background: var(--tg-secondary-bg);
+    box-shadow: var(--shadow-sm);
+    color: var(--tg-text);
+    font: var(--font-md);
+    font-family: var(--font-family-main);
+    transition: border-color var(--transition-base);
+
+    &:focus {
+        border-color: var(--color-accent);
+    }
+}
+
+.btn {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--color-accent);
+    box-shadow: var(--shadow-accent);
+    color: #fff;
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+.saveButton {
+    width: fit-content;
+    margin: 0 auto;
+}

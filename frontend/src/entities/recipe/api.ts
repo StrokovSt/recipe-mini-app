@@ -18,6 +18,11 @@ export const recipeApi = {
         return data;
     },
 
+    update: async (id: string, recipe: Partial<CreateRecipeDto>): Promise<Recipe> => {
+        const { data } = await api.patch<Recipe>(`/api/recipes/${id}`, recipe);
+        return data;
+    },
+
     delete: async (id: string): Promise<void> => {
         await api.delete(`/api/recipes/${id}`);
     },

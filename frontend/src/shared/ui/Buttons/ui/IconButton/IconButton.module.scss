@@ -1,0 +1,62 @@
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: none;
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+
+    svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    &:active:not(:disabled) {
+        transform: scale(0.9);
+    }
+}
+
+.default {
+    color: var(--tg-hint);
+
+    &:hover:not(:disabled) {
+        background: color-mix(in srgb, var(--tg-secondary-bg) 85%, black);
+        color: var(--tg-text);
+    }
+}
+
+.danger {
+    color: var(--tg-hint);
+
+    &:hover:not(:disabled) {
+        background: var(--color-error-light);
+        color: var(--color-error);
+    }
+}
+
+.success {
+    color: var(--tg-hint);
+
+    &:hover:not(:disabled) {
+        background: var(--color-success-light);
+        color: var(--color-success);
+    }
+}
+
+.accent {
+    color: var(--tg-hint);
+
+    &:hover:not(:disabled) {
+        background: var(--color-accent-light);
+        color: var(--color-accent);
+    }
+}

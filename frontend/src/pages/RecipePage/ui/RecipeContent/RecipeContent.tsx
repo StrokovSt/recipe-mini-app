@@ -1,10 +1,12 @@
 import clsx from "clsx";
 import { useState } from "react";
 
+import type { IngredientGroup } from "@recipe/common";
+
 import styles from "./RecipeContent.module.scss";
 
 interface RecipeContentProps {
-    ingredients: string[];
+    ingredients: IngredientGroup[];
     steps: string[];
 }
 
@@ -18,6 +20,8 @@ const TABS: { id: Tab; label: string }[] = [
 export function RecipeContent(props: RecipeContentProps) {
     const { ingredients, steps } = props;
     const [tab, setTab] = useState<Tab>("ingredients");
+
+    const totalIngredients = ingredients.reduce((acc, g) => acc + g.items.length, 0);
 
     return (
         <div className={styles.wrap}>
@@ -34,14 +38,23 @@ export function RecipeContent(props: RecipeContentProps) {
             </div>
 
             {tab === "ingredients" && (
-                <div className={styles.list}>
-                    {ingredients.length === 0 && (
+                <div className={styles.groups}>
+                    {totalIngredients === 0 && (
                         <p className={styles.empty}>Ингредиенты не указаны</p>
                     )}
-                    {ingredients.map((ing, i) => (
-                        <div key={i} className={styles.ingredientItem}>
-                            <span className={styles.dot} />
-                            <span>{ing}</span>
+                    {ingredients.map((group, gi) => (
+                        <div key={gi} className={styles.group}>
+                            {group.title && (
+                                <p className={styles.groupTitle}>{group.title}</p>
+                            )}
+                            <div className={styles.list}>
+                                {group.items.map((ing, i) => (
+                                    <div key={i} className={styles.ingredientItem}>
+                                        <span className={styles.dot} />
+                                        <span>{ing}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     ))}
                 </div>

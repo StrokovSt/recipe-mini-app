@@ -7,6 +7,11 @@ export interface Media {
     order: number;
 }
 
+export interface IngredientGroup {
+    title: string | null;
+    items: string[];
+}
+
 export interface Tag {
     id: string;
     name: string;
@@ -31,7 +36,7 @@ export interface Recipe {
     title: string;
     categoryId: string | null;
     category: Category | null;
-    ingredients: string[];
+    ingredients: IngredientGroup[];
     steps: string[];
     time: string | null;
     servings: number | null;
@@ -55,7 +60,7 @@ export type CreateRecipeDto = Omit<Recipe, RecipeOmitFields> & {
 export interface ParsedRecipe {
     title: string;
     category?: string;
-    ingredients: string[];
+    ingredients: IngredientGroup[];
     steps: string[];
     time: string | null;
     servings: number | null;

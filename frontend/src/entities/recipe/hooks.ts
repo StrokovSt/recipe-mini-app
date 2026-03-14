@@ -40,6 +40,19 @@ export function useCreateRecipe() {
     });
 }
 
+export function useUpdateRecipe() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: ({ id, ...data }: Partial<CreateRecipeDto> & { id: string }) =>
+            recipeApi.update(id, data),
+        onSuccess: (_, { id }) => {
+            queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.lists() });
+            queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.detail(id) });
+        },
+    });
+}
+
 export function useDeleteRecipe() {
     const queryClient = useQueryClient();
 

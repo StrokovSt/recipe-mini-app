@@ -95,3 +95,25 @@
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-black);
 }
+
+.groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.groupTitle {
+    margin: 0;
+    padding: 0 var(--space-4);
+    color: var(--tg-hint);
+    font: var(--font-sm);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}

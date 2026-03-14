@@ -1,5 +1,7 @@
 import { Request, Response, Router } from "express";
 
+import { IngredientGroup } from "@recipe/common";
+
 import prisma from "../lib/prisma";
 
 const router = Router();
@@ -7,8 +9,8 @@ const router = Router();
 function parseRecipe(recipe: Record<string, unknown>) {
     return {
         ...recipe,
-        ingredients: JSON.parse(recipe.ingredients as string),
-        steps: JSON.parse(recipe.steps as string),
+        ingredients: JSON.parse(recipe.ingredients as string) as IngredientGroup[],
+        steps: JSON.parse(recipe.steps as string) as string[],
     };
 }
 
@@ -107,6 +109,58 @@ router.post("/", async (req: Request, res: Response) => {
     });
 
     res.status(201).json(recipe);
+});
+
+// PATCH /api/recipes/:id
+router.patch("/:id", async (req: Request, res: Response) => {
+    const userId = req.userId as string;
+    const id = req.params.id as string;
+    const { title, category, categoryId, ingredients, steps, time, servings, tags } = req.body;
+
+    let resolvedCategoryId: string | null | undefined = categoryId;
+
+    if (resolvedCategoryId === undefined && category && category !== "Без категории") {
+        const cat = await prisma.category.upsert({
+            where: { userId_name: { userId, name: category } },
+            update: {},
+            create: { userId, name: category },
+        });
+        resolvedCategoryId = cat.id;
+    }
+
+    if (tags !== undefined) {
+        await prisma.recipeTag.deleteMany({ where: { recipeId: id } });
+    }
+
+    await prisma.recipe.updateMany({
+        where: { id, userId },
+        data: {
+            ...(title && { title }),
+            ...(resolvedCategoryId !== undefined && { categoryId: resolvedCategoryId }),
+            ...(ingredients && { ingredients: JSON.stringify(ingredients) }),
+            ...(steps && { steps: JSON.stringify(steps) }),
+            ...(time !== undefined && { time }),
+            ...(servings !== undefined && { servings: servings ? Number(servings) : null }),
+        },
+    });
+
+    if (tags !== undefined) {
+        const resolvedTags = await resolveTags(tags, userId);
+        await prisma.recipeTag.createMany({
+            data: resolvedTags.map((t) => ({ recipeId: id, tagId: t.tagId })),
+        });
+    }
+
+    const updated = await prisma.recipe.findFirst({
+        where: { id, userId },
+        include: {
+            category: true,
+            media: true,
+            tags: { include: { tag: true } },
+        },
+    });
+
+    res.json(parseRecipe(updated as unknown as Record<string, unknown>));
 });
 
 // DELETE /api/recipes/:id

@@ -1,0 +1,118 @@
+.btn {
+    position: relative;
+    padding: 8px;
+    border: none;
+    background: none;
+    color: var(--tg-text);
+    font: var(--font-sm);
+    font-family: var(--font-family-main);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    appearance: none;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        left: 0;
+        display: block;
+        height: calc(50% - 5px);
+        border: 1px solid var(--tg-hint);
+        transition: all 0.15s ease;
+    }
+
+    &::before {
+        top: 0;
+        border-bottom-width: 0;
+    }
+
+    &::after {
+        bottom: 0;
+        border-top-width: 0;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:active {
+        outline: none;
+
+        &::before {
+            top: 3px;
+            right: 3px;
+            left: 3px;
+        }
+
+        &::after {
+            right: 3px;
+            bottom: 3px;
+            left: 3px;
+        }
+    }
+
+    &:hover .lg {
+        background: color-mix(in srgb, var(--color-accent) 70%, var(--tg-hint));
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+.lg {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 10px 20px;
+    overflow: hidden;
+    background: var(--color-accent);
+    color: var(--tg-button-text);
+    transition: background 0.2s ease;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 2px;
+        height: 2px;
+        background: var(--color-accent);
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        display: block;
+        width: 4px;
+        height: 4px;
+        background: var(--color-accent);
+        transition: background 0.2s ease;
+    }
+}
+
+.iconWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: currentcolor;
+
+    svg {
+        display: block;
+        color: var(--tg-button-text);
+    }
+}
+
+.text {
+    position: relative;
+}

@@ -14,11 +14,13 @@
     --color-accent: #ff6b35;
     --color-accent-light: #fff0eb;
     --color-accent-shadow: rgb(255 107 53 / 40%);
-    --radius-card: 16px;
-    --radius-btn: 24px;
-    --shadow-card: 0 2px 12px rgb(0 0 0 / 7%);
-    --shadow-soft: 0 2px 8px rgb(0 0 0 / 6%);
-    --font-main: 'Nunito', sans-serif;
+    --color-error: #e53935;
+    --color-error-light: rgb(229 57 53 / 8%);
+    --color-success: #43a047;
+    --color-success-light: rgb(67 160 71 / 8%);
+    --color-border: rgb(0 0 0 / 8%);
+    --color-border-focus: var(--color-accent);
+    --color-overlay: rgb(0 0 0 / 50%);
 }
 
 [data-theme="dark"] {
@@ -26,6 +28,9 @@
     --tg-text: #fff;
     --tg-hint: #aaa;
     --tg-secondary-bg: #2a2a2a;
+    --tg-header-bg: #2a2a2a;
+    --color-border: rgb(255 255 255 / 10%);
+    --color-overlay: rgb(0 0 0 / 70%);
 }
 
 * {

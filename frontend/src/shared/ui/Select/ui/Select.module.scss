@@ -1,0 +1,236 @@
+.container {
+    --input-padding: var(--space-4);
+
+    position: relative;
+    width: 100%;
+    height: 56px;
+
+    background: var(--tg-secondary-bg);
+
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: var(--input-padding);
+    padding-top: calc(var(--input-padding) + 10px);
+    padding-right: 56px;
+    padding-bottom: calc(calc(var(--input-padding) / 2));
+    border: none;
+    border-bottom: 2px solid var(--color-border);
+    outline: none;
+    background: transparent;
+    font: var(--font-md);
+    font-family: var(--font-family-main);
+    transition: all var(--transition-base);
+    appearance: textfield;
+
+    &::placeholder {
+        color: transparent;
+        user-select: none;
+    }
+
+    &:not(:placeholder-shown) {
+        background: color-mix(in srgb, var(--tg-secondary-bg) 95%, black);
+    }
+
+    &:hover {
+        border-color: var(--tg-hint);
+    }
+
+    &:not(:placeholder-shown):hover {
+        border-color: var(--tg-hint);
+    }
+
+    &:focus,
+    &:not(:placeholder-shown):focus {
+        background: var(--tg-secondary-bg);
+        border-color: var(--color-accent);
+        border-bottom-width: 2px;
+    }
+
+    &:not(:placeholder-shown) ~ .label {
+        top: var(--space-4);
+        color: var(--tg-hint);
+        font-size: var(--font-size-xs);
+    }
+
+    &:focus ~ .label,
+    &:required:invalid:not(:placeholder-shown) ~ .label {
+        top: var(--space-4);
+        color: var(--color-accent);
+        font-size: var(--font-size-xs);
+    }
+
+    &:disabled {
+        background: color-mix(in srgb, var(--tg-secondary-bg) 80%, black);
+        cursor: auto;
+
+        & ~ .indicators {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+    }
+
+    &Readonly {
+        cursor: pointer;
+    }
+}
+
+.label {
+    position: absolute;
+    top: 50%;
+    left: var(--input-padding);
+
+    display: block;
+
+    color: var(--tg-hint);
+    font: var(--font-md);
+    font-family: var(--font-family-main);
+
+    transition: all var(--transition-base);
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.indicators {
+    position: absolute;
+    top: 50%;
+    right: var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    transform: translateY(-50%);
+}
+
+.clearBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    svg {
+        width: 20px;
+        height: 20px;
+        fill: var(--tg-hint);
+        transition: fill var(--transition-fast);
+    }
+
+    &:hover svg {
+        fill: var(--color-error);
+    }
+}
+
+.chevronBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    svg {
+        width: 20px;
+        height: 20px;
+        fill: var(--tg-hint);
+        transition: all var(--transition-base);
+    }
+
+    &Open svg {
+        transform: rotate(180deg);
+        fill: var(--color-accent);
+    }
+}
+
+.menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: var(--z-above);
+    max-height: 250px;
+    padding: var(--space-2) 0;
+    overflow-y: auto;
+    outline: none;
+    background: var(--tg-secondary-bg);
+    box-shadow: 0 4px 5px rgb(0 0 0 / 14%), 0 1px 10px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 0 / 20%);
+    scrollbar-gutter: stable;
+
+    &::-webkit-scrollbar {
+        display: block;
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: color-mix(in srgb, var(--tg-secondary-bg) 85%, black);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border: 1px solid var(--tg-secondary-bg);
+        border-radius: var(--radius-full);
+        background: rgb(0 0 0 / 25%);
+    }
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 52px;
+    padding: var(--space-3) var(--space-4);
+    color: var(--tg-text);
+    font: var(--font-md);
+    font-family: var(--font-family-main);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+
+    &:hover {
+        background: color-mix(in srgb, var(--tg-secondary-bg) 90%, black);
+    }
+
+    &Selected {
+        background: var(--color-accent-light);
+        color: var(--color-accent);
+
+        &:hover {
+            background: var(--color-accent-light);
+        }
+    }
+}
+
+.optionCheck {
+    width: 18px;
+    height: 18px;
+    fill: var(--color-accent);
+}
+
+.empty {
+    padding: var(--space-3) var(--space-4);
+    color: var(--tg-hint);
+    font: var(--font-sm);
+    font-family: var(--font-family-main);
+    text-align: center;
+}
+
+.error {
+    position: absolute;
+    bottom: calc(-1 * var(--space-4));
+    left: 0;
+    color: var(--color-error);
+    font: var(--font-xs);
+    font-family: var(--font-family-main);
+}
