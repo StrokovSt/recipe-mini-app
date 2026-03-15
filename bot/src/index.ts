@@ -27,6 +27,10 @@ bot.command(COMMANDS.help, helpCommand);
 bot.command(COMMANDS.recipes, recipesCommand);
 bot.command(COMMANDS.cancel, (ctx) => ctx.reply("Нечего отменять"));
 
+bot.catch((err) => {
+    console.error("Bot error:", err);
+});
+
 bot.start({
     onStart: async (botInfo) => {
         console.log(`Бот запущен: @${botInfo.username}`);
