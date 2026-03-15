@@ -5,6 +5,7 @@ export enum ErrorCode {
     AI_UNAVAILABLE = "AI_UNAVAILABLE",
     AI_QUOTA_EXCEEDED = "AI_QUOTA_EXCEEDED",
     VALIDATION_ERROR = "VALIDATION_ERROR",
+    LIMIT_REACHED = "LIMIT_REACHED",
 }
 
 export interface AppError {

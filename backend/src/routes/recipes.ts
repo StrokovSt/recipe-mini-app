@@ -3,6 +3,8 @@ import { Request, Response, Router } from "express";
 import { IngredientGroup } from "@recipe/common";
 
 import prisma from "../lib/prisma";
+import { checkRecipeLimit } from "../middleware/checkLimits";
+import { cuidSchema, validateId } from "../middleware/validate";
 
 const router = Router();
 
@@ -17,6 +19,19 @@ function parseRecipe(recipe: Record<string, unknown>) {
 // GET /api/recipes?categoryId=xxx&search=карб
 router.get("/", async (req: Request, res: Response) => {
     const { categoryId, search } = req.query;
+
+    if (categoryId) {
+        const result = cuidSchema.safeParse(categoryId);
+        if (!result.success) {
+            res.status(400).json({ error: "Некорректный categoryId" });
+            return;
+        }
+    }
+
+    if (search && (search as string).length > 100) {
+        res.status(400).json({ error: "Слишком длинный поисковый запрос" });
+        return;
+    }
 
     const recipes = await prisma.recipe.findMany({
         where: {
@@ -36,7 +51,7 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 // GET /api/recipes/:id
-router.get("/:id", async (req: Request, res: Response) => {
+router.get("/:id", validateId, async (req: Request, res: Response) => {
     const recipe = await prisma.recipe.findFirst({
         where: {
             id: req.params.id as string,
@@ -58,7 +73,7 @@ router.get("/:id", async (req: Request, res: Response) => {
 });
 
 // POST /api/recipes
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", checkRecipeLimit, async (req: Request, res: Response) => {
     const userId = req.userId as string;
     const { title, category, categoryId, ingredients, steps, time, servings, sourceUrl, source, media, tags } = req.body;
 
@@ -117,7 +132,7 @@ router.post("/", async (req: Request, res: Response) => {
 });
 
 // PATCH /api/recipes/:id
-router.patch("/:id", async (req: Request, res: Response) => {
+router.patch("/:id", validateId, async (req: Request, res: Response) => {
     const userId = req.userId as string;
     const id = req.params.id as string;
     const { title, category, categoryId, ingredients, steps, time, servings, tags } = req.body;
@@ -169,7 +184,7 @@ router.patch("/:id", async (req: Request, res: Response) => {
 });
 
 // DELETE /api/recipes/:id
-router.delete("/:id", async (req: Request, res: Response) => {
+router.delete("/:id", validateId, async (req: Request, res: Response) => {
     await prisma.recipe.deleteMany({
         where: {
             id: req.params.id as string,

@@ -22,11 +22,12 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-    const userId =
-        WebApp.initDataUnsafe?.user?.id?.toString() ?? "dev-user";
+    const userId = WebApp.initDataUnsafe?.user?.id?.toString() ?? "dev-user";
+    const initData = WebApp.initData;
 
-    if (config.headers) {
-        config.headers["x-user-id"] = userId;
+    config.headers["x-user-id"] = userId;
+    if (initData) {
+        config.headers["x-init-data"] = initData;
     }
 
     return config;

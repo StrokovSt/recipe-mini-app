@@ -69,3 +69,15 @@ model RecipeTag {
 
   @@id([recipeId, tagId])
 }
+
+model User {
+    id          String    @id  // telegram user id
+    plan        Plan      @default(FREE)
+    planExpiry  DateTime?
+    createdAt   DateTime  @default(now())
+}
+
+enum Plan {
+    FREE
+    PRO
+}
