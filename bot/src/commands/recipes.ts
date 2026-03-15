@@ -39,7 +39,9 @@ export async function recipesCommand(ctx: Context) {
                 .webApp("📖 Открыть все рецепты", appUrl),
         });
 
-    } catch {
+    } 
+    catch (error) {
+        console.error("recipesCommand error:", error);
         await ctx.reply("❌ Не удалось загрузить рецепты");
     }
 }

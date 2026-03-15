@@ -64,7 +64,9 @@ export async function getUserRecipes(userId: string): Promise<Recipe[]> {
         headers: { "x-user-id": userId },
     });
 
-    if (!res.ok) throw new Error("Ошибка получения рецептов");
+    console.log("getUserRecipes status:", res.status, "API_URL:", API_URL);
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     return res.json() as Promise<Recipe[]>;
 }
