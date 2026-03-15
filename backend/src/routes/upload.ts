@@ -1,11 +1,10 @@
-import { Request, Response, Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 
 import cloudinary from "../api/cloudinary";
 
 const router = Router();
 
-// POST /api/upload { base64, mimeType }
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     const { base64, mimeType } = req.body;
 
     if (!base64 || !mimeType) {
@@ -28,9 +27,10 @@ router.post("/", async (req: Request, res: Response) => {
         });
     } 
     catch (error) {
-         console.error("Cloudinary error:", error);
+        console.error("Cloudinary error:", error);
         const message = error instanceof Error ? error.message : "Ошибка загрузки";
         res.status(500).json({ error: message });
+        next(error);
     }
 });
 

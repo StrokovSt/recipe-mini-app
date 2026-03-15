@@ -6,7 +6,6 @@ import prisma from "../lib/prisma";
 export const checkRecipeLimit = async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.userId as string;
 
-    // Находим или создаём пользователя
     const user = await prisma.user.upsert({
         where: { id: userId },
         update: {},
@@ -19,7 +18,6 @@ export const checkRecipeLimit = async (req: Request, res: Response, next: NextFu
     console.log('user: ', user);
     console.log('limit: ', limit);
 
-    // Infinity означает PRO — без ограничений
     if (limit === Infinity) {
         return next();
     }
