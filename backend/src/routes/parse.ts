@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 
 import { createError, ErrorCode } from "@recipe/common";
 
-import { parseRecipeFromImage, parseRecipeFromUrl } from "../services/parser";
+import { parseRecipeFromImage, parseRecipeFromText, parseRecipeFromUrl } from "../services/parser";
 
 const router = Router();
 
@@ -67,6 +67,23 @@ router.post("/image", async (req: Request, res: Response) => {
     try {
         const recipe = await parseRecipeFromImage(base64, mimeType);
         res.json({ ...recipe, source: "other", sourceUrl: "" });
+    } catch (error) {
+        handleParseError(error, res);
+    }
+});
+
+// POST /api/parse/text { text }
+router.post("/text", async (req: Request, res: Response) => {
+    const { text } = req.body;
+
+    if (!text || text.length < 10) {
+        res.status(400).json(createError(ErrorCode.INVALID_URL, "Текст слишком короткий"));
+        return;
+    }
+
+    try {
+        const parsed = await parseRecipeFromText(text);
+        res.json({ ...parsed, source: "telegram", sourceUrl: "" });
     } catch (error) {
         handleParseError(error, res);
     }

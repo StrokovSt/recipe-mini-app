@@ -14,10 +14,11 @@
     "scripts": {
         "backend": "npm run dev --workspace backend",
         "frontend": "npm run dev --workspace frontend",
-        "build": "npm run build --workspace frontend",
+        "build:front": "npm run build --workspace frontend",
+        "build:back": "npm run build --workspace backend",
         "typecheck": "npm run typecheck --workspace frontend",
         "bot": "npm run dev --workspace bot",
-        "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+        "dev": "concurrently \"npm run backend\" \"npm run frontend\" \"npm run bot\"",
         "lint": "npm run lint --workspace backend",
         "lint:css": "npm run lint:css:fix --workspace frontend"
     },

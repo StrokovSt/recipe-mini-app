@@ -75,3 +75,8 @@ function handleRetry<T>(error: unknown, attempt: number, retry: () => Promise<T>
 
     throw error;
 }
+
+export async function parseRecipeFromText(text: string) {
+    const parsed = await generateWithRetry(text);
+    return { ...parsed, media: [] };
+}
