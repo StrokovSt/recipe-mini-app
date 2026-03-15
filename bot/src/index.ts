@@ -27,12 +27,14 @@ bot.command(COMMANDS.help, helpCommand);
 bot.command(COMMANDS.recipes, recipesCommand);
 bot.command(COMMANDS.cancel, (ctx) => ctx.reply("Нечего отменять"));
 
-bot.api.setMyCommands([
-    { command: COMMANDS.start, description: "Начать работу" },
-    { command: COMMANDS.add, description: "Добавить рецепт" },
-    { command: COMMANDS.recipes, description: "Мои рецепты" },
-    { command: COMMANDS.help, description: "Помощь" },
-]);
-
-bot.start();
-console.log("Бот запущен");
+bot.start({
+    onStart: async (botInfo) => {
+        console.log(`Бот запущен: @${botInfo.username}`);
+        await bot.api.setMyCommands([
+            { command: COMMANDS.start, description: "Начать работу" },
+            { command: COMMANDS.add, description: "Добавить рецепт" },
+            { command: COMMANDS.recipes, description: "Мои рецепты" },
+            { command: COMMANDS.help, description: "Помощь" },
+        ]);
+    },
+});
