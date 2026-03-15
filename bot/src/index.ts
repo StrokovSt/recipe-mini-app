@@ -28,7 +28,7 @@ bot.command(COMMANDS.recipes, recipesCommand);
 bot.command(COMMANDS.cancel, (ctx) => ctx.reply("Нечего отменять"));
 
 bot.catch((err) => {
-    console.error("Bot error:", err);
+    console.error("Bot error:", err.message);
 });
 
 bot.start({
@@ -41,4 +41,5 @@ bot.start({
             { command: COMMANDS.help, description: "Помощь" },
         ]);
     },
+    allowed_updates: ["message", "callback_query"],
 });

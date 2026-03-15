@@ -13,34 +13,27 @@ export async function recipesCommand(ctx: Context) {
         const recipes = await getUserRecipes(userId);
 
         if (recipes.length === 0) {
-            await ctx.reply(
-                "У тебя пока нет рецептов.\n\nДобавь первый с помощью /add",
-            );
+            await ctx.reply("У тебя пока нет рецептов.\n\nДобавь первый с помощью /add");
             return;
         }
 
-        const preview = recipes.slice(0, 5);
+        const keyboard = new InlineKeyboard();
 
-        let text = `📚 *Твои рецепты* (${recipes.length}):\n\n`;
-        preview.forEach((r, i) => {
-            text += `${i + 1}. ${r.title}`;
-            if (r.time) text += ` ⏱${r.time}`;
-            if (r.category) text += ` · ${r.category.name}`;
-            text += "\n";
+        recipes.slice(0, 10).forEach((r) => {
+            const label = `${r.title}${r.time ? ` ⏱${r.time}` : ""}`;
+            keyboard.webApp(label, `${appUrl}/recipe/${r.id}`).row();
         });
 
-        if (recipes.length > 5) {
-            text += `\n_...и ещё ${recipes.length - 5} рецептов_`;
+        if (recipes.length > 10) {
+            keyboard.webApp(`📖 Все рецепты (${recipes.length})`, appUrl).row();
         }
 
-        await ctx.reply(text, {
+        await ctx.reply(`📚 *Твои рецепты* (${recipes.length}):`, {
             parse_mode: "Markdown",
-            reply_markup: new InlineKeyboard()
-                .webApp("📖 Открыть все рецепты", appUrl),
+            reply_markup: keyboard,
         });
 
-    } 
-    catch (error) {
+    } catch (error) {
         console.error("recipesCommand error:", error);
         await ctx.reply("❌ Не удалось загрузить рецепты");
     }
