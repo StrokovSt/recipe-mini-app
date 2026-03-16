@@ -44,19 +44,22 @@ app.use(express.json());
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
 if (WEBHOOK_URL) {
-    // Режим Webhook (для продакшена)
     app.use("/webhook", webhookCallback(bot, "express"));
-    app.listen(PORT, async () => {
-        console.log(`Сервер (Webhook) запущен на порту ${PORT}`);
-        await bot.api.setWebhook(`${WEBHOOK_URL}/webhook`);
-        console.log(`Webhook установлен: ${WEBHOOK_URL}/webhook`);
+    
+    app.listen(PORT, "0.0.0.0", async () => {
+        console.log(`Бот слушает порт ${PORT} (WEBHOOK MODE)`);
+        try {
+            await bot.api.setWebhook(`${WEBHOOK_URL}/webhook`);
+            console.log(`Webhook успешно установлен на: ${WEBHOOK_URL}/webhook`);
+        } catch (e) {
+            console.error("Ошибка установки вебхука:", e);
+        }
     });
 } else {
-    // Режим Polling (для локальной разработки)
     app.listen(PORT, () => {
-        console.log(`Сервер (Health check) запущен на порту ${PORT}`);
+        console.log(`Health check на порту ${PORT}`);
         bot.start({
-            onStart: () => console.log("Бот запущен через Long Polling"),
+            onStart: () => console.log("Бот запущен (POLLING MODE)"),
             allowed_updates: ["message", "callback_query"],
         });
     });
