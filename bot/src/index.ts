@@ -11,55 +11,53 @@ import { addRecipeConversation } from "./scenes/addRecipe";
 import { COMMANDS, CONVERSATIONS } from "./shared/lib/constants";
 import { MyContext } from "./shared/types";
 
-type SessionData = Record<string, never>;
-
 const token = process.env.TELEGRAM_TOKEN;
 if (!token) throw new Error("TELEGRAM_TOKEN не задан");
 
 const bot = new Bot<MyContext>(token);
 
-bot.use(session({ initial: (): SessionData => ({}) }));
-bot.use(conversations<MyContext, MyContext>());
+// 1. Сессии (обязательно перед conversations)
+bot.use(session({ initial: () => ({}) }));
+bot.use(conversations());
 bot.use(createConversation(addRecipeConversation));
 
+// 2. Команды
 bot.command(COMMANDS.add, (ctx) => ctx.conversation.enter(CONVERSATIONS.addRecipe));
 bot.command(COMMANDS.start, startCommand);
 bot.command(COMMANDS.help, helpCommand);
 bot.command(COMMANDS.recipes, recipesCommand);
-bot.command(COMMANDS.cancel, (ctx) => ctx.reply("Нечего отменять"));
+bot.command(COMMANDS.cancel, async (ctx) => {
+    await ctx.conversation.exit(CONVERSATIONS.addRecipe); 
+    await ctx.reply("Действие отменено ✓");
+});
 
 bot.catch((err) => {
     console.error("Bot error:", err.message);
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = Number(process.env.PORT) || 3001;
 const WEBHOOK_URL = process.env.WEBHOOK_URL;
 
 const app = express();
 app.use(express.json());
 
-app.get("/health", (_req, res) => {
-    res.json({ ok: true });
-});
+app.get("/health", (_req, res) => res.json({ ok: true }));
 
-app.use("/webhook", webhookCallback(bot, "express"));
-
-app.listen(PORT, async () => {
-    console.log(`Сервер запущен на порту ${PORT}`);
-
-    if (WEBHOOK_URL) {
+if (WEBHOOK_URL) {
+    // Режим Webhook (для продакшена)
+    app.use("/webhook", webhookCallback(bot, "express"));
+    app.listen(PORT, async () => {
+        console.log(`Сервер (Webhook) запущен на порту ${PORT}`);
         await bot.api.setWebhook(`${WEBHOOK_URL}/webhook`);
-        await bot.api.setMyCommands([
-            { command: COMMANDS.start, description: "Начать работу" },
-            { command: COMMANDS.add, description: "Добавить рецепт" },
-            { command: COMMANDS.recipes, description: "Мои рецепты" },
-            { command: COMMANDS.help, description: "Помощь" },
-        ]);
         console.log(`Webhook установлен: ${WEBHOOK_URL}/webhook`);
-    } else {
-        console.log("WEBHOOK_URL не задан — запускаю polling");
+    });
+} else {
+    // Режим Polling (для локальной разработки)
+    app.listen(PORT, () => {
+        console.log(`Сервер (Health check) запущен на порту ${PORT}`);
         bot.start({
+            onStart: () => console.log("Бот запущен через Long Polling"),
             allowed_updates: ["message", "callback_query"],
         });
-    }
-});
+    });
+}

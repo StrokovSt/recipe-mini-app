@@ -1,6 +1,7 @@
 import { type Conversation } from "@grammyjs/conversations";
 
 import { parseFromImage, parseFromText, parseFromUrl, saveRecipe } from "../services/api";
+import { COMMANDS } from "../shared/lib/constants";
 import { MyContext } from "../shared/types";
 
 type MyConversation = Conversation<MyContext, MyContext>;
@@ -36,9 +37,11 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
         "Или напиши /cancel для отмены"
     );
 
-    const message = await conversation.wait();
+    const { message: msg } = await conversation.wait();
 
-    if (message.message?.text === "/cancel") {
+    if (!msg) return;
+
+    if (msg.text === "/cancel" || msg.text === `/${COMMANDS.cancel}`) {
         await ctx.reply("Отменено ✓");
         return;
     }
@@ -47,7 +50,6 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
 
     try {
         let parsed;
-        const msg = message.message;
 
         if (msg?.photo) {
             const photos = msg.photo;
