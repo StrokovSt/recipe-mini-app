@@ -1,5 +1,7 @@
 import { type Conversation } from "@grammyjs/conversations";
 
+import type { MediaInput } from "@recipe/common";
+
 import { parseFromImage, parseFromText, parseFromUrl, saveRecipe } from "../services/api";
 import { COMMANDS } from "../shared/lib/constants";
 import { MyContext } from "../shared/types";
@@ -50,16 +52,25 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
 
     try {
         let parsed;
+        const media: MediaInput[] = [];
 
         if (msg?.photo) {
             const photos = msg.photo;
             const photo = photos[photos.length - 1];
             const token = process.env.TELEGRAM_TOKEN!;
             const { base64, mimeType } = await getImageBase64(photo.file_id, token);
+
+            media.push({
+                url: `data:${mimeType};base64,${base64}`,
+                type: "image"
+            });
+
             parsed = await parseFromImage(base64, mimeType, userId);
-        } else if (msg?.text && isUrl(msg.text)) {
+        }
+        else if (msg?.text && isUrl(msg.text)) {
             parsed = await parseFromUrl(msg.text, userId);
-        } else if (msg?.video || msg?.document) {
+        }
+        else if (msg?.video || msg?.document) {
             const text = msg.caption ?? "";
             if (text.length > 30) {
                 parsed = await parseFromText(text, userId);
@@ -67,7 +78,8 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
                 await ctx.reply("❌ В посте нет текста рецепта. Попробуй отправить ссылку или фото.");
                 return;
             }
-        } else if (msg?.text || msg?.caption) {
+        }
+        else if (msg?.text || msg?.caption) {
             const text = msg.text ?? msg.caption ?? "";
             const urlMatch = text.match(/https?:\/\/[^\s]+/);
             if (urlMatch) {
@@ -78,12 +90,13 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
                 await ctx.reply("❌ Не смог найти рецепт. Попробуй отправить ссылку или фото.");
                 return;
             }
-        } else {
+        }
+        else {
             await ctx.reply("❌ Не понял что ты отправил. Попробуй ссылку или фото.");
             return;
         }
 
-        const saved = await saveRecipe(parsed, userId);
+        const saved = await saveRecipe({ ...parsed, media }, userId);
         const appUrl = process.env.APP_URL!;
         const recipeUrl = `${appUrl}/recipe/${saved.id}`;
 

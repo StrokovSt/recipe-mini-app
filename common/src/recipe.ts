@@ -70,7 +70,7 @@ export interface ParsedRecipe {
     steps: string[];
     time: string | null;
     servings: number | null;
-    media: Media[];
+    media: MediaInput[];
     tags: string[];
     source: RecipeSource;
     sourceUrl: string;
