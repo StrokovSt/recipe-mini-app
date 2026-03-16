@@ -85,7 +85,7 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
 
         const saved = await saveRecipe(parsed, userId);
         const appUrl = process.env.APP_URL!;
-        const recipeUrl = `${appUrl}?recipe=${saved.id}`;
+        const recipeUrl = `${appUrl}/recipe/${saved.id}`;
 
         await ctx.reply(
             `✅ Рецепт сохранён!\n\n` +
