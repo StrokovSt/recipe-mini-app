@@ -1,5 +1,4 @@
-import { type Context } from "grammy";
-import { InlineKeyboard } from "grammy";
+import { type Context, InlineKeyboard } from "grammy";
 
 import { getUserRecipes } from "../services/api";
 
@@ -17,21 +16,37 @@ export async function recipesCommand(ctx: Context) {
             return;
         }
 
-        const keyboard = new InlineKeyboard();
+        const preview = recipes.slice(0, 8);
 
-        recipes.slice(0, 10).forEach((r) => {
-            const label = `${r.title}${r.time ? ` ⏱${r.time}` : ""}`;
-            keyboard.webApp(label, `${appUrl}/recipe/${r.id}`).row();
-        });
+        for (const r of preview) {
+            const keyboard = new InlineKeyboard();
+            keyboard.webApp("🍳 Открыть в приложении", `${appUrl}/recipe/${r.id}`);
+            if (r.telegraphUrl) {
+                keyboard.url("📝 Открыть в Telegraph", r.telegraphUrl);
+            }
 
-        if (recipes.length > 10) {
-            keyboard.webApp(`📖 Все рецепты (${recipes.length})`, appUrl).row();
+            const label = [
+                `*${r.title}*`,
+                r.time ? `⏱ ${r.time}` : "",
+                r.category ? `📁 ${r.category.name}` : "",
+            ].filter(Boolean).join("  ");
+
+            await ctx.reply(label, {
+                parse_mode: "Markdown",
+                reply_markup: keyboard,
+            });
         }
 
-        await ctx.reply(`📚 *Твои рецепты* (${recipes.length}):`, {
-            parse_mode: "Markdown",
-            reply_markup: keyboard,
-        });
+        if (recipes.length > 8) {
+            await ctx.reply(
+                `_...и ещё ${recipes.length - 8} рецептов_`,
+                {
+                    parse_mode: "Markdown",
+                    reply_markup: new InlineKeyboard()
+                        .webApp(`📖 Все рецепты (${recipes.length})`, appUrl),
+                }
+            );
+        }
 
     } catch (error) {
         console.error("recipesCommand error:", error);

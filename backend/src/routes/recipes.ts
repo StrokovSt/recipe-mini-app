@@ -5,6 +5,7 @@ import { IngredientGroup } from "@recipe/common";
 import prisma from "../lib/prisma";
 import { checkRecipeLimit } from "../middleware/checkLimits";
 import { cuidSchema, validateId } from "../middleware/validate";
+import { publishRecipeToTelegraph } from "../services/telegraph";
 import { createRecipeSchema, updateRecipeSchema } from "../validation/recipe";
 
 const router = Router();
@@ -136,6 +137,26 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
                 media: true,
                 tags: { include: { tag: true } },
             },
+        });
+
+        publishRecipeToTelegraph({
+            title,
+            ingredients,
+            steps,
+            time,
+            servings,
+            media: recipe.media,
+            sourceUrl,
+        })
+        .then(async (telegraphUrl) => {
+            console.log("Telegraph URL:", telegraphUrl);
+            await prisma.recipe.update({
+                where: { id: recipe.id },
+                data: { telegraphUrl },
+            });
+        })
+        .catch((err) => {
+            console.error("Telegraph publish error:", err);
         });
 
         res.status(201).json(recipe);
