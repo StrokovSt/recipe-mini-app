@@ -2,7 +2,7 @@ import "dotenv/config";
 
 import { conversations, createConversation } from "@grammyjs/conversations";
 import express from "express";
-import { Bot, session, webhookCallback } from "grammy";
+import { Bot, session } from "grammy";
 
 import { helpCommand } from "./commands/help";
 import { recipesCommand } from "./commands/recipes";
@@ -36,31 +36,27 @@ bot.catch((err) => {
 });
 
 const PORT = Number(process.env.PORT) || 3001;
-const WEBHOOK_URL = process.env.WEBHOOK_URL;
 
 const app = express();
 app.use(express.json());
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
-if (WEBHOOK_URL) {
-    app.use("/webhook", webhookCallback(bot, "express"));
-    
-    app.listen(PORT, "0.0.0.0", async () => {
-        console.log(`Бот слушает порт ${PORT} (WEBHOOK MODE)`);
-        try {
-            await bot.api.setWebhook(`${WEBHOOK_URL}/webhook`);
-            console.log(`Webhook успешно установлен на: ${WEBHOOK_URL}/webhook`);
-        } catch (e) {
-            console.error("Ошибка установки вебхука:", e);
-        }
-    });
-} else {
-    app.listen(PORT, () => {
-        console.log(`Health check на порту ${PORT}`);
-        bot.start({
-            onStart: () => console.log("Бот запущен (POLLING MODE)"),
-            allowed_updates: ["message", "callback_query"],
-        });
-    });
-}
+app.listen(PORT, () => {
+    console.log(`Health check на порту ${PORT}`);
+});
+
+bot.start({
+    onStart: async (botInfo) => {
+        console.log(`Бот запущен: @${botInfo.username}`);
+        await bot.api.setMyCommands([
+            { command: COMMANDS.start, description: "Начать работу" },
+            { command: COMMANDS.add, description: "Добавить рецепт" },
+            { command: COMMANDS.recipes, description: "Мои рецепты" },
+            { command: COMMANDS.help, description: "Помощь" },
+        ]);
+        // Убираем webhook если он был установлен
+        await bot.api.deleteWebhook();
+    },
+    allowed_updates: ["message", "callback_query"],
+});
