@@ -2,7 +2,7 @@ import { type Conversation } from "@grammyjs/conversations";
 
 import type { MediaInput } from "@recipe/common";
 
-import { parseFromImage, parseFromText, parseFromUrl, saveRecipe } from "../services/api";
+import { parseFromImage, parseFromText, parseFromUrl, saveRecipe, uploadToTelegraph } from "../services/api";
 import { COMMANDS } from "../shared/lib/constants";
 import { MyContext } from "../shared/types";
 
@@ -12,19 +12,22 @@ function isUrl(text: string): boolean {
     return text.startsWith("http://") || text.startsWith("https://");
 }
 
-async function getImageBase64(fileId: string, token: string): Promise<{ base64: string; mimeType: string }> {
+async function getFileBuffer(fileId: string, token: string): Promise<{ buffer: ArrayBuffer; mimeType: string }> {
     const fileRes = await fetch(`https://api.telegram.org/bot${token}/getFile?file_id=${fileId}`);
     const fileData = await fileRes.json() as { result: { file_path: string } };
     const filePath = fileData.result.file_path;
 
-    const imageRes = await fetch(`https://api.telegram.org/file/bot${token}/${filePath}`);
-    const buffer = await imageRes.arrayBuffer();
-    const base64 = Buffer.from(buffer).toString("base64");
+    const fileRes2 = await fetch(`https://api.telegram.org/file/bot${token}/${filePath}`);
+    const buffer = await fileRes2.arrayBuffer();
 
     const ext = filePath.split(".").pop()?.toLowerCase();
-    const mimeType = ext === "jpg" || ext === "jpeg" ? "image/jpeg" : "image/png";
+    let mimeType = "image/jpeg";
+    if (ext === "png") mimeType = "image/png";
+    else if (ext === "mp4") mimeType = "video/mp4";
+    else if (ext === "mov") mimeType = "video/quicktime";
+    else if (ext === "webm") mimeType = "video/webm";
 
-    return { base64, mimeType };
+    return { buffer, mimeType };
 }
 
 export async function addRecipeConversation(conversation: MyConversation, ctx: MyContext) {
@@ -53,24 +56,30 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
     try {
         let parsed;
         const media: MediaInput[] = [];
+        const token = process.env.TELEGRAM_TOKEN!;
 
-        if (msg?.photo) {
-            const photos = msg.photo;
-            const photo = photos[photos.length - 1];
-            const token = process.env.TELEGRAM_TOKEN!;
-            const { base64, mimeType } = await getImageBase64(photo.file_id, token);
+        if (msg.photo) {
+            // Фото — загружаем в Telegraph и парсим через AI
+            const photo = msg.photo[msg.photo.length - 1];
+            const { buffer, mimeType } = await getFileBuffer(photo.file_id, token);
 
-            media.push({
-                url: `data:${mimeType};base64,${base64}`,
-                type: "image"
-            });
+            const telegraphUrl = await uploadToTelegraph(buffer, mimeType);
+            media.push({ url: telegraphUrl, type: "image" });
 
+            const base64 = Buffer.from(buffer).toString("base64");
             parsed = await parseFromImage(base64, mimeType, userId);
-        }
-        else if (msg?.text && isUrl(msg.text)) {
+
+        } else if (msg.text && isUrl(msg.text)) {
+            // Ссылка
             parsed = await parseFromUrl(msg.text, userId);
-        }
-        else if (msg?.video || msg?.document) {
+
+        } else if (msg.video) {
+            // Видео из поста — загружаем в Telegraph
+            const { buffer, mimeType } = await getFileBuffer(msg.video.file_id, token);
+            const telegraphUrl = await uploadToTelegraph(buffer, mimeType);
+            media.push({ url: telegraphUrl, type: "video" });
+
+            // Парсим текст из caption
             const text = msg.caption ?? "";
             if (text.length > 30) {
                 parsed = await parseFromText(text, userId);
@@ -78,8 +87,25 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
                 await ctx.reply("❌ В посте нет текста рецепта. Попробуй отправить ссылку или фото.");
                 return;
             }
-        }
-        else if (msg?.text || msg?.caption) {
+
+        } else if (msg.document) {
+            // Документ (может быть видео как файл)
+            const { buffer, mimeType } = await getFileBuffer(msg.document.file_id, token);
+            if (mimeType.startsWith("video/")) {
+                const telegraphUrl = await uploadToTelegraph(buffer, mimeType);
+                media.push({ url: telegraphUrl, type: "video" });
+            }
+
+            const text = msg.caption ?? msg.text ?? "";
+            if (text.length > 30) {
+                parsed = await parseFromText(text, userId);
+            } else {
+                await ctx.reply("❌ В посте нет текста рецепта.");
+                return;
+            }
+
+        } else if (msg.text || msg.caption) {
+            // Текст или пост с caption
             const text = msg.text ?? msg.caption ?? "";
             const urlMatch = text.match(/https?:\/\/[^\s]+/);
             if (urlMatch) {
@@ -90,8 +116,8 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
                 await ctx.reply("❌ Не смог найти рецепт. Попробуй отправить ссылку или фото.");
                 return;
             }
-        }
-        else {
+
+        } else {
             await ctx.reply("❌ Не понял что ты отправил. Попробуй ссылку или фото.");
             return;
         }
@@ -115,7 +141,7 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
         );
 
     } catch (error) {
-        const msg = error instanceof Error ? error.message : "Неизвестная ошибка";
-        await ctx.reply(`❌ Ошибка: ${msg}`);
+        const errMsg = error instanceof Error ? error.message : "Неизвестная ошибка";
+        await ctx.reply(`❌ Ошибка: ${errMsg}`);
     }
 }

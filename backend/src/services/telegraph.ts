@@ -58,7 +58,7 @@ function buildContent(recipe: RecipePageData) {
     }
 
     // Ингредиенты
-    content.push({ tag: "h3", children: ["🛒 Ингредиенты"] });
+    content.push({ tag: "h3", children: ["Ингредиенты"] });
 
     for (const group of recipe.ingredients) {
         if (group.title) {
@@ -75,7 +75,7 @@ function buildContent(recipe: RecipePageData) {
 
     // Шаги
     if (recipe.steps.length > 0) {
-        content.push({ tag: "h3", children: ["👨‍🍳 Приготовление"] });
+        content.push({ tag: "h3", children: ["Приготовление"] });
         content.push({
             tag: "ol",
             children: recipe.steps.map(step => ({

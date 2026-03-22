@@ -45,3 +45,17 @@ export async function createPage(accessToken: string, title: string, content: Te
     if (!data.ok) throw new Error("Ошибка создания Telegraph страницы");
     return data.result;
 }
+
+export async function uploadToTelegraph(buffer: ArrayBuffer, mimeType: string): Promise<string> {
+    const blob = new Blob([buffer], { type: mimeType });
+    const formData = new FormData();
+    formData.append("file", blob, "media");
+
+    const res = await fetch("https://telegra.ph/upload", {
+        method: "POST",
+        body: formData,
+    });
+
+    const data = await res.json() as { src: string }[];
+    return `https://telegra.ph${data[0].src}`;
+}

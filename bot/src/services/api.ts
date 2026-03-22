@@ -89,3 +89,17 @@ export async function parseFromText(text: string, userId: string): Promise<Parse
 
     return res.json() as Promise<ParsedRecipe>;
 }
+
+export async function uploadToTelegraph(buffer: ArrayBuffer, mimeType: string): Promise<string> {
+    const blob = new Blob([buffer], { type: mimeType });
+    const formData = new FormData();
+    formData.append("file", blob, "media");
+
+    const res = await fetch("https://telegra.ph/upload", {
+        method: "POST",
+        body: formData,
+    });
+
+    const data = await res.json() as { src: string }[];
+    return `https://telegra.ph${data[0].src}`;
+}

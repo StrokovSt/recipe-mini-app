@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 
-import { IngredientGroup } from "@recipe/common";
+import { IngredientGroup, MediaInput } from "@recipe/common";
 
 import prisma from "../lib/prisma";
 import { checkRecipeLimit } from "../middleware/checkLimits";
@@ -145,18 +145,18 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
             steps,
             time,
             servings,
-            media: recipe.media,
+            media: recipe.media as MediaInput[],
             sourceUrl,
         })
         .then(async (telegraphUrl) => {
-            console.log("Telegraph URL:", telegraphUrl);
+            console.log("Telegraph published:", telegraphUrl);
             await prisma.recipe.update({
                 where: { id: recipe.id },
                 data: { telegraphUrl },
             });
         })
         .catch((err) => {
-            console.error("Telegraph publish error:", err);
+            console.error("Telegraph publish error:", err.message);
         });
 
         res.status(201).json(recipe);
