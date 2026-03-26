@@ -16,19 +16,22 @@ import uploadRouter from "./routes/upload";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.set('trust proxy', 1);
+
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "x-user-id", "x-init-data"],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
 
 app.get("/health", (_req, res) => {
     res.json({ ok: true });
 });
-
-app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
-    methods: ["GET", "POST", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "x-user-id", "x-init-data"],
-}));
 
 app.use(authMiddleware);
 

@@ -47,28 +47,34 @@ export async function createPage(accessToken: string, title: string, content: Te
 }
 
 export async function uploadToTelegraph(buffer: ArrayBuffer, mimeType: string): Promise<string> {
-    const formData = new FormData();
-    
-    const ext = mimeType.split("/")[1] || "jpg";
-    const blob = new Blob([buffer], { type: mimeType });
-    
-    formData.append("file", blob, `media.${ext}`);
+    try {
+        const formData = new FormData();
+        
+        const extension = mimeType.split("/")[1] || "jpg";
+        const blob = new Blob([buffer], { type: mimeType });
+        
+        formData.append("file", blob, `media.${extension}`);
 
-    const res = await fetch("https://telegra.ph/upload", {
-        method: "POST",
-        body: formData,
-    });
+        const res = await fetch("https://telegra.ph/upload", {
+            method: "POST",
+            body: formData,
+        });
 
-    if (!res.ok) {
-        throw new Error(`Telegraph HTTP error: ${res.status}`);
+        if (!res.ok) {
+            throw new Error(`Telegraph upload failed with status ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        if (Array.isArray(data) && data[0]?.src) {
+            return `https://telegra.ph${data[0].src}`;
+        }
+
+        const errorDetail = data && typeof data === 'object' ? JSON.stringify(data) : 'Unknown error';
+        throw new Error(`Telegraph API Error: ${errorDetail}`);
     }
-
-    const data = await res.json();
-
-    if (Array.isArray(data) && data[0]?.src) {
-        return `https://telegra.ph${data[0].src}`;
+    catch (error) {
+        console.error("Upload to Telegraph failed:", error);
+        throw error; 
     }
-
-    const errorMsg = typeof data === 'object' ? JSON.stringify(data) : 'Unknown error';
-    throw new Error(`Telegraph upload failed: ${errorMsg}`);
 }
