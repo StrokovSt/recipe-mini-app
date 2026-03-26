@@ -39,7 +39,7 @@ function handleParseError(error: unknown, res: Response) {
 
 // POST /api/parse { url }
 router.post("/", async (req: Request, res: Response) => {
-    const { url } = req.body;
+    const { url, existingMedia = [] } = req.body;
 
     if (!url) {
         res.status(400).json(createError(ErrorCode.INVALID_URL, "Укажи URL"));
@@ -49,8 +49,11 @@ router.post("/", async (req: Request, res: Response) => {
     try {
         const recipe = await parseRecipeFromUrl(url);
         const source = detectSource(url);
-        res.json({ ...recipe, source, sourceUrl: url });
-    } catch (error) {
+        const combinedMedia = [...existingMedia, ...(recipe.media || [])];
+
+        res.json({ ...recipe, source, sourceUrl: url, media: combinedMedia });
+    }
+    catch (error) {
         handleParseError(error, res);
     }
 });

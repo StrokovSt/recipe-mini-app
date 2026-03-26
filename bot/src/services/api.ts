@@ -1,17 +1,16 @@
-import type { ParsedRecipe, Recipe } from "@recipe/common";
+import type { MediaInput, ParsedRecipe, Recipe } from "@recipe/common";
 
 const API_URL = process.env.API_URL ?? "http://localhost:3000";
 
-export async function parseFromUrl(url: string, userId: string): Promise<ParsedRecipe> {
+export async function parseFromUrl(url: string, userId: string, existingMedia: MediaInput[] = []): Promise<ParsedRecipe> {
     const res = await fetch(`${API_URL}/api/parse`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "x-user-id": userId,
         },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ url, existingMedia }), 
     });
-
     if (!res.ok) {
         const error = await res.json() as { message?: string; error?: string };
         throw new Error(error.message ?? error.error ?? "Ошибка парсинга");

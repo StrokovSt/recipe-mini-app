@@ -22,8 +22,8 @@ function buildContent(recipe: RecipePageData) {
 
     // Фото/видео
     if (recipe.media && recipe.media.length > 0) {
-        const image = recipe.media.find(m => m.type === "image");
-        const video = recipe.media.find(m => m.type === "video");
+        const video = recipe.media?.find(m => m.type === "video" || m.type.startsWith("video/"));
+        const image = recipe.media?.find(m => m.type === "image" || m.type.startsWith("image/"));
 
         if (image) {
             content.push({

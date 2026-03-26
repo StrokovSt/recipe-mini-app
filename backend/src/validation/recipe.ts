@@ -7,7 +7,11 @@ const ingredientGroupSchema = z.object({
 
 const mediaItemSchema = z.object({
     url: z.string().url(),
-    type: z.enum(["image", "video"]),
+    type: z.union([
+        z.enum(["image", "video"]),
+        z.string().regex(/^video\//),
+        z.string().regex(/^image\//)
+    ]),
 });
 
 export const createRecipeSchema = z.object({
