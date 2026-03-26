@@ -47,15 +47,28 @@ export async function createPage(accessToken: string, title: string, content: Te
 }
 
 export async function uploadToTelegraph(buffer: ArrayBuffer, mimeType: string): Promise<string> {
-    const blob = new Blob([buffer], { type: mimeType });
     const formData = new FormData();
-    formData.append("file", blob, "media");
+    
+    const ext = mimeType.split("/")[1] || "jpg";
+    const blob = new Blob([buffer], { type: mimeType });
+    
+    formData.append("file", blob, `media.${ext}`);
 
     const res = await fetch("https://telegra.ph/upload", {
         method: "POST",
         body: formData,
     });
 
-    const data = await res.json() as { src: string }[];
-    return `https://telegra.ph${data[0].src}`;
+    if (!res.ok) {
+        throw new Error(`Telegraph HTTP error: ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    if (Array.isArray(data) && data[0]?.src) {
+        return `https://telegra.ph${data[0].src}`;
+    }
+
+    const errorMsg = typeof data === 'object' ? JSON.stringify(data) : 'Unknown error';
+    throw new Error(`Telegraph upload failed: ${errorMsg}`);
 }
