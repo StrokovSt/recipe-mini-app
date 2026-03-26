@@ -90,15 +90,33 @@ export async function parseFromText(text: string, userId: string): Promise<Parse
 }
 
 export async function uploadToTelegraph(buffer: ArrayBuffer, mimeType: string): Promise<string> {
-    const blob = new Blob([buffer], { type: mimeType });
-    const formData = new FormData();
-    formData.append("file", blob, "media");
+    try {
+        const formData = new FormData();
+        
+        const extension = mimeType.split("/")[1] || "jpg";
+        const blob = new Blob([buffer], { type: mimeType });
+        
+        formData.append("file", blob, `media.${extension}`);
 
-    const res = await fetch("https://telegra.ph/upload", {
-        method: "POST",
-        body: formData,
-    });
+        const res = await fetch("https://telegra.ph/upload", {
+            method: "POST",
+            body: formData,
+        });
 
-    const data = await res.json() as { src: string }[];
-    return `https://telegra.ph${data[0].src}`;
+        if (!res.ok) throw new Error(`Telegraph HTTP error: ${res.status}`);
+
+        const data = await res.json();
+
+
+        if (Array.isArray(data) && data[0]?.src) {
+            return `https://telegra.ph${data[0].src}`;
+        }
+
+        const errorMsg = data && typeof data === 'object' ? JSON.stringify(data) : 'Unknown error';
+        throw new Error(`Telegraph Error: ${errorMsg}`);
+
+    } catch (error) {
+        console.error("❌ Telegraph Upload Failed:", error);
+        throw error; // Пробрасываем выше, чтобы не сохранять "undefined" в базу
+    }
 }
