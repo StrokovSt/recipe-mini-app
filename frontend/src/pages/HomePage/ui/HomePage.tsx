@@ -5,6 +5,7 @@ import { useRecipes } from '@/entities/recipe';
 import { PageWrapper } from '@/shared/ui/PageWrapper';
 import { Spinner } from '@/shared/ui/Spinner';
 import { StatsWidget } from '@/widgets/stats';
+import { UserGreeting } from '@/widgets/UserGreeting';
 
 import styles from './HomePage.module.scss'
 
@@ -24,6 +25,7 @@ const HomePage = () => {
 
     return (
         <PageWrapper>
+            <UserGreeting />
             <StatsWidget total={stats.total} categories={stats.cats} pinterest={stats.pinterest} />
 
             <div className={styles.grid}>

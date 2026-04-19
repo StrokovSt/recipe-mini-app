@@ -68,3 +68,20 @@
         background: var(--color-accent-hover);
     }
 }
+
+.empty {
+    width: fit-content;
+    height: auto;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--color-brand-header);
+
+    &:hover:not(:disabled) {
+        color: var(--color-brand-accent-warm);
+    }
+
+    &:active {
+        transform: scale(0.85);
+    }
+}

@@ -2,8 +2,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 20px 12px;
+    padding: var(--space-5);
     background: var(--tg-bg);
+
+    .burger {
+        color: var(--color-brand-header); /* Теперь у этого селектора вес выше */
+    }
+}
+
+.heading {
+    color: var(--color-brand-header);
+    font: var(--font-header-xl);
+    font-weight: 600;
+    font-style: italic;
+
+}
+
+.burger {
+    color: var(--color-brand-header);
 }
 
 .greeting {

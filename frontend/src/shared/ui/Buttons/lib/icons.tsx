@@ -1,5 +1,6 @@
 import AddIcon from "@/shared/assets/icons/icon-add.svg?react";
 import BackIcon from "@/shared/assets/icons/icon-back.svg?react";
+import BurgerIcon from "@/shared/assets/icons/icon-burger.svg?react";
 import CheckIcon from "@/shared/assets/icons/icon-check.svg?react";
 import CloseIcon from "@/shared/assets/icons/icon-close.svg?react";
 import DeleteIcon from "@/shared/assets/icons/icon-delete.svg?react";
@@ -28,6 +29,9 @@ export const ButtonIcons = {
     ),
     check: (
         <CheckIcon />
+    ),
+    burger: (
+        <BurgerIcon />
     ),
     close: (
         <CloseIcon />

@@ -1,12 +1,13 @@
 :root {
   // ─── Typography ───────────────────────────────────────────
-    --font-family-main: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    --font-family-main: "Plus Jakarta Sans", sans-serif;
+    --font-family-header: "Noto Serif", serif;
     --font-size-xs: 12px;
     --font-size-sm: 14px;
     --font-size-md: 16px;
     --font-size-lg: 18px;
     --font-size-xl: 22px;
-    --font-size-2xl: 28px;
+    --font-size-2xl: 32px;
     --font-line-xs: 16px;
     --font-line-sm: 20px;
     --font-line-md: 24px;
@@ -23,6 +24,7 @@
     --font-lg: var(--font-size-lg) / var(--font-line-lg) var(--font-family-main);
     --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
     --font-2xl: var(--font-size-2xl) / var(--font-line-2xl) var(--font-family-main);
+    --font-header-xl: var(--font-size-2xl) / var(--font-line-xl) var(--font-family-header);
 
     // ─── Spacing ──────────────────────────────────────────────
     --space-1: 4px;

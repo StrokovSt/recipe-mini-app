@@ -3,39 +3,57 @@
 @use "tailwindcss";
 
 :root {
-    --tg-bg: var(--tg-theme-bg-color, #faf9f6);
-    --tg-text: var(--tg-theme-text-color, #1a1a1a);
-    --tg-hint: var(--tg-theme-hint-color, #888);
-    --tg-link: var(--tg-theme-link-color, #ff6b35);
-    --tg-button: var(--tg-theme-button-color, #ff6b35);
+    --color-brand-brown: #92462D;
+    --color-brand-dark: #1C1C19;
+    --color-brand-beige: #D6D3D1;
+    --color-brand-light: #F7F3EE;
+    --color-brand-deep-brown: #54433E;
+    --color-brand-olive: #576845;
+    --color-brand-muted: #6B7280;
+    --color-brand-accent-warm: #B15D43;
+    --color-brand-night: #301400;
+    --color-brand-header: #CC7357;
+
+    /* ─── Интеграция в существующую схему ─────────────── */
+    --tg-bg: var(--tg-theme-bg-color, var(--color-brand-light));
+    --tg-text: var(--tg-theme-text-color, var(--color-brand-dark));
+    --tg-hint: var(--tg-theme-hint-color, var(--color-brand-muted));
+    --tg-link: var(--tg-theme-link-color, var(--color-brand-brown));
+    --tg-button: var(--tg-theme-button-color, var(--color-brand-brown));
     --tg-button-text: var(--tg-theme-button-text-color, #fff);
     --tg-secondary-bg: var(--tg-theme-secondary-bg-color, #fff);
     --tg-header-bg: var(--tg-theme-header-bg_color, #fff);
-    --color-accent: #ff6b35;
+    --color-accent: var(--color-brand-brown);
     --color-accent-hover: color-mix(in srgb, var(--color-accent) 85%, black);
-    --color-accent-light: #fff0eb;
-    --color-accent-shadow: rgb(255 107 53 / 40%);
+    --color-accent-light: #fff0eb; 
+    --color-accent-shadow: rgb(146 70 45 / 40%);
+    --color-success: var(--color-brand-olive);
     --color-error: #e53935;
     --color-error-light: rgb(229 57 53 / 8%);
-    --color-success: #43a047;
-    --color-success-light: rgb(67 160 71 / 8%);
+    --color-success-light: rgb(87 104 69 / 8%);
     --color-border: rgb(0 0 0 / 8%);
     --color-border-focus: var(--color-accent);
     --color-overlay: rgb(0 0 0 / 50%);
 }
 
 [data-theme="dark"] {
-    --tg-bg: #1a1a1a;
-    --tg-text: #fff;
-    --tg-hint: #aaa;
-    --tg-secondary-bg: #2a2a2a;
-    --tg-header-bg: #2a2a2a;
+    --tg-bg: var(--color-brand-night);
+    --tg-text: #f7f3ee;
+    --tg-hint: #d6d3d1;
+    --tg-secondary-bg: #1c1c19;
+    --tg-header-bg: #1c1c19;
     --color-border: rgb(255 255 255 / 10%);
     --color-overlay: rgb(0 0 0 / 70%);
 }
 
 * {
     box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-main);
+    font-size: var(--font-size-md);
+    line-height: var(--font-line-md);
 }
 
 #root {
