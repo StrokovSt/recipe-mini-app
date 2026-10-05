@@ -1,0 +1,18 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "noEmit": false,
+        "strict": true,
+        "noImplicitAny": true,
+    },
+    "files": ["src/types/express.d.ts"],
+    "include": ["src/**/*"],
+    "exclude": [
+        "src/scripts",
+        "src/utils/test-scraper.ts",
+        "src/utils/test-parser.ts",
+        "src/utils/test-save.ts"
+    ]
+}

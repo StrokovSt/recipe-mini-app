@@ -1,0 +1,14 @@
+.container {
+    display: grid;
+    gap: 8px;
+
+    & > h1 {
+        font: var(--font-2xl);
+        font-family: var(--font-family-header);
+        font-weight: 600;
+    }
+
+    & > p {
+        font: var(--font-sm);
+    }
+}

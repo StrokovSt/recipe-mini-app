@@ -1,0 +1,48 @@
+.tag {
+    --tag-color: var(--color-accent);
+    --tag-bg: color-mix(in srgb, var(--color-accent) 8%, transparent);
+    --tag-border: color-mix(in srgb, var(--color-accent) 20%, transparent);
+
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+
+    border: 1px solid var(--tag-border);
+    border-radius: var(--radius-lg);
+    background: var(--tag-bg);
+
+    color: var(--tag-color);
+    font: var(--font-xs);
+    font-weight: var(--font-weight-bold);
+    white-space: nowrap;
+    transition: 0.25s ease-in-out all;
+
+    [data-theme="dark"] & {
+        --tag-color: var(--color-brand-header);
+        --tag-bg: color-mix(in srgb, var(--color-brand-header) 12%, transparent);
+        --tag-border: color-mix(in srgb, var(--color-brand-header) 30%, transparent);
+    }
+
+    &--isActive {
+        border-color: var(--color-accent);
+        background: var(--color-accent);
+        color: var(--tg-button-text);
+    }
+
+    &--interactive {
+        cursor: pointer;
+
+        &:hover {
+            border-color: var(--color-accent);
+        }
+
+        &:focus-visible {
+            border-color: var(--color-accent);
+        }
+
+        &.tag--isActive:hover {
+            border-color: var(--color-accent-hover);
+            background: var(--color-accent-hover);
+        }
+    }
+}

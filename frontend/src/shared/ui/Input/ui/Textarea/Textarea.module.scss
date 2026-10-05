@@ -1,0 +1,106 @@
+.wrap {
+    position: relative;
+    width: 100%;
+    background: var(--tg-secondary-bg);
+    cursor: text;
+    transition: all var(--transition-base);
+}
+
+.textarea {
+    width: 100%;
+    max-height: calc(56px * 3);
+    padding: var(--space-4);
+    padding-top: calc(var(--space-4) + 10px);
+    padding-bottom: calc(var(--space-4) / 2);
+    overflow: hidden;
+    border: none;
+    border-bottom: 2px solid var(--color-border);
+    outline: none;
+    background: transparent;
+    color: var(--tg-text);
+    font: var(--font-md);
+    font-family: var(--font-family-main);
+    transition: border-color var(--transition-base), background var(--transition-base);
+    resize: none;
+
+    &::placeholder {
+        color: transparent;
+        user-select: none;
+    }
+
+    &:not(:placeholder-shown) {
+        background: color-mix(in srgb, var(--tg-secondary-bg) 95%, black);
+    }
+
+    &:hover {
+        border-color: var(--tg-hint);
+    }
+
+    &:not(:placeholder-shown):hover {
+        background: color-mix(in srgb, var(--tg-secondary-bg) 85%, black);
+        border-color: var(--tg-hint);
+    }
+
+    &:focus,
+    &:not(:placeholder-shown):focus {
+        background: var(--tg-secondary-bg);
+        border-color: var(--color-accent);
+    }
+
+    &:placeholder-shown ~ .label {
+        top: 50%;
+        color: var(--tg-hint);
+        font-size: var(--font-size-md);
+        cursor: text;
+        transform: translateY(-50%);
+    }
+
+    &:not(:placeholder-shown) ~ .label {
+        top: var(--space-1);
+        color: var(--tg-hint);
+        font-size: var(--font-size-xs);
+        transform: none;
+    }
+
+    &:focus ~ .label {
+        top: var(--space-1);
+        color: var(--color-accent);
+        font-size: var(--font-size-xs);
+        transform: none;
+    }
+
+    &:disabled {
+        background: color-mix(in srgb, var(--tg-secondary-bg) 80%, black);
+        opacity: 0.6;
+        cursor: auto;
+        resize: none;
+    }
+
+    &Error {
+        border-color: var(--color-error);
+
+        &:placeholder-shown ~ .label {
+            color: var(--color-error);
+        }
+    }
+}
+
+.label {
+    position: absolute;
+    top: var(--space-1);
+    left: var(--space-4);
+    display: block;
+    color: var(--tg-hint);
+    font: var(--font-md);
+    font-family: var(--font-family-main);
+    transition: all var(--transition-base);
+    pointer-events: none;
+}
+
+.error {
+    display: block;
+    margin-top: var(--space-1);
+    color: var(--color-error);
+    font: var(--font-xs);
+    font-family: var(--font-family-main);
+}

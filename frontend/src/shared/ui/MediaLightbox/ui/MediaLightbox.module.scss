@@ -1,0 +1,82 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-overlay);
+    backdrop-filter: blur(4px);
+}
+
+.content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100vw;
+    height: 100%;
+    max-height: 100vh;
+    padding: var(--space-6);
+}
+
+.media {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+}
+
+.closeBtn {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    border-radius: var(--radius-sm);
+    background: rgb(0 0 0 / 50%);
+    color: #fff;
+}
+
+.prevBtn {
+    position: absolute;
+    top: 50%;
+
+    left: var(--space-4);
+    border-radius: var(--radius-sm);
+    background: rgb(0 0 0 / 50%);
+    color: #fff;
+}
+
+.nextBtn {
+    position: absolute;
+    top: 50%;
+    right: var(--space-4);
+    border-radius: var(--radius-sm);
+    background: rgb(0 0 0 / 50%);
+    color: #fff;
+}
+
+.dots {
+    position: absolute;
+    bottom: var(--space-4);
+    left: 50%;
+    display: flex;
+    gap: var(--space-2);
+    transform: translateX(-50%);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-full);
+    background: rgb(255 255 255 / 50%);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+
+    &Active {
+        background: #fff;
+    }
+}

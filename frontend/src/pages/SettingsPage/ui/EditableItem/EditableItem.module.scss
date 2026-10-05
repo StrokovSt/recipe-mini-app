@@ -1,0 +1,97 @@
+.item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid rgb(0 0 0 / 4%);
+    transition: background var(--transition-fast);
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &Editing {
+        background: var(--color-accent-light);
+    }
+}
+
+.info {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: var(--space-2);
+    cursor: pointer;
+}
+
+.name {
+    flex: 1;
+    color: var(--tg-text);
+    font: var(--font-sm);
+    font-weight: var(--font-weight-bold);
+}
+
+.count {
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-full);
+    background: rgb(0 0 0 / 6%);
+    color: var(--tg-hint);
+    font: var(--font-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--tg-text);
+    font: var(--font-sm);
+    font-family: var(--font-family-main);
+    font-weight: var(--font-weight-bold);
+}
+
+.actions {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--space-1);
+}
+
+.editBtn,
+.deleteBtn,
+.confirmBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.editBtn {
+    color: var(--tg-hint);
+
+    &:active {
+        background: rgb(0 0 0 / 6%);
+    }
+}
+
+.deleteBtn {
+    color: #e53935;
+
+    &:active {
+        background: rgb(229 57 53 / 8%);
+    }
+}
+
+.confirmBtn {
+    color: var(--color-accent);
+
+    &:active {
+        background: var(--color-accent-light);
+    }
+}

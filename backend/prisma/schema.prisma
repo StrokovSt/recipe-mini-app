@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  recipes   Recipe[]
+  createdAt DateTime @default(now())
+  iconName String?
+
+  @@unique([userId, name])
+  @@index([userId])
+}
+
+model Recipe {
+  id           String    @id @default(cuid())
+  userId       String
+  title        String
+  categoryId   String?
+  category     Category? @relation(fields: [categoryId], references: [id])
+  ingredients  String
+  steps        String
+  time         String?
+  servings     Int?
+  sourceUrl    String
+  source       String    @default("other")
+  telegraphUrl String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  media        Media[]
+  tags         RecipeTag[]
+
+  @@index([userId])
+  @@index([userId, categoryId])
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  recipeId  String
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  url       String
+  type      String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Tag {
+  id      String      @id @default(cuid())
+  userId  String
+  name    String
+  recipes RecipeTag[]
+
+  @@unique([userId, name])
+  @@index([userId])
+}
+
+model RecipeTag {
+  recipeId String
+  tagId    String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  tag      Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([recipeId, tagId])
+}
+
+model User {
+    id          String    @id  // telegram user id
+    plan        Plan      @default(FREE)
+    planExpiry  DateTime?
+    createdAt   DateTime  @default(now())
+}
+
+enum Plan {
+    FREE
+    PRO
+}
