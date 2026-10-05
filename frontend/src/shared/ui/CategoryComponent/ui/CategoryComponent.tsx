@@ -1,15 +1,28 @@
-import React from 'react';
+import clsx from 'clsx';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-interface CategoryComponentProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+import styles from './CategoryComponent.module.scss';
+
+interface CategoryComponentProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     label: string;
+    icon?: ReactNode;
+    isActive?: boolean;
 }
 
 const CategoryComponent = (props: CategoryComponentProps) => {
-    const { label } = props;
+    const { label, icon, isActive = false, className, ...rest } = props;
+
     return (
-        <article>
-            {label}
-        </article>
+        <button
+            type="button"
+            className={clsx(styles.category, isActive && styles['category--isActive'], className)}
+            aria-pressed={isActive}
+            title={label}
+            {...rest}
+        >
+            {icon}
+            <span className={styles.label}>{label}</span>
+        </button>
     );
 };
 

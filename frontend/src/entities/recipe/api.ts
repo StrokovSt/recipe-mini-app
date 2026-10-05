@@ -1,7 +1,7 @@
 import type { CreateRecipeDto, ParsedRecipe, Recipe } from "@recipe/common";
 
 import { api } from "@/shared/api";
-import { fileToBase64 } from "@/shared/lib/utils";
+import { fileToBase64 } from "@/shared/lib/file";
 
 import { GetRecipesProps } from "./types";
 

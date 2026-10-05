@@ -39,6 +39,30 @@ export const DEFAULT_CATEGORIES = [
         name: "Напитки",
         iconName: "CupSoda",
     },
+    {
+        name: "Птица",
+        iconName: "Drumstick",
+    },
+    {
+        name: "Морепродукты",
+        iconName: "Shrimp",
+    },
+    {
+        name: "Закуски",
+        iconName: "Canape",
+    },
+    {
+        name: "Гарниры и крупы",
+        iconName: "Rice",
+    },
+    {
+        name: "Соусы",
+        iconName: "SauceBoat",
+    },
+    {
+        name: "Заготовки",
+        iconName: "Jar",
+    },
 ];
 
 export const DEFAULT_TAGS = [

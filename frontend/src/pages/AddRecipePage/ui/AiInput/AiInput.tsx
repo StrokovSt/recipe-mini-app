@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 
 import { ApiError } from "@/shared/api";
-import { getErrorMessage } from "@/shared/lib/errorMessages";
+import { getErrorMessage } from "@/shared/lib/errors";
 import { IconButton } from "@/shared/ui/Buttons";
 import { ErrorMessage } from "@/shared/ui/ErrorMessage";
 import { Input } from "@/shared/ui/Input";

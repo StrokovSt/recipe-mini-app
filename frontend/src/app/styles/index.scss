@@ -13,6 +13,8 @@
     --color-brand-accent-warm: #B15D43;
     --color-brand-night: #301400;
     --color-brand-header: #CC7357;
+    --color-brand-wine: #8B2020;
+    --color-brand-sand: #EDE0B8;
 
     /* ─── Интеграция в существующую схему ─────────────── */
     --tg-bg: var(--tg-theme-bg-color, var(--color-brand-light));
@@ -27,6 +29,11 @@
     --color-accent-hover: color-mix(in srgb, var(--color-accent) 85%, black);
     --color-accent-light: #fff0eb; 
     --color-accent-shadow: rgb(146 70 45 / 40%);
+    --color-active: var(--color-brand-wine);
+    --color-active-hover: color-mix(in srgb, var(--color-active) 85%, black);
+    --color-active-text: #fff;
+    --color-category-bg: var(--color-brand-sand);
+    --color-category-text: var(--color-brand-dark);
     --color-success: var(--color-brand-olive);
     --color-error: #e53935;
     --color-error-light: rgb(229 57 53 / 8%);
@@ -44,6 +51,9 @@
     --tg-header-bg: #1c1c19;
     --color-border: rgb(255 255 255 / 10%);
     --color-overlay: rgb(0 0 0 / 70%);
+    --color-active: #b53a3a;
+    --color-category-bg: color-mix(in srgb, var(--color-brand-sand) 14%, transparent);
+    --color-category-text: var(--tg-text);
 }
 
 * {

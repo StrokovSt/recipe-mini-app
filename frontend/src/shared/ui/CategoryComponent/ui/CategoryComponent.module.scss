@@ -1,0 +1,97 @@
+.category {
+    --category-bg: var(--color-category-bg);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+    padding: var(--space-3) var(--space-2);
+
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    outline: none;
+    background: var(--category-bg);
+
+    color: var(--color-category-text);
+    font: var(--font-xs);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+
+    cursor: pointer;
+    transition: var(--transition-base);
+    transition-property: border-color, background;
+
+    svg {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        color: var(--color-accent);
+
+        transition: color var(--transition-base), stroke-width var(--transition-base);
+    }
+
+    &:not([aria-pressed="true"]) {
+        &:hover,
+        &:focus-visible {
+            background: color-mix(in srgb, var(--category-bg) 92%, black);
+
+            svg {
+                transform: scale(1.2);
+                animation: icon-tilt 0.45s ease-in-out;
+            }
+        }
+
+        &:focus svg {
+            transform: scale(1.2);
+        }
+    }
+
+    &:focus-visible {
+        border-color: var(--color-active);
+    }
+
+    &--isActive {
+        --category-bg: color-mix(in srgb, var(--color-active) 10%, var(--color-category-bg));
+
+        border-color: var(--color-active);
+
+        svg {
+            color: var(--color-active);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &:hover svg,
+        &:focus-visible svg {
+            animation: none;
+        }
+    }
+}
+
+.label {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@keyframes icon-tilt {
+    100% {
+        transform: rotate(0);
+        transform: scale(1.2);
+    }
+
+    60% {
+        transform: rotate(5deg);
+    }
+
+    30% {
+        transform: rotate(5deg);
+    }
+
+    0% {
+        transform: rotate(0);
+        transform: scale(1);
+    }
+}

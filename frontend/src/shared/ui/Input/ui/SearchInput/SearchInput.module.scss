@@ -1,0 +1,93 @@
+.wrap {
+    position: relative;
+    flex-grow: 1;
+    min-width: 0;
+    background: var(--tg-secondary-bg);
+    color: var(--tg-hint);
+
+    cursor: text;
+    transition: all var(--transition-base);
+
+    &:focus-within {
+        color: var(--color-accent);
+    }
+
+    .clear {
+        position: absolute;
+        top: 50%;
+        right: var(--space-4);
+        color: var(--tg-hint);
+
+        transform: translateY(-50%);
+
+        &:hover:not(:disabled) {
+            color: var(--tg-text);
+        }
+
+        &:active:not(:disabled) {
+            transform: translateY(-50%) scale(0.85);
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: var(--space-4);
+    width: 20px;
+    height: 20px;
+
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 56px;
+    padding: var(--space-4);
+    padding-right: 48px;
+    padding-left: calc(var(--space-4) + 20px + var(--space-3));
+    border: none;
+    border-bottom: 2px solid var(--color-border);
+    outline: none;
+    background: transparent;
+    color: var(--tg-text);
+    font: var(--font-md);
+    font-family: var(--font-family-main);
+
+    transition: all var(--transition-base);
+    appearance: none;
+
+    &::placeholder {
+        color: var(--tg-hint);
+    }
+
+    &::-webkit-search-cancel-button {
+        appearance: none;
+    }
+
+    &:not(:placeholder-shown) {
+        background: color-mix(in srgb, var(--tg-secondary-bg) 95%, black);
+    }
+
+    &:hover {
+        border-color: var(--tg-hint);
+    }
+
+    &:not(:placeholder-shown):hover {
+        background: color-mix(in srgb, var(--tg-secondary-bg) 85%, black);
+        border-color: var(--tg-hint);
+    }
+
+    &:focus,
+    &:not(:placeholder-shown):focus {
+        background: var(--tg-secondary-bg);
+        border-color: var(--color-accent);
+    }
+}

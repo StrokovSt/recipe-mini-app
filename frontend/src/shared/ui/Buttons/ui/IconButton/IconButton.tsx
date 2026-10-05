@@ -6,7 +6,7 @@ import styles from "./IconButton.module.scss";
 
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     icon: ButtonIconName;
-    variant?: "default" | "danger" | "success" | "accent" | "empty";
+    variant?: "default" | "danger" | "success" | "accent" | "active" | "empty";
 }
 
 export const IconButton = (props: IconButtonProps) => {

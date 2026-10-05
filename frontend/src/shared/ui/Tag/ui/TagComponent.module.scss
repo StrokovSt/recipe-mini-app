@@ -13,7 +13,6 @@
 
     color: var(--tag-color);
     font: var(--font-xs);
-    font-weight: var(--font-weight-bold);
     white-space: nowrap;
     transition: 0.25s ease-in-out all;
 
@@ -24,9 +23,9 @@
     }
 
     &--isActive {
-        border-color: var(--color-accent);
-        background: var(--color-accent);
-        color: var(--tg-button-text);
+        border-color: var(--color-active);
+        background: var(--color-active);
+        color: var(--color-active-text);
     }
 
     &--interactive {
@@ -41,8 +40,8 @@
         }
 
         &.tag--isActive:hover {
-            border-color: var(--color-accent-hover);
-            background: var(--color-accent-hover);
+            border-color: var(--color-active-hover);
+            background: var(--color-active-hover);
         }
     }
 }

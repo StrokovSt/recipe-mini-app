@@ -1,6 +1,6 @@
 import WebApp from "@twa-dev/sdk";
 
-import { getGreeting } from "@/shared/lib/utils";
+import { getGreeting } from "../lib/getGreeting";
 
 import styles from "./UserGreeting.module.scss";
 

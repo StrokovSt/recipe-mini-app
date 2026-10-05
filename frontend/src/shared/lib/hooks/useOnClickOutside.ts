@@ -1,7 +1,7 @@
-import React from "react";
+import { type RefObject, useEffect } from "react";
 
-export const useOnClickOutside = (ref: React.RefObject<HTMLElement | null>, handler: () => void) => {
-    React.useEffect(() => {
+export const useOnClickOutside = (ref: RefObject<HTMLElement | null>, handler: () => void) => {
+    useEffect(() => {
         const onClickOutside = (event: MouseEvent) => {
             if (ref.current && !event.composedPath().includes(ref.current)) {
                 handler();

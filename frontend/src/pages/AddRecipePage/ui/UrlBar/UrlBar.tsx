@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { ApiError } from "@/shared/api";
-import { getErrorMessage } from "@/shared/lib/errorMessages";
+import { getErrorMessage } from "@/shared/lib/errors";
 import { ErrorMessage } from "@/shared/ui/ErrorMessage";
 import { Spinner } from "@/shared/ui/Spinner";
 
