@@ -24,8 +24,7 @@
     border-bottom: 2px solid var(--color-border);
     outline: none;
     background: transparent;
-    font: var(--font-md);
-    font-family: var(--font-family-main);
+    font: var(--font-ui-md);
     transition: all var(--transition-base);
     appearance: textfield;
 
@@ -89,8 +88,7 @@
     display: block;
 
     color: var(--tg-hint);
-    font: var(--font-md);
-    font-family: var(--font-family-main);
+    font: var(--font-ui-md);
 
     transition: all var(--transition-base);
     transform: translateY(-50%);
@@ -193,8 +191,7 @@
     min-height: 52px;
     padding: var(--space-3) var(--space-4);
     color: var(--tg-text);
-    font: var(--font-md);
-    font-family: var(--font-family-main);
+    font: var(--font-ui-md);
     cursor: pointer;
     transition: background var(--transition-fast);
 
@@ -221,8 +218,7 @@
 .empty {
     padding: var(--space-3) var(--space-4);
     color: var(--tg-hint);
-    font: var(--font-sm);
-    font-family: var(--font-family-main);
+    font: var(--font-ui-sm);
     text-align: center;
 }
 
@@ -231,6 +227,5 @@
     bottom: calc(-1 * var(--space-4));
     left: 0;
     color: var(--color-error);
-    font: var(--font-xs);
-    font-family: var(--font-family-main);
+    font: var(--font-ui-xs);
 }

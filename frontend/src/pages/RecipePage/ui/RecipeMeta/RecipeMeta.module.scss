@@ -23,7 +23,7 @@
 
 .statLabel {
     color: var(--tg-hint);
-    font: var(--font-xs);
+    font: var(--font-ui-xs);
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -31,7 +31,7 @@
 
 .statValue {
     color: var(--tg-text);
-    font: var(--font-md);
+    font: var(--font-ui-md);
     font-weight: var(--font-weight-extrabold);
 }
 
@@ -46,7 +46,7 @@
     border-radius: var(--radius-full);
     background: var(--color-accent-light);
     color: var(--color-accent);
-    font: var(--font-xs);
+    font: var(--font-ui-xs);
     font-weight: var(--font-weight-bold);
 }
 
@@ -86,11 +86,11 @@
 
 .linkTitle {
     color: var(--tg-text);
-    font: var(--font-sm);
+    font: var(--font-ui-sm);
     font-weight: var(--font-weight-extrabold);
 }
 
 .linkSub {
     color: var(--tg-hint);
-    font: var(--font-xs);
+    font: var(--font-ui-xs);
 }

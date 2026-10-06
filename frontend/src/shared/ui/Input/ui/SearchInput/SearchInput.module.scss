@@ -67,8 +67,7 @@
     outline: none;
     background: transparent;
     color: var(--tg-text);
-    font: var(--font-md);
-    font-family: var(--font-family-main);
+    font: var(--font-ui-md);
 
     transition: all var(--transition-base);
     appearance: none;
@@ -122,8 +121,7 @@
     top: var(--space-1);
     left: calc(var(--space-4) + 20px + var(--space-3));
     color: var(--tg-hint);
-    font: var(--font-md);
-    font-family: var(--font-family-main);
+    font: var(--font-ui-md);
     white-space: nowrap;
     transition: all var(--transition-base);
     pointer-events: none;

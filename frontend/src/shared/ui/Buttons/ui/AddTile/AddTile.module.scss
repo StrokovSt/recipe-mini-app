@@ -30,6 +30,11 @@
         border-color: var(--color-active);
         background: var(--color-hover-bg);
         color: var(--color-active);
+
+        & > svg {
+            transition: var(--transition-base);
+            transform: scale(1.15);
+        }
     }
 
     &:active {

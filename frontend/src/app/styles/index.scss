@@ -41,8 +41,9 @@
     --color-success: var(--color-brand-olive);
     --color-error: #e53935;
     --color-error-light: rgb(229 57 53 / 8%);
+    --color-error-text: #fff;
     --color-success-light: rgb(87 104 69 / 8%);
-    --color-border: rgb(0 0 0 / 8%);
+    --color-border: rgb(216 200 144);
     --color-border-focus: var(--color-accent);
     --color-overlay: rgb(0 0 0 / 50%);
 }
@@ -69,6 +70,14 @@ body {
     font-family: var(--font-family-main);
     font-size: var(--font-size-md);
     line-height: var(--font-line-md);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-header);
+}
+
+button, input, textarea, select {
+    font-family: var(--font-family-ui);
 }
 
 #root {

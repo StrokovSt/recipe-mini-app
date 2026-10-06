@@ -1,6 +1,7 @@
 :root {
   // ─── Typography ───────────────────────────────────────────
-    --font-family-main: "Plus Jakarta Sans", sans-serif;
+    --font-family-main: "Literata", serif;
+    --font-family-ui: "Noto Sans", sans-serif;
     --font-family-header: "Noto Serif", serif;
     --font-size-xs: 12px;
     --font-size-sm: 14px;
@@ -24,7 +25,18 @@
     --font-lg: var(--font-size-lg) / var(--font-line-lg) var(--font-family-main);
     --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
     --font-2xl: var(--font-size-2xl) / var(--font-line-2xl) var(--font-family-main);
+    --font-ui-xs: var(--font-size-xs) / var(--font-line-xs) var(--font-family-ui);
+    --font-ui-sm: var(--font-size-sm) / var(--font-line-sm) var(--font-family-ui);
+    --font-ui-md: var(--font-size-md) / var(--font-line-md) var(--font-family-ui);
+    --font-ui-lg: var(--font-size-lg) / var(--font-line-lg) var(--font-family-ui);
+    --font-ui-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-ui);
+    --font-ui-2xl: var(--font-size-2xl) / var(--font-line-2xl) var(--font-family-ui);
+    --font-header-xs: var(--font-size-xs) / var(--font-line-xs) var(--font-family-header);
+    --font-header-sm: var(--font-size-sm) / var(--font-line-sm) var(--font-family-header);
+    --font-header-md: var(--font-size-md) / var(--font-line-md) var(--font-family-header);
+    --font-header-lg: var(--font-size-lg) / var(--font-line-lg) var(--font-family-header);
     --font-header-xl: var(--font-size-2xl) / var(--font-line-xl) var(--font-family-header);
+    --font-header-2xl: var(--font-size-2xl) / var(--font-line-2xl) var(--font-family-header);
 
     // ─── Spacing ──────────────────────────────────────────────
     --space-1: 4px;
@@ -41,6 +53,7 @@
     --size-nav-action: 56px;
     --size-card-min-width: 160px;
     --size-category-min-width: 150px;
+    --size-tag-min-width: 50px;
     --size-list-max-columns: 4;
 
     // ─── Border radius ────────────────────────────────────────

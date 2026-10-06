@@ -66,8 +66,7 @@
     outline: none;
     background: transparent;
     color: var(--tg-text);
-    font: var(--font-sm);
-    font-family: var(--font-family-main);
+    font: var(--font-ui-sm);
 }
 
 .removeBtn {
@@ -90,8 +89,7 @@
     border: none;
     background: none;
     color: var(--color-accent);
-    font: var(--font-xs);
-    font-family: var(--font-family-main);
+    font: var(--font-ui-xs);
     font-weight: var(--font-weight-bold);
     cursor: pointer;
 }
@@ -102,8 +100,7 @@
     border: none;
     background: none;
     color: var(--tg-hint);
-    font: var(--font-sm);
-    font-family: var(--font-family-main);
+    font: var(--font-ui-sm);
     font-weight: var(--font-weight-bold);
     cursor: pointer;
 }

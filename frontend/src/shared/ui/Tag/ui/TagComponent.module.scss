@@ -4,19 +4,21 @@
     --tag-border: color-mix(in srgb, var(--color-accent) 20%, transparent);
 
     display: inline-block;
+    min-width: var(--size-tag-min-width);
     max-width: 100%;
     padding: var(--space-1) var(--space-2);
+    overflow: hidden;
 
     border: 1px solid var(--tag-border);
     border-radius: var(--radius-lg);
     background: var(--tag-bg);
 
     color: var(--tag-color);
-    font: var(--font-xs);
+    font: var(--font-ui-xs);
+    text-align: center;
     white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
     transition: 0.25s ease-in-out all;
+    text-overflow: ellipsis;
 
     [data-theme="dark"] & {
         --tag-color: var(--color-brand-header);
