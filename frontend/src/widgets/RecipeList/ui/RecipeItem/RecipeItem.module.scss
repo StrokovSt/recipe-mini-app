@@ -1,3 +1,14 @@
+@mixin raised {
+    border-color: var(--color-active);
+    background: var(--color-hover-bg);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+
+    .image {
+        transform: scale(1.05);
+    }
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -11,15 +22,21 @@
 
     color: var(--tg-text);
     text-decoration: none;
-    transition: transform var(--transition-fast);
+    transition: var(--transition-base);
+    transition-property: transform, border-color, background, box-shadow;
 
-    &:active {
-        transform: scale(0.98);
+    @media (hover: hover) {
+        &:hover {
+            @include raised;
+        }
     }
 
     &:focus-visible {
-        outline: 2px solid var(--color-active);
-        outline-offset: 2px;
+        @include raised;
+    }
+
+    &:active {
+        transform: scale(0.98);
     }
 
     .media {
@@ -27,6 +44,7 @@
         display: grid;
         place-items: center;
         aspect-ratio: 4 / 3;
+        overflow: hidden;
         background: color-mix(in srgb, var(--color-category-bg) 88%, black);
     }
 
@@ -41,6 +59,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: transform var(--transition-slow);
     }
 
     .badge {
