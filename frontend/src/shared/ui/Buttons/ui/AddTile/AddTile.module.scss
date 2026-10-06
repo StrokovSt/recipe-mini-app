@@ -1,0 +1,38 @@
+.tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    min-height: 100%;
+    padding: var(--space-4);
+
+    border: 1px dashed color-mix(in srgb, var(--tg-hint) 50%, transparent);
+    border-radius: var(--radius-md);
+    outline: none;
+    background: none;
+
+    color: var(--tg-hint);
+    font: var(--font-xs);
+    font-weight: var(--font-weight-bold);
+
+    cursor: pointer;
+    transition: var(--transition-base);
+    transition-property: border-color, background, color;
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--color-active);
+        background: var(--color-hover-bg);
+        color: var(--color-active);
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+}

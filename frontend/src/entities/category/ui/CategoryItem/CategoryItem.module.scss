@@ -1,0 +1,71 @@
+.item {
+    display: grid;
+    align-items: start;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-3);
+    min-width: 0;
+    padding: var(--space-3);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+
+    transition: var(--transition-base);
+    grid-template-areas:
+        "icon actions"
+        "name name";
+    transition-property: border-color, background;
+
+    &:hover,
+    &:focus-within {
+        border-color: var(--color-active);
+        background: var(--color-hover-bg);
+    }
+
+    .icon {
+        grid-area: icon;
+        width: 32px;
+        height: 32px;
+        color: var(--color-accent);
+    }
+
+    .actions {
+        display: flex;
+        grid-area: actions;
+        gap: var(--space-2);
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .edit:not(:disabled) {
+            color: var(--tg-hint);
+
+            &:hover,
+            &:focus-visible {
+                color: var(--tg-text);
+            }
+        }
+
+        .delete:not(:disabled) {
+            color: var(--color-error);
+
+            &:hover,
+            &:focus-visible {
+                color: color-mix(in srgb, var(--color-error) 80%, black);
+            }
+        }
+    }
+
+    .name {
+        grid-area: name;
+        overflow: hidden;
+
+        color: var(--tg-text);
+        font: var(--font-sm);
+        font-weight: var(--font-weight-bold);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

@@ -16,11 +16,13 @@ interface TabsProps<T extends string> {
 
 export const Tabs = <T extends string>({ tabs, active, onChange, className }: TabsProps<T>) => {
     return (
-        <div className={clsx(styles.wrap, className)}>
+        <div className={clsx(styles.wrap, className)} role="tablist">
             {tabs.map((tab) => (
                 <button
                     key={tab.id}
                     type="button"
+                    role="tab"
+                    aria-selected={active === tab.id}
                     className={clsx(styles.tab, active === tab.id && styles.tabActive)}
                     onClick={() => onChange(tab.id)}
                 >

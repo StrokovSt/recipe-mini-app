@@ -1,24 +1,37 @@
 .wrap {
     display: flex;
-    gap: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .tab {
     flex: 1;
+    margin-bottom: -1px;
     padding: var(--space-3);
+
     border: none;
-    border-radius: var(--radius-md);
-    background: var(--tg-secondary-bg);
-    box-shadow: var(--shadow-sm);
+    border-bottom: 2px solid transparent;
+    outline: none;
+    background: none;
+
     color: var(--tg-hint);
     font: var(--font-sm);
-    font-family: var(--font-family-main);
-    font-weight: var(--font-weight-extrabold);
-    cursor: pointer;
-    transition: all var(--transition-base);
+    font-weight: var(--font-weight-bold);
 
-    &Active {
-        background: var(--color-active);
-        color: var(--color-active-text);
+    cursor: pointer;
+    transition: var(--transition-base);
+    transition-property: color, border-color, background;
+
+    &:hover {
+        color: var(--tg-text);
+    }
+
+    &:focus-visible {
+        background: var(--color-hover-bg);
+    }
+
+    &Active,
+    &Active:hover {
+        border-bottom-color: var(--color-active);
+        color: var(--color-active);
     }
 }

@@ -4,6 +4,14 @@
     background: var(--tg-secondary-bg);
     cursor: text;
     transition: all var(--transition-base);
+
+    &--rounded {
+        border-radius: var(--radius-md);
+
+        .input {
+            border-radius: inherit;
+        }
+    }
 }
 
 .input {

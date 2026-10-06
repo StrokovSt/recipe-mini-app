@@ -34,7 +34,7 @@
         &:not([aria-pressed="true"]) {
             &:hover,
             &:focus-visible {
-                background: var(--color-hover-bg);
+                background: color-mix(in srgb, var(--filter-bg) 92%, black);
             }
         }
 
@@ -69,7 +69,7 @@
 
     border-radius: 10px;
     background: var(--color-brand-olive);
-
+    
     color: var(--tg-button-text);
     font: var(--font-xs);
     font-weight: var(--font-weight-bold);

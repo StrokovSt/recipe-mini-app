@@ -6,7 +6,7 @@ import { InputProps } from "../../lib/types";
 import styles from "./Input.module.scss";
 
 export const Input = (props: InputProps) => {
-    const { label, register, error, suffix, className, ...rest } = props;
+    const { label, register, error, suffix, rounded = false, className, ...rest } = props;
     const measureRef = useRef<HTMLSpanElement>(null);
     const suffixRef = useRef<HTMLSpanElement>(null);
 
@@ -20,7 +20,7 @@ export const Input = (props: InputProps) => {
     }, [rest.value]);
 
     return (
-        <div className={clsx(styles.wrap, className)}>
+        <div className={clsx(styles.wrap, rounded && styles['wrap--rounded'], className)}>
             <input
                 className={clsx(styles.input, {
                     [styles.inputNumber]: rest.type === "number",

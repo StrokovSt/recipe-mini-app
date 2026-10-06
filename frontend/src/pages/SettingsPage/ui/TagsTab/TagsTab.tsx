@@ -1,61 +1,62 @@
 import { useState } from "react";
 
-import { useCreateTag, useDeleteTag, useRenameTag, useTags } from "@/entities/tag";
-import { Spinner } from "@/shared/ui/Spinner";
+import { Tag } from "@recipe/common";
 
-import { EditableItem } from "../EditableItem/EditableItem";
+import { TagItem, useDeleteTag, useTags } from "@/entities/tag";
+import { TagForm } from "@/features/tag-form";
+import { BottomSheet } from "@/shared/ui/BottomSheet";
+import { AddTile } from "@/shared/ui/Buttons";
+import { Spinner } from "@/shared/ui/Spinner";
 
 import styles from "./TagsTab.module.scss";
 
 export function TagsTab() {
     const { data: tags = [], isLoading } = useTags();
-    const { mutate: create } = useCreateTag();
-    const { mutate: rename } = useRenameTag();
     const { mutate: remove } = useDeleteTag();
 
-    const [newTag, setNewTag] = useState("");
+    const [isFormOpen, setIsFormOpen] = useState(false);
+    const [editingTag, setEditingTag] = useState<Tag | null>(null);
 
-    const handleCreate = () => {
-        const trimmed = newTag.trim();
-        if (!trimmed) return;
-        create(trimmed, { onSuccess: () => setNewTag("") });
+    const openCreate = () => {
+        setEditingTag(null);
+        setIsFormOpen(true);
     };
+
+    const openEdit = (tag: Tag) => {
+        setEditingTag(tag);
+        setIsFormOpen(true);
+    };
+
+    const closeForm = () => setIsFormOpen(false);
 
     if (isLoading) return <Spinner size="md" />;
 
     return (
-        <div className={styles.wrap}>
-            <div className={styles.createRow}>
-                <input
-                    className={styles.input}
-                    value={newTag}
-                    onChange={(e) => setNewTag(e.target.value)}
-                    placeholder="Новый тег..."
-                    onKeyDown={(e) => e.key === "Enter" && handleCreate()}
-                />
-                <button
-                    className={styles.addBtn}
-                    onClick={handleCreate}
-                    disabled={!newTag.trim()}
-                >
-                    +
-                </button>
+        <>
+            <div className={styles.list}>
+                {tags.map((tag) => (
+                    <TagItem
+                        key={tag.id}
+                        tag={tag}
+                        onEdit={openEdit}
+                        onDelete={(item) => remove(item.id)}
+                    />
+                ))}
+                <AddTile label="Новый тег" onClick={openCreate} />
             </div>
 
-            {tags.length === 0 ? (
-                <p className={styles.empty}>Тегов пока нет</p>
-            ) : (
-                <div className={styles.list}>
-                    {tags.map((tag) => (
-                        <EditableItem
-                            key={tag.id}
-                            name={tag.name}
-                            onRename={(newName) => rename({ id: tag.id, name: newName })}
-                            onDelete={() => remove(tag.id)}
-                        />
-                    ))}
-                </div>
-            )}
-        </div>
+            <BottomSheet
+                isOpen={isFormOpen}
+                onClose={closeForm}
+                title={editingTag ? "Редактирование" : "Новый тег"}
+            >
+                <TagForm
+                    key={editingTag?.id ?? "new"}
+                    tag={editingTag}
+                    onSuccess={closeForm}
+                    onCancel={closeForm}
+                />
+            </BottomSheet>
+        </>
     );
 }

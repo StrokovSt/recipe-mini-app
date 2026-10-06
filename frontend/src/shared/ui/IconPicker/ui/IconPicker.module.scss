@@ -1,0 +1,66 @@
+.picker {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--size-action-button), 1fr));
+    gap: var(--space-1);
+    max-height: 0;
+    margin-top:-24px;
+    padding: var(--space-2);
+    overflow: hidden;
+
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    opacity: 0;
+
+    transition: var(--transition-slow);
+    transform: translateY(calc(-1 * var(--space-2)));
+    visibility: hidden;
+    transition-property: max-height, padding, opacity, transform, border-color, visibility;
+
+    &--isOpen {
+        max-height: 280px;
+        margin-top: 0;
+        padding: var(--space-2);
+        visibility: visible;
+        border-color: var(--color-border);
+        opacity: 1;
+        transform: none;
+    }
+
+    .option {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1;
+
+        border: 1px solid transparent;
+        border-radius: var(--radius-sm);
+        outline: none;
+        background: none;
+
+        color: var(--color-accent);
+        cursor: pointer;
+        transition: var(--transition-base);
+        transition-property: border-color, background;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background: var(--color-hover-bg);
+        }
+
+        &:focus-visible {
+            border-color: var(--color-active);
+        }
+
+        &[aria-checked="true"] {
+            border-color: var(--color-active);
+            background: var(--color-active-bg);
+            color: var(--color-active);
+        }
+    }
+}

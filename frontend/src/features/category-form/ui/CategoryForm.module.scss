@@ -1,0 +1,57 @@
+.form {
+    --icon-picker-offset: var(--space-3);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    .row {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-2);
+    }
+
+    .iconTrigger {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: var(--size-control-height);
+        height: var(--size-control-height);
+
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        outline: none;
+        background: var(--color-surface);
+
+        color: var(--color-accent);
+        cursor: pointer;
+        transition: var(--transition-base);
+        transition-property: border-color, background;
+
+        svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background: var(--color-hover-bg);
+        }
+
+        &:focus-visible,
+        &[aria-expanded="true"] {
+            border-color: var(--color-active);
+        }
+
+        &[aria-expanded="true"] {
+            background: var(--color-active-bg);
+        }
+    }
+
+    .actions {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: var(--space-3);
+    }
+}
