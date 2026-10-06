@@ -72,7 +72,8 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                 <div className={styles.trigger}>
                     <IconButton
                         icon="filter"
-                        variant={activeCount > 0 ? "active" : "default"}
+                        className={styles.filterButton}
+                        aria-pressed={activeCount > 0}
                         onClick={() => setIsOpen(true)}
                         aria-label="Открыть фильтры"
                     />

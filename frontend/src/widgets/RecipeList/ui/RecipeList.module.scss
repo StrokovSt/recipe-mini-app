@@ -1,0 +1,24 @@
+.list {
+    --list-gap: var(--space-3);
+
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(
+            max(
+                min(var(--size-card-min-width), calc((100% - var(--list-gap)) / 2)),
+                calc((100% - (var(--size-list-max-columns) - 1) * var(--list-gap)) / var(--size-list-max-columns))
+            ),
+            1fr
+        )
+    );
+    grid-auto-rows: 1fr;
+    gap: var(--list-gap);
+}
+
+.empty {
+    padding: var(--space-6) var(--space-4);
+    color: var(--tg-hint);
+    font: var(--font-sm);
+    text-align: center;
+}

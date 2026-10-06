@@ -3,8 +3,8 @@
     --tag-bg: color-mix(in srgb, var(--color-accent) 8%, transparent);
     --tag-border: color-mix(in srgb, var(--color-accent) 20%, transparent);
 
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
+    max-width: 100%;
     padding: var(--space-1) var(--space-2);
 
     border: 1px solid var(--tag-border);
@@ -14,6 +14,8 @@
     color: var(--tag-color);
     font: var(--font-xs);
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     transition: 0.25s ease-in-out all;
 
     [data-theme="dark"] & {

@@ -1,9 +1,10 @@
-import React, { memo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { memo } from 'react';
 
 import { Recipe } from '@recipe/common';
 
 import { Spinner } from '@/shared/ui/Spinner';
+
+import RecipeItem from './RecipeItem/RecipeItem';
 
 import styles from './RecipeList.module.scss'
 
@@ -14,7 +15,6 @@ interface RecipeListProps {
 
 const RecipeList = (props: RecipeListProps) => {
     const {recipes, isLoading} = props;
-    const navigate = useNavigate();
 
     if (isLoading) return <Spinner size='xl' />;
 
@@ -27,21 +27,9 @@ const RecipeList = (props: RecipeListProps) => {
     }
     
     return (
-        <div>
+        <div className={styles.list}>
             {recipes.map((recipe) => (
-                <div key={recipe.id} className={styles.card} onClick={() => navigate(`/recipe/${recipe.id}`)}>
-                    <div className={styles.cardMedia}>
-                        {recipe.media[0] && (
-                            <img src={recipe.media[0].url} alt={recipe.title} className={styles.cardImg} />
-                        )}
-                    </div>
-                    <div className={styles.cardBody}>
-                        <p className={styles.cardTitle}>{recipe.title}</p>
-                        {recipe.time && 
-                            <p className={styles.cardTime}>⏱ {recipe.time}</p>
-                        }
-                    </div>
-                </div>
+                <RecipeItem key={recipe.id} recipe={recipe} />
             ))}
         </div>
     );

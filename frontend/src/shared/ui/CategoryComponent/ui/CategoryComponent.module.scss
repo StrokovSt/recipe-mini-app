@@ -34,7 +34,7 @@
     &:not([aria-pressed="true"]) {
         &:hover,
         &:focus-visible {
-            background: color-mix(in srgb, var(--category-bg) 92%, black);
+            background: var(--color-hover-bg);
 
             svg {
                 transform: scale(1.2);
@@ -52,7 +52,7 @@
     }
 
     &--isActive {
-        --category-bg: color-mix(in srgb, var(--color-active) 10%, var(--color-category-bg));
+        --category-bg: var(--color-active-bg);
 
         border-color: var(--color-active);
 

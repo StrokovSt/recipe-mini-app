@@ -44,8 +44,9 @@ export const SearchInput = (props: SearchInputProps) => {
                 className={styles.input}
                 value={query}
                 onChange={(event) => handleChange(event.target.value)}
-                placeholder={placeholder}
+                placeholder=" "
             />
+            <span className={styles.label}>{placeholder}</span>
             {query && (
                 <IconButton
                     icon="close"

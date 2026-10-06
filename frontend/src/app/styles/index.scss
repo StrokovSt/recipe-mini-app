@@ -17,7 +17,9 @@
     --color-brand-sand: #EDE0B8;
 
     /* ─── Интеграция в существующую схему ─────────────── */
-    --tg-bg: var(--tg-theme-bg-color, var(--color-brand-light));
+    --color-app-bg: var(--color-brand-sand);
+    --color-surface: color-mix(in srgb, var(--color-brand-sand) 45%, var(--color-brand-light));
+    --tg-bg: var(--color-app-bg);
     --tg-text: var(--tg-theme-text-color, var(--color-brand-dark));
     --tg-hint: var(--tg-theme-hint-color, var(--color-brand-muted));
     --tg-link: var(--tg-theme-link-color, var(--color-brand-brown));
@@ -32,7 +34,9 @@
     --color-active: var(--color-brand-wine);
     --color-active-hover: color-mix(in srgb, var(--color-active) 85%, black);
     --color-active-text: #fff;
-    --color-category-bg: var(--color-brand-sand);
+    --color-hover-bg: color-mix(in srgb, var(--color-active) 8%, var(--color-category-bg));
+    --color-active-bg: color-mix(in srgb, var(--color-active) 12%, var(--color-category-bg));
+    --color-category-bg: var(--color-surface);
     --color-category-text: var(--color-brand-dark);
     --color-success: var(--color-brand-olive);
     --color-error: #e53935;
@@ -44,12 +48,13 @@
 }
 
 [data-theme="dark"] {
-    --tg-bg: var(--color-brand-night);
+    --color-app-bg: var(--color-brand-night);
+    --color-surface: color-mix(in srgb, var(--color-brand-sand) 8%, var(--color-app-bg));
     --tg-text: #f7f3ee;
     --tg-hint: #d6d3d1;
     --tg-secondary-bg: #1c1c19;
     --tg-header-bg: #1c1c19;
-    --color-border: rgb(255 255 255 / 10%);
+    --color-border: rgb(216 200 144);
     --color-overlay: rgb(0 0 0 / 70%);
     --color-active: #b53a3a;
     --color-category-bg: color-mix(in srgb, var(--color-brand-sand) 14%, transparent);
@@ -71,7 +76,7 @@ body {
     grid-template-rows: auto 1fr auto;
     width: 100vw;
     width: 100dvw;
-    max-width: 640px;
+    max-width: var(--size-app-max-width);
     height: 100%;
     min-height: 100vh;
     min-height: 100dvh;

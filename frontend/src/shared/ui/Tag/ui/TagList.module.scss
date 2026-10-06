@@ -1,0 +1,12 @@
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1);
+    min-width: 0;
+
+    .more {
+        color: var(--tg-hint);
+        font: var(--font-xs);
+    }
+}

@@ -39,8 +39,8 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: var(--size-action-button);
+    height: var(--size-action-button);
     border: none;
     border-radius: var(--radius-md);
     background: var(--color-accent);

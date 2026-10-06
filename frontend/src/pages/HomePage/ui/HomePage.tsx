@@ -18,13 +18,14 @@ const HomePage = () => {
     return (
         <PageWrapper>
             <UserGreeting />
-            <RecipeList recipes={recipes} isLoading={isLoading} />
             <RecipeFilters 
                 categories={categories}
                 tags={tags}
                 setFilters={setFilters}
                 filters={filters}
             />
+            <RecipeList recipes={recipes} isLoading={isLoading} />
+
         </PageWrapper>
     );
 };

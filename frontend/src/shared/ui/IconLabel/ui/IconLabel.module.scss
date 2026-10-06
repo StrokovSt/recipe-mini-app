@@ -1,0 +1,16 @@
+.label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-width: 0;
+
+    color: var(--tg-hint);
+    font: var(--font-xs);
+    white-space: nowrap;
+
+    svg {
+        flex-shrink: 0;
+        width: 14px;
+        height: 14px;
+    }
+}

@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
+    width: var(--size-control-height);
+    height: var(--size-control-height);
     border: none;
     border: 1px solid var(--tg-secondary-bg);
     border-radius: var(--radius-sm);
