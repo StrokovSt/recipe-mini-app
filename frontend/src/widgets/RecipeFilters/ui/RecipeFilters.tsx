@@ -61,7 +61,7 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
     };
 
     return (
-        <article className={styles.filters}>
+        <article>
             <div className={styles.bar}>
                 <SearchInput
                     value={filters.search ?? ""}

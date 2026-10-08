@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { Tabs } from "@/shared/ui/Tabs";
 
@@ -19,9 +20,14 @@ const SettingsPage = () => {
     const [tab, setTab] = useState<Tab>("categories");
 
     return (
-        <PageWrapper className={styles.page}>
-            <Tabs tabs={TABS} active={tab} onChange={setTab} className={styles.tabs} />
-
+        <PageWrapper
+            className={styles.page}
+            header={
+                <PageHeader className={styles.header}>
+                    <Tabs tabs={TABS} active={tab} onChange={setTab} className={styles.tabs} />
+                </PageHeader>
+            }
+        >
             {tab === "categories" ? <CategoriesTab /> : <TagsTab />}
         </PageWrapper>
     );

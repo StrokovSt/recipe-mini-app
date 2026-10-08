@@ -1,6 +1,6 @@
-import { parseRecipeFromUrl } from "../services/parser";
-
 import "dotenv/config";
+
+import { parseRecipeFromUrl } from "../services/parser";
 
 const url = process.argv[2];
 

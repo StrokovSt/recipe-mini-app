@@ -8,6 +8,7 @@ import EditIcon from "@/shared/assets/icons/icon-edit.svg?react";
 import FilterIcon from "@/shared/assets/icons/icon-filter.svg?react";
 import ForwardIcon from "@/shared/assets/icons/icon-forward.svg?react";
 import SaveIcon from "@/shared/assets/icons/icon-save.svg?react";
+import UserIcon from "@/shared/assets/icons/icon-user.svg?react";
 
 export const ButtonIcons = {
     save: (
@@ -39,6 +40,9 @@ export const ButtonIcons = {
     ),
     filter: (
         <FilterIcon />
+    ),
+    user: (
+        <UserIcon />
     ),
 } as const;
 

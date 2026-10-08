@@ -4,8 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AppRoute } from "@/app/router";
 import { buildRoute } from "@/app/router/routes";
 import { useDeleteRecipe, useRecipe } from "@/entities/recipe";
-import { RegularButton } from "@/shared/ui/Buttons";
+import { IconButton } from "@/shared/ui/Buttons";
 import { MediaLightbox } from "@/shared/ui/MediaLightbox";
+import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { Spinner } from "@/shared/ui/Spinner";
 
@@ -40,13 +41,38 @@ const RecipePage = () => {
     }
 
     return (
-        <PageWrapper className={styles.page}>
+        <PageWrapper
+            className={styles.page}
+            header={
+                <PageHeader className={styles.header}>
+                    <IconButton
+                        icon="back"
+                        type="button"
+                        aria-label="Назад"
+                        onClick={() => navigate(AppRoute.Home)}
+                    />
+                    <IconButton
+                        icon="edit"
+                        type="button"
+                        className={styles.edit}
+                        aria-label="Редактировать"
+                        onClick={() => navigate(buildRoute.editRecipe(recipe.id))}
+                    />
+                    <IconButton
+                        icon="delete"
+                        type="button"
+                        variant="danger"
+                        aria-label="Удалить рецепт"
+                        onClick={handleDelete}
+                    />
+                </PageHeader>
+            }
+        >
             <RecipeHero
                 title={recipe.title}
                 category={recipe.category?.name}
                 videoUrl={video?.url}
                 imageUrl={images[0]?.url}
-                onBack={() => navigate(AppRoute.Home)}
                 onImageClick={imageClickHandler}
             />
 
@@ -62,22 +88,6 @@ const RecipePage = () => {
                 ingredients={recipe.ingredients}
                 steps={recipe.steps}
             />
-
-            <div className={styles.actions}>
-                <RegularButton
-                    label="Редактировать"
-                    icon="edit"
-                    type="button"
-                    onClick={() => navigate(buildRoute.editRecipe(recipe.id))}
-                />
-
-                <RegularButton
-                    label="Удалить рецепт"
-                    icon="delete"
-                    type="button"
-                    onClick={handleDelete}
-                />
-            </div>
 
             {lightboxIndex !== null && (
                 <MediaLightbox

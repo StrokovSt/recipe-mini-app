@@ -1,7 +1,5 @@
 import { useCallback, useState } from "react";
 
-import { IconButton } from "@/shared/ui/Buttons";
-
 import styles from "./RecipeHero.module.scss";
 
 interface RecipeHeroProps {
@@ -9,12 +7,11 @@ interface RecipeHeroProps {
     category?: string;
     videoUrl?: string;
     imageUrl?: string;
-    onBack: () => void;
     onImageClick?: () => void;
 }
 
 export function RecipeHero(props: RecipeHeroProps) {
-    const { title, category, videoUrl, imageUrl, onBack, onImageClick } = props;
+    const { title, category, videoUrl, imageUrl, onImageClick } = props;
     const [videoOpen, setVideoOpen] = useState(false);
 
     const mediaClickHandler = useCallback(() => {
@@ -41,13 +38,6 @@ export function RecipeHero(props: RecipeHeroProps) {
                 )}
 
                 <div className={styles.overlay} />
-
-                <IconButton
-                    icon="back"
-                    type="button"
-                    className={styles.backBtn}
-                    onClick={onBack}
-                />
 
                 {videoUrl && (
                     <button className={styles.playBtn} onClick={mediaClickHandler}>▶</button>

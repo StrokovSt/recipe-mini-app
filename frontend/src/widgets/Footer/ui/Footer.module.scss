@@ -70,21 +70,15 @@
     background: var(--color-active);
     box-shadow: 0 6px 16px color-mix(in srgb, var(--color-active) 40%, transparent);
     color: var(--color-active-text);
-    transition: transform var(--transition-fast), box-shadow var(--transition-base);
+    transition: transform var(--transition-fast), box-shadow var(--transition-base), filter var(--transition-base);
 
     &:hover {
         box-shadow: 0 10px 22px color-mix(in srgb, var(--color-active) 50%, transparent);
-        transform: scale(1.05);
-
-        svg {
-            transform: scale(1.05);
-        }
+        filter: brightness(1.1);
     }
 
     &:active {
-        svg {
-            transform: scale(1.1);
-        }
+        transform: scale(0.9);
     }
 
     &Active {

@@ -1,0 +1,19 @@
+.heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+        font: var(--font-header-xl);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .profile {
+        width: var(--size-action-button);
+        height: var(--size-action-button);
+        border-color: var(--color-border);
+        border-radius: var(--radius-full);
+        background: var(--color-surface);
+        color: var(--color-active);
+    }
+}
