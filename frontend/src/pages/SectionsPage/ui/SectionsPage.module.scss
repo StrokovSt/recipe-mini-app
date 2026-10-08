@@ -1,0 +1,12 @@
+.page {
+    min-height: 100%;
+    font-family: var(--font-family-main);
+}
+
+.header {
+    padding-bottom: 0;
+
+    .tabs {
+        border-bottom: none;
+    }
+}

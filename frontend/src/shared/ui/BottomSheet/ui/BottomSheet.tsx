@@ -26,16 +26,19 @@ export const BottomSheet = (props: BottomSheetProps) => {
                 <DialogPanel transition className={clsx(styles.panel, className)}>
                     <div className={styles.handle} aria-hidden />
 
-                    <header className={styles.header}>
-                        {title && <DialogTitle className={styles.title}>{title}</DialogTitle>}
-                        <IconButton
-                            icon="close"
-                            variant="empty"
-                            className={styles.close}
-                            onClick={onClose}
-                            aria-label="Закрыть"
-                        />
-                    </header>
+                    <IconButton
+                        icon="close"
+                        round
+                        className={styles.close}
+                        onClick={onClose}
+                        aria-label="Закрыть"
+                    />
+
+                    {title && (
+                        <header className={styles.header}>
+                            <DialogTitle className={styles.title}>{title}</DialogTitle>
+                        </header>
+                    )}
 
                     <div className={styles.content}>{children}</div>
 

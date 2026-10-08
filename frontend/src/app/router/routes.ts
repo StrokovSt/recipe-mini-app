@@ -5,9 +5,10 @@ export enum AppRoute {
     Recipe = "/recipe/:id",
     AddRecipe = "/add",
     EditRecipe = "/edit/:id",
-    Tags = "/tags",
-    Categories = "/categories",
+    Sections = "/sections",
+    Profile = "/profile",
     Settings = "/settings",
+    About = "/about",
 }
 
 export const buildRoute = {

@@ -2,7 +2,7 @@
   // ─── Typography ───────────────────────────────────────────
     --font-family-main: "Literata Variable", serif;
     --font-family-ui: "Noto Sans Variable", sans-serif;
-    --font-family-header: "Noto Serif Variable", Georgia, serif;
+    --font-family-header: "Noto Serif Variable", georgia, serif;
     --font-size-xs: 12px;
     --font-size-sm: 14px;
     --font-size-md: 16px;
@@ -50,11 +50,15 @@
     --size-app-max-width: 1024px;
     --size-control-height: 56px;
     --size-action-button: 48px;
+    --size-header-button: 40px;
     --size-nav-action: 56px;
+    --size-avatar: 56px;
+    --size-menu-icon: 40px;
     --size-card-min-width: 160px;
     --size-category-min-width: 150px;
     --size-tag-min-width: 50px;
     --size-list-max-columns: 4;
+    --size-scrollbar: 6px;
 
     // ─── Border radius ────────────────────────────────────────
     --radius-sm: 10px;

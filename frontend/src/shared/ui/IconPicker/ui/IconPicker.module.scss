@@ -1,31 +1,18 @@
+.collapse {
+    margin-top: calc(-1 * var(--icon-picker-offset, 0px));
+    overflow: hidden;
+}
+
 .picker {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(var(--size-action-button), 1fr));
     gap: var(--space-1);
-    max-height: 0;
-    margin-top:-24px;
+    margin-top: var(--icon-picker-offset, 0px);
     padding: var(--space-2);
-    overflow: hidden;
 
-    border: 1px solid transparent;
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     background: var(--color-surface);
-    opacity: 0;
-
-    transition: var(--transition-slow);
-    transform: translateY(calc(-1 * var(--space-2)));
-    visibility: hidden;
-    transition-property: max-height, padding, opacity, transform, border-color, visibility;
-
-    &--isOpen {
-        max-height: 450px;
-        margin-top: 0;
-        padding: var(--space-2);
-        visibility: visible;
-        border-color: var(--color-border);
-        opacity: 1;
-        transform: none;
-    }
 
     .option {
         display: flex;

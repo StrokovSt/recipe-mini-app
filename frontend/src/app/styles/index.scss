@@ -18,6 +18,7 @@
 
     /* ─── Интеграция в существующую схему ─────────────── */
     --color-app-bg: var(--color-brand-sand);
+    --color-app-image-bg: rgb(236 218 198); /* средний цвет background_list.png */
     --color-surface: color-mix(in srgb, var(--color-brand-sand) 45%, var(--color-brand-light));
     --tg-bg: var(--color-app-bg);
     --tg-text: var(--tg-theme-text-color, var(--color-brand-dark));
@@ -46,6 +47,7 @@
     --color-border: rgb(216 200 144);
     --color-border-focus: var(--color-accent);
     --color-overlay: rgb(0 0 0 / 50%);
+    --color-scrollbar-thumb: color-mix(in srgb, var(--color-brand-deep-brown) 40%, transparent);
 }
 
 [data-theme="dark"] {
@@ -57,6 +59,7 @@
     --tg-header-bg: #1c1c19;
     --color-border: rgb(216 200 144);
     --color-overlay: rgb(0 0 0 / 70%);
+    --color-scrollbar-thumb: color-mix(in srgb, var(--color-brand-sand) 30%, transparent);
     --color-active: #b53a3a;
     --color-category-bg: color-mix(in srgb, var(--color-brand-sand) 14%, transparent);
     --color-category-text: var(--tg-text);
@@ -64,9 +67,28 @@
 
 * {
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-scrollbar-thumb) transparent;
+}
+
+@supports not (scrollbar-color: auto) {
+    ::-webkit-scrollbar {
+        width: var(--size-scrollbar);
+        height: var(--size-scrollbar);
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: var(--radius-sm);
+        background: var(--color-scrollbar-thumb);
+    }
 }
 
 body {
+    background: var(--color-app-image-bg);
     font-family: var(--font-family-main);
     font-size: var(--font-size-md);
     line-height: var(--font-line-md);
@@ -91,4 +113,5 @@ button, input, textarea, select {
     min-height: 100dvh;
     margin: 0 auto;
     overflow: hidden;
+    background: var(--color-app-image-bg) url("@/shared/assets/images/background_list.png") center / cover no-repeat;
 }

@@ -6,42 +6,6 @@
 
 .trigger {
     position: relative;
-
-    .filterButton {
-        --filter-bg: var(--color-surface);
-
-        border-color: var(--color-border);
-        border-radius: var(--radius-md);
-        background: var(--filter-bg);
-        transition: var(--transition-base);
-        transition-property: border-color, background, color;
-
-        &:focus {
-            border-color: var(--color-border);
-        }
-
-        &:not([aria-pressed="true"]) {
-            &:hover,
-            &:focus-visible {
-                background: color-mix(in srgb, var(--filter-bg) 92%, black);
-            }
-        }
-
-        &:focus-visible {
-            border-color: var(--color-active);
-        }
-
-        &[aria-pressed="true"] {
-            --filter-bg: var(--color-active-bg);
-
-            &,
-            &:hover {
-                border-color: var(--color-active);
-                background: var(--filter-bg);
-                color: var(--color-active);
-            }
-        }
-    }
 }
 
 .badge {

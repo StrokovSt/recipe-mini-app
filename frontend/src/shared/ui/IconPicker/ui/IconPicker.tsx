@@ -1,5 +1,8 @@
 import clsx from 'clsx';
+import { AnimatePresence, motion } from 'motion/react';
 import type { FC, SVGProps } from 'react';
+
+import { TRANSITION_BASE } from '@/shared/config/animation';
 
 import styles from './IconPicker.module.scss';
 
@@ -17,30 +20,41 @@ interface IconPickerProps {
     className?: string;
 }
 
+const COLLAPSED = { height: 0, opacity: 0 };
+const EXPANDED = { height: 'auto', opacity: 1 };
+
 const IconPicker = (props: IconPickerProps) => {
     const { options, value, isOpen, onChange, className } = props;
 
     return (
-        <div
-            className={clsx(styles.picker, isOpen && styles['picker--isOpen'], className)}
-            role="radiogroup"
-            aria-label="Выбор иконки"
-        >
-            {options.map(({ name, label, Icon }) => (
-                <button
-                    key={name}
-                    type="button"
-                    role="radio"
-                    aria-checked={value === name}
-                    aria-label={label}
-                    title={label}
-                    className={styles.option}
-                    onClick={() => onChange(name)}
+        <AnimatePresence initial={false}>
+            {isOpen && (
+                <motion.div
+                    className={clsx(styles.collapse, className)}
+                    initial={COLLAPSED}
+                    animate={EXPANDED}
+                    exit={COLLAPSED}
+                    transition={TRANSITION_BASE}
                 >
-                    <Icon />
-                </button>
-            ))}
-        </div>
+                    <div className={styles.picker} role="radiogroup" aria-label="Выбор иконки">
+                        {options.map(({ name, label, Icon }) => (
+                            <button
+                                key={name}
+                                type="button"
+                                role="radio"
+                                aria-checked={value === name}
+                                aria-label={label}
+                                title={label}
+                                className={styles.option}
+                                onClick={() => onChange(name)}
+                            >
+                                <Icon />
+                            </button>
+                        ))}
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 };
 

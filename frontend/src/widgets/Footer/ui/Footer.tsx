@@ -19,7 +19,7 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
     { to: AppRoute.Home, icon: <CollectionIcon />, label: "Коллекция" },
     { to: AppRoute.AddRecipe, icon: <AddIcon />, label: "", isAdd: true },
-    { to: AppRoute.Settings, icon: <SectionsIcon />, label: "Разделы" },
+    { to: AppRoute.Sections, icon: <SectionsIcon />, label: "Разделы" },
 ];
 
 export function Footer() {

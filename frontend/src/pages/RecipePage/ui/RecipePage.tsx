@@ -47,12 +47,14 @@ const RecipePage = () => {
                 <PageHeader className={styles.header}>
                     <IconButton
                         icon="back"
+                        round
                         type="button"
                         aria-label="Назад"
                         onClick={() => navigate(AppRoute.Home)}
                     />
                     <IconButton
                         icon="edit"
+                        round
                         type="button"
                         className={styles.edit}
                         aria-label="Редактировать"
@@ -60,6 +62,7 @@ const RecipePage = () => {
                     />
                     <IconButton
                         icon="delete"
+                        round
                         type="button"
                         variant="danger"
                         aria-label="Удалить рецепт"

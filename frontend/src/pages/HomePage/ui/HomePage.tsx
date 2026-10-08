@@ -8,7 +8,6 @@ import { PageHeader } from '@/shared/ui/PageHeader';
 import { PageWrapper } from '@/shared/ui/PageWrapper';
 import { RecipeFilters } from '@/widgets/RecipeFilters';
 import { RecipeList } from '@/widgets/RecipeList';
-import { UserGreeting } from '@/widgets/UserGreeting';
 
 import { HomeHeading } from './HomeHeading/HomeHeading';
 
@@ -32,7 +31,6 @@ const HomePage = () => {
                 </PageHeader>
             }
         >
-            <UserGreeting />
             <RecipeList recipes={recipes} isLoading={isLoading} />
 
         </PageWrapper>

@@ -4,9 +4,9 @@ import { IconButton } from "@/shared/ui/Buttons";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 
-import styles from "./SettingsPage.module.scss";
+import styles from "./AboutPage.module.scss";
 
-const SettingsPage = () => {
+const AboutPage = () => {
     const navigate = useNavigate();
 
     return (
@@ -21,15 +21,15 @@ const SettingsPage = () => {
                         onClick={() => navigate(-1)}
                     />
                     <div>
-                        <h1 className={styles.title}>Настройки</h1>
-                        <p className={styles.subtitle}>Чтобы на кухне всё было под рукой</p>
+                        <h1 className={styles.title}>О приложении</h1>
+                        <p className={styles.subtitle}>Рецепты, которые остаются с вами</p>
                     </div>
                 </PageHeader>
             }
         >
-            <p className={styles.placeholder}>Скоро здесь появятся настройки</p>
+            <p className={styles.placeholder}>Скоро здесь появится информация о приложении</p>
         </PageWrapper>
     );
 };
 
-export default SettingsPage;
+export default AboutPage;
