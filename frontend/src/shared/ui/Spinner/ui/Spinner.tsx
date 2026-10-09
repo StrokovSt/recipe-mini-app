@@ -1,4 +1,6 @@
 import SpinnerIcon from "@/shared/assets/spinner.svg?react";
+import catLoaderWebm from "@/shared/assets/video/cat-loader-480.webm";
+import catLoaderMp4 from "@/shared/assets/video/cat-loader-preview.mp4";
 
 import styles from "./Spinner.module.scss";
 
@@ -8,23 +10,26 @@ interface SpinnerProps {
     size?: SpinnerSize;
 }
 
-const SIZE_MAP: Record<SpinnerSize, number> = {
-    sm: 24,
-    md: 48,
-    lg: 96,
-    xl: 192
-};
-
 export function Spinner(props: SpinnerProps) {
     const { size = "md" } = props;
-    const px = SIZE_MAP[size];
 
     return (
         <div className={styles.wrapper}>
-            <SpinnerIcon
-                className={styles.spinner}
-                style={{ width: px, height: px }}
-            />
+            {size === "sm" ? (
+                <SpinnerIcon className={styles.spinner} />
+            ) : (
+                <video
+                    className={styles[size]}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    aria-label="Загрузка"
+                >
+                    <source src={catLoaderWebm} type="video/webm" />
+                    <source src={catLoaderMp4} type="video/mp4" />
+                </video>
+            )}
         </div>
     );
 }

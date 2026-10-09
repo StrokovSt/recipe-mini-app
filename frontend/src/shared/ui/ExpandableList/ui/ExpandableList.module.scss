@@ -1,0 +1,31 @@
+.viewport {
+    position: relative;
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin: var(--space-3) auto 0;
+    padding: var(--space-1) var(--space-2);
+    border: none;
+    background: none;
+    color: var(--color-active);
+    font: var(--font-ui-sm);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+
+    svg {
+        width: 20px;
+        height: 20px;
+        transition: transform var(--transition-base);
+    }
+
+    &:hover {
+        color: var(--color-active-hover);
+    }
+
+    &[aria-expanded="true"] svg {
+        transform: rotate(180deg);
+    }
+}

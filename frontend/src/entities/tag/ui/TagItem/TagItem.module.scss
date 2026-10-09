@@ -1,4 +1,8 @@
+@use "@/shared/styles/brush";
+
 .item {
+    @include brush.brush-underline;
+
     display: grid;
     align-items: start;
     grid-template-columns: 1fr auto;
@@ -13,11 +17,15 @@
     transition: var(--transition-base);
     grid-template-areas:
         "hash actions"
-        "name name";
+        "name name"
+        "count count";
     transition-property: border-color, background;
 
     &:hover,
-    &:focus-within {
+    &:focus-within,
+    &:active {
+        @include brush.brush-underline-active;
+
         border-color: var(--color-active);
         background: var(--color-hover-bg);
     }
@@ -67,5 +75,12 @@
         font-weight: var(--font-weight-bold);
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+
+    .count {
+        grid-area: count;
+        margin-top: calc(var(--space-2) * -1);
+        color: var(--color-icon);
+        font: var(--font-ui-xs);
     }
 }

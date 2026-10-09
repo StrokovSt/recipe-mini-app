@@ -8,7 +8,9 @@
         font-weight: var(--font-weight-bold);
     }
 
-    .menu {
-        color: var(--color-active);
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
     }
 }

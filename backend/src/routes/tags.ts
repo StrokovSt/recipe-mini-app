@@ -5,29 +5,30 @@ import prisma from "../lib/prisma";
 
 const router = Router();
 
+// Теги пользователя вместе с количеством рецептов
+const findTags = (userId: string) =>
+    prisma.tag.findMany({
+        where: { userId },
+        orderBy: { name: "asc" },
+        include: { _count: { select: { recipes: true } } },
+    });
+
 // GET /api/tags
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const userId = req.userId;
+        const userId = req.userId as string;
 
-        let tags = await prisma.tag.findMany({
-            where: { userId },
-            orderBy: { name: "asc" },
-        });
+        let tags = await findTags(userId);
 
         if (tags.length === 0) {
             await prisma.tag.createMany({
-                data: DEFAULT_TAGS.map((name) => ({ userId, name })),
-                skipDuplicates: true,
+                data: DEFAULT_TAGS.map((name) => ({ userId, name }))
             });
 
-            tags = await prisma.tag.findMany({
-            where: { userId },
-            orderBy: { name: "asc" },
-            });
+            tags = await findTags(userId);
         }
 
-        res.json(tags);
+        res.json(tags.map(({ _count, ...tag }) => ({ ...tag, recipeCount: _count.recipes })));
     } 
     catch (error) {
         next(error);

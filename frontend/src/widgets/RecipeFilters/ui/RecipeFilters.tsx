@@ -1,29 +1,39 @@
-import { type Dispatch, memo, type SetStateAction, useState } from 'react';
+import { type Dispatch, memo, type Ref, type SetStateAction } from 'react';
 
 import type { Category, Tag } from '@recipe/common';
 
 import { getCategoryIcon } from '@/entities/category';
 import type { GetRecipesProps } from '@/entities/recipe/types';
 import { BottomSheet } from '@/shared/ui/BottomSheet';
-import { IconButton, OutlineButton } from '@/shared/ui/Buttons';
+import { OutlineButton } from '@/shared/ui/Buttons';
 import { CategoryComponent } from '@/shared/ui/CategoryComponent';
+import { ExpandableList } from '@/shared/ui/ExpandableList';
 import { SearchInput } from '@/shared/ui/Input';
 import { TagComponent } from '@/shared/ui/Tag';
 
+import { getActiveFilterCount } from '../lib/getActiveFilterCount';
+import { FilterButton } from './FilterButton/FilterButton';
+
 import styles from './RecipeFilters.module.scss';
+
+// Сколько рядов категорий и тегов видно в свёрнутом фильтре
+const COLLAPSED_ROWS = 2;
 
 interface RecipeFiltersProps {
     categories: Category[];
     tags: Tag[];
     filters: GetRecipesProps;
     setFilters: Dispatch<SetStateAction<GetRecipesProps>>;
+    // Шторка фильтров управляется снаружи: её открывает и кнопка в шапке страницы
+    isOpen: boolean;
+    onOpenChange: (isOpen: boolean) => void;
+    ref?: Ref<HTMLElement>;
 }
 
 const RecipeFilters = (props: RecipeFiltersProps) => {
-    const {categories, tags, filters, setFilters} = props;
-    const [isOpen, setIsOpen] = useState(false);
+    const {categories, tags, filters, setFilters, isOpen, onOpenChange, ref} = props;
 
-    const activeCount = (filters.categoryId ? 1 : 0) + (filters.tagIds?.length ?? 0);
+    const activeCount = getActiveFilterCount(filters);
 
     const handleSearchChange = (search: string) => {
         setFilters((prev) => ({
@@ -61,7 +71,7 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
     };
 
     return (
-        <article>
+        <article ref={ref}>
             <div className={styles.bar}>
                 <SearchInput
                     value={filters.search ?? ""}
@@ -69,20 +79,12 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                     placeholder="Поиск рецептов..."
                 />
 
-                <div className={styles.trigger}>
-                    <IconButton
-                        icon="filter"
-                        aria-pressed={activeCount > 0}
-                        onClick={() => setIsOpen(true)}
-                        aria-label="Открыть фильтры"
-                    />
-                    {activeCount > 0 && <span className={styles.badge}>{activeCount}</span>}
-                </div>
+                <FilterButton activeCount={activeCount} onClick={() => onOpenChange(true)} />
             </div>
 
             <BottomSheet
                 isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
+                onClose={() => onOpenChange(false)}
                 title="Фильтры"
                 footer={
                     <OutlineButton
@@ -94,9 +96,22 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                 }
             >
                 <section className={styles.section}>
+                    <h3 className={styles.sectionTitle}>Поиск</h3>
+                    <SearchInput
+                        value={filters.search ?? ""}
+                        onChange={handleSearchChange}
+                        placeholder="Поиск рецептов..."
+                    />
+                </section>
+
+                <section className={styles.section}>
                     <h3 className={styles.sectionTitle}>Категории</h3>
-                    <div className={styles.categories}>
-                        {categories.map((category) => {
+                    <ExpandableList
+                        items={categories}
+                        rows={COLLAPSED_ROWS}
+                        isPinned={(category) => filters.categoryId === category.id}
+                        className={styles.categories}
+                        renderItem={(category) => {
                             const Icon = getCategoryIcon(category.iconName);
 
                             return (
@@ -114,21 +129,26 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                                     }
                                 />
                             );
-                        })}
-                    </div>
+                        }}
+                    />
                 </section>
 
                 <section className={styles.section}>
                     <h3 className={styles.sectionTitle}>Теги</h3>
-                    <div className={styles.tags}>
-                        {tags.map((tag) => {
-                            const isSelected = filters.tagIds?.includes(tag.id) ?? false;
-
-                            return (
-                                <TagComponent key={tag.id} tag={tag} clickHandler={handleTagToggle} tagIsActive={isSelected} />
-                            );
-                        })}
-                    </div>
+                    <ExpandableList
+                        items={tags}
+                        rows={COLLAPSED_ROWS}
+                        isPinned={(tag) => filters.tagIds?.includes(tag.id) ?? false}
+                        className={styles.tags}
+                        renderItem={(tag) => (
+                            <TagComponent
+                                key={tag.id}
+                                tag={tag}
+                                clickHandler={handleTagToggle}
+                                tagIsActive={filters.tagIds?.includes(tag.id) ?? false}
+                            />
+                        )}
+                    />
                 </section>
             </BottomSheet>
         </article>

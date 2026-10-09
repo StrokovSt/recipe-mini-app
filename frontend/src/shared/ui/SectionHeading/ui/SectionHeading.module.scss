@@ -1,0 +1,42 @@
+.heading {
+    display: grid;
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    column-gap: var(--space-3);
+    grid-template-areas:
+        "title title action"
+        "hint total action";
+
+    .title {
+        grid-area: title;
+        overflow: hidden;
+        color: var(--color-text);
+        font: var(--font-header-lg);
+        font-weight: var(--font-weight-bold);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .action {
+        display: flex;
+        grid-area: action;
+    }
+
+    .hint {
+        grid-area: hint;
+        overflow: hidden;
+        color: var(--color-text-soft);
+        font: var(--font-ui-sm);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .total {
+        grid-area: total;
+        justify-self: end;
+        color: var(--color-active);
+        font: var(--font-ui-sm);
+        font-weight: var(--font-weight-bold);
+        white-space: nowrap;
+    }
+}

@@ -59,7 +59,7 @@ router.post("/", async (req: Request, res: Response,  next: NextFunction) => {
             create: {
                 userId,
                 name,
-                iconName: iconName || "Utensils",
+                iconName: iconName || "Cutlery",
             },
         });
 

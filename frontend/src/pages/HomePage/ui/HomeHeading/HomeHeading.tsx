@@ -1,26 +1,24 @@
-import { useState } from "react";
+import type { ReactNode } from "react";
 
-import { IconButton } from "@/shared/ui/Buttons";
-import { AppMenu } from "@/widgets/AppMenu";
+import { AppMenuButton } from "@/widgets/AppMenu";
 
 import styles from "./HomeHeading.module.scss";
 
-export function HomeHeading() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+interface HomeHeadingProps {
+    // Дополнительные кнопки слева от меню
+    actions?: ReactNode;
+}
+
+export function HomeHeading(props: HomeHeadingProps) {
+    const { actions } = props;
 
     return (
         <div className={styles.heading}>
             <h1 className={styles.title}>Ричетта</h1>
-            <IconButton
-                icon="burger"
-                round
-                type="button"
-                className={styles.menu}
-                aria-label="Меню"
-                aria-expanded={isMenuOpen}
-                onClick={() => setIsMenuOpen(true)}
-            />
-            <AppMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+            <div className={styles.actions}>
+                {actions}
+                <AppMenuButton />
+            </div>
         </div>
     );
 }

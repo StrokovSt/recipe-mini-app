@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AppRoute } from "@/app/router";
 import { useCategories } from "@/entities/category";
 import { useCreateRecipe } from "@/entities/recipe";
-import { RegularButton } from "@/shared/ui/Buttons";
+import { OutlineButton, RegularButton } from "@/shared/ui/Buttons";
 import { InputController } from "@/shared/ui/Input";
 import { SelectController } from "@/shared/ui/Select";
 
@@ -131,13 +131,12 @@ const RecipeForm = (props: RecipeFormProps) => {
                 </FieldsetWrapper>
 
                 <div className={styles.actions}>
-                    <RegularButton
+                    <OutlineButton
                         className={styles.saveButton}
                         type="button"
-                        label={"Сбросить форму"}
+                        label="Сбросить форму"
                         disabled={isPending}
                         onClick={handleReset}
-                        icon="delete"
                     />
                     <RegularButton
                         className={styles.saveButton}

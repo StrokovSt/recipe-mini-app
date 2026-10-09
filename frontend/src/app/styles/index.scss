@@ -43,6 +43,7 @@
     --color-accent-light: color-mix(in srgb, var(--color-active) 8%, var(--color-surface));
     --color-accent-shadow: color-mix(in srgb, var(--color-active) 24%, transparent);
     --color-hover-bg: color-mix(in srgb, var(--color-active) 8%, var(--color-category-bg));
+    --color-brush: color-mix(in srgb, var(--color-border-strong) 45%, transparent);
     --color-active-bg: color-mix(in srgb, var(--color-active) 12%, var(--color-category-bg));
     --color-category-bg: var(--color-surface);
     --color-category-text: var(--color-text);

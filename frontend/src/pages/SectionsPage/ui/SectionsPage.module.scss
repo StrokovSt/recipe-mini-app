@@ -6,7 +6,10 @@
 .header {
     padding-bottom: 0;
 
+    // Вкладки на всю ширину шапки, сверху линия отделяет их от заголовка
     .tabs {
+        margin: 0 calc(-1 * var(--page-header-padding-x));
+        border-top: 1px solid var(--color-border);
         border-bottom: none;
     }
 }

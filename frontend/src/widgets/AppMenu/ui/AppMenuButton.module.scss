@@ -1,0 +1,10 @@
+.button {
+    flex-shrink: 0;
+    width: var(--size-menu-button);
+    height: var(--size-menu-button);
+
+    svg {
+        width: 45%;
+        height: 45%;
+    }
+}

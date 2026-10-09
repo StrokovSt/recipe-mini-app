@@ -1,8 +1,12 @@
+@use "@/shared/styles/brush";
+
 @mixin raised {
     border-color: var(--color-active);
     background: var(--color-hover-bg);
     box-shadow: var(--shadow-lg);
     transform: translateY(-2px);
+
+    @include brush.brush-underline-active;
 
     .image {
         transform: scale(1.05);
@@ -10,10 +14,11 @@
 }
 
 .card {
+    @include brush.brush-underline;
+
     display: flex;
     flex-direction: column;
     min-width: 0;
-    overflow: hidden;
 
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -37,6 +42,8 @@
 
     &:active {
         transform: scale(0.98);
+
+        @include brush.brush-underline-active;
     }
 
     .media {
@@ -45,6 +52,7 @@
         place-items: center;
         aspect-ratio: 4 / 3;
         overflow: hidden;
+        border-radius: var(--radius-md) var(--radius-md) 0 0;
         background: color-mix(in srgb, var(--color-category-bg) 88%, black);
     }
 

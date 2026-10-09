@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { CreateRecipeDto } from "@recipe/common";
 
@@ -14,10 +14,15 @@ export const RECIPE_KEYS = {
     categories: () => [...RECIPE_KEYS.all, "categories"] as const,
 };
 
+// Ключ списка тегов: у тегов есть счётчик рецептов, его нужно обновлять после изменений рецептов
+const TAGS_KEY = ["tags"] as const;
+
 export function useRecipes(filters: GetRecipesProps) {
     return useQuery({
         queryKey: RECIPE_KEYS.list(filters ?? {}),
         queryFn: () => recipeApi.getAll(filters),
+        // При смене фильтров показываем прежний список, пока грузится новый (без скачка прокрутки)
+        placeholderData: keepPreviousData,
     });
 }
 
@@ -37,6 +42,7 @@ export function useCreateRecipe() {
         onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.lists() });
         queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.categories() });
+        queryClient.invalidateQueries({ queryKey: TAGS_KEY });
         },
     });
 }
@@ -50,6 +56,7 @@ export function useUpdateRecipe() {
         onSuccess: (_, { id }) => {
             queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.lists() });
             queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.detail(id) });
+            queryClient.invalidateQueries({ queryKey: TAGS_KEY });
         },
     });
 }
@@ -61,6 +68,7 @@ export function useDeleteRecipe() {
         mutationFn: (id: string) => recipeApi.delete(id),
         onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.lists() });
+        queryClient.invalidateQueries({ queryKey: TAGS_KEY });
         },
     });
 }

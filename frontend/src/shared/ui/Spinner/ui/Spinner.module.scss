@@ -7,7 +7,19 @@
 }
 
 .spinner {
-    width: 48px;
-    height: 48px;
+    width: 24px;
+    height: 24px;
     color: var(--color-accent);
+}
+
+.md {
+    width: var(--size-loader-md);
+}
+
+.lg {
+    width: var(--size-loader-lg);
+}
+
+.xl {
+    width: var(--size-loader-xl);
 }

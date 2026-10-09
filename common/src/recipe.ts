@@ -20,6 +20,8 @@ export interface IngredientGroup {
 export interface Tag {
     id: string;
     name: string;
+    // Количество рецептов с тегом, приходит только в GET /api/tags
+    recipeCount?: number;
 }
 
 export interface RecipeTag {

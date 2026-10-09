@@ -1,0 +1,10 @@
+// Кнопка фильтров в шапке того же размера, что и меню
+.filterButton {
+    width: var(--size-menu-button);
+    height: var(--size-menu-button);
+
+    svg {
+        width: 45%;
+        height: 45%;
+    }
+}

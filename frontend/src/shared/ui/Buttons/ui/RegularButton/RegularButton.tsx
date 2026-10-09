@@ -9,19 +9,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: ButtonIconName;
 }
 
+// Основная кнопка действия: скруглённая, винная
 export const RegularButton = (props: ButtonProps) => {
     const { label, icon, className, ...rest } = props;
 
     return (
         <button className={clsx(styles.btn, className)} {...rest}>
-            <span className={styles.lg}>
-                {icon && (
-                    <span className={styles.iconWrapper}>
-                        {ButtonIcons[icon]}
-                    </span>
-                )}
-                <span className={styles.text}>{label}</span>
-            </span>
+            {icon && ButtonIcons[icon]}
+            {label}
         </button>
     );
 };
