@@ -34,9 +34,9 @@
     max-height: 85dvh;
     padding: var(--space-2) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom));
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    background: var(--tg-bg);
-    box-shadow: var(--shadow-md);
-    color: var(--tg-text);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sheet);
+    color: var(--color-text);
 
     transition: transform 0.3s ease;
 
@@ -51,7 +51,7 @@
     height: 4px;
     margin-bottom: var(--space-3);
     border-radius: 2px;
-    background: var(--color-border);
+    background: var(--color-border-strong);
 }
 
 .header {
@@ -67,6 +67,15 @@
     margin: 0;
     font: var(--font-header-lg);
     font-weight: var(--font-weight-extrabold);
+}
+
+// Элементы внутри шторки лежат на цвете фона приложения, чтобы не сливаться с ней (как в Figma)
+.close,
+.content,
+.footer {
+    --color-surface: var(--color-app-bg);
+    --color-category-bg: var(--color-app-bg);
+    --tg-secondary-bg: var(--color-app-bg);
 }
 
 .close {

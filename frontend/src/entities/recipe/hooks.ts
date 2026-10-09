@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { CreateRecipeDto } from "@recipe/common";
 
 import { recipeApi } from "./api";
-import { GetRecipesProps } from "./types";
+import type { GetRecipesProps } from "./types";
 
 export const RECIPE_KEYS = {
     all: ["recipes"] as const,

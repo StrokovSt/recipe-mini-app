@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Category } from "@recipe/common";
+import type { Category } from "@recipe/common";
 
 import { CategoryItem, useCategories, useDeleteCategory } from "@/entities/category";
 import { CategoryForm } from "@/features/category-form";

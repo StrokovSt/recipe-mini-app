@@ -1,6 +1,6 @@
-import { Controller, FieldValues } from "react-hook-form";
+import { Controller, type FieldValues } from "react-hook-form";
 
-import { TextareaControllerProps } from "../../lib/types";
+import type { TextareaControllerProps } from "../../lib/types";
 import { Textarea } from "./Textarea";
 
 export const TextareaController = <TForm extends FieldValues>(props: TextareaControllerProps<TForm>) => {

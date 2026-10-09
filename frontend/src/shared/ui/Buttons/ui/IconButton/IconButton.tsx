@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { ButtonIconName, ButtonIcons } from "../../lib/icons";
+import { type ButtonIconName, ButtonIcons } from "../../lib/icons";
 
 import styles from "./IconButton.module.scss";
 

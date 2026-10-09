@@ -3,7 +3,7 @@ import type { CreateRecipeDto, ParsedRecipe, Recipe } from "@recipe/common";
 import { api } from "@/shared/api";
 import { fileToBase64 } from "@/shared/lib/file";
 
-import { GetRecipesProps } from "./types";
+import type { GetRecipesProps } from "./types";
 
 export const recipeApi = {
     getAll: async (params: GetRecipesProps): Promise<Recipe[]> => {

@@ -1,13 +1,27 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { getTheme, setTheme, type Theme } from "@/shared/lib/theme";
 import { IconButton } from "@/shared/ui/Buttons";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
+import { Tabs } from "@/shared/ui/Tabs";
 
 import styles from "./SettingsPage.module.scss";
 
+const THEME_TABS: { id: Theme; label: string }[] = [
+    { id: "light", label: "Светлая" },
+    { id: "dark", label: "Тёмная" },
+];
+
 const SettingsPage = () => {
     const navigate = useNavigate();
+    const [theme, setThemeState] = useState<Theme>(getTheme);
+
+    const handleThemeChange = (next: Theme) => {
+        setTheme(next);
+        setThemeState(next);
+    };
 
     return (
         <PageWrapper
@@ -27,7 +41,10 @@ const SettingsPage = () => {
                 </PageHeader>
             }
         >
-            <p className={styles.placeholder}>Скоро здесь появятся настройки</p>
+            <section className={styles.section}>
+                <h2 className={styles.sectionTitle}>Тема</h2>
+                <Tabs tabs={THEME_TABS} active={theme} onChange={handleThemeChange} />
+            </section>
         </PageWrapper>
     );
 };

@@ -19,7 +19,7 @@
         "typecheck": "npm run typecheck --workspace frontend",
         "bot": "npm run dev --workspace bot",
         "dev": "concurrently \"npm run backend\" \"npm run frontend\" \"npm run bot\"",
-        "lint": "npm run lint --workspace backend",
+        "lint": "eslint .",
         "lint:css": "npm run lint:css:fix --workspace frontend"
     },
     "devDependencies": {

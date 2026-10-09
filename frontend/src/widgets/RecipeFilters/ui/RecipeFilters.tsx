@@ -1,9 +1,9 @@
 import { type Dispatch, memo, type SetStateAction, useState } from 'react';
 
-import { Category, Tag } from '@recipe/common';
+import type { Category, Tag } from '@recipe/common';
 
 import { getCategoryIcon } from '@/entities/category';
-import { GetRecipesProps } from '@/entities/recipe/types';
+import type { GetRecipesProps } from '@/entities/recipe/types';
 import { BottomSheet } from '@/shared/ui/BottomSheet';
 import { IconButton, OutlineButton } from '@/shared/ui/Buttons';
 import { CategoryComponent } from '@/shared/ui/CategoryComponent';

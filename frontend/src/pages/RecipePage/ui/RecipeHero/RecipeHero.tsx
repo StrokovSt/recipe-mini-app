@@ -20,7 +20,7 @@ export function RecipeHero(props: RecipeHeroProps) {
         } else {
             onImageClick?.();
         }
-    }, [videoUrl])
+    }, [videoUrl, onImageClick])
 
     return (
         <>

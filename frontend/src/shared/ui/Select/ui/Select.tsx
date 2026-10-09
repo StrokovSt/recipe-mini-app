@@ -7,7 +7,7 @@ import ChevronIcon from "@/shared/assets/icons/icon-chevron.svg?react";
 import CloseIcon from "@/shared/assets/icons/icon-close.svg?react";
 import { useOnClickOutside } from "@/shared/lib/hooks";
 
-import { SelectOption, SelectProps } from "../lib";
+import type { SelectOption, SelectProps } from "../lib";
 
 import styles from "./Select.module.scss";
 

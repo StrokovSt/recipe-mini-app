@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { ParsedRecipe } from "@recipe/common";
+import type { ParsedRecipe } from "@recipe/common";
 
 import { useParseRecipe, useParseRecipeFromImage } from "@/entities/recipe";
 import { RecipeForm, type RecipeFormValues } from "@/features/recipe-form";

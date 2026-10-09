@@ -59,23 +59,26 @@
     --size-tag-min-width: 50px;
     --size-list-max-columns: 4;
     --size-scrollbar: 6px;
+    --size-theme-blur: 6px;
 
     // ─── Border radius ────────────────────────────────────────
-    --radius-sm: 10px;
-    --radius-md: 16px;
+    --radius-sm: 6px;
+    --radius-md: 12px;
     --radius-lg: 20px;
     --radius-full: 50%;
 
     // ─── Shadows ──────────────────────────────────────────────
-    --shadow-sm: 0 2px 8px rgb(0 0 0 / 36%);
-    --shadow-md: 0 2px 12px rgb(0 0 0 / 7%);
-    --shadow-lg: 0 8px 24px rgb(0 0 0 / 12%);
-    --shadow-accent: 0 4px 16px var(--color-accent-shadow);
+    --shadow-sm: 0 1px 3px color-mix(in srgb, var(--color-shadow) 8%, transparent);
+    --shadow-md: 0 2px 8px color-mix(in srgb, var(--color-shadow) 9%, transparent);
+    --shadow-lg: 0 4px 20px color-mix(in srgb, var(--color-shadow) 14%, transparent), 0 1px 4px color-mix(in srgb, var(--color-shadow) 8%, transparent);
+    --shadow-sheet: 0 -8px 30px color-mix(in srgb, var(--color-shadow) 20%, transparent);
+    --shadow-accent: 0 5px 16px var(--color-accent-shadow);
 
     // ─── Transitions ──────────────────────────────────────────
     --transition-fast: 0.15s ease;
     --transition-base: 0.2s ease;
     --transition-slow: 0.4s ease;
+    --transition-theme: 0.3s ease;
 
     // ─── Z-index ──────────────────────────────────────────────
     --z-above: 10;

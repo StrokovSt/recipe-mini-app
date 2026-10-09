@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useCategories } from "@/entities/category";
 import { useRecipes } from '@/entities/recipe';
-import { GetRecipesProps } from '@/entities/recipe/types';
+import type { GetRecipesProps } from '@/entities/recipe/types';
 import { useTags } from '@/entities/tag';
 import { PageHeader } from '@/shared/ui/PageHeader';
 import { PageWrapper } from '@/shared/ui/PageWrapper';

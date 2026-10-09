@@ -1,7 +1,6 @@
 import clsx from 'clsx';
-import React from 'react';
 
-import { Tag } from '@recipe/common';
+import type { Tag } from '@recipe/common';
 
 import styles from './TagComponent.module.scss'
 

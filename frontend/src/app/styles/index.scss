@@ -1,68 +1,84 @@
 @use "reset";
 @use "./variables";
-@use "tailwindcss";
 
 :root {
-    --color-brand-brown: #92462D;
-    --color-brand-dark: #1C1C19;
-    --color-brand-beige: #D6D3D1;
-    --color-brand-light: #F7F3EE;
-    --color-brand-deep-brown: #54433E;
-    --color-brand-olive: #576845;
-    --color-brand-muted: #6B7280;
-    --color-brand-accent-warm: #B15D43;
-    --color-brand-night: #301400;
-    --color-brand-header: #CC7357;
-    --color-brand-wine: #8B2020;
+    /* ─── Палитра бренда (из макета Figma) ─────────────── */
     --color-brand-sand: #EDE0B8;
+    --color-brand-sand-light: #F5EDD5;
+    --color-brand-sand-mid: #E4D5A2;
+    --color-brand-sand-dark: #D4C49A;
+    --color-brand-wine: #8B2020;
+    --color-brand-wine-hover: #7A1C1C;
+    --color-brand-vermillion: #C30;
+    --color-brand-ink: #2C1A0E;
+    --color-brand-ink-soft: #4A3728;
+    --color-brand-ink-muted: #6B5A3E;
+    --color-brand-branch: #8B7355;
+    --color-brand-sage: #6B7C5A;
+    --color-brand-border: #C0AA7A;
+    --color-brand-border-light: #D8C890;
 
-    /* ─── Интеграция в существующую схему ─────────────── */
+    /* ─── Семантические токены ─────────────────────────── */
     --color-app-bg: var(--color-brand-sand);
     --color-app-image-bg: rgb(236 218 198); /* средний цвет background_list.png */
-    --color-surface: color-mix(in srgb, var(--color-brand-sand) 45%, var(--color-brand-light));
+    --color-surface: var(--color-brand-sand-light);
+    --color-surface-dim: var(--color-brand-sand-dark);
+    --color-text: var(--color-brand-ink);
+    --color-text-soft: var(--color-brand-ink-soft);
+    --color-text-muted: var(--color-brand-ink-muted);
+    --color-icon: var(--color-brand-branch);
     --tg-bg: var(--color-app-bg);
-    --tg-text: var(--tg-theme-text-color, var(--color-brand-dark));
-    --tg-hint: var(--tg-theme-hint-color, var(--color-brand-muted));
-    --tg-link: var(--tg-theme-link-color, var(--color-brand-brown));
-    --tg-button: var(--tg-theme-button-color, var(--color-brand-brown));
-    --tg-button-text: var(--tg-theme-button-text-color, #fff);
-    --tg-secondary-bg: var(--tg-theme-secondary-bg-color, #fff);
-    --tg-header-bg: var(--tg-theme-header-bg_color, #fff);
-    --color-accent: var(--color-brand-brown);
-    --color-accent-hover: color-mix(in srgb, var(--color-accent) 85%, black);
-    --color-accent-light: #fff0eb; 
-    --color-accent-shadow: rgb(146 70 45 / 40%);
+    --tg-text: var(--color-text);
+    --tg-hint: var(--color-text-muted);
+    --tg-link: var(--color-active);
+    --tg-button: var(--color-active);
+    --tg-button-text: var(--color-surface);
+    --tg-secondary-bg: var(--color-surface);
+    --tg-header-bg: var(--color-surface);
     --color-active: var(--color-brand-wine);
-    --color-active-hover: color-mix(in srgb, var(--color-active) 85%, black);
-    --color-active-text: #fff;
+    --color-active-hover: var(--color-brand-wine-hover);
+    --color-active-text: var(--color-surface);
+    --color-accent: var(--color-active);
+    --color-accent-hover: var(--color-active-hover);
+    --color-accent-light: color-mix(in srgb, var(--color-active) 8%, var(--color-surface));
+    --color-accent-shadow: color-mix(in srgb, var(--color-active) 24%, transparent);
     --color-hover-bg: color-mix(in srgb, var(--color-active) 8%, var(--color-category-bg));
     --color-active-bg: color-mix(in srgb, var(--color-active) 12%, var(--color-category-bg));
     --color-category-bg: var(--color-surface);
-    --color-category-text: var(--color-brand-dark);
-    --color-success: var(--color-brand-olive);
-    --color-error: #e53935;
-    --color-error-light: rgb(229 57 53 / 8%);
-    --color-error-text: #fff;
-    --color-success-light: rgb(87 104 69 / 8%);
-    --color-border: rgb(216 200 144);
-    --color-border-focus: var(--color-accent);
-    --color-overlay: rgb(0 0 0 / 50%);
-    --color-scrollbar-thumb: color-mix(in srgb, var(--color-brand-deep-brown) 40%, transparent);
+    --color-category-text: var(--color-text);
+    --color-success: var(--color-brand-sage);
+    --color-success-light: color-mix(in srgb, var(--color-success) 8%, transparent);
+    --color-error: var(--color-brand-vermillion);
+    --color-error-light: color-mix(in srgb, var(--color-error) 8%, transparent);
+    --color-error-text: var(--color-surface);
+    --color-border: var(--color-brand-border-light);
+    --color-border-strong: var(--color-brand-border);
+    --color-border-focus: var(--color-active);
+    --color-shadow: rgb(44 26 14);
+    --color-overlay: rgb(44 26 14 / 38%);
+    --color-scrollbar-thumb: color-mix(in srgb, var(--color-brand-ink-muted) 40%, transparent);
 }
 
 [data-theme="dark"] {
-    --color-app-bg: var(--color-brand-night);
-    --color-surface: color-mix(in srgb, var(--color-brand-sand) 8%, var(--color-app-bg));
-    --tg-text: #f7f3ee;
-    --tg-hint: #d6d3d1;
-    --tg-secondary-bg: #1c1c19;
-    --tg-header-bg: #1c1c19;
-    --color-border: rgb(216 200 144);
-    --color-overlay: rgb(0 0 0 / 70%);
-    --color-scrollbar-thumb: color-mix(in srgb, var(--color-brand-sand) 30%, transparent);
-    --color-active: #b53a3a;
-    --color-category-bg: color-mix(in srgb, var(--color-brand-sand) 14%, transparent);
-    --color-category-text: var(--tg-text);
+    --color-brand-sand: #1D1814;
+    --color-brand-sand-light: #29211A;
+    --color-brand-sand-mid: #352A20;
+    --color-brand-sand-dark: #46382A;
+    --color-brand-wine: #D3655F;
+    --color-brand-wine-hover: #E07972;
+    --color-brand-vermillion: #E76B47;
+    --color-brand-ink: #F3E8C9;
+    --color-brand-ink-soft: #D8C9A8;
+    --color-brand-ink-muted: #B6A789;
+    --color-brand-branch: #A99676;
+    --color-brand-sage: #92A47D;
+    --color-brand-border: #675640;
+    --color-brand-border-light: #493D30;
+    --color-app-image-bg: rgb(44 36 31); /* средний цвет background_list_dark.png */
+    --color-shadow: rgb(0 0 0);
+    --color-overlay: rgb(0 0 0 / 60%);
+
+    color-scheme: dark;
 }
 
 * {
@@ -87,8 +103,32 @@
     }
 }
 
+// Смена темы: старый снимок экрана растворяется с блюром, новый проявляется (setTheme)
+::view-transition-old(root) {
+    animation: theme-fade-out var(--transition-theme) both;
+}
+
+::view-transition-new(root) {
+    animation: theme-fade-in var(--transition-theme) both;
+}
+
+@keyframes theme-fade-out {
+    to {
+        opacity: 0;
+        filter: blur(var(--size-theme-blur));
+    }
+}
+
+@keyframes theme-fade-in {
+    from {
+        opacity: 0;
+        filter: blur(var(--size-theme-blur));
+    }
+}
+
 body {
     background: var(--color-app-image-bg);
+    color: var(--color-text);
     font-family: var(--font-family-main);
     font-size: var(--font-size-md);
     line-height: var(--font-line-md);
@@ -114,4 +154,8 @@ button, input, textarea, select {
     margin: 0 auto;
     overflow: hidden;
     background: var(--color-app-image-bg) url("@/shared/assets/images/background_list.png") center / cover no-repeat;
+
+    [data-theme="dark"] & {
+        background-image: url("@/shared/assets/images/background_list_dark.png");
+    }
 }

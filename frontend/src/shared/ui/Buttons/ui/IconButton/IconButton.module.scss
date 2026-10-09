@@ -106,10 +106,10 @@
     height: auto;
     padding: 0;
     border: none;
-    color: var(--color-brand-header);
+    color: var(--color-icon);
 
     &:hover:not(:disabled) {
-        color: var(--color-brand-accent-warm);
+        color: var(--color-active);
     }
 }
 

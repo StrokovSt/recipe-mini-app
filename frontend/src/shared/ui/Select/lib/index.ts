@@ -1,4 +1,4 @@
-import { Control, FieldValues, Path, RegisterOptions } from "react-hook-form";
+import type { Control, FieldValues, Path, RegisterOptions } from "react-hook-form";
 
 export interface SelectOption<T extends string | number = string> {
     value: T;

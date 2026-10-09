@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Tag } from "@recipe/common";
+import type { Tag } from "@recipe/common";
 
 import { TagItem, useDeleteTag, useTags } from "@/entities/tag";
 import { TagForm } from "@/features/tag-form";

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Category } from '@recipe/common';
+import type { Category } from '@recipe/common';
 
 import { IconButton } from '@/shared/ui/Buttons';
 

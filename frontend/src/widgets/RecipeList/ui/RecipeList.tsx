@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Recipe } from '@recipe/common';
+import type { Recipe } from '@recipe/common';
 
 import { Spinner } from '@/shared/ui/Spinner';
 

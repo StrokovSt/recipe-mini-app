@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from 'react';
 
-import { Category } from '@recipe/common';
+import type { Category } from '@recipe/common';
 
 import {
     CATEGORY_ICON_LIST,

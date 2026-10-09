@@ -1,7 +1,6 @@
 import clsx from 'clsx';
-import React from 'react';
 
-import { ScrollDirection, ScrollSpeed } from '../lib/types';
+import type { ScrollDirection, ScrollSpeed } from '../lib/types';
 
 import styles from './ScrolList.module.scss'
 

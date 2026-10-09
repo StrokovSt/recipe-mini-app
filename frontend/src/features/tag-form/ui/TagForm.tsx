@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from 'react';
 
-import { Tag } from '@recipe/common';
+import type { Tag } from '@recipe/common';
 
 import { useCreateTag, useRenameTag, useTags } from '@/entities/tag';
 import { OutlineButton, RegularButton } from '@/shared/ui/Buttons';

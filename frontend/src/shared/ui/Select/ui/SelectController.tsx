@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
 
-import { FormValues, SelectControllerProps } from "../lib";
+import type { FormValues, SelectControllerProps } from "../lib";
 import Select from "./Select";
 
 const SelectController = <TForm extends FormValues, T extends string | number = string>(

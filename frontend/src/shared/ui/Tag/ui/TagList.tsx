@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { Tag } from '@recipe/common';
+import type { Tag } from '@recipe/common';
 
 import TagComponent from './TagComponent';
 

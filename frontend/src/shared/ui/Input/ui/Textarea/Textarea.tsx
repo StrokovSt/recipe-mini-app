@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useEffect, useRef } from "react";
 
-import { TextareaProps } from "../../lib/types";
+import type { TextareaProps } from "../../lib/types";
 
 import styles from "./Textarea.module.scss";
 

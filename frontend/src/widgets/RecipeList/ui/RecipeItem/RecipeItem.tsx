@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Recipe } from '@recipe/common';
+import type { Recipe } from '@recipe/common';
 
 import { getCategoryIcon } from '@/entities/category';
 import ClockIcon from '@/shared/assets/icons/icon-clock.svg?react';

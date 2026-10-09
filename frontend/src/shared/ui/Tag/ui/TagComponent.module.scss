@@ -20,12 +20,6 @@
     transition: 0.25s ease-in-out all;
     text-overflow: ellipsis;
 
-    [data-theme="dark"] & {
-        --tag-color: var(--color-brand-header);
-        --tag-bg: color-mix(in srgb, var(--color-brand-header) 12%, transparent);
-        --tag-border: color-mix(in srgb, var(--color-brand-header) 30%, transparent);
-    }
-
     &--isActive {
         border-color: var(--color-active);
         background: var(--color-active);
