@@ -6,7 +6,7 @@ import { pluralize } from "@/shared/lib/plural";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { SectionHeading } from "@/shared/ui/SectionHeading";
-import { Tabs } from "@/shared/ui/Tabs";
+import { SegmentedControl, type SegmentedOption } from "@/shared/ui/SegmentedControl";
 import { AppMenuButton } from "@/widgets/AppMenu";
 
 import CategoriesTab from "./CategoriesTab/CategoriesTab";
@@ -16,7 +16,7 @@ import styles from "./SectionsPage.module.scss";
 
 type Tab = "categories" | "tags";
 
-const TABS: { id: Tab; label: string }[] = [
+const TABS: SegmentedOption<Tab>[] = [
     { id: "categories", label: "Категории" },
     { id: "tags", label: "Теги" },
 ];
@@ -56,7 +56,7 @@ const SectionsPage = () => {
                 </PageHeader>
             }
         >
-            <Tabs tabs={TABS} active={tab} onChange={setTab} />
+            <SegmentedControl options={TABS} value={tab} onChange={setTab} />
             {tab === "categories" ? <CategoriesTab /> : <TagsTab />}
         </PageWrapper>
     );
