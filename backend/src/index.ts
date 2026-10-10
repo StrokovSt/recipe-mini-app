@@ -7,7 +7,9 @@ import express from "express";
 import { authMiddleware } from "./middleware/auth";
 import { errorHandler } from "./middleware/errorHandler";
 import { generalLimiter, parseLimiter, uploadLimiter } from "./middleware/rateLimit";
+import { requireAi } from "./middleware/requireAi";
 import categoriesRouter from "./routes/categories";
+import meRouter from "./routes/me";
 import router from "./routes/parse";
 import recipesRouter from "./routes/recipes";
 import tagsRouter from "./routes/tags";
@@ -35,7 +37,8 @@ app.get("/health", (_req, res) => {
 
 app.use(authMiddleware);
 
-app.use("/api/parse", parseLimiter, router);
+app.use("/api/parse", parseLimiter, requireAi, router);
+app.use("/api/me", meRouter);
 app.use("/api/recipes", recipesRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/tags", tagsRouter);

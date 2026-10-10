@@ -12,6 +12,7 @@
     "nothingFound": "未找到结果",
     "showMore": "再显示 {{count}} 个",
     "collapse": "收起",
+    "minutes": "{{count}}分钟",
     "iconPicker": "选择图标",
     "errorBoundary": {
         "title": "出了点问题",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "已达到每日请求上限，请明天再试。",
         "VALIDATION_ERROR": "数据校验失败。",
         "LIMIT_REACHED": "已达到食谱数量上限，订阅即可无限使用。",
+        "AI_DISABLED": "此账户无法使用 AI 识别。",
         "unknown": "出了点问题。"
     }
 }

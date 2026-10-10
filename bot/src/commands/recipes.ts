@@ -25,10 +25,11 @@ export async function recipesCommand(ctx: Context) {
                 keyboard.url("📝 Открыть в Telegraph", r.telegraphUrl);
             }
 
+            const totalTime = (r.prepTime ?? 0) + (r.cookTime ?? 0);
             const label = [
                 `*${r.title}*`,
-                r.time ? `⏱ ${r.time}` : "",
-                r.category ? `📁 ${r.category.name}` : "",
+                totalTime ? `⏱ ${totalTime} мин` : "",
+                `📁 ${r.category.name}`,
             ].filter(Boolean).join("  ");
 
             await ctx.reply(label, {

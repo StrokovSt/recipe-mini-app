@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 
-import { DEFAULT_TAGS } from "../config/defaults";
 import prisma from "../lib/prisma";
+import { ensureTags } from "../services/userDefaults";
 
 const router = Router();
 
@@ -18,15 +18,8 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const userId = req.userId as string;
 
-        let tags = await findTags(userId);
-
-        if (tags.length === 0) {
-            await prisma.tag.createMany({
-                data: DEFAULT_TAGS.map((name) => ({ userId, name }))
-            });
-
-            tags = await findTags(userId);
-        }
+        await ensureTags(userId);
+        const tags = await findTags(userId);
 
         res.json(tags.map(({ _count, ...tag }) => ({ ...tag, recipeCount: _count.recipes })));
     } 

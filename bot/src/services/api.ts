@@ -47,7 +47,6 @@ export async function saveRecipe(recipe: ParsedRecipe, userId: string): Promise<
         body: JSON.stringify({
             ...recipe,
             media: recipe.media || [],
-            tags: [],
         }),
     });
 

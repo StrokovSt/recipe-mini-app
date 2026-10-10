@@ -12,6 +12,7 @@
     "nothingFound": "Hiçbir şey bulunamadı",
     "showMore": "{{count}} tane daha göster",
     "collapse": "Daha az göster",
+    "minutes": "{{count}} dk",
     "iconPicker": "Simge seç",
     "errorBoundary": {
         "title": "Bir şeyler ters gitti",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "Günlük istek sınırına ulaşıldı. Yarın tekrar dene.",
         "VALIDATION_ERROR": "Geçersiz veri.",
         "LIMIT_REACHED": "Tarif sınırına ulaşıldı. Sınırsız erişim için abone ol.",
+        "AI_DISABLED": "Yapay zekâ ile tanıma bu hesap için kullanılamıyor.",
         "unknown": "Bir şeyler ters gitti."
     }
 }

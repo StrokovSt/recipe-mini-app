@@ -12,6 +12,7 @@
     "nothingFound": "Nada encontrado",
     "showMore": "Mostrar mais {{count}}",
     "collapse": "Mostrar menos",
+    "minutes": "{{count}} min",
     "iconPicker": "Escolher ícone",
     "errorBoundary": {
         "title": "Algo deu errado",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "Limite diário de solicitações atingido. Tente amanhã.",
         "VALIDATION_ERROR": "Dados inválidos.",
         "LIMIT_REACHED": "Limite de receitas atingido. Assine para ter acesso ilimitado.",
+        "AI_DISABLED": "O reconhecimento por IA não está disponível para esta conta.",
         "unknown": "Algo deu errado."
     }
 }

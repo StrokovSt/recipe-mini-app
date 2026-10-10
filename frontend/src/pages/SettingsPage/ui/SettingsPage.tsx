@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import { useUpdateSettings } from "@/entities/user";
 import { LanguageSelect } from "@/features/select-language";
 import MoonIcon from "@/shared/assets/icons/icon-moon.svg?react";
 import SunIcon from "@/shared/assets/icons/icon-sun.svg?react";
@@ -21,6 +22,7 @@ const SettingsPage = () => {
     const navigate = useNavigate();
     const [theme, setThemeState] = useState<Theme>(getTheme);
     const [animations, setAnimationsState] = useState(getAnimations);
+    const { mutate: updateSettings } = useUpdateSettings();
 
     const themeOptions: SegmentedOption<Theme>[] = [
         { id: "light", label: t("appearance.light"), icon: <SunIcon /> },
@@ -30,11 +32,13 @@ const SettingsPage = () => {
     const handleThemeChange = (next: Theme) => {
         setTheme(next);
         setThemeState(next);
+        updateSettings({ theme: next });
     };
 
     const handleAnimationsChange = (enabled: boolean) => {
         setAnimations(enabled);
         setAnimationsState(enabled);
+        updateSettings({ animations: enabled });
     };
 
     return (

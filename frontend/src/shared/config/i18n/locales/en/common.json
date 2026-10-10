@@ -12,6 +12,7 @@
     "nothingFound": "Nothing found",
     "showMore": "Show {{count}} more",
     "collapse": "Show less",
+    "minutes": "{{count}} min",
     "iconPicker": "Choose an icon",
     "errorBoundary": {
         "title": "Something went wrong",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "Daily request limit reached. Try again tomorrow.",
         "VALIDATION_ERROR": "Invalid data.",
         "LIMIT_REACHED": "Recipe limit reached. Subscribe for unlimited access.",
+        "AI_DISABLED": "AI recognition isn't available for this account.",
         "unknown": "Something went wrong."
     }
 }

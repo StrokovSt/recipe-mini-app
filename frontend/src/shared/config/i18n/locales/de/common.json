@@ -12,6 +12,7 @@
     "nothingFound": "Nichts gefunden",
     "showMore": "{{count}} weitere anzeigen",
     "collapse": "Weniger anzeigen",
+    "minutes": "{{count}} Min.",
     "iconPicker": "Symbol auswählen",
     "errorBoundary": {
         "title": "Etwas ist schiefgelaufen",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "Das Tageslimit für Anfragen ist erreicht. Versuch es morgen wieder.",
         "VALIDATION_ERROR": "Ungültige Daten.",
         "LIMIT_REACHED": "Rezeptlimit erreicht. Schließ ein Abo ab, um unbegrenzt Rezepte zu speichern.",
+        "AI_DISABLED": "KI-Erkennung ist für dieses Konto nicht verfügbar.",
         "unknown": "Etwas ist schiefgelaufen."
     }
 }

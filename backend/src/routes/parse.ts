@@ -47,7 +47,7 @@ router.post("/", async (req: Request, res: Response) => {
     }
 
     try {
-        const recipe = await parseRecipeFromUrl(url);
+        const recipe = await parseRecipeFromUrl(url, req.userId as string);
         const source = detectSource(url);
         const combinedMedia = [...existingMedia, ...(recipe.media || [])];
 
@@ -68,7 +68,7 @@ router.post("/image", async (req: Request, res: Response) => {
     }
 
     try {
-        const recipe = await parseRecipeFromImage(base64, mimeType);
+        const recipe = await parseRecipeFromImage(base64, mimeType, req.userId as string);
         res.json({ ...recipe, source: "other", sourceUrl: "" });
     } catch (error) {
         handleParseError(error, res);
@@ -85,7 +85,7 @@ router.post("/text", async (req: Request, res: Response) => {
     }
 
     try {
-        const parsed = await parseRecipeFromText(text);
+        const parsed = await parseRecipeFromText(text, req.userId as string);
         res.json({ ...parsed, source: "telegram", sourceUrl: "" });
     } catch (error) {
         handleParseError(error, res);

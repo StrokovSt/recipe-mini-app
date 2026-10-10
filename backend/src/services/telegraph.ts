@@ -1,6 +1,7 @@
-import type { IngredientGroup, MediaType } from "@recipe/common";
+import type { IngredientGroup, MediaType, RecipeStep } from "@recipe/common";
 
 import { createPage } from "../api/telegraph";
+import { formatIngredient } from "../utils/formatIngredient";
 
 interface MediaInput {
     url: string;
@@ -9,9 +10,11 @@ interface MediaInput {
 
 interface RecipePageData {
     title: string;
+    description?: string | null;
     ingredients: IngredientGroup[];
-    steps: string[];
-    time?: string | null;
+    steps: RecipeStep[];
+    prepTime?: number | null;
+    cookTime?: number | null;
     servings?: number | null;
     media?: MediaInput[];
     sourceUrl?: string;
@@ -46,10 +49,15 @@ function buildContent(recipe: RecipePageData) {
         }
     }
 
+    if (recipe.description) {
+        content.push({ tag: "p", children: [recipe.description] });
+    }
+
     // Мета информация
-    if (recipe.time || recipe.servings) {
+    if (recipe.prepTime || recipe.cookTime || recipe.servings) {
         const meta = [];
-        if (recipe.time) meta.push(`⏱ ${recipe.time}`);
+        if (recipe.prepTime) meta.push(`🔪 подготовка ${recipe.prepTime} мин`);
+        if (recipe.cookTime) meta.push(`⏱ готовка ${recipe.cookTime} мин`);
         if (recipe.servings) meta.push(`👤 ${recipe.servings} порц.`);
         content.push({
             tag: "p",
@@ -68,20 +76,27 @@ function buildContent(recipe: RecipePageData) {
             tag: "ul",
             children: group.items.map(item => ({
                 tag: "li",
-                children: [item],
+                children: [formatIngredient(item)],
             })),
         });
     }
 
-    // Шаги
+    // Шаги: номер и текст, под шагом его фото
     if (recipe.steps.length > 0) {
         content.push({ tag: "h3", children: ["Приготовление"] });
-        content.push({
-            tag: "ol",
-            children: recipe.steps.map(step => ({
-                tag: "li",
-                children: [step],
-            })),
+
+        recipe.steps.forEach((step, i) => {
+            content.push({
+                tag: "p",
+                children: [{ tag: "b", children: [`${i + 1}.`] }, ` ${step.text}`],
+            });
+
+            for (const src of step.images) {
+                content.push({
+                    tag: "figure",
+                    children: [{ tag: "img", attrs: { src } }],
+                });
+            }
         });
     }
 

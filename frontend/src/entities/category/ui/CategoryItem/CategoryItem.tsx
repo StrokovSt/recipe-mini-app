@@ -37,7 +37,10 @@ const CategoryItem = (props: CategoryItemProps) => {
             menuLabel={t('categories.actions', { name: category.name })}
             menu={[
                 { label: t('common:edit'), icon: <EditIcon />, onClick: () => onEdit(category) },
-                { label: t('common:delete'), icon: <DeleteIcon />, danger: true, onClick: () => onDelete(category) },
+                // Резервную категорию «Разное» удалить нельзя
+                ...(category.isDefault ? [] : [
+                    { label: t('common:delete'), icon: <DeleteIcon />, danger: true, onClick: () => onDelete(category) },
+                ]),
             ]}
         />
     );

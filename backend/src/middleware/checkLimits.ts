@@ -2,15 +2,12 @@ import { NextFunction, Request, Response } from "express";
 
 import { PLAN_LIMITS } from "../config/limits";
 import prisma from "../lib/prisma";
+import { ensureUser } from "../services/user";
 
 export const checkRecipeLimit = async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.userId as string;
 
-    const user = await prisma.user.upsert({
-        where: { id: userId },
-        update: {},
-        create: { id: userId },
-    });
+    const user = await ensureUser(userId);
 
     const plan = user.plan as keyof typeof PLAN_LIMITS;
     const limit = PLAN_LIMITS[plan].recipes;

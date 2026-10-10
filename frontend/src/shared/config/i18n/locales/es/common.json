@@ -12,6 +12,7 @@
     "nothingFound": "No se encontró nada",
     "showMore": "Mostrar {{count}} más",
     "collapse": "Mostrar menos",
+    "minutes": "{{count}} min",
     "iconPicker": "Elegir un icono",
     "errorBoundary": {
         "title": "Algo salió mal",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "Has alcanzado el límite diario de solicitudes. Inténtalo mañana.",
         "VALIDATION_ERROR": "Datos no válidos.",
         "LIMIT_REACHED": "Has alcanzado el límite de recetas. Suscríbete para tener acceso ilimitado.",
+        "AI_DISABLED": "El reconocimiento con IA no está disponible para esta cuenta.",
         "unknown": "Algo salió mal."
     }
 }

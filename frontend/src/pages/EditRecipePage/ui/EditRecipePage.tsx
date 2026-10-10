@@ -23,10 +23,12 @@ const EditRecipePage = () => {
             {
                 id: recipe.id,
                 title: values.title,
+                description: values.description ?? null,
                 categoryId: values.categoryId,
                 ingredients: values.ingredients,
                 steps: values.steps,
-                time: values.time ?? null,
+                prepTime: values.prepTime ?? null,
+                cookTime: values.cookTime ?? null,
                 servings: values.servings ?? null,
                 tags: values.tagIds,
                 media: values.media,
@@ -40,10 +42,12 @@ const EditRecipePage = () => {
             <RecipeForm
                 defaultValues={{
                     title: recipe.title,
+                    description: recipe.description,
                     categoryId: recipe.categoryId,
                     ingredients: recipe.ingredients,
                     steps: recipe.steps,
-                    time: recipe.time ?? undefined,
+                    prepTime: recipe.prepTime,
+                    cookTime: recipe.cookTime,
                     servings: recipe.servings ?? undefined,
                     tagIds: recipe.tags.map((t) => t.tagId),
                     media: recipe.media.map((m) => ({ url: m.url, type: m.type })),

@@ -44,7 +44,7 @@ export function RecipeHero(props: RecipeHeroProps) {
                 )}
 
                 <div className={styles.info}>
-                    {category && category !== "Без категории" && (
+                    {category && (
                         <span className={styles.category}>{category}</span>
                     )}
                     <h1 className={styles.title}>{title}</h1>

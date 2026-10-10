@@ -9,6 +9,7 @@ import type recipe from "./locales/ru/recipe.json";
 import type recipeForm from "./locales/ru/recipeForm.json";
 import type sections from "./locales/ru/sections.json";
 import type settings from "./locales/ru/settings.json";
+import type units from "./locales/ru/units.json";
 
 // Русские словари — эталон: по ним TypeScript проверяет ключи t() во всех языках.
 // Новый словарь (страница, виджет) добавляется сюда же
@@ -24,4 +25,5 @@ export interface Resources {
     recipeForm: typeof recipeForm;
     sections: typeof sections;
     settings: typeof settings;
+    units: typeof units;
 }

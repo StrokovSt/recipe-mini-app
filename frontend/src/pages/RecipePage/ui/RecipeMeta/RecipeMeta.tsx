@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import styles from "./RecipeMeta.module.scss";
 
 interface RecipeMetaProps {
-    time?: string | null;
+    // Общее время в минутах
+    time?: number | null;
     servings?: number | null;
     tags: string[];
     sourceUrl?: string | null;
@@ -12,7 +13,7 @@ interface RecipeMetaProps {
 
 export function RecipeMeta(props: RecipeMetaProps) {
     const { time, servings, tags, sourceUrl, telegraphUrl } = props;
-    const { t } = useTranslation("recipe");
+    const { t } = useTranslation(["recipe", "common"]);
 
     const hasLinks = telegraphUrl || sourceUrl;
 
@@ -23,7 +24,7 @@ export function RecipeMeta(props: RecipeMetaProps) {
                     {time && (
                         <div className={styles.statItem}>
                             <span className={styles.statLabel}>{t("time")}</span>
-                            <span className={styles.statValue}>⏱ {time}</span>
+                            <span className={styles.statValue}>⏱ {t("common:minutes", { count: time })}</span>
                         </div>
                     )}
                     {servings && (

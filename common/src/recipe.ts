@@ -1,3 +1,5 @@
+import type { UnitCode } from "./units";
+
 export type MediaType = "image" | "video";
 
 export interface Media {
@@ -12,9 +14,23 @@ export interface MediaInput {
     type: MediaType;
 }
 
+// amount — число (диапазон «2–3» хранится нижним числом), unit — код из UNITS.
+// «По вкусу» — unit "to_taste" без amount
+export interface Ingredient {
+    name: string;
+    amount: number | null;
+    unit: UnitCode | null;
+}
+
 export interface IngredientGroup {
     title: string | null;
-    items: string[];
+    items: Ingredient[];
+}
+
+// images — ссылки на фото к шагу
+export interface RecipeStep {
+    text: string;
+    images: string[];
 }
 
 export interface Tag {
@@ -34,6 +50,8 @@ export interface Category {
     name: string;
     userId: string;
     iconName?: string;
+    // Резервная категория «Разное»: её нельзя удалить, сюда попадают рецепты без категории
+    isDefault: boolean;
     // Количество рецептов в категории, приходит только в GET /api/categories
     recipeCount?: number;
 }
@@ -44,11 +62,14 @@ export interface Recipe {
     id: string;
     userId: string;
     title: string;
-    categoryId: string | null;
-    category: Category | null;
+    description: string | null;
+    categoryId: string;
+    category: Category;
     ingredients: IngredientGroup[];
-    steps: string[];
-    time: string | null;
+    steps: RecipeStep[];
+    // Время в минутах
+    prepTime: number | null;
+    cookTime: number | null;
     servings: number | null;
     sourceUrl: string;
     source: RecipeSource;
@@ -61,22 +82,15 @@ export interface Recipe {
 
 export type RecipeOmitFields = "id" | "userId" | "category" | "categoryId" | "telegraphUrl" | "createdAt" | "updatedAt" | "tags" | "media";
 
+// Без categoryId рецепт попадает в «Разное». tags — id существующих тегов пользователя
 export type CreateRecipeDto = Omit<Recipe, RecipeOmitFields> & {
     categoryId?: string | null;
-    category?: string;
     tags: string[];
     media: MediaInput[];
 };
 
-export interface ParsedRecipe {
-    title: string;
-    category?: string;
-    ingredients: IngredientGroup[];
-    steps: string[];
-    time: string | null;
-    servings: number | null;
-    media: MediaInput[];
-    tags: string[];
-    source: RecipeSource;
-    sourceUrl: string;
-}
+// Результат распознавания: категорию и теги AI выбирает из списков пользователя,
+// поэтому здесь уже id (categoryId — «Разное», если ничего не подошло)
+export type ParsedRecipe = Omit<CreateRecipeDto, "categoryId"> & {
+    categoryId: string;
+};

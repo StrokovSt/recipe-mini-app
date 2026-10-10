@@ -20,12 +20,13 @@ interface RecipeItemProps {
 
 const RecipeItem = (props: RecipeItemProps) => {
     const { recipe } = props;
-    const { t } = useTranslation('home');
-    const { id, title, steps, time, servings, source, media, tags, category } = recipe;
+    const { t } = useTranslation(['home', 'common']);
+    const { id, title, description, steps, prepTime, cookTime, servings, source, media, tags, category } = recipe;
 
     const cover = media.find((item) => item.type === 'image');
-    const PlaceholderIcon = getCategoryIcon(category?.iconName);
-    const description = steps[0];
+    const PlaceholderIcon = getCategoryIcon(category.iconName);
+    const summary = description ?? steps[0]?.text;
+    const time = (prepTime ?? 0) + (cookTime ?? 0);
 
     return (
         <Link to={`/recipe/${id}`} className={styles.card}>
@@ -42,14 +43,14 @@ const RecipeItem = (props: RecipeItemProps) => {
 
             <div className={styles.body}>
                 <h3 className={styles.title}>{title}</h3>
-                {description && (
-                    <p className={styles.description}>{description}</p>
+                {summary && (
+                    <p className={styles.description}>{summary}</p>
                 )}
 
-                {(time || servings) && (
+                {(time > 0 || servings) && (
                     <div className={styles.meta}>
-                        {time && (
-                            <IconLabel icon={<ClockIcon />}>{time}</IconLabel>
+                        {time > 0 && (
+                            <IconLabel icon={<ClockIcon />}>{t('common:minutes', { count: time })}</IconLabel>
                         )}
                         {servings && (
                             <IconLabel icon={<UserIcon />}>{t('servings', { count: servings })}</IconLabel>

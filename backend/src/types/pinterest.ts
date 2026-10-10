@@ -11,6 +11,7 @@ export interface PinterestJsonLd {
     keywords?: string;
 }
 
+// Распознанный рецепт до добавления медиа и источника
 export type ParsedRecipeAI = Omit<ParsedRecipe, "media" | "source" | "sourceUrl">;
 
 export type MediaItem = {

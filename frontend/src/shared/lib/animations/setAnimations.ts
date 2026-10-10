@@ -6,6 +6,12 @@ export function getAnimations(): boolean {
     return document.documentElement.getAttribute("data-animations") !== "off";
 }
 
+// Выбор, сохранённый на устройстве, null — по системной настройке
+export function getSavedAnimations(): boolean | null {
+    const saved = localStorage.getItem(ANIMATIONS_STORAGE_KEY);
+    return saved === null ? null : saved === "on";
+}
+
 export function setAnimations(enabled: boolean) {
     localStorage.setItem(ANIMATIONS_STORAGE_KEY, enabled ? "on" : "off");
     applyAnimations(enabled);

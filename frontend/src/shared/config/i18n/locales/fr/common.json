@@ -12,6 +12,7 @@
     "nothingFound": "Aucun résultat",
     "showMore": "Afficher {{count}} de plus",
     "collapse": "Réduire",
+    "minutes": "{{count}} min",
     "iconPicker": "Choisir une icône",
     "errorBoundary": {
         "title": "Une erreur s'est produite",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "Limite quotidienne de requêtes atteinte. Réessaie demain.",
         "VALIDATION_ERROR": "Données non valides.",
         "LIMIT_REACHED": "Limite de recettes atteinte. Abonne-toi pour un accès illimité.",
+        "AI_DISABLED": "La reconnaissance par IA n'est pas disponible pour ce compte.",
         "unknown": "Une erreur s'est produite."
     }
 }

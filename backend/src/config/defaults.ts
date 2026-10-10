@@ -1,3 +1,9 @@
+// Резервная категория: создаётся каждому пользователю, удалить её нельзя
+export const FALLBACK_CATEGORY = {
+    name: "Разное",
+    iconName: "Cutlery",
+};
+
 export const DEFAULT_CATEGORIES = [
     {
         name: "Супы",

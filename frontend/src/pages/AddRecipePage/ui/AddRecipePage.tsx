@@ -31,11 +31,15 @@ const AddRecipePage = () => {
     const applyParsedData = (data: ParsedRecipe) => {
         setDefaultValues({
             title: data.title,
+            description: data.description,
+            categoryId: data.categoryId,
             ingredients: data.ingredients,
             steps: data.steps,
-            time: data.time ?? undefined,
+            prepTime: data.prepTime,
+            cookTime: data.cookTime,
             servings: data.servings ?? undefined,
-            tagIds: [],
+            tagIds: data.tags,
+            media: data.media,
         });
         setFormKey((k) => k + 1);
         setMode("manual");

@@ -12,6 +12,7 @@
     "nothingFound": "Tidak ada hasil",
     "showMore": "Tampilkan {{count}} lagi",
     "collapse": "Tampilkan lebih sedikit",
+    "minutes": "{{count}} mnt",
     "iconPicker": "Pilih ikon",
     "errorBoundary": {
         "title": "Terjadi kesalahan",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "Batas permintaan harian tercapai. Coba lagi besok.",
         "VALIDATION_ERROR": "Data tidak valid.",
         "LIMIT_REACHED": "Batas resep tercapai. Berlangganan untuk akses tanpa batas.",
+        "AI_DISABLED": "Pengenalan dengan AI tidak tersedia untuk akun ini.",
         "unknown": "Terjadi kesalahan."
     }
 }

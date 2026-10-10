@@ -12,6 +12,7 @@
     "nothingFound": "見つかりませんでした",
     "showMore": "さらに{{count}}件表示",
     "collapse": "折りたたむ",
+    "minutes": "{{count}}分",
     "iconPicker": "アイコンを選択",
     "errorBoundary": {
         "title": "問題が発生しました",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "1日のリクエスト上限に達しました。明日もう一度お試しください。",
         "VALIDATION_ERROR": "入力データが正しくありません。",
         "LIMIT_REACHED": "レシピの上限に達しました。無制限に使うには購読してください。",
+        "AI_DISABLED": "このアカウントではAI認識を利用できません。",
         "unknown": "問題が発生しました。"
     }
 }

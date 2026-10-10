@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { AddButton, IconButton } from "@/shared/ui/Buttons";
 import { TextareaController } from "@/shared/ui/Input";
 
-import type { RecipeFormValues } from "../../model/schema";
+import { EMPTY_STEP, type RecipeFormValues } from "../../model/schema";
 import FieldsetWrapper from "../FieldsetWrapper/FieldsetWrapper";
 
 import styles from "./StepsField.module.scss";
@@ -15,7 +15,7 @@ const StepsField = () => {
     const steps = watch("steps");
 
     const append = () => {
-        setValue("steps", [...steps, ""], { shouldValidate: true });
+        setValue("steps", [...steps, EMPTY_STEP], { shouldValidate: true });
     };
 
     const remove = (i: number) => {
@@ -29,10 +29,10 @@ const StepsField = () => {
                     {steps.map((_, i) => (
                         <div key={i} className={styles.row}>
                             <TextareaController
-                                name={`steps.${i}` as "steps.0"}
+                                name={`steps.${i}.text` as "steps.0.text"}
                                 control={control}
                                 label={t("steps.item", { number: i + 1 })}
-                                error={(errors.steps?.[i] as { message?: string })?.message}
+                                error={errors.steps?.[i]?.text?.message}
                             />
                             <IconButton icon="close" variant="danger" type="button" onClick={() => remove(i)} />
                         </div>

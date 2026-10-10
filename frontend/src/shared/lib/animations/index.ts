@@ -1,2 +1,2 @@
 export { initAnimations } from "./initAnimations";
-export { getAnimations, setAnimations } from "./setAnimations";
+export { getAnimations, getSavedAnimations, setAnimations } from "./setAnimations";

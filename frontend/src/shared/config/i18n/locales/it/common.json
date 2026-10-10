@@ -12,6 +12,7 @@
     "nothingFound": "Nessun risultato",
     "showMore": "Mostra altri {{count}}",
     "collapse": "Mostra meno",
+    "minutes": "{{count}} min",
     "iconPicker": "Scegli un'icona",
     "errorBoundary": {
         "title": "Qualcosa è andato storto",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "Limite giornaliero di richieste raggiunto. Riprova domani.",
         "VALIDATION_ERROR": "Dati non validi.",
         "LIMIT_REACHED": "Limite di ricette raggiunto. Abbonati per l'accesso illimitato.",
+        "AI_DISABLED": "Il riconoscimento con IA non è disponibile per questo account.",
         "unknown": "Qualcosa è andato storto."
     }
 }

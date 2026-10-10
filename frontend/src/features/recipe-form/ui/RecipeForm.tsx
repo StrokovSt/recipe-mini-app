@@ -10,7 +10,7 @@ import { OutlineButton, RegularButton } from "@/shared/ui/Buttons";
 import { InputController } from "@/shared/ui/Input";
 import { SelectController } from "@/shared/ui/Select";
 
-import { type RecipeFormValues,recipeSchema } from "../model/schema";
+import { EMPTY_INGREDIENT, EMPTY_STEP, type RecipeFormValues, recipeSchema } from "../model/schema";
 import type { RecipeFormProps } from "../model/types";
 import FieldsetWrapper from "./FieldsetWrapper/FieldsetWrapper";
 import IngredientsField from "./IngredientsField/IngredientsField";
@@ -29,9 +29,9 @@ const RecipeForm = (props: RecipeFormProps) => {
         defaultValues: {
             title: "",
             categoryId: null,
-            ingredients: [{ title: null, items: [""] }],
-            steps: [""],
-            time: null,
+            ingredients: [{ title: null, items: [EMPTY_INGREDIENT] }],
+            steps: [EMPTY_STEP],
+            cookTime: null,
             servings: null,
             tagIds: [],
             ...defaultValues,
@@ -57,10 +57,12 @@ const RecipeForm = (props: RecipeFormProps) => {
         createRecipe(
             {
                 title: values.title,
+                description: values.description ?? null,
                 categoryId: values.categoryId,
                 ingredients: values.ingredients,
                 steps: values.steps,
-                time: values.time ?? null,
+                prepTime: values.prepTime ?? null,
+                cookTime: values.cookTime ?? null,
                 servings: values.servings ?? null,
                 tags: values.tagIds,
                 source: "other",
@@ -75,9 +77,9 @@ const RecipeForm = (props: RecipeFormProps) => {
         reset({
             title: "",
             categoryId: null,
-            ingredients: [{ title: null, items: [""] }],
+            ingredients: [{ title: null, items: [EMPTY_INGREDIENT] }],
             steps: [],
-            time: null,
+            cookTime: null,
             servings: null,
             tagIds: [],
         });
@@ -101,9 +103,10 @@ const RecipeForm = (props: RecipeFormProps) => {
                     />
 
                     <InputController
-                        name="time"
+                        name="cookTime"
                         control={control}
                         label={t("recipe.time")}
+                        type="number"
                         suffix={t("recipe.timeSuffix")}
                     />
 

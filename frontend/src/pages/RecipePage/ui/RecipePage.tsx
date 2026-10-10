@@ -34,6 +34,7 @@ const RecipePage = () => {
     const images = recipe.media.filter((m) => m.type === "image");
     const video = recipe.media.find((m) => m.type === "video");
     const tags = recipe.tags.map((t) => t.tag.name);
+    const totalTime = (recipe.prepTime ?? 0) + (recipe.cookTime ?? 0);
 
     const handleDelete = () => {
         deleteRecipe(recipe.id, { onSuccess: () => navigate(AppRoute.Home) });
@@ -77,14 +78,14 @@ const RecipePage = () => {
         >
             <RecipeHero
                 title={recipe.title}
-                category={recipe.category?.name}
+                category={recipe.category.name}
                 videoUrl={video?.url}
                 imageUrl={images[0]?.url}
                 onImageClick={imageClickHandler}
             />
 
             <RecipeMeta
-                time={recipe.time}
+                time={totalTime || null}
                 servings={recipe.servings}
                 tags={tags}
                 sourceUrl={recipe.sourceUrl || null}

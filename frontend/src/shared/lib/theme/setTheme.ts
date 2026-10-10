@@ -8,6 +8,12 @@ export function getTheme(): Theme {
     return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
 }
 
+// Выбор, сохранённый на устройстве, null — тема берётся из Telegram
+export function getSavedTheme(): Theme | null {
+    const saved = localStorage.getItem(THEME_STORAGE_KEY);
+    return saved === "light" || saved === "dark" ? saved : null;
+}
+
 export function setTheme(theme: Theme) {
     const apply = () => document.documentElement.setAttribute("data-theme", theme);
 

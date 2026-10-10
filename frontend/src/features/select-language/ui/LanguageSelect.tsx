@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useUpdateSettings } from "@/entities/user";
 import CheckIcon from "@/shared/assets/icons/icon-check.svg?react";
 import ChevronIcon from "@/shared/assets/icons/icon-chevron-right.svg?react";
 import { type Language, LANGUAGES } from "@/shared/config/i18n";
@@ -14,12 +15,14 @@ import styles from "./LanguageSelect.module.scss";
 export const LanguageSelect = () => {
     const { t, i18n } = useTranslation("settings");
     const [isOpen, setIsOpen] = useState(false);
+    const { mutate: updateSettings } = useUpdateSettings();
 
     const current = LANGUAGES.find((language) => language.code === i18n.language) ?? LANGUAGES[0];
 
     const handleSelect = (language: Language) => {
         setIsOpen(false);
         void setLanguage(language);
+        updateSettings({ language });
     };
 
     return (

@@ -11,5 +11,6 @@ if (!url) {
 
 console.log(`Parsing: ${url}\n`);
 
-const recipe = await parseRecipeFromUrl(url);
+// Категории и теги берутся у dev-пользователя
+const recipe = await parseRecipeFromUrl(url, "dev-user");
 console.log(JSON.stringify(recipe, null, 2));

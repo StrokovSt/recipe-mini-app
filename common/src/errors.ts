@@ -6,6 +6,7 @@ export const ErrorCode = {
     AI_QUOTA_EXCEEDED: "AI_QUOTA_EXCEEDED",
     VALIDATION_ERROR: "VALIDATION_ERROR",
     LIMIT_REACHED: "LIMIT_REACHED",
+    AI_DISABLED: "AI_DISABLED",
 } as const;
 
 export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];

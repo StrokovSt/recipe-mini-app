@@ -1,22 +1,29 @@
 import { NextFunction, Request, Response, Router } from "express";
 
-import { IngredientGroup, MediaInput } from "@recipe/common";
+import { IngredientGroup, MediaInput, RecipeStep } from "@recipe/common";
 
 import prisma from "../lib/prisma";
 import { checkRecipeLimit } from "../middleware/checkLimits";
 import { cuidSchema, validateId } from "../middleware/validate";
 import { publishRecipeToTelegraph } from "../services/telegraph";
+import { getFallbackCategory } from "../services/userDefaults";
 import { createRecipeSchema, updateRecipeSchema } from "../validation/recipe";
 
 const router = Router();
 
-function parseRecipe(recipe: Record<string, unknown>) {
+function parseRecipe<T extends { ingredients: string; steps: string }>(recipe: T) {
     return {
         ...recipe,
-        ingredients: JSON.parse(recipe.ingredients as string) as IngredientGroup[],
-        steps: JSON.parse(recipe.steps as string) as string[],
+        ingredients: JSON.parse(recipe.ingredients) as IngredientGroup[],
+        steps: JSON.parse(recipe.steps) as RecipeStep[],
     };
 }
+
+const RECIPE_INCLUDE = {
+    category: true,
+    media: { orderBy: { order: "asc" } },
+    tags: { include: { tag: true } },
+} as const;
 
 // GET /api/recipes?categoryId=xxx&tagIds=xxx,yyy&search=карб
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
@@ -96,21 +103,7 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
                     : {}),
             },
 
-            include: {
-                category: true,
-
-                media: {
-                    orderBy: {
-                        order: "asc",
-                    },
-                },
-
-                tags: {
-                    include: {
-                        tag: true,
-                    },
-                },
-            },
+            include: RECIPE_INCLUDE,
 
             orderBy: {
                 createdAt: "desc",
@@ -132,11 +125,7 @@ router.get("/:id", validateId, async (req: Request, res: Response, next: NextFun
                 id: req.params.id as string,
                 userId: req.userId,
             },
-            include: {
-                category: true,
-                media: { orderBy: { order: "asc" } },
-                tags: { include: { tag: true } },
-            },
+            include: RECIPE_INCLUDE,
         });
 
         if (!recipe) {
@@ -144,7 +133,7 @@ router.get("/:id", validateId, async (req: Request, res: Response, next: NextFun
             return;
         }
 
-        res.json(parseRecipe(recipe as unknown as Record<string, unknown>));    
+        res.json(parseRecipe(recipe));    
     } 
     catch (error) {
         next(error);
@@ -164,27 +153,18 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
         }
 
         const userId = req.userId as string;
-        const { title, category, categoryId, ingredients, steps, time, servings, sourceUrl, source, media, tags } = parsed.data;
-
-        let resolvedCategoryId: string | null = categoryId ?? null;
-
-        if (!resolvedCategoryId && category && category !== "Без категории") {
-            const cat = await prisma.category.upsert({
-                where: { userId_name: { userId, name: category } },
-                update: {},
-                create: { userId, name: category },
-            });
-            resolvedCategoryId = cat.id;
-        }
+        const { title, description, categoryId, ingredients, steps, prepTime, cookTime, servings, sourceUrl, source, media, tags } = parsed.data;
 
         const recipe = await prisma.recipe.create({
             data: {
                 userId,
                 title,
-                categoryId: resolvedCategoryId,
+                description: description || null,
+                categoryId: await resolveCategoryId(categoryId, userId),
                 ingredients: JSON.stringify(ingredients),
                 steps: JSON.stringify(steps),
-                time: time || null,
+                prepTime: prepTime ?? null,
+                cookTime: cookTime ?? null,
                 servings: servings ?? null,
                 sourceUrl: sourceUrl || "",
                 source: source || "other",
@@ -199,18 +179,16 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
                     create: await resolveTags(tags, userId),
                 },
             },
-            include: {
-                category: true,
-                media: true,
-                tags: { include: { tag: true } },
-            },
+            include: RECIPE_INCLUDE,
         });
 
         publishRecipeToTelegraph({
             title,
+            description,
             ingredients,
             steps,
-            time,
+            prepTime,
+            cookTime,
             servings,
             media: recipe.media as MediaInput[],
             sourceUrl,
@@ -226,7 +204,7 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
             console.error("Telegraph publish error:", err.message);
         });
 
-        res.status(201).json(recipe);
+        res.status(201).json(parseRecipe(recipe));
     } catch (error) {
         next(error);
     }
@@ -246,52 +224,46 @@ router.patch("/:id", validateId, async (req: Request, res: Response, next: NextF
 
         const userId = req.userId as string;
         const id = req.params.id as string;
-        const { title, category, categoryId, ingredients, steps, time, servings, tags } = parsed.data;
+        const { title, description, categoryId, ingredients, steps, prepTime, cookTime, servings, media, tags } = parsed.data;
 
-        let resolvedCategoryId: string | null | undefined = categoryId;
+        const existing = await prisma.recipe.findFirst({ where: { id, userId }, select: { id: true } });
 
-        if (resolvedCategoryId === undefined && category && category !== "Без категории") {
-            const cat = await prisma.category.upsert({
-                where: { userId_name: { userId, name: category } },
-                update: {},
-                create: { userId, name: category },
-            });
-            resolvedCategoryId = cat.id;
+        if (!existing) {
+            res.status(404).json({ error: "Рецепт не найден" });
+            return;
         }
 
-        if (tags !== undefined) {
-            await prisma.recipeTag.deleteMany({ where: { recipeId: id } });
-        }
+        const resolvedTags = tags !== undefined ? await resolveTags(tags, userId) : undefined;
 
-        await prisma.recipe.updateMany({
-            where: { id, userId },
+        const updated = await prisma.recipe.update({
+            where: { id },
             data: {
                 ...(title && { title }),
-                ...(resolvedCategoryId !== undefined && { categoryId: resolvedCategoryId }),
+                ...(description !== undefined && { description: description || null }),
+                ...(categoryId !== undefined && { categoryId: await resolveCategoryId(categoryId, userId) }),
                 ...(ingredients && { ingredients: JSON.stringify(ingredients) }),
                 ...(steps && { steps: JSON.stringify(steps) }),
-                ...(time !== undefined && { time }),
-                ...(servings !== undefined && { servings: servings ?? null }),
+                ...(prepTime !== undefined && { prepTime }),
+                ...(cookTime !== undefined && { cookTime }),
+                ...(servings !== undefined && { servings }),
+                // Медиа и теги заменяются целиком
+                ...(media && {
+                    media: {
+                        deleteMany: {},
+                        create: media.map((m, i) => ({ url: m.url, type: m.type, order: i })),
+                    },
+                }),
+                ...(resolvedTags && {
+                    tags: {
+                        deleteMany: {},
+                        create: resolvedTags,
+                    },
+                }),
             },
+            include: RECIPE_INCLUDE,
         });
 
-        if (tags !== undefined) {
-            const resolvedTags = await resolveTags(tags, userId);
-            await prisma.recipeTag.createMany({
-                data: resolvedTags.map((t: { tagId: string }) => ({ recipeId: id, tagId: t.tagId })),
-            });
-        }
-
-        const updated = await prisma.recipe.findFirst({
-            where: { id, userId },
-            include: {
-                category: true,
-                media: true,
-                tags: { include: { tag: true } },
-            },
-        });
-
-        res.json(parseRecipe(updated as unknown as Record<string, unknown>));
+        res.json(parseRecipe(updated));
     } catch (error) {
         next(error);
     }
@@ -314,6 +286,18 @@ router.delete("/:id", validateId, async (req: Request, res: Response, next: Next
     }
 });
 
+// Категория должна принадлежать пользователю, иначе рецепт попадает в «Разное»
+async function resolveCategoryId(categoryId: string | null | undefined, userId: string) {
+    if (categoryId) {
+        const category = await prisma.category.findFirst({ where: { id: categoryId, userId } });
+        if (category) return category.id;
+    }
+
+    const fallback = await getFallbackCategory(userId);
+    return fallback.id;
+}
+
+// Только существующие теги пользователя, новые не создаются
 async function resolveTags(tagIds: string[], userId: string) {
     const userTags = await prisma.tag.findMany({
         where: {

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { AddButton, IconButton } from "@/shared/ui/Buttons";
 import { InputController } from "@/shared/ui/Input";
 
-import type { RecipeFormValues } from "../../model/schema";
+import { EMPTY_INGREDIENT, type RecipeFormValues } from "../../model/schema";
 import FieldsetWrapper from "../FieldsetWrapper/FieldsetWrapper";
 import GroupItems from "./GroupItems";
 
@@ -42,7 +42,7 @@ const IngredientsField = () => {
 
             <AddButton
                 label={t("ingredients.addGroup")}
-                onClick={() => appendGroup({ title: null, items: [""] })}
+                onClick={() => appendGroup({ title: null, items: [EMPTY_INGREDIENT] })}
             />
         </FieldsetWrapper>
     );

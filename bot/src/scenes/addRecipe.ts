@@ -99,11 +99,12 @@ export async function addRecipeConversation(conversation: MyConversation, ctx: M
         const saved = await saveRecipe({ ...parsed, media: uniqueMedia }, userId);
         const appUrl = process.env.APP_URL!;
         const recipeUrl = `${appUrl}/recipe/${saved.id}`;
+        const totalTime = (parsed.prepTime ?? 0) + (parsed.cookTime ?? 0);
 
         await ctx.reply(
             `✅ Рецепт сохранён!\n\n` +
             `*${parsed.title}*\n` +
-            `${parsed.time ? `⏱ ${parsed.time}` : ""} ${parsed.servings ? `👤 ${parsed.servings} порц.` : ""}`,
+            `${totalTime ? `⏱ ${totalTime} мин` : ""} ${parsed.servings ? `👤 ${parsed.servings} порц.` : ""}`,
             {
                 parse_mode: "Markdown",
                 reply_markup: {

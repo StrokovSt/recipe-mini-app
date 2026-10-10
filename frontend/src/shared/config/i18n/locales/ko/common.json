@@ -12,6 +12,7 @@
     "nothingFound": "검색 결과가 없어요",
     "showMore": "{{count}}개 더 보기",
     "collapse": "접기",
+    "minutes": "{{count}}분",
     "iconPicker": "아이콘 선택",
     "errorBoundary": {
         "title": "문제가 발생했어요",
@@ -25,6 +26,7 @@
         "AI_QUOTA_EXCEEDED": "일일 요청 한도를 초과했어요. 내일 다시 시도해 주세요.",
         "VALIDATION_ERROR": "데이터가 올바르지 않아요.",
         "LIMIT_REACHED": "레시피 한도에 도달했어요. 무제한으로 이용하려면 구독하세요.",
+        "AI_DISABLED": "이 계정에서는 AI 인식을 사용할 수 없습니다.",
         "unknown": "문제가 발생했어요."
     }
 }

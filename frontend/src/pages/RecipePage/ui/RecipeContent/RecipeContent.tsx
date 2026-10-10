@@ -2,13 +2,15 @@ import clsx from "clsx";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { IngredientGroup } from "@recipe/common";
+import type { IngredientGroup, RecipeStep } from "@recipe/common";
+
+import { useFormatQuantity } from "@/entities/recipe";
 
 import styles from "./RecipeContent.module.scss";
 
 interface RecipeContentProps {
     ingredients: IngredientGroup[];
-    steps: string[];
+    steps: RecipeStep[];
 }
 
 type Tab = "ingredients" | "steps";
@@ -17,6 +19,7 @@ export function RecipeContent(props: RecipeContentProps) {
     const { ingredients, steps } = props;
     const { t } = useTranslation("recipe");
     const [tab, setTab] = useState<Tab>("ingredients");
+    const formatQuantity = useFormatQuantity();
 
     const tabs: { id: Tab; label: string }[] = [
         { id: "ingredients", label: t("tabs.ingredients") },
@@ -50,12 +53,16 @@ export function RecipeContent(props: RecipeContentProps) {
                                 <p className={styles.groupTitle}>{group.title}</p>
                             )}
                             <div className={styles.list}>
-                                {group.items.map((ing, i) => (
-                                    <div key={i} className={styles.ingredientItem}>
-                                        <span className={styles.dot} />
-                                        <span>{ing}</span>
-                                    </div>
-                                ))}
+                                {group.items.map((ing, i) => {
+                                    const quantity = formatQuantity(ing);
+
+                                    return (
+                                        <div key={i} className={styles.ingredientItem}>
+                                            <span className={styles.dot} />
+                                            <span>{quantity ? `${ing.name} — ${quantity}` : ing.name}</span>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     ))}
@@ -70,7 +77,7 @@ export function RecipeContent(props: RecipeContentProps) {
                     {steps.map((step, i) => (
                         <div key={i} className={styles.stepItem}>
                             <span className={styles.stepNum}>{i + 1}</span>
-                            <span>{step}</span>
+                            <span>{step.text}</span>
                         </div>
                     ))}
                 </div>

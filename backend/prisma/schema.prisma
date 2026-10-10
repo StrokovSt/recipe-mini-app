@@ -14,6 +14,8 @@ model Category {
   recipes   Recipe[]
   createdAt DateTime @default(now())
   iconName String?
+  // Резервная категория «Разное»: одна на пользователя, удалить нельзя
+  isDefault Boolean  @default(false)
 
   @@unique([userId, name])
   @@index([userId])
@@ -23,11 +25,15 @@ model Recipe {
   id           String    @id @default(cuid())
   userId       String
   title        String
-  categoryId   String?
-  category     Category? @relation(fields: [categoryId], references: [id])
+  description  String?
+  categoryId   String
+  category     Category  @relation(fields: [categoryId], references: [id])
+  // JSON: IngredientGroup[] и RecipeStep[] из @recipe/common
   ingredients  String
   steps        String
-  time         String?
+  // Время в минутах
+  prepTime     Int?
+  cookTime     Int?
   servings     Int?
   sourceUrl    String
   source       String    @default("other")
@@ -76,6 +82,14 @@ model User {
     plan        Plan      @default(FREE)
     planExpiry  DateTime?
     createdAt   DateTime  @default(now())
+
+    // Настройки интерфейса, null — автоопределение на устройстве
+    language    String?
+    theme       String?   // "light" | "dark"
+    animations  Boolean?
+
+    // Можно ли распознавать рецепты через ИИ
+    aiEnabled   Boolean   @default(true)
 }
 
 enum Plan {
