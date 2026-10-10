@@ -1,0 +1,89 @@
+@use "@/shared/styles/states";
+
+.card {
+    display: grid;
+    align-items: center;
+    grid-template-columns: var(--size-option-icon) 1fr;
+    width: 100%;
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+    color: var(--color-text);
+    text-align: left;
+    cursor: pointer;
+    transition:
+        border-color var(--transition-base),
+        background-color var(--transition-base);
+    column-gap: var(--space-4);
+
+    @include states.hover(":not(:disabled)") {
+        border-color: var(--color-active);
+        background: var(--color-hover-bg);
+    }
+
+    &:disabled {
+        @include states.disabled;
+    }
+
+    .icon {
+        display: grid;
+        grid-row: 1 / span 3;
+        width: var(--size-option-icon);
+        height: var(--size-option-icon);
+        border: 1px solid var(--color-border-strong);
+        border-radius: var(--radius-full);
+        background: var(--color-app-bg);
+        color: var(--color-active);
+        place-items: center;
+
+        svg {
+            width: 48%;
+            height: 48%;
+        }
+    }
+
+    .title {
+        font: var(--font-header-md);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .description {
+        margin-top: var(--space-1);
+        color: var(--color-text-muted);
+        font: var(--font-ui-xs);
+    }
+
+    .action {
+        margin-top: var(--space-2);
+        color: var(--color-active);
+        font: var(--font-ui-xs);
+        font-weight: var(--font-weight-bold);
+
+        &::after {
+            content: " →";
+        }
+    }
+
+    &.accent {
+        border-color: var(--color-active);
+
+        .icon {
+            border-color: var(--color-active);
+            background: var(--color-active);
+            color: var(--color-active-text);
+        }
+    }
+
+    &.locked {
+        .icon,
+        .action {
+            color: var(--color-text-muted);
+        }
+
+        .action::after {
+            content: none;
+        }
+    }
+}

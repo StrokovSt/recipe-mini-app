@@ -14,6 +14,18 @@
     "collapse": "Weniger anzeigen",
     "minutes": "{{count}} Min.",
     "iconPicker": "Symbol auswählen",
+    "imageInput": {
+        "add": "Foto hinzufügen",
+        "hint": "oder füge unten einen Link ein",
+        "uploading": "Foto wird hochgeladen…",
+        "drop": "Zum Hochladen loslassen",
+        "url": "Bild-Link",
+        "apply": "Link übernehmen",
+        "remove": "Bild entfernen",
+        "invalidUrl": "Gib einen Link wie https://… ein",
+        "broken": "Bild konnte nicht geladen werden",
+        "uploadFailed": "Foto konnte nicht hochgeladen werden"
+    },
     "errorBoundary": {
         "title": "Etwas ist schiefgelaufen",
         "retry": "Erneut versuchen"

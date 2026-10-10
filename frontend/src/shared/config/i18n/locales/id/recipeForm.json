@@ -1,17 +1,48 @@
 {
-    "modes": {
-        "manual": "✍️ Manual",
-        "ai": "✨ Dengan AI"
+    "choose": {
+        "title": "Resep baru",
+        "subtitle": "pilih cara menambahkannya",
+        "intro": "Isi resep sendiri atau biarkan AI mengenalinya dari tautan atau foto.",
+        "saved": "akan disimpan di koleksimu",
+        "locked": "Tidak tersedia",
+        "manual": {
+            "title": "Buat manual",
+            "description": "Judul, bahan, dan langkah memasak",
+            "action": "Buka formulir"
+        },
+        "import": {
+            "title": "Dari tautan atau foto",
+            "description": "AI menyiapkan draf yang bisa kamu periksa dan lengkapi",
+            "action": "Kenali resep"
+        },
+        "aiLocked": {
+            "title": "Pengenalan tidak tersedia",
+            "text": "Pengenalan dari tautan dan foto belum tersedia untuk akunmu. Kamu bisa menambahkan resep secara manual.",
+            "action": "Buat manual"
+        },
+        "limit": {
+            "title": "Batas resep tercapai",
+            "text": "{{current}} dari {{limit}} tersimpan. Hapus resep yang tidak diperlukan untuk menambah yang baru."
+        }
     },
-    "submitAdd": "Simpan resep",
+    "form": {
+        "newTitle": "Resep baru",
+        "newSubtitle": "akan disimpan di koleksimu",
+        "editTitle": "Edit resep"
+    },
+    "sections": {
+        "cover": "Sampul",
+        "main": "Info dasar",
+        "ingredients": "Bahan",
+        "steps": "Cara membuat"
+    },
+    "submitAdd": "Tambahkan ke koleksi",
     "submitEdit": "Simpan perubahan",
-    "reset": "Atur ulang formulir",
     "ai": {
         "url": "Tautan Pinterest",
         "uploadPhoto": "📷 Unggah foto"
     },
     "recipe": {
-        "legend": "Resep",
         "title": "Judul",
         "category": "Kategori",
         "time": "Waktu memasak",
@@ -21,24 +52,14 @@
     },
     "tags": "Tag",
     "ingredients": {
-        "legend": "Bahan",
         "groupTitle": "Judul grup bahan",
         "item": "Bahan {{number}}",
         "add": "Tambah bahan",
         "addGroup": "Tambah grup"
     },
     "steps": {
-        "legend": "Langkah memasak",
         "item": "Langkah {{number}}",
         "add": "Tambah langkah"
-    },
-    "media": {
-        "legend": "Media",
-        "url": "Tautan foto atau video",
-        "upload": "📎 Unggah file",
-        "addLink": "Tambah tautan",
-        "emptyUrl": "Masukkan tautan",
-        "invalidUrl": "Masukkan tautan yang valid (https://...)"
     },
     "validation": {
         "titleRequired": "Judul wajib diisi",
@@ -46,7 +67,6 @@
         "ingredientsRequired": "Tambahkan minimal satu bahan",
         "ingredientEmpty": "Bahan tidak boleh kosong",
         "groupEmpty": "Grup tidak boleh kosong",
-        "stepEmpty": "Langkah tidak boleh kosong",
-        "invalidUrl": "Masukkan URL yang valid"
+        "stepEmpty": "Langkah tidak boleh kosong"
     }
 }

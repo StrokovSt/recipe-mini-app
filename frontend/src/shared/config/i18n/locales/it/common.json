@@ -14,6 +14,18 @@
     "collapse": "Mostra meno",
     "minutes": "{{count}} min",
     "iconPicker": "Scegli un'icona",
+    "imageInput": {
+        "add": "Aggiungi foto",
+        "hint": "o incolla un link qui sotto",
+        "uploading": "Caricamento foto…",
+        "drop": "Rilascia per caricare",
+        "url": "Link dell'immagine",
+        "apply": "Usa il link",
+        "remove": "Rimuovi immagine",
+        "invalidUrl": "Inserisci un link tipo https://…",
+        "broken": "Impossibile caricare l'immagine",
+        "uploadFailed": "Impossibile caricare la foto"
+    },
     "errorBoundary": {
         "title": "Qualcosa è andato storto",
         "retry": "Riprova"

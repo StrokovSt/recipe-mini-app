@@ -5,7 +5,7 @@ import { AddButton, IconButton } from "@/shared/ui/Buttons";
 import { TextareaController } from "@/shared/ui/Input";
 
 import { EMPTY_STEP, type RecipeFormValues } from "../../model/schema";
-import FieldsetWrapper from "../FieldsetWrapper/FieldsetWrapper";
+import FormSection from "../FormSection/FormSection";
 
 import styles from "./StepsField.module.scss";
 
@@ -23,7 +23,7 @@ const StepsField = () => {
     };
 
     return (
-        <FieldsetWrapper legend={t("steps.legend")}>
+        <FormSection title={t("sections.steps")}>
             {steps.length > 0 && (
                 <div className={styles.list}>
                     {steps.map((_, i) => (
@@ -45,7 +45,7 @@ const StepsField = () => {
                 </span>
             )}
             <AddButton label={t("steps.add")} onClick={append} />
-        </FieldsetWrapper>
+        </FormSection>
     );
 };
 

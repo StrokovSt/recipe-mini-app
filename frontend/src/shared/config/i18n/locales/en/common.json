@@ -14,6 +14,18 @@
     "collapse": "Show less",
     "minutes": "{{count}} min",
     "iconPicker": "Choose an icon",
+    "imageInput": {
+        "add": "Add photo",
+        "hint": "or paste a link below",
+        "uploading": "Uploading photo…",
+        "drop": "Drop to upload",
+        "url": "Image link",
+        "apply": "Use link",
+        "remove": "Remove image",
+        "invalidUrl": "Enter a link like https://…",
+        "broken": "Couldn't load the image",
+        "uploadFailed": "Couldn't upload the photo"
+    },
     "errorBoundary": {
         "title": "Something went wrong",
         "retry": "Try again"

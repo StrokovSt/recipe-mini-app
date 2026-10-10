@@ -5,7 +5,7 @@ import { AddButton, IconButton } from "@/shared/ui/Buttons";
 import { InputController } from "@/shared/ui/Input";
 
 import { EMPTY_INGREDIENT, type RecipeFormValues } from "../../model/schema";
-import FieldsetWrapper from "../FieldsetWrapper/FieldsetWrapper";
+import FormSection from "../FormSection/FormSection";
 import GroupItems from "./GroupItems";
 
 import styles from "./IngredientsField.module.scss";
@@ -19,7 +19,7 @@ const IngredientsField = () => {
     });
 
     return (
-        <FieldsetWrapper legend={t("ingredients.legend")}>
+        <FormSection title={t("sections.ingredients")}>
             {groups.map((group, gi) => (
                 <div key={group.id} className={styles.group}>
                     <div className={styles.groupHeader}>
@@ -44,7 +44,7 @@ const IngredientsField = () => {
                 label={t("ingredients.addGroup")}
                 onClick={() => appendGroup({ title: null, items: [EMPTY_INGREDIENT] })}
             />
-        </FieldsetWrapper>
+        </FormSection>
     );
 };
 

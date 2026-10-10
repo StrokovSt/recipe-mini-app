@@ -1,17 +1,48 @@
 {
-    "modes": {
-        "manual": "✍️ 手入力",
-        "ai": "✨ AIで"
+    "choose": {
+        "title": "新しいレシピ",
+        "subtitle": "追加方法を選んでください",
+        "intro": "レシピを自分で入力するか、リンクや写真からAIに認識させましょう。",
+        "saved": "コレクションに保存されます",
+        "locked": "利用不可",
+        "manual": {
+            "title": "手動で作成",
+            "description": "タイトル、材料、作り方",
+            "action": "フォームを開く"
+        },
+        "import": {
+            "title": "リンクまたは写真から",
+            "description": "AIが下書きを作成します。確認して追記できます",
+            "action": "レシピを認識"
+        },
+        "aiLocked": {
+            "title": "認識は利用できません",
+            "text": "リンクや写真からの認識は、このアカウントではまだ利用できません。レシピは手動で追加できます。",
+            "action": "手動で作成"
+        },
+        "limit": {
+            "title": "レシピの上限に達しました",
+            "text": "{{limit}}件中{{current}}件を保存済みです。新しいレシピを追加するには、不要なレシピを削除してください。"
+        }
     },
-    "submitAdd": "レシピを保存",
+    "form": {
+        "newTitle": "新しいレシピ",
+        "newSubtitle": "コレクションに保存されます",
+        "editTitle": "レシピを編集"
+    },
+    "sections": {
+        "cover": "カバー写真",
+        "main": "基本情報",
+        "ingredients": "材料",
+        "steps": "作り方"
+    },
+    "submitAdd": "コレクションに追加",
     "submitEdit": "変更を保存",
-    "reset": "フォームをリセット",
     "ai": {
         "url": "Pinterestのリンク",
         "uploadPhoto": "📷 写真をアップロード"
     },
     "recipe": {
-        "legend": "レシピ",
         "title": "タイトル",
         "category": "カテゴリー",
         "time": "調理時間",
@@ -21,24 +52,14 @@
     },
     "tags": "タグ",
     "ingredients": {
-        "legend": "材料",
         "groupTitle": "材料グループの見出し",
         "item": "材料 {{number}}",
         "add": "材料を追加",
         "addGroup": "グループを追加"
     },
     "steps": {
-        "legend": "調理手順",
         "item": "手順 {{number}}",
         "add": "手順を追加"
-    },
-    "media": {
-        "legend": "メディア",
-        "url": "写真または動画のリンク",
-        "upload": "📎 ファイルをアップロード",
-        "addLink": "リンクを追加",
-        "emptyUrl": "リンクを入力してください",
-        "invalidUrl": "正しいリンクを入力してください（https://...）"
     },
     "validation": {
         "titleRequired": "タイトルは必須です",
@@ -46,7 +67,6 @@
         "ingredientsRequired": "材料を1つ以上追加してください",
         "ingredientEmpty": "材料を入力してください",
         "groupEmpty": "グループが空です",
-        "stepEmpty": "手順を入力してください",
-        "invalidUrl": "正しいURLを入力してください"
+        "stepEmpty": "手順を入力してください"
     }
 }

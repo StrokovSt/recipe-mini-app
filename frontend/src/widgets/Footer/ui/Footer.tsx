@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
+import { matchPath, NavLink, useLocation } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
 import AddIcon from "@/shared/assets/icons/icon-add.svg?react";
@@ -9,6 +9,9 @@ import CollectionIcon from "@/shared/assets/icons/icon-collection.svg?react";
 import SectionsIcon from "@/shared/assets/icons/icon-sections.svg?react";
 
 import styles from "./Footer.module.scss";
+
+// На формах рецепта футера нет: внизу закреплена кнопка сохранения
+const HIDDEN_ON: AppRoute[] = [AppRoute.CreateRecipe, AppRoute.ImportRecipe, AppRoute.EditRecipe];
 
 interface NavItem {
     to: AppRoute;
@@ -19,6 +22,9 @@ interface NavItem {
 
 export function Footer() {
     const { t } = useTranslation("footer");
+    const { pathname } = useLocation();
+
+    if (HIDDEN_ON.some((path) => matchPath(path, pathname))) return null;
 
     const navItems: NavItem[] = [
         { to: AppRoute.Home, icon: <CollectionIcon />, label: t("collection") },

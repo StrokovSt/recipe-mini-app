@@ -1,20 +1,22 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, FormProvider, type Resolver,useForm } from "react-hook-form";
+import { Controller, FormProvider, type Resolver, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
 import { useCategories } from "@/entities/category";
-import { useCreateRecipe } from "@/entities/recipe";
-import { OutlineButton, RegularButton } from "@/shared/ui/Buttons";
+import { useCreateRecipe, useUploadMedia } from "@/entities/recipe";
+import { IconButton, RegularButton } from "@/shared/ui/Buttons";
+import { ImageInput } from "@/shared/ui/ImageInput";
 import { InputController } from "@/shared/ui/Input";
+import { PageHeader } from "@/shared/ui/PageHeader";
 import { SelectController } from "@/shared/ui/Select";
 
+import { toMedia } from "../model/cover";
 import { EMPTY_INGREDIENT, EMPTY_STEP, type RecipeFormValues, recipeSchema } from "../model/schema";
 import type { RecipeFormProps } from "../model/types";
-import FieldsetWrapper from "./FieldsetWrapper/FieldsetWrapper";
+import FormSection from "./FormSection/FormSection";
 import IngredientsField from "./IngredientsField/IngredientsField";
-import MediaField from "./MediaField/MediaField";
 import StepsField from "./StepsField/StepsField";
 import TagsSelect from "./TagsSelect/TagsSelect";
 
@@ -22,7 +24,14 @@ import styles from "./RecipeForm.module.scss";
 
 const RecipeForm = (props: RecipeFormProps) => {
     const { t } = useTranslation(["recipeForm", "common"]);
-    const {defaultValues, submitLabel = t("common:save"), onSubmit: onSubmitProp, isPending: isPendingProp} = props;
+    const {
+        title,
+        subtitle,
+        defaultValues,
+        submitLabel = t("common:save"),
+        onSubmit: onSubmitProp,
+        isPending: isPendingProp,
+    } = props;
     const navigate = useNavigate();
     const methods = useForm<RecipeFormValues>({
         resolver: zodResolver(recipeSchema) as Resolver<RecipeFormValues>,
@@ -34,11 +43,12 @@ const RecipeForm = (props: RecipeFormProps) => {
             cookTime: null,
             servings: null,
             tagIds: [],
+            cover: null,
             ...defaultValues,
         },
     });
 
-    const { handleSubmit, control, reset } = methods;
+    const { handleSubmit, control } = methods;
     const { data: categories = [] } = useCategories();
 
     const categoryOptions = [
@@ -46,7 +56,10 @@ const RecipeForm = (props: RecipeFormProps) => {
     ];
 
     const { mutate: createRecipe, isPending: isSaving } = useCreateRecipe();
+    const { mutateAsync: uploadMedia } = useUploadMedia();
     const isPending = isPendingProp ?? isSaving;
+
+    const uploadCover = async (file: File) => (await uploadMedia(file)).url;
 
     const handleSave = (values: RecipeFormValues) => {
         if (onSubmitProp) {
@@ -67,28 +80,45 @@ const RecipeForm = (props: RecipeFormProps) => {
                 tags: values.tagIds,
                 source: "other",
                 sourceUrl: "",
-                media: values.media,
+                media: toMedia(values.cover),
             },
             { onSuccess: () => navigate(AppRoute.Home) }
         );
     };
 
-    const handleReset = () => {
-        reset({
-            title: "",
-            categoryId: null,
-            ingredients: [{ title: null, items: [EMPTY_INGREDIENT] }],
-            steps: [],
-            cookTime: null,
-            servings: null,
-            tagIds: [],
-        });
-    };
-
     return (
         <FormProvider {...methods}>
-            <form className={styles.form} onSubmit={handleSubmit(handleSave, (errors) => console.log('Validation errors:', errors))}>
-                <FieldsetWrapper legend={t("recipe.legend")}>
+            <PageHeader className={styles.header}>
+                <div className={styles.heading}>
+                    <h1 className={styles.title}>{title}</h1>
+                    {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+                </div>
+                <IconButton
+                    icon="back"
+                    round
+                    className={styles.back}
+                    type="button"
+                    aria-label={t("common:back")}
+                    onClick={() => navigate(-1)}
+                />
+            </PageHeader>
+
+            <form className={styles.form} onSubmit={handleSubmit(handleSave)}>
+                <FormSection title={t("sections.cover")}>
+                    <Controller
+                        control={control}
+                        name="cover"
+                        render={({ field }) => (
+                            <ImageInput
+                                value={field.value}
+                                onChange={field.onChange}
+                                onUpload={uploadCover}
+                            />
+                        )}
+                    />
+                </FormSection>
+
+                <FormSection title={t("sections.main")}>
                     <InputController
                         name="title"
                         control={control}
@@ -117,15 +147,9 @@ const RecipeForm = (props: RecipeFormProps) => {
                         type="number"
                         suffix={t("recipe.servingsSuffix")}
                     />
-                </FieldsetWrapper>
+                </FormSection>
 
-                <IngredientsField />
-
-                <StepsField />
-
-                <MediaField />
-
-                <FieldsetWrapper legend={t("tags")}>
+                <FormSection title={t("tags")}>
                     <Controller
                         control={control}
                         name="tagIds"
@@ -133,22 +157,18 @@ const RecipeForm = (props: RecipeFormProps) => {
                             <TagsSelect value={field.value} onChange={field.onChange} />
                         )}
                     />
-                </FieldsetWrapper>
+                </FormSection>
 
-                <div className={styles.actions}>
-                    <OutlineButton
-                        className={styles.saveButton}
-                        type="button"
-                        label={t("reset")}
-                        disabled={isPending}
-                        onClick={handleReset}
-                    />
+                <IngredientsField />
+
+                <StepsField />
+
+                <div className={styles.save}>
                     <RegularButton
-                        className={styles.saveButton}
+                        className={styles.submit}
                         type="submit"
                         label={submitLabel}
                         disabled={isPending}
-                        icon="save"
                     />
                 </div>
             </form>

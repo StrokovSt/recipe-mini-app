@@ -1,17 +1,48 @@
 {
-    "modes": {
-        "manual": "✍️ Manualmente",
-        "ai": "✨ Com IA"
+    "choose": {
+        "title": "Nova receita",
+        "subtitle": "escolha como adicioná-la",
+        "intro": "Preencha a receita você mesmo ou deixe a IA reconhecê-la a partir de um link ou foto.",
+        "saved": "será salva na sua coleção",
+        "locked": "Indisponível",
+        "manual": {
+            "title": "Criar manualmente",
+            "description": "Título, ingredientes e etapas de preparo",
+            "action": "Abrir formulário"
+        },
+        "import": {
+            "title": "De um link ou foto",
+            "description": "A IA prepara um rascunho para você revisar e completar",
+            "action": "Reconhecer receita"
+        },
+        "aiLocked": {
+            "title": "Reconhecimento indisponível",
+            "text": "O reconhecimento a partir de links e fotos ainda não está disponível para sua conta. Você pode adicionar a receita manualmente.",
+            "action": "Criar manualmente"
+        },
+        "limit": {
+            "title": "Limite de receitas atingido",
+            "text": "{{current}} de {{limit}} salvas. Exclua receitas que não precisa para adicionar novas."
+        }
     },
-    "submitAdd": "Salvar receita",
+    "form": {
+        "newTitle": "Nova receita",
+        "newSubtitle": "será salva na sua coleção",
+        "editTitle": "Editar receita"
+    },
+    "sections": {
+        "cover": "Capa",
+        "main": "Básico",
+        "ingredients": "Ingredientes",
+        "steps": "Modo de preparo"
+    },
+    "submitAdd": "Adicionar à coleção",
     "submitEdit": "Salvar alterações",
-    "reset": "Redefinir formulário",
     "ai": {
         "url": "Link do Pinterest",
         "uploadPhoto": "📷 Enviar foto"
     },
     "recipe": {
-        "legend": "Receita",
         "title": "Título",
         "category": "Categoria",
         "time": "Tempo de preparo",
@@ -21,24 +52,14 @@
     },
     "tags": "Tags",
     "ingredients": {
-        "legend": "Ingredientes",
         "groupTitle": "Título do grupo de ingredientes",
         "item": "Ingrediente {{number}}",
         "add": "Adicionar ingrediente",
         "addGroup": "Adicionar grupo"
     },
     "steps": {
-        "legend": "Etapas de preparo",
         "item": "Etapa {{number}}",
         "add": "Adicionar etapa"
-    },
-    "media": {
-        "legend": "Mídia",
-        "url": "Link de foto ou vídeo",
-        "upload": "📎 Enviar arquivo",
-        "addLink": "Adicionar link",
-        "emptyUrl": "Insira um link",
-        "invalidUrl": "Insira um link válido (https://...)"
     },
     "validation": {
         "titleRequired": "O título é obrigatório",
@@ -46,7 +67,6 @@
         "ingredientsRequired": "Adicione pelo menos um ingrediente",
         "ingredientEmpty": "O ingrediente não pode ficar vazio",
         "groupEmpty": "O grupo não pode ficar vazio",
-        "stepEmpty": "A etapa não pode ficar vazia",
-        "invalidUrl": "Insira uma URL válida"
+        "stepEmpty": "A etapa não pode ficar vazia"
     }
 }

@@ -14,6 +14,18 @@
     "collapse": "Mostrar menos",
     "minutes": "{{count}} min",
     "iconPicker": "Elegir un icono",
+    "imageInput": {
+        "add": "Añadir foto",
+        "hint": "o pega un enlace abajo",
+        "uploading": "Subiendo foto…",
+        "drop": "Suelta para subir",
+        "url": "Enlace de la imagen",
+        "apply": "Usar enlace",
+        "remove": "Quitar imagen",
+        "invalidUrl": "Escribe un enlace tipo https://…",
+        "broken": "No se pudo cargar la imagen",
+        "uploadFailed": "No se pudo subir la foto"
+    },
     "errorBoundary": {
         "title": "Algo salió mal",
         "retry": "Intentar de nuevo"

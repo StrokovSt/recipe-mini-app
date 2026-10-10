@@ -19,6 +19,8 @@ const PAGES = {
     HomePage: lazyPage(() => import("@/pages/HomePage").then(m => ({ default: m.HomePage }))),
     RecipePage: lazyPage(() => import("@/pages/RecipePage").then(m => ({ default: m.RecipePage }))),
     AddRecipePage: lazyPage(() => import("@/pages/AddRecipePage").then(m => ({ default: m.AddRecipePage }))),
+    ImportRecipePage: lazyPage(() => import("@/pages/ImportRecipePage").then(m => ({ default: m.ImportRecipePage }))),
+    CreateRecipePage: lazyPage(() => import("@/pages/CreateRecipePage").then(m => ({ default: m.CreateRecipePage }))),
     SectionsPage: lazyPage(() => import("@/pages/SectionsPage").then(m => ({ default: m.SectionsPage }))),
     EditRecipePage: lazyPage(() => import("@/pages/EditRecipePage").then(m => ({ default: m.EditRecipePage }))),
     ProfilePage: lazyPage(() => import("@/pages/ProfilePage").then(m => ({ default: m.ProfilePage }))),
@@ -41,6 +43,14 @@ export const routeConfig: RouteConfig[] = [
     {
         path: AppRoute.AddRecipe,
         element: PAGES.AddRecipePage.Page,
+    },
+    {
+        path: AppRoute.ImportRecipe,
+        element: PAGES.ImportRecipePage.Page,
+    },
+    {
+        path: AppRoute.CreateRecipe,
+        element: PAGES.CreateRecipePage.Page,
     },
     {
         path: AppRoute.Sections,

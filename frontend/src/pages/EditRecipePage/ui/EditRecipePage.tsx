@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { buildRoute } from "@/app/router/routes";
 import { useRecipe, useUpdateRecipe } from "@/entities/recipe";
-import { RecipeForm, type RecipeFormValues } from "@/features/recipe-form";
+import { getCover, RecipeForm, type RecipeFormValues, toMedia } from "@/features/recipe-form";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { Spinner } from "@/shared/ui/Spinner";
 
@@ -31,7 +31,7 @@ const EditRecipePage = () => {
                 cookTime: values.cookTime ?? null,
                 servings: values.servings ?? null,
                 tags: values.tagIds,
-                media: values.media,
+                media: toMedia(values.cover),
             },
             { onSuccess: () => navigate(buildRoute.recipe(recipe.id)) }
         );
@@ -40,6 +40,8 @@ const EditRecipePage = () => {
     return (
         <PageWrapper>
             <RecipeForm
+                title={t("form.editTitle")}
+                subtitle={recipe.title}
                 defaultValues={{
                     title: recipe.title,
                     description: recipe.description,
@@ -50,7 +52,7 @@ const EditRecipePage = () => {
                     cookTime: recipe.cookTime,
                     servings: recipe.servings ?? undefined,
                     tagIds: recipe.tags.map((t) => t.tagId),
-                    media: recipe.media.map((m) => ({ url: m.url, type: m.type })),
+                    cover: getCover(recipe.media),
                 }}
                 onSubmit={handleSubmit}
                 isPending={isPending}

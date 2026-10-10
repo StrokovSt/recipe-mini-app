@@ -25,12 +25,6 @@ const stepSchema = z.object({
 export const EMPTY_INGREDIENT: Ingredient = { name: "", amount: null, unit: null };
 export const EMPTY_STEP: RecipeStep = { text: "", images: [] };
 
-const mediaItemSchema = z.object({
-    url: z.string().url({ error: () => i18next.t("recipeForm:validation.invalidUrl") }),
-    type: z.enum(["image", "video"]),
-});
-
-
 export const recipeSchema = z.object({
     title: z.string()
         .min(1, { error: () => i18next.t("recipeForm:validation.titleRequired") })
@@ -44,7 +38,7 @@ export const recipeSchema = z.object({
     cookTime: z.number().int().min(0).nullable().optional(),
     servings: z.number().int().positive().nullable().optional(),
     tagIds: z.array(z.string()).default([]),
-    media: z.array(mediaItemSchema).default([]),
+    cover: z.string().nullable(),
 });
 
 export type RecipeFormValues = z.infer<typeof recipeSchema>;

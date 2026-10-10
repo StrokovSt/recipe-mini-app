@@ -71,6 +71,13 @@
     --size-dropdown-icon: 18px;
     --size-segmented-icon: 16px;
     --size-section-mark: 28px;
+    // Круг с иконкой в карточке выбора способа добавления рецепта
+    --size-option-icon: 52px;
+    // Цветная полоса слева у плашки-предупреждения
+    --size-banner-stripe: 3px;
+    // Поле картинки (обложка рецепта): общая высота зоны со строкой ссылки или превью, иконка в пустой зоне
+    --size-image-input-height: 224px;
+    --size-image-input-icon: 32px;
     --size-switch-width: 44px;
     --size-switch-height: 24px;
     --size-switch-knob: 18px;

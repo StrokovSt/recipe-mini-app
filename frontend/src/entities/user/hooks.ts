@@ -6,10 +6,12 @@ export const USER_KEYS = {
     me: ["me"] as const,
 };
 
-export function useMe() {
+// fresh — перезапросить при открытии экрана: число рецептов меняется при добавлении и удалении
+export function useMe({ fresh = false }: { fresh?: boolean } = {}) {
     return useQuery({
         queryKey: USER_KEYS.me,
         queryFn: userApi.getMe,
+        ...(fresh && { staleTime: 0 }),
     });
 }
 

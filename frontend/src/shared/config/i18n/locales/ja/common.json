@@ -14,6 +14,18 @@
     "collapse": "折りたたむ",
     "minutes": "{{count}}分",
     "iconPicker": "アイコンを選択",
+    "imageInput": {
+        "add": "写真を追加",
+        "hint": "または下にリンクを貼り付け",
+        "uploading": "写真をアップロード中…",
+        "drop": "ドロップしてアップロード",
+        "url": "画像のリンク",
+        "apply": "リンクを使う",
+        "remove": "画像を削除",
+        "invalidUrl": "https://… の形式で入力してください",
+        "broken": "画像を読み込めませんでした",
+        "uploadFailed": "写真をアップロードできませんでした"
+    },
     "errorBoundary": {
         "title": "問題が発生しました",
         "retry": "再試行"

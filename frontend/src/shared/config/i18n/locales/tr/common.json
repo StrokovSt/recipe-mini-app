@@ -14,6 +14,18 @@
     "collapse": "Daha az göster",
     "minutes": "{{count}} dk",
     "iconPicker": "Simge seç",
+    "imageInput": {
+        "add": "Fotoğraf ekle",
+        "hint": "veya aşağıya bir bağlantı yapıştır",
+        "uploading": "Fotoğraf yükleniyor…",
+        "drop": "Yüklemek için bırak",
+        "url": "Görsel bağlantısı",
+        "apply": "Bağlantıyı kullan",
+        "remove": "Görseli kaldır",
+        "invalidUrl": "https://… biçiminde bir bağlantı gir",
+        "broken": "Görsel yüklenemedi",
+        "uploadFailed": "Fotoğraf yüklenemedi"
+    },
     "errorBoundary": {
         "title": "Bir şeyler ters gitti",
         "retry": "Tekrar dene"

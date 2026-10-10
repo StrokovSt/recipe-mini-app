@@ -14,6 +14,18 @@
     "collapse": "收起",
     "minutes": "{{count}}分钟",
     "iconPicker": "选择图标",
+    "imageInput": {
+        "add": "添加照片",
+        "hint": "或在下方粘贴链接",
+        "uploading": "正在上传照片…",
+        "drop": "松开即可上传",
+        "url": "图片链接",
+        "apply": "使用链接",
+        "remove": "移除图片",
+        "invalidUrl": "请输入 https://… 格式的链接",
+        "broken": "无法加载图片",
+        "uploadFailed": "照片上传失败"
+    },
     "errorBoundary": {
         "title": "出了点问题",
         "retry": "重试"

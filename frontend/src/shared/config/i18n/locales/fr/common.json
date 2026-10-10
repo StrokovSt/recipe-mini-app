@@ -14,6 +14,18 @@
     "collapse": "Réduire",
     "minutes": "{{count}} min",
     "iconPicker": "Choisir une icône",
+    "imageInput": {
+        "add": "Ajouter une photo",
+        "hint": "ou colle un lien ci-dessous",
+        "uploading": "Envoi de la photo…",
+        "drop": "Dépose pour envoyer",
+        "url": "Lien de l'image",
+        "apply": "Utiliser le lien",
+        "remove": "Retirer l'image",
+        "invalidUrl": "Saisis un lien du type https://…",
+        "broken": "Impossible de charger l'image",
+        "uploadFailed": "Impossible d'envoyer la photo"
+    },
     "errorBoundary": {
         "title": "Une erreur s'est produite",
         "retry": "Réessayer"

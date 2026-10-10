@@ -1,77 +1,103 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-import type { ParsedRecipe } from "@recipe/common";
-
-import { useParseRecipe, useParseRecipeFromImage } from "@/entities/recipe";
-import { RecipeForm, type RecipeFormValues } from "@/features/recipe-form";
+import { AppRoute } from "@/app/router";
+import { useMe } from "@/entities/user";
+import FormIcon from "@/shared/assets/icons/icon-form.svg?react";
+import ImageIcon from "@/shared/assets/icons/icon-image.svg?react";
+import { BottomSheet } from "@/shared/ui/BottomSheet";
+import { IconButton, RegularButton } from "@/shared/ui/Buttons";
+import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
-import { Tabs } from "@/shared/ui/Tabs";
 
-import AiInput from "./AiInput/AiInput";
+import { OptionCard } from "./OptionCard/OptionCard";
 
 import styles from "./AddRecipePage.module.scss";
 
-type Mode = "manual" | "ai";
-
+// Выбор способа добавления: вручную или распознать по ссылке и фото
 const AddRecipePage = () => {
-    const { t } = useTranslation("recipeForm");
-    const [mode, setMode] = useState<Mode>("manual");
-    const [formKey, setFormKey] = useState(0);
-    const [defaultValues, setDefaultValues] = useState<Partial<RecipeFormValues>>({});
+    const { t } = useTranslation(["recipeForm", "common"]);
+    const navigate = useNavigate();
+    const { data: user } = useMe({ fresh: true });
+    const [isAiSheetOpen, setIsAiSheetOpen] = useState(false);
 
-    const { mutate: parseUrl, isPending: isParsing, error: parseUrlError } = useParseRecipe();
-    const { mutate: parseImage, isPending: isParsingImage, error: parseImageError } = useParseRecipeFromImage();
+    const isAiLocked = user?.aiEnabled === false;
+    const isLimitReached = user?.recipeLimit != null && user.recipeCount >= user.recipeLimit;
 
-    const tabs: { id: Mode; label: string }[] = [
-        { id: "manual", label: t("modes.manual") },
-        { id: "ai", label: t("modes.ai") },
-    ];
+    const handleImport = () => {
+        if (isAiLocked) {
+            setIsAiSheetOpen(true);
+            return;
+        }
 
-    const applyParsedData = (data: ParsedRecipe) => {
-        setDefaultValues({
-            title: data.title,
-            description: data.description,
-            categoryId: data.categoryId,
-            ingredients: data.ingredients,
-            steps: data.steps,
-            prepTime: data.prepTime,
-            cookTime: data.cookTime,
-            servings: data.servings ?? undefined,
-            tagIds: data.tags,
-            media: data.media,
-        });
-        setFormKey((k) => k + 1);
-        setMode("manual");
-    };
-
-    const handleParseUrl = (url: string) => {
-        parseUrl(url, { onSuccess: applyParsedData });
-    };
-
-    const handleParseImage = (file: File) => {
-        parseImage(file, { onSuccess: applyParsedData });
+        navigate(AppRoute.ImportRecipe);
     };
 
     return (
-        <PageWrapper className={styles.page}>
-            <Tabs tabs={tabs} active={mode} onChange={setMode} />
+        <PageWrapper
+            className={styles.page}
+            header={
+                <PageHeader className={styles.header}>
+                    <div>
+                        <h1 className={styles.title}>{t("choose.title")}</h1>
+                        <p className={styles.subtitle}>{t("choose.subtitle")}</p>
+                    </div>
+                    <IconButton
+                        icon="back"
+                        round
+                        className={styles.back}
+                        type="button"
+                        aria-label={t("common:back")}
+                        onClick={() => navigate(-1)}
+                    />
+                </PageHeader>
+            }
+        >
+            <p className={styles.intro}>{t("choose.intro")}</p>
 
-            {mode === "ai" && (
-                <AiInput
-                    isParsing={isParsing}
-                    isParsingImage={isParsingImage}
-                    error={parseUrlError ?? parseImageError}
-                    onSubmitUrl={handleParseUrl}
-                    onSubmitImage={handleParseImage}
-                />
+            {isLimitReached && (
+                <p className={styles.limit} role="status">
+                    <strong>{t("choose.limit.title")}</strong>
+                    {t("choose.limit.text", { current: user.recipeCount, limit: user.recipeLimit })}
+                </p>
             )}
 
-            <RecipeForm
-                key={formKey}
-                defaultValues={defaultValues}
-                submitLabel={t("submitAdd")}
+            <OptionCard
+                icon={<FormIcon />}
+                title={t("choose.manual.title")}
+                description={t("choose.manual.description")}
+                action={t("choose.manual.action")}
+                disabled={isLimitReached}
+                onClick={() => navigate(AppRoute.CreateRecipe)}
             />
+            <OptionCard
+                icon={<ImageIcon />}
+                title={t("choose.import.title")}
+                description={t("choose.import.description")}
+                action={isAiLocked ? t("choose.locked") : t("choose.import.action")}
+                accent
+                locked={isAiLocked}
+                disabled={isLimitReached}
+                onClick={handleImport}
+            />
+
+            <p className={styles.saved}>{t("choose.saved")}</p>
+
+            <BottomSheet
+                isOpen={isAiSheetOpen}
+                onClose={() => setIsAiSheetOpen(false)}
+                title={t("choose.aiLocked.title")}
+                footer={
+                    <RegularButton
+                        type="button"
+                        label={t("choose.aiLocked.action")}
+                        onClick={() => navigate(AppRoute.CreateRecipe)}
+                    />
+                }
+            >
+                <p className={styles.sheetText}>{t("choose.aiLocked.text")}</p>
+            </BottomSheet>
         </PageWrapper>
     );
 };

@@ -14,6 +14,18 @@
     "collapse": "Tampilkan lebih sedikit",
     "minutes": "{{count}} mnt",
     "iconPicker": "Pilih ikon",
+    "imageInput": {
+        "add": "Tambah foto",
+        "hint": "atau tempel tautan di bawah",
+        "uploading": "Mengunggah foto…",
+        "drop": "Lepaskan untuk mengunggah",
+        "url": "Tautan gambar",
+        "apply": "Gunakan tautan",
+        "remove": "Hapus gambar",
+        "invalidUrl": "Masukkan tautan seperti https://…",
+        "broken": "Gambar tidak dapat dimuat",
+        "uploadFailed": "Foto gagal diunggah"
+    },
     "errorBoundary": {
         "title": "Terjadi kesalahan",
         "retry": "Coba lagi"
