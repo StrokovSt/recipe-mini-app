@@ -39,7 +39,7 @@
 
             svg {
                 transform: scale(1.2);
-                animation: icon-tilt 0.45s ease-in-out;
+                animation: icon-tilt var(--transition-slow);
             }
         }
 
@@ -48,7 +48,7 @@
 
             svg {
                 transform: scale(1.2);
-                animation: icon-tilt 0.45s ease-in-out;
+                animation: icon-tilt var(--transition-slow);
             }
         }
 
@@ -68,16 +68,6 @@
 
         svg {
             color: var(--color-active);
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        &:focus-visible svg {
-            animation: none;
-        }
-
-        @include states.hover(" svg") {
-            animation: none;
         }
     }
 }

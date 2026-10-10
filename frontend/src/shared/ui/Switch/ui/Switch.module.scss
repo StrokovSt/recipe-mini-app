@@ -1,0 +1,64 @@
+.row {
+    // Подпись и описание в первой колонке, тумблер во второй на обе строки
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: var(--space-3);
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-app-bg);
+    cursor: pointer;
+
+    .label {
+        font: var(--font-ui-sm);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .description {
+        color: var(--color-text-muted);
+        font: var(--font-ui-xs);
+    }
+
+    // Сам чекбокс рисуется дорожкой, ::before — кружок
+    .switch {
+        position: relative;
+        grid-row: 1 / span 2;
+        grid-column: 2;
+        width: var(--size-switch-width);
+        height: var(--size-switch-height);
+        margin: 0;
+        border-radius: var(--size-switch-height);
+        outline: none;
+        background: var(--color-surface-dim);
+        cursor: pointer;
+        transition: var(--transition-base);
+        transition-property: background, box-shadow;
+        appearance: none;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: calc((var(--size-switch-height) - var(--size-switch-knob)) / 2);
+            left: calc((var(--size-switch-height) - var(--size-switch-knob)) / 2);
+            width: var(--size-switch-knob);
+            height: var(--size-switch-knob);
+            border-radius: var(--radius-full);
+            background: var(--color-surface);
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-base);
+        }
+
+        &:checked {
+            background: var(--color-active);
+
+            &::before {
+                transform: translateX(calc(var(--size-switch-width) - var(--size-switch-height)));
+            }
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 0 3px var(--color-accent-shadow);
+        }
+    }
+}

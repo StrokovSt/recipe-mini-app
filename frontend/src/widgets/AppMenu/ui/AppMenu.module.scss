@@ -77,7 +77,7 @@
         }
     }
 
-    &:active {
+    @include states.active {
         filter: brightness(1.1);
 
         .icon {

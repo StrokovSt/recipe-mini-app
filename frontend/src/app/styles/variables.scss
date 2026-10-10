@@ -16,6 +16,7 @@
     --font-line-xl: 30px;
     --font-line-2xl: 36px;
     --font-weight-regular: 400;
+    --font-weight-medium: 500;
     --font-weight-bold: 700;
     --font-weight-extrabold: 800;
     --font-weight-black: 900;
@@ -69,6 +70,10 @@
     --size-dropdown-min-width: 170px;
     --size-dropdown-icon: 18px;
     --size-segmented-icon: 16px;
+    --size-section-mark: 28px;
+    --size-switch-width: 44px;
+    --size-switch-height: 24px;
+    --size-switch-knob: 18px;
     --size-modal-max-width: 400px;
     --size-tile-action: 40px;
     --size-tile-icon: 32px;
@@ -106,8 +111,19 @@
     --transition-base: 0.2s ease;
     --transition-slow: 0.4s ease;
     --transition-theme: 0.3s ease;
+    // Появление шторки и модалки
+    --transition-overlay: 0.3s ease;
 
     // ─── Z-index ──────────────────────────────────────────────
     --z-above: 10;
     --z-modal: 100;
+}
+
+// Анимации выключены в настройках (shared/lib/animations): переходы и CSS-анимации без длительности
+:root[data-animations="off"] {
+    --transition-fast: 0s;
+    --transition-base: 0s;
+    --transition-slow: 0s;
+    --transition-theme: 0s;
+    --transition-overlay: 0s;
 }

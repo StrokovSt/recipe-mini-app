@@ -49,7 +49,7 @@
         }
     }
 
-    &:active:not(:disabled) {
+    @include states.active(":not(:disabled)") {
         transform: scale(0.98);
     }
 

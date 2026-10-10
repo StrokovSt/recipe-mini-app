@@ -11,7 +11,7 @@
     background: var(--color-overlay);
     backdrop-filter: blur(6px);
 
-    transition: opacity 0.3s ease;
+    transition: opacity var(--transition-overlay);
 
     &[data-closed] {
         opacity: 0;

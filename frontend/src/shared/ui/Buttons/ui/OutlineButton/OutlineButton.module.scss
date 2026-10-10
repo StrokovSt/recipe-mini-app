@@ -28,7 +28,7 @@
         color: var(--color-accent);
     }
 
-    &:active:not(:disabled) {
+    @include states.active(":not(:disabled)") {
         background: var(--color-accent-light);
         color: var(--color-accent);
         transform: scale(0.97);

@@ -35,12 +35,12 @@
         transform: translateX(0);
     }
 
-    &:active:not(:disabled) {
+    @include states.active(":not(:disabled)") {
         transform: scale(0.95);
-    }
 
-    &:active:not(:disabled)::before {
-        background-color: var(--color-accent-shadow);
+        &::before {
+            background-color: var(--color-accent-shadow);
+        }
     }
 
     &:disabled {

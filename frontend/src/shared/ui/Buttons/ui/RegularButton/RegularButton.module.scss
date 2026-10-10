@@ -38,7 +38,7 @@
         box-shadow: 0 0 0 3px var(--color-accent-shadow);
     }
 
-    &:active:not(:disabled) {
+    @include states.active(":not(:disabled)") {
         transform: scale(0.97);
     }
 

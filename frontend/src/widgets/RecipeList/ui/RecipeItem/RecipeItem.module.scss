@@ -1,4 +1,5 @@
 @use "@/shared/styles/brush";
+@use "@/shared/styles/states";
 
 @mixin raised {
     border-color: var(--color-active);
@@ -40,7 +41,7 @@
         @include raised;
     }
 
-    &:active {
+    @include states.active {
         transform: scale(0.98);
 
         @include brush.brush-underline-active;

@@ -1,3 +1,5 @@
+import { getAnimations } from "@/shared/lib/animations";
+
 export type Theme = "light" | "dark";
 
 export const THEME_STORAGE_KEY = "theme";
@@ -11,7 +13,7 @@ export function setTheme(theme: Theme) {
 
     localStorage.setItem(THEME_STORAGE_KEY, theme);
 
-    if ("startViewTransition" in document) {
+    if ("startViewTransition" in document && getAnimations()) {
         document.startViewTransition(apply);
     } else {
         apply();

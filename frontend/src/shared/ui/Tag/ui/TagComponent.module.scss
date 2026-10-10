@@ -19,7 +19,7 @@
     font: var(--font-ui-xs);
     text-align: center;
     white-space: nowrap;
-    transition: 0.25s ease-in-out all;
+    transition: var(--transition-base);
     text-overflow: ellipsis;
 
     &--isActive {

@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import App from './app/App'
+import { initAnimations } from './shared/lib/animations'
 import { initTheme } from './shared/lib/theme'
 
 import '@fontsource-variable/literata/opsz.css'
@@ -13,6 +14,7 @@ import '@fontsource-variable/noto-serif/wght-italic.css'
 import './app/styles/index.scss'
 
 initTheme()
+initAnimations()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -29,7 +29,7 @@
         filter: brightness(1.05);
     }
 
-    &:active:not(:disabled) {
+    @include states.active(":not(:disabled)") {
         transform: scale(0.85);
         filter: brightness(1.1);
     }
