@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .tile {
     display: flex;
     flex-direction: column;
@@ -25,7 +27,6 @@
         height: 24px;
     }
 
-    &:hover,
     &:focus-visible {
         border-color: var(--color-active);
         background: var(--color-hover-bg);
@@ -37,7 +38,22 @@
         }
     }
 
-    &:active {
+    @include states.hover(":not(:disabled)") {
+        border-color: var(--color-active);
+        background: var(--color-hover-bg);
+        color: var(--color-active);
+
+        & > svg {
+            transition: var(--transition-base);
+            transform: scale(1.15);
+        }
+    }
+
+    &:active:not(:disabled) {
         transform: scale(0.98);
+    }
+
+    &:disabled {
+        @include states.disabled;
     }
 }

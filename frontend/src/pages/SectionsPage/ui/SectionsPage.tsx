@@ -46,17 +46,17 @@ const SectionsPage = () => {
         <PageWrapper
             className={styles.page}
             header={
-                <PageHeader className={styles.header}>
+                <PageHeader>
                     <SectionHeading
                         title={heading.title}
                         hint={heading.hint}
                         total={`${count} ${pluralize(count, heading.forms)}`}
                         action={<AppMenuButton />}
                     />
-                    <Tabs tabs={TABS} active={tab} onChange={setTab} className={styles.tabs} />
                 </PageHeader>
             }
         >
+            <Tabs tabs={TABS} active={tab} onChange={setTab} />
             {tab === "categories" ? <CategoriesTab /> : <TagsTab />}
         </PageWrapper>
     );

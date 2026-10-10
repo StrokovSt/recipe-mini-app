@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .wrap {
     display: flex;
     flex-direction: column;
@@ -61,7 +63,7 @@
     cursor: pointer;
     transition: all var(--transition-base);
 
-    &:hover:not(:disabled) {
+    @include states.hover(":not(:disabled)") {
         background: var(--color-accent-light);
         color: var(--color-accent);
         border-color: var(--color-accent);

@@ -2,6 +2,14 @@
     flex-direction: row;
     align-items: center;
 
+    // «Назад» в правом краю шапки, на месте бургера
+    .back {
+        flex-shrink: 0;
+        width: var(--size-menu-button);
+        height: var(--size-menu-button);
+        margin-left: auto;
+    }
+
     .title {
         font: var(--font-header-lg);
         font-weight: var(--font-weight-bold);

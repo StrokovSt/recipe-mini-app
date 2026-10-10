@@ -15,19 +15,22 @@ interface PageWrapperProps {
 const HIDDEN = { opacity: 0, y: 8, filter: "blur(6px)" };
 const VISIBLE = { opacity: 1, y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } };
 
+// Анимируется только контент: шапка при переходах стоит на месте, как footer
 export function PageWrapper(props: PageWrapperProps) {
     const { children, header, className } = props;
 
     return (
-        <motion.main
-            className={clsx(styles.wrapper, className)}
-            initial={HIDDEN}
-            animate={VISIBLE}
-            exit={HIDDEN}
-            transition={TRANSITION_PAGE}
-        >
+        <main className={clsx(styles.wrapper, className)}>
             {header}
-            {children}
-        </motion.main>
+            <motion.div
+                className={styles.content}
+                initial={HIDDEN}
+                animate={VISIBLE}
+                exit={HIDDEN}
+                transition={TRANSITION_PAGE}
+            >
+                {children}
+            </motion.div>
+        </main>
     );
 }

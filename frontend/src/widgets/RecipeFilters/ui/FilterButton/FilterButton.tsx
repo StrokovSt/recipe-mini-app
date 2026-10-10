@@ -7,11 +7,12 @@ interface FilterButtonProps {
     onClick: () => void;
     round?: boolean;
     className?: string;
+    disabled?: boolean;
 }
 
 // Кнопка открытия фильтров со счётчиком включённых фильтров
 export const FilterButton = (props: FilterButtonProps) => {
-    const { activeCount, onClick, round, className } = props;
+    const { activeCount, onClick, round, className, disabled } = props;
 
     return (
         <div className={styles.trigger}>
@@ -21,6 +22,7 @@ export const FilterButton = (props: FilterButtonProps) => {
                 className={className}
                 aria-pressed={activeCount > 0}
                 onClick={onClick}
+                disabled={disabled}
                 aria-label="Открыть фильтры"
             />
             {activeCount > 0 && <span className={styles.badge}>{activeCount}</span>}

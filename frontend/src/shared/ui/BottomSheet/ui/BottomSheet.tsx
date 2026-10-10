@@ -1,10 +1,16 @@
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import clsx from "clsx";
-import { type ReactNode } from "react";
+import { animate, motion, useMotionValue } from "motion/react";
+import { type PointerEvent, type ReactNode, useEffect, useRef } from "react";
 
+import { TRANSITION_BASE } from "@/shared/config/animation";
 import { IconButton } from "@/shared/ui/Buttons";
 
 import styles from "./BottomSheet.module.scss";
+
+// Шторка закрывается, если её утянули ниже этого расстояния (px) или смахнули быстрее этой скорости (px/с)
+const CLOSE_DISTANCE = 100;
+const CLOSE_VELOCITY = 500;
 
 interface BottomSheetProps {
     isOpen: boolean;
@@ -18,13 +24,48 @@ interface BottomSheetProps {
 export const BottomSheet = (props: BottomSheetProps) => {
     const { isOpen, onClose, children, title, footer, className } = props;
 
+    const y = useMotionValue(0);
+    const startYRef = useRef<number | null>(null);
+
+    useEffect(() => {
+        if (isOpen) y.set(0);
+    }, [isOpen, y]);
+
+    const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+        event.currentTarget.setPointerCapture(event.pointerId);
+        y.stop();
+        startYRef.current = event.clientY - y.get();
+    };
+
+    const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+        if (startYRef.current === null) return;
+
+        y.set(Math.max(0, event.clientY - startYRef.current));
+    };
+
+    const handlePointerUp = () => {
+        if (startYRef.current === null) return;
+        startYRef.current = null;
+
+        // При закрытии оставляем шторку где отпустили: дальше вниз её уводит переход закрытия
+        if (y.get() > CLOSE_DISTANCE || y.getVelocity() > CLOSE_VELOCITY) onClose();
+        else animate(y, 0, TRANSITION_BASE);
+    };
+
     return (
         <Dialog open={isOpen} onClose={onClose} className={styles.root}>
             <DialogBackdrop transition className={styles.backdrop} />
 
-            <div className={styles.container}>
+            <motion.div className={styles.container} style={{ y }}>
                 <DialogPanel transition className={clsx(styles.panel, className)}>
-                    <div className={styles.handle} aria-hidden />
+                    <div
+                        className={styles.handle}
+                        aria-hidden
+                        onPointerDown={handlePointerDown}
+                        onPointerMove={handlePointerMove}
+                        onPointerUp={handlePointerUp}
+                        onPointerCancel={handlePointerUp}
+                    />
 
                     <IconButton
                         icon="close"
@@ -44,7 +85,7 @@ export const BottomSheet = (props: BottomSheetProps) => {
 
                     {footer && <footer className={styles.footer}>{footer}</footer>}
                 </DialogPanel>
-            </div>
+            </motion.div>
         </Dialog>
     );
 };

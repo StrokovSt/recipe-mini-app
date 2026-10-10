@@ -27,11 +27,13 @@ interface RecipeFiltersProps {
     // Шторка фильтров управляется снаружи: её открывает и кнопка в шапке страницы
     isOpen: boolean;
     onOpenChange: (isOpen: boolean) => void;
+    // Поиск и кнопка фильтров неактивны, пока грузится список
+    disabled?: boolean;
     ref?: Ref<HTMLElement>;
 }
 
 const RecipeFilters = (props: RecipeFiltersProps) => {
-    const {categories, tags, filters, setFilters, isOpen, onOpenChange, ref} = props;
+    const {categories, tags, filters, setFilters, isOpen, onOpenChange, disabled, ref} = props;
 
     const activeCount = getActiveFilterCount(filters);
 
@@ -77,9 +79,14 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                     value={filters.search ?? ""}
                     onChange={handleSearchChange}
                     placeholder="Поиск рецептов..."
+                    disabled={disabled}
                 />
 
-                <FilterButton activeCount={activeCount} onClick={() => onOpenChange(true)} />
+                <FilterButton
+                    activeCount={activeCount}
+                    onClick={() => onOpenChange(true)}
+                    disabled={disabled}
+                />
             </div>
 
             <BottomSheet

@@ -12,6 +12,16 @@
     color: var(--color-accent);
 }
 
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-above);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
 .md {
     width: var(--size-loader-md);
 }

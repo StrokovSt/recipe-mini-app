@@ -1,16 +1,22 @@
-.header {
-    // Боковой отступ шапки: дети могут выйти на всю ширину через отрицательный margin
-    --page-header-padding-x: var(--space-5);
-
-    position: sticky;
+// Общая полоса шапки: поверх main сверху колонки, контент уезжает под неё
+.bar {
+    position: absolute;
     top: 0;
+    right: 0;
+    left: 0;
     z-index: var(--z-above);
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
-    margin: 0 calc(-1 * var(--page-header-padding-x));
-    padding: var(--space-3) var(--page-header-padding-x);
+    justify-content: center;
+    height: var(--size-page-header);
+    padding: var(--space-3) var(--space-5);
     border-bottom: 1px solid var(--color-border);
     background: color-mix(in srgb, var(--color-app-bg) 70%, transparent);
     backdrop-filter: blur(5px);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
 }

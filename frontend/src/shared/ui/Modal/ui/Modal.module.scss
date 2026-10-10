@@ -1,0 +1,106 @@
+@use "@/shared/styles/states";
+
+.root {
+    position: relative;
+    z-index: var(--z-modal);
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--color-overlay);
+    backdrop-filter: blur(6px);
+
+    transition: opacity 0.3s ease;
+
+    &[data-closed] {
+        opacity: 0;
+    }
+}
+
+.container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5);
+}
+
+.panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+    max-width: var(--size-modal-max-width);
+    max-height: 85dvh;
+    padding: var(--space-5);
+    overflow-y: auto;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    color: var(--color-text);
+
+    transition: var(--transition-base);
+    transition-property: opacity, transform;
+
+    &[data-closed] {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+// Элементы внутри окна лежат на цвете фона приложения, как в шторке
+.close,
+.content,
+.footer {
+    --color-surface: var(--color-app-bg);
+    --color-category-bg: var(--color-app-bg);
+    --tg-secondary-bg: var(--color-app-bg);
+}
+
+.close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    width: var(--size-sheet-close);
+    height: var(--size-sheet-close);
+
+    svg {
+        width: 50%;
+        height: 50%;
+    }
+}
+
+.title {
+    margin: 0;
+    padding-right: var(--size-sheet-close);
+    font: var(--font-header-lg);
+    font-weight: var(--font-weight-extrabold);
+}
+
+.content {
+    color: var(--color-text-soft);
+    font: var(--font-sm);
+}
+
+.footer {
+    display: flex;
+    gap: var(--space-3);
+    padding-top: var(--space-2);
+
+    > * {
+        flex: 1;
+    }
+
+    .danger {
+        border-color: var(--color-error);
+        background: var(--color-error);
+
+        @include states.hover(":not(:disabled)") {
+            border-color: color-mix(in srgb, var(--color-error) 85%, black);
+            background: color-mix(in srgb, var(--color-error) 85%, black);
+        }
+    }
+}

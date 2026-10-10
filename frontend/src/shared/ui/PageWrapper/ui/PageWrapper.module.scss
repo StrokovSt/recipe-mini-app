@@ -2,7 +2,15 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
-    padding: 0 var(--space-5);
+    // Сверху место под общую шапку, которая лежит поверх main
+    padding: calc(var(--size-page-header) + var(--space-5)) var(--space-5) 0;
     overflow: hidden auto;
     font-family: var(--font-family-main);
+
+    // Раскладка как у main: страницы задают gap через className
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: inherit;
+    }
 }

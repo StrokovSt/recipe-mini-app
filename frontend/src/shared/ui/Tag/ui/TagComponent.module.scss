@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .tag {
     --tag-color: var(--color-accent);
     --tag-bg: color-mix(in srgb, var(--color-accent) 8%, transparent);
@@ -29,7 +31,7 @@
     &--interactive {
         cursor: pointer;
 
-        &:hover {
+        @include states.hover {
             border-color: var(--color-accent);
         }
 
@@ -37,9 +39,11 @@
             border-color: var(--color-accent);
         }
 
-        &.tag--isActive:hover {
-            border-color: var(--color-active-hover);
-            background: var(--color-active-hover);
+        &.tag--isActive {
+            @include states.hover {
+                border-color: var(--color-active-hover);
+                background: var(--color-active-hover);
+            }
         }
     }
 }

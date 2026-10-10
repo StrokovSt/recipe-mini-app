@@ -13,10 +13,11 @@ interface SearchInputProps {
     placeholder?: string;
     delay?: number;
     className?: string;
+    disabled?: boolean;
 }
 
 export const SearchInput = (props: SearchInputProps) => {
-    const { value, onChange, placeholder = "Поиск", delay = 400, className } = props;
+    const { value, onChange, placeholder = "Поиск", delay = 400, className, disabled } = props;
     const [query, setQuery] = useState(value);
     const { run: debouncedChange, cancel } = useDebouncedCallback(onChange, delay);
 
@@ -45,6 +46,7 @@ export const SearchInput = (props: SearchInputProps) => {
                 value={query}
                 onChange={(event) => handleChange(event.target.value)}
                 placeholder=" "
+                disabled={disabled}
             />
             <span className={styles.label}>{placeholder}</span>
             {query && (
@@ -53,6 +55,7 @@ export const SearchInput = (props: SearchInputProps) => {
                     variant="empty"
                     className={styles.clear}
                     onClick={handleClear}
+                    disabled={disabled}
                     aria-label="Очистить поиск"
                 />
             )}

@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -19,7 +21,7 @@
         fill: currentcolor;
     }
 
-    &:hover:not(:disabled) {
+    @include states.hover(":not(:disabled)") {
         border-color: var(--color-active-hover);
         background: var(--color-active-hover);
     }
@@ -33,7 +35,6 @@
     }
 
     &:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
+        @include states.disabled;
     }
 }

@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import type { ComponentType } from "react";
 
 export const AppRoute = {
     Home: "/",
@@ -16,10 +16,13 @@ export type AppRoute = (typeof AppRoute)[keyof typeof AppRoute];
 export const buildRoute = {
     recipe: (id: string) => `/recipe/${id}`,
     editRecipe: (id: string) => `/edit/${id}`,
+    // Главная с включённым фильтром
+    homeByCategory: (id: string) => `/?category=${id}`,
+    homeByTag: (id: string) => `/?tag=${id}`,
 };
 
 export interface RouteConfig {
     path: AppRoute;
-    element: React.LazyExoticComponent<() => JSX.Element | null>;
+    element: ComponentType;
     protected?: boolean;
 }

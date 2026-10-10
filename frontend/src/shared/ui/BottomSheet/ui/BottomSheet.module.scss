@@ -45,13 +45,32 @@
     }
 }
 
+// Зона захвата во всю ширину шторки, видимая полоска — ::before
 .handle {
-    align-self: center;
-    width: 40px;
-    height: 4px;
-    margin-bottom: var(--space-3);
-    border-radius: 2px;
-    background: var(--color-border-strong);
+    // Зона выше видимого места под полоску и заходит на заголовок, поэтому лежит поверх него
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-shrink: 0;
+    align-items: flex-start;
+    justify-content: center;
+    height: var(--size-sheet-handle-zone);
+    margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-5)) calc(var(--space-6) + var(--space-1) - var(--size-sheet-handle-zone));
+    padding-top: var(--space-3);
+    cursor: grab;
+    touch-action: none;
+
+    &:active {
+        cursor: grabbing;
+    }
+
+    &::before {
+        content: "";
+        width: 40px;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--color-border-strong);
+    }
 }
 
 .header {
@@ -82,6 +101,7 @@
     position: absolute;
     top: var(--space-3);
     right: var(--space-5);
+    z-index: 2;
     width: var(--size-sheet-close);
     height: var(--size-sheet-close);
 

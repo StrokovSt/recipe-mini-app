@@ -14,8 +14,9 @@ export const RECIPE_KEYS = {
     categories: () => [...RECIPE_KEYS.all, "categories"] as const,
 };
 
-// Ключ списка тегов: у тегов есть счётчик рецептов, его нужно обновлять после изменений рецептов
+// Ключи списков тегов и категорий: у них есть счётчик рецептов, его нужно обновлять после изменений рецептов
 const TAGS_KEY = ["tags"] as const;
+const CATEGORIES_KEY = ["categories"] as const;
 
 export function useRecipes(filters: GetRecipesProps) {
     return useQuery({
@@ -43,6 +44,7 @@ export function useCreateRecipe() {
         queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.lists() });
         queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.categories() });
         queryClient.invalidateQueries({ queryKey: TAGS_KEY });
+        queryClient.invalidateQueries({ queryKey: CATEGORIES_KEY });
         },
     });
 }
@@ -57,6 +59,7 @@ export function useUpdateRecipe() {
             queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.lists() });
             queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.detail(id) });
             queryClient.invalidateQueries({ queryKey: TAGS_KEY });
+            queryClient.invalidateQueries({ queryKey: CATEGORIES_KEY });
         },
     });
 }
@@ -69,6 +72,7 @@ export function useDeleteRecipe() {
         onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.lists() });
         queryClient.invalidateQueries({ queryKey: TAGS_KEY });
+        queryClient.invalidateQueries({ queryKey: CATEGORIES_KEY });
         },
     });
 }

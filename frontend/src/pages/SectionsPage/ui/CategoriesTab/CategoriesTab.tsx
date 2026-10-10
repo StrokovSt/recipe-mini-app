@@ -2,10 +2,12 @@ import { useState } from "react";
 
 import type { Category } from "@recipe/common";
 
+import { buildRoute } from "@/app/router/routes";
 import { CategoryItem, useCategories, useDeleteCategory } from "@/entities/category";
 import { CategoryForm } from "@/features/category-form";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 import { AddTile } from "@/shared/ui/Buttons";
+import { ConfirmModal } from "@/shared/ui/Modal";
 import { Spinner } from "@/shared/ui/Spinner";
 
 import styles from "./CategoriesTab.module.scss";
@@ -16,6 +18,9 @@ const CategoriesTab = () => {
 
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState<Category | null>(null);
+
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    const [deletingCategory, setDeletingCategory] = useState<Category | null>(null);
 
     const openCreate = () => {
         setEditingCategory(null);
@@ -29,6 +34,18 @@ const CategoriesTab = () => {
 
     const closeForm = () => setIsFormOpen(false);
 
+    const askDelete = (category: Category) => {
+        setDeletingCategory(category);
+        setIsConfirmOpen(true);
+    };
+
+    const closeConfirm = () => setIsConfirmOpen(false);
+
+    const confirmDelete = () => {
+        if (deletingCategory) remove(deletingCategory.id);
+        closeConfirm();
+    };
+
     if (isLoading) return <Spinner size="md" />;
 
     return (
@@ -38,8 +55,9 @@ const CategoriesTab = () => {
                     <CategoryItem
                         key={category.id}
                         category={category}
+                        to={buildRoute.homeByCategory(category.id)}
                         onEdit={openEdit}
-                        onDelete={(item) => remove(item.id)}
+                        onDelete={askDelete}
                     />
                 ))}
                 <AddTile label="Новая категория" onClick={openCreate} />
@@ -57,6 +75,14 @@ const CategoriesTab = () => {
                     onCancel={closeForm}
                 />
             </BottomSheet>
+
+            <ConfirmModal
+                isOpen={isConfirmOpen}
+                onClose={closeConfirm}
+                onConfirm={confirmDelete}
+                title={`Удалить категорию «${deletingCategory?.name}»?`}
+                text="Рецепты из неё останутся, но без категории."
+            />
         </>
     );
 };

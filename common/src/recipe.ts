@@ -34,6 +34,8 @@ export interface Category {
     name: string;
     userId: string;
     iconName?: string;
+    // Количество рецептов в категории, приходит только в GET /api/categories
+    recipeCount?: number;
 }
 
 export type RecipeSource = "pinterest" | "telegram" | "other";

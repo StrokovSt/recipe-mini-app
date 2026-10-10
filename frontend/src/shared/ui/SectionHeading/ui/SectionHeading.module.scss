@@ -25,8 +25,9 @@
     .hint {
         grid-area: hint;
         overflow: hidden;
-        color: var(--color-text-soft);
-        font: var(--font-ui-sm);
+        color: var(--color-text-muted);
+        font: var(--font-sm);
+        font-style: italic;
         text-overflow: ellipsis;
         white-space: nowrap;
     }

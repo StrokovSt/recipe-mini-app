@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .btn {
     --icon-button-bg: var(--color-surface);
     --icon-button-hover-bg: color-mix(in srgb, var(--icon-button-bg) 92%, black);
@@ -20,11 +22,10 @@
     }
 
     &:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
+        @include states.disabled;
     }
 
-    &:hover:not(:disabled) {
+    @include states.hover(":not(:disabled)") {
         filter: brightness(1.05);
     }
 
@@ -34,8 +35,11 @@
     }
 
     &:not([aria-pressed="true"]) {
-        &:hover:not(:disabled),
         &:focus-visible {
+            background: var(--icon-button-hover-bg);
+        }
+
+        @include states.hover(":not(:disabled)") {
             background: var(--icon-button-hover-bg);
         }
     }
@@ -55,8 +59,14 @@
 .default {
     color: var(--tg-hint);
 
-    &:hover:not(:disabled, [aria-pressed="true"]),
     &:focus-visible:not([aria-pressed="true"]) {
+        --icon-button-hover-bg: var(--color-hover-bg);
+
+        border-color: var(--color-active);
+        color: var(--color-active);
+    }
+
+    @include states.hover(":not(:disabled, [aria-pressed="true"])") {
         --icon-button-hover-bg: var(--color-hover-bg);
 
         border-color: var(--color-active);
@@ -67,7 +77,7 @@
 .danger {
     color: var(--tg-hint);
 
-    &:hover:not(:disabled) {
+    @include states.hover(":not(:disabled)") {
         --icon-button-bg: var(--color-error-light);
 
         color: var(--color-error);
@@ -77,7 +87,7 @@
 .success {
     color: var(--tg-hint);
 
-    &:hover:not(:disabled) {
+    @include states.hover(":not(:disabled)") {
         --icon-button-bg: var(--color-success-light);
 
         color: var(--color-success);
@@ -108,7 +118,7 @@
     border: none;
     color: var(--color-icon);
 
-    &:hover:not(:disabled) {
+    @include states.hover(":not(:disabled)") {
         color: var(--color-active);
     }
 }

@@ -1,0 +1,109 @@
+@use "@/shared/styles/brush";
+@use "@/shared/styles/states";
+
+.tile {
+    @include brush.brush-underline;
+
+    // Свой контекст наложения: кнопка «⋯» поднимается над ссылкой, но не над шапкой страницы
+    isolation: isolate;
+    display: grid;
+    align-items: start;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto 1fr;
+    column-gap: var(--space-2);
+    min-width: 0;
+    padding: var(--space-3);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+
+    transition: var(--transition-base);
+    grid-template-areas:
+        "icon more"
+        "title title"
+        "subtitle arrow";
+    transition-property: border-color, background;
+
+    // Плитка подсвечивается только от работы с ней самой, нажатие на «⋯» её не трогает
+    &:has(.title:focus-visible) {
+        @include brush.brush-underline-active;
+
+        border-color: var(--color-active);
+        background: var(--color-hover-bg);
+    }
+
+    @include states.hover(":not(:has(.more:hover, .more:active))") {
+        @include brush.brush-underline-active;
+
+        border-color: var(--color-active);
+        background: var(--color-hover-bg);
+    }
+
+    .icon {
+        display: flex;
+        grid-area: icon;
+        align-items: center;
+        height: var(--size-tile-icon);
+        color: var(--color-accent);
+
+        svg {
+            width: var(--size-tile-icon);
+            height: var(--size-tile-icon);
+        }
+    }
+
+    .more {
+        position: relative;
+        z-index: 1;
+        grid-area: more;
+        width: var(--size-tile-action);
+        height: var(--size-tile-action);
+
+        svg {
+            width: 60%;
+            height: 60%;
+        }
+    }
+
+    // Ссылка растянута на всю плитку
+    .title {
+        grid-area: title;
+        overflow: hidden;
+        margin-top: var(--space-3);
+
+        color: var(--color-text);
+        font: var(--font-ui-sm);
+        font-weight: var(--font-weight-bold);
+        text-decoration: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        outline: none;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-md);
+        }
+    }
+
+    .subtitle {
+        grid-area: subtitle;
+        align-self: end;
+        overflow: hidden;
+        color: var(--color-text-muted);
+        font: var(--font-ui-xs);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .arrow {
+        grid-area: arrow;
+        align-self: end;
+        justify-self: end;
+        width: var(--size-tile-arrow);
+        height: var(--size-tile-arrow);
+        color: var(--color-active);
+    }
+}

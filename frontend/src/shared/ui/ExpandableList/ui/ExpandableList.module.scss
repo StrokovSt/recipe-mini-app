@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .viewport {
     position: relative;
 }
@@ -21,7 +23,7 @@
         transition: transform var(--transition-base);
     }
 
-    &:hover {
+    @include states.hover {
         color: var(--color-active-hover);
     }
 

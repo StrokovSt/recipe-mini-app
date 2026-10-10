@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -14,7 +16,7 @@
     cursor: pointer;
     transition: all var(--transition-base);
 
-    &:hover:not(:disabled) {
+    @include states.hover(":not(:disabled)") {
         background: var(--color-accent-light);
         color: var(--color-accent);
         border-color: var(--color-accent);
@@ -34,8 +36,7 @@
     }
 
     &:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
+        @include states.disabled;
     }
 
     &Dashed {

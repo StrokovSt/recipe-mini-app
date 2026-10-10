@@ -1,9 +1,9 @@
+@use "@/shared/styles/states";
+
 .greeting {
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--color-border);
 
     .avatar {
         display: flex;
@@ -34,6 +34,7 @@
 .list {
     display: flex;
     flex-direction: column;
+    margin-top: var(--space-5);
 }
 
 .link {
@@ -49,8 +50,24 @@
     transition: var(--transition-base);
     transition-property: color, background, filter;
 
-    &:hover,
+    &:first-child {
+        border-top: 1px solid var(--color-border);
+    }
+
     &:focus-visible {
+        background: var(--color-hover-bg);
+        color: var(--color-active);
+
+        .icon {
+            background: var(--color-active-bg);
+        }
+
+        .chevron {
+            color: var(--color-active);
+        }
+    }
+
+    @include states.hover {
         background: var(--color-hover-bg);
         color: var(--color-active);
 

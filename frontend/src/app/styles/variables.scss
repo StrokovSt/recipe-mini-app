@@ -52,6 +52,9 @@
     --size-action-button: 48px;
     --size-header-button: 40px;
     --size-menu-button: 46px;
+
+    // Высота общей шапки: кнопка меню + отступы сверху и снизу + нижняя граница
+    --size-page-header: calc(var(--size-menu-button) + 2 * var(--space-3) + 1px);
     --size-brush-height: 10px;
     --size-brush-offset: 6px;
     --size-sheet-close: clamp(28px, 8vw, 40px);
@@ -61,6 +64,13 @@
     --size-nav-action: 56px;
     --size-avatar: 56px;
     --size-menu-icon: 40px;
+    --size-dropdown-min-width: 170px;
+    --size-dropdown-icon: 18px;
+    --size-modal-max-width: 400px;
+    --size-tile-action: 40px;
+    --size-tile-icon: 32px;
+    --size-tile-arrow: 16px;
+    --size-sheet-handle-zone: 44px;
     --size-card-min-width: 160px;
     --size-category-min-width: 150px;
     --size-tag-min-width: 50px;
@@ -80,6 +90,9 @@
     --shadow-lg: 0 4px 20px color-mix(in srgb, var(--color-shadow) 14%, transparent), 0 1px 4px color-mix(in srgb, var(--color-shadow) 8%, transparent);
     --shadow-sheet: 0 -8px 30px color-mix(in srgb, var(--color-shadow) 20%, transparent);
     --shadow-accent: 0 5px 16px var(--color-accent-shadow);
+
+    // ─── States ─────────────────────────────────────────────
+    --opacity-disabled: 0.4;
 
     // ─── Transitions ──────────────────────────────────────────
     --transition-fast: 0.15s ease;

@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .collapse {
     margin-top: calc(-1 * var(--icon-picker-offset, 0px));
     overflow: hidden;
@@ -35,8 +37,11 @@
             height: 24px;
         }
 
-        &:hover,
         &:focus-visible {
+            background: var(--color-hover-bg);
+        }
+
+        @include states.hover {
             background: var(--color-hover-bg);
         }
 

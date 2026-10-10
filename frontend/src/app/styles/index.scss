@@ -144,6 +144,7 @@ button, input, textarea, select {
 }
 
 #root {
+    position: relative;
     display: grid;
     grid-template-rows: 1fr auto;
     width: 100vw;

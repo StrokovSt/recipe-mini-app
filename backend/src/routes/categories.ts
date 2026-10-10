@@ -5,15 +5,20 @@ import prisma from "../lib/prisma";
 
 const router = Router();
 
+// Категории пользователя вместе с количеством рецептов
+const findCategories = (userId: string) =>
+    prisma.category.findMany({
+        where: { userId },
+        orderBy: { name: "asc" },
+        include: { _count: { select: { recipes: true } } },
+    });
+
 // GET /api/categories
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const userId = req.userId as string;
 
-        let categories = await prisma.category.findMany({
-            where: { userId },
-            orderBy: { name: "asc" },
-        });
+        let categories = await findCategories(userId);
 
         if (categories.length === 0) {
             await prisma.category.createMany({
@@ -24,13 +29,10 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
                 }))            
             });
 
-            categories = await prisma.category.findMany({
-                where: { userId },
-                orderBy: { name: "asc" },
-            });
+            categories = await findCategories(userId);
         }
 
-        res.json(categories);    
+        res.json(categories.map(({ _count, ...category }) => ({ ...category, recipeCount: _count.recipes })));    
     } 
     catch (error) {
         next(error);

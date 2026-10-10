@@ -27,17 +27,18 @@ const SettingsPage = () => {
         <PageWrapper
             header={
                 <PageHeader className={styles.header}>
-                    <IconButton
-                        icon="back"
-                        round
-                        type="button"
-                        aria-label="Назад"
-                        onClick={() => navigate(-1)}
-                    />
                     <div>
                         <h1 className={styles.title}>Настройки</h1>
                         <p className={styles.subtitle}>Чтобы на кухне всё было под рукой</p>
                     </div>
+                    <IconButton
+                        icon="back"
+                        round
+                        className={styles.back}
+                        type="button"
+                        aria-label="Назад"
+                        onClick={() => navigate(-1)}
+                    />
                 </PageHeader>
             }
         >

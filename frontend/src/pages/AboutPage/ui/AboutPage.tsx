@@ -13,17 +13,18 @@ const AboutPage = () => {
         <PageWrapper
             header={
                 <PageHeader className={styles.header}>
-                    <IconButton
-                        icon="back"
-                        round
-                        type="button"
-                        aria-label="Назад"
-                        onClick={() => navigate(-1)}
-                    />
                     <div>
                         <h1 className={styles.title}>О приложении</h1>
                         <p className={styles.subtitle}>Рецепты, которые остаются с вами</p>
                     </div>
+                    <IconButton
+                        icon="back"
+                        round
+                        className={styles.back}
+                        type="button"
+                        aria-label="Назад"
+                        onClick={() => navigate(-1)}
+                    />
                 </PageHeader>
             }
         >

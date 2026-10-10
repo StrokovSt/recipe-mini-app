@@ -19,17 +19,18 @@ const ProfilePage = () => {
         <PageWrapper
             header={
                 <PageHeader className={styles.header}>
-                    <IconButton
-                        icon="back"
-                        round
-                        type="button"
-                        aria-label="Назад"
-                        onClick={() => navigate(-1)}
-                    />
                     <div>
                         <h1 className={styles.title}>Мой профиль</h1>
                         <p className={styles.subtitle}>Всё, что вы собрали и приготовили</p>
                     </div>
+                    <IconButton
+                        icon="back"
+                        round
+                        className={styles.back}
+                        type="button"
+                        aria-label="Назад"
+                        onClick={() => navigate(-1)}
+                    />
                 </PageHeader>
             }
         >

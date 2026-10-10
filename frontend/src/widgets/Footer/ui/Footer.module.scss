@@ -1,4 +1,9 @@
+@use "@/shared/styles/states";
+
 .footer {
+    // Всегда вторая строка сетки #root: пока грузится код страницы и main ещё нет,
+    // footer не должен подниматься в первую строку
+    grid-row: 2;
     padding: var(--space-3);
     padding-top: var(--space-5);
 }
@@ -25,7 +30,7 @@
     text-decoration: none;
     transition: color var(--transition-base);
 
-    &:hover {
+    @include states.hover {
         color: var(--color-active);
 
         .navIcon {
@@ -72,7 +77,7 @@
     color: var(--color-active-text);
     transition: transform var(--transition-fast), box-shadow var(--transition-base), filter var(--transition-base);
 
-    &:hover {
+    @include states.hover {
         box-shadow: 0 10px 22px color-mix(in srgb, var(--color-active) 50%, transparent);
         filter: brightness(1.1);
     }

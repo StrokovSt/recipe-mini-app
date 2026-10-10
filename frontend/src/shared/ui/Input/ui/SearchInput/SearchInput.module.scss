@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .wrap {
     position: relative;
     display: block;
@@ -13,8 +15,16 @@
     cursor: text;
     transition: all var(--transition-base);
 
-    &:hover {
+    @include states.hover(":not(:has(.input:disabled))") {
         border-color: var(--tg-hint);
+    }
+
+    &:has(.input:disabled) {
+        @include states.disabled;
+
+        .input {
+            cursor: inherit;
+        }
     }
 
     &:focus-within {
@@ -30,7 +40,7 @@
 
         transform: translateY(-50%);
 
-        &:hover:not(:disabled) {
+        @include states.hover(":not(:disabled)") {
             color: var(--tg-text);
         }
 
@@ -86,7 +96,7 @@
         background: color-mix(in srgb, var(--color-surface) 95%, black);
     }
 
-    &:not(:placeholder-shown):hover {
+    @include states.hover(":not(:placeholder-shown)") {
         background: color-mix(in srgb, var(--color-surface) 90%, black);
     }
 

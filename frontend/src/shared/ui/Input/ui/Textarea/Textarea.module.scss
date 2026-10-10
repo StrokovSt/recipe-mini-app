@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .wrap {
     position: relative;
     width: 100%;
@@ -31,11 +33,11 @@
         background: color-mix(in srgb, var(--tg-secondary-bg) 95%, black);
     }
 
-    &:hover {
+    @include states.hover {
         border-color: var(--tg-hint);
     }
 
-    &:not(:placeholder-shown):hover {
+    @include states.hover(":not(:placeholder-shown)") {
         background: color-mix(in srgb, var(--tg-secondary-bg) 85%, black);
         border-color: var(--tg-hint);
     }
@@ -77,8 +79,11 @@
 
     &.textareaError {
         &,
-        &:hover,
         &:focus {
+            border-color: var(--color-error);
+        }
+
+        @include states.hover {
             border-color: var(--color-error);
         }
 

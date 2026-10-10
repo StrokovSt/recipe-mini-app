@@ -13,6 +13,9 @@ export const recipeApi = {
             tagIds: params.tagIds?.join(","),
         };
 
+        // TODO: временная задержка, чтобы проверить лоадер — убрать
+        await new Promise((resolve) => setTimeout(resolve, 4000));
+
         const { data } = await api.get<Recipe[]>("/api/recipes", {
             params: queryParams,
         });

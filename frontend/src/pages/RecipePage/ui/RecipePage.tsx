@@ -6,6 +6,7 @@ import { buildRoute } from "@/app/router/routes";
 import { useDeleteRecipe, useRecipe } from "@/entities/recipe";
 import { IconButton } from "@/shared/ui/Buttons";
 import { MediaLightbox } from "@/shared/ui/MediaLightbox";
+import { ConfirmModal } from "@/shared/ui/Modal";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { Spinner } from "@/shared/ui/Spinner";
@@ -20,6 +21,7 @@ const RecipePage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
     const { data: recipe, isLoading, isError } = useRecipe(id!);
     const { mutate: deleteRecipe } = useDeleteRecipe();
@@ -46,17 +48,9 @@ const RecipePage = () => {
             header={
                 <PageHeader className={styles.header}>
                     <IconButton
-                        icon="back"
-                        round
-                        type="button"
-                        aria-label="Назад"
-                        onClick={() => navigate(AppRoute.Home)}
-                    />
-                    <IconButton
                         icon="edit"
                         round
                         type="button"
-                        className={styles.edit}
                         aria-label="Редактировать"
                         onClick={() => navigate(buildRoute.editRecipe(recipe.id))}
                     />
@@ -66,7 +60,15 @@ const RecipePage = () => {
                         type="button"
                         variant="danger"
                         aria-label="Удалить рецепт"
-                        onClick={handleDelete}
+                        onClick={() => setIsConfirmOpen(true)}
+                    />
+                    <IconButton
+                        icon="back"
+                        round
+                        className={styles.back}
+                        type="button"
+                        aria-label="Назад"
+                        onClick={() => navigate(AppRoute.Home)}
                     />
                 </PageHeader>
             }
@@ -90,6 +92,14 @@ const RecipePage = () => {
             <RecipeContent
                 ingredients={recipe.ingredients}
                 steps={recipe.steps}
+            />
+
+            <ConfirmModal
+                isOpen={isConfirmOpen}
+                onClose={() => setIsConfirmOpen(false)}
+                onConfirm={handleDelete}
+                title={`Удалить рецепт «${recipe.title}»?`}
+                text="Вернуть его не получится."
             />
 
             {lightboxIndex !== null && (

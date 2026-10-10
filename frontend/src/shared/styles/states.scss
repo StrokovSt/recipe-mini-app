@@ -1,0 +1,21 @@
+// Неактивный элемент (кнопка, поле): полупрозрачный, курсор «нельзя».
+// Подключается в &:disabled блока
+@mixin disabled {
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+}
+
+// Hover только на устройствах с мышью (на телефоне :hover залипает после тапа),
+// на таче те же стили показываются на время нажатия.
+// $suffix — продолжение селектора: ":not(:disabled)", " svg" и т. п.
+@mixin hover($suffix: "") {
+    @media (hover: hover) {
+        &:hover#{$suffix} {
+            @content;
+        }
+    }
+
+    &:active#{$suffix} {
+        @content;
+    }
+}

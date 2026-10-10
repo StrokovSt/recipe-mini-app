@@ -2,10 +2,12 @@ import { useState } from "react";
 
 import type { Tag } from "@recipe/common";
 
+import { buildRoute } from "@/app/router/routes";
 import { TagItem, useDeleteTag, useTags } from "@/entities/tag";
 import { TagForm } from "@/features/tag-form";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 import { AddTile } from "@/shared/ui/Buttons";
+import { ConfirmModal } from "@/shared/ui/Modal";
 import { Spinner } from "@/shared/ui/Spinner";
 
 import styles from "./TagsTab.module.scss";
@@ -16,6 +18,9 @@ export function TagsTab() {
 
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [editingTag, setEditingTag] = useState<Tag | null>(null);
+
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    const [deletingTag, setDeletingTag] = useState<Tag | null>(null);
 
     const openCreate = () => {
         setEditingTag(null);
@@ -29,6 +34,18 @@ export function TagsTab() {
 
     const closeForm = () => setIsFormOpen(false);
 
+    const askDelete = (tag: Tag) => {
+        setDeletingTag(tag);
+        setIsConfirmOpen(true);
+    };
+
+    const closeConfirm = () => setIsConfirmOpen(false);
+
+    const confirmDelete = () => {
+        if (deletingTag) remove(deletingTag.id);
+        closeConfirm();
+    };
+
     if (isLoading) return <Spinner size="md" />;
 
     return (
@@ -38,8 +55,9 @@ export function TagsTab() {
                     <TagItem
                         key={tag.id}
                         tag={tag}
+                        to={buildRoute.homeByTag(tag.id)}
                         onEdit={openEdit}
-                        onDelete={(item) => remove(item.id)}
+                        onDelete={askDelete}
                     />
                 ))}
                 <AddTile label="Новый тег" onClick={openCreate} />
@@ -57,6 +75,14 @@ export function TagsTab() {
                     onCancel={closeForm}
                 />
             </BottomSheet>
+
+            <ConfirmModal
+                isOpen={isConfirmOpen}
+                onClose={closeConfirm}
+                onConfirm={confirmDelete}
+                title={`Удалить тег «${deletingTag?.name}»?`}
+                text="Тег уберётся из всех рецептов, сами рецепты останутся."
+            />
         </>
     );
 }

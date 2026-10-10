@@ -9,6 +9,8 @@ export default defineConfig({
     devSourcemap: true,
   },
   server: {
+    // Доступ с других устройств в локальной сети (телефон): http://<IP компьютера>:5173
+    host: true,
     proxy: {
       "/api": "http://localhost:3000",
     },

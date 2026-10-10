@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'motion/react';
 import { memo } from 'react';
 
 import type { Recipe } from '@recipe/common';
@@ -16,22 +17,23 @@ interface RecipeListProps {
 const RecipeList = (props: RecipeListProps) => {
     const {recipes, isLoading} = props;
 
-    if (isLoading) return <Spinner size='xl' />;
-
-    if (recipes.length === 0) {
-        return (
-            <div className={styles.empty}>
-                Рецептов пока нет
-            </div>
-        );
-    }
-    
+    // mode="wait": список появляется, когда котик успел плавно исчезнуть
     return (
-        <div className={styles.list}>
-            {recipes.map((recipe) => (
-                <RecipeItem key={recipe.id} recipe={recipe} />
-            ))}
-        </div>
+        <AnimatePresence mode="wait">
+            {isLoading ? (
+                <Spinner key="loader" size='xl' />
+            ) : recipes.length === 0 ? (
+                <div key="empty" className={styles.empty}>
+                    Рецептов пока нет
+                </div>
+            ) : (
+                <div key="list" className={styles.list}>
+                    {recipes.map((recipe) => (
+                        <RecipeItem key={recipe.id} recipe={recipe} />
+                    ))}
+                </div>
+            )}
+        </AnimatePresence>
     );
 };
 

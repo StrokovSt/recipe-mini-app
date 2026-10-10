@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 .container {
     --input-padding: var(--space-4);
 
@@ -37,11 +39,11 @@
         background: color-mix(in srgb, var(--tg-secondary-bg) 95%, black);
     }
 
-    &:hover {
+    @include states.hover {
         border-color: var(--tg-hint);
     }
 
-    &:not(:placeholder-shown):hover {
+    @include states.hover(":not(:placeholder-shown)") {
         border-color: var(--tg-hint);
     }
 
@@ -122,7 +124,7 @@
         transition: fill var(--transition-fast);
     }
 
-    &:hover svg {
+    @include states.hover(" svg") {
         fill: var(--color-error);
     }
 }
@@ -195,7 +197,7 @@
     cursor: pointer;
     transition: background var(--transition-fast);
 
-    &:hover {
+    @include states.hover {
         background: color-mix(in srgb, var(--tg-secondary-bg) 90%, black);
     }
 
@@ -203,7 +205,7 @@
         background: var(--color-accent-light);
         color: var(--color-accent);
 
-        &:hover {
+        @include states.hover {
             background: var(--color-accent-light);
         }
     }
