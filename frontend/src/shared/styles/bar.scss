@@ -1,0 +1,6 @@
+// Полоса шапки или футера: полупрозрачный фон приложения и линия-разделитель.
+// $side — сторона линии: bottom у шапки, top у футера
+@mixin bar($side: bottom) {
+    border-#{$side}: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-app-bg) 70%, transparent);
+}

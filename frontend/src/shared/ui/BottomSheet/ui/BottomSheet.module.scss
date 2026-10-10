@@ -1,3 +1,5 @@
+@use "@/shared/styles/bar";
+
 .root {
     position: relative;
     z-index: var(--z-modal);
@@ -32,7 +34,7 @@
     width: 100%;
     max-width: var(--size-app-max-width);
     max-height: 85dvh;
-    padding: var(--space-2) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom));
+    padding: var(--size-sheet-top) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom));
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     background: var(--color-surface);
     box-shadow: var(--shadow-sheet);
@@ -45,23 +47,29 @@
     }
 }
 
-// Зона захвата во всю ширину шторки, видимая полоска — ::before
+// Зона захвата во всю ширину шторки, видимая полоска — ::before.
+// Зона выше отступа под полоску и заходит на шапку, поэтому лежит поверх неё
 .handle {
-    // Зона выше видимого места под полоску и заходит на заголовок, поэтому лежит поверх него
-    position: relative;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
     z-index: 1;
     display: flex;
-    flex-shrink: 0;
     align-items: flex-start;
     justify-content: center;
     height: var(--size-sheet-handle-zone);
-    margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-5)) calc(var(--space-6) + var(--space-1) - var(--size-sheet-handle-zone));
     padding-top: var(--space-3);
     cursor: grab;
     touch-action: none;
 
+    // Пока шторку держат или тянут, полоска подсвечивается
     &:active {
         cursor: grabbing;
+
+        &::before {
+            background: var(--color-active);
+        }
     }
 
     &::before {
@@ -70,22 +78,33 @@
         height: 4px;
         border-radius: 2px;
         background: var(--color-border-strong);
+        transition: background var(--transition-base);
     }
 }
 
+// Шапка — полоса как у шапки страницы, от верхнего края шторки
 .header {
+    @include bar.bar(bottom);
+
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-3);
-    margin-bottom: var(--space-4);
-    padding-right: var(--size-sheet-close);
+    flex-direction: column;
+    gap: var(--space-1);
+    margin: calc(-1 * var(--size-sheet-top)) calc(-1 * var(--space-5)) 0;
+    padding: var(--space-5);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .title {
     margin: 0;
     font: var(--font-header-lg);
     font-weight: var(--font-weight-extrabold);
+}
+
+.subtitle {
+    margin: 0;
+    color: var(--tg-hint);
+    font: var(--font-sm);
+    font-style: italic;
 }
 
 // Элементы внутри шторки лежат на цвете фона приложения, чтобы не сливаться с ней (как в Figma)
@@ -116,10 +135,24 @@
     margin: 0 calc(-1 * var(--space-5));
     padding: 0 var(--space-5);
     overflow-y: auto;
+
+    // Отступы от линий шапки и футера
+    .header + & {
+        padding-top: var(--space-4);
+    }
+
+    &:has(+ .footer) {
+        padding-bottom: var(--space-4);
+    }
 }
 
+// Футер — такая же полоса до нижнего края шторки
 .footer {
+    @include bar.bar(top);
+
     display: flex;
+    justify-content: flex-end;
     gap: var(--space-3);
-    padding-top: var(--space-4);
+    margin: 0 calc(-1 * var(--space-5)) calc(-1 * (var(--space-5) + env(safe-area-inset-bottom)));
+    padding: var(--space-4) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom));
 }

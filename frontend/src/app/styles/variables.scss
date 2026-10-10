@@ -52,6 +52,8 @@
     --size-action-button: 48px;
     --size-header-button: 40px;
     --size-menu-button: 46px;
+    // Поиск и кнопка фильтров — высотой с кнопки шапки
+    --size-search-height: var(--size-menu-button);
 
     // Высота общей шапки: кнопка меню + отступы сверху и снизу + нижняя граница
     --size-page-header: calc(var(--size-menu-button) + 2 * var(--space-3) + 1px);
@@ -62,7 +64,7 @@
     --size-loader-lg: 180px;
     --size-loader-xl: 240px;
     --size-nav-action: 56px;
-    --size-avatar: 56px;
+    --size-avatar: 40px;
     --size-menu-icon: 40px;
     --size-dropdown-min-width: 170px;
     --size-dropdown-icon: 18px;
@@ -71,6 +73,10 @@
     --size-tile-icon: 32px;
     --size-tile-arrow: 16px;
     --size-sheet-handle-zone: 44px;
+    // Отступ сверху шторки под полоску захвата
+    --size-sheet-top: calc(var(--space-6) + var(--space-1));
+    // Главная кнопка в футере шторки не растягивается шире этого на больших экранах
+    --size-sheet-action-max-width: 240px;
     --size-card-min-width: 160px;
     --size-category-min-width: 150px;
     --size-tag-min-width: 50px;

@@ -1,4 +1,4 @@
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
+import { Description, Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import clsx from "clsx";
 import { animate, motion, useMotionValue } from "motion/react";
 import { type PointerEvent, type ReactNode, useEffect, useRef } from "react";
@@ -17,12 +17,16 @@ interface BottomSheetProps {
     onClose: () => void;
     children: ReactNode;
     title?: string;
+    // Курсивная подпись под заголовком
+    subtitle?: string;
+    // Своё содержимое шапки вместо заголовка и подписи
+    header?: ReactNode;
     footer?: ReactNode;
     className?: string;
 }
 
 export const BottomSheet = (props: BottomSheetProps) => {
-    const { isOpen, onClose, children, title, footer, className } = props;
+    const { isOpen, onClose, children, title, subtitle, header, footer, className } = props;
 
     const y = useMotionValue(0);
     const startYRef = useRef<number | null>(null);
@@ -75,9 +79,14 @@ export const BottomSheet = (props: BottomSheetProps) => {
                         aria-label="Закрыть"
                     />
 
-                    {title && (
+                    {(header || title) && (
                         <header className={styles.header}>
-                            <DialogTitle className={styles.title}>{title}</DialogTitle>
+                            {header ?? (
+                                <>
+                                    <DialogTitle className={styles.title}>{title}</DialogTitle>
+                                    {subtitle && <Description className={styles.subtitle}>{subtitle}</Description>}
+                                </>
+                            )}
                         </header>
                     )}
 

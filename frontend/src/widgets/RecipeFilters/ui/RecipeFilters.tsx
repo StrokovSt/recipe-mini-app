@@ -1,17 +1,18 @@
-import { type Dispatch, memo, type Ref, type SetStateAction } from 'react';
+import { type Dispatch, memo, type Ref, type SetStateAction, useState } from 'react';
 
 import type { Category, Tag } from '@recipe/common';
 
 import { getCategoryIcon } from '@/entities/category';
 import type { GetRecipesProps } from '@/entities/recipe/types';
 import { BottomSheet } from '@/shared/ui/BottomSheet';
-import { OutlineButton } from '@/shared/ui/Buttons';
+import { OutlineButton, RegularButton } from '@/shared/ui/Buttons';
 import { CategoryComponent } from '@/shared/ui/CategoryComponent';
 import { ExpandableList } from '@/shared/ui/ExpandableList';
 import { SearchInput } from '@/shared/ui/Input';
 import { TagComponent } from '@/shared/ui/Tag';
 
 import { getActiveFilterCount } from '../lib/getActiveFilterCount';
+import { isSameFilters } from '../lib/isSameFilters';
 import { FilterButton } from './FilterButton/FilterButton';
 
 import styles from './RecipeFilters.module.scss';
@@ -37,6 +38,17 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
 
     const activeCount = getActiveFilterCount(filters);
 
+    // В шторке правится черновик, в фильтры он попадает только по кнопке «Применить»
+    const [draft, setDraft] = useState<GetRecipesProps>(filters);
+    const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+
+    // Каждое открытие начинается с применённых фильтров, незакрытые правки прошлого раза теряются
+    if (isOpen !== prevIsOpen) {
+        setPrevIsOpen(isOpen);
+        if (isOpen) setDraft(filters);
+    }
+
+    // Поиск на странице применяется сразу
     const handleSearchChange = (search: string) => {
         setFilters((prev) => ({
             ...prev,
@@ -44,15 +56,22 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
         }));
     };
 
+    const handleDraftSearchChange = (search: string) => {
+        setDraft((prev) => ({
+            ...prev,
+            search: search || undefined,
+        }));
+    };
+
     const handleCategoryChange = (categoryId: string | undefined) => {
-        setFilters((prev) => ({
+        setDraft((prev) => ({
             ...prev,
             categoryId,
         }));
     };
 
     const handleTagToggle = (tagId: string) => {
-        setFilters((prev) => {
+        setDraft((prev) => {
             const currentTagIds = prev.tagIds ?? [];
 
             const isSelected = currentTagIds.includes(tagId);
@@ -69,13 +88,19 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
     };
 
     const handleReset = () => {
-        setFilters((prev) => ({ search: prev.search }));
+        setDraft((prev) => ({ search: prev.search }));
+    };
+
+    const handleApply = () => {
+        setFilters(draft);
+        onOpenChange(false);
     };
 
     return (
         <article ref={ref}>
             <div className={styles.bar}>
                 <SearchInput
+                    className={styles.search}
                     value={filters.search ?? ""}
                     onChange={handleSearchChange}
                     placeholder="Поиск рецептов..."
@@ -83,6 +108,7 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                 />
 
                 <FilterButton
+                    className={styles.filter}
                     activeCount={activeCount}
                     onClick={() => onOpenChange(true)}
                     disabled={disabled}
@@ -93,21 +119,32 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                 isOpen={isOpen}
                 onClose={() => onOpenChange(false)}
                 title="Фильтры"
+                subtitle="Настройте подборку рецептов"
                 footer={
-                    <OutlineButton
-                        label="Сбросить"
-                        className={styles.action}
-                        onClick={handleReset}
-                        disabled={activeCount === 0}
-                    />
+                    <>
+                        <OutlineButton
+                            label="Сбросить"
+                            onClick={handleReset}
+                            disabled={getActiveFilterCount(draft) === 0}
+                        />
+                        <RegularButton
+                            label="Применить"
+                            className={styles.apply}
+                            onClick={handleApply}
+                            // Активна, только когда в шторке что-то поменяли
+                            disabled={isSameFilters(draft, filters)}
+                        />
+                    </>
                 }
             >
                 <section className={styles.section}>
                     <h3 className={styles.sectionTitle}>Поиск</h3>
                     <SearchInput
-                        value={filters.search ?? ""}
-                        onChange={handleSearchChange}
+                        value={draft.search ?? ""}
+                        onChange={handleDraftSearchChange}
                         placeholder="Поиск рецептов..."
+                        // Черновику задержка не нужна: запрос уйдёт только по «Применить»
+                        delay={0}
                     />
                 </section>
 
@@ -116,7 +153,7 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                     <ExpandableList
                         items={categories}
                         rows={COLLAPSED_ROWS}
-                        isPinned={(category) => filters.categoryId === category.id}
+                        isPinned={(category) => draft.categoryId === category.id}
                         className={styles.categories}
                         renderItem={(category) => {
                             const Icon = getCategoryIcon(category.iconName);
@@ -126,10 +163,10 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                                     key={category.id}
                                     label={category.name}
                                     icon={<Icon />}
-                                    isActive={filters.categoryId === category.id}
+                                    isActive={draft.categoryId === category.id}
                                     onClick={() =>
                                         handleCategoryChange(
-                                            filters.categoryId === category.id
+                                            draft.categoryId === category.id
                                                 ? undefined
                                                 : category.id
                                         )
@@ -145,14 +182,14 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                     <ExpandableList
                         items={tags}
                         rows={COLLAPSED_ROWS}
-                        isPinned={(tag) => filters.tagIds?.includes(tag.id) ?? false}
+                        isPinned={(tag) => draft.tagIds?.includes(tag.id) ?? false}
                         className={styles.tags}
                         renderItem={(tag) => (
                             <TagComponent
                                 key={tag.id}
                                 tag={tag}
                                 clickHandler={handleTagToggle}
-                                tagIsActive={filters.tagIds?.includes(tag.id) ?? false}
+                                tagIsActive={draft.tagIds?.includes(tag.id) ?? false}
                             />
                         )}
                     />

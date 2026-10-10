@@ -20,7 +20,7 @@
 
     /* ─── Семантические токены ─────────────────────────── */
     --color-app-bg: var(--color-brand-sand);
-    --color-app-image-bg: rgb(236 218 198); /* средний цвет background_list.png */
+    --color-app-image-bg: rgb(236 218 198); /* средний цвет background_list.webp */
     --color-surface: var(--color-brand-sand-light);
     --color-surface-dim: var(--color-brand-sand-dark);
     --color-text: var(--color-brand-ink);
@@ -75,7 +75,7 @@
     --color-brand-sage: #92A47D;
     --color-brand-border: #675640;
     --color-brand-border-light: #493D30;
-    --color-app-image-bg: rgb(44 36 31); /* средний цвет background_list_dark.png */
+    --color-app-image-bg: rgb(44 36 31); /* средний цвет background_list_dark.webp */
     --color-shadow: rgb(0 0 0);
     --color-overlay: rgb(0 0 0 / 60%);
 
@@ -155,9 +155,9 @@ button, input, textarea, select {
     min-height: 100dvh;
     margin: 0 auto;
     overflow: hidden;
-    background: var(--color-app-image-bg) url("@/shared/assets/images/background_list.png") center / cover no-repeat;
+    background: var(--color-app-image-bg) url("@/shared/assets/images/background_list.webp") center / cover no-repeat;
 
     [data-theme="dark"] & {
-        background-image: url("@/shared/assets/images/background_list_dark.png");
+        background-image: url("@/shared/assets/images/background_list_dark.webp");
     }
 }

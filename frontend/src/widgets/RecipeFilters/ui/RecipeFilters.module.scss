@@ -2,6 +2,11 @@
     display: flex;
     align-items: center;
     gap: var(--space-3);
+
+    .filter {
+        width: var(--size-search-height);
+        height: var(--size-search-height);
+    }
 }
 
 .section {
@@ -29,6 +34,24 @@
     gap: var(--space-2);
 }
 
-.action {
+// На телефоне «Применить» занимает всю ширину рядом со «Сбросить», на больших экранах не шире --size-sheet-action-max-width
+.apply {
     flex: 1;
+    max-width: var(--size-sheet-action-max-width);
+}
+
+// Поиск на главной — высотой с кнопку фильтров и кнопки шапки
+.search {
+    height: var(--size-search-height);
+
+    input {
+        height: calc(var(--size-search-height) - 2px);
+        padding-top: var(--space-4);
+        padding-bottom: var(--space-1);
+    }
+
+    // Плавающий лейбл с узкой строкой, чтобы над ним и под текстом остались отступы
+    span {
+        line-height: var(--font-line-xs);
+    }
 }

@@ -9,8 +9,6 @@ import SettingsIcon from "@/shared/assets/icons/icon-settings.svg?react";
 import UserIcon from "@/shared/assets/icons/icon-user.svg?react";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 
-import { getGreeting } from "../lib/getGreeting";
-
 import styles from "./AppMenu.module.scss";
 
 interface AppMenuProps {
@@ -38,18 +36,23 @@ export function AppMenu(props: AppMenuProps) {
     const name = user?.first_name ?? "Шеф";
 
     return (
-        <BottomSheet isOpen={isOpen} onClose={onClose}>
-            <article className={styles.greeting}>
-                {user?.photo_url ? (
-                    <img className={styles.avatar} src={user.photo_url} alt="" />
-                ) : (
-                    <span className={styles.avatar} aria-hidden>{name[0]}</span>
-                )}
-                <div>
-                    <h2 className={styles.title}>{`${getGreeting()}, ${name}`}</h2>
-                    <p className={styles.subtitle}>Что бы вы хотели приготовить сегодня?</p>
-                </div>
-            </article>
+        <BottomSheet
+            isOpen={isOpen}
+            onClose={onClose}
+            header={
+                <article className={styles.greeting}>
+                    {user?.photo_url ? (
+                        <img className={styles.avatar} src={user.photo_url} alt="" />
+                    ) : (
+                        <span className={styles.avatar} aria-hidden>{name[0]}</span>
+                    )}
+                    <div>
+                        <h2 className={styles.title}>{name}</h2>
+                        <p className={styles.subtitle}>Профиль, настройки и всё о приложении</p>
+                    </div>
+                </article>
+            }
+        >
 
             <nav className={styles.list}>
                 {MENU_ITEMS.map((item) => (

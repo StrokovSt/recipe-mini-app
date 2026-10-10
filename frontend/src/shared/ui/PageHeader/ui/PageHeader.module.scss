@@ -1,5 +1,9 @@
+@use "@/shared/styles/bar";
+
 // Общая полоса шапки: поверх main сверху колонки, контент уезжает под неё
 .bar {
+    @include bar.bar(bottom);
+
     position: absolute;
     top: 0;
     right: 0;
@@ -10,8 +14,7 @@
     justify-content: center;
     height: var(--size-page-header);
     padding: var(--space-3) var(--space-5);
-    border-bottom: 1px solid var(--color-border);
-    background: color-mix(in srgb, var(--color-app-bg) 70%, transparent);
+    // Контент страницы уезжает под шапку и размывается
     backdrop-filter: blur(5px);
 }
 
