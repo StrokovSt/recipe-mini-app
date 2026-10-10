@@ -1,0 +1,10 @@
+{
+    "title": "マイプロフィール",
+    "subtitle": "集めたレシピと作った料理のすべて",
+    "placeholder": "プロフィール情報は近日公開予定です",
+    "stats": {
+        "total": "レシピ",
+        "categories": "カテゴリー",
+        "pinterest": "Pinterest"
+    }
+}

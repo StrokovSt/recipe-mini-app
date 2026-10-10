@@ -1,0 +1,30 @@
+{
+    "appName": "Ricetta",
+    "back": "Geri",
+    "close": "Kapat",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "save": "Kaydet",
+    "loading": "Yükleniyor",
+    "search": "Ara",
+    "clearSearch": "Aramayı temizle",
+    "nothingFound": "Hiçbir şey bulunamadı",
+    "showMore": "{{count}} tane daha göster",
+    "collapse": "Daha az göster",
+    "iconPicker": "Simge seç",
+    "errorBoundary": {
+        "title": "Bir şeyler ters gitti",
+        "retry": "Tekrar dene"
+    },
+    "errors": {
+        "PARSE_FAILED": "Tarif okunamadı. Başka bir bağlantı dene.",
+        "RECIPE_NOT_FOUND": "Tarif bulunamadı.",
+        "INVALID_URL": "Geçersiz bağlantı.",
+        "AI_UNAVAILABLE": "Yapay zekâ hizmeti geçici olarak kullanılamıyor. Daha sonra tekrar dene.",
+        "AI_QUOTA_EXCEEDED": "Günlük istek sınırına ulaşıldı. Yarın tekrar dene.",
+        "VALIDATION_ERROR": "Geçersiz veri.",
+        "LIMIT_REACHED": "Tarif sınırına ulaşıldı. Sınırsız erişim için abone ol.",
+        "unknown": "Bir şeyler ters gitti."
+    }
+}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { IconButton } from "@/shared/ui/Buttons";
 
@@ -13,6 +14,7 @@ interface AppMenuButtonProps {
 // Бургер в шапке страницы, открывает меню приложения
 export function AppMenuButton(props: AppMenuButtonProps) {
     const { disabled } = props;
+    const { t } = useTranslation("menu");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
@@ -22,7 +24,7 @@ export function AppMenuButton(props: AppMenuButtonProps) {
                 round
                 type="button"
                 className={styles.button}
-                aria-label="Меню"
+                aria-label={t("open")}
                 aria-expanded={isMenuOpen}
                 onClick={() => setIsMenuOpen(true)}
                 disabled={disabled}

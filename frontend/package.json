@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "lint:css": "stylelint \"src/**/*.scss\"",
-    "lint:css:fix": "stylelint \"src/**/*.scss\" --fix"
+    "lint:css:fix": "stylelint \"src/**/*.scss\" --fix",
+    "i18n:check": "node scripts/check-locales.js"
   },
   "dependencies": {
     "@fontsource-variable/literata": "^5.3.0",
@@ -23,10 +24,12 @@
     "@tanstack/react-query-devtools": "^5.91.3",
     "@twa-dev/sdk": "^8.0.2",
     "axios": "^1.13.6",
+    "i18next": "^26.4.3",
     "motion": "^14.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.71.2",
+    "react-i18next": "^17.0.16",
     "react-router-dom": "^7.13.1",
     "react-select": "^5.10.2",
     "zod": "^4.3.6",

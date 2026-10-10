@@ -1,0 +1,23 @@
+{
+    "title": "Pengaturan",
+    "subtitle": "Agar semua di dapur mudah dijangkau",
+    "appearance": {
+        "title": "Tampilan",
+        "description": "Pilih mode baca yang nyaman",
+        "light": "Terang",
+        "dark": "Gelap"
+    },
+    "language": {
+        "title": "Bahasa",
+        "description": "Bahasa navigasi dan antarmuka",
+        "sheetTitle": "Pilih bahasa",
+        "available_other": "{{count}} bahasa tersedia"
+    },
+    "motion": {
+        "title": "Gerakan",
+        "description": "Atur transisi visual",
+        "animations": "Animasi antarmuka",
+        "on": "Aktif",
+        "off": "Nonaktif"
+    }
+}

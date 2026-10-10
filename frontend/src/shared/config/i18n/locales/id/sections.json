@@ -1,0 +1,78 @@
+{
+    "tabs": {
+        "categories": "Kategori",
+        "tags": "Tag"
+    },
+    "editing": "Edit",
+    "categories": {
+        "title": "Kategori saya",
+        "hint": "Resep tertata rapi",
+        "add": "Kategori baru",
+        "noRecipes": "Tidak ada resep",
+        "actions": "Tindakan untuk kategori “{{name}}”",
+        "deleteTitle": "Hapus kategori “{{name}}”?",
+        "deleteText": "Resepnya tetap ada, tetapi tanpa kategori.",
+        "form": {
+            "name": "Nama kategori",
+            "pickIcon": "Pilih ikon",
+            "duplicate": "Kategori ini sudah ada",
+            "saveFailed": "Kategori gagal disimpan"
+        },
+        "total_other": "{{count}} kategori"
+    },
+    "tags": {
+        "title": "Tag saya",
+        "hint": "Cari resep dengan cepat",
+        "add": "Tag baru",
+        "unused": "Belum digunakan",
+        "actions": "Tindakan untuk tag “{{name}}”",
+        "deleteTitle": "Hapus tag “{{name}}”?",
+        "deleteText": "Tag akan dihapus dari semua resep, resepnya tetap ada.",
+        "form": {
+            "name": "Nama tag",
+            "duplicate": "Tag ini sudah ada",
+            "saveFailed": "Tag gagal disimpan"
+        },
+        "total_other": "{{count}} tag"
+    },
+    "icons": {
+        "Soup": "Sup",
+        "CakeSlice": "Potongan kue",
+        "Cake": "Kue",
+        "Salad": "Salad",
+        "Utensils": "Pasta",
+        "Beef": "Steik",
+        "Fish": "Ikan",
+        "Egg": "Telur",
+        "Vegan": "Daun",
+        "CupSoda": "Minuman",
+        "Drumstick": "Paha ayam",
+        "Shrimp": "Udang",
+        "Canape": "Kanape",
+        "Rice": "Nasi",
+        "SauceBoat": "Wadah saus",
+        "Jar": "Toples",
+        "Pizza": "Piza",
+        "Burger": "Burger",
+        "Sushi": "Sushi",
+        "Taco": "Taco",
+        "Ramen": "Ramen",
+        "Bread": "Roti",
+        "Cheese": "Keju",
+        "Grill": "Panggangan",
+        "Chili": "Cabai",
+        "Mushroom": "Jamur",
+        "Carrot": "Wortel",
+        "Apple": "Apel",
+        "IceCream": "Es krim",
+        "Cookie": "Kue kering",
+        "Coffee": "Kopi",
+        "Wine": "Anggur",
+        "CookingPot": "Panci",
+        "Pan": "Wajan",
+        "Star": "Bintang",
+        "Heart": "Hati",
+        "Cutlery": "Alat makan"
+    },
+    "recipeCount_other": "{{count}} resep"
+}

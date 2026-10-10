@@ -1,0 +1,23 @@
+{
+    "notFound": "Recipe not found",
+    "edit": "Edit",
+    "delete": "Delete recipe",
+    "deleteTitle": "Delete recipe “{{title}}”?",
+    "deleteText": "This can't be undone.",
+    "time": "Time",
+    "servings": "Servings",
+    "telegraph": {
+        "title": "Open in Telegraph",
+        "hint": "Full version of the recipe"
+    },
+    "source": {
+        "title": "Open original",
+        "hint": "Recipe source"
+    },
+    "tabs": {
+        "ingredients": "Ingredients",
+        "steps": "Method"
+    },
+    "noIngredients": "No ingredients listed",
+    "noSteps": "No steps listed"
+}

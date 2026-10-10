@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
 
 import SpinnerIcon from "@/shared/assets/spinner.svg?react";
 import catLoaderWebm from "@/shared/assets/video/cat-loader-480.webm";
@@ -20,6 +21,7 @@ const VISIBLE = { opacity: 1, scale: 1, filter: "blur(0px)" };
 
 export function Spinner(props: SpinnerProps) {
     const { size = "md" } = props;
+    const { t } = useTranslation();
 
     if (size === "sm") {
         return (
@@ -45,7 +47,7 @@ export function Spinner(props: SpinnerProps) {
                 loop
                 muted
                 playsInline
-                aria-label="Загрузка"
+                aria-label={t("loading")}
             >
                 <source src={catLoaderWebm} type="video/webm" />
                 <source src={catLoaderMp4} type="video/mp4" />

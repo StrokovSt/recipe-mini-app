@@ -1,0 +1,11 @@
+{
+    "searchPlaceholder": "레시피 검색...",
+    "open": "필터 열기",
+    "title": "필터",
+    "subtitle": "레시피 목록을 맞춤 설정하세요",
+    "reset": "초기화",
+    "apply": "적용",
+    "search": "검색",
+    "categories": "카테고리",
+    "tags": "태그"
+}

@@ -1,0 +1,23 @@
+{
+    "notFound": "Resep tidak ditemukan",
+    "edit": "Edit",
+    "delete": "Hapus resep",
+    "deleteTitle": "Hapus resep “{{title}}”?",
+    "deleteText": "Tindakan ini tidak bisa dibatalkan.",
+    "time": "Waktu",
+    "servings": "Porsi",
+    "telegraph": {
+        "title": "Buka di Telegraph",
+        "hint": "Versi lengkap resep"
+    },
+    "source": {
+        "title": "Buka sumber asli",
+        "hint": "Sumber resep"
+    },
+    "tabs": {
+        "ingredients": "Bahan",
+        "steps": "Cara membuat"
+    },
+    "noIngredients": "Bahan belum dicantumkan",
+    "noSteps": "Langkah belum dicantumkan"
+}

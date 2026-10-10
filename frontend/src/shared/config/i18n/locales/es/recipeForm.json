@@ -1,0 +1,52 @@
+{
+    "modes": {
+        "manual": "✍️ A mano",
+        "ai": "✨ Con IA"
+    },
+    "submitAdd": "Guardar receta",
+    "submitEdit": "Guardar cambios",
+    "reset": "Restablecer formulario",
+    "ai": {
+        "url": "Enlace de Pinterest",
+        "uploadPhoto": "📷 Subir foto"
+    },
+    "recipe": {
+        "legend": "Receta",
+        "title": "Título",
+        "category": "Categoría",
+        "time": "Tiempo de preparación",
+        "timeSuffix": "min",
+        "servings": "Porciones",
+        "servingsSuffix": "rac."
+    },
+    "tags": "Etiquetas",
+    "ingredients": {
+        "legend": "Ingredientes",
+        "groupTitle": "Título del grupo de ingredientes",
+        "item": "Ingrediente {{number}}",
+        "add": "Añadir ingrediente",
+        "addGroup": "Añadir grupo"
+    },
+    "steps": {
+        "legend": "Pasos de preparación",
+        "item": "Paso {{number}}",
+        "add": "Añadir paso"
+    },
+    "media": {
+        "legend": "Multimedia",
+        "url": "Enlace a foto o vídeo",
+        "upload": "📎 Subir archivo",
+        "addLink": "Añadir enlace",
+        "emptyUrl": "Introduce un enlace",
+        "invalidUrl": "Introduce un enlace válido (https://...)"
+    },
+    "validation": {
+        "titleRequired": "El título es obligatorio",
+        "titleTooLong": "Máximo {{max}} caracteres",
+        "ingredientsRequired": "Añade al menos un ingrediente",
+        "ingredientEmpty": "El ingrediente no puede estar vacío",
+        "groupEmpty": "El grupo no puede estar vacío",
+        "stepEmpty": "El paso no puede estar vacío",
+        "invalidUrl": "Introduce una URL válida"
+    }
+}

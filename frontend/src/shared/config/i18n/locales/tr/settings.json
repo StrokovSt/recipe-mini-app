@@ -1,0 +1,24 @@
+{
+    "title": "Ayarlar",
+    "subtitle": "Mutfakta her şey elinin altında olsun",
+    "appearance": {
+        "title": "Görünüm",
+        "description": "Rahat bir okuma modu seç",
+        "light": "Açık",
+        "dark": "Koyu"
+    },
+    "language": {
+        "title": "Dil",
+        "description": "Gezinme ve arayüz dili",
+        "sheetTitle": "Dil seç",
+        "available_one": "{{count}} dil mevcut",
+        "available_other": "{{count}} dil mevcut"
+    },
+    "motion": {
+        "title": "Hareket",
+        "description": "Görsel geçişleri yönet",
+        "animations": "Arayüz animasyonları",
+        "on": "Açık",
+        "off": "Kapalı"
+    }
+}

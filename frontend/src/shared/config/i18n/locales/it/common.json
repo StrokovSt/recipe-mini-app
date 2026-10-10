@@ -1,0 +1,30 @@
+{
+    "appName": "Ricetta",
+    "back": "Indietro",
+    "close": "Chiudi",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "save": "Salva",
+    "loading": "Caricamento",
+    "search": "Cerca",
+    "clearSearch": "Cancella ricerca",
+    "nothingFound": "Nessun risultato",
+    "showMore": "Mostra altri {{count}}",
+    "collapse": "Mostra meno",
+    "iconPicker": "Scegli un'icona",
+    "errorBoundary": {
+        "title": "Qualcosa è andato storto",
+        "retry": "Riprova"
+    },
+    "errors": {
+        "PARSE_FAILED": "Impossibile leggere la ricetta. Prova un altro link.",
+        "RECIPE_NOT_FOUND": "Ricetta non trovata.",
+        "INVALID_URL": "Link non valido.",
+        "AI_UNAVAILABLE": "Il servizio di IA non è al momento disponibile. Riprova più tardi.",
+        "AI_QUOTA_EXCEEDED": "Limite giornaliero di richieste raggiunto. Riprova domani.",
+        "VALIDATION_ERROR": "Dati non validi.",
+        "LIMIT_REACHED": "Limite di ricette raggiunto. Abbonati per l'accesso illimitato.",
+        "unknown": "Qualcosa è andato storto."
+    }
+}

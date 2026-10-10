@@ -1,0 +1,30 @@
+{
+    "appName": "Ricetta",
+    "back": "Kembali",
+    "close": "Tutup",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "save": "Simpan",
+    "loading": "Memuat",
+    "search": "Cari",
+    "clearSearch": "Hapus pencarian",
+    "nothingFound": "Tidak ada hasil",
+    "showMore": "Tampilkan {{count}} lagi",
+    "collapse": "Tampilkan lebih sedikit",
+    "iconPicker": "Pilih ikon",
+    "errorBoundary": {
+        "title": "Terjadi kesalahan",
+        "retry": "Coba lagi"
+    },
+    "errors": {
+        "PARSE_FAILED": "Resep tidak bisa dibaca. Coba tautan lain.",
+        "RECIPE_NOT_FOUND": "Resep tidak ditemukan.",
+        "INVALID_URL": "Tautan tidak valid.",
+        "AI_UNAVAILABLE": "Layanan AI sedang tidak tersedia. Coba lagi nanti.",
+        "AI_QUOTA_EXCEEDED": "Batas permintaan harian tercapai. Coba lagi besok.",
+        "VALIDATION_ERROR": "Data tidak valid.",
+        "LIMIT_REACHED": "Batas resep tercapai. Berlangganan untuk akses tanpa batas.",
+        "unknown": "Terjadi kesalahan."
+    }
+}

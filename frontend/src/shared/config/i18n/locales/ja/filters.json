@@ -1,0 +1,11 @@
+{
+    "searchPlaceholder": "レシピを検索...",
+    "open": "フィルターを開く",
+    "title": "フィルター",
+    "subtitle": "レシピの絞り込み条件を設定",
+    "reset": "リセット",
+    "apply": "適用",
+    "search": "検索",
+    "categories": "カテゴリー",
+    "tags": "タグ"
+}

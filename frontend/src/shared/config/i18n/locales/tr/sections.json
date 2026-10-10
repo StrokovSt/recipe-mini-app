@@ -1,0 +1,81 @@
+{
+    "tabs": {
+        "categories": "Kategoriler",
+        "tags": "Etiketler"
+    },
+    "editing": "Düzenleme",
+    "categories": {
+        "title": "Kategorilerim",
+        "hint": "Tarifler düzenli",
+        "add": "Yeni kategori",
+        "noRecipes": "Tarif yok",
+        "actions": "“{{name}}” kategorisi için işlemler",
+        "deleteTitle": "“{{name}}” kategorisi silinsin mi?",
+        "deleteText": "İçindeki tarifler kalır, ama kategorisiz olur.",
+        "form": {
+            "name": "Kategori adı",
+            "pickIcon": "Simge seç",
+            "duplicate": "Bu kategori zaten var",
+            "saveFailed": "Kategori kaydedilemedi"
+        },
+        "total_one": "{{count}} kategori",
+        "total_other": "{{count}} kategori"
+    },
+    "tags": {
+        "title": "Etiketlerim",
+        "hint": "Tarifleri hızla bul",
+        "add": "Yeni etiket",
+        "unused": "Henüz kullanılmıyor",
+        "actions": "“{{name}}” etiketi için işlemler",
+        "deleteTitle": "“{{name}}” etiketi silinsin mi?",
+        "deleteText": "Etiket tüm tariflerden kaldırılır, tarifler kalır.",
+        "form": {
+            "name": "Etiket adı",
+            "duplicate": "Bu etiket zaten var",
+            "saveFailed": "Etiket kaydedilemedi"
+        },
+        "total_one": "{{count}} etiket",
+        "total_other": "{{count}} etiket"
+    },
+    "icons": {
+        "Soup": "Çorba",
+        "CakeSlice": "Pasta dilimi",
+        "Cake": "Pasta",
+        "Salad": "Salata",
+        "Utensils": "Makarna",
+        "Beef": "Biftek",
+        "Fish": "Balık",
+        "Egg": "Yumurta",
+        "Vegan": "Yaprak",
+        "CupSoda": "İçecek",
+        "Drumstick": "Tavuk but",
+        "Shrimp": "Karides",
+        "Canape": "Kanepe",
+        "Rice": "Pirinç",
+        "SauceBoat": "Sosluk",
+        "Jar": "Kavanoz",
+        "Pizza": "Pizza",
+        "Burger": "Burger",
+        "Sushi": "Suşi",
+        "Taco": "Tako",
+        "Ramen": "Ramen",
+        "Bread": "Ekmek",
+        "Cheese": "Peynir",
+        "Grill": "Izgara",
+        "Chili": "Acı biber",
+        "Mushroom": "Mantar",
+        "Carrot": "Havuç",
+        "Apple": "Elma",
+        "IceCream": "Dondurma",
+        "Cookie": "Kurabiye",
+        "Coffee": "Kahve",
+        "Wine": "Şarap",
+        "CookingPot": "Tencere",
+        "Pan": "Tava",
+        "Star": "Yıldız",
+        "Heart": "Kalp",
+        "Cutlery": "Çatal bıçak"
+    },
+    "recipeCount_one": "{{count}} tarif",
+    "recipeCount_other": "{{count}} tarif"
+}

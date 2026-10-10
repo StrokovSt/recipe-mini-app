@@ -1,0 +1,17 @@
+{
+    "open": "메뉴",
+    "guest": "셰프",
+    "subtitle": "프로필, 설정, 앱 정보",
+    "profile": {
+        "title": "내 프로필",
+        "hint": "이름 및 Telegram 정보"
+    },
+    "settings": {
+        "title": "설정",
+        "hint": "테마, 언어, 애니메이션"
+    },
+    "about": {
+        "title": "앱 정보",
+        "hint": "도움말 및 피드백"
+    }
+}

@@ -42,52 +42,52 @@ type SvgIcon = FC<SVGProps<SVGSVGElement>>;
 
 interface CategoryIconConfig {
     Icon: SvgIcon;
-    label: string;
 }
 
 // Библиотека иконок для категорий. Ключ — iconName, который хранится в категории.
-// Ключи базовых категорий совпадают с backend/src/config/defaults.ts (DEFAULT_CATEGORIES)
+// Ключи базовых категорий совпадают с backend/src/config/defaults.ts (DEFAULT_CATEGORIES).
+// Подписи иконок — в словаре sections (icons.<ключ>)
 export const CATEGORY_ICONS = {
     // Базовые категории
-    Soup: { Icon: SoupIcon, label: "Суп" },
-    CakeSlice: { Icon: CakeSliceIcon, label: "Кусок торта" },
-    Cake: { Icon: CakeIcon, label: "Торт" },
-    Salad: { Icon: SaladIcon, label: "Салат" },
-    Utensils: { Icon: PastaIcon, label: "Паста" },
-    Beef: { Icon: BeefIcon, label: "Стейк" },
-    Fish: { Icon: FishIcon, label: "Рыба" },
-    Egg: { Icon: EggIcon, label: "Яйцо" },
-    Vegan: { Icon: VeganIcon, label: "Лист" },
-    CupSoda: { Icon: CupSodaIcon, label: "Напиток" },
-    Drumstick: { Icon: DrumstickIcon, label: "Куриная ножка" },
-    Shrimp: { Icon: ShrimpIcon, label: "Креветка" },
-    Canape: { Icon: CanapeIcon, label: "Канапе" },
-    Rice: { Icon: RiceIcon, label: "Рис" },
-    SauceBoat: { Icon: SauceBoatIcon, label: "Соусница" },
-    Jar: { Icon: JarIcon, label: "Банка" },
+    Soup: { Icon: SoupIcon },
+    CakeSlice: { Icon: CakeSliceIcon },
+    Cake: { Icon: CakeIcon },
+    Salad: { Icon: SaladIcon },
+    Utensils: { Icon: PastaIcon },
+    Beef: { Icon: BeefIcon },
+    Fish: { Icon: FishIcon },
+    Egg: { Icon: EggIcon },
+    Vegan: { Icon: VeganIcon },
+    CupSoda: { Icon: CupSodaIcon },
+    Drumstick: { Icon: DrumstickIcon },
+    Shrimp: { Icon: ShrimpIcon },
+    Canape: { Icon: CanapeIcon },
+    Rice: { Icon: RiceIcon },
+    SauceBoat: { Icon: SauceBoatIcon },
+    Jar: { Icon: JarIcon },
 
     // Дополнительные иконки для своих категорий
-    Pizza: { Icon: PizzaIcon, label: "Пицца" },
-    Burger: { Icon: BurgerIcon, label: "Бургер" },
-    Sushi: { Icon: SushiIcon, label: "Суши" },
-    Taco: { Icon: TacoIcon, label: "Тако" },
-    Ramen: { Icon: RamenIcon, label: "Рамен" },
-    Bread: { Icon: BreadIcon, label: "Хлеб" },
-    Cheese: { Icon: CheeseIcon, label: "Сыр" },
-    Grill: { Icon: GrillIcon, label: "Гриль" },
-    Chili: { Icon: ChiliIcon, label: "Перец чили" },
-    Mushroom: { Icon: MushroomIcon, label: "Гриб" },
-    Carrot: { Icon: CarrotIcon, label: "Морковь" },
-    Apple: { Icon: AppleIcon, label: "Яблоко" },
-    IceCream: { Icon: IceCreamIcon, label: "Мороженое" },
-    Cookie: { Icon: CookieIcon, label: "Печенье" },
-    Coffee: { Icon: CoffeeIcon, label: "Кофе" },
-    Wine: { Icon: WineIcon, label: "Вино" },
-    CookingPot: { Icon: CookingPotIcon, label: "Кастрюля" },
-    Pan: { Icon: PanIcon, label: "Сковорода" },
-    Star: { Icon: StarIcon, label: "Звезда" },
-    Heart: { Icon: HeartIcon, label: "Сердце" },
-    Cutlery: { Icon: UtensilsIcon, label: "Столовые приборы" },
+    Pizza: { Icon: PizzaIcon },
+    Burger: { Icon: BurgerIcon },
+    Sushi: { Icon: SushiIcon },
+    Taco: { Icon: TacoIcon },
+    Ramen: { Icon: RamenIcon },
+    Bread: { Icon: BreadIcon },
+    Cheese: { Icon: CheeseIcon },
+    Grill: { Icon: GrillIcon },
+    Chili: { Icon: ChiliIcon },
+    Mushroom: { Icon: MushroomIcon },
+    Carrot: { Icon: CarrotIcon },
+    Apple: { Icon: AppleIcon },
+    IceCream: { Icon: IceCreamIcon },
+    Cookie: { Icon: CookieIcon },
+    Coffee: { Icon: CoffeeIcon },
+    Wine: { Icon: WineIcon },
+    CookingPot: { Icon: CookingPotIcon },
+    Pan: { Icon: PanIcon },
+    Star: { Icon: StarIcon },
+    Heart: { Icon: HeartIcon },
+    Cutlery: { Icon: UtensilsIcon },
 } as const satisfies Record<string, CategoryIconConfig>;
 
 export type CategoryIconName = keyof typeof CATEGORY_ICONS;

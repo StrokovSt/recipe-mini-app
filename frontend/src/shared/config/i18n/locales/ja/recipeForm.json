@@ -1,0 +1,52 @@
+{
+    "modes": {
+        "manual": "✍️ 手入力",
+        "ai": "✨ AIで"
+    },
+    "submitAdd": "レシピを保存",
+    "submitEdit": "変更を保存",
+    "reset": "フォームをリセット",
+    "ai": {
+        "url": "Pinterestのリンク",
+        "uploadPhoto": "📷 写真をアップロード"
+    },
+    "recipe": {
+        "legend": "レシピ",
+        "title": "タイトル",
+        "category": "カテゴリー",
+        "time": "調理時間",
+        "timeSuffix": "分",
+        "servings": "人数",
+        "servingsSuffix": "人分"
+    },
+    "tags": "タグ",
+    "ingredients": {
+        "legend": "材料",
+        "groupTitle": "材料グループの見出し",
+        "item": "材料 {{number}}",
+        "add": "材料を追加",
+        "addGroup": "グループを追加"
+    },
+    "steps": {
+        "legend": "調理手順",
+        "item": "手順 {{number}}",
+        "add": "手順を追加"
+    },
+    "media": {
+        "legend": "メディア",
+        "url": "写真または動画のリンク",
+        "upload": "📎 ファイルをアップロード",
+        "addLink": "リンクを追加",
+        "emptyUrl": "リンクを入力してください",
+        "invalidUrl": "正しいリンクを入力してください（https://...）"
+    },
+    "validation": {
+        "titleRequired": "タイトルは必須です",
+        "titleTooLong": "{{max}}文字以内で入力してください",
+        "ingredientsRequired": "材料を1つ以上追加してください",
+        "ingredientEmpty": "材料を入力してください",
+        "groupEmpty": "グループが空です",
+        "stepEmpty": "手順を入力してください",
+        "invalidUrl": "正しいURLを入力してください"
+    }
+}

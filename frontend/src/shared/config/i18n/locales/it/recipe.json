@@ -1,0 +1,23 @@
+{
+    "notFound": "Ricetta non trovata",
+    "edit": "Modifica",
+    "delete": "Elimina ricetta",
+    "deleteTitle": "Eliminare la ricetta «{{title}}»?",
+    "deleteText": "Non sarà possibile recuperarla.",
+    "time": "Tempo",
+    "servings": "Porzioni",
+    "telegraph": {
+        "title": "Apri in Telegraph",
+        "hint": "Versione completa della ricetta"
+    },
+    "source": {
+        "title": "Apri l'originale",
+        "hint": "Fonte della ricetta"
+    },
+    "tabs": {
+        "ingredients": "Ingredienti",
+        "steps": "Preparazione"
+    },
+    "noIngredients": "Nessun ingrediente indicato",
+    "noSteps": "Nessun passaggio indicato"
+}

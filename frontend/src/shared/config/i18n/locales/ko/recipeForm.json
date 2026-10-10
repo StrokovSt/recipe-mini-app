@@ -1,0 +1,52 @@
+{
+    "modes": {
+        "manual": "✍️ 직접 입력",
+        "ai": "✨ AI로"
+    },
+    "submitAdd": "레시피 저장",
+    "submitEdit": "변경 사항 저장",
+    "reset": "양식 초기화",
+    "ai": {
+        "url": "Pinterest 링크",
+        "uploadPhoto": "📷 사진 업로드"
+    },
+    "recipe": {
+        "legend": "레시피",
+        "title": "제목",
+        "category": "카테고리",
+        "time": "조리 시간",
+        "timeSuffix": "분",
+        "servings": "인분 수",
+        "servingsSuffix": "인분"
+    },
+    "tags": "태그",
+    "ingredients": {
+        "legend": "재료",
+        "groupTitle": "재료 그룹 제목",
+        "item": "재료 {{number}}",
+        "add": "재료 추가",
+        "addGroup": "그룹 추가"
+    },
+    "steps": {
+        "legend": "조리 단계",
+        "item": "{{number}}단계",
+        "add": "단계 추가"
+    },
+    "media": {
+        "legend": "미디어",
+        "url": "사진 또는 동영상 링크",
+        "upload": "📎 파일 업로드",
+        "addLink": "링크 추가",
+        "emptyUrl": "링크를 입력하세요",
+        "invalidUrl": "올바른 링크를 입력하세요 (https://...)"
+    },
+    "validation": {
+        "titleRequired": "제목을 입력하세요",
+        "titleTooLong": "최대 {{max}}자까지 입력할 수 있어요",
+        "ingredientsRequired": "재료를 하나 이상 추가하세요",
+        "ingredientEmpty": "재료를 입력하세요",
+        "groupEmpty": "그룹이 비어 있어요",
+        "stepEmpty": "단계를 입력하세요",
+        "invalidUrl": "올바른 URL을 입력하세요"
+    }
+}

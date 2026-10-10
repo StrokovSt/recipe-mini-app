@@ -1,0 +1,30 @@
+{
+    "appName": "Ricetta",
+    "back": "Zurück",
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "save": "Speichern",
+    "loading": "Wird geladen",
+    "search": "Suche",
+    "clearSearch": "Suche löschen",
+    "nothingFound": "Nichts gefunden",
+    "showMore": "{{count}} weitere anzeigen",
+    "collapse": "Weniger anzeigen",
+    "iconPicker": "Symbol auswählen",
+    "errorBoundary": {
+        "title": "Etwas ist schiefgelaufen",
+        "retry": "Erneut versuchen"
+    },
+    "errors": {
+        "PARSE_FAILED": "Das Rezept konnte nicht gelesen werden. Versuch einen anderen Link.",
+        "RECIPE_NOT_FOUND": "Rezept nicht gefunden.",
+        "INVALID_URL": "Ungültiger Link.",
+        "AI_UNAVAILABLE": "Der KI-Dienst ist vorübergehend nicht verfügbar. Versuch es später noch einmal.",
+        "AI_QUOTA_EXCEEDED": "Das Tageslimit für Anfragen ist erreicht. Versuch es morgen wieder.",
+        "VALIDATION_ERROR": "Ungültige Daten.",
+        "LIMIT_REACHED": "Rezeptlimit erreicht. Schließ ein Abo ab, um unbegrenzt Rezepte zu speichern.",
+        "unknown": "Etwas ist schiefgelaufen."
+    }
+}

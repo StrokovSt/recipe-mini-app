@@ -1,5 +1,6 @@
 import { AnimatePresence } from 'motion/react';
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { Recipe } from '@recipe/common';
 
@@ -16,6 +17,7 @@ interface RecipeListProps {
 
 const RecipeList = (props: RecipeListProps) => {
     const {recipes, isLoading} = props;
+    const { t } = useTranslation('home');
 
     // mode="wait": список появляется, когда котик успел плавно исчезнуть
     return (
@@ -24,7 +26,7 @@ const RecipeList = (props: RecipeListProps) => {
                 <Spinner key="loader" size='xl' />
             ) : recipes.length === 0 ? (
                 <div key="empty" className={styles.empty}>
-                    Рецептов пока нет
+                    {t('empty')}
                 </div>
             ) : (
                 <div key="list" className={styles.list}>

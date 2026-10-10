@@ -1,0 +1,78 @@
+{
+    "tabs": {
+        "categories": "카테고리",
+        "tags": "태그"
+    },
+    "editing": "편집",
+    "categories": {
+        "title": "내 카테고리",
+        "hint": "레시피를 깔끔하게 정리",
+        "add": "새 카테고리",
+        "noRecipes": "레시피 없음",
+        "actions": "‘{{name}}’ 카테고리 작업",
+        "deleteTitle": "‘{{name}}’ 카테고리를 삭제할까요?",
+        "deleteText": "레시피는 남지만 카테고리가 없어져요.",
+        "form": {
+            "name": "카테고리 이름",
+            "pickIcon": "아이콘 선택",
+            "duplicate": "이미 있는 카테고리예요",
+            "saveFailed": "카테고리를 저장하지 못했어요"
+        },
+        "total_other": "카테고리 {{count}}개"
+    },
+    "tags": {
+        "title": "내 태그",
+        "hint": "레시피를 빠르게 찾기",
+        "add": "새 태그",
+        "unused": "아직 사용되지 않음",
+        "actions": "‘{{name}}’ 태그 작업",
+        "deleteTitle": "‘{{name}}’ 태그를 삭제할까요?",
+        "deleteText": "태그가 모든 레시피에서 빠지고 레시피는 그대로 남아요.",
+        "form": {
+            "name": "태그 이름",
+            "duplicate": "이미 있는 태그예요",
+            "saveFailed": "태그를 저장하지 못했어요"
+        },
+        "total_other": "태그 {{count}}개"
+    },
+    "icons": {
+        "Soup": "수프",
+        "CakeSlice": "케이크 조각",
+        "Cake": "케이크",
+        "Salad": "샐러드",
+        "Utensils": "파스타",
+        "Beef": "스테이크",
+        "Fish": "생선",
+        "Egg": "달걀",
+        "Vegan": "잎",
+        "CupSoda": "음료",
+        "Drumstick": "닭다리",
+        "Shrimp": "새우",
+        "Canape": "카나페",
+        "Rice": "밥",
+        "SauceBoat": "소스 그릇",
+        "Jar": "병",
+        "Pizza": "피자",
+        "Burger": "버거",
+        "Sushi": "초밥",
+        "Taco": "타코",
+        "Ramen": "라멘",
+        "Bread": "빵",
+        "Cheese": "치즈",
+        "Grill": "그릴",
+        "Chili": "고추",
+        "Mushroom": "버섯",
+        "Carrot": "당근",
+        "Apple": "사과",
+        "IceCream": "아이스크림",
+        "Cookie": "쿠키",
+        "Coffee": "커피",
+        "Wine": "와인",
+        "CookingPot": "냄비",
+        "Pan": "프라이팬",
+        "Star": "별",
+        "Heart": "하트",
+        "Cutlery": "수저"
+    },
+    "recipeCount_other": "레시피 {{count}}개"
+}

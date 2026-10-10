@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { useUploadMedia } from "@/entities/recipe";
 import { IconButton, OutlineButton } from "@/shared/ui/Buttons";
@@ -16,6 +17,7 @@ const URL_REGEX = /^https?:\/\/.+\..+/i;
 const VIDEO_REGEX = /\.(mp4|mov|avi|webm)/i;
 
 const MediaField = () => {
+    const { t } = useTranslation("recipeForm");
     const { watch, setValue, formState: { errors } } = useFormContext<RecipeFormValues>();
     const media = watch("media") ?? [];
     const fileRef = useRef<HTMLInputElement>(null);
@@ -42,12 +44,12 @@ const MediaField = () => {
         const trimmed = urlInput.trim();
 
         if (!trimmed) {
-            setUrlError("Введите ссылку");
+            setUrlError(t("media.emptyUrl"));
             return;
         }
 
         if (!URL_REGEX.test(trimmed)) {
-            setUrlError("Введите корректную ссылку (https://...)");
+            setUrlError(t("media.invalidUrl"));
             return;
         }
 
@@ -64,7 +66,7 @@ const MediaField = () => {
     };
 
     return (
-        <FieldsetWrapper legend="Медиа">
+        <FieldsetWrapper legend={t("media.legend")}>
             {media.length > 0 && (
                 <div className={styles.list}>
                     {media.map((item, i) => (
@@ -88,7 +90,7 @@ const MediaField = () => {
             {showUrlInput && (
                 <div className={styles.urlBar}>
                     <Input
-                        label="Ссылка на фото или видео"
+                        label={t("media.url")}
                         value={urlInput}
                         onChange={(e) => { setUrlInput(e.target.value); setUrlError(""); }}
                         onKeyDown={(e) => e.key === "Enter" && handleAddUrl()}
@@ -100,12 +102,12 @@ const MediaField = () => {
 
             <div className={styles.actions}>
                 <OutlineButton
-                    label="📎 Загрузить файл"
+                    label={t("media.upload")}
                     onClick={() => fileRef.current?.click()}
                     disabled={isUploading}
                     type="button"
                 >
-                    {isUploading ? <Spinner size="sm" /> : "📎 Загрузить файл"}
+                    {isUploading ? <Spinner size="sm" /> : t("media.upload")}
                 </OutlineButton>
                 <input
                     ref={fileRef}
@@ -115,12 +117,12 @@ const MediaField = () => {
                     onChange={handleFileChange}
                 />
                 <OutlineButton
-                    label="Добавить ссылку"
+                    label={t("media.addLink")}
                     onClick={() => { setShowUrlInput((v) => !v); setUrlError(""); }}
                     disabled={isUploading}
                     type="button"
                 >
-                    {"Добавить ссылку"}
+                    {t("media.addLink")}
                 </OutlineButton>
             </div>
 

@@ -1,0 +1,30 @@
+{
+    "appName": "Ricetta",
+    "back": "戻る",
+    "close": "閉じる",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "save": "保存",
+    "loading": "読み込み中",
+    "search": "検索",
+    "clearSearch": "検索をクリア",
+    "nothingFound": "見つかりませんでした",
+    "showMore": "さらに{{count}}件表示",
+    "collapse": "折りたたむ",
+    "iconPicker": "アイコンを選択",
+    "errorBoundary": {
+        "title": "問題が発生しました",
+        "retry": "再試行"
+    },
+    "errors": {
+        "PARSE_FAILED": "レシピを読み取れませんでした。別のリンクをお試しください。",
+        "RECIPE_NOT_FOUND": "レシピが見つかりません。",
+        "INVALID_URL": "無効なリンクです。",
+        "AI_UNAVAILABLE": "AIサービスは一時的に利用できません。しばらくしてからお試しください。",
+        "AI_QUOTA_EXCEEDED": "1日のリクエスト上限に達しました。明日もう一度お試しください。",
+        "VALIDATION_ERROR": "入力データが正しくありません。",
+        "LIMIT_REACHED": "レシピの上限に達しました。無制限に使うには購読してください。",
+        "unknown": "問題が発生しました。"
+    }
+}

@@ -2,6 +2,7 @@ import { Description, Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@
 import clsx from "clsx";
 import { animate, motion, useMotionValue } from "motion/react";
 import { type PointerEvent, type ReactNode, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 import { TRANSITION_BASE } from "@/shared/config/animation";
 import { IconButton } from "@/shared/ui/Buttons";
@@ -27,6 +28,7 @@ interface BottomSheetProps {
 
 export const BottomSheet = (props: BottomSheetProps) => {
     const { isOpen, onClose, children, title, subtitle, header, footer, className } = props;
+    const { t } = useTranslation();
 
     const y = useMotionValue(0);
     const startYRef = useRef<number | null>(null);
@@ -76,7 +78,7 @@ export const BottomSheet = (props: BottomSheetProps) => {
                         round
                         className={styles.close}
                         onClick={onClose}
-                        aria-label="Закрыть"
+                        aria-label={t("close")}
                     />
 
                     {(header || title) && (

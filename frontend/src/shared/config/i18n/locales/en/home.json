@@ -1,0 +1,5 @@
+{
+    "empty": "No recipes yet",
+    "servings_one": "{{count}} serving",
+    "servings_other": "{{count}} servings"
+}

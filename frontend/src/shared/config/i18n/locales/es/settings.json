@@ -1,0 +1,25 @@
+{
+    "title": "Ajustes",
+    "subtitle": "Para tenerlo todo a mano en la cocina",
+    "appearance": {
+        "title": "Apariencia",
+        "description": "Elige un modo de lectura cómodo",
+        "light": "Claro",
+        "dark": "Oscuro"
+    },
+    "language": {
+        "title": "Idioma",
+        "description": "Idioma de la navegación y la interfaz",
+        "sheetTitle": "Elige el idioma",
+        "available_one": "{{count}} idioma disponible",
+        "available_many": "{{count}} de idiomas disponibles",
+        "available_other": "{{count}} idiomas disponibles"
+    },
+    "motion": {
+        "title": "Movimiento",
+        "description": "Controla las transiciones visuales",
+        "animations": "Animaciones de la interfaz",
+        "on": "Activadas",
+        "off": "Desactivadas"
+    }
+}

@@ -1,5 +1,6 @@
 import { animate } from 'motion/react';
 import { type ReactElement, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ChevronIcon from '@/shared/assets/icons/icon-chevron.svg?react';
 import { TRANSITION_BASE } from '@/shared/config/animation';
@@ -48,6 +49,7 @@ const countInRows = (list: HTMLElement, rows: number) => {
 
 export const ExpandableList = <T,>(props: ExpandableListProps<T>) => {
     const { items, rows, renderItem, isPinned, className } = props;
+    const { t } = useTranslation();
     const [isExpanded, setIsExpanded] = useState(false);
     const [width, setWidth] = useState(0);
     const [measured, setMeasured] = useState<Capacity<T> | null>(null);
@@ -146,7 +148,7 @@ export const ExpandableList = <T,>(props: ExpandableListProps<T>) => {
                     aria-expanded={isExpanded}
                     onClick={handleToggle}
                 >
-                    {isExpanded ? 'Свернуть' : `Показать ещё ${hiddenCount}`}
+                    {isExpanded ? t('collapse') : t('showMore', { count: hiddenCount })}
                     <ChevronIcon aria-hidden />
                 </button>
             )}

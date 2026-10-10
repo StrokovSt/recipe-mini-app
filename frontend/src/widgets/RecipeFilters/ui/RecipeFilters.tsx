@@ -1,4 +1,5 @@
 import { type Dispatch, memo, type Ref, type SetStateAction, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { Category, Tag } from '@recipe/common';
 
@@ -35,6 +36,7 @@ interface RecipeFiltersProps {
 
 const RecipeFilters = (props: RecipeFiltersProps) => {
     const {categories, tags, filters, setFilters, isOpen, onOpenChange, disabled, ref} = props;
+    const { t } = useTranslation('filters');
 
     const activeCount = getActiveFilterCount(filters);
 
@@ -103,7 +105,7 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                     className={styles.search}
                     value={filters.search ?? ""}
                     onChange={handleSearchChange}
-                    placeholder="Поиск рецептов..."
+                    placeholder={t('searchPlaceholder')}
                     disabled={disabled}
                 />
 
@@ -118,17 +120,17 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
             <BottomSheet
                 isOpen={isOpen}
                 onClose={() => onOpenChange(false)}
-                title="Фильтры"
-                subtitle="Настройте подборку рецептов"
+                title={t('title')}
+                subtitle={t('subtitle')}
                 footer={
                     <>
                         <OutlineButton
-                            label="Сбросить"
+                            label={t('reset')}
                             onClick={handleReset}
                             disabled={getActiveFilterCount(draft) === 0}
                         />
                         <RegularButton
-                            label="Применить"
+                            label={t('apply')}
                             className={styles.apply}
                             onClick={handleApply}
                             // Активна, только когда в шторке что-то поменяли
@@ -138,18 +140,18 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                 }
             >
                 <section className={styles.section}>
-                    <h3 className={styles.sectionTitle}>Поиск</h3>
+                    <h3 className={styles.sectionTitle}>{t('search')}</h3>
                     <SearchInput
                         value={draft.search ?? ""}
                         onChange={handleDraftSearchChange}
-                        placeholder="Поиск рецептов..."
+                        placeholder={t('searchPlaceholder')}
                         // Черновику задержка не нужна: запрос уйдёт только по «Применить»
                         delay={0}
                     />
                 </section>
 
                 <section className={styles.section}>
-                    <h3 className={styles.sectionTitle}>Категории</h3>
+                    <h3 className={styles.sectionTitle}>{t('categories')}</h3>
                     <ExpandableList
                         items={categories}
                         rows={COLLAPSED_ROWS}
@@ -178,7 +180,7 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                 </section>
 
                 <section className={styles.section}>
-                    <h3 className={styles.sectionTitle}>Теги</h3>
+                    <h3 className={styles.sectionTitle}>{t('tags')}</h3>
                     <ExpandableList
                         items={tags}
                         rows={COLLAPSED_ROWS}

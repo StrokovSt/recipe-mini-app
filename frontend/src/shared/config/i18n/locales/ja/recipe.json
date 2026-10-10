@@ -1,0 +1,23 @@
+{
+    "notFound": "レシピが見つかりません",
+    "edit": "編集",
+    "delete": "レシピを削除",
+    "deleteTitle": "レシピ「{{title}}」を削除しますか？",
+    "deleteText": "元に戻すことはできません。",
+    "time": "時間",
+    "servings": "人数",
+    "telegraph": {
+        "title": "Telegraphで開く",
+        "hint": "レシピの完全版"
+    },
+    "source": {
+        "title": "元のページを開く",
+        "hint": "レシピの出典"
+    },
+    "tabs": {
+        "ingredients": "材料",
+        "steps": "作り方"
+    },
+    "noIngredients": "材料が記載されていません",
+    "noSteps": "手順が記載されていません"
+}

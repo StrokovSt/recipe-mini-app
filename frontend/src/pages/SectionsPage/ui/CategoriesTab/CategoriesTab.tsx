@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { Category } from "@recipe/common";
 
@@ -13,6 +14,7 @@ import { Spinner } from "@/shared/ui/Spinner";
 import styles from "./CategoriesTab.module.scss";
 
 const CategoriesTab = () => {
+    const { t } = useTranslation("sections");
     const { data: categories = [], isLoading } = useCategories();
     const { mutate: remove } = useDeleteCategory();
 
@@ -60,13 +62,13 @@ const CategoriesTab = () => {
                         onDelete={askDelete}
                     />
                 ))}
-                <AddTile label="Новая категория" onClick={openCreate} />
+                <AddTile label={t("categories.add")} onClick={openCreate} />
             </div>
 
             <BottomSheet
                 isOpen={isFormOpen}
                 onClose={closeForm}
-                title={editingCategory ? "Редактирование" : "Новая категория"}
+                title={editingCategory ? t("editing") : t("categories.add")}
             >
                 <CategoryForm
                     key={editingCategory?.id ?? "new"}
@@ -80,8 +82,8 @@ const CategoriesTab = () => {
                 isOpen={isConfirmOpen}
                 onClose={closeConfirm}
                 onConfirm={confirmDelete}
-                title={`Удалить категорию «${deletingCategory?.name}»?`}
-                text="Рецепты из неё останутся, но без категории."
+                title={t("categories.deleteTitle", { name: deletingCategory?.name })}
+                text={t("categories.deleteText")}
             />
         </>
     );

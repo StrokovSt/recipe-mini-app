@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { Tag } from "@recipe/common";
 
@@ -13,6 +14,7 @@ import { Spinner } from "@/shared/ui/Spinner";
 import styles from "./TagsTab.module.scss";
 
 export function TagsTab() {
+    const { t } = useTranslation("sections");
     const { data: tags = [], isLoading } = useTags();
     const { mutate: remove } = useDeleteTag();
 
@@ -60,13 +62,13 @@ export function TagsTab() {
                         onDelete={askDelete}
                     />
                 ))}
-                <AddTile label="Новый тег" onClick={openCreate} />
+                <AddTile label={t("tags.add")} onClick={openCreate} />
             </div>
 
             <BottomSheet
                 isOpen={isFormOpen}
                 onClose={closeForm}
-                title={editingTag ? "Редактирование" : "Новый тег"}
+                title={editingTag ? t("editing") : t("tags.add")}
             >
                 <TagForm
                     key={editingTag?.id ?? "new"}
@@ -80,8 +82,8 @@ export function TagsTab() {
                 isOpen={isConfirmOpen}
                 onClose={closeConfirm}
                 onConfirm={confirmDelete}
-                title={`Удалить тег «${deletingTag?.name}»?`}
-                text="Тег уберётся из всех рецептов, сами рецепты останутся."
+                title={t("tags.deleteTitle", { name: deletingTag?.name })}
+                text={t("tags.deleteText")}
             />
         </>
     );

@@ -1,5 +1,6 @@
 import WebApp from "@twa-dev/sdk";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
@@ -23,17 +24,18 @@ interface MenuItem {
     hint: string;
 }
 
-const MENU_ITEMS: MenuItem[] = [
-    { to: AppRoute.Profile, icon: <UserIcon />, title: "Мой профиль", hint: "Имя и данные Telegram" },
-    { to: AppRoute.Settings, icon: <SettingsIcon />, title: "Настройки", hint: "Тема, язык и анимации" },
-    { to: AppRoute.About, icon: <InfoIcon />, title: "О приложении", hint: "Помощь и обратная связь" },
-];
-
 export function AppMenu(props: AppMenuProps) {
     const { isOpen, onClose } = props;
+    const { t } = useTranslation("menu");
+
+    const menuItems: MenuItem[] = [
+        { to: AppRoute.Profile, icon: <UserIcon />, title: t("profile.title"), hint: t("profile.hint") },
+        { to: AppRoute.Settings, icon: <SettingsIcon />, title: t("settings.title"), hint: t("settings.hint") },
+        { to: AppRoute.About, icon: <InfoIcon />, title: t("about.title"), hint: t("about.hint") },
+    ];
 
     const user = WebApp.initDataUnsafe?.user;
-    const name = user?.first_name ?? "Шеф";
+    const name = user?.first_name ?? t("guest");
 
     return (
         <BottomSheet
@@ -48,14 +50,14 @@ export function AppMenu(props: AppMenuProps) {
                     )}
                     <div>
                         <h2 className={styles.title}>{name}</h2>
-                        <p className={styles.subtitle}>Профиль, настройки и всё о приложении</p>
+                        <p className={styles.subtitle}>{t("subtitle")}</p>
                     </div>
                 </article>
             }
         >
 
             <nav className={styles.list}>
-                {MENU_ITEMS.map((item) => (
+                {menuItems.map((item) => (
                     <Link key={item.to} to={item.to} className={styles.link} onClick={onClose}>
                         <span className={styles.icon}>{item.icon}</span>
                         <span className={styles.text}>

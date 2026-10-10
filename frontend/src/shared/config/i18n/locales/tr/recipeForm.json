@@ -1,0 +1,52 @@
+{
+    "modes": {
+        "manual": "✍️ Elle",
+        "ai": "✨ Yapay zekâ ile"
+    },
+    "submitAdd": "Tarifi kaydet",
+    "submitEdit": "Değişiklikleri kaydet",
+    "reset": "Formu sıfırla",
+    "ai": {
+        "url": "Pinterest bağlantısı",
+        "uploadPhoto": "📷 Fotoğraf yükle"
+    },
+    "recipe": {
+        "legend": "Tarif",
+        "title": "Başlık",
+        "category": "Kategori",
+        "time": "Pişirme süresi",
+        "timeSuffix": "dk",
+        "servings": "Porsiyon sayısı",
+        "servingsSuffix": "porsiyon"
+    },
+    "tags": "Etiketler",
+    "ingredients": {
+        "legend": "Malzemeler",
+        "groupTitle": "Malzeme grubu başlığı",
+        "item": "Malzeme {{number}}",
+        "add": "Malzeme ekle",
+        "addGroup": "Grup ekle"
+    },
+    "steps": {
+        "legend": "Hazırlama adımları",
+        "item": "Adım {{number}}",
+        "add": "Adım ekle"
+    },
+    "media": {
+        "legend": "Medya",
+        "url": "Fotoğraf veya video bağlantısı",
+        "upload": "📎 Dosya yükle",
+        "addLink": "Bağlantı ekle",
+        "emptyUrl": "Bir bağlantı gir",
+        "invalidUrl": "Geçerli bir bağlantı gir (https://...)"
+    },
+    "validation": {
+        "titleRequired": "Başlık zorunlu",
+        "titleTooLong": "En fazla {{max}} karakter",
+        "ingredientsRequired": "En az bir malzeme ekle",
+        "ingredientEmpty": "Malzeme boş olamaz",
+        "groupEmpty": "Grup boş olamaz",
+        "stepEmpty": "Adım boş olamaz",
+        "invalidUrl": "Geçerli bir URL gir"
+    }
+}

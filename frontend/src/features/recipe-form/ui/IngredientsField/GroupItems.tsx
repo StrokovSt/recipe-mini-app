@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { AddButton, IconButton } from "@/shared/ui/Buttons";
 import { InputController } from "@/shared/ui/Input";
@@ -12,6 +13,7 @@ interface GroupItemsProps {
 }
 
 const GroupItems = ({ groupIndex }: GroupItemsProps) => {
+    const { t } = useTranslation("recipeForm");
     const { control, watch, setValue, formState: { errors } } = useFormContext<RecipeFormValues>();
     const items = watch(`ingredients.${groupIndex}.items`);
 
@@ -35,7 +37,7 @@ const GroupItems = ({ groupIndex }: GroupItemsProps) => {
                         <InputController
                             name={`ingredients.${groupIndex}.items.${i}` as "ingredients.0.items.0"}
                             control={control}
-                            label={`Ингредиент ${i + 1}`}
+                            label={t("ingredients.item", { number: i + 1 })}
                             error={(errors.ingredients?.[groupIndex]?.items?.[i] as { message?: string })?.message}
                         />
                         {items.length > 1 && (
@@ -44,7 +46,7 @@ const GroupItems = ({ groupIndex }: GroupItemsProps) => {
                     </li>
                 ))}
             </ul>
-            <AddButton label="Добавить ингредиент" onClick={append} />
+            <AddButton label={t("ingredients.add")} onClick={append} />
         </>
     );
 };

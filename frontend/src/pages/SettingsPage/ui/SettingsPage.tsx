@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import { LanguageSelect } from "@/features/select-language";
 import MoonIcon from "@/shared/assets/icons/icon-moon.svg?react";
 import SunIcon from "@/shared/assets/icons/icon-sun.svg?react";
 import { getAnimations, setAnimations } from "@/shared/lib/animations";
@@ -14,15 +16,16 @@ import { Switch } from "@/shared/ui/Switch";
 
 import styles from "./SettingsPage.module.scss";
 
-const THEME_OPTIONS: SegmentedOption<Theme>[] = [
-    { id: "light", label: "Светлая", icon: <SunIcon /> },
-    { id: "dark", label: "Тёмная", icon: <MoonIcon /> },
-];
-
 const SettingsPage = () => {
+    const { t } = useTranslation(["settings", "common"]);
     const navigate = useNavigate();
     const [theme, setThemeState] = useState<Theme>(getTheme);
     const [animations, setAnimationsState] = useState(getAnimations);
+
+    const themeOptions: SegmentedOption<Theme>[] = [
+        { id: "light", label: t("appearance.light"), icon: <SunIcon /> },
+        { id: "dark", label: t("appearance.dark"), icon: <MoonIcon /> },
+    ];
 
     const handleThemeChange = (next: Theme) => {
         setTheme(next);
@@ -39,28 +42,32 @@ const SettingsPage = () => {
             header={
                 <PageHeader className={styles.header}>
                     <div>
-                        <h1 className={styles.title}>Настройки</h1>
-                        <p className={styles.subtitle}>Чтобы на кухне всё было под рукой</p>
+                        <h1 className={styles.title}>{t("title")}</h1>
+                        <p className={styles.subtitle}>{t("subtitle")}</p>
                     </div>
                     <IconButton
                         icon="back"
                         round
                         className={styles.back}
                         type="button"
-                        aria-label="Назад"
+                        aria-label={t("common:back")}
                         onClick={() => navigate(-1)}
                     />
                 </PageHeader>
             }
         >
-            <SectionCard mark="一" title="Оформление" description="Выберите комфортный режим чтения">
-                <SegmentedControl options={THEME_OPTIONS} value={theme} onChange={handleThemeChange} />
+            <SectionCard mark="一" title={t("appearance.title")} description={t("appearance.description")}>
+                <SegmentedControl options={themeOptions} value={theme} onChange={handleThemeChange} />
             </SectionCard>
 
-            <SectionCard mark="二" title="Движение" description="Управление визуальными переходами">
+            <SectionCard mark="二" title={t("language.title")} description={t("language.description")}>
+                <LanguageSelect />
+            </SectionCard>
+
+            <SectionCard mark="三" title={t("motion.title")} description={t("motion.description")}>
                 <Switch
-                    label="Анимации интерфейса"
-                    description={animations ? "Включены" : "Выключены"}
+                    label={t("motion.animations")}
+                    description={animations ? t("motion.on") : t("motion.off")}
                     checked={animations}
                     onChange={handleAnimationsChange}
                 />

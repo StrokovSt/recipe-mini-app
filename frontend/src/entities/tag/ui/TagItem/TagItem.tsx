@@ -1,10 +1,10 @@
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { Tag } from '@recipe/common';
 
 import DeleteIcon from '@/shared/assets/icons/icon-delete.svg?react';
 import EditIcon from '@/shared/assets/icons/icon-edit.svg?react';
-import { pluralize } from '@/shared/lib/plural';
 import { Tile } from '@/shared/ui/Tile';
 
 import styles from './TagItem.module.scss';
@@ -19,6 +19,7 @@ interface TagItemProps {
 
 const TagItem = (props: TagItemProps) => {
     const { tag, to, onEdit, onDelete } = props;
+    const { t } = useTranslation(['sections', 'common']);
     const recipeCount = tag.recipeCount ?? 0;
 
     return (
@@ -27,14 +28,14 @@ const TagItem = (props: TagItemProps) => {
             title={tag.name}
             subtitle={
                 recipeCount === 0
-                    ? 'Пока не используется'
-                    : `${recipeCount} ${pluralize(recipeCount, ['рецепт', 'рецепта', 'рецептов'])}`
+                    ? t('tags.unused')
+                    : t('recipeCount', { count: recipeCount })
             }
             to={to}
-            menuLabel={`Действия с тегом «${tag.name}»`}
+            menuLabel={t('tags.actions', { name: tag.name })}
             menu={[
-                { label: 'Изменить', icon: <EditIcon />, onClick: () => onEdit(tag) },
-                { label: 'Удалить', icon: <DeleteIcon />, danger: true, onClick: () => onDelete(tag) },
+                { label: t('common:edit'), icon: <EditIcon />, onClick: () => onEdit(tag) },
+                { label: t('common:delete'), icon: <DeleteIcon />, danger: true, onClick: () => onDelete(tag) },
             ]}
         />
     );

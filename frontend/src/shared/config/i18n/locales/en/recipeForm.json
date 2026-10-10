@@ -1,0 +1,52 @@
+{
+    "modes": {
+        "manual": "✍️ Manually",
+        "ai": "✨ With AI"
+    },
+    "submitAdd": "Save recipe",
+    "submitEdit": "Save changes",
+    "reset": "Reset form",
+    "ai": {
+        "url": "Pinterest link",
+        "uploadPhoto": "📷 Upload photo"
+    },
+    "recipe": {
+        "legend": "Recipe",
+        "title": "Title",
+        "category": "Category",
+        "time": "Cooking time",
+        "timeSuffix": "min",
+        "servings": "Servings",
+        "servingsSuffix": "serv."
+    },
+    "tags": "Tags",
+    "ingredients": {
+        "legend": "Ingredients",
+        "groupTitle": "Ingredient group title",
+        "item": "Ingredient {{number}}",
+        "add": "Add ingredient",
+        "addGroup": "Add group"
+    },
+    "steps": {
+        "legend": "Steps",
+        "item": "Step {{number}}",
+        "add": "Add step"
+    },
+    "media": {
+        "legend": "Media",
+        "url": "Photo or video link",
+        "upload": "📎 Upload file",
+        "addLink": "Add link",
+        "emptyUrl": "Enter a link",
+        "invalidUrl": "Enter a valid link (https://...)"
+    },
+    "validation": {
+        "titleRequired": "Title is required",
+        "titleTooLong": "No more than {{max}} characters",
+        "ingredientsRequired": "Add at least one ingredient",
+        "ingredientEmpty": "Ingredient can't be empty",
+        "groupEmpty": "Group can't be empty",
+        "stepEmpty": "Step can't be empty",
+        "invalidUrl": "Enter a valid URL"
+    }
+}

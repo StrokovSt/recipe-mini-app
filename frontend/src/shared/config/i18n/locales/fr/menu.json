@@ -1,0 +1,17 @@
+{
+    "open": "Menu",
+    "guest": "Chef",
+    "subtitle": "Profil, réglages et tout sur l'application",
+    "profile": {
+        "title": "Mon profil",
+        "hint": "Nom et données Telegram"
+    },
+    "settings": {
+        "title": "Réglages",
+        "hint": "Thème, langue et animations"
+    },
+    "about": {
+        "title": "À propos",
+        "hint": "Aide et commentaires"
+    }
+}

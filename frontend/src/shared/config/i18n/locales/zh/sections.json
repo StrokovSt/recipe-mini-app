@@ -1,0 +1,78 @@
+{
+    "tabs": {
+        "categories": "分类",
+        "tags": "标签"
+    },
+    "editing": "编辑",
+    "categories": {
+        "title": "我的分类",
+        "hint": "食谱分门别类",
+        "add": "新建分类",
+        "noRecipes": "暂无食谱",
+        "actions": "分类“{{name}}”的操作",
+        "deleteTitle": "删除分类“{{name}}”？",
+        "deleteText": "其中的食谱会保留，但不再属于任何分类。",
+        "form": {
+            "name": "分类名称",
+            "pickIcon": "选择图标",
+            "duplicate": "该分类已存在",
+            "saveFailed": "无法保存分类"
+        },
+        "total_other": "{{count}} 个分类"
+    },
+    "tags": {
+        "title": "我的标签",
+        "hint": "快速查找食谱",
+        "add": "新建标签",
+        "unused": "尚未使用",
+        "actions": "标签“{{name}}”的操作",
+        "deleteTitle": "删除标签“{{name}}”？",
+        "deleteText": "该标签将从所有食谱中移除，食谱本身会保留。",
+        "form": {
+            "name": "标签名称",
+            "duplicate": "该标签已存在",
+            "saveFailed": "无法保存标签"
+        },
+        "total_other": "{{count}} 个标签"
+    },
+    "icons": {
+        "Soup": "汤",
+        "CakeSlice": "蛋糕切片",
+        "Cake": "蛋糕",
+        "Salad": "沙拉",
+        "Utensils": "意面",
+        "Beef": "牛排",
+        "Fish": "鱼",
+        "Egg": "鸡蛋",
+        "Vegan": "叶子",
+        "CupSoda": "饮品",
+        "Drumstick": "鸡腿",
+        "Shrimp": "虾",
+        "Canape": "小点心",
+        "Rice": "米饭",
+        "SauceBoat": "酱汁壶",
+        "Jar": "罐子",
+        "Pizza": "披萨",
+        "Burger": "汉堡",
+        "Sushi": "寿司",
+        "Taco": "墨西哥卷饼",
+        "Ramen": "拉面",
+        "Bread": "面包",
+        "Cheese": "奶酪",
+        "Grill": "烧烤",
+        "Chili": "辣椒",
+        "Mushroom": "蘑菇",
+        "Carrot": "胡萝卜",
+        "Apple": "苹果",
+        "IceCream": "冰淇淋",
+        "Cookie": "饼干",
+        "Coffee": "咖啡",
+        "Wine": "葡萄酒",
+        "CookingPot": "锅",
+        "Pan": "平底锅",
+        "Star": "星星",
+        "Heart": "爱心",
+        "Cutlery": "餐具"
+    },
+    "recipeCount_other": "{{count}} 个食谱"
+}

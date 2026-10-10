@@ -1,0 +1,52 @@
+{
+    "modes": {
+        "manual": "✍️ Manuell",
+        "ai": "✨ Mit KI"
+    },
+    "submitAdd": "Rezept speichern",
+    "submitEdit": "Änderungen speichern",
+    "reset": "Formular zurücksetzen",
+    "ai": {
+        "url": "Pinterest-Link",
+        "uploadPhoto": "📷 Foto hochladen"
+    },
+    "recipe": {
+        "legend": "Rezept",
+        "title": "Titel",
+        "category": "Kategorie",
+        "time": "Zubereitungszeit",
+        "timeSuffix": "Min.",
+        "servings": "Portionen",
+        "servingsSuffix": "Port."
+    },
+    "tags": "Tags",
+    "ingredients": {
+        "legend": "Zutaten",
+        "groupTitle": "Titel der Zutatengruppe",
+        "item": "Zutat {{number}}",
+        "add": "Zutat hinzufügen",
+        "addGroup": "Gruppe hinzufügen"
+    },
+    "steps": {
+        "legend": "Zubereitungsschritte",
+        "item": "Schritt {{number}}",
+        "add": "Schritt hinzufügen"
+    },
+    "media": {
+        "legend": "Medien",
+        "url": "Link zu Foto oder Video",
+        "upload": "📎 Datei hochladen",
+        "addLink": "Link hinzufügen",
+        "emptyUrl": "Link eingeben",
+        "invalidUrl": "Gib einen gültigen Link ein (https://...)"
+    },
+    "validation": {
+        "titleRequired": "Titel ist erforderlich",
+        "titleTooLong": "Höchstens {{max}} Zeichen",
+        "ingredientsRequired": "Füge mindestens eine Zutat hinzu",
+        "ingredientEmpty": "Die Zutat darf nicht leer sein",
+        "groupEmpty": "Die Gruppe darf nicht leer sein",
+        "stepEmpty": "Der Schritt darf nicht leer sein",
+        "invalidUrl": "Gib eine gültige URL ein"
+    }
+}

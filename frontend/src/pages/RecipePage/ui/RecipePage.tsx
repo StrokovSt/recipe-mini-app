@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
@@ -20,6 +21,7 @@ import styles from "./RecipePage.module.scss";
 const RecipePage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
+    const { t } = useTranslation(["recipe", "common"]);
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
@@ -27,7 +29,7 @@ const RecipePage = () => {
     const { mutate: deleteRecipe } = useDeleteRecipe();
 
     if (isLoading) return <Spinner size="xl" />;
-    if (isError || !recipe) return <div className={styles.notFound}>Рецепт не найден</div>;
+    if (isError || !recipe) return <div className={styles.notFound}>{t("notFound")}</div>;
 
     const images = recipe.media.filter((m) => m.type === "image");
     const video = recipe.media.find((m) => m.type === "video");
@@ -51,7 +53,7 @@ const RecipePage = () => {
                         icon="edit"
                         round
                         type="button"
-                        aria-label="Редактировать"
+                        aria-label={t("edit")}
                         onClick={() => navigate(buildRoute.editRecipe(recipe.id))}
                     />
                     <IconButton
@@ -59,7 +61,7 @@ const RecipePage = () => {
                         round
                         type="button"
                         variant="danger"
-                        aria-label="Удалить рецепт"
+                        aria-label={t("delete")}
                         onClick={() => setIsConfirmOpen(true)}
                     />
                     <IconButton
@@ -67,7 +69,7 @@ const RecipePage = () => {
                         round
                         className={styles.back}
                         type="button"
-                        aria-label="Назад"
+                        aria-label={t("common:back")}
                         onClick={() => navigate(AppRoute.Home)}
                     />
                 </PageHeader>
@@ -98,8 +100,8 @@ const RecipePage = () => {
                 isOpen={isConfirmOpen}
                 onClose={() => setIsConfirmOpen(false)}
                 onConfirm={handleDelete}
-                title={`Удалить рецепт «${recipe.title}»?`}
-                text="Вернуть его не получится."
+                title={t("deleteTitle", { title: recipe.title })}
+                text={t("deleteText")}
             />
 
             {lightboxIndex !== null && (

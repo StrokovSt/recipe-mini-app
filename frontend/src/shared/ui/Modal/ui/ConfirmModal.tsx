@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import { OutlineButton, RegularButton } from "@/shared/ui/Buttons";
 
 import { Modal } from "./Modal";
@@ -15,7 +17,8 @@ interface ConfirmModalProps {
 
 // Подтверждение опасного действия: «Вы уверены?»
 export const ConfirmModal = (props: ConfirmModalProps) => {
-    const { isOpen, onClose, onConfirm, title, text, confirmLabel = "Удалить" } = props;
+    const { t } = useTranslation();
+    const { isOpen, onClose, onConfirm, title, text, confirmLabel = t("delete") } = props;
 
     return (
         <Modal
@@ -24,7 +27,7 @@ export const ConfirmModal = (props: ConfirmModalProps) => {
             title={title}
             footer={
                 <>
-                    <OutlineButton label="Отмена" onClick={onClose} />
+                    <OutlineButton label={t("cancel")} onClick={onClose} />
                     <RegularButton label={confirmLabel} className={styles.danger} onClick={onConfirm} />
                 </>
             }

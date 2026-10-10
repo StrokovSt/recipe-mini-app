@@ -1,0 +1,17 @@
+{
+    "open": "Menu",
+    "guest": "Chef",
+    "subtitle": "Profil, pengaturan, dan semua tentang aplikasi",
+    "profile": {
+        "title": "Profil saya",
+        "hint": "Nama dan data Telegram"
+    },
+    "settings": {
+        "title": "Pengaturan",
+        "hint": "Tema, bahasa, dan animasi"
+    },
+    "about": {
+        "title": "Tentang aplikasi",
+        "hint": "Bantuan dan masukan"
+    }
+}

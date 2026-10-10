@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { IconButton } from '@/shared/ui/Buttons';
 
 import styles from './FilterButton.module.scss';
@@ -13,6 +15,7 @@ interface FilterButtonProps {
 // Кнопка открытия фильтров со счётчиком включённых фильтров
 export const FilterButton = (props: FilterButtonProps) => {
     const { activeCount, onClick, round, className, disabled } = props;
+    const { t } = useTranslation('filters');
 
     return (
         <div className={styles.trigger}>
@@ -23,7 +26,7 @@ export const FilterButton = (props: FilterButtonProps) => {
                 aria-pressed={activeCount > 0}
                 onClick={onClick}
                 disabled={disabled}
-                aria-label="Открыть фильтры"
+                aria-label={t('open')}
             />
             {activeCount > 0 && <span className={styles.badge}>{activeCount}</span>}
         </div>

@@ -1,0 +1,23 @@
+{
+    "title": "设置",
+    "subtitle": "让厨房里的一切触手可及",
+    "appearance": {
+        "title": "外观",
+        "description": "选择舒适的阅读模式",
+        "light": "浅色",
+        "dark": "深色"
+    },
+    "language": {
+        "title": "语言",
+        "description": "导航和界面语言",
+        "sheetTitle": "选择语言",
+        "available_other": "{{count}} 种语言可选"
+    },
+    "motion": {
+        "title": "动效",
+        "description": "管理视觉过渡效果",
+        "animations": "界面动画",
+        "on": "已开启",
+        "off": "已关闭"
+    }
+}

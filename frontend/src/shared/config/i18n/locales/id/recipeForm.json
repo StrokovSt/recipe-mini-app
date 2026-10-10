@@ -1,0 +1,52 @@
+{
+    "modes": {
+        "manual": "✍️ Manual",
+        "ai": "✨ Dengan AI"
+    },
+    "submitAdd": "Simpan resep",
+    "submitEdit": "Simpan perubahan",
+    "reset": "Atur ulang formulir",
+    "ai": {
+        "url": "Tautan Pinterest",
+        "uploadPhoto": "📷 Unggah foto"
+    },
+    "recipe": {
+        "legend": "Resep",
+        "title": "Judul",
+        "category": "Kategori",
+        "time": "Waktu memasak",
+        "timeSuffix": "mnt",
+        "servings": "Jumlah porsi",
+        "servingsSuffix": "porsi"
+    },
+    "tags": "Tag",
+    "ingredients": {
+        "legend": "Bahan",
+        "groupTitle": "Judul grup bahan",
+        "item": "Bahan {{number}}",
+        "add": "Tambah bahan",
+        "addGroup": "Tambah grup"
+    },
+    "steps": {
+        "legend": "Langkah memasak",
+        "item": "Langkah {{number}}",
+        "add": "Tambah langkah"
+    },
+    "media": {
+        "legend": "Media",
+        "url": "Tautan foto atau video",
+        "upload": "📎 Unggah file",
+        "addLink": "Tambah tautan",
+        "emptyUrl": "Masukkan tautan",
+        "invalidUrl": "Masukkan tautan yang valid (https://...)"
+    },
+    "validation": {
+        "titleRequired": "Judul wajib diisi",
+        "titleTooLong": "Maksimal {{max}} karakter",
+        "ingredientsRequired": "Tambahkan minimal satu bahan",
+        "ingredientEmpty": "Bahan tidak boleh kosong",
+        "groupEmpty": "Grup tidak boleh kosong",
+        "stepEmpty": "Langkah tidak boleh kosong",
+        "invalidUrl": "Masukkan URL yang valid"
+    }
+}

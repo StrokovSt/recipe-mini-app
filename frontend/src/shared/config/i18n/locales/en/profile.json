@@ -1,0 +1,10 @@
+{
+    "title": "My profile",
+    "subtitle": "Everything you've collected and cooked",
+    "placeholder": "Profile details are coming soon",
+    "stats": {
+        "total": "Recipes",
+        "categories": "Categories",
+        "pinterest": "Pinterest"
+    }
+}

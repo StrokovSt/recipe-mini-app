@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, FormProvider, type Resolver,useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
@@ -20,7 +21,8 @@ import TagsSelect from "./TagsSelect/TagsSelect";
 import styles from "./RecipeForm.module.scss";
 
 const RecipeForm = (props: RecipeFormProps) => {
-    const {defaultValues, submitLabel = "Сохранить", onSubmit: onSubmitProp, isPending: isPendingProp} = props;
+    const { t } = useTranslation(["recipeForm", "common"]);
+    const {defaultValues, submitLabel = t("common:save"), onSubmit: onSubmitProp, isPending: isPendingProp} = props;
     const navigate = useNavigate();
     const methods = useForm<RecipeFormValues>({
         resolver: zodResolver(recipeSchema) as Resolver<RecipeFormValues>,
@@ -84,33 +86,33 @@ const RecipeForm = (props: RecipeFormProps) => {
     return (
         <FormProvider {...methods}>
             <form className={styles.form} onSubmit={handleSubmit(handleSave, (errors) => console.log('Validation errors:', errors))}>
-                <FieldsetWrapper legend="Рецепт">
+                <FieldsetWrapper legend={t("recipe.legend")}>
                     <InputController
                         name="title"
                         control={control}
-                        label="Название"
+                        label={t("recipe.title")}
                     />
 
                     <SelectController
                         name="categoryId"
                         control={control}
                         options={categoryOptions}
-                        placeholder="Категория"
+                        placeholder={t("recipe.category")}
                     />
 
                     <InputController
                         name="time"
                         control={control}
-                        label="Время приготовления"
-                        suffix="мин."
+                        label={t("recipe.time")}
+                        suffix={t("recipe.timeSuffix")}
                     />
 
                     <InputController
                         name="servings"
                         control={control}
-                        label="Количество порций"
+                        label={t("recipe.servings")}
                         type="number"
-                        suffix="шт."
+                        suffix={t("recipe.servingsSuffix")}
                     />
                 </FieldsetWrapper>
 
@@ -120,7 +122,7 @@ const RecipeForm = (props: RecipeFormProps) => {
 
                 <MediaField />
 
-                <FieldsetWrapper legend="Теги">
+                <FieldsetWrapper legend={t("tags")}>
                     <Controller
                         control={control}
                         name="tagIds"
@@ -134,7 +136,7 @@ const RecipeForm = (props: RecipeFormProps) => {
                     <OutlineButton
                         className={styles.saveButton}
                         type="button"
-                        label="Сбросить форму"
+                        label={t("reset")}
                         disabled={isPending}
                         onClick={handleReset}
                     />

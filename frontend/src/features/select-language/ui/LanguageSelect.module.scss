@@ -1,0 +1,123 @@
+@use "@/shared/styles/row";
+@use "@/shared/styles/states";
+
+// Общая раскладка строки языка: код слева на две строки, название и английское название, значок справа
+.current,
+.option {
+    display: grid;
+    align-items: center;
+    grid-template-columns: var(--size-menu-icon) 1fr auto;
+    color: var(--color-text);
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition-base);
+    grid-template-areas:
+        "code name mark"
+        "code english mark";
+    column-gap: var(--space-3);
+    transition-property: color, background, border-color;
+
+    .code {
+        grid-area: code;
+        font: var(--font-ui-xs);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+    }
+
+    .name {
+        grid-area: name;
+        font: var(--font-ui-sm);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .english {
+        grid-area: english;
+        color: var(--color-text-muted);
+        font: var(--font-ui-xs);
+    }
+
+    .mark {
+        grid-area: mark;
+        width: var(--size-row-icon);
+        height: var(--size-row-icon);
+        color: var(--color-icon);
+        transition: color var(--transition-base);
+    }
+}
+
+// Текущий язык в карточке настроек: код в круглом значке, как иконки в меню
+.current {
+    @include row.row;
+
+    width: 100%;
+
+    .code {
+        display: grid;
+        place-items: center;
+        height: var(--size-menu-icon);
+        border-radius: var(--radius-full);
+        background: var(--color-hover-bg);
+        color: var(--color-active);
+    }
+
+    @include states.hover {
+        border-color: var(--color-active);
+
+        .mark {
+            color: var(--color-active);
+        }
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px var(--color-accent-shadow);
+    }
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+// Языки в шторке: строки во всю ширину с разделителями, как ссылки в меню
+.option {
+    margin: 0 calc(-1 * var(--space-5));
+    padding: var(--space-3) var(--space-5);
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    background: none;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    .code {
+        color: var(--color-icon);
+    }
+
+    @include states.hover {
+        background: var(--color-hover-bg);
+    }
+
+    &:focus-visible {
+        outline: none;
+        background: var(--color-hover-bg);
+    }
+
+    &Active {
+        background: var(--color-active-bg);
+
+        .code,
+        .mark {
+            color: var(--color-active);
+        }
+
+        .name {
+            font-weight: var(--font-weight-bold);
+        }
+
+        @include states.hover {
+            background: var(--color-active-bg);
+        }
+    }
+}

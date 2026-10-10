@@ -1,4 +1,5 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { AddButton, IconButton } from "@/shared/ui/Buttons";
 import { InputController } from "@/shared/ui/Input";
@@ -10,6 +11,7 @@ import GroupItems from "./GroupItems";
 import styles from "./IngredientsField.module.scss";
 
 const IngredientsField = () => {
+    const { t } = useTranslation("recipeForm");
     const { control, formState: { errors } } = useFormContext<RecipeFormValues>();
     const { fields: groups, append: appendGroup, remove: removeGroup } = useFieldArray({
         control,
@@ -17,14 +19,14 @@ const IngredientsField = () => {
     });
 
     return (
-        <FieldsetWrapper legend="Ингридиенты">
+        <FieldsetWrapper legend={t("ingredients.legend")}>
             {groups.map((group, gi) => (
                 <div key={group.id} className={styles.group}>
                     <div className={styles.groupHeader}>
                         <InputController
                             name={`ingredients.${gi}.title` as "ingredients.0.title"}
                             control={control}
-                            label="Заголовок группы ингридиентов"
+                            label={t("ingredients.groupTitle")}
                         />
                         {groups.length > 1 && (
                             <IconButton icon="close" variant="danger" type="button" onClick={() => removeGroup(gi)} />
@@ -39,7 +41,7 @@ const IngredientsField = () => {
             )}
 
             <AddButton
-                label="Добавить группу"
+                label={t("ingredients.addGroup")}
                 onClick={() => appendGroup({ title: null, items: [""] })}
             />
         </FieldsetWrapper>

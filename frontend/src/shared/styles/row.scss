@@ -1,0 +1,7 @@
+// Плашка-строка внутри карточки настроек (тумблер, выбор языка): подложка цвета фона в рамке
+@mixin row {
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-app-bg);
+}

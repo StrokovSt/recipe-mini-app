@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { ParsedRecipe } from "@recipe/common";
 
@@ -13,18 +14,19 @@ import styles from "./AddRecipePage.module.scss";
 
 type Mode = "manual" | "ai";
 
-const TABS: { id: Mode; label: string }[] = [
-    { id: "manual", label: "✍️ Вручную" },
-    { id: "ai", label: "✨ С помощью ИИ" },
-];
-
 const AddRecipePage = () => {
+    const { t } = useTranslation("recipeForm");
     const [mode, setMode] = useState<Mode>("manual");
     const [formKey, setFormKey] = useState(0);
     const [defaultValues, setDefaultValues] = useState<Partial<RecipeFormValues>>({});
 
     const { mutate: parseUrl, isPending: isParsing, error: parseUrlError } = useParseRecipe();
     const { mutate: parseImage, isPending: isParsingImage, error: parseImageError } = useParseRecipeFromImage();
+
+    const tabs: { id: Mode; label: string }[] = [
+        { id: "manual", label: t("modes.manual") },
+        { id: "ai", label: t("modes.ai") },
+    ];
 
     const applyParsedData = (data: ParsedRecipe) => {
         setDefaultValues({
@@ -49,7 +51,7 @@ const AddRecipePage = () => {
 
     return (
         <PageWrapper className={styles.page}>
-            <Tabs tabs={TABS} active={mode} onChange={setMode} />
+            <Tabs tabs={tabs} active={mode} onChange={setMode} />
 
             {mode === "ai" && (
                 <AiInput
@@ -64,7 +66,7 @@ const AddRecipePage = () => {
             <RecipeForm
                 key={formKey}
                 defaultValues={defaultValues}
-                submitLabel="Сохранить рецепт"
+                submitLabel={t("submitAdd")}
             />
         </PageWrapper>
     );

@@ -1,6 +1,7 @@
 import { Combobox } from "@headlessui/react";
 import clsx from "clsx";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import CheckIcon from "@/shared/assets/icons/icon-check.svg?react";
 import ChevronIcon from "@/shared/assets/icons/icon-chevron.svg?react";
@@ -25,6 +26,7 @@ const Select = <T extends string | number = string>(props: SelectProps<T>) => {
         changeHandler,
         error,
     } = props;
+    const { t } = useTranslation();
 
     const [isOpen, setIsOpen] = useState(false);
     const [query, setQuery] = useState("");
@@ -109,7 +111,7 @@ const Select = <T extends string | number = string>(props: SelectProps<T>) => {
                             </Combobox.Option>
                         ))
                     ) : (
-                        <div className={styles.empty}>Ничего не найдено</div>
+                        <div className={styles.empty}>{t("nothingFound")}</div>
                     )}
                 </Combobox.Options>
             )}

@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { IngredientGroup } from "@recipe/common";
 
@@ -12,27 +13,28 @@ interface RecipeContentProps {
 
 type Tab = "ingredients" | "steps";
 
-const TABS: { id: Tab; label: string }[] = [
-    { id: "ingredients", label: "Ингредиенты" },
-    { id: "steps", label: "Приготовление" },
-];
-
 export function RecipeContent(props: RecipeContentProps) {
     const { ingredients, steps } = props;
+    const { t } = useTranslation("recipe");
     const [tab, setTab] = useState<Tab>("ingredients");
+
+    const tabs: { id: Tab; label: string }[] = [
+        { id: "ingredients", label: t("tabs.ingredients") },
+        { id: "steps", label: t("tabs.steps") },
+    ];
 
     const totalIngredients = ingredients.reduce((acc, g) => acc + g.items.length, 0);
 
     return (
         <div className={styles.wrap}>
             <div className={styles.tabs}>
-                {TABS.map((t) => (
+                {tabs.map((item) => (
                     <button
-                        key={t.id}
-                        onClick={() => setTab(t.id)}
-                        className={clsx(styles.tab, tab === t.id && styles.tabActive)}
+                        key={item.id}
+                        onClick={() => setTab(item.id)}
+                        className={clsx(styles.tab, tab === item.id && styles.tabActive)}
                     >
-                        {t.label}
+                        {item.label}
                     </button>
                 ))}
             </div>
@@ -40,7 +42,7 @@ export function RecipeContent(props: RecipeContentProps) {
             {tab === "ingredients" && (
                 <div className={styles.groups}>
                     {totalIngredients === 0 && (
-                        <p className={styles.empty}>Ингредиенты не указаны</p>
+                        <p className={styles.empty}>{t("noIngredients")}</p>
                     )}
                     {ingredients.map((group, gi) => (
                         <div key={gi} className={styles.group}>
@@ -63,7 +65,7 @@ export function RecipeContent(props: RecipeContentProps) {
             {tab === "steps" && (
                 <div className={styles.list}>
                     {steps.length === 0 && (
-                        <p className={styles.empty}>Шаги не указаны</p>
+                        <p className={styles.empty}>{t("noSteps")}</p>
                     )}
                     {steps.map((step, i) => (
                         <div key={i} className={styles.stepItem}>

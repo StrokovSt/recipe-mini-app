@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { useCategories } from "@/entities/category";
@@ -11,6 +12,7 @@ import styles from "./ProfilePage.module.scss";
 
 const ProfilePage = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation(["profile", "common"]);
     const { data: recipes = [] } = useRecipes({});
     const { data: categories = [] } = useCategories();
     const pinterest = recipes.filter((recipe) => recipe.sourceUrl?.includes("pinterest")).length;
@@ -20,22 +22,22 @@ const ProfilePage = () => {
             header={
                 <PageHeader className={styles.header}>
                     <div>
-                        <h1 className={styles.title}>Мой профиль</h1>
-                        <p className={styles.subtitle}>Всё, что вы собрали и приготовили</p>
+                        <h1 className={styles.title}>{t("title")}</h1>
+                        <p className={styles.subtitle}>{t("subtitle")}</p>
                     </div>
                     <IconButton
                         icon="back"
                         round
                         className={styles.back}
                         type="button"
-                        aria-label="Назад"
+                        aria-label={t("common:back")}
                         onClick={() => navigate(-1)}
                     />
                 </PageHeader>
             }
         >
             <StatsWidget total={recipes.length} categories={categories.length} pinterest={pinterest} />
-            <p className={styles.placeholder}>Скоро здесь появятся данные профиля</p>
+            <p className={styles.placeholder}>{t("placeholder")}</p>
         </PageWrapper>
     );
 };

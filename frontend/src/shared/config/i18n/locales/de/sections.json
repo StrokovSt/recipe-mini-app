@@ -1,0 +1,81 @@
+{
+    "tabs": {
+        "categories": "Kategorien",
+        "tags": "Tags"
+    },
+    "editing": "Bearbeiten",
+    "categories": {
+        "title": "Meine Kategorien",
+        "hint": "Rezepte schön sortiert",
+        "add": "Neue Kategorie",
+        "noRecipes": "Keine Rezepte",
+        "actions": "Aktionen für Kategorie „{{name}}“",
+        "deleteTitle": "Kategorie „{{name}}“ löschen?",
+        "deleteText": "Die Rezepte bleiben erhalten, nur ohne Kategorie.",
+        "form": {
+            "name": "Name der Kategorie",
+            "pickIcon": "Symbol wählen",
+            "duplicate": "Diese Kategorie gibt es schon",
+            "saveFailed": "Kategorie konnte nicht gespeichert werden"
+        },
+        "total_one": "{{count}} Kategorie",
+        "total_other": "{{count}} Kategorien"
+    },
+    "tags": {
+        "title": "Meine Tags",
+        "hint": "Rezepte schnell finden",
+        "add": "Neuer Tag",
+        "unused": "Noch nicht verwendet",
+        "actions": "Aktionen für Tag „{{name}}“",
+        "deleteTitle": "Tag „{{name}}“ löschen?",
+        "deleteText": "Der Tag wird aus allen Rezepten entfernt, die Rezepte bleiben.",
+        "form": {
+            "name": "Name des Tags",
+            "duplicate": "Diesen Tag gibt es schon",
+            "saveFailed": "Tag konnte nicht gespeichert werden"
+        },
+        "total_one": "{{count}} Tag",
+        "total_other": "{{count}} Tags"
+    },
+    "icons": {
+        "Soup": "Suppe",
+        "CakeSlice": "Tortenstück",
+        "Cake": "Torte",
+        "Salad": "Salat",
+        "Utensils": "Pasta",
+        "Beef": "Steak",
+        "Fish": "Fisch",
+        "Egg": "Ei",
+        "Vegan": "Blatt",
+        "CupSoda": "Getränk",
+        "Drumstick": "Hähnchenkeule",
+        "Shrimp": "Garnele",
+        "Canape": "Kanapee",
+        "Rice": "Reis",
+        "SauceBoat": "Sauciere",
+        "Jar": "Glas",
+        "Pizza": "Pizza",
+        "Burger": "Burger",
+        "Sushi": "Sushi",
+        "Taco": "Taco",
+        "Ramen": "Ramen",
+        "Bread": "Brot",
+        "Cheese": "Käse",
+        "Grill": "Grill",
+        "Chili": "Chili",
+        "Mushroom": "Pilz",
+        "Carrot": "Karotte",
+        "Apple": "Apfel",
+        "IceCream": "Eis",
+        "Cookie": "Keks",
+        "Coffee": "Kaffee",
+        "Wine": "Wein",
+        "CookingPot": "Kochtopf",
+        "Pan": "Pfanne",
+        "Star": "Stern",
+        "Heart": "Herz",
+        "Cutlery": "Besteck"
+    },
+    "recipeCount_one": "{{count}} Rezept",
+    "recipeCount_other": "{{count}} Rezepte"
+}

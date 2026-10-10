@@ -1,0 +1,17 @@
+{
+    "open": "Menü",
+    "guest": "Şef",
+    "subtitle": "Profil, ayarlar ve uygulama hakkında her şey",
+    "profile": {
+        "title": "Profilim",
+        "hint": "Ad ve Telegram bilgileri"
+    },
+    "settings": {
+        "title": "Ayarlar",
+        "hint": "Tema, dil ve animasyonlar"
+    },
+    "about": {
+        "title": "Hakkında",
+        "hint": "Yardım ve geri bildirim"
+    }
+}

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import styles from "./RecipeMeta.module.scss";
 
 interface RecipeMetaProps {
@@ -10,6 +12,7 @@ interface RecipeMetaProps {
 
 export function RecipeMeta(props: RecipeMetaProps) {
     const { time, servings, tags, sourceUrl, telegraphUrl } = props;
+    const { t } = useTranslation("recipe");
 
     const hasLinks = telegraphUrl || sourceUrl;
 
@@ -19,13 +22,13 @@ export function RecipeMeta(props: RecipeMetaProps) {
                 <div className={styles.stats}>
                     {time && (
                         <div className={styles.statItem}>
-                            <span className={styles.statLabel}>Время</span>
+                            <span className={styles.statLabel}>{t("time")}</span>
                             <span className={styles.statValue}>⏱ {time}</span>
                         </div>
                     )}
                     {servings && (
                         <div className={styles.statItem}>
-                            <span className={styles.statLabel}>Порций</span>
+                            <span className={styles.statLabel}>{t("servings")}</span>
                             <span className={styles.statValue}>👤 {servings}</span>
                         </div>
                     )}
@@ -46,8 +49,8 @@ export function RecipeMeta(props: RecipeMetaProps) {
                         <a href={telegraphUrl} target="_blank" rel="noreferrer" className={styles.link}>
                             <span className={styles.linkIcon}>📝</span>
                             <div>
-                                <div className={styles.linkTitle}>Открыть в Telegraph</div>
-                                <div className={styles.linkSub}>Полная версия рецепта</div>
+                                <div className={styles.linkTitle}>{t("telegraph.title")}</div>
+                                <div className={styles.linkSub}>{t("telegraph.hint")}</div>
                             </div>
                         </a>
                     )}
@@ -55,8 +58,8 @@ export function RecipeMeta(props: RecipeMetaProps) {
                         <a href={sourceUrl} target="_blank" rel="noreferrer" className={styles.link}>
                             <span className={styles.linkIcon}>↗</span>
                             <div>
-                                <div className={styles.linkTitle}>Открыть оригинал</div>
-                                <div className={styles.linkSub}>Источник рецепта</div>
+                                <div className={styles.linkTitle}>{t("source.title")}</div>
+                                <div className={styles.linkSub}>{t("source.hint")}</div>
                             </div>
                         </a>
                     )}

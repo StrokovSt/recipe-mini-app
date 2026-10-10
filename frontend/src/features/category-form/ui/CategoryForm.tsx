@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { Category } from '@recipe/common';
 
@@ -26,6 +27,7 @@ interface CategoryFormProps {
 
 const CategoryForm = (props: CategoryFormProps) => {
     const { category, onSuccess, onCancel } = props;
+    const { t } = useTranslation(['sections', 'common']);
 
     const [name, setName] = useState(category?.name ?? '');
     const [iconName, setIconName] = useState(category?.iconName ?? DEFAULT_ICON_NAME);
@@ -42,12 +44,13 @@ const CategoryForm = (props: CategoryFormProps) => {
     const isPending = isCreating || isUpdating;
 
     const error = isDuplicate
-        ? 'Такая категория уже есть'
+        ? t('categories.form.duplicate')
         : isCreateError || isUpdateError
-            ? 'Не удалось сохранить категорию'
+            ? t('categories.form.saveFailed')
             : undefined;
 
     const Icon = getCategoryIcon(iconName);
+    const iconOptions = CATEGORY_ICON_LIST.map((option) => ({ ...option, label: t(`icons.${option.name}`) }));
 
     const handleIconChange = (nextIconName: string) => {
         setIconName(nextIconName);
@@ -72,13 +75,13 @@ const CategoryForm = (props: CategoryFormProps) => {
                     type="button"
                     className={styles.iconTrigger}
                     aria-expanded={isPickerOpen}
-                    aria-label="Выбрать иконку"
+                    aria-label={t('categories.form.pickIcon')}
                     onClick={() => setIsPickerOpen((prev) => !prev)}
                 >
                     <Icon />
                 </button>
                 <Input
-                    label="Название категории"
+                    label={t('categories.form.name')}
                     rounded
                     value={name}
                     onChange={(event) => setName(event.target.value)}
@@ -87,17 +90,17 @@ const CategoryForm = (props: CategoryFormProps) => {
             </div>
 
             <IconPicker
-                options={CATEGORY_ICON_LIST}
+                options={iconOptions}
                 value={iconName}
                 isOpen={isPickerOpen}
                 onChange={handleIconChange}
             />
 
             <div className={styles.actions}>
-                <OutlineButton type="button" label="Отмена" onClick={onCancel} />
+                <OutlineButton type="button" label={t('common:cancel')} onClick={onCancel} />
                 <RegularButton
                     type="submit"
-                    label="Сохранить"
+                    label={t('common:save')}
                     disabled={!trimmedName || isDuplicate || isPending}
                 />
             </div>

@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
@@ -16,17 +17,19 @@ interface NavItem {
     isAdd?: boolean;
 }
 
-const NAV_ITEMS: NavItem[] = [
-    { to: AppRoute.Home, icon: <CollectionIcon />, label: "Коллекция" },
-    { to: AppRoute.AddRecipe, icon: <AddIcon />, label: "", isAdd: true },
-    { to: AppRoute.Sections, icon: <SectionsIcon />, label: "Разделы" },
-];
-
 export function Footer() {
+    const { t } = useTranslation("footer");
+
+    const navItems: NavItem[] = [
+        { to: AppRoute.Home, icon: <CollectionIcon />, label: t("collection") },
+        { to: AppRoute.AddRecipe, icon: <AddIcon />, label: "", isAdd: true },
+        { to: AppRoute.Sections, icon: <SectionsIcon />, label: t("sections") },
+    ];
+
     return (
         <footer className={styles.footer}>
             <nav className={styles.nav}>
-                {NAV_ITEMS.map((item) =>
+                {navItems.map((item) =>
                     item.isAdd ? (
                         <NavLink
                             key={item.to}

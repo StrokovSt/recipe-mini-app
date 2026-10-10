@@ -1,0 +1,30 @@
+{
+    "appName": "Ricetta",
+    "back": "Voltar",
+    "close": "Fechar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "save": "Salvar",
+    "loading": "Carregando",
+    "search": "Buscar",
+    "clearSearch": "Limpar busca",
+    "nothingFound": "Nada encontrado",
+    "showMore": "Mostrar mais {{count}}",
+    "collapse": "Mostrar menos",
+    "iconPicker": "Escolher ícone",
+    "errorBoundary": {
+        "title": "Algo deu errado",
+        "retry": "Tentar novamente"
+    },
+    "errors": {
+        "PARSE_FAILED": "Não foi possível ler a receita. Tente outro link.",
+        "RECIPE_NOT_FOUND": "Receita não encontrada.",
+        "INVALID_URL": "Link inválido.",
+        "AI_UNAVAILABLE": "O serviço de IA está temporariamente indisponível. Tente mais tarde.",
+        "AI_QUOTA_EXCEEDED": "Limite diário de solicitações atingido. Tente amanhã.",
+        "VALIDATION_ERROR": "Dados inválidos.",
+        "LIMIT_REACHED": "Limite de receitas atingido. Assine para ter acesso ilimitado.",
+        "unknown": "Algo deu errado."
+    }
+}

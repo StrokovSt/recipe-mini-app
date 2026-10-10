@@ -1,0 +1,23 @@
+{
+    "title": "設定",
+    "subtitle": "キッチンのすべてを手の届くところに",
+    "appearance": {
+        "title": "外観",
+        "description": "読みやすいモードを選んでください",
+        "light": "ライト",
+        "dark": "ダーク"
+    },
+    "language": {
+        "title": "言語",
+        "description": "ナビゲーションと画面表示の言語",
+        "sheetTitle": "言語を選択",
+        "available_other": "{{count}}言語に対応"
+    },
+    "motion": {
+        "title": "モーション",
+        "description": "画面の切り替え効果を管理",
+        "animations": "インターフェースのアニメーション",
+        "on": "オン",
+        "off": "オフ"
+    }
+}

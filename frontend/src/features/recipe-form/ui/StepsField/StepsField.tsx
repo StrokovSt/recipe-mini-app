@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { AddButton, IconButton } from "@/shared/ui/Buttons";
 import { TextareaController } from "@/shared/ui/Input";
@@ -9,6 +10,7 @@ import FieldsetWrapper from "../FieldsetWrapper/FieldsetWrapper";
 import styles from "./StepsField.module.scss";
 
 const StepsField = () => {
+    const { t } = useTranslation("recipeForm");
     const { control, watch, setValue, formState: { errors } } = useFormContext<RecipeFormValues>();
     const steps = watch("steps");
 
@@ -21,7 +23,7 @@ const StepsField = () => {
     };
 
     return (
-        <FieldsetWrapper legend="Шаги приготовления">
+        <FieldsetWrapper legend={t("steps.legend")}>
             {steps.length > 0 && (
                 <div className={styles.list}>
                     {steps.map((_, i) => (
@@ -29,7 +31,7 @@ const StepsField = () => {
                             <TextareaController
                                 name={`steps.${i}` as "steps.0"}
                                 control={control}
-                                label={`Шаг ${i + 1}`}
+                                label={t("steps.item", { number: i + 1 })}
                                 error={(errors.steps?.[i] as { message?: string })?.message}
                             />
                             <IconButton icon="close" variant="danger" type="button" onClick={() => remove(i)} />
@@ -42,7 +44,7 @@ const StepsField = () => {
                     {errors.steps.message ?? errors.steps.root?.message}
                 </span>
             )}
-            <AddButton label="Добавить шаг" onClick={append} />
+            <AddButton label={t("steps.add")} onClick={append} />
         </FieldsetWrapper>
     );
 };

@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import type { Recipe } from '@recipe/common';
@@ -19,6 +20,7 @@ interface RecipeItemProps {
 
 const RecipeItem = (props: RecipeItemProps) => {
     const { recipe } = props;
+    const { t } = useTranslation('home');
     const { id, title, steps, time, servings, source, media, tags, category } = recipe;
 
     const cover = media.find((item) => item.type === 'image');
@@ -50,7 +52,7 @@ const RecipeItem = (props: RecipeItemProps) => {
                             <IconLabel icon={<ClockIcon />}>{time}</IconLabel>
                         )}
                         {servings && (
-                            <IconLabel icon={<UserIcon />}>{servings} пор.</IconLabel>
+                            <IconLabel icon={<UserIcon />}>{t('servings', { count: servings })}</IconLabel>
                         )}
                     </div>
                 )}

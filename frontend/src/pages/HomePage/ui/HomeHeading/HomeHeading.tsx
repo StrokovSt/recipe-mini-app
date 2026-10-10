@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AppMenuButton } from "@/widgets/AppMenu";
 
@@ -13,10 +14,11 @@ interface HomeHeadingProps {
 
 export function HomeHeading(props: HomeHeadingProps) {
     const { actions, disabled } = props;
+    const { t } = useTranslation();
 
     return (
         <div className={styles.heading}>
-            <h1 className={styles.title}>Ричетта</h1>
+            <h1 className={styles.title}>{t("appName")}</h1>
             <div className={styles.actions}>
                 {actions}
                 <AppMenuButton disabled={disabled} />

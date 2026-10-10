@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import SearchIcon from "@/shared/assets/icons/icon-search.svg?react";
 import { useDebouncedCallback } from "@/shared/lib/hooks";
@@ -17,7 +18,8 @@ interface SearchInputProps {
 }
 
 export const SearchInput = (props: SearchInputProps) => {
-    const { value, onChange, placeholder = "Поиск", delay = 400, className, disabled } = props;
+    const { t } = useTranslation();
+    const { value, onChange, placeholder = t("search"), delay = 400, className, disabled } = props;
     const [query, setQuery] = useState(value);
     const { run: debouncedChange, cancel } = useDebouncedCallback(onChange, delay);
 
@@ -56,7 +58,7 @@ export const SearchInput = (props: SearchInputProps) => {
                     className={styles.clear}
                     onClick={handleClear}
                     disabled={disabled}
-                    aria-label="Очистить поиск"
+                    aria-label={t("clearSearch")}
                 />
             )}
         </label>

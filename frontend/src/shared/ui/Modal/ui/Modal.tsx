@@ -1,6 +1,7 @@
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import clsx from "clsx";
 import { type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 import { IconButton } from "@/shared/ui/Buttons";
 
@@ -18,6 +19,7 @@ interface ModalProps {
 // Окно по центру экрана, фон как у шторки; закрывается по клику вне окна и по Esc
 export const Modal = (props: ModalProps) => {
     const { isOpen, onClose, children, title, footer, className } = props;
+    const { t } = useTranslation();
 
     return (
         <Dialog open={isOpen} onClose={onClose} className={styles.root}>
@@ -30,7 +32,7 @@ export const Modal = (props: ModalProps) => {
                         round
                         className={styles.close}
                         onClick={onClose}
-                        aria-label="Закрыть"
+                        aria-label={t("close")}
                     />
 
                     {title && <DialogTitle className={styles.title}>{title}</DialogTitle>}

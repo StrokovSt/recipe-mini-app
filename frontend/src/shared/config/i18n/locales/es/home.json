@@ -1,0 +1,6 @@
+{
+    "empty": "Aún no hay recetas",
+    "servings_one": "{{count}} porción",
+    "servings_many": "{{count}} porciones",
+    "servings_other": "{{count}} porciones"
+}

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { buildRoute } from "@/app/router/routes";
@@ -9,12 +10,13 @@ import { Spinner } from "@/shared/ui/Spinner";
 const EditRecipePage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
+    const { t } = useTranslation(["recipeForm", "recipe"]);
 
     const { data: recipe, isLoading } = useRecipe(id!);
     const { mutate: updateRecipe, isPending } = useUpdateRecipe();
 
     if (isLoading) return <Spinner size="xl" />;
-    if (!recipe) return <div>Рецепт не найден</div>;
+    if (!recipe) return <div>{t("recipe:notFound")}</div>;
 
     const handleSubmit = (values: RecipeFormValues) => {
         updateRecipe(
@@ -48,7 +50,7 @@ const EditRecipePage = () => {
                 }}
                 onSubmit={handleSubmit}
                 isPending={isPending}
-                submitLabel="Сохранить изменения"
+                submitLabel={t("submitEdit")}
             />
         </PageWrapper>
     );

@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useCategories } from "@/entities/category";
 import { useTags } from "@/entities/tag";
-import { pluralize } from "@/shared/lib/plural";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { SectionHeading } from "@/shared/ui/SectionHeading";
@@ -16,30 +16,18 @@ import styles from "./SectionsPage.module.scss";
 
 type Tab = "categories" | "tags";
 
-const TABS: SegmentedOption<Tab>[] = [
-    { id: "categories", label: "Категории" },
-    { id: "tags", label: "Теги" },
-];
-
-const HEADINGS: Record<Tab, { title: string; hint: string; forms: [string, string, string] }> = {
-    categories: {
-        title: "Мои категории",
-        hint: "Рецепты по полочкам",
-        forms: ["категория", "категории", "категорий"],
-    },
-    tags: {
-        title: "Мои теги",
-        hint: "Быстрый поиск рецептов",
-        forms: ["тег", "тега", "тегов"],
-    },
-};
-
 const SectionsPage = () => {
+    const { t } = useTranslation("sections");
     const [tab, setTab] = useState<Tab>("categories");
     const { data: categories = [] } = useCategories();
     const { data: tags = [] } = useTags();
 
-    const heading = HEADINGS[tab];
+    const tabs: SegmentedOption<Tab>[] = [
+        { id: "categories", label: t("tabs.categories") },
+        { id: "tags", label: t("tabs.tags") },
+    ];
+
+    // Заголовок, подсказка и счётчик берутся из раздела словаря текущей вкладки
     const count = tab === "categories" ? categories.length : tags.length;
 
     return (
@@ -48,15 +36,15 @@ const SectionsPage = () => {
             header={
                 <PageHeader>
                     <SectionHeading
-                        title={heading.title}
-                        hint={heading.hint}
-                        total={`${count} ${pluralize(count, heading.forms)}`}
+                        title={t(`${tab}.title`)}
+                        hint={t(`${tab}.hint`)}
+                        total={t(`${tab}.total`, { count })}
                         action={<AppMenuButton />}
                     />
                 </PageHeader>
             }
         >
-            <SegmentedControl options={TABS} value={tab} onChange={setTab} />
+            <SegmentedControl options={tabs} value={tab} onChange={setTab} />
             {tab === "categories" ? <CategoriesTab /> : <TagsTab />}
         </PageWrapper>
     );

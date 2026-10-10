@@ -1,0 +1,25 @@
+{
+    "title": "Réglages",
+    "subtitle": "Pour tout avoir sous la main en cuisine",
+    "appearance": {
+        "title": "Apparence",
+        "description": "Choisis un mode de lecture confortable",
+        "light": "Clair",
+        "dark": "Sombre"
+    },
+    "language": {
+        "title": "Langue",
+        "description": "Langue de la navigation et de l'interface",
+        "sheetTitle": "Choisir la langue",
+        "available_one": "{{count}} langue disponible",
+        "available_many": "{{count}} de langues disponibles",
+        "available_other": "{{count}} langues disponibles"
+    },
+    "motion": {
+        "title": "Mouvement",
+        "description": "Gérer les transitions visuelles",
+        "animations": "Animations de l'interface",
+        "on": "Activées",
+        "off": "Désactivées"
+    }
+}

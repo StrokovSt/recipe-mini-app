@@ -1,0 +1,30 @@
+{
+    "appName": "Ricetta",
+    "back": "Back",
+    "close": "Close",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "loading": "Loading",
+    "search": "Search",
+    "clearSearch": "Clear search",
+    "nothingFound": "Nothing found",
+    "showMore": "Show {{count}} more",
+    "collapse": "Show less",
+    "iconPicker": "Choose an icon",
+    "errorBoundary": {
+        "title": "Something went wrong",
+        "retry": "Try again"
+    },
+    "errors": {
+        "PARSE_FAILED": "Couldn't read the recipe. Try another link.",
+        "RECIPE_NOT_FOUND": "Recipe not found.",
+        "INVALID_URL": "Invalid link.",
+        "AI_UNAVAILABLE": "The AI service is temporarily unavailable. Try again later.",
+        "AI_QUOTA_EXCEEDED": "Daily request limit reached. Try again tomorrow.",
+        "VALIDATION_ERROR": "Invalid data.",
+        "LIMIT_REACHED": "Recipe limit reached. Subscribe for unlimited access.",
+        "unknown": "Something went wrong."
+    }
+}

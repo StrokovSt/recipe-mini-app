@@ -1,0 +1,26 @@
+{
+    "title": "Налаштування",
+    "subtitle": "Щоб на кухні все було під рукою",
+    "appearance": {
+        "title": "Оформлення",
+        "description": "Оберіть зручний режим читання",
+        "light": "Світла",
+        "dark": "Темна"
+    },
+    "language": {
+        "title": "Мова",
+        "description": "Мова навігації та системних елементів",
+        "sheetTitle": "Оберіть мову",
+        "available_one": "Доступна {{count}} мова",
+        "available_few": "Доступно {{count}} мови",
+        "available_many": "Доступно {{count}} мов",
+        "available_other": "Доступно {{count}} мови"
+    },
+    "motion": {
+        "title": "Рух",
+        "description": "Керування візуальними переходами",
+        "animations": "Анімації інтерфейсу",
+        "on": "Увімкнено",
+        "off": "Вимкнено"
+    }
+}

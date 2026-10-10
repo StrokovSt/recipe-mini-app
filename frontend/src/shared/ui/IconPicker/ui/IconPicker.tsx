@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 import type { FC, SVGProps } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { TRANSITION_BASE } from '@/shared/config/animation';
 
@@ -25,6 +26,7 @@ const EXPANDED = { height: 'auto', opacity: 1 };
 
 const IconPicker = (props: IconPickerProps) => {
     const { options, value, isOpen, onChange, className } = props;
+    const { t } = useTranslation();
 
     return (
         <AnimatePresence initial={false}>
@@ -36,7 +38,7 @@ const IconPicker = (props: IconPickerProps) => {
                     exit={COLLAPSED}
                     transition={TRANSITION_BASE}
                 >
-                    <div className={styles.picker} role="radiogroup" aria-label="Выбор иконки">
+                    <div className={styles.picker} role="radiogroup" aria-label={t('iconPicker')}>
                         {options.map(({ name, label, Icon }) => (
                             <button
                                 key={name}

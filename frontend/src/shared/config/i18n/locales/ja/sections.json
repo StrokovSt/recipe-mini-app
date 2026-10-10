@@ -1,0 +1,78 @@
+{
+    "tabs": {
+        "categories": "カテゴリー",
+        "tags": "タグ"
+    },
+    "editing": "編集",
+    "categories": {
+        "title": "マイカテゴリー",
+        "hint": "レシピをきちんと整理",
+        "add": "新しいカテゴリー",
+        "noRecipes": "レシピなし",
+        "actions": "カテゴリー「{{name}}」の操作",
+        "deleteTitle": "カテゴリー「{{name}}」を削除しますか？",
+        "deleteText": "レシピは残りますが、カテゴリーなしになります。",
+        "form": {
+            "name": "カテゴリー名",
+            "pickIcon": "アイコンを選ぶ",
+            "duplicate": "このカテゴリーはすでにあります",
+            "saveFailed": "カテゴリーを保存できませんでした"
+        },
+        "total_other": "カテゴリー{{count}}件"
+    },
+    "tags": {
+        "title": "マイタグ",
+        "hint": "レシピをすばやく検索",
+        "add": "新しいタグ",
+        "unused": "まだ使われていません",
+        "actions": "タグ「{{name}}」の操作",
+        "deleteTitle": "タグ「{{name}}」を削除しますか？",
+        "deleteText": "タグはすべてのレシピから外れますが、レシピ自体は残ります。",
+        "form": {
+            "name": "タグ名",
+            "duplicate": "このタグはすでにあります",
+            "saveFailed": "タグを保存できませんでした"
+        },
+        "total_other": "タグ{{count}}件"
+    },
+    "icons": {
+        "Soup": "スープ",
+        "CakeSlice": "ケーキのひと切れ",
+        "Cake": "ケーキ",
+        "Salad": "サラダ",
+        "Utensils": "パスタ",
+        "Beef": "ステーキ",
+        "Fish": "魚",
+        "Egg": "卵",
+        "Vegan": "葉",
+        "CupSoda": "飲み物",
+        "Drumstick": "骨付きチキン",
+        "Shrimp": "エビ",
+        "Canape": "カナッペ",
+        "Rice": "ご飯",
+        "SauceBoat": "ソース入れ",
+        "Jar": "瓶",
+        "Pizza": "ピザ",
+        "Burger": "ハンバーガー",
+        "Sushi": "寿司",
+        "Taco": "タコス",
+        "Ramen": "ラーメン",
+        "Bread": "パン",
+        "Cheese": "チーズ",
+        "Grill": "グリル",
+        "Chili": "唐辛子",
+        "Mushroom": "きのこ",
+        "Carrot": "にんじん",
+        "Apple": "りんご",
+        "IceCream": "アイスクリーム",
+        "Cookie": "クッキー",
+        "Coffee": "コーヒー",
+        "Wine": "ワイン",
+        "CookingPot": "鍋",
+        "Pan": "フライパン",
+        "Star": "星",
+        "Heart": "ハート",
+        "Cutlery": "カトラリー"
+    },
+    "recipeCount_other": "レシピ{{count}}件"
+}

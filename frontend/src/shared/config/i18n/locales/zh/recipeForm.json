@@ -1,0 +1,52 @@
+{
+    "modes": {
+        "manual": "✍️ 手动",
+        "ai": "✨ 借助 AI"
+    },
+    "submitAdd": "保存食谱",
+    "submitEdit": "保存更改",
+    "reset": "重置表单",
+    "ai": {
+        "url": "Pinterest 链接",
+        "uploadPhoto": "📷 上传照片"
+    },
+    "recipe": {
+        "legend": "食谱",
+        "title": "标题",
+        "category": "分类",
+        "time": "烹饪时间",
+        "timeSuffix": "分钟",
+        "servings": "份数",
+        "servingsSuffix": "份"
+    },
+    "tags": "标签",
+    "ingredients": {
+        "legend": "食材",
+        "groupTitle": "食材分组标题",
+        "item": "食材 {{number}}",
+        "add": "添加食材",
+        "addGroup": "添加分组"
+    },
+    "steps": {
+        "legend": "烹饪步骤",
+        "item": "步骤 {{number}}",
+        "add": "添加步骤"
+    },
+    "media": {
+        "legend": "媒体",
+        "url": "照片或视频链接",
+        "upload": "📎 上传文件",
+        "addLink": "添加链接",
+        "emptyUrl": "请输入链接",
+        "invalidUrl": "请输入有效链接（https://...）"
+    },
+    "validation": {
+        "titleRequired": "标题为必填项",
+        "titleTooLong": "最多 {{max}} 个字符",
+        "ingredientsRequired": "请至少添加一种食材",
+        "ingredientEmpty": "食材不能为空",
+        "groupEmpty": "分组不能为空",
+        "stepEmpty": "步骤不能为空",
+        "invalidUrl": "请输入有效的 URL"
+    }
+}

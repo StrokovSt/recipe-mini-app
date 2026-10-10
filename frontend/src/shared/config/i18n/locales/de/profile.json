@@ -1,0 +1,10 @@
+{
+    "title": "Mein Profil",
+    "subtitle": "Alles, was du gesammelt und gekocht hast",
+    "placeholder": "Profildaten folgen bald",
+    "stats": {
+        "total": "Rezepte",
+        "categories": "Kategorien",
+        "pinterest": "Pinterest"
+    }
+}

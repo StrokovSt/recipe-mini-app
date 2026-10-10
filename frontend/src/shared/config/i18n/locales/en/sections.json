@@ -1,0 +1,81 @@
+{
+    "tabs": {
+        "categories": "Categories",
+        "tags": "Tags"
+    },
+    "editing": "Editing",
+    "categories": {
+        "title": "My categories",
+        "hint": "Recipes, neatly sorted",
+        "add": "New category",
+        "noRecipes": "No recipes",
+        "actions": "Actions for category “{{name}}”",
+        "deleteTitle": "Delete category “{{name}}”?",
+        "deleteText": "Its recipes will stay, just without a category.",
+        "form": {
+            "name": "Category name",
+            "pickIcon": "Choose icon",
+            "duplicate": "This category already exists",
+            "saveFailed": "Couldn't save the category"
+        },
+        "total_one": "{{count}} category",
+        "total_other": "{{count}} categories"
+    },
+    "tags": {
+        "title": "My tags",
+        "hint": "Find recipes fast",
+        "add": "New tag",
+        "unused": "Not used yet",
+        "actions": "Actions for tag “{{name}}”",
+        "deleteTitle": "Delete tag “{{name}}”?",
+        "deleteText": "The tag will be removed from all recipes; the recipes themselves stay.",
+        "form": {
+            "name": "Tag name",
+            "duplicate": "This tag already exists",
+            "saveFailed": "Couldn't save the tag"
+        },
+        "total_one": "{{count}} tag",
+        "total_other": "{{count}} tags"
+    },
+    "icons": {
+        "Soup": "Soup",
+        "CakeSlice": "Slice of cake",
+        "Cake": "Cake",
+        "Salad": "Salad",
+        "Utensils": "Pasta",
+        "Beef": "Steak",
+        "Fish": "Fish",
+        "Egg": "Egg",
+        "Vegan": "Leaf",
+        "CupSoda": "Drink",
+        "Drumstick": "Drumstick",
+        "Shrimp": "Shrimp",
+        "Canape": "Canapé",
+        "Rice": "Rice",
+        "SauceBoat": "Gravy boat",
+        "Jar": "Jar",
+        "Pizza": "Pizza",
+        "Burger": "Burger",
+        "Sushi": "Sushi",
+        "Taco": "Taco",
+        "Ramen": "Ramen",
+        "Bread": "Bread",
+        "Cheese": "Cheese",
+        "Grill": "Grill",
+        "Chili": "Chili pepper",
+        "Mushroom": "Mushroom",
+        "Carrot": "Carrot",
+        "Apple": "Apple",
+        "IceCream": "Ice cream",
+        "Cookie": "Cookie",
+        "Coffee": "Coffee",
+        "Wine": "Wine",
+        "CookingPot": "Pot",
+        "Pan": "Frying pan",
+        "Star": "Star",
+        "Heart": "Heart",
+        "Cutlery": "Cutlery"
+    },
+    "recipeCount_one": "{{count}} recipe",
+    "recipeCount_other": "{{count}} recipes"
+}

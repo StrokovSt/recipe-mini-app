@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import styles from "./StatsWidget.module.scss";
 
 interface StatsWidgetProps {
@@ -11,20 +13,21 @@ interface StatItem {
     label: string;
 }
 
-const STATS_LIST: StatItem[] = [
-    { key: "total", label: "Рецептов" },
-    { key: "categories", label: "Категорий" },
-    { key: "pinterest", label: "Pinterest" },
-];
-
 export function StatsWidget(props: StatsWidgetProps) {
     const { total, categories, pinterest } = props;
+    const { t } = useTranslation("profile");
+
+    const statsList: StatItem[] = [
+        { key: "total", label: t("stats.total") },
+        { key: "categories", label: t("stats.categories") },
+        { key: "pinterest", label: t("stats.pinterest") },
+    ];
 
     const values: Record<keyof StatsWidgetProps, number> = { total, categories, pinterest };
 
     return (
         <label className={styles.stats}>
-            {STATS_LIST.map(({ key, label }) => (
+            {statsList.map(({ key, label }) => (
                 <div key={key} className={styles.item}>
                     <div className={styles.val}>
                         {values[key]}

@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
 import styles from "./ErrorBoundary.module.scss";
@@ -34,7 +35,7 @@ export class ErrorBoundary extends Component<Props, State> {
             return (
                 <div className={styles.wrapper}>
                     <p className={styles.text}>
-                        Что-то пошло не так
+                        {i18next.t("errorBoundary.title")}
                     </p>
                     <p className={styles.subtext}>
                         {this.state.error?.message}
@@ -43,7 +44,7 @@ export class ErrorBoundary extends Component<Props, State> {
                         onClick={this.reset}
                         className={styles.button}
                     >
-                        Попробовать снова
+                        {i18next.t("errorBoundary.retry")}
                     </button>
                 </div>
             );

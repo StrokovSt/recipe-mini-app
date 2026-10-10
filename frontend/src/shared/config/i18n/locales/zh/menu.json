@@ -1,0 +1,17 @@
+{
+    "open": "菜单",
+    "guest": "大厨",
+    "subtitle": "个人资料、设置及应用相关信息",
+    "profile": {
+        "title": "我的资料",
+        "hint": "姓名和 Telegram 信息"
+    },
+    "settings": {
+        "title": "设置",
+        "hint": "主题、语言和动画"
+    },
+    "about": {
+        "title": "关于应用",
+        "hint": "帮助与反馈"
+    }
+}

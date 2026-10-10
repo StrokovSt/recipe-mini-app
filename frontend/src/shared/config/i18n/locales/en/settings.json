@@ -1,0 +1,24 @@
+{
+    "title": "Settings",
+    "subtitle": "Everything in your kitchen within reach",
+    "appearance": {
+        "title": "Appearance",
+        "description": "Choose a comfortable reading mode",
+        "light": "Light",
+        "dark": "Dark"
+    },
+    "language": {
+        "title": "Language",
+        "description": "Language of navigation and interface elements",
+        "sheetTitle": "Choose language",
+        "available_one": "{{count}} language available",
+        "available_other": "{{count}} languages available"
+    },
+    "motion": {
+        "title": "Motion",
+        "description": "Control visual transitions",
+        "animations": "Interface animations",
+        "on": "Enabled",
+        "off": "Disabled"
+    }
+}

@@ -16,14 +16,14 @@
     .mark {
         display: grid;
         flex-shrink: 0;
-        place-items: center;
-        margin-left: auto;
         width: var(--size-section-mark);
         height: var(--size-section-mark);
+        margin-left: auto;
         border: 1px solid var(--color-active);
         color: var(--color-active);
         font: var(--font-header-xs);
         transform: rotate(-3deg);
+        place-items: center;
     }
 
     .title {

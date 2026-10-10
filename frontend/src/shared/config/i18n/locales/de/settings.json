@@ -1,0 +1,24 @@
+{
+    "title": "Einstellungen",
+    "subtitle": "Damit in der Küche alles griffbereit ist",
+    "appearance": {
+        "title": "Darstellung",
+        "description": "Wähle einen angenehmen Lesemodus",
+        "light": "Hell",
+        "dark": "Dunkel"
+    },
+    "language": {
+        "title": "Sprache",
+        "description": "Sprache der Navigation und Bedienelemente",
+        "sheetTitle": "Sprache wählen",
+        "available_one": "{{count}} Sprache verfügbar",
+        "available_other": "{{count}} Sprachen verfügbar"
+    },
+    "motion": {
+        "title": "Bewegung",
+        "description": "Visuelle Übergänge steuern",
+        "animations": "Animationen der Oberfläche",
+        "on": "Aktiviert",
+        "off": "Deaktiviert"
+    }
+}

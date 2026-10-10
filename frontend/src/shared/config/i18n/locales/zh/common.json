@@ -1,0 +1,30 @@
+{
+    "appName": "Ricetta",
+    "back": "返回",
+    "close": "关闭",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "save": "保存",
+    "loading": "加载中",
+    "search": "搜索",
+    "clearSearch": "清除搜索",
+    "nothingFound": "未找到结果",
+    "showMore": "再显示 {{count}} 个",
+    "collapse": "收起",
+    "iconPicker": "选择图标",
+    "errorBoundary": {
+        "title": "出了点问题",
+        "retry": "重试"
+    },
+    "errors": {
+        "PARSE_FAILED": "无法解析该食谱，请换一个链接试试。",
+        "RECIPE_NOT_FOUND": "未找到该食谱。",
+        "INVALID_URL": "链接无效。",
+        "AI_UNAVAILABLE": "AI 服务暂时不可用，请稍后再试。",
+        "AI_QUOTA_EXCEEDED": "已达到每日请求上限，请明天再试。",
+        "VALIDATION_ERROR": "数据校验失败。",
+        "LIMIT_REACHED": "已达到食谱数量上限，订阅即可无限使用。",
+        "unknown": "出了点问题。"
+    }
+}

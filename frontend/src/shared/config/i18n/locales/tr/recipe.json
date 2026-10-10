@@ -1,0 +1,23 @@
+{
+    "notFound": "Tarif bulunamadı",
+    "edit": "Düzenle",
+    "delete": "Tarifi sil",
+    "deleteTitle": "“{{title}}” tarifi silinsin mi?",
+    "deleteText": "Bu işlem geri alınamaz.",
+    "time": "Süre",
+    "servings": "Porsiyon",
+    "telegraph": {
+        "title": "Telegraph'ta aç",
+        "hint": "Tarifin tam hâli"
+    },
+    "source": {
+        "title": "Orijinali aç",
+        "hint": "Tarifin kaynağı"
+    },
+    "tabs": {
+        "ingredients": "Malzemeler",
+        "steps": "Hazırlanışı"
+    },
+    "noIngredients": "Malzeme belirtilmemiş",
+    "noSteps": "Adımlar belirtilmemiş"
+}

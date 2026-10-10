@@ -78,6 +78,8 @@
     --size-tile-action: 40px;
     --size-tile-icon: 32px;
     --size-tile-arrow: 16px;
+    // Стрелка или галочка в конце строки-кнопки (выбор языка)
+    --size-row-icon: 16px;
     --size-sheet-handle-zone: 44px;
     // Отступ сверху шторки под полоску захвата
     --size-sheet-top: calc(var(--space-6) + var(--space-1));

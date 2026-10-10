@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { Tag } from '@recipe/common';
 
@@ -16,6 +17,7 @@ interface TagFormProps {
 
 const TagForm = (props: TagFormProps) => {
     const { tag, onSuccess, onCancel } = props;
+    const { t } = useTranslation(['sections', 'common']);
 
     const [name, setName] = useState(tag?.name ?? '');
 
@@ -30,9 +32,9 @@ const TagForm = (props: TagFormProps) => {
     const isPending = isCreating || isRenaming;
 
     const error = isDuplicate
-        ? 'Такой тег уже есть'
+        ? t('tags.form.duplicate')
         : isCreateError || isRenameError
-            ? 'Не удалось сохранить тег'
+            ? t('tags.form.saveFailed')
             : undefined;
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -49,7 +51,7 @@ const TagForm = (props: TagFormProps) => {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input
-                label="Название тега"
+                label={t('tags.form.name')}
                 rounded
                 value={name}
                 onChange={(event) => setName(event.target.value)}
@@ -57,10 +59,10 @@ const TagForm = (props: TagFormProps) => {
             />
 
             <div className={styles.actions}>
-                <OutlineButton type="button" label="Отмена" onClick={onCancel} />
+                <OutlineButton type="button" label={t('common:cancel')} onClick={onCancel} />
                 <RegularButton
                     type="submit"
-                    label="Сохранить"
+                    label={t('common:save')}
                     disabled={!trimmedName || isDuplicate || isPending}
                 />
             </div>

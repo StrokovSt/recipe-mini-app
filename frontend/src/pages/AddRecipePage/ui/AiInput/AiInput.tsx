@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { ApiError } from "@/shared/api";
 import { getErrorMessage } from "@/shared/lib/errors";
@@ -18,6 +19,7 @@ interface AiInputProps {
 }
 
 const AiInput = ({ isParsing, isParsingImage, error, onSubmitUrl, onSubmitImage }: AiInputProps) => {
+    const { t } = useTranslation("recipeForm");
     const [url, setUrl] = useState("");
     const fileRef = useRef<HTMLInputElement>(null);
 
@@ -39,7 +41,7 @@ const AiInput = ({ isParsing, isParsingImage, error, onSubmitUrl, onSubmitImage 
         <div className={styles.wrap}>
             <div className={styles.bar}>
                 <Input
-                    label="Cсылка на Pinterest"
+                    label={t("ai.url")}
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSubmitUrl()}
@@ -60,7 +62,7 @@ const AiInput = ({ isParsing, isParsingImage, error, onSubmitUrl, onSubmitImage 
                 onClick={() => fileRef.current?.click()}
                 disabled={isParsing || isParsingImage}
             >
-                {isParsingImage ? <Spinner size="sm" /> : "📷 Загрузить фото"}
+                {isParsingImage ? <Spinner size="sm" /> : t("ai.uploadPhoto")}
             </button>
             <input
                 ref={fileRef}
