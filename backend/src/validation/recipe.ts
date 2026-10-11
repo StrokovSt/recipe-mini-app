@@ -55,6 +55,8 @@ export const createRecipeSchema = z.object({
     steps: recipeShape.steps.default([]),
     media: recipeShape.media.default([]),
     tags: recipeShape.tags.default([]),
+    // Черновик, из которого сохраняется рецепт: после создания удаляется
+    draftId: z.string().cuid().optional(),
 });
 
 export const updateRecipeSchema = z.object(recipeShape).partial();

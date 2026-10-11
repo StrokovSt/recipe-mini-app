@@ -153,7 +153,7 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
         }
 
         const userId = req.userId as string;
-        const { title, description, categoryId, ingredients, steps, prepTime, cookTime, servings, sourceUrl, source, media, tags } = parsed.data;
+        const { title, description, categoryId, ingredients, steps, prepTime, cookTime, servings, sourceUrl, source, media, tags, draftId } = parsed.data;
 
         const recipe = await prisma.recipe.create({
             data: {
@@ -181,6 +181,10 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
             },
             include: RECIPE_INCLUDE,
         });
+
+        if (draftId) {
+            await prisma.draft.deleteMany({ where: { id: draftId, userId } });
+        }
 
         publishRecipeToTelegraph({
             title,

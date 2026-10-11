@@ -77,6 +77,21 @@ model RecipeTag {
   @@id([recipeId, tagId])
 }
 
+// Черновик формы рецепта. data — JSON значений формы, проверяется при сохранении рецепта
+model Draft {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String   @default("")
+  // "ai" | "manual"
+  origin    String   @default("manual")
+  source    String   @default("other")
+  data      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
 model User {
     id          String    @id  // telegram user id
     plan        Plan      @default(FREE)

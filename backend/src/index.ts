@@ -9,6 +9,7 @@ import { errorHandler } from "./middleware/errorHandler";
 import { generalLimiter, parseLimiter, uploadLimiter } from "./middleware/rateLimit";
 import { requireAi } from "./middleware/requireAi";
 import categoriesRouter from "./routes/categories";
+import draftsRouter from "./routes/drafts";
 import meRouter from "./routes/me";
 import router from "./routes/parse";
 import recipesRouter from "./routes/recipes";
@@ -41,6 +42,7 @@ app.use("/api/parse", parseLimiter, requireAi, router);
 app.use("/api/me", meRouter);
 app.use("/api/recipes", recipesRouter);
 app.use("/api/categories", categoriesRouter);
+app.use("/api/drafts", draftsRouter);
 app.use("/api/tags", tagsRouter);
 app.use("/api/upload", uploadLimiter, uploadRouter);
 

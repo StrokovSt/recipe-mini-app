@@ -87,6 +87,8 @@ export type CreateRecipeDto = Omit<Recipe, RecipeOmitFields> & {
     categoryId?: string | null;
     tags: string[];
     media: MediaInput[];
+    // Черновик, из которого сохраняется рецепт: бэкенд удалит его после создания
+    draftId?: string;
 };
 
 // Результат распознавания: категорию и теги AI выбирает из списков пользователя,
