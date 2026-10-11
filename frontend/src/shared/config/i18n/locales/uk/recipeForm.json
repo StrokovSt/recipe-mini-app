@@ -44,29 +44,40 @@
     },
     "recipe": {
         "title": "Назва",
+        "description": "Опис",
         "category": "Категорія",
-        "time": "Час приготування",
-        "timeSuffix": "хв",
-        "servings": "Кількість порцій",
-        "servingsSuffix": "шт."
+        "servings": "Порції",
+        "servingsSuffix": "шт.",
+        "cookTime": "Готування",
+        "timeSuffix": "хв"
     },
     "tags": "Теги",
     "ingredients": {
-        "groupTitle": "Заголовок групи інгредієнтів",
-        "item": "Інгредієнт {{number}}",
-        "add": "Додати інгредієнт",
-        "addGroup": "Додати групу"
+        "groupTitle": "Назва групи",
+        "name": "Інгредієнт",
+        "amount": "К-ть",
+        "unit": "Од.",
+        "unitTitle": "Одиниця виміру",
+        "noUnit": "Без одиниці",
+        "remove": "Видалити інгредієнт",
+        "removeGroup": "Видалити групу",
+        "add": "Інгредієнт",
+        "addGroup": "Група"
     },
     "steps": {
         "item": "Крок {{number}}",
-        "add": "Додати крок"
+        "add": "Крок",
+        "remove": "Видалити крок",
+        "photo": "Фото",
+        "removePhoto": "Прибрати фото"
     },
     "validation": {
         "titleRequired": "Назва обов'язкова",
         "titleTooLong": "Не більше {{max}} символів",
         "ingredientsRequired": "Додайте хоча б один інгредієнт",
-        "ingredientEmpty": "Інгредієнт не може бути порожнім",
+        "ingredientEmpty": "Введіть назву",
         "groupEmpty": "Група не може бути порожньою",
-        "stepEmpty": "Крок не може бути порожнім"
+        "stepEmpty": "Крок не може бути порожнім",
+        "amountInvalid": "Більше нуля"
     }
 }

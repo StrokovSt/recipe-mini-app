@@ -42,5 +42,11 @@
         "pinch": "{{count, number}}つまみ",
         "handful": "{{count, number}}つかみ",
         "to_taste": "適量"
+    },
+    "kind": {
+        "mass": "重さ",
+        "volume": "容量",
+        "count": "個数",
+        "other": "その他"
     }
 }

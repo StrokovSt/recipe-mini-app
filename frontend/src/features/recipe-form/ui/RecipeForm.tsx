@@ -1,24 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useRef } from "react";
 import { Controller, FormProvider, type Resolver, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
-import { useCategories } from "@/entities/category";
 import { useCreateRecipe, useUploadMedia } from "@/entities/recipe";
+import { getAnimations } from "@/shared/lib/animations";
 import { IconButton, RegularButton } from "@/shared/ui/Buttons";
 import { ImageInput } from "@/shared/ui/ImageInput";
-import { InputController } from "@/shared/ui/Input";
 import { PageHeader } from "@/shared/ui/PageHeader";
-import { SelectController } from "@/shared/ui/Select";
 
 import { toMedia } from "../model/cover";
 import { EMPTY_INGREDIENT, EMPTY_STEP, type RecipeFormValues, recipeSchema } from "../model/schema";
 import type { RecipeFormProps } from "../model/types";
 import FormSection from "./FormSection/FormSection";
 import IngredientsField from "./IngredientsField/IngredientsField";
+import MainFields from "./MainFields/MainFields";
 import StepsField from "./StepsField/StepsField";
-import TagsSelect from "./TagsSelect/TagsSelect";
 
 import styles from "./RecipeForm.module.scss";
 
@@ -35,11 +34,15 @@ const RecipeForm = (props: RecipeFormProps) => {
     const navigate = useNavigate();
     const methods = useForm<RecipeFormValues>({
         resolver: zodResolver(recipeSchema) as Resolver<RecipeFormValues>,
+        // Фокус сразу открыл бы клавиатуру и сбил прокрутку, к ошибке ведём сами
+        shouldFocusError: false,
         defaultValues: {
             title: "",
+            description: null,
             categoryId: null,
             ingredients: [{ title: null, items: [EMPTY_INGREDIENT] }],
             steps: [EMPTY_STEP],
+            prepTime: null,
             cookTime: null,
             servings: null,
             tagIds: [],
@@ -48,12 +51,16 @@ const RecipeForm = (props: RecipeFormProps) => {
         },
     });
 
-    const { handleSubmit, control } = methods;
-    const { data: categories = [] } = useCategories();
+    const { handleSubmit, control, formState: { submitCount } } = methods;
+    const formRef = useRef<HTMLFormElement>(null);
 
-    const categoryOptions = [
-        ...categories.map((cat) => ({ value: cat.id, label: cat.name })),
-    ];
+    // Не сохранилось из-за ошибок: прокручиваем к самой верхней, как по якорю
+    useEffect(() => {
+        if (submitCount === 0) return;
+
+        const invalid = formRef.current?.querySelector('[aria-invalid="true"], [role="alert"]');
+        invalid?.scrollIntoView({ behavior: getAnimations() ? "smooth" : "auto", block: "center" });
+    }, [submitCount]);
 
     const { mutate: createRecipe, isPending: isSaving } = useCreateRecipe();
     const { mutateAsync: uploadMedia } = useUploadMedia();
@@ -70,7 +77,7 @@ const RecipeForm = (props: RecipeFormProps) => {
         createRecipe(
             {
                 title: values.title,
-                description: values.description ?? null,
+                description: values.description?.trim() || null,
                 categoryId: values.categoryId,
                 ingredients: values.ingredients,
                 steps: values.steps,
@@ -103,8 +110,8 @@ const RecipeForm = (props: RecipeFormProps) => {
                 />
             </PageHeader>
 
-            <form className={styles.form} onSubmit={handleSubmit(handleSave)}>
-                <FormSection title={t("sections.cover")}>
+            <form ref={formRef} className={styles.form} onSubmit={handleSubmit(handleSave)}>
+                <FormSection mark="一" title={t("sections.cover")}>
                     <Controller
                         control={control}
                         name="cover"
@@ -118,46 +125,7 @@ const RecipeForm = (props: RecipeFormProps) => {
                     />
                 </FormSection>
 
-                <FormSection title={t("sections.main")}>
-                    <InputController
-                        name="title"
-                        control={control}
-                        label={t("recipe.title")}
-                    />
-
-                    <SelectController
-                        name="categoryId"
-                        control={control}
-                        options={categoryOptions}
-                        placeholder={t("recipe.category")}
-                    />
-
-                    <InputController
-                        name="cookTime"
-                        control={control}
-                        label={t("recipe.time")}
-                        type="number"
-                        suffix={t("recipe.timeSuffix")}
-                    />
-
-                    <InputController
-                        name="servings"
-                        control={control}
-                        label={t("recipe.servings")}
-                        type="number"
-                        suffix={t("recipe.servingsSuffix")}
-                    />
-                </FormSection>
-
-                <FormSection title={t("tags")}>
-                    <Controller
-                        control={control}
-                        name="tagIds"
-                        render={({ field }) => (
-                            <TagsSelect value={field.value} onChange={field.onChange} />
-                        )}
-                    />
-                </FormSection>
+                <MainFields />
 
                 <IngredientsField />
 

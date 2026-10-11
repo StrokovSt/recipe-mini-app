@@ -1,0 +1,23 @@
+// Общие стили ингредиентов и шагов: блок в рамке, узкий крестик удаления, текст ошибки
+
+@mixin block {
+    padding: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+// Крестик высотой с поле, узкий, чтобы полю осталось больше места
+@mixin remove {
+    width: var(--size-row-remove);
+    height: var(--size-field-height);
+
+    svg {
+        width: var(--size-row-icon);
+        height: var(--size-row-icon);
+    }
+}
+
+@mixin error {
+    color: var(--color-error);
+    font: var(--font-ui-xs);
+}

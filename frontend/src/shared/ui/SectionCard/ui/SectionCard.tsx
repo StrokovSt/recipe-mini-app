@@ -8,21 +8,24 @@ interface SectionCardProps {
     description?: string;
     // Знак в рамке-печати справа от заголовка, например «一»
     mark?: string;
+    // Кнопка в шапке справа, например «+ Группа»
+    action?: ReactNode;
     children: ReactNode;
     className?: string;
 }
 
 // Карточка-секция, как в настройках Figma: печать с номером, заголовок, подпись и содержимое
 export const SectionCard = (props: SectionCardProps) => {
-    const { title, description, mark, children, className } = props;
+    const { title, description, mark, action, children, className } = props;
 
     return (
         <section className={clsx(styles.card, className)}>
             <header className={styles.header}>
-                <div>
+                <div className={styles.heading}>
                     <h2 className={styles.title}>{title}</h2>
                     {description && <p className={styles.description}>{description}</p>}
                 </div>
+                {action}
                 {mark && (
                     <span className={styles.mark} aria-hidden>
                         {mark}

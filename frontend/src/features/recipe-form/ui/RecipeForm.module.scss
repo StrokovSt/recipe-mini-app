@@ -1,5 +1,9 @@
 @use "@/shared/styles/bar";
 
+// На телефонах уже этой ширины форма во всю ширину экрана, без боковых отступов страницы.
+// В @media нельзя подставить CSS-переменную, поэтому граница здесь, а не в variables.scss
+$narrow-screen-width: 360px;
+
 .header {
     flex-direction: row;
     align-items: center;
@@ -51,5 +55,14 @@
 
     .submit {
         width: 100%;
+    }
+
+    // После .save, чтобы перебить его отрицательные поля
+    @media (width <= $narrow-screen-width) {
+        margin-inline: calc(-1 * var(--space-5));
+
+        .save {
+            margin-inline: 0;
+        }
     }
 }

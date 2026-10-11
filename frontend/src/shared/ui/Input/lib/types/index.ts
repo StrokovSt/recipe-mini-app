@@ -5,7 +5,6 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
     register?: UseFormRegisterReturn;
     error?: string;
     suffix?: string;
-    rounded?: boolean;
 }
 
 type FormValues = FieldValues;

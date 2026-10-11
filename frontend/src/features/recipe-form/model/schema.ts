@@ -8,7 +8,7 @@ const TITLE_MAX_LENGTH = 100;
 // Тексты ошибок берутся из словаря в момент проверки, поэтому они на текущем языке
 const ingredientSchema = z.object({
     name: z.string().trim().min(1, { error: () => i18next.t("recipeForm:validation.ingredientEmpty") }),
-    amount: z.number().nullable(),
+    amount: z.number().positive({ error: () => i18next.t("recipeForm:validation.amountInvalid") }).nullable(),
     unit: z.enum(UNIT_CODES).nullable(),
 });
 
@@ -33,7 +33,7 @@ export const recipeSchema = z.object({
     categoryId: z.string().nullable().optional(),
     ingredients: z.array(ingredientGroupSchema).min(1, { error: () => i18next.t("recipeForm:validation.ingredientsRequired") }),
     steps: z.array(stepSchema).default([]),
-    // Время в минутах. Поля подготовки в форме пока нет, значение сохраняется как пришло
+    // Время подготовки и готовки в минутах
     prepTime: z.number().int().min(0).nullable().optional(),
     cookTime: z.number().int().min(0).nullable().optional(),
     servings: z.number().int().positive().nullable().optional(),

@@ -6,7 +6,7 @@ import type { InputProps } from "../../lib/types";
 import styles from "./Input.module.scss";
 
 export const Input = (props: InputProps) => {
-    const { label, register, error, suffix, rounded = false, className, ...rest } = props;
+    const { label, register, error, suffix, className, ...rest } = props;
     const measureRef = useRef<HTMLSpanElement>(null);
     const suffixRef = useRef<HTMLSpanElement>(null);
 
@@ -15,18 +15,19 @@ export const Input = (props: InputProps) => {
     useLayoutEffect(() => {
         if (measureRef.current && suffixRef.current) {
             const width = measureRef.current.offsetWidth;
-            suffixRef.current.style.left = `calc(var(--space-4) + ${width}px + 4px)`;
+            suffixRef.current.style.left = `calc(var(--space-3) + 1px + ${width}px + var(--space-1))`;
         }
     }, [rest.value]);
 
     return (
-        <div className={clsx(styles.wrap, rounded && styles['wrap--rounded'], className)}>
+        <div className={clsx(styles.wrap, className)}>
             <input
                 className={clsx(styles.input, {
                     [styles.inputNumber]: rest.type === "number",
                     [styles.inputError]: error,
                 })}
                 placeholder=" "
+                aria-invalid={error ? true : undefined}
                 {...rest}
                 {...register}
             />

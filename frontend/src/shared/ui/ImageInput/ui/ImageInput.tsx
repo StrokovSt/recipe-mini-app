@@ -171,7 +171,6 @@ export const ImageInput = (props: ImageInputProps) => {
                             label={t("imageInput.url")}
                             type="url"
                             inputMode="url"
-                            rounded
                             value={url}
                             error={urlError}
                             disabled={isUploading}
@@ -184,6 +183,7 @@ export const ImageInput = (props: ImageInputProps) => {
                         <IconButton
                             icon="forward"
                             type="button"
+                            className={styles.apply}
                             aria-label={t("imageInput.apply")}
                             disabled={!url.trim() || isUploading}
                             onClick={applyUrl}

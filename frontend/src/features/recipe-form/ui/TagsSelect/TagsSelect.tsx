@@ -1,6 +1,8 @@
-import clsx from "clsx";
-
 import { useTags } from "@/entities/tag";
+import { ExpandableList } from "@/shared/ui/ExpandableList";
+import { TagComponent } from "@/shared/ui/Tag";
+
+import { COLLAPSED_ROWS } from "../../model/constants";
 
 import styles from "./TagsSelect.module.scss";
 
@@ -9,6 +11,7 @@ interface TagsSelectProps {
     onChange: (ids: string[]) => void;
 }
 
+// Теги как в шторке фильтров: два ряда, выбранные закреплены
 const TagsSelect = ({ value, onChange }: TagsSelectProps) => {
     const { data: tags = [] } = useTags();
 
@@ -17,18 +20,20 @@ const TagsSelect = ({ value, onChange }: TagsSelectProps) => {
     };
 
     return (
-        <div className={styles.wrap}>
-            {tags.map((tag) => (
-                <button
+        <ExpandableList
+            items={tags}
+            rows={COLLAPSED_ROWS}
+            isPinned={(tag) => value.includes(tag.id)}
+            className={styles.list}
+            renderItem={(tag) => (
+                <TagComponent
                     key={tag.id}
-                    type="button"
-                    onClick={() => toggle(tag.id)}
-                    className={clsx(styles.tag, value.includes(tag.id) && styles.tagActive)}
-                >
-                    {tag.name}
-                </button>
-            ))}
-        </div>
+                    tag={tag}
+                    clickHandler={toggle}
+                    tagIsActive={value.includes(tag.id)}
+                />
+            )}
+        />
     );
 };
 

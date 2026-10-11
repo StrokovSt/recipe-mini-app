@@ -1,26 +1,25 @@
 import type { ReactNode } from "react";
 
+import { SectionCard } from "@/shared/ui/SectionCard";
+
 import styles from "./FormSection.module.scss";
 
 interface FormSectionProps {
     title: string;
-    // Действие справа от заголовка, например «+ Шаг»
+    // Номер секции в печати, как в карточках настроек: «一», «二»…
+    mark: string;
     action?: ReactNode;
     children: ReactNode;
 }
 
-// Секция формы рецепта: заголовок с действием и содержимое
+// Секция формы рецепта: карточка, как в настройках, чтобы заголовки читались на фоне картинки
 const FormSection = (props: FormSectionProps) => {
-    const { title, action, children } = props;
+    const { title, mark, action, children } = props;
 
     return (
-        <section className={styles.section}>
-            <div className={styles.head}>
-                <h2 className={styles.title}>{title}</h2>
-                {action}
-            </div>
+        <SectionCard title={title} mark={mark} action={action} className={styles.section}>
             {children}
-        </section>
+        </SectionCard>
     );
 };
 

@@ -44,29 +44,40 @@
     },
     "recipe": {
         "title": "タイトル",
+        "description": "説明",
         "category": "カテゴリー",
-        "time": "調理時間",
-        "timeSuffix": "分",
         "servings": "人数",
-        "servingsSuffix": "人分"
+        "servingsSuffix": "人分",
+        "cookTime": "調理時間",
+        "timeSuffix": "分"
     },
     "tags": "タグ",
     "ingredients": {
-        "groupTitle": "材料グループの見出し",
-        "item": "材料 {{number}}",
-        "add": "材料を追加",
-        "addGroup": "グループを追加"
+        "groupTitle": "グループ名",
+        "name": "材料",
+        "amount": "分量",
+        "unit": "単位",
+        "unitTitle": "単位",
+        "noUnit": "単位なし",
+        "remove": "材料を削除",
+        "removeGroup": "グループを削除",
+        "add": "材料",
+        "addGroup": "グループ"
     },
     "steps": {
         "item": "手順 {{number}}",
-        "add": "手順を追加"
+        "add": "手順",
+        "remove": "手順を削除",
+        "photo": "写真",
+        "removePhoto": "写真を削除"
     },
     "validation": {
         "titleRequired": "タイトルは必須です",
         "titleTooLong": "{{max}}文字以内で入力してください",
         "ingredientsRequired": "材料を1つ以上追加してください",
-        "ingredientEmpty": "材料を入力してください",
+        "ingredientEmpty": "名前を入力",
         "groupEmpty": "グループが空です",
-        "stepEmpty": "手順を入力してください"
+        "stepEmpty": "手順を入力してください",
+        "amountInvalid": "0より大きい数"
     }
 }

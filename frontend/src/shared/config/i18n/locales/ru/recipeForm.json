@@ -44,29 +44,40 @@
     },
     "recipe": {
         "title": "Название",
+        "description": "Описание",
         "category": "Категория",
-        "time": "Время приготовления",
-        "timeSuffix": "мин.",
-        "servings": "Количество порций",
-        "servingsSuffix": "шт."
+        "servings": "Порции",
+        "servingsSuffix": "шт.",
+        "cookTime": "Готовка",
+        "timeSuffix": "мин."
     },
     "tags": "Теги",
     "ingredients": {
-        "groupTitle": "Заголовок группы ингредиентов",
-        "item": "Ингредиент {{number}}",
-        "add": "Добавить ингредиент",
-        "addGroup": "Добавить группу"
+        "groupTitle": "Название группы",
+        "name": "Ингредиент",
+        "amount": "Кол.",
+        "unit": "Ед.",
+        "unitTitle": "Единица измерения",
+        "noUnit": "Без единицы",
+        "remove": "Удалить ингредиент",
+        "removeGroup": "Удалить группу",
+        "add": "Ингредиент",
+        "addGroup": "Группа"
     },
     "steps": {
         "item": "Шаг {{number}}",
-        "add": "Добавить шаг"
+        "add": "Шаг",
+        "remove": "Удалить шаг",
+        "photo": "Фото",
+        "removePhoto": "Убрать фото"
     },
     "validation": {
         "titleRequired": "Название обязательно",
         "titleTooLong": "Не более {{max}} символов",
         "ingredientsRequired": "Добавьте хотя бы один ингредиент",
-        "ingredientEmpty": "Ингредиент не может быть пустым",
+        "ingredientEmpty": "Введите название",
         "groupEmpty": "Группа не может быть пустой",
-        "stepEmpty": "Шаг не может быть пустым"
+        "stepEmpty": "Шаг не может быть пустым",
+        "amountInvalid": "Больше нуля"
     }
 }

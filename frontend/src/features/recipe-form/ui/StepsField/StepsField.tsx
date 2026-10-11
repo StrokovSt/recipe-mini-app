@@ -1,50 +1,44 @@
-import { useFormContext } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { AddButton, IconButton } from "@/shared/ui/Buttons";
-import { TextareaController } from "@/shared/ui/Input";
+import { useUploadMedia } from "@/entities/recipe";
+import { AddButton } from "@/shared/ui/Buttons";
 
 import { EMPTY_STEP, type RecipeFormValues } from "../../model/schema";
 import FormSection from "../FormSection/FormSection";
+import StepItem from "./StepItem";
 
 import styles from "./StepsField.module.scss";
 
+// Секция «Приготовление»: шаги карточками с номером, текстом и фото
 const StepsField = () => {
     const { t } = useTranslation("recipeForm");
-    const { control, watch, setValue, formState: { errors } } = useFormContext<RecipeFormValues>();
-    const steps = watch("steps");
+    const { control, formState: { errors } } = useFormContext<RecipeFormValues>();
+    const { fields, append, remove } = useFieldArray({ control, name: "steps" });
+    const { mutateAsync: uploadMedia } = useUploadMedia();
 
-    const append = () => {
-        setValue("steps", [...steps, EMPTY_STEP], { shouldValidate: true });
-    };
-
-    const remove = (i: number) => {
-        setValue("steps", steps.filter((_, idx) => idx !== i), { shouldValidate: true });
-    };
+    const uploadPhoto = async (file: File) => (await uploadMedia(file)).url;
 
     return (
-        <FormSection title={t("sections.steps")}>
-            {steps.length > 0 && (
-                <div className={styles.list}>
-                    {steps.map((_, i) => (
-                        <div key={i} className={styles.row}>
-                            <TextareaController
-                                name={`steps.${i}.text` as "steps.0.text"}
-                                control={control}
-                                label={t("steps.item", { number: i + 1 })}
-                                error={errors.steps?.[i]?.text?.message}
-                            />
-                            <IconButton icon="close" variant="danger" type="button" onClick={() => remove(i)} />
-                        </div>
+        <FormSection
+            mark="四"
+            title={t("sections.steps")}
+            action={<AddButton label={t("steps.add")} onClick={() => append(EMPTY_STEP)} />}
+        >
+            {fields.length > 0 && (
+                <ol className={styles.list}>
+                    {fields.map((field, index) => (
+                        <StepItem
+                            key={field.id}
+                            index={index}
+                            onUpload={uploadPhoto}
+                            onRemove={fields.length > 1 ? () => remove(index) : undefined}
+                        />
                     ))}
-                </div>
+                </ol>
             )}
-            {(errors.steps?.message || errors.steps?.root?.message) && (
-                <span className={styles.error}>
-                    {errors.steps.message ?? errors.steps.root?.message}
-                </span>
-            )}
-            <AddButton label={t("steps.add")} onClick={append} />
+
+            {errors.steps?.message && <p className={styles.error} role="alert">{errors.steps.message}</p>}
         </FormSection>
     );
 };

@@ -44,29 +44,40 @@
     },
     "recipe": {
         "title": "Título",
+        "description": "Descrição",
         "category": "Categoria",
-        "time": "Tempo de preparo",
-        "timeSuffix": "min",
         "servings": "Porções",
-        "servingsSuffix": "porç."
+        "servingsSuffix": "porç.",
+        "cookTime": "Cozimento",
+        "timeSuffix": "min"
     },
     "tags": "Tags",
     "ingredients": {
-        "groupTitle": "Título do grupo de ingredientes",
-        "item": "Ingrediente {{number}}",
-        "add": "Adicionar ingrediente",
-        "addGroup": "Adicionar grupo"
+        "groupTitle": "Nome do grupo",
+        "name": "Ingrediente",
+        "amount": "Qtd.",
+        "unit": "Unid.",
+        "unitTitle": "Unidade de medida",
+        "noUnit": "Sem unidade",
+        "remove": "Remover ingrediente",
+        "removeGroup": "Remover grupo",
+        "add": "Ingrediente",
+        "addGroup": "Grupo"
     },
     "steps": {
         "item": "Etapa {{number}}",
-        "add": "Adicionar etapa"
+        "add": "Etapa",
+        "remove": "Remover etapa",
+        "photo": "Foto",
+        "removePhoto": "Remover foto"
     },
     "validation": {
         "titleRequired": "O título é obrigatório",
         "titleTooLong": "No máximo {{max}} caracteres",
         "ingredientsRequired": "Adicione pelo menos um ingrediente",
-        "ingredientEmpty": "O ingrediente não pode ficar vazio",
+        "ingredientEmpty": "Digite o nome",
         "groupEmpty": "O grupo não pode ficar vazio",
-        "stepEmpty": "A etapa não pode ficar vazia"
+        "stepEmpty": "A etapa não pode ficar vazia",
+        "amountInvalid": "Maior que 0"
     }
 }

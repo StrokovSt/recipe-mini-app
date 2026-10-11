@@ -1,84 +1,49 @@
-@use "@/shared/styles/states";
-
-.wrap {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-}
+@use "../compact";
 
 .list {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-    border-radius: var(--radius-md);
 }
 
-.row {
-    display: flex;
-    align-items: center;
+// Шаг в рамке: номер слева, справа текст, под ним фото; крестик в правом столбце
+.step {
+    @include compact.block;
+
+    display: grid;
+    align-items: start;
+    grid-template-columns: var(--size-step-number) minmax(0, 1fr) auto;
     gap: var(--space-2);
-    width: 100%;
-    padding-right: var(--space-3);
-}
 
-.stepNum {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: var(--radius-sm);
-    background: var(--color-accent);
-    color: #fff;
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-black);
-}
-
-.input {
-    flex: 1;
-    padding: var(--space-1) 0;
-    border: none;
-    border-bottom: 1px solid rgb(0 0 0 / 6%);
-    outline: none;
-    background: transparent;
-    color: var(--tg-text);
-    font: var(--font-ui-sm);
-}
-
-.removeBtn {
-    flex-shrink: 0;
-    padding: var(--space-1);
-    border: none;
-    background: none;
-    color: var(--tg-hint);
-    font-size: var(--font-size-xs);
-    cursor: pointer;
-
-    transition: var(--transition-base);
-
-    @include states.hover {
-        color: var(--color-accent);
+    .content {
+        grid-column: 2 / -1;
     }
 
-    &:active {
-        color: #e53935;
-        transform: scale(1.1);
+    // Единственный шаг без крестика: текст до правого края
+    &:not(:has(.remove)) .text {
+        grid-column: 2 / -1;
+    }
+
+    .remove {
+        @include compact.remove;
     }
 }
 
-.addBtn {
-    align-self: flex-start;
-    padding: var(--space-1) 0;
-    border: none;
-    background: none;
-    color: var(--color-accent);
-    font: var(--font-ui-sm);
-    font-weight: var(--font-weight-bold);
-    cursor: pointer;
+// Номер шага в кружке, курсивом с засечками, как в Figma
+.number {
+    display: grid;
+    width: var(--size-step-number);
+    height: var(--size-step-number);
+    margin-top: calc((var(--size-field-height) - var(--size-step-number)) / 2);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    background: var(--tg-secondary-bg);
+    color: var(--color-active);
+    font: var(--font-header-sm);
+    font-style: italic;
+    place-items: center;
 }
 
 .error {
-    color: #e53935;
-    font: var(--font-xs);
+    @include compact.error;
 }

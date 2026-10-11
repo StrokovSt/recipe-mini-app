@@ -8,13 +8,14 @@ interface AddButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     label: string;
 }
 
+// Прозрачная пилюля с винной рамкой, как «+ Группа» в Figma
 export const AddButton = (props: AddButtonProps) => {
     const { label, className, ...rest } = props;
 
     return (
         <button className={clsx(styles.btn, className)} type="button" {...rest}>
-            <span className={styles.label}>{label}</span>
-            <span className={styles.icon}>{ButtonIcons.add}</span>
+            {ButtonIcons.add}
+            {label}
         </button>
     );
 };

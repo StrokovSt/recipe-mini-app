@@ -82,7 +82,6 @@ const CategoryForm = (props: CategoryFormProps) => {
                 </button>
                 <Input
                     label={t('categories.form.name')}
-                    rounded
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                     error={error}

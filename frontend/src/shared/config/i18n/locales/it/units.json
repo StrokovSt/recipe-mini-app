@@ -66,5 +66,11 @@
         "handful_many": "{{count, number}} manciate",
         "handful_other": "{{count, number}} manciate",
         "to_taste": "q.b."
+    },
+    "kind": {
+        "mass": "Peso",
+        "volume": "Volume",
+        "count": "Pezzi",
+        "other": "Altro"
     }
 }

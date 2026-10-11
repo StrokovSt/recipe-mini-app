@@ -52,7 +52,6 @@ const TagForm = (props: TagFormProps) => {
         <form className={styles.form} onSubmit={handleSubmit}>
             <Input
                 label={t('tags.form.name')}
-                rounded
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 error={error}

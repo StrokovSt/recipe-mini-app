@@ -44,29 +44,40 @@
     },
     "recipe": {
         "title": "Başlık",
+        "description": "Açıklama",
         "category": "Kategori",
-        "time": "Pişirme süresi",
-        "timeSuffix": "dk",
-        "servings": "Porsiyon sayısı",
-        "servingsSuffix": "porsiyon"
+        "servings": "Porsiyon",
+        "servingsSuffix": "porsiyon",
+        "cookTime": "Pişirme",
+        "timeSuffix": "dk"
     },
     "tags": "Etiketler",
     "ingredients": {
-        "groupTitle": "Malzeme grubu başlığı",
-        "item": "Malzeme {{number}}",
-        "add": "Malzeme ekle",
-        "addGroup": "Grup ekle"
+        "groupTitle": "Grup adı",
+        "name": "Malzeme",
+        "amount": "Mik.",
+        "unit": "Birim",
+        "unitTitle": "Ölçü birimi",
+        "noUnit": "Birimsiz",
+        "remove": "Malzemeyi kaldır",
+        "removeGroup": "Grubu kaldır",
+        "add": "Malzeme",
+        "addGroup": "Grup"
     },
     "steps": {
         "item": "Adım {{number}}",
-        "add": "Adım ekle"
+        "add": "Adım",
+        "remove": "Adımı kaldır",
+        "photo": "Fotoğraf",
+        "removePhoto": "Fotoğrafı kaldır"
     },
     "validation": {
         "titleRequired": "Başlık zorunlu",
         "titleTooLong": "En fazla {{max}} karakter",
         "ingredientsRequired": "En az bir malzeme ekle",
-        "ingredientEmpty": "Malzeme boş olamaz",
+        "ingredientEmpty": "Ad girin",
         "groupEmpty": "Grup boş olamaz",
-        "stepEmpty": "Adım boş olamaz"
+        "stepEmpty": "Adım boş olamaz",
+        "amountInvalid": "0'dan büyük olmalı"
     }
 }

@@ -44,29 +44,40 @@
     },
     "recipe": {
         "title": "Judul",
+        "description": "Deskripsi",
         "category": "Kategori",
-        "time": "Waktu memasak",
-        "timeSuffix": "mnt",
-        "servings": "Jumlah porsi",
-        "servingsSuffix": "porsi"
+        "servings": "Porsi",
+        "servingsSuffix": "porsi",
+        "cookTime": "Waktu masak",
+        "timeSuffix": "mnt"
     },
     "tags": "Tag",
     "ingredients": {
-        "groupTitle": "Judul grup bahan",
-        "item": "Bahan {{number}}",
-        "add": "Tambah bahan",
-        "addGroup": "Tambah grup"
+        "groupTitle": "Nama grup",
+        "name": "Bahan",
+        "amount": "Jml",
+        "unit": "Satuan",
+        "unitTitle": "Satuan ukuran",
+        "noUnit": "Tanpa satuan",
+        "remove": "Hapus bahan",
+        "removeGroup": "Hapus grup",
+        "add": "Bahan",
+        "addGroup": "Grup"
     },
     "steps": {
         "item": "Langkah {{number}}",
-        "add": "Tambah langkah"
+        "add": "Langkah",
+        "remove": "Hapus langkah",
+        "photo": "Foto",
+        "removePhoto": "Hapus foto"
     },
     "validation": {
         "titleRequired": "Judul wajib diisi",
         "titleTooLong": "Maksimal {{max}} karakter",
         "ingredientsRequired": "Tambahkan minimal satu bahan",
-        "ingredientEmpty": "Bahan tidak boleh kosong",
+        "ingredientEmpty": "Isi nama",
         "groupEmpty": "Grup tidak boleh kosong",
-        "stepEmpty": "Langkah tidak boleh kosong"
+        "stepEmpty": "Langkah tidak boleh kosong",
+        "amountInvalid": "Lebih dari 0"
     }
 }

@@ -51,6 +51,7 @@ const AiInput = ({ isParsing, isParsingImage, error, onSubmitUrl, onSubmitImage 
                     icon="forward"
                     variant="accent"
                     type="button"
+                    className={styles.apply}
                     onClick={handleSubmitUrl}
                     disabled={isParsing || isParsingImage || !url.trim()}
                 />

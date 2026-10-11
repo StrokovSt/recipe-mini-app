@@ -53,5 +53,11 @@
         "handful_one": "{{count, number}} handful",
         "handful_other": "{{count, number}} handfuls",
         "to_taste": "to taste"
+    },
+    "kind": {
+        "mass": "Weight",
+        "volume": "Volume",
+        "count": "Count",
+        "other": "Other"
     }
 }

@@ -1,111 +1,95 @@
-.wrap {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-}
+@use "../compact";
 
+// Уже этой ширины группы строка ингредиента делится на две: название и количество с единицей.
+// В @container нельзя подставить CSS-переменную, поэтому граница здесь, а не в variables.scss
+$row-split-width: 340px;
+
+// Группа — рамка внутри карточки секции, поля в ней на цвете фона приложения
 .group {
+    @include compact.block;
+
+    container-type: inline-size;
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
-    padding: var(--space-3) var(--space-4);
-    
-    border-radius: var(--radius-md);
-    background: var(--tg-secondary-bg);
-    box-shadow: var(--shadow-sm);
-}
 
-.groupHeader {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding-bottom: var(--space-2);
-    border-bottom: 1px solid rgb(0 0 0 / 6%);
-}
+    .groupHeader {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+    }
 
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    padding-left: var(--space-4);
-}
+    // Название группы винным: рамка, подпись и текст поля берут цвета из этих переменных
+    .groupTitle {
+        --color-border: color-mix(in srgb, var(--color-active) 30%, transparent);
+        --tg-hint: color-mix(in srgb, var(--color-active) 60%, transparent);
+        --tg-text: var(--color-active);
+    }
 
-.row {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-1) 0;
-
-    &::before {
-        content: "";
+    // Ингредиенты разделены пунктиром, отступ под линией такой же, как над ней
+    .list {
+        --row-gap: var(--space-2);
 
         display: flex;
-        width: 10px;
-        aspect-ratio: 1/1;
-        border-radius: 100%;
+        flex-direction: column;
+        gap: var(--row-gap);
 
-        background-color: var(--color-accent);
+        // Строки в две линии разделены шире, чтобы ингредиенты не сливались
+        @container (width < #{$row-split-width}) {
+            --row-gap: var(--space-3);
+        }
     }
-}
 
-.dot {
-    flex-shrink: 0;
-    width: 6px;
-    height: 6px;
-    border-radius: var(--radius-full);
-    background: var(--color-accent);
-}
+    // Название, количество, единица, удаление
+    .row {
+        display: grid;
+        align-items: center;
+        grid-template-columns: minmax(0, 1fr) var(--size-amount-field) var(--size-unit-field) auto;
+        gap: var(--space-2);
 
-.input {
-    flex: 1;
-    padding: var(--space-1) 0;
-    border: none;
-    border-bottom: 1px solid rgb(0 0 0 / 6%);
-    outline: none;
-    background: transparent;
-    color: var(--tg-text);
-    font: var(--font-ui-sm);
-}
+        &:not(:first-child) {
+            padding-top: var(--row-gap);
+            border-top: 1px dashed var(--color-border);
+        }
 
-.removeBtn {
-    flex-shrink: 0;
-    padding: var(--space-1);
-    border: none;
-    background: none;
-    color: var(--tg-text);
-    font-size: var(--font-size-xs);
-    cursor: pointer;
+        // На узком экране название на всю строку, количество и единица делят вторую пополам
+        @container (width < #{$row-split-width}) {
+            grid-template-areas:
+                "name name remove"
+                "amount unit unit";
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
 
-    &:active {
-        color: #e53935;
+            .name {
+                grid-area: name;
+            }
+
+            .amount {
+                grid-area: amount;
+            }
+
+            .unit {
+                grid-area: unit;
+            }
+
+            .remove {
+                grid-area: remove;
+            }
+
+            // Единственная строка без крестика: название до правого края
+            &:not(:has(.remove)) {
+                grid-template-areas:
+                    "name name"
+                    "amount unit";
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            }
+        }
     }
-}
 
-.addBtn {
-    align-self: flex-start;
-    padding: var(--space-1) 0;
-    border: none;
-    background: none;
-    color: var(--color-accent);
-    font: var(--font-ui-xs);
-    font-weight: var(--font-weight-bold);
-    cursor: pointer;
-}
-
-.addGroupBtn {
-    align-self: flex-start;
-    padding: var(--space-1) 0;
-    border: none;
-    background: none;
-    color: var(--tg-hint);
-    font: var(--font-ui-sm);
-    font-weight: var(--font-weight-bold);
-    cursor: pointer;
+    .remove {
+        @include compact.remove;
+    }
 }
 
 .error {
-    color: #e53935;
-    font: var(--font-xs);
+    @include compact.error;
 }

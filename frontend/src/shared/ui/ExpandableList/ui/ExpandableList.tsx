@@ -104,15 +104,16 @@ export const ExpandableList = <T,>(props: ExpandableListProps<T>) => {
         }
     }, [isExpanded]);
 
-    // Высота списка, если оставить только элементы свёрнутого вида
+    // Высота первых rows рядов: свёрнутый список занимает ровно их,
+    // закреплённые элементы из конца списка встают на последние места
     const getCollapsedHeight = () => {
         const children = Array.from(listRef.current!.children) as HTMLElement[];
+        const rowTops = [...new Set(children.map((child) => child.offsetTop))].sort((a, b) => a - b);
+        const limit = rowTops[rows] ?? Infinity;
 
         return children.reduce(
-            (height, child, index) =>
-                isVisibleCollapsed(items[index], index)
-                    ? Math.max(height, child.offsetTop + child.offsetHeight)
-                    : height,
+            (height, child) =>
+                child.offsetTop < limit ? Math.max(height, child.offsetTop + child.offsetHeight) : height,
             0
         );
     };

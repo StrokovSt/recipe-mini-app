@@ -42,5 +42,11 @@
         "pinch": "{{count, number}} tutam",
         "handful": "{{count, number}} avuç",
         "to_taste": "damak zevkine göre"
+    },
+    "kind": {
+        "mass": "Ağırlık",
+        "volume": "Hacim",
+        "count": "Adet",
+        "other": "Diğer"
     }
 }

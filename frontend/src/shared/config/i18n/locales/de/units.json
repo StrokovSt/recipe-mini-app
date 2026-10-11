@@ -50,5 +50,11 @@
         "pinch_other": "{{count, number}} Prisen",
         "handful": "{{count, number}} Handvoll",
         "to_taste": "nach Geschmack"
+    },
+    "kind": {
+        "mass": "Gewicht",
+        "volume": "Volumen",
+        "count": "Stück",
+        "other": "Sonstiges"
     }
 }

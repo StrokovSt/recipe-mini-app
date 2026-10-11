@@ -23,7 +23,7 @@ const EditRecipePage = () => {
             {
                 id: recipe.id,
                 title: values.title,
-                description: values.description ?? null,
+                description: values.description?.trim() || null,
                 categoryId: values.categoryId,
                 ingredients: values.ingredients,
                 steps: values.steps,

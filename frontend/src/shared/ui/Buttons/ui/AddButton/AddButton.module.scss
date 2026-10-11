@@ -1,79 +1,43 @@
 @use "@/shared/styles/states";
 
 .btn {
-    position: relative;
-    display: flex;
-    gap: var(--space-2);
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--space-1);
     width: fit-content;
-    padding: 10px 18px;
-    border: none;
-    background: none;
+    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+    border: 1px solid color-mix(in srgb, var(--color-active) 30%, transparent);
+    border-radius: var(--radius-lg);
+    background: transparent;
+    color: var(--color-active);
+    font: var(--font-ui-xs);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
     cursor: pointer;
-    transition: transform var(--transition-fast);
+    transition: var(--transition-base);
+    transition-property: border-color, background-color;
 
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        width: 38px;
-        height: 38px;
-        background: var(--color-accent-light);
-        transition: width var(--transition-base);
+    svg {
+        width: var(--size-pill-icon);
+        height: var(--size-pill-icon);
     }
 
-    &:focus:not(:disabled)::before {
-        width: 100%;
-    }
-
-    @include states.hover(":not(:disabled)::before") {
-        width: 100%;
-    }
-
-    @include states.hover(":not(:disabled) .arrow") {
-        transform: translateX(0);
+    @include states.hover(":not(:disabled)") {
+        border-color: var(--color-active);
+        background: var(--color-hover-bg);
     }
 
     @include states.active(":not(:disabled)") {
-        transform: scale(0.95);
+        background: var(--color-active-bg);
+    }
 
-        &::before {
-            background-color: var(--color-accent-shadow);
-        }
+    &:focus-visible {
+        border-color: var(--color-active);
+        outline: none;
     }
 
     &:disabled {
         @include states.disabled;
     }
-}
-
-.label {
-    position: relative;
-    z-index: 1;
-    color: var(--color-accent);
-    font: var(--font-ui-sm);
-    font-weight: var(--font-weight-bold);
-}
-
-.arrow {
-    position: relative;
-
-    margin-left: var(--space-2);
-    transition: transform var(--transition-base);
-    transform: translateX(-4px);
-    fill: none;
-    stroke: var(--color-accent);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.icon {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-accent);
 }

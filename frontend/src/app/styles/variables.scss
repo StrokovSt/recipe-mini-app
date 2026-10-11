@@ -53,6 +53,10 @@
     --size-action-button: 48px;
     --size-header-button: 40px;
     --size-menu-button: 46px;
+
+    // Высота всех полей ввода (Input, Textarea)
+    --size-field-height: 40px;
+
     // Поиск и кнопка фильтров — высотой с кнопки шапки
     --size-search-height: var(--size-menu-button);
 
@@ -71,10 +75,13 @@
     --size-dropdown-icon: 18px;
     --size-segmented-icon: 16px;
     --size-section-mark: 28px;
+
     // Круг с иконкой в карточке выбора способа добавления рецепта
     --size-option-icon: 52px;
+
     // Цветная полоса слева у плашки-предупреждения
     --size-banner-stripe: 3px;
+
     // Поле картинки (обложка рецепта): общая высота зоны со строкой ссылки или превью, иконка в пустой зоне
     --size-image-input-height: 224px;
     --size-image-input-icon: 32px;
@@ -85,15 +92,36 @@
     --size-tile-action: 40px;
     --size-tile-icon: 32px;
     --size-tile-arrow: 16px;
+
     // Стрелка или галочка в конце строки-кнопки (выбор языка)
     --size-row-icon: 16px;
     --size-sheet-handle-zone: 44px;
+
     // Отступ сверху шторки под полоску захвата
     --size-sheet-top: calc(var(--space-6) + var(--space-1));
+
     // Главная кнопка в футере шторки не растягивается шире этого на больших экранах
     --size-sheet-action-max-width: 240px;
     --size-card-min-width: 160px;
     --size-category-min-width: 150px;
+
+    // Плитка-чип категории в шторке фильтров и в форме рецепта
+    --size-category-chip-min-width: 88px;
+
+    // Строка ингредиента: ширина количества, единицы и крестика
+    --size-amount-field: 64px;
+    --size-unit-field: 80px;
+    --size-row-remove: 28px;
+
+    // Плюс в кнопке-пилюле «+ Группа», «+ Ингредиент»
+    --size-pill-icon: 14px;
+
+    // Шаг рецепта: кружок с номером, миниатюры фото, их иконка и крестик
+    --size-step-number: 28px;
+    --size-step-photo-width: 88px;
+    --size-step-photo-height: 64px;
+    --size-step-photo-icon: 20px;
+    --size-step-photo-remove: 20px;
     --size-tag-min-width: 50px;
     --size-list-max-columns: 4;
     --size-scrollbar: 6px;
@@ -120,6 +148,7 @@
     --transition-base: 0.2s ease;
     --transition-slow: 0.4s ease;
     --transition-theme: 0.3s ease;
+
     // Появление шторки и модалки
     --transition-overlay: 0.3s ease;
 

@@ -44,29 +44,40 @@
     },
     "recipe": {
         "title": "Titel",
+        "description": "Beschreibung",
         "category": "Kategorie",
-        "time": "Zubereitungszeit",
-        "timeSuffix": "Min.",
         "servings": "Portionen",
-        "servingsSuffix": "Port."
+        "servingsSuffix": "Port.",
+        "cookTime": "Garzeit",
+        "timeSuffix": "Min."
     },
     "tags": "Tags",
     "ingredients": {
-        "groupTitle": "Titel der Zutatengruppe",
-        "item": "Zutat {{number}}",
-        "add": "Zutat hinzufügen",
-        "addGroup": "Gruppe hinzufügen"
+        "groupTitle": "Gruppenname",
+        "name": "Zutat",
+        "amount": "Mng.",
+        "unit": "Einh.",
+        "unitTitle": "Maßeinheit",
+        "noUnit": "Ohne Einheit",
+        "remove": "Zutat entfernen",
+        "removeGroup": "Gruppe entfernen",
+        "add": "Zutat",
+        "addGroup": "Gruppe"
     },
     "steps": {
         "item": "Schritt {{number}}",
-        "add": "Schritt hinzufügen"
+        "add": "Schritt",
+        "remove": "Schritt entfernen",
+        "photo": "Foto",
+        "removePhoto": "Foto entfernen"
     },
     "validation": {
         "titleRequired": "Titel ist erforderlich",
         "titleTooLong": "Höchstens {{max}} Zeichen",
         "ingredientsRequired": "Füge mindestens eine Zutat hinzu",
-        "ingredientEmpty": "Die Zutat darf nicht leer sein",
+        "ingredientEmpty": "Name eingeben",
         "groupEmpty": "Die Gruppe darf nicht leer sein",
-        "stepEmpty": "Der Schritt darf nicht leer sein"
+        "stepEmpty": "Der Schritt darf nicht leer sein",
+        "amountInvalid": "Größer als 0"
     }
 }

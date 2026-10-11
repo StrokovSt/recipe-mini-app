@@ -1,0 +1,114 @@
+@use "@/shared/styles/states";
+
+// Миниатюры в ряд с переносом, плитка добавления того же размера в конце
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.photo {
+    position: relative;
+    width: var(--size-step-photo-width);
+    height: var(--size-step-photo-height);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-dim);
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        object-fit: cover;
+    }
+
+    &.uploading {
+        display: grid;
+        color: var(--color-active);
+        place-items: center;
+
+        svg {
+            width: var(--size-step-photo-icon);
+            height: var(--size-step-photo-icon);
+        }
+    }
+}
+
+// Круглый винный крестик на углу миниатюры, как в Figma
+.remove {
+    position: absolute;
+    top: calc(var(--size-step-photo-remove) / -3);
+    right: calc(var(--size-step-photo-remove) / -3);
+    display: grid;
+    width: var(--size-step-photo-remove);
+    height: var(--size-step-photo-remove);
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--color-active);
+    color: var(--color-active-text);
+    cursor: pointer;
+    place-items: center;
+
+    svg {
+        width: 70%;
+        height: 70%;
+    }
+}
+
+// Плитка добавления: тап открывает выбор файлов, в браузере сюда можно перетащить фото
+.add {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    width: var(--size-step-photo-width);
+    height: var(--size-step-photo-height);
+    border: 1.5px dashed var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-surface) 40%, transparent);
+    color: var(--color-icon);
+    font: var(--font-ui-xs);
+    cursor: pointer;
+    transition: var(--transition-base);
+    transition-property: border-color, background-color, color;
+
+    svg {
+        width: var(--size-step-photo-icon);
+        height: var(--size-step-photo-icon);
+    }
+
+    &:has(:focus-visible) {
+        border-color: var(--color-active);
+    }
+
+    @include states.hover {
+        border-color: var(--color-active);
+        background: var(--color-hover-bg);
+        color: var(--color-active);
+    }
+
+    &.dragging {
+        border-style: solid;
+        border-color: var(--color-active);
+        background: var(--color-active-bg);
+        color: var(--color-active);
+    }
+}
+
+// Само поле файла скрыто, но остаётся доступным с клавиатуры
+.file {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.error {
+    margin-top: var(--space-1);
+    color: var(--color-error);
+    font: var(--font-ui-xs);
+}

@@ -62,5 +62,11 @@
         "handful_many": "{{count, number}} punhados",
         "handful_other": "{{count, number}} punhados",
         "to_taste": "a gosto"
+    },
+    "kind": {
+        "mass": "Peso",
+        "volume": "Volume",
+        "count": "Unidades",
+        "other": "Outros"
     }
 }

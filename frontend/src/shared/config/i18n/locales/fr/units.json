@@ -64,5 +64,11 @@
         "handful_many": "{{count, number}} poignées",
         "handful_other": "{{count, number}} poignées",
         "to_taste": "selon le goût"
+    },
+    "kind": {
+        "mass": "Poids",
+        "volume": "Volume",
+        "count": "Pièces",
+        "other": "Autres"
     }
 }

@@ -44,29 +44,40 @@
     },
     "recipe": {
         "title": "Title",
+        "description": "Description",
         "category": "Category",
-        "time": "Cooking time",
-        "timeSuffix": "min",
         "servings": "Servings",
-        "servingsSuffix": "serv."
+        "servingsSuffix": "serv.",
+        "cookTime": "Cook time",
+        "timeSuffix": "min"
     },
     "tags": "Tags",
     "ingredients": {
-        "groupTitle": "Ingredient group title",
-        "item": "Ingredient {{number}}",
-        "add": "Add ingredient",
-        "addGroup": "Add group"
+        "groupTitle": "Group name",
+        "name": "Ingredient",
+        "amount": "Qty",
+        "unit": "Unit",
+        "unitTitle": "Unit of measure",
+        "noUnit": "No unit",
+        "remove": "Remove ingredient",
+        "removeGroup": "Remove group",
+        "add": "Ingredient",
+        "addGroup": "Group"
     },
     "steps": {
         "item": "Step {{number}}",
-        "add": "Add step"
+        "add": "Step",
+        "remove": "Remove step",
+        "photo": "Photo",
+        "removePhoto": "Remove photo"
     },
     "validation": {
         "titleRequired": "Title is required",
         "titleTooLong": "No more than {{max}} characters",
         "ingredientsRequired": "Add at least one ingredient",
-        "ingredientEmpty": "Ingredient can't be empty",
+        "ingredientEmpty": "Enter a name",
         "groupEmpty": "Group can't be empty",
-        "stepEmpty": "Step can't be empty"
+        "stepEmpty": "Step can't be empty",
+        "amountInvalid": "Must be above 0"
     }
 }

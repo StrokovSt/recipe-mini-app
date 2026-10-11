@@ -75,5 +75,11 @@
         "handful_many": "{{count, number}} горстей",
         "handful_other": "{{count, number}} горсти",
         "to_taste": "по вкусу"
+    },
+    "kind": {
+        "mass": "Вес",
+        "volume": "Объём",
+        "count": "Штучные",
+        "other": "Другое"
     }
 }

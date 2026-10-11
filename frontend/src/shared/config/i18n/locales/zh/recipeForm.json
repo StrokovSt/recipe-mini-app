@@ -44,29 +44,40 @@
     },
     "recipe": {
         "title": "标题",
+        "description": "简介",
         "category": "分类",
-        "time": "烹饪时间",
-        "timeSuffix": "分钟",
-        "servings": "份数",
-        "servingsSuffix": "份"
+        "servings": "份量",
+        "servingsSuffix": "份",
+        "cookTime": "烹饪时间",
+        "timeSuffix": "分钟"
     },
     "tags": "标签",
     "ingredients": {
-        "groupTitle": "食材分组标题",
-        "item": "食材 {{number}}",
-        "add": "添加食材",
-        "addGroup": "添加分组"
+        "groupTitle": "分组名称",
+        "name": "食材",
+        "amount": "数量",
+        "unit": "单位",
+        "unitTitle": "计量单位",
+        "noUnit": "无单位",
+        "remove": "删除食材",
+        "removeGroup": "删除分组",
+        "add": "食材",
+        "addGroup": "分组"
     },
     "steps": {
         "item": "步骤 {{number}}",
-        "add": "添加步骤"
+        "add": "步骤",
+        "remove": "删除步骤",
+        "photo": "照片",
+        "removePhoto": "移除照片"
     },
     "validation": {
         "titleRequired": "标题为必填项",
         "titleTooLong": "最多 {{max}} 个字符",
         "ingredientsRequired": "请至少添加一种食材",
-        "ingredientEmpty": "食材不能为空",
+        "ingredientEmpty": "请输入名称",
         "groupEmpty": "分组不能为空",
-        "stepEmpty": "步骤不能为空"
+        "stepEmpty": "步骤不能为空",
+        "amountInvalid": "须大于 0"
     }
 }

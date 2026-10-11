@@ -42,5 +42,11 @@
         "pinch": "{{count, number}} jumput",
         "handful": "{{count, number}} genggam",
         "to_taste": "secukupnya"
+    },
+    "kind": {
+        "mass": "Berat",
+        "volume": "Volume",
+        "count": "Hitungan",
+        "other": "Lainnya"
     }
 }

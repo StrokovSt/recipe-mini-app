@@ -75,5 +75,11 @@
         "handful_many": "{{count, number}} жмень",
         "handful_other": "{{count, number}} жмені",
         "to_taste": "за смаком"
+    },
+    "kind": {
+        "mass": "Вага",
+        "volume": "Об'єм",
+        "count": "Штучні",
+        "other": "Інше"
     }
 }
