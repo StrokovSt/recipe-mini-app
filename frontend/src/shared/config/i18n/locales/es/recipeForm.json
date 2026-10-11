@@ -28,7 +28,8 @@
     "form": {
         "newTitle": "Nueva receta",
         "newSubtitle": "se guardará en tu colección",
-        "editTitle": "Editar receta"
+        "editTitle": "Editar receta",
+        "aiSubtitle": "reconocida por IA, revísala"
     },
     "sections": {
         "cover": "Portada",
@@ -38,10 +39,6 @@
     },
     "submitAdd": "Añadir a la colección",
     "submitEdit": "Guardar cambios",
-    "ai": {
-        "url": "Enlace de Pinterest",
-        "uploadPhoto": "📷 Subir foto"
-    },
     "recipe": {
         "title": "Título",
         "description": "Descripción",
@@ -79,5 +76,16 @@
         "groupEmpty": "El grupo no puede estar vacío",
         "stepEmpty": "El paso no puede estar vacío",
         "amountInvalid": "Mayor que 0"
+    },
+    "import": {
+        "title": "Importar receta",
+        "subtitle": "reconocimiento con IA",
+        "link": "Enlace a la receta",
+        "or": "o",
+        "photo": "Añadir imagen",
+        "photoHint": "Captura o foto de una receta",
+        "submit": "Reconocer receta",
+        "note": "La IA preparará un borrador que podrás editar",
+        "loading": "Reconociendo la receta…"
     }
 }

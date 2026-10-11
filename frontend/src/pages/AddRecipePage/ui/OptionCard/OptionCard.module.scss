@@ -66,16 +66,6 @@
         }
     }
 
-    &.accent {
-        border-color: var(--color-active);
-
-        .icon {
-            border-color: var(--color-active);
-            background: var(--color-active);
-            color: var(--color-active-text);
-        }
-    }
-
     &.locked {
         .icon,
         .action {

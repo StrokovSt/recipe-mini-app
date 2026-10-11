@@ -127,6 +127,11 @@ function normalizeRecipe(raw: RawRecipeAI, lists: UserLists): ParsedRecipeAI {
         .filter(Boolean)
         .map((text) => ({ text, images: [] }));
 
+    // На картинке или странице нет рецепта: ИИ вернул пустоту, черновик открывать нечем
+    if (ingredients.length === 0 && steps.length === 0) {
+        throw new Error("Рецепт не найден");
+    }
+
     return {
         title: toText(raw.title),
         description: toText(raw.description) || null,

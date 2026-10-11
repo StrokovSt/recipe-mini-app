@@ -28,7 +28,8 @@
     "form": {
         "newTitle": "新しいレシピ",
         "newSubtitle": "コレクションに保存されます",
-        "editTitle": "レシピを編集"
+        "editTitle": "レシピを編集",
+        "aiSubtitle": "AIが認識、内容を確認"
     },
     "sections": {
         "cover": "カバー写真",
@@ -38,10 +39,6 @@
     },
     "submitAdd": "コレクションに追加",
     "submitEdit": "変更を保存",
-    "ai": {
-        "url": "Pinterestのリンク",
-        "uploadPhoto": "📷 写真をアップロード"
-    },
     "recipe": {
         "title": "タイトル",
         "description": "説明",
@@ -79,5 +76,16 @@
         "groupEmpty": "グループが空です",
         "stepEmpty": "手順を入力してください",
         "amountInvalid": "0より大きい数"
+    },
+    "import": {
+        "title": "レシピをインポート",
+        "subtitle": "AI認識",
+        "link": "レシピのリンク",
+        "or": "または",
+        "photo": "画像を追加",
+        "photoHint": "レシピのスクリーンショットまたは写真",
+        "submit": "レシピを認識",
+        "note": "AIが編集できる下書きを作成します",
+        "loading": "レシピを認識中…"
     }
 }

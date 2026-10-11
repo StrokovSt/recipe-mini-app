@@ -28,7 +28,8 @@
     "form": {
         "newTitle": "Neues Rezept",
         "newSubtitle": "wird in deiner Sammlung gespeichert",
-        "editTitle": "Rezept bearbeiten"
+        "editTitle": "Rezept bearbeiten",
+        "aiSubtitle": "von KI erkannt, bitte prüfen"
     },
     "sections": {
         "cover": "Titelbild",
@@ -38,10 +39,6 @@
     },
     "submitAdd": "Zur Sammlung hinzufügen",
     "submitEdit": "Änderungen speichern",
-    "ai": {
-        "url": "Pinterest-Link",
-        "uploadPhoto": "📷 Foto hochladen"
-    },
     "recipe": {
         "title": "Titel",
         "description": "Beschreibung",
@@ -79,5 +76,16 @@
         "groupEmpty": "Die Gruppe darf nicht leer sein",
         "stepEmpty": "Der Schritt darf nicht leer sein",
         "amountInvalid": "Größer als 0"
+    },
+    "import": {
+        "title": "Rezept importieren",
+        "subtitle": "KI-Erkennung",
+        "link": "Link zum Rezept",
+        "or": "oder",
+        "photo": "Bild hinzufügen",
+        "photoHint": "Screenshot oder Foto eines Rezepts",
+        "submit": "Rezept erkennen",
+        "note": "Die KI erstellt einen Entwurf, den du bearbeiten kannst",
+        "loading": "Rezept wird erkannt…"
     }
 }

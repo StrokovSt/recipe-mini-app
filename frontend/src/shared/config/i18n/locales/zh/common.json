@@ -31,7 +31,7 @@
         "retry": "重试"
     },
     "errors": {
-        "PARSE_FAILED": "无法解析该食谱，请换一个链接试试。",
+        "PARSE_FAILED": "未找到食谱，请换一个链接或图片试试。",
         "RECIPE_NOT_FOUND": "未找到该食谱。",
         "INVALID_URL": "链接无效。",
         "AI_UNAVAILABLE": "AI 服务暂时不可用，请稍后再试。",

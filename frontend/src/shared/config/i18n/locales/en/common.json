@@ -31,7 +31,7 @@
         "retry": "Try again"
     },
     "errors": {
-        "PARSE_FAILED": "Couldn't read the recipe. Try another link.",
+        "PARSE_FAILED": "Couldn't find a recipe. Try another link or image.",
         "RECIPE_NOT_FOUND": "Recipe not found.",
         "INVALID_URL": "Invalid link.",
         "AI_UNAVAILABLE": "The AI service is temporarily unavailable. Try again later.",

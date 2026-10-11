@@ -28,7 +28,8 @@
     "form": {
         "newTitle": "Yeni tarif",
         "newSubtitle": "koleksiyonuna kaydedilir",
-        "editTitle": "Tarifi düzenle"
+        "editTitle": "Tarifi düzenle",
+        "aiSubtitle": "yapay zekâ tanıdı, kontrol et"
     },
     "sections": {
         "cover": "Kapak",
@@ -38,10 +39,6 @@
     },
     "submitAdd": "Koleksiyona ekle",
     "submitEdit": "Değişiklikleri kaydet",
-    "ai": {
-        "url": "Pinterest bağlantısı",
-        "uploadPhoto": "📷 Fotoğraf yükle"
-    },
     "recipe": {
         "title": "Başlık",
         "description": "Açıklama",
@@ -79,5 +76,16 @@
         "groupEmpty": "Grup boş olamaz",
         "stepEmpty": "Adım boş olamaz",
         "amountInvalid": "0'dan büyük olmalı"
+    },
+    "import": {
+        "title": "Tarifi içe aktar",
+        "subtitle": "yapay zekâ ile tanıma",
+        "link": "Tarif bağlantısı",
+        "or": "veya",
+        "photo": "Görsel ekle",
+        "photoHint": "Tarifin ekran görüntüsü veya fotoğrafı",
+        "submit": "Tarifi tanı",
+        "note": "Yapay zekâ düzenleyebileceğin bir taslak hazırlayacak",
+        "loading": "Tarif tanınıyor…"
     }
 }

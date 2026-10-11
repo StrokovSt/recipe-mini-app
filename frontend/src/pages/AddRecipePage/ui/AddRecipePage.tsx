@@ -76,7 +76,6 @@ const AddRecipePage = () => {
                 title={t("choose.import.title")}
                 description={t("choose.import.description")}
                 action={isAiLocked ? t("choose.locked") : t("choose.import.action")}
-                accent
                 locked={isAiLocked}
                 disabled={isLimitReached}
                 onClick={handleImport}

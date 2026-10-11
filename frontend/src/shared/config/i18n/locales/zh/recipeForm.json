@@ -28,7 +28,8 @@
     "form": {
         "newTitle": "新食谱",
         "newSubtitle": "将保存到你的收藏",
-        "editTitle": "编辑食谱"
+        "editTitle": "编辑食谱",
+        "aiSubtitle": "AI 已识别，请检查"
     },
     "sections": {
         "cover": "封面",
@@ -38,10 +39,6 @@
     },
     "submitAdd": "添加到收藏",
     "submitEdit": "保存更改",
-    "ai": {
-        "url": "Pinterest 链接",
-        "uploadPhoto": "📷 上传照片"
-    },
     "recipe": {
         "title": "标题",
         "description": "简介",
@@ -79,5 +76,16 @@
         "groupEmpty": "分组不能为空",
         "stepEmpty": "步骤不能为空",
         "amountInvalid": "须大于 0"
+    },
+    "import": {
+        "title": "导入食谱",
+        "subtitle": "AI 识别",
+        "link": "食谱链接",
+        "or": "或",
+        "photo": "添加图片",
+        "photoHint": "食谱截图或照片",
+        "submit": "识别食谱",
+        "note": "AI 会生成一份可编辑的草稿",
+        "loading": "正在识别食谱…"
     }
 }

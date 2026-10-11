@@ -28,7 +28,8 @@
     "form": {
         "newTitle": "New recipe",
         "newSubtitle": "saved to your collection",
-        "editTitle": "Edit recipe"
+        "editTitle": "Edit recipe",
+        "aiSubtitle": "recognized by AI, please check"
     },
     "sections": {
         "cover": "Cover",
@@ -38,10 +39,6 @@
     },
     "submitAdd": "Add to collection",
     "submitEdit": "Save changes",
-    "ai": {
-        "url": "Pinterest link",
-        "uploadPhoto": "📷 Upload photo"
-    },
     "recipe": {
         "title": "Title",
         "description": "Description",
@@ -79,5 +76,16 @@
         "groupEmpty": "Group can't be empty",
         "stepEmpty": "Step can't be empty",
         "amountInvalid": "Must be above 0"
+    },
+    "import": {
+        "title": "Import recipe",
+        "subtitle": "AI recognition",
+        "link": "Recipe link",
+        "or": "or",
+        "photo": "Add image",
+        "photoHint": "Screenshot or photo of a recipe",
+        "submit": "Recognize recipe",
+        "note": "AI will prepare a draft you can edit",
+        "loading": "Recognizing the recipe…"
     }
 }

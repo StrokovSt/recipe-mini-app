@@ -31,7 +31,7 @@
         "retry": "Erneut versuchen"
     },
     "errors": {
-        "PARSE_FAILED": "Das Rezept konnte nicht gelesen werden. Versuch einen anderen Link.",
+        "PARSE_FAILED": "Kein Rezept gefunden. Versuch einen anderen Link oder ein anderes Bild.",
         "RECIPE_NOT_FOUND": "Rezept nicht gefunden.",
         "INVALID_URL": "Ungültiger Link.",
         "AI_UNAVAILABLE": "Der KI-Dienst ist vorübergehend nicht verfügbar. Versuch es später noch einmal.",

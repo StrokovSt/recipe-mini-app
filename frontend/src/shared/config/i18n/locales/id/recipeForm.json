@@ -28,7 +28,8 @@
     "form": {
         "newTitle": "Resep baru",
         "newSubtitle": "akan disimpan di koleksimu",
-        "editTitle": "Edit resep"
+        "editTitle": "Edit resep",
+        "aiSubtitle": "dikenali AI, periksa dulu"
     },
     "sections": {
         "cover": "Sampul",
@@ -38,10 +39,6 @@
     },
     "submitAdd": "Tambahkan ke koleksi",
     "submitEdit": "Simpan perubahan",
-    "ai": {
-        "url": "Tautan Pinterest",
-        "uploadPhoto": "📷 Unggah foto"
-    },
     "recipe": {
         "title": "Judul",
         "description": "Deskripsi",
@@ -79,5 +76,16 @@
         "groupEmpty": "Grup tidak boleh kosong",
         "stepEmpty": "Langkah tidak boleh kosong",
         "amountInvalid": "Lebih dari 0"
+    },
+    "import": {
+        "title": "Impor resep",
+        "subtitle": "pengenalan AI",
+        "link": "Tautan resep",
+        "or": "atau",
+        "photo": "Tambah gambar",
+        "photoHint": "Tangkapan layar atau foto resep",
+        "submit": "Kenali resep",
+        "note": "AI akan menyiapkan draf yang bisa kamu ubah",
+        "loading": "Mengenali resep…"
     }
 }

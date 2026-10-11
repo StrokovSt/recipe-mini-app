@@ -11,8 +11,6 @@ interface OptionCardProps {
     description: string;
     // Подпись-действие внизу карточки
     action: string;
-    // Выделенная карточка: винная рамка и винный круг
-    accent?: boolean;
     // Способ недоступен аккаунту: замок вместо иконки, карточка приглушена, но нажимается
     locked?: boolean;
     disabled?: boolean;
@@ -21,12 +19,12 @@ interface OptionCardProps {
 
 // Большая карточка-кнопка способа добавления рецепта
 export const OptionCard = (props: OptionCardProps) => {
-    const { icon, title, description, action, accent, locked, disabled, onClick } = props;
+    const { icon, title, description, action, locked, disabled, onClick } = props;
 
     return (
         <button
             type="button"
-            className={clsx(styles.card, accent && !locked && styles.accent, locked && styles.locked)}
+            className={clsx(styles.card, locked && styles.locked)}
             disabled={disabled}
             onClick={onClick}
         >

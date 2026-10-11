@@ -28,7 +28,8 @@
     "form": {
         "newTitle": "Nouvelle recette",
         "newSubtitle": "enregistrée dans ta collection",
-        "editTitle": "Modifier la recette"
+        "editTitle": "Modifier la recette",
+        "aiSubtitle": "reconnue par l’IA, à vérifier"
     },
     "sections": {
         "cover": "Couverture",
@@ -38,10 +39,6 @@
     },
     "submitAdd": "Ajouter à la collection",
     "submitEdit": "Enregistrer les modifications",
-    "ai": {
-        "url": "Lien Pinterest",
-        "uploadPhoto": "📷 Importer une photo"
-    },
     "recipe": {
         "title": "Titre",
         "description": "Description",
@@ -79,5 +76,16 @@
         "groupEmpty": "Le groupe ne peut pas être vide",
         "stepEmpty": "L'étape ne peut pas être vide",
         "amountInvalid": "Supérieur à 0"
+    },
+    "import": {
+        "title": "Importer une recette",
+        "subtitle": "reconnaissance par IA",
+        "link": "Lien vers la recette",
+        "or": "ou",
+        "photo": "Ajouter une image",
+        "photoHint": "Capture d’écran ou photo d’une recette",
+        "submit": "Reconnaître la recette",
+        "note": "L’IA préparera un brouillon modifiable",
+        "loading": "Reconnaissance de la recette…"
     }
 }

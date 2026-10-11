@@ -1,3 +1,5 @@
+import type { ParsedRecipe } from "@recipe/common";
+
 import type { RecipeFormValues } from "./schema";
 
 export interface RecipeFormProps {
@@ -8,4 +10,11 @@ export interface RecipeFormProps {
     submitLabel?: string;
     onSubmit?: (values: RecipeFormValues) => void;
     isPending?: boolean;
+    // Откуда рецепт, если его распознал ИИ; без него «other» и пустая ссылка
+    source?: Pick<ParsedRecipe, "source" | "sourceUrl">;
+}
+
+// Состояние роутера при переходе с импорта на форму создания
+export interface RecipeDraftState {
+    parsed: ParsedRecipe;
 }

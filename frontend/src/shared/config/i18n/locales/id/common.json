@@ -31,7 +31,7 @@
         "retry": "Coba lagi"
     },
     "errors": {
-        "PARSE_FAILED": "Resep tidak bisa dibaca. Coba tautan lain.",
+        "PARSE_FAILED": "Resep tidak ditemukan. Coba tautan atau gambar lain.",
         "RECIPE_NOT_FOUND": "Resep tidak ditemukan.",
         "INVALID_URL": "Tautan tidak valid.",
         "AI_UNAVAILABLE": "Layanan AI sedang tidak tersedia. Coba lagi nanti.",

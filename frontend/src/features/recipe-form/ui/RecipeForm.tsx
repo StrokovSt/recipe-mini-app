@@ -30,6 +30,7 @@ const RecipeForm = (props: RecipeFormProps) => {
         submitLabel = t("common:save"),
         onSubmit: onSubmitProp,
         isPending: isPendingProp,
+        source,
     } = props;
     const navigate = useNavigate();
     const methods = useForm<RecipeFormValues>({
@@ -85,8 +86,8 @@ const RecipeForm = (props: RecipeFormProps) => {
                 cookTime: values.cookTime ?? null,
                 servings: values.servings ?? null,
                 tags: values.tagIds,
-                source: "other",
-                sourceUrl: "",
+                source: source?.source ?? "other",
+                sourceUrl: source?.sourceUrl ?? "",
                 media: toMedia(values.cover),
             },
             { onSuccess: () => navigate(AppRoute.Home) }

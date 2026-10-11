@@ -13,6 +13,8 @@ type SpinnerSize = "sm" | "md" | "lg" | "xl";
 
 interface SpinnerProps {
     size?: SpinnerSize;
+    // Подпись под котиком, например «Распознаём рецепт…»
+    label?: string;
 }
 
 // Появление и исчезновение: проявляется из размытия, как стекло
@@ -20,7 +22,7 @@ const HIDDEN = { opacity: 0, scale: 0.94, filter: "blur(6px)" };
 const VISIBLE = { opacity: 1, scale: 1, filter: "blur(0px)" };
 
 export function Spinner(props: SpinnerProps) {
-    const { size = "md" } = props;
+    const { size = "md", label } = props;
     const { t } = useTranslation();
 
     if (size === "sm") {
@@ -52,6 +54,7 @@ export function Spinner(props: SpinnerProps) {
                 <source src={catLoaderWebm} type="video/webm" />
                 <source src={catLoaderMp4} type="video/mp4" />
             </video>
+            {label && <p className={styles.label}>{label}</p>}
         </motion.div>,
         document.body
     );
