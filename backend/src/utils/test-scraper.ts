@@ -2,6 +2,7 @@ import "dotenv/config";
 
 import * as cheerio from "cheerio";
 
+import { extractPin, fetchCaptions, isPinterestUrl, pinToText, toPlayableVideo } from "../services/pinterest";
 import { extractMedia, extractText, fetchPage } from "./scraper";
 
 const url = process.argv[2];
@@ -47,6 +48,17 @@ async function run() {
         console.log("\n" + "=".repeat(30));
         console.log("🖼️  MEDIA");
         console.table(media); // Красивая таблица для массивов объектов
+
+        if (isPinterestUrl(url)) {
+            const pin = extractPin(html);
+            const captions = pin.captionsUrl ? await fetchCaptions(pin.captionsUrl) : "";
+            const video = pin.video ? await toPlayableVideo(pin.video) : null;
+
+            console.log("\n" + "=".repeat(30));
+            console.log("📌 PIN");
+            console.log({ ...pin, playableVideo: video });
+            console.log("\n📝 TEXT FOR AI:\n" + pinToText(pin, captions));
+        }
 
     } catch (error) {
         console.error("🔥 Critical Error:", error instanceof Error ? error.message : error);

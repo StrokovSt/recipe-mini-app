@@ -41,6 +41,7 @@ export const Textarea = (props: TextareaProps) => {
                 className={clsx(styles.textarea, { [styles.textareaError]: error })}
                 placeholder=" "
                 rows={1}
+                autoComplete="off"
                 aria-invalid={error ? true : undefined}
                 {...rest}
                 {...register}

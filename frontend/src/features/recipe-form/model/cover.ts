@@ -4,5 +4,11 @@ import type { MediaInput } from "@recipe/common";
 export const getCover = (media: MediaInput[]): string | null =>
     media.find((item) => item.type === "image")?.url ?? null;
 
-export const toMedia = (cover: string | null): MediaInput[] =>
-    cover ? [{ url: cover, type: "image" }] : [];
+// Видео у рецепта одно: первое видео в media
+export const getVideo = (media: MediaInput[]): string | null =>
+    media.find((item) => item.type === "video")?.url ?? null;
+
+export const toMedia = (cover: string | null, video?: string | null): MediaInput[] => [
+    ...(cover ? [{ url: cover, type: "image" as const }] : []),
+    ...(video ? [{ url: video, type: "video" as const }] : []),
+];

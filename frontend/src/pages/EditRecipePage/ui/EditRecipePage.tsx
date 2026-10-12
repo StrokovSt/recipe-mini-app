@@ -3,9 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { buildRoute } from "@/app/router/routes";
 import { useRecipe, useUpdateRecipe } from "@/entities/recipe";
-import { EMPTY_FORM_VALUES, getCover, RecipeForm, type RecipeFormValues, toMedia } from "@/features/recipe-form";
+import { EMPTY_FORM_VALUES, getCover, getVideo, RecipeForm, type RecipeFormValues, toMedia } from "@/features/recipe-form";
+import { useLoader } from "@/shared/ui/GlobalLoader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
-import { Spinner } from "@/shared/ui/Spinner";
 
 const EditRecipePage = () => {
     const { id } = useParams<{ id: string }>();
@@ -13,9 +13,10 @@ const EditRecipePage = () => {
     const { t } = useTranslation(["recipeForm", "recipe"]);
 
     const { data: recipe, isLoading } = useRecipe(id!);
+    useLoader(isLoading);
     const { mutate: updateRecipe, isPending } = useUpdateRecipe();
 
-    if (isLoading) return <Spinner size="xl" />;
+    if (isLoading) return null;
     if (!recipe) return <div>{t("recipe:notFound")}</div>;
 
     const handleSubmit = (values: RecipeFormValues) => {
@@ -31,7 +32,7 @@ const EditRecipePage = () => {
                 cookTime: values.cookTime ?? null,
                 servings: values.servings ?? null,
                 tags: values.tagIds,
-                media: toMedia(values.cover),
+                media: toMedia(values.cover, values.video),
             },
             { onSuccess: () => navigate(buildRoute.recipe(recipe.id)) }
         );
@@ -54,6 +55,7 @@ const EditRecipePage = () => {
                     servings: recipe.servings ?? undefined,
                     tagIds: recipe.tags.map((t) => t.tagId),
                     cover: getCover(recipe.media),
+                    video: getVideo(recipe.media),
                 }}
                 onSubmit={handleSubmit}
                 isPending={isPending}

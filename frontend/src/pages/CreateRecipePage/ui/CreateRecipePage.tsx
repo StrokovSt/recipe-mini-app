@@ -4,18 +4,19 @@ import { Navigate, useLocation, useParams } from "react-router-dom";
 import { AppRoute } from "@/app/router";
 import { useDraft } from "@/entities/draft";
 import { parsedToFormValues, type RecipeDraftData, type RecipeDraftState, RecipeForm } from "@/features/recipe-form";
+import { useLoader } from "@/shared/ui/GlobalLoader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
-import { Spinner } from "@/shared/ui/Spinner";
 
 // Форма нового рецепта: пустая, открытый черновик или распознанное ИИ, если черновик создать не удалось.
 // Форма сама сохраняется в черновик
 const CreateRecipePage = () => {
     const { t } = useTranslation("recipeForm");
     const { id } = useParams<{ id: string }>();
-    const parsed = (useLocation().state as RecipeDraftState | null)?.parsed;
+    const { parsed, isImported } = (useLocation().state as RecipeDraftState | null) ?? {};
     const { data: draft, isLoading, isError } = useDraft<RecipeDraftData>(id);
+    useLoader(!!id && isLoading);
 
-    if (id && isLoading) return <Spinner size="xl" />;
+    if (id && isLoading) return null;
     // Черновик удалили или он чужой: возвращаемся к выбору способа
     if (id && (isError || !draft)) return <Navigate to={AppRoute.AddRecipe} replace />;
 
@@ -28,7 +29,7 @@ const CreateRecipePage = () => {
                 subtitle={isAi ? t("form.aiSubtitle") : t("form.newSubtitle")}
                 defaultValues={draft ? draft.data.values : parsed && parsedToFormValues(parsed)}
                 source={draft ? { source: draft.source, sourceUrl: draft.data.sourceUrl } : parsed}
-                draft={{ id: draft?.id, origin: isAi ? "ai" : "manual" }}
+                draft={{ id: draft?.id, origin: isAi ? "ai" : "manual", isImported: !!draft && isImported }}
                 submitLabel={t("submitAdd")}
             />
         </PageWrapper>

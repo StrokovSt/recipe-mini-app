@@ -1,4 +1,4 @@
-export { getCover, toMedia } from "./model/cover";
+export { getCover, getVideo, toMedia } from "./model/cover";
 export { parsedToFormValues } from "./model/parsed";
 export type { RecipeFormValues } from "./model/schema";
 export { EMPTY_FORM_VALUES } from "./model/schema";

@@ -48,6 +48,7 @@ export const SearchInput = (props: SearchInputProps) => {
                 value={query}
                 onChange={(event) => handleChange(event.target.value)}
                 placeholder=" "
+                autoComplete="off"
                 disabled={disabled}
             />
             <span className={styles.label}>{placeholder}</span>

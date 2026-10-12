@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 
@@ -15,15 +16,27 @@ interface SpinnerProps {
     size?: SpinnerSize;
     // Подпись под котиком, например «Распознаём рецепт…»
     label?: string;
+    // Через сколько мс показать котика. Быстрая загрузка проходит без него, иначе он мелькает на долю секунды.
+    // 0 — сразу, например когда пользователь сам запустил долгое действие
+    delay?: number;
 }
+
+const DEFAULT_DELAY = 300;
 
 // Появление и исчезновение: проявляется из размытия, как стекло
 const HIDDEN = { opacity: 0, scale: 0.94, filter: "blur(6px)" };
 const VISIBLE = { opacity: 1, scale: 1, filter: "blur(0px)" };
 
 export function Spinner(props: SpinnerProps) {
-    const { size = "md", label } = props;
+    const { size = "md", label, delay = DEFAULT_DELAY } = props;
     const { t } = useTranslation();
+    const [isVisible, setIsVisible] = useState(delay === 0);
+
+    useEffect(() => {
+        if (delay === 0) return;
+        const timer = setTimeout(() => setIsVisible(true), delay);
+        return () => clearTimeout(timer);
+    }, [delay]);
 
     if (size === "sm") {
         return (
@@ -32,6 +45,8 @@ export function Spinner(props: SpinnerProps) {
             </div>
         );
     }
+
+    if (!isVisible) return null;
 
     // Котик всегда строго по центру экрана. Портал в body, чтобы fixed
     // не зависел от transform/filter анимаций страницы

@@ -27,6 +27,7 @@ export const Input = (props: InputProps) => {
                     [styles.inputError]: error,
                 })}
                 placeholder=" "
+                autoComplete="off"
                 aria-invalid={error ? true : undefined}
                 {...rest}
                 {...register}

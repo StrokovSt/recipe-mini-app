@@ -1,6 +1,6 @@
 import type { ParsedRecipe } from "@recipe/common";
 
-import { getCover } from "./cover";
+import { getCover, getVideo } from "./cover";
 import { EMPTY_FORM_VALUES, type RecipeFormValues } from "./schema";
 
 // Распознанный ИИ рецепт как начальные значения формы. Если ИИ не нашёл ингредиенты или шаги,
@@ -14,7 +14,8 @@ export const parsedToFormValues = (data: ParsedRecipe): RecipeFormValues => ({
     steps: data.steps.length > 0 ? data.steps : EMPTY_FORM_VALUES.steps,
     prepTime: data.prepTime,
     cookTime: data.cookTime,
-    servings: data.servings ?? undefined,
+    servings: data.servings ?? EMPTY_FORM_VALUES.servings,
     tagIds: data.tags,
     cover: getCover(data.media),
+    video: getVideo(data.media),
 });

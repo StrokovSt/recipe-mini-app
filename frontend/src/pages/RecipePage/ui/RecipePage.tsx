@@ -6,11 +6,11 @@ import { AppRoute } from "@/app/router";
 import { buildRoute } from "@/app/router/routes";
 import { useDeleteRecipe, useRecipe } from "@/entities/recipe";
 import { IconButton } from "@/shared/ui/Buttons";
+import { useLoader } from "@/shared/ui/GlobalLoader";
 import { MediaLightbox } from "@/shared/ui/MediaLightbox";
 import { ConfirmModal } from "@/shared/ui/Modal";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
-import { Spinner } from "@/shared/ui/Spinner";
 
 import { RecipeContent } from "./RecipeContent/RecipeContent";
 import { RecipeHero } from "./RecipeHero/RecipeHero";
@@ -27,8 +27,9 @@ const RecipePage = () => {
 
     const { data: recipe, isLoading, isError } = useRecipe(id!);
     const { mutate: deleteRecipe } = useDeleteRecipe();
+    useLoader(isLoading);
 
-    if (isLoading) return <Spinner size="xl" />;
+    if (isLoading) return null;
     if (isError || !recipe) return <div className={styles.notFound}>{t("notFound")}</div>;
 
     const images = recipe.media.filter((m) => m.type === "image");

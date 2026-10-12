@@ -3,11 +3,12 @@ import { Request, Response, Router } from "express";
 import { createError, ErrorCode } from "@recipe/common";
 
 import { parseRecipeFromImage, parseRecipeFromText, parseRecipeFromUrl } from "../services/parser";
+import { isPinterestUrl } from "../services/pinterest";
 
 const router = Router();
 
 function detectSource(url: string): "pinterest" | "telegram" | "other" {
-    if (url.includes("pinterest.com") || url.includes("pin.it")) return "pinterest";
+    if (isPinterestUrl(url)) return "pinterest";
     if (url.includes("t.me") || url.includes("telegram.me")) return "telegram";
     return "other";
 }

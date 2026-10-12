@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { type FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,17 +8,17 @@ import type { ParsedRecipe } from "@recipe/common";
 
 import { AppRoute } from "@/app/router";
 import { buildRoute } from "@/app/router/routes";
-import { draftApi } from "@/entities/draft";
+import { DRAFT_KEYS, draftApi } from "@/entities/draft";
 import { useParseRecipe, useParseRecipeFromImage } from "@/entities/recipe";
 import { parsedToFormValues, type RecipeDraftData, type RecipeDraftState } from "@/features/recipe-form";
 import { ApiError } from "@/shared/api";
 import { getErrorMessage } from "@/shared/lib/errors";
 import { IconButton, RegularButton } from "@/shared/ui/Buttons";
 import { ErrorMessage } from "@/shared/ui/ErrorMessage";
+import { useLoader } from "@/shared/ui/GlobalLoader";
 import { Input } from "@/shared/ui/Input";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
-import { Spinner } from "@/shared/ui/Spinner";
 
 import PhotoZone, { type Photo } from "./PhotoZone/PhotoZone";
 
@@ -30,6 +31,7 @@ const URL_REGEX = /^https?:\/\/\S+\.\S+$/i;
 const ImportRecipePage = () => {
     const { t } = useTranslation(["recipeForm", "common"]);
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const [url, setUrl] = useState("");
     const [urlError, setUrlError] = useState("");
     const [photo, setPhoto] = useState<Photo | null>(null);
@@ -45,6 +47,8 @@ const ImportRecipePage = () => {
     } = useParseRecipeFromImage();
 
     const isParsing = isParsingUrl || isParsingImage || isOpening;
+    // Котик не уходит при переходе в форму: его погасит форма, когда отрисуется
+    useLoader(isParsing, { label: t("import.loading"), delay: 0, handOff: true });
     const error = urlParseError ?? imageParseError;
     const errorMessage = error
         ? getErrorMessage(error instanceof ApiError ? error.code : undefined, error.message)
@@ -63,7 +67,10 @@ const ImportRecipePage = () => {
         try {
             const data: RecipeDraftData = { values: parsedToFormValues(parsed), sourceUrl: parsed.sourceUrl };
             const draft = await draftApi.create({ title: parsed.title, origin: "ai", source: parsed.source, data });
-            navigate(buildRoute.draft(draft.id), { replace: true });
+            // Иначе на /add остаётся старый список, и новый черновик видно только после следующего автосохранения
+            queryClient.invalidateQueries({ queryKey: DRAFT_KEYS.lists() });
+            const state: RecipeDraftState = { isImported: true };
+            navigate(buildRoute.draft(draft.id), { state, replace: true });
         }
         catch {
             const state: RecipeDraftState = { parsed };
@@ -146,8 +153,6 @@ const ImportRecipePage = () => {
                 />
                 <p className={styles.note}>{t("import.note")}</p>
             </form>
-
-            {isParsing && <Spinner size="xl" label={t("import.loading")} />}
         </PageWrapper>
     );
 };

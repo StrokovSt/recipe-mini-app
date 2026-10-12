@@ -47,6 +47,8 @@ export const recipeSchema = z.object({
     servings: z.number().int().positive().nullable().optional(),
     tagIds: z.array(z.string()).default([]),
     cover: z.string().nullable(),
+    // Видео из импорта (Pinterest). В форме не показывается, но сохраняется вместе с рецептом
+    video: z.string().nullable().optional(),
 });
 
 export type RecipeFormValues = z.infer<typeof recipeSchema>;
@@ -61,9 +63,11 @@ export const EMPTY_FORM_VALUES: RecipeFormValues = {
     steps: [EMPTY_STEP],
     prepTime: null,
     cookTime: null,
-    servings: null,
+    // По умолчанию одна порция
+    servings: 1,
     tagIds: [],
     cover: null,
+    video: null,
 };
 
 // Перед сохранением: без пустых строк ингредиентов, пустых групп и пустых шагов

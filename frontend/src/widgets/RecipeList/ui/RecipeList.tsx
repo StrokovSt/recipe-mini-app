@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import type { Recipe } from '@recipe/common';
 
-import { Spinner } from '@/shared/ui/Spinner';
+import { useLoader } from '@/shared/ui/GlobalLoader';
 
 import RecipeItem from './RecipeItem/RecipeItem';
 
@@ -18,13 +18,12 @@ interface RecipeListProps {
 const RecipeList = (props: RecipeListProps) => {
     const {recipes, isLoading} = props;
     const { t } = useTranslation('home');
+    useLoader(isLoading);
 
-    // mode="wait": список появляется, когда котик успел плавно исчезнуть
+    // Пока грузится, показывается глобальный котик
     return (
         <AnimatePresence mode="wait">
-            {isLoading ? (
-                <Spinner key="loader" size='xl' />
-            ) : recipes.length === 0 ? (
+            {isLoading ? null : recipes.length === 0 ? (
                 <div key="empty" className={styles.empty}>
                     {t('empty')}
                 </div>

@@ -9,6 +9,8 @@ export type RecipeFormSource = Pick<ParsedRecipe, "source" | "sourceUrl">;
 export interface RecipeFormDraft {
     id?: string;
     origin: DraftOrigin;
+    // Черновик только что создан импортом, без действия пользователя: при уходе спрашиваем даже без правок
+    isImported?: boolean;
 }
 
 // Что лежит в черновике на сервере
@@ -32,5 +34,7 @@ export interface RecipeFormProps {
 
 // Состояние роутера при переходе с импорта на форму создания, если черновик создать не удалось
 export interface RecipeDraftState {
-    parsed: ParsedRecipe;
+    parsed?: ParsedRecipe;
+    // Переход с импорта в созданный черновик
+    isImported?: boolean;
 }

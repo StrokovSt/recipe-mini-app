@@ -66,11 +66,11 @@ const RecipeForm = (props: RecipeFormProps) => {
 
     const uploadCover = async (file: File) => (await uploadMedia(file)).url;
 
-    // Уход с изменённой формы спрашиваем в шторке. Не спрашиваем, когда рецепт сохраняется
-    // или пользователь уже выбрал действие в шторке
+    // Уход с изменённой формы (или из только что импортированного черновика) спрашиваем в шторке.
+    // Не спрашиваем, когда рецепт сохраняется или пользователь уже выбрал действие в шторке
     const isLeavingRef = useRef(false);
     const blocker = useBlocker(({ currentLocation, nextLocation }) =>
-        isDirty && !isLeavingRef.current && currentLocation.pathname !== nextLocation.pathname
+        (isDirty || !!draft?.isImported) && !isLeavingRef.current && currentLocation.pathname !== nextLocation.pathname
     );
 
     // Сохранение не удалось: снова спрашиваем при уходе
@@ -136,7 +136,7 @@ const RecipeForm = (props: RecipeFormProps) => {
                 tags: values.tagIds,
                 source: source?.source ?? "other",
                 sourceUrl: source?.sourceUrl ?? "",
-                media: toMedia(values.cover),
+                media: toMedia(values.cover, values.video),
                 draftId,
             },
             {

@@ -1,8 +1,9 @@
 import clsx from "clsx";
 import { motion } from "motion/react";
-import { type ReactNode } from "react";
+import { type ReactNode, useEffect } from "react";
 
 import { TRANSITION_PAGE } from "@/shared/config/animation";
+import { finishHandedOffLoading } from "@/shared/ui/GlobalLoader";
 
 import styles from "./PageWrapper.module.scss";
 
@@ -18,6 +19,11 @@ const VISIBLE = { opacity: 1, y: 0, filter: "blur(0px)", transitionEnd: { filter
 // Анимируется только контент: шапка при переходах стоит на месте, как footer
 export function PageWrapper(props: PageWrapperProps) {
     const { children, header, className } = props;
+
+    // Страница отрисовалась: котик, переданный с прошлой страницы (например, после распознавания), уходит
+    useEffect(() => {
+        finishHandedOffLoading();
+    }, []);
 
     return (
         <main className={clsx(styles.wrapper, className)}>
