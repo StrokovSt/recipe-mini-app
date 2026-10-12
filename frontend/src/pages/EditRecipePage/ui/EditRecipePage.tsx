@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { buildRoute } from "@/app/router/routes";
 import { useRecipe, useUpdateRecipe } from "@/entities/recipe";
-import { getCover, RecipeForm, type RecipeFormValues, toMedia } from "@/features/recipe-form";
+import { EMPTY_FORM_VALUES, getCover, RecipeForm, type RecipeFormValues, toMedia } from "@/features/recipe-form";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { Spinner } from "@/shared/ui/Spinner";
 
@@ -46,8 +46,9 @@ const EditRecipePage = () => {
                     title: recipe.title,
                     description: recipe.description,
                     categoryId: recipe.categoryId,
-                    ingredients: recipe.ingredients,
-                    steps: recipe.steps,
+                    // Рецепт без ингредиентов или шагов: в форме одна пустая строка, как в новом
+                    ingredients: recipe.ingredients.length > 0 ? recipe.ingredients : EMPTY_FORM_VALUES.ingredients,
+                    steps: recipe.steps.length > 0 ? recipe.steps : EMPTY_FORM_VALUES.steps,
                     prepTime: recipe.prepTime,
                     cookTime: recipe.cookTime,
                     servings: recipe.servings ?? undefined,

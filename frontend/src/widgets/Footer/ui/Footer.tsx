@@ -11,7 +11,7 @@ import SectionsIcon from "@/shared/assets/icons/icon-sections.svg?react";
 import styles from "./Footer.module.scss";
 
 // На формах рецепта футера нет: внизу закреплена кнопка сохранения
-const HIDDEN_ON: AppRoute[] = [AppRoute.CreateRecipe, AppRoute.ImportRecipe, AppRoute.EditRecipe];
+const HIDDEN_ON: AppRoute[] = [AppRoute.CreateRecipe, AppRoute.Draft, AppRoute.ImportRecipe, AppRoute.EditRecipe];
 
 interface NavItem {
     to: AppRoute;

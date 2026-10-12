@@ -3,6 +3,7 @@
         "title": "새 레시피",
         "subtitle": "추가 방법을 선택하세요",
         "intro": "레시피를 직접 입력하거나 AI가 링크나 사진에서 인식하게 하세요.",
+        "methods": "추가 방법",
         "saved": "컬렉션에 저장됩니다",
         "locked": "사용 불가",
         "manual": {
@@ -35,7 +36,8 @@
         "cover": "대표 사진",
         "main": "기본 정보",
         "ingredients": "재료",
-        "steps": "조리 과정"
+        "steps": "조리 과정",
+        "optional": "선택 사항"
     },
     "submitAdd": "컬렉션에 추가",
     "submitEdit": "변경 사항 저장",
@@ -71,9 +73,7 @@
     "validation": {
         "titleRequired": "제목을 입력하세요",
         "titleTooLong": "최대 {{max}}자까지 입력할 수 있어요",
-        "ingredientsRequired": "재료를 하나 이상 추가하세요",
         "ingredientEmpty": "이름 입력",
-        "groupEmpty": "그룹이 비어 있어요",
         "stepEmpty": "단계를 입력하세요",
         "amountInvalid": "0보다 커야 함"
     },
@@ -87,5 +87,38 @@
         "submit": "레시피 인식",
         "note": "AI가 수정할 수 있는 초안을 만듭니다",
         "loading": "레시피 인식 중…"
+    },
+    "drafts": {
+        "title": "임시 저장",
+        "hint": "멈춘 곳에서 이어서 작성하세요",
+        "total": "{{count}} / {{limit}}",
+        "untitled": "제목 없음",
+        "actions": "임시 저장 “{{name}}” 작업",
+        "deleteTitle": "임시 저장 “{{name}}”을(를) 삭제할까요?",
+        "deleteText": "임시 저장이 영구적으로 삭제됩니다.",
+        "limit": {
+            "title": "임시 저장 한도에 도달했습니다",
+            "text": "{{limit}}개 중 {{count}}개 저장됨. 새로 시작하려면 필요 없는 임시 저장을 삭제하거나 레시피로 저장하세요."
+        }
+    },
+    "draftStatus": {
+        "saving": "임시 저장 중…",
+        "saved": "임시 저장됨",
+        "error": "임시 저장 실패, 연결을 확인하세요"
+    },
+    "leave": {
+        "draft": {
+            "title": "양식에서 나갈까요?",
+            "text": "레시피는 임시 저장에 남아 있으며 추가 페이지에서 이어서 작성할 수 있습니다.",
+            "keep": "임시 저장에 두기",
+            "delete": "임시 저장 삭제",
+            "continue": "계속 편집"
+        },
+        "edit": {
+            "title": "변경 사항을 저장할까요?",
+            "text": "레시피 변경 사항이 아직 저장되지 않았습니다.",
+            "save": "저장",
+            "discard": "저장하지 않고 나가기"
+        }
     }
 }

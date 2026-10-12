@@ -39,6 +39,7 @@
         "VALIDATION_ERROR": "Invalid data.",
         "LIMIT_REACHED": "Recipe limit reached. Subscribe for unlimited access.",
         "AI_DISABLED": "AI recognition isn't available for this account.",
+        "DRAFT_LIMIT_REACHED": "You can keep up to 5 drafts. Delete one you don't need to start a new one.",
         "unknown": "Something went wrong."
     }
 }

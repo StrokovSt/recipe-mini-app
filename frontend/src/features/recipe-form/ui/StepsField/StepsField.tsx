@@ -23,6 +23,7 @@ const StepsField = () => {
         <FormSection
             mark="四"
             title={t("sections.steps")}
+            description={t("sections.optional")}
             action={<AddButton label={t("steps.add")} onClick={() => append(EMPTY_STEP)} />}
         >
             {fields.length > 0 && (

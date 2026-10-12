@@ -20,6 +20,7 @@ const IngredientsField = () => {
         <FormSection
             mark="三"
             title={t("sections.ingredients")}
+            description={t("sections.optional")}
             action={
                 <AddButton
                     label={t("ingredients.addGroup")}

@@ -39,6 +39,7 @@
         "VALIDATION_ERROR": "Dados inválidos.",
         "LIMIT_REACHED": "Limite de receitas atingido. Assine para ter acesso ilimitado.",
         "AI_DISABLED": "O reconhecimento por IA não está disponível para esta conta.",
+        "DRAFT_LIMIT_REACHED": "Você pode manter até 5 rascunhos. Exclua um para começar outro.",
         "unknown": "Algo deu errado."
     }
 }

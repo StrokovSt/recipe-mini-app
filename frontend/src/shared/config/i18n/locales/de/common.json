@@ -39,6 +39,7 @@
         "VALIDATION_ERROR": "Ungültige Daten.",
         "LIMIT_REACHED": "Rezeptlimit erreicht. Schließ ein Abo ab, um unbegrenzt Rezepte zu speichern.",
         "AI_DISABLED": "KI-Erkennung ist für dieses Konto nicht verfügbar.",
+        "DRAFT_LIMIT_REACHED": "Du kannst bis zu 5 Entwürfe behalten. Lösche einen, um einen neuen zu beginnen.",
         "unknown": "Etwas ist schiefgelaufen."
     }
 }

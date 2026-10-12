@@ -1,6 +1,8 @@
 @use "../compact";
 
 .list {
+    --field-font-size: var(--font-size-field-sm);
+
     display: flex;
     flex-direction: column;
     gap: var(--space-3);

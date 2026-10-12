@@ -1,6 +1,7 @@
 @use "@/shared/styles/states";
 
-// Поле высотой 40px: подпись внутри, при вводе уезжает вверх мелким шрифтом, как в поиске на главной
+// Поле высотой 40px: подпись внутри, при вводе уезжает вверх мелким шрифтом, как в поиске на главной.
+// Размер шрифта можно уменьшить снаружи переменной --field-font-size (мелкие поля формы рецепта)
 .wrap {
     position: relative;
 
@@ -25,6 +26,7 @@
     background: transparent;
     color: var(--tg-text);
     font: var(--font-ui-md);
+    font-size: var(--field-font-size, var(--font-size-md));
     text-overflow: ellipsis;
     transition: all var(--transition-base);
     appearance: textfield;
@@ -56,7 +58,7 @@
     &:placeholder-shown ~ .label {
         top: 50%;
         color: var(--tg-hint);
-        font-size: var(--font-size-md);
+        font-size: var(--field-font-size, var(--font-size-md));
         cursor: text;
         transform: translateY(-50%);
     }
@@ -113,6 +115,7 @@
     overflow: hidden;
     color: var(--tg-hint);
     font: var(--font-ui-md);
+    font-size: var(--field-font-size, var(--font-size-md));
     line-height: var(--font-line-xs);
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -160,6 +163,7 @@
     top: 50%;
     left: var(--space-3);
     font: var(--font-ui-md);
+    font-size: var(--field-font-size, var(--font-size-md));
     font-weight: var(--font-weight-bold);
     white-space: pre;
     visibility: hidden;
@@ -175,5 +179,6 @@
 
     color: var(--tg-hint);
     font: var(--font-ui-md);
+    font-size: var(--field-font-size, var(--font-size-md));
     pointer-events: none;
 }

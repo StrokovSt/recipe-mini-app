@@ -39,6 +39,7 @@
         "VALIDATION_ERROR": "Données non valides.",
         "LIMIT_REACHED": "Limite de recettes atteinte. Abonne-toi pour un accès illimité.",
         "AI_DISABLED": "La reconnaissance par IA n'est pas disponible pour ce compte.",
+        "DRAFT_LIMIT_REACHED": "Vous pouvez garder jusqu'à 5 brouillons. Supprimez-en un pour en commencer un nouveau.",
         "unknown": "Une erreur s'est produite."
     }
 }

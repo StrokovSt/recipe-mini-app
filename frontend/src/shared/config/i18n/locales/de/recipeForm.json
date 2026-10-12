@@ -3,6 +3,7 @@
         "title": "Neues Rezept",
         "subtitle": "wähle, wie du es hinzufügst",
         "intro": "Fülle das Rezept selbst aus oder lass die KI es aus einem Link oder Foto erkennen.",
+        "methods": "Art des Hinzufügens",
         "saved": "wird in deiner Sammlung gespeichert",
         "locked": "Nicht verfügbar",
         "manual": {
@@ -35,7 +36,8 @@
         "cover": "Titelbild",
         "main": "Grunddaten",
         "ingredients": "Zutaten",
-        "steps": "Zubereitung"
+        "steps": "Zubereitung",
+        "optional": "optional"
     },
     "submitAdd": "Zur Sammlung hinzufügen",
     "submitEdit": "Änderungen speichern",
@@ -71,9 +73,7 @@
     "validation": {
         "titleRequired": "Titel ist erforderlich",
         "titleTooLong": "Höchstens {{max}} Zeichen",
-        "ingredientsRequired": "Füge mindestens eine Zutat hinzu",
         "ingredientEmpty": "Name eingeben",
-        "groupEmpty": "Die Gruppe darf nicht leer sein",
         "stepEmpty": "Der Schritt darf nicht leer sein",
         "amountInvalid": "Größer als 0"
     },
@@ -87,5 +87,38 @@
         "submit": "Rezept erkennen",
         "note": "Die KI erstellt einen Entwurf, den du bearbeiten kannst",
         "loading": "Rezept wird erkannt…"
+    },
+    "drafts": {
+        "title": "Entwürfe",
+        "hint": "mach dort weiter, wo du aufgehört hast",
+        "total": "{{count}} von {{limit}}",
+        "untitled": "Ohne Titel",
+        "actions": "Aktionen für Entwurf „{{name}}“",
+        "deleteTitle": "Entwurf „{{name}}“ löschen?",
+        "deleteText": "Der Entwurf wird endgültig gelöscht.",
+        "limit": {
+            "title": "Entwurfslimit erreicht",
+            "text": "{{count}} von {{limit}} gespeichert. Lösche einen nicht benötigten Entwurf oder speichere ihn als Rezept, um einen neuen zu beginnen."
+        }
+    },
+    "draftStatus": {
+        "saving": "Entwurf wird gespeichert…",
+        "saved": "Entwurf gespeichert",
+        "error": "Entwurf nicht gespeichert, prüfe die Verbindung"
+    },
+    "leave": {
+        "draft": {
+            "title": "Formular verlassen?",
+            "text": "Das Rezept bleibt in den Entwürfen, du findest es auf der Seite zum Hinzufügen.",
+            "keep": "In Entwürfen behalten",
+            "delete": "Entwurf löschen",
+            "continue": "Weiter bearbeiten"
+        },
+        "edit": {
+            "title": "Änderungen speichern?",
+            "text": "Deine Änderungen am Rezept sind noch nicht gespeichert.",
+            "save": "Speichern",
+            "discard": "Ohne Speichern verlassen"
+        }
     }
 }

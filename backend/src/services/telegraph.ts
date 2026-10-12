@@ -65,8 +65,10 @@ function buildContent(recipe: RecipePageData) {
         });
     }
 
-    // Ингредиенты
-    content.push({ tag: "h3", children: ["Ингредиенты"] });
+    // Ингредиенты, если есть
+    if (recipe.ingredients.length > 0) {
+        content.push({ tag: "h3", children: ["Ингредиенты"] });
+    }
 
     for (const group of recipe.ingredients) {
         if (group.title) {

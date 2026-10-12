@@ -53,6 +53,10 @@ export const routeConfig: RouteConfig[] = [
         element: PAGES.CreateRecipePage.Page,
     },
     {
+        path: AppRoute.Draft,
+        element: PAGES.CreateRecipePage.Page,
+    },
+    {
         path: AppRoute.Sections,
         element: PAGES.SectionsPage.Page,
     },

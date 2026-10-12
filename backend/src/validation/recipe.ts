@@ -39,7 +39,8 @@ const recipeShape = {
     description: z.string().max(1000).nullable().optional(),
     // Без категории рецепт попадает в «Разное»
     categoryId: z.string().cuid().nullable().optional(),
-    ingredients: z.array(ingredientGroupSchema).min(1),
+    // Ингредиенты и шаги необязательны: рецептом может быть, например, просто видео
+    ingredients: z.array(ingredientGroupSchema),
     steps: z.array(stepSchema),
     prepTime: minutesSchema,
     cookTime: minutesSchema,

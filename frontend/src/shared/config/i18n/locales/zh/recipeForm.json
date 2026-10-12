@@ -3,6 +3,7 @@
         "title": "新食谱",
         "subtitle": "选择添加方式",
         "intro": "自己填写食谱，或让 AI 从链接或照片中识别。",
+        "methods": "添加方式",
         "saved": "将保存到你的收藏",
         "locked": "不可用",
         "manual": {
@@ -35,7 +36,8 @@
         "cover": "封面",
         "main": "基本信息",
         "ingredients": "食材",
-        "steps": "做法"
+        "steps": "做法",
+        "optional": "可选"
     },
     "submitAdd": "添加到收藏",
     "submitEdit": "保存更改",
@@ -71,9 +73,7 @@
     "validation": {
         "titleRequired": "标题为必填项",
         "titleTooLong": "最多 {{max}} 个字符",
-        "ingredientsRequired": "请至少添加一种食材",
         "ingredientEmpty": "请输入名称",
-        "groupEmpty": "分组不能为空",
         "stepEmpty": "步骤不能为空",
         "amountInvalid": "须大于 0"
     },
@@ -87,5 +87,38 @@
         "submit": "识别食谱",
         "note": "AI 会生成一份可编辑的草稿",
         "loading": "正在识别食谱…"
+    },
+    "drafts": {
+        "title": "草稿",
+        "hint": "从上次停下的地方继续",
+        "total": "{{count}} / {{limit}}",
+        "untitled": "无标题",
+        "actions": "草稿“{{name}}”的操作",
+        "deleteTitle": "删除草稿“{{name}}”？",
+        "deleteText": "草稿将被永久删除。",
+        "limit": {
+            "title": "已达草稿上限",
+            "text": "已保存 {{count}} / {{limit}}。删除不需要的草稿或将其保存为食谱，即可开始新的草稿。"
+        }
+    },
+    "draftStatus": {
+        "saving": "正在保存草稿…",
+        "saved": "草稿已保存",
+        "error": "草稿未保存，请检查网络连接"
+    },
+    "leave": {
+        "draft": {
+            "title": "离开表单？",
+            "text": "食谱会保留在草稿中，可以在添加页面继续编辑。",
+            "keep": "保留在草稿",
+            "delete": "删除草稿",
+            "continue": "继续编辑"
+        },
+        "edit": {
+            "title": "保存更改？",
+            "text": "食谱的更改尚未保存。",
+            "save": "保存",
+            "discard": "不保存并离开"
+        }
     }
 }

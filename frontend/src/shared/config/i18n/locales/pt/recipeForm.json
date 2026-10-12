@@ -3,6 +3,7 @@
         "title": "Nova receita",
         "subtitle": "escolha como adicioná-la",
         "intro": "Preencha a receita você mesmo ou deixe a IA reconhecê-la a partir de um link ou foto.",
+        "methods": "Forma de adicionar",
         "saved": "será salva na sua coleção",
         "locked": "Indisponível",
         "manual": {
@@ -35,7 +36,8 @@
         "cover": "Capa",
         "main": "Básico",
         "ingredients": "Ingredientes",
-        "steps": "Modo de preparo"
+        "steps": "Modo de preparo",
+        "optional": "opcional"
     },
     "submitAdd": "Adicionar à coleção",
     "submitEdit": "Salvar alterações",
@@ -71,9 +73,7 @@
     "validation": {
         "titleRequired": "O título é obrigatório",
         "titleTooLong": "No máximo {{max}} caracteres",
-        "ingredientsRequired": "Adicione pelo menos um ingrediente",
         "ingredientEmpty": "Digite o nome",
-        "groupEmpty": "O grupo não pode ficar vazio",
         "stepEmpty": "A etapa não pode ficar vazia",
         "amountInvalid": "Maior que 0"
     },
@@ -87,5 +87,38 @@
         "submit": "Reconhecer receita",
         "note": "A IA vai preparar um rascunho editável",
         "loading": "Reconhecendo a receita…"
+    },
+    "drafts": {
+        "title": "Rascunhos",
+        "hint": "continue de onde parou",
+        "total": "{{count}} de {{limit}}",
+        "untitled": "Sem título",
+        "actions": "Ações do rascunho «{{name}}»",
+        "deleteTitle": "Excluir o rascunho «{{name}}»?",
+        "deleteText": "O rascunho será excluído permanentemente.",
+        "limit": {
+            "title": "Limite de rascunhos atingido",
+            "text": "{{count}} de {{limit}} salvos. Exclua um rascunho que não precisa ou salve-o como receita para começar um novo."
+        }
+    },
+    "draftStatus": {
+        "saving": "Salvando rascunho…",
+        "saved": "Rascunho salvo",
+        "error": "Rascunho não salvo, verifique a conexão"
+    },
+    "leave": {
+        "draft": {
+            "title": "Sair do formulário?",
+            "text": "A receita fica nos rascunhos, você pode voltar a ela na página de adicionar.",
+            "keep": "Manter nos rascunhos",
+            "delete": "Excluir rascunho",
+            "continue": "Continuar editando"
+        },
+        "edit": {
+            "title": "Salvar alterações?",
+            "text": "As alterações na receita ainda não foram salvas.",
+            "save": "Salvar",
+            "discard": "Sair sem salvar"
+        }
     }
 }

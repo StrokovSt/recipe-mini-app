@@ -3,6 +3,7 @@
         "title": "新しいレシピ",
         "subtitle": "追加方法を選んでください",
         "intro": "レシピを自分で入力するか、リンクや写真からAIに認識させましょう。",
+        "methods": "追加方法",
         "saved": "コレクションに保存されます",
         "locked": "利用不可",
         "manual": {
@@ -35,7 +36,8 @@
         "cover": "カバー写真",
         "main": "基本情報",
         "ingredients": "材料",
-        "steps": "作り方"
+        "steps": "作り方",
+        "optional": "任意"
     },
     "submitAdd": "コレクションに追加",
     "submitEdit": "変更を保存",
@@ -71,9 +73,7 @@
     "validation": {
         "titleRequired": "タイトルは必須です",
         "titleTooLong": "{{max}}文字以内で入力してください",
-        "ingredientsRequired": "材料を1つ以上追加してください",
         "ingredientEmpty": "名前を入力",
-        "groupEmpty": "グループが空です",
         "stepEmpty": "手順を入力してください",
         "amountInvalid": "0より大きい数"
     },
@@ -87,5 +87,38 @@
         "submit": "レシピを認識",
         "note": "AIが編集できる下書きを作成します",
         "loading": "レシピを認識中…"
+    },
+    "drafts": {
+        "title": "下書き",
+        "hint": "途中から再開できます",
+        "total": "{{count}} / {{limit}}",
+        "untitled": "無題",
+        "actions": "下書き「{{name}}」の操作",
+        "deleteTitle": "下書き「{{name}}」を削除しますか？",
+        "deleteText": "下書きは完全に削除されます。",
+        "limit": {
+            "title": "下書きの上限に達しました",
+            "text": "{{limit}} 件中 {{count}} 件を保存済み。新しく始めるには、不要な下書きを削除するかレシピとして保存してください。"
+        }
+    },
+    "draftStatus": {
+        "saving": "下書きを保存中…",
+        "saved": "下書きを保存しました",
+        "error": "下書きを保存できませんでした。接続を確認してください"
+    },
+    "leave": {
+        "draft": {
+            "title": "フォームを閉じますか？",
+            "text": "レシピは下書きに残ります。追加ページから再開できます。",
+            "keep": "下書きに残す",
+            "delete": "下書きを削除",
+            "continue": "編集を続ける"
+        },
+        "edit": {
+            "title": "変更を保存しますか？",
+            "text": "レシピの変更はまだ保存されていません。",
+            "save": "保存",
+            "discard": "保存せずに閉じる"
+        }
     }
 }

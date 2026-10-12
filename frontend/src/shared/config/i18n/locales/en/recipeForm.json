@@ -3,6 +3,7 @@
         "title": "New recipe",
         "subtitle": "choose how to add it",
         "intro": "Fill in the recipe yourself or let AI recognize it from a link or photo.",
+        "methods": "How to add",
         "saved": "saved to your collection",
         "locked": "Unavailable",
         "manual": {
@@ -35,7 +36,8 @@
         "cover": "Cover",
         "main": "Basics",
         "ingredients": "Ingredients",
-        "steps": "Method"
+        "steps": "Method",
+        "optional": "optional"
     },
     "submitAdd": "Add to collection",
     "submitEdit": "Save changes",
@@ -71,9 +73,7 @@
     "validation": {
         "titleRequired": "Title is required",
         "titleTooLong": "No more than {{max}} characters",
-        "ingredientsRequired": "Add at least one ingredient",
         "ingredientEmpty": "Enter a name",
-        "groupEmpty": "Group can't be empty",
         "stepEmpty": "Step can't be empty",
         "amountInvalid": "Must be above 0"
     },
@@ -87,5 +87,38 @@
         "submit": "Recognize recipe",
         "note": "AI will prepare a draft you can edit",
         "loading": "Recognizing the recipe…"
+    },
+    "drafts": {
+        "title": "Drafts",
+        "hint": "pick up where you left off",
+        "total": "{{count}} of {{limit}}",
+        "untitled": "Untitled",
+        "actions": "Actions for draft “{{name}}”",
+        "deleteTitle": "Delete draft “{{name}}”?",
+        "deleteText": "The draft will be deleted permanently.",
+        "limit": {
+            "title": "Draft limit reached",
+            "text": "{{count}} of {{limit}} saved. Delete a draft you don't need or save it as a recipe to start a new one."
+        }
+    },
+    "draftStatus": {
+        "saving": "Saving draft…",
+        "saved": "Draft saved",
+        "error": "Draft not saved, check your connection"
+    },
+    "leave": {
+        "draft": {
+            "title": "Leave the form?",
+            "text": "The recipe stays in drafts, you can come back to it on the add page.",
+            "keep": "Keep in drafts",
+            "delete": "Delete draft",
+            "continue": "Keep editing"
+        },
+        "edit": {
+            "title": "Save changes?",
+            "text": "Your changes to the recipe aren't saved yet.",
+            "save": "Save",
+            "discard": "Leave without saving"
+        }
     }
 }

@@ -3,6 +3,7 @@
         "title": "Nuova ricetta",
         "subtitle": "scegli come aggiungerla",
         "intro": "Compila la ricetta da solo o lascia che l'IA la riconosca da un link o da una foto.",
+        "methods": "Modo di aggiunta",
         "saved": "verrà salvata nella tua raccolta",
         "locked": "Non disponibile",
         "manual": {
@@ -35,7 +36,8 @@
         "cover": "Copertina",
         "main": "Informazioni di base",
         "ingredients": "Ingredienti",
-        "steps": "Preparazione"
+        "steps": "Preparazione",
+        "optional": "facoltativo"
     },
     "submitAdd": "Aggiungi alla raccolta",
     "submitEdit": "Salva modifiche",
@@ -71,9 +73,7 @@
     "validation": {
         "titleRequired": "Il titolo è obbligatorio",
         "titleTooLong": "Massimo {{max}} caratteri",
-        "ingredientsRequired": "Aggiungi almeno un ingrediente",
         "ingredientEmpty": "Inserisci il nome",
-        "groupEmpty": "Il gruppo non può essere vuoto",
         "stepEmpty": "Il passaggio non può essere vuoto",
         "amountInvalid": "Maggiore di 0"
     },
@@ -87,5 +87,38 @@
         "submit": "Riconosci ricetta",
         "note": "L’IA preparerà una bozza modificabile",
         "loading": "Riconoscimento della ricetta…"
+    },
+    "drafts": {
+        "title": "Bozze",
+        "hint": "riprendi da dove avevi lasciato",
+        "total": "{{count}} di {{limit}}",
+        "untitled": "Senza titolo",
+        "actions": "Azioni per la bozza «{{name}}»",
+        "deleteTitle": "Eliminare la bozza «{{name}}»?",
+        "deleteText": "La bozza verrà eliminata definitivamente.",
+        "limit": {
+            "title": "Limite di bozze raggiunto",
+            "text": "{{count}} di {{limit}} salvate. Elimina una bozza che non ti serve o salvala come ricetta per iniziarne una nuova."
+        }
+    },
+    "draftStatus": {
+        "saving": "Salvataggio bozza…",
+        "saved": "Bozza salvata",
+        "error": "Bozza non salvata, controlla la connessione"
+    },
+    "leave": {
+        "draft": {
+            "title": "Uscire dal modulo?",
+            "text": "La ricetta resta nelle bozze, puoi ritrovarla nella pagina di aggiunta.",
+            "keep": "Tieni nelle bozze",
+            "delete": "Elimina bozza",
+            "continue": "Continua a modificare"
+        },
+        "edit": {
+            "title": "Salvare le modifiche?",
+            "text": "Le modifiche alla ricetta non sono ancora salvate.",
+            "save": "Salva",
+            "discard": "Esci senza salvare"
+        }
     }
 }

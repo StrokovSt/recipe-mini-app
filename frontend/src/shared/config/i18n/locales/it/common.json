@@ -39,6 +39,7 @@
         "VALIDATION_ERROR": "Dati non validi.",
         "LIMIT_REACHED": "Limite di ricette raggiunto. Abbonati per l'accesso illimitato.",
         "AI_DISABLED": "Il riconoscimento con IA non è disponibile per questo account.",
+        "DRAFT_LIMIT_REACHED": "Puoi tenere fino a 5 bozze. Eliminane una per iniziarne una nuova.",
         "unknown": "Qualcosa è andato storto."
     }
 }

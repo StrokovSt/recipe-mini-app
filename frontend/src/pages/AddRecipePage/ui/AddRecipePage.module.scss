@@ -28,10 +28,9 @@
     gap: var(--space-3);
     padding-bottom: var(--space-6);
 
-    .intro {
-        margin-bottom: var(--space-1);
-        color: var(--color-text-muted);
-        font: var(--font-sm);
+    // Карточки способов внутри SectionCard на цвете фона приложения, как поля в форме
+    .methods > :not(header) {
+        --color-surface: var(--color-app-bg);
     }
 
     // Плашка с винной полосой слева
@@ -54,8 +53,9 @@
         align-items: center;
         gap: var(--space-2);
         margin-top: var(--space-2);
-        color: var(--color-text-muted);
+        color: var(--color-text-soft);
         font: var(--font-ui-xs);
+        font-weight: var(--font-weight-bold);
         letter-spacing: 0.08em;
         text-transform: uppercase;
 
@@ -66,6 +66,19 @@
             height: 1px;
             background: var(--color-border);
         }
+    }
+
+    .drafts {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        margin-top: var(--space-4);
+    }
+
+    .draftList {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
     }
 }
 

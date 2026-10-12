@@ -3,6 +3,7 @@
         "title": "Nueva receta",
         "subtitle": "elige cómo añadirla",
         "intro": "Completa la receta tú mismo o deja que la IA la reconozca a partir de un enlace o una foto.",
+        "methods": "Forma de añadir",
         "saved": "se guardará en tu colección",
         "locked": "No disponible",
         "manual": {
@@ -35,7 +36,8 @@
         "cover": "Portada",
         "main": "Lo básico",
         "ingredients": "Ingredientes",
-        "steps": "Preparación"
+        "steps": "Preparación",
+        "optional": "opcional"
     },
     "submitAdd": "Añadir a la colección",
     "submitEdit": "Guardar cambios",
@@ -71,9 +73,7 @@
     "validation": {
         "titleRequired": "El título es obligatorio",
         "titleTooLong": "Máximo {{max}} caracteres",
-        "ingredientsRequired": "Añade al menos un ingrediente",
         "ingredientEmpty": "Escribe el nombre",
-        "groupEmpty": "El grupo no puede estar vacío",
         "stepEmpty": "El paso no puede estar vacío",
         "amountInvalid": "Mayor que 0"
     },
@@ -87,5 +87,38 @@
         "submit": "Reconocer receta",
         "note": "La IA preparará un borrador que podrás editar",
         "loading": "Reconociendo la receta…"
+    },
+    "drafts": {
+        "title": "Borradores",
+        "hint": "continúa donde lo dejaste",
+        "total": "{{count}} de {{limit}}",
+        "untitled": "Sin título",
+        "actions": "Acciones del borrador «{{name}}»",
+        "deleteTitle": "¿Eliminar el borrador «{{name}}»?",
+        "deleteText": "El borrador se eliminará de forma permanente.",
+        "limit": {
+            "title": "Límite de borradores alcanzado",
+            "text": "{{count}} de {{limit}} guardados. Elimina un borrador que no necesites o guárdalo como receta para empezar uno nuevo."
+        }
+    },
+    "draftStatus": {
+        "saving": "Guardando borrador…",
+        "saved": "Borrador guardado",
+        "error": "Borrador no guardado, revisa la conexión"
+    },
+    "leave": {
+        "draft": {
+            "title": "¿Salir del formulario?",
+            "text": "La receta queda en borradores, puedes volver a ella en la página de añadir.",
+            "keep": "Guardar en borradores",
+            "delete": "Eliminar borrador",
+            "continue": "Seguir editando"
+        },
+        "edit": {
+            "title": "¿Guardar los cambios?",
+            "text": "Los cambios en la receta aún no se han guardado.",
+            "save": "Guardar",
+            "discard": "Salir sin guardar"
+        }
     }
 }

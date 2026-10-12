@@ -23,6 +23,7 @@
     background: transparent;
     color: var(--tg-text);
     font: var(--font-ui-md);
+    font-size: var(--field-font-size, var(--font-size-md));
     transition: border-color var(--transition-base), background var(--transition-base);
     resize: none;
 
@@ -53,7 +54,7 @@
     &:placeholder-shown ~ .label {
         top: calc(var(--size-field-height) / 2);
         color: var(--tg-hint);
-        font-size: var(--font-size-md);
+        font-size: var(--field-font-size, var(--font-size-md));
         cursor: text;
         transform: translateY(-50%);
     }
@@ -104,6 +105,7 @@
     overflow: hidden;
     color: var(--tg-hint);
     font: var(--font-ui-md);
+    font-size: var(--field-font-size, var(--font-size-md));
     line-height: var(--font-line-xs);
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -3,6 +3,7 @@
         "title": "Yeni tarif",
         "subtitle": "nasıl ekleyeceğini seç",
         "intro": "Tarifi kendin doldur ya da yapay zekânın bir bağlantıdan veya fotoğraftan tanımasına izin ver.",
+        "methods": "Ekleme yöntemi",
         "saved": "koleksiyonuna kaydedilir",
         "locked": "Kullanılamıyor",
         "manual": {
@@ -35,7 +36,8 @@
         "cover": "Kapak",
         "main": "Temel bilgiler",
         "ingredients": "Malzemeler",
-        "steps": "Hazırlanışı"
+        "steps": "Hazırlanışı",
+        "optional": "isteğe bağlı"
     },
     "submitAdd": "Koleksiyona ekle",
     "submitEdit": "Değişiklikleri kaydet",
@@ -71,9 +73,7 @@
     "validation": {
         "titleRequired": "Başlık zorunlu",
         "titleTooLong": "En fazla {{max}} karakter",
-        "ingredientsRequired": "En az bir malzeme ekle",
         "ingredientEmpty": "Ad girin",
-        "groupEmpty": "Grup boş olamaz",
         "stepEmpty": "Adım boş olamaz",
         "amountInvalid": "0'dan büyük olmalı"
     },
@@ -87,5 +87,38 @@
         "submit": "Tarifi tanı",
         "note": "Yapay zekâ düzenleyebileceğin bir taslak hazırlayacak",
         "loading": "Tarif tanınıyor…"
+    },
+    "drafts": {
+        "title": "Taslaklar",
+        "hint": "kaldığınız yerden devam edin",
+        "total": "{{count}} / {{limit}}",
+        "untitled": "Başlıksız",
+        "actions": "“{{name}}” taslağı için işlemler",
+        "deleteTitle": "“{{name}}” taslağı silinsin mi?",
+        "deleteText": "Taslak kalıcı olarak silinecek.",
+        "limit": {
+            "title": "Taslak sınırına ulaşıldı",
+            "text": "{{count}} / {{limit}} kayıtlı. Yeni bir taslak başlatmak için gereksiz bir taslağı silin veya tarif olarak kaydedin."
+        }
+    },
+    "draftStatus": {
+        "saving": "Taslak kaydediliyor…",
+        "saved": "Taslak kaydedildi",
+        "error": "Taslak kaydedilemedi, bağlantınızı kontrol edin"
+    },
+    "leave": {
+        "draft": {
+            "title": "Formdan çıkılsın mı?",
+            "text": "Tarif taslaklarda kalır, ekleme sayfasından ona geri dönebilirsiniz.",
+            "keep": "Taslaklarda tut",
+            "delete": "Taslağı sil",
+            "continue": "Düzenlemeye devam et"
+        },
+        "edit": {
+            "title": "Değişiklikler kaydedilsin mi?",
+            "text": "Tarifteki değişiklikler henüz kaydedilmedi.",
+            "save": "Kaydet",
+            "discard": "Kaydetmeden çık"
+        }
     }
 }

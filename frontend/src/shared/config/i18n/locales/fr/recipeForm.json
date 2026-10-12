@@ -3,6 +3,7 @@
         "title": "Nouvelle recette",
         "subtitle": "choisis comment l'ajouter",
         "intro": "Remplis la recette toi-même ou laisse l'IA la reconnaître à partir d'un lien ou d'une photo.",
+        "methods": "Mode d'ajout",
         "saved": "enregistrée dans ta collection",
         "locked": "Indisponible",
         "manual": {
@@ -35,7 +36,8 @@
         "cover": "Couverture",
         "main": "L'essentiel",
         "ingredients": "Ingrédients",
-        "steps": "Préparation"
+        "steps": "Préparation",
+        "optional": "facultatif"
     },
     "submitAdd": "Ajouter à la collection",
     "submitEdit": "Enregistrer les modifications",
@@ -71,9 +73,7 @@
     "validation": {
         "titleRequired": "Le titre est obligatoire",
         "titleTooLong": "{{max}} caractères maximum",
-        "ingredientsRequired": "Ajoute au moins un ingrédient",
         "ingredientEmpty": "Saisissez le nom",
-        "groupEmpty": "Le groupe ne peut pas être vide",
         "stepEmpty": "L'étape ne peut pas être vide",
         "amountInvalid": "Supérieur à 0"
     },
@@ -87,5 +87,38 @@
         "submit": "Reconnaître la recette",
         "note": "L’IA préparera un brouillon modifiable",
         "loading": "Reconnaissance de la recette…"
+    },
+    "drafts": {
+        "title": "Brouillons",
+        "hint": "reprenez là où vous vous êtes arrêté",
+        "total": "{{count}} sur {{limit}}",
+        "untitled": "Sans titre",
+        "actions": "Actions pour le brouillon « {{name}} »",
+        "deleteTitle": "Supprimer le brouillon « {{name}} » ?",
+        "deleteText": "Le brouillon sera supprimé définitivement.",
+        "limit": {
+            "title": "Limite de brouillons atteinte",
+            "text": "{{count}} sur {{limit}} enregistrés. Supprimez un brouillon inutile ou enregistrez-le comme recette pour en commencer un nouveau."
+        }
+    },
+    "draftStatus": {
+        "saving": "Enregistrement du brouillon…",
+        "saved": "Brouillon enregistré",
+        "error": "Brouillon non enregistré, vérifiez la connexion"
+    },
+    "leave": {
+        "draft": {
+            "title": "Quitter le formulaire ?",
+            "text": "La recette reste dans les brouillons, vous pourrez la retrouver sur la page d'ajout.",
+            "keep": "Garder en brouillon",
+            "delete": "Supprimer le brouillon",
+            "continue": "Continuer la modification"
+        },
+        "edit": {
+            "title": "Enregistrer les modifications ?",
+            "text": "Vos modifications de la recette ne sont pas encore enregistrées.",
+            "save": "Enregistrer",
+            "discard": "Quitter sans enregistrer"
+        }
     }
 }

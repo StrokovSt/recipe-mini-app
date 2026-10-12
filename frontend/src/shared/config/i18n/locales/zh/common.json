@@ -39,6 +39,7 @@
         "VALIDATION_ERROR": "数据校验失败。",
         "LIMIT_REACHED": "已达到食谱数量上限，订阅即可无限使用。",
         "AI_DISABLED": "此账户无法使用 AI 识别。",
+        "DRAFT_LIMIT_REACHED": "最多可保存 5 个草稿。删除一个即可开始新的草稿。",
         "unknown": "出了点问题。"
     }
 }

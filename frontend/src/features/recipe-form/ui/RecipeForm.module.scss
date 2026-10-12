@@ -57,9 +57,21 @@ $narrow-screen-width: 360px;
         width: 100%;
     }
 
+    // Подпись автосохранения над кнопкой
+    .draftStatus {
+        margin-bottom: var(--space-2);
+        color: var(--color-text-muted);
+        font: var(--font-ui-xs);
+        text-align: center;
+    }
+
+    .draftError {
+        color: var(--color-error);
+    }
+
     // После .save, чтобы перебить его отрицательные поля
     @media (width <= $narrow-screen-width) {
-        margin-inline: calc(-1 * var(--space-5));
+        margin-inline: calc(-1 * var(--space-2));
 
         .save {
             margin-inline: 0;

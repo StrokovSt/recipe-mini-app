@@ -6,6 +6,7 @@ export const AppRoute = {
     AddRecipe: "/add",
     ImportRecipe: "/add/import",
     CreateRecipe: "/add/form",
+    Draft: "/add/draft/:id",
     EditRecipe: "/edit/:id",
     Sections: "/sections",
     Profile: "/profile",
@@ -18,6 +19,7 @@ export type AppRoute = (typeof AppRoute)[keyof typeof AppRoute];
 export const buildRoute = {
     recipe: (id: string) => `/recipe/${id}`,
     editRecipe: (id: string) => `/edit/${id}`,
+    draft: (id: string) => `/add/draft/${id}`,
     // Главная с включённым фильтром
     homeByCategory: (id: string) => `/?category=${id}`,
     homeByTag: (id: string) => `/?tag=${id}`,

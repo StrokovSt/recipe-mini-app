@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import type { ParsedRecipe } from "@recipe/common";
 
 import { AppRoute } from "@/app/router";
+import { buildRoute } from "@/app/router/routes";
+import { draftApi } from "@/entities/draft";
 import { useParseRecipe, useParseRecipeFromImage } from "@/entities/recipe";
-import type { RecipeDraftState } from "@/features/recipe-form";
+import { parsedToFormValues, type RecipeDraftData, type RecipeDraftState } from "@/features/recipe-form";
 import { ApiError } from "@/shared/api";
 import { getErrorMessage } from "@/shared/lib/errors";
 import { IconButton, RegularButton } from "@/shared/ui/Buttons";
@@ -31,6 +33,8 @@ const ImportRecipePage = () => {
     const [url, setUrl] = useState("");
     const [urlError, setUrlError] = useState("");
     const [photo, setPhoto] = useState<Photo | null>(null);
+    // Распознанный рецепт сохраняется в черновик, пока это идёт, лоадер не убираем
+    const [isOpening, setIsOpening] = useState(false);
 
     const { mutate: parseUrl, isPending: isParsingUrl, error: urlParseError, reset: resetUrl } = useParseRecipe();
     const {
@@ -40,7 +44,7 @@ const ImportRecipePage = () => {
         reset: resetImage,
     } = useParseRecipeFromImage();
 
-    const isParsing = isParsingUrl || isParsingImage;
+    const isParsing = isParsingUrl || isParsingImage || isOpening;
     const error = urlParseError ?? imageParseError;
     const errorMessage = error
         ? getErrorMessage(error instanceof ApiError ? error.code : undefined, error.message)
@@ -52,9 +56,19 @@ const ImportRecipePage = () => {
         resetImage();
     };
 
-    const openDraft = (parsed: ParsedRecipe) => {
-        const state: RecipeDraftState = { parsed };
-        navigate(AppRoute.CreateRecipe, { state });
+    // Сразу сохраняем в черновик, чтобы распознанное не пропало. Если не вышло, открываем форму без черновика
+    const openDraft = async (parsed: ParsedRecipe) => {
+        setIsOpening(true);
+
+        try {
+            const data: RecipeDraftData = { values: parsedToFormValues(parsed), sourceUrl: parsed.sourceUrl };
+            const draft = await draftApi.create({ title: parsed.title, origin: "ai", source: parsed.source, data });
+            navigate(buildRoute.draft(draft.id), { replace: true });
+        }
+        catch {
+            const state: RecipeDraftState = { parsed };
+            navigate(AppRoute.CreateRecipe, { state, replace: true });
+        }
     };
 
     // Фото важнее ссылки: пока оно выбрано, поле ссылки неактивно
