@@ -2,6 +2,8 @@
     "appName": "Ricetta",
     "back": "戻る",
     "close": "閉じる",
+    "prev": "前へ",
+    "next": "次へ",
     "cancel": "キャンセル",
     "delete": "削除",
     "edit": "編集",

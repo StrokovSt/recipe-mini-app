@@ -20,9 +20,7 @@ interface Task {
 }
 
 const DEFAULT_DELAY = 300;
-// Показанный котик держится не меньше секунды, чтобы не моргал
 const MIN_VISIBLE_MS = 1000;
-// Страница, которой передали загрузку, так и не отрисовалась: котик всё равно уходит
 const HANDOFF_TIMEOUT_MS = 15000;
 
 const tasks = new Map<number, Task>();

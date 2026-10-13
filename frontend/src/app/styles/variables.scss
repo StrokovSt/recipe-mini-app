@@ -48,6 +48,9 @@
     --space-5: 20px;
     --space-6: 24px;
 
+    // Боковой отступ страниц от края экрана; на узких телефонах меньше (ниже)
+    --space-page: var(--space-5);
+
     // ─── Sizes ────────────────────────────────────────────────
     --size-app-max-width: 1024px;
     --size-control-height: 56px;
@@ -124,6 +127,16 @@
     --size-step-photo-icon: 20px;
     --size-step-photo-remove: 20px;
     --size-tag-min-width: 50px;
+
+    // Обложка рецепта от верха экрана, вместе с зоной под шапкой
+    --size-recipe-cover: 320px;
+    --size-play-button: 56px;
+
+    // Иконка площадки в плашке источника на обложке
+    --size-source-icon: 14px;
+
+    // Точки-переключатели в полноэкранном просмотре фото
+    --size-lightbox-dot: 8px;
     --size-list-max-columns: 4;
     --size-scrollbar: 6px;
     --size-theme-blur: 6px;
@@ -156,6 +169,14 @@
     // ─── Z-index ──────────────────────────────────────────────
     --z-above: 10;
     --z-modal: 100;
+}
+
+// Узкие телефоны: контенту нужна каждая точка ширины. В @media нельзя подставить CSS-переменную,
+// поэтому граница числом
+@media (width <= 360px) {
+    :root {
+        --space-page: var(--space-3);
+    }
 }
 
 // Анимации выключены в настройках (shared/lib/animations): переходы и CSS-анимации без длительности

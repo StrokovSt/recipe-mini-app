@@ -1,82 +1,88 @@
-.overlay {
-    position: fixed;
-    inset: 0;
+.root {
+    position: relative;
     z-index: var(--z-modal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-overlay);
-    backdrop-filter: blur(4px);
 }
 
-.content {
-    position: relative;
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--color-lightbox-bg);
+    backdrop-filter: blur(6px);
+
+    transition: opacity var(--transition-overlay);
+
+    &[data-closed] {
+        opacity: 0;
+    }
+}
+
+// Сверху и снизу место под крестик и точки, чтобы они не ложились на картинку
+.panel {
+    position: fixed;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100vw;
-    height: 100%;
-    max-height: 100vh;
-    padding: var(--space-6);
+    padding: calc(var(--size-header-button) + 2 * var(--space-3)) var(--space-3);
+
+    transition: var(--transition-overlay);
+    transition-property: opacity, transform;
+
+    &[data-closed] {
+        opacity: 0;
+        transform: scale(0.95);
+    }
 }
 
 .media {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain;
     border-radius: var(--radius-md);
+    object-fit: contain;
 }
 
-.closeBtn {
+.close {
     position: absolute;
-    top: var(--space-4);
-    right: var(--space-4);
-    border-radius: var(--radius-sm);
-    background: rgb(0 0 0 / 50%);
-    color: #fff;
+    top: var(--space-3);
+    right: var(--space-3);
 }
 
-.prevBtn {
+// По центру по высоте через top, а не transform: transform занят эффектом нажатия
+.nav {
     position: absolute;
-    top: 50%;
-
-    left: var(--space-4);
-    border-radius: var(--radius-sm);
-    background: rgb(0 0 0 / 50%);
-    color: #fff;
+    top: calc(50% - var(--size-header-button) / 2);
 }
 
-.nextBtn {
-    position: absolute;
-    top: 50%;
-    right: var(--space-4);
-    border-radius: var(--radius-sm);
-    background: rgb(0 0 0 / 50%);
-    color: #fff;
+.prev {
+    left: var(--space-3);
+}
+
+.next {
+    right: var(--space-3);
 }
 
 .dots {
     position: absolute;
+    right: 0;
     bottom: var(--space-4);
-    left: 50%;
+    left: 0;
     display: flex;
+    justify-content: center;
     gap: var(--space-2);
-    transform: translateX(-50%);
 }
 
 .dot {
-    width: 8px;
-    height: 8px;
+    width: var(--size-lightbox-dot);
+    height: var(--size-lightbox-dot);
     padding: 0;
     border: none;
     border-radius: var(--radius-full);
-    background: rgb(255 255 255 / 50%);
+    background: var(--color-lightbox-dot);
+    opacity: 0.5;
     cursor: pointer;
-    transition: background var(--transition-fast);
+    transition: opacity var(--transition-fast);
 
     &Active {
-        background: #fff;
+        opacity: 1;
     }
 }

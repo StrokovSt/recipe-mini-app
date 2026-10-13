@@ -46,6 +46,24 @@ export async function createPage(accessToken: string, title: string, content: Te
     return data.result;
 }
 
+// Перезаписывает страницу по её path («Pasta-10-13»): ссылка остаётся прежней
+export async function editPage(accessToken: string, path: string, title: string, content: TelegraphContent): Promise<TelegraphPage> {
+    const res = await fetch(`${TELEGRAPH_API}/editPage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            access_token: accessToken,
+            path,
+            title,
+            content: JSON.stringify(content),
+            return_content: false,
+        }),
+    });
+    const data = await res.json() as { ok: boolean; result: TelegraphPage };
+    if (!data.ok) throw new Error("Ошибка обновления Telegraph страницы");
+    return data.result;
+}
+
 export async function uploadToTelegraph(buffer: ArrayBuffer, mimeType: string): Promise<string> {
     try {
         const formData = new FormData();

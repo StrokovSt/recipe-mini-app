@@ -57,6 +57,12 @@
     --color-border-focus: var(--color-active);
     --color-shadow: rgb(44 26 14);
     --color-overlay: rgb(44 26 14 / 38%);
+    --color-lightbox-bg: color-mix(in srgb, var(--color-shadow) 88%, transparent); /* фон полноэкранного фото, тёмный в обеих темах */
+    --color-lightbox-dot: rgb(255 255 255);
+    --color-media-text: rgb(255 255 255); /* текст и иконки поверх фото и видео */
+    --color-media-badge-bg: color-mix(in srgb, var(--color-shadow) 55%, transparent);
+    --color-media-badge-hover-bg: color-mix(in srgb, var(--color-shadow) 75%, transparent);
+    --color-video-bg: rgb(0 0 0); /* фон развёрнутого видео, страница под ним не просвечивает */
     --color-scrollbar-thumb: color-mix(in srgb, var(--color-brand-ink-muted) 40%, transparent);
 }
 

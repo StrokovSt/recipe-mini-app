@@ -1,0 +1,56 @@
+// Обложка держит место в странице: пока видео открыто поверх всего, в ней остаётся заставка
+.player {
+    position: relative;
+    background: var(--color-surface-dim);
+}
+
+.poster,
+.screen {
+    position: absolute;
+    inset: 0;
+}
+
+.poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.screen {
+    // Открытое видео поверх всей страницы
+    &.open {
+        position: fixed;
+        z-index: var(--z-modal);
+        background: var(--color-video-bg);
+    }
+}
+
+.video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    object-fit: cover;
+
+    .open & {
+        cursor: auto;
+        object-fit: contain;
+    }
+}
+
+// По центру через top и left, а не transform: transform занят эффектом нажатия
+.play {
+    position: absolute;
+    top: calc(50% - var(--size-play-button) / 2);
+    left: calc(50% - var(--size-play-button) / 2);
+    width: var(--size-play-button);
+    height: var(--size-play-button);
+    box-shadow: var(--shadow-lg);
+    color: var(--color-active);
+}
+
+.close {
+    position: absolute;
+    top: calc(env(safe-area-inset-top) + var(--space-3));
+    right: var(--space-3);
+}

@@ -266,8 +266,19 @@ router.patch("/:id", validateId, async (req: Request, res: Response, next: NextF
             },
             include: RECIPE_INCLUDE,
         });
+        const recipe = parseRecipe(updated);
 
-        res.json(parseRecipe(updated));
+        // Telegraph-страница (ей делятся) обновляется в фоне, как и создаётся
+        publishRecipeToTelegraph({ ...recipe, media: recipe.media as MediaInput[] }, recipe.telegraphUrl)
+            .then(async (telegraphUrl) => {
+                if (telegraphUrl === recipe.telegraphUrl) return;
+                await prisma.recipe.update({ where: { id }, data: { telegraphUrl } });
+            })
+            .catch((err) => {
+                console.error("Telegraph update error:", err.message);
+            });
+
+        res.json(recipe);
     } catch (error) {
         next(error);
     }

@@ -1,23 +1,19 @@
 {
     "notFound": "未找到该食谱",
-    "edit": "编辑",
-    "delete": "删除食谱",
     "deleteTitle": "删除食谱“{{title}}”？",
     "deleteText": "删除后无法恢复。",
-    "time": "时间",
     "servings": "份数",
-    "telegraph": {
-        "title": "在 Telegraph 中打开",
-        "hint": "食谱完整版"
-    },
-    "source": {
-        "title": "打开原文",
-        "hint": "食谱来源"
-    },
+    "source": "打开原文",
     "tabs": {
         "ingredients": "食材",
         "steps": "做法"
     },
     "noIngredients": "未列出食材",
-    "noSteps": "未列出步骤"
+    "noSteps": "未列出步骤",
+    "playVideo": "观看视频",
+    "openPhoto": "打开照片",
+    "share": "分享",
+    "shareCopied": "链接已复制",
+    "more": "更多",
+    "actions": "操作"
 }

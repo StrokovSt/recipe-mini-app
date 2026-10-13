@@ -2,6 +2,8 @@
     "appName": "Ricetta",
     "back": "뒤로",
     "close": "닫기",
+    "prev": "이전",
+    "next": "다음",
     "cancel": "취소",
     "delete": "삭제",
     "edit": "편집",

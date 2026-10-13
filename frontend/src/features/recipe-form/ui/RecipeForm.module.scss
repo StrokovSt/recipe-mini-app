@@ -1,9 +1,5 @@
 @use "@/shared/styles/bar";
 
-// На телефонах уже этой ширины форма во всю ширину экрана, без боковых отступов страницы.
-// В @media нельзя подставить CSS-переменную, поэтому граница здесь, а не в variables.scss
-$narrow-screen-width: 360px;
-
 .header {
     flex-direction: row;
     align-items: center;
@@ -48,8 +44,8 @@ $narrow-screen-width: 360px;
         position: sticky;
         bottom: 0;
         z-index: var(--z-above);
-        margin: 0 calc(-1 * var(--space-5));
-        padding: var(--space-3) var(--space-5) calc(var(--space-3) + env(safe-area-inset-bottom));
+        margin: 0 calc(-1 * var(--space-page));
+        padding: var(--space-3) var(--space-page) calc(var(--space-3) + env(safe-area-inset-bottom));
         backdrop-filter: blur(5px);
     }
 
@@ -67,14 +63,5 @@ $narrow-screen-width: 360px;
 
     .draftError {
         color: var(--color-error);
-    }
-
-    // После .save, чтобы перебить его отрицательные поля
-    @media (width <= $narrow-screen-width) {
-        margin-inline: calc(-1 * var(--space-2));
-
-        .save {
-            margin-inline: 0;
-        }
     }
 }

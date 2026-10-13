@@ -9,6 +9,7 @@ import FilterIcon from "@/shared/assets/icons/icon-filter.svg?react";
 import ForwardIcon from "@/shared/assets/icons/icon-forward.svg?react";
 import MoreIcon from "@/shared/assets/icons/icon-more.svg?react";
 import SaveIcon from "@/shared/assets/icons/icon-save.svg?react";
+import ShareIcon from "@/shared/assets/icons/icon-share.svg?react";
 import UserIcon from "@/shared/assets/icons/icon-user.svg?react";
 
 export const ButtonIcons = {
@@ -47,6 +48,9 @@ export const ButtonIcons = {
     ),
     more: (
         <MoreIcon />
+    ),
+    share: (
+        <ShareIcon />
     ),
 } as const;
 

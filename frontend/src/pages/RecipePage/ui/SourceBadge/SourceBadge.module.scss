@@ -1,0 +1,35 @@
+@use "@/shared/styles/states";
+
+// Тёмная полупрозрачная плашка: читается и на фото, и на фоне страницы
+.badge {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-lg);
+    background: var(--color-media-badge-bg);
+    color: var(--color-media-text);
+    font: var(--font-ui-xs);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    backdrop-filter: blur(4px);
+
+    svg {
+        flex-shrink: 0;
+        width: var(--size-source-icon);
+        height: var(--size-source-icon);
+    }
+}
+
+.link {
+    transition: background var(--transition-base);
+
+    @include states.hover {
+        background: var(--color-media-badge-hover-bg);
+    }
+}
+
+.arrow {
+    opacity: 0.7;
+}

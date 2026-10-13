@@ -4,7 +4,7 @@
     gap: var(--space-5);
 
     // Сверху место под общую шапку, которая лежит поверх main
-    padding: calc(var(--size-page-header) + var(--space-5)) var(--space-5) 0;
+    padding: calc(var(--size-page-header) + var(--space-5)) var(--space-page) 0;
     overflow: hidden auto;
     font-family: var(--font-family-main);
 

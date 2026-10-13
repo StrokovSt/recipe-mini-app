@@ -1,68 +1,40 @@
-import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import type { RecipeSourceInfo } from "@/entities/recipe";
+
+import { RecipeVideo } from "../RecipeVideo/RecipeVideo";
+import { SourceBadge } from "../SourceBadge/SourceBadge";
 
 import styles from "./RecipeHero.module.scss";
 
 interface RecipeHeroProps {
     title: string;
-    category?: string;
-    videoUrl?: string;
     imageUrl?: string;
-    onImageClick?: () => void;
+    videoUrl?: string;
+    source: RecipeSourceInfo | null;
+    onImageClick: () => void;
 }
 
+// Обложка во всю ширину экрана от самого верха, полупрозрачная шапка лежит поверх неё.
+// Есть видео — превью видео с кнопкой ▶ (фото служит заставкой), иначе фото, которое по тапу
+// открывается на весь экран. Внизу слева плашка источника со ссылкой на оригинал
 export function RecipeHero(props: RecipeHeroProps) {
-    const { title, category, videoUrl, imageUrl, onImageClick } = props;
-    const [videoOpen, setVideoOpen] = useState(false);
+    const { title, imageUrl, videoUrl, source, onImageClick } = props;
+    const { t } = useTranslation("recipe");
 
-    const mediaClickHandler = useCallback(() => {
-        if (videoUrl) {
-            setVideoOpen(true);
-        } else {
-            onImageClick?.();
-        }
-    }, [videoUrl, onImageClick])
+    if (!imageUrl && !videoUrl) return null;
 
     return (
-        <>
-            <div className={styles.hero}>
-                {imageUrl ? (
-                    <img
-                        src={imageUrl}
-                        alt={title}
-                        className={styles.media}
-                        onClick={mediaClickHandler}
-                        style={{ cursor: onImageClick ? "pointer" : "default" }}
-                    />
-                ) : (
-                    <div className={styles.mediaPlaceholder} />
-                )}
-
-                <div className={styles.overlay} />
-
-                {videoUrl && (
-                    <button className={styles.playBtn} onClick={mediaClickHandler}>▶</button>
-                )}
-
-                <div className={styles.info}>
-                    {category && (
-                        <span className={styles.category}>{category}</span>
-                    )}
-                    <h1 className={styles.title}>{title}</h1>
-                </div>
-            </div>
-
-            {videoOpen && videoUrl && (
-                <div className={styles.videoModal} onClick={() => setVideoOpen(false)}>
-                    <video
-                        src={videoUrl}
-                        controls
-                        autoPlay
-                        className={styles.video}
-                        onClick={(e) => e.stopPropagation()}
-                    />
-                    <button className={styles.closeBtn} onClick={() => setVideoOpen(false)}>✕</button>
-                </div>
+        <div className={styles.hero}>
+            {videoUrl ? (
+                <RecipeVideo url={videoUrl} poster={imageUrl} className={styles.media} />
+            ) : (
+                <button type="button" className={styles.media} aria-label={t("openPhoto")} onClick={onImageClick}>
+                    <img src={imageUrl} alt={title} className={styles.image} />
+                </button>
             )}
-        </>
+
+            {source && <SourceBadge source={source} className={styles.badge} />}
+        </div>
     );
 }

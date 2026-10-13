@@ -1,0 +1,82 @@
+@use "@/shared/styles/card";
+@use "@/shared/styles/states";
+
+.info {
+    @include card.card;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.category {
+    color: var(--color-icon);
+    font: var(--font-ui-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+.title {
+    margin: 0;
+    color: var(--color-text);
+    font: var(--font-header-2xl);
+    font-weight: var(--font-weight-bold);
+}
+
+.descriptionWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+}
+
+.description {
+    margin: 0;
+    color: var(--color-text-muted);
+    font: var(--font-md);
+    font-style: italic;
+    white-space: pre-line;
+}
+
+.clamped {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.more {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--color-active);
+    font: var(--font-ui-sm);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: color var(--transition-base);
+
+    @include states.hover {
+        color: var(--color-active-hover);
+    }
+}
+
+.chips,
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.chip {
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+
+    // На карточке чип лежит на цвете фона приложения, как поля в секциях формы
+    background: var(--color-app-bg);
+    color: var(--color-text-soft);
+
+    svg {
+        color: var(--color-icon);
+    }
+}

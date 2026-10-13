@@ -1,6 +1,6 @@
 import type { IngredientGroup, MediaType, RecipeStep } from "@recipe/common";
 
-import { createPage } from "../api/telegraph";
+import { createPage, editPage } from "../api/telegraph";
 import { formatIngredient } from "../utils/formatIngredient";
 
 interface MediaInput {
@@ -117,11 +117,18 @@ function buildContent(recipe: RecipePageData) {
     return content;
 }
 
-export async function publishRecipeToTelegraph(recipe: RecipePageData): Promise<string> {
+// Новый рецепт — новая страница. Есть pageUrl (правка рецепта) — обновляем ту же страницу,
+// чтобы ссылка, которой уже поделились, показывала свежую версию
+export async function publishRecipeToTelegraph(recipe: RecipePageData, pageUrl?: string | null): Promise<string> {
     const accessToken = process.env.TELEGRAPH_TOKEN;
     if (!accessToken) throw new Error("TELEGRAPH_TOKEN не задан");
 
     const content = buildContent(recipe);
+    if (pageUrl) {
+        const page = await editPage(accessToken, new URL(pageUrl).pathname.slice(1), recipe.title, content);
+        return page.url;
+    }
+
     const page = await createPage(accessToken, recipe.title, content);
     return page.url;
 }
