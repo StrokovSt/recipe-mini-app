@@ -137,6 +137,17 @@
 
     // Точки-переключатели в полноэкранном просмотре фото
     --size-lightbox-dot: 8px;
+
+    // Чекбокс: колонка под галочку и сама галочка
+    --size-checkbox-column: 30px;
+    --size-checkbox: 20px;
+
+    // Число в счётчике (порции): ширина под две цифры, чтобы кнопки не прыгали
+    --size-stepper-value: 32px;
+
+    // Страница рецепта: фото шага
+    --size-recipe-step-photo-width: 140px;
+    --size-recipe-step-photo-height: 96px;
     --size-list-max-columns: 4;
     --size-scrollbar: 6px;
     --size-theme-blur: 6px;
@@ -156,6 +167,7 @@
 
     // ─── States ─────────────────────────────────────────────
     --opacity-disabled: 0.4;
+    --opacity-crossed: 0.45; // вычеркнутый ингредиент или шаг
 
     // ─── Transitions ──────────────────────────────────────────
     --transition-fast: 0.15s ease;

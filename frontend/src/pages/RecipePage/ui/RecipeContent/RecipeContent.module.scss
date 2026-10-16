@@ -1,118 +1,171 @@
-.wrap {
+@use "@/shared/styles/card";
+@use "@/shared/styles/states";
+
+.content {
+    @include card.card;
+
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
-    padding-bottom: var(--space-6);
-}
-
-.tabs {
-    display: flex;
-    gap: var(--space-2);
-}
-
-.tab {
-    flex: 1;
-    padding: var(--space-3);
-    border: none;
-    border-radius: var(--radius-md);
-    background: var(--tg-secondary-bg);
-    box-shadow: var(--shadow-sm);
-    color: var(--tg-hint);
-    font: var(--font-ui-sm);
-    font-weight: var(--font-weight-extrabold);
-    cursor: pointer;
-    transition: all var(--transition-base);
-
-    &Active {
-        background: var(--color-active);
-        color: var(--color-active-text);
-    }
-}
-
-.list {
-    overflow: hidden;
-    border-radius: var(--radius-md);
-    background: var(--tg-secondary-bg);
-    box-shadow: var(--shadow-sm);
+    gap: var(--space-4);
 }
 
 .empty {
     margin: 0;
-    padding: var(--space-4);
-    color: var(--tg-hint);
-    font: var(--font-sm);
+    color: var(--color-text-muted);
+    font: var(--font-md);
+    font-style: italic;
     text-align: center;
 }
 
-.ingredientItem {
+// Порции — отдельная плашка на цвете фона, как подложка переключателя вкладок
+.servings {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    border-bottom: 1px solid rgb(0 0 0 / 4%);
-    color: var(--tg-text);
-    font: var(--font-sm);
-
-    &:last-child {
-        border-bottom: none;
-    }
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-app-bg);
 }
 
-.dot {
-    flex-shrink: 0;
-    width: 8px;
-    height: 8px;
-    border-radius: var(--radius-full);
-    background: var(--color-accent);
-}
-
-.stepItem {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    border-bottom: 1px solid rgb(0 0 0 / 4%);
-    color: var(--tg-text);
-    font: var(--font-sm);
-    line-height: var(--font-line-md);
-
-    &:last-child {
-        border-bottom: none;
-    }
-}
-
-.stepNum {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: var(--radius-sm);
-    background: var(--color-accent);
-    color: #fff;
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-black);
-}
-
-.groups {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
+.servingsLabel {
+    color: var(--color-text);
+    font: var(--font-header-md);
+    font-weight: var(--font-weight-bold);
 }
 
 .group {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-1);
 }
 
 .groupTitle {
     margin: 0;
-    padding: 0 var(--space-4);
-    color: var(--tg-hint);
-    font: var(--font-sm);
-    font-weight: var(--font-weight-black);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: var(--color-active);
+    font: var(--font-header-md);
+    font-weight: var(--font-weight-bold);
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li + li {
+        border-top: 1px solid var(--color-border);
+    }
+}
+
+// Выполненный шаг: бледный и зачёркнутый, как отмеченный ингредиент
+.crossed {
+    opacity: var(--opacity-crossed);
+
+    .name {
+        text-decoration-color: currentcolor;
+    }
+}
+
+// Линия зачёркивания прозрачная, пока шаг не отмечен и не под курсором: так она проявляется плавно
+.name {
+    flex: 1;
+    color: var(--color-text);
+    font: var(--font-md);
+    text-decoration: line-through transparent;
+    transition: text-decoration-color var(--transition-base);
+}
+
+.ingredient {
+    // Подсветка при наведении чуть шире текста, сам текст стоит ровно по краю карточки
+    margin: 0 calc(-1 * var(--space-2));
+    padding: var(--space-3) var(--space-2);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-base);
+    transition-property: background, opacity;
+
+    @include states.hover {
+        background: var(--color-hover-bg);
+    }
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    transition: opacity var(--transition-base);
+}
+
+.stepText {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+
+    // Подсветка при наведении выходит за текст, отрицательный отступ сохраняет раскладку
+    margin: calc(-1 * var(--space-2));
+    padding: var(--space-2);
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    transition: background var(--transition-base);
+
+    .name {
+        white-space: pre-line;
+    }
+
+    // Наведение зачёркивает шаг, как и ингредиент
+    @include states.hover {
+        background: var(--color-hover-bg);
+
+        .name {
+            text-decoration-color: currentcolor;
+        }
+    }
+}
+
+// Номер шага в кружке, как в прототипе
+.number {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: var(--size-step-number);
+    height: var(--size-step-number);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    background: var(--color-app-bg);
+    color: var(--color-active);
+    font: var(--font-header-sm);
+    font-style: italic;
+}
+
+// Фото шага лентой под текстом, с отступом под номер
+.photos {
+    display: flex;
+    gap: var(--space-2);
+    padding-left: calc(var(--size-step-number) + var(--space-3));
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.photo {
+    flex-shrink: 0;
+    width: var(--size-recipe-step-photo-width);
+    height: var(--size-recipe-step-photo-height);
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-dim);
+    cursor: zoom-in;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }

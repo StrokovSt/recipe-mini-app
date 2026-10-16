@@ -2,6 +2,8 @@
     "appName": "Ricetta",
     "back": "Back",
     "close": "Close",
+    "decrease": "Decrease",
+    "increase": "Increase",
     "prev": "Previous",
     "next": "Next",
     "cancel": "Cancel",

@@ -30,8 +30,9 @@ const RecipePage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const { t } = useTranslation(["recipe", "common"]);
-    // Индекс не сбрасываем при закрытии: окно гаснет плавно и до конца показывает то же фото
+    // Фото и индекс не сбрасываем при закрытии: окно гаснет плавно и до конца показывает то же фото
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
     const [lightboxIndex, setLightboxIndex] = useState(0);
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [isLinkCopied, setIsLinkCopied] = useState(false);
@@ -53,7 +54,9 @@ const RecipePage = () => {
         deleteRecipe(recipe.id, { onSuccess: () => navigate(AppRoute.Home) });
     };
 
-    const openLightbox = (index: number) => {
+    // Обложка или фото одного шага на весь экран
+    const openLightbox = (photos: string[], index: number) => {
+        setLightboxPhotos(photos);
         setLightboxIndex(index);
         setIsLightboxOpen(true);
     };
@@ -106,7 +109,7 @@ const RecipePage = () => {
                 imageUrl={cover?.url}
                 videoUrl={video?.url}
                 source={source}
-                onImageClick={() => openLightbox(0)}
+                onImageClick={() => openLightbox(images.map((image) => image.url), 0)}
             />
 
             {/* Без обложки плашке источника негде лежать — ставим её над названием */}
@@ -123,6 +126,8 @@ const RecipePage = () => {
             <RecipeContent
                 ingredients={recipe.ingredients}
                 steps={recipe.steps}
+                servings={recipe.servings ?? 1}
+                onPhotoClick={openLightbox}
             />
 
             <ConfirmModal
@@ -135,7 +140,7 @@ const RecipePage = () => {
 
             <MediaLightbox
                 isOpen={isLightboxOpen}
-                media={images}
+                media={lightboxPhotos.map((url) => ({ url, type: "image" }))}
                 index={lightboxIndex}
                 onClose={() => setIsLightboxOpen(false)}
                 onChange={setLightboxIndex}

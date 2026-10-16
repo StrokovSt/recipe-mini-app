@@ -1,0 +1,123 @@
+@use "@/shared/styles/states";
+
+// Галочка по мотивам checkbox-wrapper-19 (uiverse.io): две полоски вырастают из угла.
+// Все размеры рисунка — доли стороны квадрата --size-checkbox
+$size: var(--size-checkbox);
+
+.checkbox {
+    display: grid;
+    align-items: center;
+    grid-template-columns: var(--size-checkbox-column) minmax(0, 1fr) auto;
+    font: var(--font-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+
+    @include states.hover {
+        .label {
+            text-decoration-color: currentcolor;
+        }
+    }
+
+    &.checked {
+        opacity: var(--opacity-crossed);
+
+        .label {
+            text-decoration-color: currentcolor;
+        }
+    }
+}
+
+// Сам input — рамка квадрата, полоски галочки — его ::before и ::after
+.input {
+    position: relative;
+    box-sizing: border-box;
+    width: $size;
+    height: $size;
+    margin: 0;
+    border: calc(#{$size} * 0.1) solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    outline: none;
+    background: none;
+    cursor: pointer;
+    transition: border-color var(--transition-base);
+    appearance: none;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        box-sizing: border-box;
+        width: calc(#{$size} * 0.12);
+        height: 0;
+        border-radius: var(--radius-sm);
+        background: var(--color-active);
+        transform-origin: left top;
+    }
+
+    // Длинная полоска чуть выходит за рамку
+    &::before {
+        top: calc(#{$size} * 0.72);
+        left: calc(#{$size} * 0.41);
+        transform: rotate(-135deg);
+    }
+
+    &::after {
+        top: calc(#{$size} * 0.37);
+        left: calc(#{$size} * 0.05);
+        transform: rotate(-45deg);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-border-focus);
+        outline-offset: 2px;
+    }
+
+    &:checked {
+        border-color: var(--color-active);
+
+        &::before {
+            height: calc(#{$size} * 0.9);
+            animation: check-long var(--transition-slow) forwards;
+        }
+
+        &::after {
+            height: calc(#{$size} / 2);
+            animation: check-short var(--transition-base) forwards;
+        }
+    }
+}
+
+// Линия зачёркивания есть всегда, но прозрачная: так она плавно проявляется при наведении
+.label {
+    color: var(--color-text);
+    text-decoration: line-through transparent;
+    transition: text-decoration-color var(--transition-base);
+}
+
+.aside {
+    padding-left: var(--space-3);
+    color: var(--color-text-muted);
+    font: var(--font-ui-sm);
+    white-space: nowrap;
+}
+
+@keyframes check-short {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: calc(#{$size} / 2);
+    }
+}
+
+@keyframes check-long {
+    0%,
+    50% {
+        height: 0;
+    }
+
+    100% {
+        height: calc(#{$size} * 0.9);
+    }
+}

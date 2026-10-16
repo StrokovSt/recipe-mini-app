@@ -10,6 +10,7 @@
     },
     "noIngredients": "材料が記載されていません",
     "noSteps": "手順が記載されていません",
+    "noContent": "材料と手順は記載されていません",
     "playVideo": "動画を見る",
     "openPhoto": "写真を開く",
     "share": "共有",

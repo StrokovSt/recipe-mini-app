@@ -7,6 +7,7 @@ import DeleteIcon from "@/shared/assets/icons/icon-delete.svg?react";
 import EditIcon from "@/shared/assets/icons/icon-edit.svg?react";
 import FilterIcon from "@/shared/assets/icons/icon-filter.svg?react";
 import ForwardIcon from "@/shared/assets/icons/icon-forward.svg?react";
+import MinusIcon from "@/shared/assets/icons/icon-minus.svg?react";
 import MoreIcon from "@/shared/assets/icons/icon-more.svg?react";
 import SaveIcon from "@/shared/assets/icons/icon-save.svg?react";
 import ShareIcon from "@/shared/assets/icons/icon-share.svg?react";
@@ -27,6 +28,9 @@ export const ButtonIcons = {
     ),
     add: (
         <AddIcon />
+    ),
+    minus: (
+        <MinusIcon />
     ),
     edit: (
         <EditIcon />

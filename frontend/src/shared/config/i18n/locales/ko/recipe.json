@@ -10,6 +10,7 @@
     },
     "noIngredients": "재료가 없어요",
     "noSteps": "조리 단계가 없어요",
+    "noContent": "재료와 조리 단계가 없어요",
     "playVideo": "동영상 보기",
     "openPhoto": "사진 열기",
     "share": "공유",

@@ -1,0 +1,13 @@
+.stepper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.value {
+    min-width: var(--size-stepper-value);
+    color: var(--color-text);
+    font: var(--font-header-lg);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+}
