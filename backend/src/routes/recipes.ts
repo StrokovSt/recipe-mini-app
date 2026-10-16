@@ -153,7 +153,7 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
         }
 
         const userId = req.userId as string;
-        const { title, description, categoryId, ingredients, steps, prepTime, cookTime, servings, sourceUrl, source, media, tags, draftId } = parsed.data;
+        const { title, description, categoryId, ingredients, steps, prepTime, cookTime, servings, calories, protein, fat, carbs, sourceUrl, source, media, tags, draftId } = parsed.data;
 
         const recipe = await prisma.recipe.create({
             data: {
@@ -166,6 +166,10 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
                 prepTime: prepTime ?? null,
                 cookTime: cookTime ?? null,
                 servings: servings ?? null,
+                calories: calories ?? null,
+                protein: protein ?? null,
+                fat: fat ?? null,
+                carbs: carbs ?? null,
                 sourceUrl: sourceUrl || "",
                 source: source || "other",
                 media: {
@@ -194,6 +198,10 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
             prepTime,
             cookTime,
             servings,
+            calories,
+            protein,
+            fat,
+            carbs,
             media: recipe.media as MediaInput[],
             sourceUrl,
         })
@@ -228,7 +236,7 @@ router.patch("/:id", validateId, async (req: Request, res: Response, next: NextF
 
         const userId = req.userId as string;
         const id = req.params.id as string;
-        const { title, description, categoryId, ingredients, steps, prepTime, cookTime, servings, media, tags } = parsed.data;
+        const { title, description, categoryId, ingredients, steps, prepTime, cookTime, servings, calories, protein, fat, carbs, media, tags } = parsed.data;
 
         const existing = await prisma.recipe.findFirst({ where: { id, userId }, select: { id: true } });
 
@@ -250,6 +258,10 @@ router.patch("/:id", validateId, async (req: Request, res: Response, next: NextF
                 ...(prepTime !== undefined && { prepTime }),
                 ...(cookTime !== undefined && { cookTime }),
                 ...(servings !== undefined && { servings }),
+                ...(calories !== undefined && { calories }),
+                ...(protein !== undefined && { protein }),
+                ...(fat !== undefined && { fat }),
+                ...(carbs !== undefined && { carbs }),
                 // Медиа и теги заменяются целиком
                 ...(media && {
                     media: {

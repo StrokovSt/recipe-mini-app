@@ -48,7 +48,14 @@
         "servings": "Порции",
         "servingsSuffix": "шт.",
         "cookTime": "Готовка",
-        "timeSuffix": "мин."
+        "timeSuffix": "мин.",
+        "nutrition": "КБЖУ на порцию",
+        "calories": "Калории",
+        "caloriesSuffix": "ккал",
+        "protein": "Белки",
+        "fat": "Жиры",
+        "carbs": "Углеводы",
+        "gramsSuffix": "г"
     },
     "tags": "Теги",
     "ingredients": {

@@ -48,7 +48,14 @@
         "servings": "Porsi",
         "servingsSuffix": "porsi",
         "cookTime": "Waktu masak",
-        "timeSuffix": "mnt"
+        "timeSuffix": "mnt",
+        "nutrition": "Gizi per porsi",
+        "calories": "Kalori",
+        "caloriesSuffix": "kkal",
+        "protein": "Protein",
+        "fat": "Lemak",
+        "carbs": "Karbohidrat",
+        "gramsSuffix": "g"
     },
     "tags": "Tag",
     "ingredients": {

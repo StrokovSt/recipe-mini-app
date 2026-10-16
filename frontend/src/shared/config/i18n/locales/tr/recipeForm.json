@@ -48,7 +48,14 @@
         "servings": "Porsiyon",
         "servingsSuffix": "porsiyon",
         "cookTime": "Pişirme",
-        "timeSuffix": "dk"
+        "timeSuffix": "dk",
+        "nutrition": "Porsiyon başına besin değeri",
+        "calories": "Kalori",
+        "caloriesSuffix": "kcal",
+        "protein": "Protein",
+        "fat": "Yağ",
+        "carbs": "Karbonhidrat",
+        "gramsSuffix": "g"
     },
     "tags": "Etiketler",
     "ingredients": {

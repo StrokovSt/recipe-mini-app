@@ -16,5 +16,12 @@
     "share": "Paylaş",
     "shareCopied": "Bağlantı kopyalandı",
     "more": "Daha fazla",
-    "actions": "İşlemler"
+    "actions": "İşlemler",
+    "nutrition": {
+        "title": "≈ Porsiyon başına",
+        "calories": "kcal",
+        "protein": "protein",
+        "fat": "yağ",
+        "carbs": "karbonhidrat"
+    }
 }

@@ -48,7 +48,14 @@
         "servings": "Порції",
         "servingsSuffix": "шт.",
         "cookTime": "Готування",
-        "timeSuffix": "хв"
+        "timeSuffix": "хв",
+        "nutrition": "КБЖВ на порцію",
+        "calories": "Калорії",
+        "caloriesSuffix": "ккал",
+        "protein": "Білки",
+        "fat": "Жири",
+        "carbs": "Вуглеводи",
+        "gramsSuffix": "г"
     },
     "tags": "Теги",
     "ingredients": {

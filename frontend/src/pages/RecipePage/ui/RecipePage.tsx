@@ -121,6 +121,7 @@ const RecipePage = () => {
                 description={recipe.description}
                 time={totalTime}
                 tags={recipe.tags.map(({ tag }) => tag)}
+                nutrition={recipe}
             />
 
             <RecipeContent

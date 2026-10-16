@@ -71,6 +71,11 @@ export interface Recipe {
     prepTime: number | null;
     cookTime: number | null;
     servings: number | null;
+    // КБЖУ на одну порцию: ккал и граммы белков, жиров, углеводов. null — неизвестно
+    calories: number | null;
+    protein: number | null;
+    fat: number | null;
+    carbs: number | null;
     sourceUrl: string;
     source: RecipeSource;
     telegraphUrl: string | null;

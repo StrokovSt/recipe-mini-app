@@ -16,5 +16,12 @@
     "share": "共有",
     "shareCopied": "リンクをコピーしました",
     "more": "もっと見る",
-    "actions": "操作"
+    "actions": "操作",
+    "nutrition": {
+        "title": "≈ 1人分",
+        "calories": "kcal",
+        "protein": "たんぱく質",
+        "fat": "脂質",
+        "carbs": "炭水化物"
+    }
 }

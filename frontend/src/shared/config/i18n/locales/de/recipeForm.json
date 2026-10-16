@@ -48,7 +48,14 @@
         "servings": "Portionen",
         "servingsSuffix": "Port.",
         "cookTime": "Garzeit",
-        "timeSuffix": "Min."
+        "timeSuffix": "Min.",
+        "nutrition": "Nährwerte pro Portion",
+        "calories": "Kalorien",
+        "caloriesSuffix": "kcal",
+        "protein": "Eiweiß",
+        "fat": "Fett",
+        "carbs": "Kohlenhydrate",
+        "gramsSuffix": "g"
     },
     "tags": "Tags",
     "ingredients": {

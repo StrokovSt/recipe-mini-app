@@ -16,5 +16,12 @@
     "share": "Поделиться",
     "shareCopied": "Ссылка скопирована",
     "more": "Ещё",
-    "actions": "Действия"
+    "actions": "Действия",
+    "nutrition": {
+        "title": "≈ На порцию",
+        "calories": "ккал",
+        "protein": "белки",
+        "fat": "жиры",
+        "carbs": "углеводы"
+    }
 }

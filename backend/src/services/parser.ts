@@ -26,6 +26,10 @@ interface RawRecipeAI {
     prepTime?: unknown;
     cookTime?: unknown;
     servings?: unknown;
+    calories?: unknown;
+    protein?: unknown;
+    fat?: unknown;
+    carbs?: unknown;
     tags?: unknown;
 }
 
@@ -105,6 +109,10 @@ const emptyRecipe = (lists: UserLists): ParsedRecipeAI => ({
     prepTime: null,
     cookTime: null,
     servings: null,
+    calories: null,
+    protein: null,
+    fat: null,
+    carbs: null,
     tags: [],
 });
 
@@ -178,6 +186,12 @@ const toInteger = (value: unknown) => {
     return number === null ? null : Math.round(number);
 };
 
+// КБЖУ: целое неотрицательное, всё остальное — «неизвестно»
+const toNutrition = (value: unknown) => {
+    const number = toInteger(value);
+    return number === null || number < 0 ? null : number;
+};
+
 const isUnitCode = (value: unknown): value is UnitCode =>
     typeof value === "string" && (UNIT_CODES as string[]).includes(value);
 
@@ -229,6 +243,10 @@ function normalizeRecipe(raw: RawRecipeAI, lists: UserLists): ParsedRecipeAI {
         prepTime: toInteger(raw.prepTime),
         cookTime: toInteger(raw.cookTime),
         servings: toInteger(raw.servings),
+        calories: toNutrition(raw.calories),
+        protein: toNutrition(raw.protein),
+        fat: toNutrition(raw.fat),
+        carbs: toNutrition(raw.carbs),
         tags: tags.map((tag) => tag.id),
     };
 }

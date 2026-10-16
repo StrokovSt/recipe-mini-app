@@ -16,5 +16,12 @@
     "share": "Compartir",
     "shareCopied": "Enlace copiado",
     "more": "Más",
-    "actions": "Acciones"
+    "actions": "Acciones",
+    "nutrition": {
+        "title": "≈ Por porción",
+        "calories": "kcal",
+        "protein": "proteínas",
+        "fat": "grasas",
+        "carbs": "carbohidratos"
+    }
 }

@@ -16,5 +16,12 @@
     "share": "Bagikan",
     "shareCopied": "Tautan disalin",
     "more": "Lainnya",
-    "actions": "Tindakan"
+    "actions": "Tindakan",
+    "nutrition": {
+        "title": "≈ Per porsi",
+        "calories": "kkal",
+        "protein": "protein",
+        "fat": "lemak",
+        "carbs": "karbohidrat"
+    }
 }

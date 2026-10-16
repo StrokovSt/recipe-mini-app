@@ -16,6 +16,10 @@ interface RecipePageData {
     prepTime?: number | null;
     cookTime?: number | null;
     servings?: number | null;
+    calories?: number | null;
+    protein?: number | null;
+    fat?: number | null;
+    carbs?: number | null;
     media?: MediaInput[];
     sourceUrl?: string;
 }
@@ -62,6 +66,19 @@ function buildContent(recipe: RecipePageData) {
         content.push({
             tag: "p",
             children: [meta.join("  |  ")],
+        });
+    }
+
+    // КБЖУ на порцию: показываем, только если известны калории
+    if (recipe.calories) {
+        const macros = [
+            recipe.protein !== null && recipe.protein !== undefined && `Б ${recipe.protein}`,
+            recipe.fat !== null && recipe.fat !== undefined && `Ж ${recipe.fat}`,
+            recipe.carbs !== null && recipe.carbs !== undefined && `У ${recipe.carbs} г`,
+        ].filter(Boolean);
+        content.push({
+            tag: "p",
+            children: [[`🔥 ≈ ${recipe.calories} ккал на порцию`, ...macros].join("  ·  ")],
         });
     }
 

@@ -16,5 +16,12 @@
     "share": "Поділитися",
     "shareCopied": "Посилання скопійовано",
     "more": "Ще",
-    "actions": "Дії"
+    "actions": "Дії",
+    "nutrition": {
+        "title": "≈ На порцію",
+        "calories": "ккал",
+        "protein": "білки",
+        "fat": "жири",
+        "carbs": "вуглеводи"
+    }
 }

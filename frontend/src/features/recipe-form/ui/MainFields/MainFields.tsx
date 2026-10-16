@@ -10,7 +10,7 @@ import TagsSelect from "../TagsSelect/TagsSelect";
 
 import styles from "./MainFields.module.scss";
 
-// Секция «Основное»: название, описание, порции и время готовки, категория, теги
+// Секция «Основное»: название, описание, порции и время готовки, КБЖУ на порцию, категория, теги
 const MainFields = () => {
     const { t } = useTranslation("recipeForm");
     const { control } = useFormContext<RecipeFormValues>();
@@ -34,6 +34,38 @@ const MainFields = () => {
                     label={t("recipe.cookTime")}
                     type="number"
                     suffix={t("recipe.timeSuffix")}
+                />
+            </div>
+
+            <h3 className={styles.label}>{t("recipe.nutrition")}</h3>
+            <div className={styles.numbers}>
+                <InputController
+                    name="calories"
+                    control={control}
+                    label={t("recipe.calories")}
+                    type="number"
+                    suffix={t("recipe.caloriesSuffix")}
+                />
+                <InputController
+                    name="protein"
+                    control={control}
+                    label={t("recipe.protein")}
+                    type="number"
+                    suffix={t("recipe.gramsSuffix")}
+                />
+                <InputController
+                    name="fat"
+                    control={control}
+                    label={t("recipe.fat")}
+                    type="number"
+                    suffix={t("recipe.gramsSuffix")}
+                />
+                <InputController
+                    name="carbs"
+                    control={control}
+                    label={t("recipe.carbs")}
+                    type="number"
+                    suffix={t("recipe.gramsSuffix")}
                 />
             </div>
 

@@ -80,3 +80,53 @@
         color: var(--color-icon);
     }
 }
+
+.nutrition {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.nutritionTitle {
+    color: var(--color-text-muted);
+    font: var(--font-ui-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+// Ячейки в одну строку, сколько бы значений ни было известно
+.facts {
+    display: grid;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    gap: var(--space-2);
+    margin: 0;
+}
+
+// Число сверху, подпись снизу: в разметке dt (подпись) идёт первым
+.fact {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: var(--space-2) var(--space-1);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-app-bg);
+    text-align: center;
+
+    dt {
+        max-width: 100%;
+        overflow: hidden;
+        color: var(--color-text-muted);
+        font: var(--font-ui-xs);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    dd {
+        margin: 0;
+        color: var(--color-text);
+        font: var(--font-header-md);
+        font-weight: var(--font-weight-bold);
+    }
+}

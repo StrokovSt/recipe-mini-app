@@ -16,5 +16,12 @@
     "share": "分享",
     "shareCopied": "链接已复制",
     "more": "更多",
-    "actions": "操作"
+    "actions": "操作",
+    "nutrition": {
+        "title": "≈ 每份",
+        "calories": "千卡",
+        "protein": "蛋白质",
+        "fat": "脂肪",
+        "carbs": "碳水"
+    }
 }

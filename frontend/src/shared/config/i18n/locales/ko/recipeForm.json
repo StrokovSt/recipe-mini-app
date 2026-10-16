@@ -48,7 +48,14 @@
         "servings": "인분",
         "servingsSuffix": "인분",
         "cookTime": "조리 시간",
-        "timeSuffix": "분"
+        "timeSuffix": "분",
+        "nutrition": "1인분 영양 정보",
+        "calories": "칼로리",
+        "caloriesSuffix": "kcal",
+        "protein": "단백질",
+        "fat": "지방",
+        "carbs": "탄수화물",
+        "gramsSuffix": "g"
     },
     "tags": "태그",
     "ingredients": {

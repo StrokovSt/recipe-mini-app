@@ -10,7 +10,7 @@ $size: var(--size-checkbox);
     grid-template-columns: var(--size-checkbox-column) minmax(0, 1fr) auto;
     font: var(--font-md);
     cursor: pointer;
-    transition: all var(--transition-base);
+    transition: opacity var(--transition-base);
 
     @include states.hover {
         .label {

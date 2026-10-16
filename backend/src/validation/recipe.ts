@@ -4,6 +4,8 @@ import { UNIT_CODES } from "@recipe/common";
 
 // Ограничения времени: неделя в минутах (для заготовок и маринадов)
 const MAX_MINUTES = 7 * 24 * 60;
+// Потолок КБЖУ на порцию: отсекает явные опечатки
+const MAX_NUTRITION = 10000;
 
 const ingredientSchema = z.object({
     name: z.string().trim().min(1).max(200),
@@ -32,6 +34,9 @@ const mediaItemSchema = z.object({
 
 const minutesSchema = z.number().int().min(0).max(MAX_MINUTES).nullable().optional();
 
+// КБЖУ на порцию: ккал или граммы
+const nutritionSchema = z.number().int().min(0).max(MAX_NUTRITION).nullable().optional();
+
 // Поля без значений по умолчанию: в zod 4 .partial() сохраняет default,
 // и PATCH без steps/media/tags затирал бы их пустыми массивами
 const recipeShape = {
@@ -45,6 +50,10 @@ const recipeShape = {
     prepTime: minutesSchema,
     cookTime: minutesSchema,
     servings: z.number().int().positive().nullable().optional(),
+    calories: nutritionSchema,
+    protein: nutritionSchema,
+    fat: nutritionSchema,
+    carbs: nutritionSchema,
     sourceUrl: z.string().max(500).optional(),
     source: z.enum(["pinterest", "telegram", "other"]).optional(),
     media: z.array(mediaItemSchema).max(10),

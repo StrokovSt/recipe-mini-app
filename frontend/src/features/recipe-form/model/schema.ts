@@ -45,6 +45,11 @@ export const recipeSchema = z.object({
     prepTime: z.number().int().min(0).nullable().optional(),
     cookTime: z.number().int().min(0).nullable().optional(),
     servings: z.number().int().positive().nullable().optional(),
+    // КБЖУ на одну порцию, все необязательные
+    calories: z.number().int().min(0).nullable().optional(),
+    protein: z.number().int().min(0).nullable().optional(),
+    fat: z.number().int().min(0).nullable().optional(),
+    carbs: z.number().int().min(0).nullable().optional(),
     tagIds: z.array(z.string()).default([]),
     cover: z.string().nullable(),
     // Видео из импорта (Pinterest). В форме не показывается, но сохраняется вместе с рецептом
@@ -65,6 +70,10 @@ export const EMPTY_FORM_VALUES: RecipeFormValues = {
     cookTime: null,
     // По умолчанию одна порция
     servings: 1,
+    calories: null,
+    protein: null,
+    fat: null,
+    carbs: null,
     tagIds: [],
     cover: null,
     video: null,

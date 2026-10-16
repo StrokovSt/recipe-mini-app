@@ -48,7 +48,14 @@
         "servings": "份量",
         "servingsSuffix": "份",
         "cookTime": "烹饪时间",
-        "timeSuffix": "分钟"
+        "timeSuffix": "分钟",
+        "nutrition": "每份营养",
+        "calories": "热量",
+        "caloriesSuffix": "千卡",
+        "protein": "蛋白质",
+        "fat": "脂肪",
+        "carbs": "碳水",
+        "gramsSuffix": "克"
     },
     "tags": "标签",
     "ingredients": {

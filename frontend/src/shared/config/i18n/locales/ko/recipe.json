@@ -16,5 +16,12 @@
     "share": "공유",
     "shareCopied": "링크가 복사되었습니다",
     "more": "더 보기",
-    "actions": "작업"
+    "actions": "작업",
+    "nutrition": {
+        "title": "≈ 1인분",
+        "calories": "kcal",
+        "protein": "단백질",
+        "fat": "지방",
+        "carbs": "탄수화물"
+    }
 }

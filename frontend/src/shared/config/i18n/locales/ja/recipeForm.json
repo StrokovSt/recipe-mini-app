@@ -48,7 +48,14 @@
         "servings": "人数",
         "servingsSuffix": "人分",
         "cookTime": "調理時間",
-        "timeSuffix": "分"
+        "timeSuffix": "分",
+        "nutrition": "1人分の栄養",
+        "calories": "カロリー",
+        "caloriesSuffix": "kcal",
+        "protein": "たんぱく質",
+        "fat": "脂質",
+        "carbs": "炭水化物",
+        "gramsSuffix": "g"
     },
     "tags": "タグ",
     "ingredients": {

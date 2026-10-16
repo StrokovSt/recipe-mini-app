@@ -2,8 +2,9 @@ import clsx from "clsx";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { Tag } from "@recipe/common";
+import type { Recipe, Tag } from "@recipe/common";
 
+import { useFormatQuantity } from "@/entities/recipe";
 import ClockIcon from "@/shared/assets/icons/icon-clock.svg?react";
 import { IconLabel } from "@/shared/ui/IconLabel";
 import { TagComponent } from "@/shared/ui/Tag";
@@ -17,16 +18,25 @@ interface RecipeInfoProps {
     // Общее время в минутах
     time: number;
     tags: Tag[];
+    nutrition: Pick<Recipe, Nutrient>;
 }
 
-// Под обложкой: категория, название, описание, время и теги.
+type Nutrient = "calories" | "protein" | "fat" | "carbs";
+
+const NUTRIENTS: Nutrient[] = ["calories", "protein", "fat", "carbs"];
+
+// Под обложкой: категория, название, описание, время, КБЖУ на порцию и теги.
 // Длинное описание свёрнуто до трёх строк, чтобы не отодвигать ингредиенты
 export function RecipeInfo(props: RecipeInfoProps) {
-    const { title, category, description, time, tags } = props;
+    const { title, category, description, time, tags, nutrition } = props;
     const { t } = useTranslation(["recipe", "common"]);
     const descriptionRef = useRef<HTMLParagraphElement>(null);
     const [isExpanded, setIsExpanded] = useState(false);
     const [isClamped, setIsClamped] = useState(false);
+    const formatQuantity = useFormatQuantity();
+
+    // Показываем только известные значения, без них блока нет
+    const nutrients = NUTRIENTS.filter((key) => nutrition[key] !== null);
 
     // Кнопка нужна, только если текст правда обрезан
     useLayoutEffect(() => {
@@ -57,6 +67,20 @@ export function RecipeInfo(props: RecipeInfoProps) {
                     <IconLabel icon={<ClockIcon />} className={styles.chip}>
                         {t("common:minutes", { count: time })}
                     </IconLabel>
+                </div>
+            )}
+
+            {nutrients.length > 0 && (
+                <div className={styles.nutrition}>
+                    <span className={styles.nutritionTitle}>{t("nutrition.title")}</span>
+                    <dl className={styles.facts}>
+                        {nutrients.map((key) => (
+                            <div key={key} className={styles.fact}>
+                                <dt>{t(`nutrition.${key}`)}</dt>
+                                <dd>{key === "calories" ? nutrition[key] : formatQuantity({ amount: nutrition[key], unit: "g" })}</dd>
+                            </div>
+                        ))}
+                    </dl>
                 </div>
             )}
 
