@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { motion } from "motion/react";
-import { type ReactNode, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { matchPath, NavLink, useLocation } from "react-router-dom";
 
@@ -9,16 +9,15 @@ import AddIcon from "@/shared/assets/icons/icon-add.svg?react";
 import CollectionIcon from "@/shared/assets/icons/icon-collection.svg?react";
 import SectionsIcon from "@/shared/assets/icons/icon-sections.svg?react";
 import { TRANSITION_PAGE } from "@/shared/config/animation";
-import { getAnimations } from "@/shared/lib/animations";
+import { useSetPageFooterSlot } from "@/shared/ui/PageFooter";
 
 import styles from "./Footer.module.scss";
 
-// На формах рецепта футера нет: внизу закреплена кнопка сохранения
-const HIDDEN_ON: AppRoute[] = [AppRoute.CreateRecipe, AppRoute.Draft, AppRoute.ImportRecipe, AppRoute.EditRecipe];
+// На формах вместо навигации в плашке кнопка страницы (сохранить, распознать), её кладёт PageFooter
+const ACTION_ON: AppRoute[] = [AppRoute.CreateRecipe, AppRoute.Draft, AppRoute.ImportRecipe, AppRoute.EditRecipe];
 
-// Адрес меняется раньше, чем старая страница доиграет уход. Футер появляется после него,
-// иначе он выскакивает поверх уходящей формы и поднимает её кнопку сохранения. Убирается сразу
-const PAGE_EXIT_MS = (TRANSITION_PAGE.duration ?? 0) * 1000;
+const HIDDEN = { opacity: 0 };
+const VISIBLE = { opacity: 1 };
 
 interface NavItem {
     to: AppRoute;
@@ -30,21 +29,9 @@ interface NavItem {
 export function Footer() {
     const { t } = useTranslation("footer");
     const { pathname } = useLocation();
+    const setSlot = useSetPageFooterSlot();
 
-    const isHidden = HIDDEN_ON.some((path) => matchPath(path, pathname));
-    const [isReady, setIsReady] = useState(!isHidden);
-
-    useEffect(() => {
-        if (isHidden) {
-            setIsReady(false);
-            return;
-        }
-
-        const timer = setTimeout(() => setIsReady(true), getAnimations() ? PAGE_EXIT_MS : 0);
-        return () => clearTimeout(timer);
-    }, [isHidden]);
-
-    if (isHidden || !isReady) return null;
+    const hasAction = ACTION_ON.some((path) => matchPath(path, pathname));
 
     const navItems: NavItem[] = [
         { to: AppRoute.Home, icon: <CollectionIcon />, label: t("collection") },
@@ -53,38 +40,57 @@ export function Footer() {
     ];
 
     return (
-        <motion.footer
-            className={styles.footer}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={TRANSITION_PAGE}
-        >
-            <nav className={styles.nav}>
-                {navItems.map((item) =>
-                    item.isAdd ? (
-                        <NavLink
-                            key={item.to}
-                            to={item.to}
-                            className={({ isActive }) =>
-                                clsx(styles.navBtnAdd, isActive && styles.navBtnAddActive)
-                            }
-                        >
-                            {item.icon}
-                        </NavLink>
+        <motion.footer className={styles.footer} initial={HIDDEN} animate={VISIBLE} transition={TRANSITION_PAGE}>
+            {/* Плашка стоит на месте, навигация и кнопка формы сменяют друг друга внутри */}
+            <div className={clsx(styles.nav, hasAction && styles.navAction)}>
+                <AnimatePresence mode="wait" initial={false}>
+                    {hasAction ? (
+                        <motion.div
+                            key="action"
+                            ref={setSlot}
+                            className={styles.action}
+                            initial={HIDDEN}
+                            animate={VISIBLE}
+                            exit={HIDDEN}
+                            transition={TRANSITION_PAGE}
+                        />
                     ) : (
-                        <NavLink
-                            key={item.to}
-                            to={item.to}
-                            className={({ isActive }) =>
-                                clsx(styles.navBtn, isActive && styles.navBtnActive)
-                            }
+                        <motion.nav
+                            key="nav"
+                            className={styles.items}
+                            initial={HIDDEN}
+                            animate={VISIBLE}
+                            exit={HIDDEN}
+                            transition={TRANSITION_PAGE}
                         >
-                            <span className={styles.navIcon}>{item.icon}</span>
-                            <span className={styles.navLabel}>{item.label}</span>
-                        </NavLink>
-                    )
-                )}
-            </nav>
+                            {navItems.map((item) =>
+                                item.isAdd ? (
+                                    <NavLink
+                                        key={item.to}
+                                        to={item.to}
+                                        className={({ isActive }) =>
+                                            clsx(styles.navBtnAdd, isActive && styles.navBtnAddActive)
+                                        }
+                                    >
+                                        {item.icon}
+                                    </NavLink>
+                                ) : (
+                                    <NavLink
+                                        key={item.to}
+                                        to={item.to}
+                                        className={({ isActive }) =>
+                                            clsx(styles.navBtn, isActive && styles.navBtnActive)
+                                        }
+                                    >
+                                        <span className={styles.navIcon}>{item.icon}</span>
+                                        <span className={styles.navLabel}>{item.label}</span>
+                                    </NavLink>
+                                )
+                            )}
+                        </motion.nav>
+                    )}
+                </AnimatePresence>
+            </div>
         </motion.footer>
     );
 }

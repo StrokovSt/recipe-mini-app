@@ -1,4 +1,4 @@
-@use "@/shared/styles/bar";
+@use "@/shared/styles/footer-action";
 
 .header {
     flex-direction: row;
@@ -36,26 +36,21 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-6);
+}
 
-    // Кнопка сохранения прилипает к низу экрана, футера на форме нет
-    .save {
-        @include bar.bar(top);
-
-        position: sticky;
-        bottom: 0;
-        z-index: var(--z-above);
-        margin: 0 calc(-1 * var(--space-page));
-        padding: var(--space-3) var(--space-page) calc(var(--space-3) + env(safe-area-inset-bottom));
-        backdrop-filter: blur(5px);
-    }
-
+// Кнопка сохранения на всю плашку футера
+.footer {
     .submit {
-        width: 100%;
+        @include footer-action.footer-action;
     }
 
-    // Подпись автосохранения над кнопкой
+    // Подпись автосохранения висит над плашкой, в отступе футера: высота плашки не меняется
     .draftStatus {
-        margin-bottom: var(--space-2);
+        position: absolute;
+        right: 0;
+        bottom: 100%;
+        left: 0;
+        margin: 0 0 var(--space-1);
         color: var(--color-text-muted);
         font: var(--font-ui-xs);
         text-align: center;

@@ -1,3 +1,5 @@
+@use "@/shared/styles/footer-action";
+
 .header {
     flex-direction: row;
     align-items: center;
@@ -65,10 +67,13 @@
     }
 
     .note {
-        margin-top: calc(-1 * var(--space-2));
         color: var(--color-text-muted);
         font: var(--font-sm);
         font-style: italic;
         text-align: center;
     }
+}
+
+.submit {
+    @include footer-action.footer-action;
 }

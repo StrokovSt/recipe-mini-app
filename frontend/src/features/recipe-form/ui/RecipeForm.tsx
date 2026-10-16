@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 import { Controller, FormProvider, type Resolver, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useBlocker, useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import { useCreateRecipe, useUploadMedia } from "@/entities/recipe";
 import { getAnimations } from "@/shared/lib/animations";
 import { IconButton, RegularButton } from "@/shared/ui/Buttons";
 import { ImageInput } from "@/shared/ui/ImageInput";
+import { PageFooter } from "@/shared/ui/PageFooter";
 import { PageHeader } from "@/shared/ui/PageHeader";
 
 import { toMedia } from "../model/cover";
@@ -48,6 +49,8 @@ const RecipeForm = (props: RecipeFormProps) => {
 
     const { handleSubmit, control, formState: { submitCount, isDirty } } = methods;
     const formRef = useRef<HTMLFormElement>(null);
+    // Кнопка сохранения в футере, вне формы: связана с ней через атрибут form
+    const formId = useId();
 
     // Не сохранилось из-за ошибок: прокручиваем к самой верхней, как по якорю
     useEffect(() => {
@@ -173,7 +176,7 @@ const RecipeForm = (props: RecipeFormProps) => {
                 />
             </PageHeader>
 
-            <form ref={formRef} className={styles.form} onSubmit={handleSubmit(handleSave)}>
+            <form ref={formRef} id={formId} className={styles.form} onSubmit={handleSubmit(handleSave)}>
                 <FormSection mark="一" title={t("sections.cover")}>
                     <Controller
                         control={control}
@@ -193,24 +196,25 @@ const RecipeForm = (props: RecipeFormProps) => {
                 <IngredientsField />
 
                 <StepsField />
-
-                <div className={styles.save}>
-                    {autosave.status !== "idle" && (
-                        <p
-                            className={clsx(styles.draftStatus, autosave.status === "error" && styles.draftError)}
-                            role="status"
-                        >
-                            {t(`draftStatus.${autosave.status}`)}
-                        </p>
-                    )}
-                    <RegularButton
-                        className={styles.submit}
-                        type="submit"
-                        label={submitLabel}
-                        disabled={isPending}
-                    />
-                </div>
             </form>
+
+            <PageFooter className={styles.footer}>
+                {autosave.status !== "idle" && (
+                    <p
+                        className={clsx(styles.draftStatus, autosave.status === "error" && styles.draftError)}
+                        role="status"
+                    >
+                        {t(`draftStatus.${autosave.status}`)}
+                    </p>
+                )}
+                <RegularButton
+                    className={styles.submit}
+                    type="submit"
+                    form={formId}
+                    label={submitLabel}
+                    disabled={isPending}
+                />
+            </PageFooter>
 
             <LeaveSheet
                 isOpen={blocker.state === "blocked"}

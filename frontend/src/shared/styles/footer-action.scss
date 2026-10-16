@@ -1,0 +1,12 @@
+// Кнопка формы в футере: заполняет винную плашку целиком, своей рамки и скругления нет
+@mixin footer-action {
+    flex: 1;
+    align-self: stretch;
+    min-height: var(--size-nav-action);
+    border: none;
+
+    // Скругление плашки минус её рамка
+    border-radius: calc(var(--radius-lg) - 1px);
+    font: var(--font-ui-md);
+    font-weight: var(--font-weight-bold);
+}

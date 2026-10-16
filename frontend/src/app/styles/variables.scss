@@ -60,7 +60,7 @@
 
     // Высота всех полей ввода (Input, Textarea)
     --size-field-height: 40px;
-    --size-field-height-lg: 52px; /* поле в шторках создания тега и категории */
+    --size-field-height-lg: 52px; /* крупное поле (шторки тега и категории) и кнопка формы в футере */
 
     // Поиск и кнопка фильтров — высотой с кнопки шапки
     --size-search-height: var(--size-menu-button);
@@ -109,6 +109,7 @@
 
     // Главная кнопка в футере шторки не растягивается шире этого на больших экранах
     --size-sheet-action-max-width: 240px;
+    --size-footer-action-max-width: 320px; /* кнопка формы в футере на широком экране */
     --size-card-min-width: 160px;
     --size-category-min-width: 150px;
 

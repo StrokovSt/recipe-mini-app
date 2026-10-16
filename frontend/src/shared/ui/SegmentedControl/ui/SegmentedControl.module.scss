@@ -64,6 +64,6 @@
     width: calc((100% - var(--space-1) * (var(--count) + 1)) / var(--count));
     border-radius: var(--radius-sm);
     background: var(--color-active);
-    transform: translateX(calc(var(--index) * (100% + var(--space-1))));
     transition: transform var(--transition-base);
+    transform: translateX(calc(var(--index) * (100% + var(--space-1))));
 }

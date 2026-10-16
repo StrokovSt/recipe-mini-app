@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ import { IconButton, RegularButton } from "@/shared/ui/Buttons";
 import { ErrorMessage } from "@/shared/ui/ErrorMessage";
 import { useLoader } from "@/shared/ui/GlobalLoader";
 import { Input } from "@/shared/ui/Input";
+import { PageFooter } from "@/shared/ui/PageFooter";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 
@@ -33,6 +34,8 @@ const ImportRecipePage = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const [url, setUrl] = useState("");
+    // Кнопка «Распознать» в футере, вне формы: связана с ней через атрибут form
+    const formId = useId();
     const [urlError, setUrlError] = useState("");
     const [photo, setPhoto] = useState<Photo | null>(null);
     // Распознанный рецепт сохраняется в черновик, пока это идёт, лоадер не убираем
@@ -116,7 +119,7 @@ const ImportRecipePage = () => {
                 </PageHeader>
             }
         >
-            <form className={clsx(styles.form, isParsing && styles.parsing)} onSubmit={handleSubmit}>
+            <form id={formId} className={clsx(styles.form, isParsing && styles.parsing)} onSubmit={handleSubmit}>
                 <div className={styles.card}>
                     <Input
                         label={t("import.link")}
@@ -146,13 +149,18 @@ const ImportRecipePage = () => {
 
                 {errorMessage && <ErrorMessage message={errorMessage} />}
 
+                <p className={styles.note}>{t("import.note")}</p>
+            </form>
+
+            <PageFooter>
                 <RegularButton
+                    className={styles.submit}
                     type="submit"
+                    form={formId}
                     label={t("import.submit")}
                     disabled={isParsing || (!photo && !url.trim())}
                 />
-                <p className={styles.note}>{t("import.note")}</p>
-            </form>
+            </PageFooter>
         </PageWrapper>
     );
 };
