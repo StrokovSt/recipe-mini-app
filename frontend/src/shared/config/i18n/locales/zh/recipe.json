@@ -1,5 +1,8 @@
 {
-    "notFound": "未找到该食谱",
+    "notFound": {
+        "title": "未找到该食谱",
+        "text": "可能已被删除，或链接有误。"
+    },
     "deleteTitle": "删除食谱“{{title}}”？",
     "deleteText": "删除后无法恢复。",
     "servings": "份数",

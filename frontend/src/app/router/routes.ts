@@ -12,6 +12,8 @@ export const AppRoute = {
     Profile: "/profile",
     Settings: "/settings",
     About: "/about",
+    // Любой неизвестный адрес
+    NotFound: "*",
 } as const;
 
 export type AppRoute = (typeof AppRoute)[keyof typeof AppRoute];

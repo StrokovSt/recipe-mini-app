@@ -1,5 +1,8 @@
 {
-    "notFound": "Resep tidak ditemukan",
+    "notFound": {
+        "title": "Resep tidak ditemukan",
+        "text": "Mungkin sudah dihapus atau tautannya salah."
+    },
     "deleteTitle": "Hapus resep “{{title}}”?",
     "deleteText": "Tindakan ini tidak bisa dibatalkan.",
     "servings": "Porsi",

@@ -26,6 +26,7 @@ const PAGES = {
     ProfilePage: lazyPage(() => import("@/pages/ProfilePage").then(m => ({ default: m.ProfilePage }))),
     SettingsPage: lazyPage(() => import("@/pages/SettingsPage").then(m => ({ default: m.SettingsPage }))),
     AboutPage: lazyPage(() => import("@/pages/AboutPage").then(m => ({ default: m.AboutPage }))),
+    NotFoundPage: lazyPage(() => import("@/pages/NotFoundPage").then(m => ({ default: m.NotFoundPage }))),
 };
 
 // Подгружаем код всех страниц в фоне после старта, чтобы переходы были без ожидания
@@ -75,5 +76,9 @@ export const routeConfig: RouteConfig[] = [
     {
         path: AppRoute.About,
         element: PAGES.AboutPage.Page,
+    },
+    {
+        path: AppRoute.NotFound,
+        element: PAGES.NotFoundPage.Page,
     },
 ];

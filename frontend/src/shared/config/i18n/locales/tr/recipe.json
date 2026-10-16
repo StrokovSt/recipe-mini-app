@@ -1,5 +1,8 @@
 {
-    "notFound": "Tarif bulunamadı",
+    "notFound": {
+        "title": "Tarif bulunamadı",
+        "text": "Silinmiş olabilir ya da bağlantı hatalı."
+    },
     "deleteTitle": "“{{title}}” tarifi silinsin mi?",
     "deleteText": "Bu işlem geri alınamaz.",
     "servings": "Porsiyon",

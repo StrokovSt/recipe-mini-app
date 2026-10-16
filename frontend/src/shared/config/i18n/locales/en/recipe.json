@@ -1,5 +1,8 @@
 {
-    "notFound": "Recipe not found",
+    "notFound": {
+        "title": "Recipe not found",
+        "text": "It may have been deleted, or the link is wrong."
+    },
     "deleteTitle": "Delete recipe “{{title}}”?",
     "deleteText": "This can't be undone.",
     "servings": "Servings",

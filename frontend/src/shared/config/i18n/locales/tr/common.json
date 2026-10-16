@@ -1,5 +1,9 @@
 {
     "appName": "Mirabelle",
+    "notFound": {
+        "title": "Sayfa bulunamadı",
+        "text": "Böyle bir sayfa yok. Bağlantıyı kontrol edin."
+    },
     "back": "Geri",
     "close": "Kapat",
     "decrease": "Azalt",

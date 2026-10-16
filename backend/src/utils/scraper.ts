@@ -24,10 +24,27 @@ const client = axios.create({
     timeout: 10000,
 });
 
+// Старые сайты (russianfood и т.п.) отдают windows-1251: кодировку берём из заголовка или <meta>, иначе UTF-8
 export async function fetchPage(url: string): Promise<string> {
-    const { data } = await client.get(url);
-    return data;
+    const { data, headers } = await client.get<ArrayBuffer>(url, { responseType: "arraybuffer" });
+    const buffer = Buffer.from(data);
+    const head = buffer.subarray(0, 2048).toString("latin1");
+    const charset = (String(headers["content-type"] ?? "").match(/charset=([\w-]+)/i) ?? head.match(/charset=["']?([\w-]+)/i))?.[1];
+
+    try {
+        return new TextDecoder(charset ?? "utf-8").decode(buffer);
+    } catch {
+        return buffer.toString("utf-8");
+    }
 }
+
+const toAbsoluteUrl = (value: string, pageUrl: string) => {
+    try {
+        return value ? new URL(value, pageUrl).href : null;
+    } catch {
+        return null;
+    }
+};
 
 export function extractJsonLd(html: string): PinterestJsonLd[] {
     const $ = cheerio.load(html);
@@ -63,15 +80,18 @@ export function extractText(html: string): string {
         $("main, article").first().text() ||
         $("body").text();
 
-    return content.replace(/\s+/g, " ").trim().slice(0, 4000);
+    // С запасом: на старых сайтах рецепт идёт после длинного меню
+    return content.replace(/\s+/g, " ").trim().slice(0, 15000);
 }
 
-export function extractMedia(html: string): MediaItem[] {
+// pageUrl нужен для относительных ссылок: «//site.com/img.jpg», «/img.jpg»
+export function extractMedia(html: string, pageUrl: string): MediaItem[] {
     const $ = cheerio.load(html);
     const media: MediaItem[] = [];
     const seen = new Set<string>();
 
-    const add = (url: string, type: MediaType) => {
+    const add = (value: string, type: MediaType) => {
+        const url = toAbsoluteUrl(value, pageUrl);
         if (url && !seen.has(url)) {
         seen.add(url);
         media.push({ url, type });

@@ -21,7 +21,7 @@ async function run() {
         
         // Извлечение данных
         const text = extractText(html);
-        const media = extractMedia(html);
+        const media = extractMedia(html, url);
         
         // JSON-LD с безопасным парсингом
         const jsonLdRaw = $('script[type="application/ld+json"]')

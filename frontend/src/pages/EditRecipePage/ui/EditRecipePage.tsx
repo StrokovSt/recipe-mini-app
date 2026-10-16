@@ -5,6 +5,7 @@ import { buildRoute } from "@/app/router/routes";
 import { useRecipe, useUpdateRecipe } from "@/entities/recipe";
 import { EMPTY_FORM_VALUES, getCover, getVideo, RecipeForm, type RecipeFormValues, toMedia } from "@/features/recipe-form";
 import { useLoader } from "@/shared/ui/GlobalLoader";
+import { Message } from "@/shared/ui/Message";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 
 const EditRecipePage = () => {
@@ -17,7 +18,13 @@ const EditRecipePage = () => {
     const { mutate: updateRecipe, isPending } = useUpdateRecipe();
 
     if (isLoading) return null;
-    if (!recipe) return <div>{t("recipe:notFound")}</div>;
+    if (!recipe) {
+        return (
+            <PageWrapper>
+                <Message title={t("recipe:notFound.title")} text={t("recipe:notFound.text")} />
+            </PageWrapper>
+        );
+    }
 
     const handleSubmit = (values: RecipeFormValues) => {
         updateRecipe(

@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { type ReactNode, useEffect } from "react";
 
 import { TRANSITION_PAGE } from "@/shared/config/animation";
-import { finishHandedOffLoading } from "@/shared/ui/GlobalLoader";
+import { finishHandedOffLoading, useIsLoaderShown } from "@/shared/ui/GlobalLoader";
 
 import styles from "./PageWrapper.module.scss";
 
@@ -16,9 +16,11 @@ interface PageWrapperProps {
 const HIDDEN = { opacity: 0, y: 8, filter: "blur(6px)" };
 const VISIBLE = { opacity: 1, y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } };
 
-// Анимируется только контент: шапка при переходах стоит на месте, как footer
+// Анимируется только контент: шапка при переходах стоит на месте, как footer.
+// Пока котик на экране или гаснет, контент ждёт скрытым и всплывает после него
 export function PageWrapper(props: PageWrapperProps) {
     const { children, header, className } = props;
+    const isLoaderShown = useIsLoaderShown();
 
     // Страница отрисовалась: котик, переданный с прошлой страницы (например, после распознавания), уходит
     useEffect(() => {
@@ -31,7 +33,7 @@ export function PageWrapper(props: PageWrapperProps) {
             <motion.div
                 className={styles.content}
                 initial={HIDDEN}
-                animate={VISIBLE}
+                animate={isLoaderShown ? HIDDEN : VISIBLE}
                 exit={HIDDEN}
                 transition={TRANSITION_PAGE}
             >

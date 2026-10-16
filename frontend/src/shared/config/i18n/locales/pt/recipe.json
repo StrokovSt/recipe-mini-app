@@ -1,5 +1,8 @@
 {
-    "notFound": "Receita não encontrada",
+    "notFound": {
+        "title": "Receita não encontrada",
+        "text": "Talvez tenha sido excluída ou o link esteja errado."
+    },
     "deleteTitle": "Excluir a receita “{{title}}”?",
     "deleteText": "Não será possível recuperá-la.",
     "servings": "Porções",

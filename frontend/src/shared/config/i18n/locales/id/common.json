@@ -1,5 +1,9 @@
 {
     "appName": "Mirabelle",
+    "notFound": {
+        "title": "Halaman tidak ditemukan",
+        "text": "Halaman ini tidak ada. Periksa tautannya."
+    },
     "back": "Kembali",
     "close": "Tutup",
     "decrease": "Kurangi",

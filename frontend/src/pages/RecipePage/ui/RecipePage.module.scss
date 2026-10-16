@@ -6,15 +6,6 @@
     font-family: var(--font-family-main);
 }
 
-.notFound {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--tg-hint);
-    font: var(--font-md);
-}
-
 .danger {
     padding: 0 var(--space-5);
 }

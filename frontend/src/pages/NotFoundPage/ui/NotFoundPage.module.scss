@@ -1,0 +1,11 @@
+.header {
+    flex-direction: row;
+
+    // «Назад» в правом краю шапки, на месте бургера
+    .back {
+        flex-shrink: 0;
+        width: var(--size-menu-button);
+        height: var(--size-menu-button);
+        margin-left: auto;
+    }
+}

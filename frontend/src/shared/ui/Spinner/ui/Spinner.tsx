@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 
+import catPoster from "@/shared/assets/images/cat-loader-poster.webp";
 import SpinnerIcon from "@/shared/assets/spinner.svg?react";
 import catLoaderWebm from "@/shared/assets/video/cat-loader-480.webm";
 import catLoaderMp4 from "@/shared/assets/video/cat-loader-preview.mp4";
@@ -60,6 +61,8 @@ export function Spinner(props: SpinnerProps) {
         >
             <video
                 className={styles[size]}
+                // Первый кадр, пока само видео не загрузилось
+                poster={catPoster}
                 autoPlay
                 loop
                 muted

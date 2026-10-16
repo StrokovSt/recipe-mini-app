@@ -8,6 +8,7 @@ import type { GetRecipesProps } from '@/entities/recipe/types';
 import { useTags } from '@/entities/tag';
 import { TRANSITION_BASE } from '@/shared/config/animation';
 import { useIsHiddenBehind } from '@/shared/lib/hooks';
+import { useLoader } from '@/shared/ui/GlobalLoader';
 import { PageHeader, usePageHeaderBar } from '@/shared/ui/PageHeader';
 import { PageWrapper } from '@/shared/ui/PageWrapper';
 import { FilterButton, getActiveFilterCount, RecipeFilters } from '@/widgets/RecipeFilters';
@@ -55,12 +56,15 @@ const HomePage = () => {
     const filtersRef = useRef<HTMLElement>(null);
     const isFiltersHidden = useIsHiddenBehind(filtersRef, headerBar);
 
+    // Первая загрузка списка: страница ждёт за глобальным котиком. Смена фильтров котика не зовёт (keepPreviousData)
+    useLoader(isLoading);
+    if (isLoading) return null;
+
     return (
         <PageWrapper
             header={
                 <PageHeader>
                     <HomeHeading
-                        disabled={isLoading}
                         actions={
                             <AnimatePresence initial={false}>
                                 {isFiltersHidden && (
@@ -75,7 +79,6 @@ const HomePage = () => {
                                             className={styles.filterButton}
                                             activeCount={getActiveFilterCount(filters)}
                                             onClick={() => setIsFiltersOpen(true)}
-                                            disabled={isLoading}
                                         />
                                     </motion.div>
                                 )}
@@ -93,9 +96,8 @@ const HomePage = () => {
                 filters={filters}
                 isOpen={isFiltersOpen}
                 onOpenChange={setIsFiltersOpen}
-                disabled={isLoading}
             />
-            <RecipeList recipes={recipes} isLoading={isLoading} />
+            <RecipeList recipes={recipes} />
         </PageWrapper>
     );
 };

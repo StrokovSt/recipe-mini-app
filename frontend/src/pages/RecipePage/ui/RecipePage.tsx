@@ -12,6 +12,7 @@ import { IconButton } from "@/shared/ui/Buttons";
 import { Dropdown } from "@/shared/ui/Dropdown";
 import { useLoader } from "@/shared/ui/GlobalLoader";
 import { MediaLightbox } from "@/shared/ui/MediaLightbox";
+import { Message } from "@/shared/ui/Message";
 import { ConfirmModal } from "@/shared/ui/Modal";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
@@ -41,8 +42,25 @@ const RecipePage = () => {
     const { mutate: deleteRecipe } = useDeleteRecipe();
     useLoader(isLoading);
 
+    const backButton = (
+        <IconButton
+            icon="back"
+            round
+            className={styles.back}
+            type="button"
+            aria-label={t("common:back")}
+            onClick={() => navigate(AppRoute.Home)}
+        />
+    );
+
     if (isLoading) return null;
-    if (isError || !recipe) return <div className={styles.notFound}>{t("notFound")}</div>;
+    if (isError || !recipe) {
+        return (
+            <PageWrapper className={styles.page} header={<PageHeader className={styles.header}>{backButton}</PageHeader>}>
+                <Message title={t("notFound.title")} text={t("notFound.text")} />
+            </PageWrapper>
+        );
+    }
 
     const images = recipe.media.filter((m) => m.type === "image");
     const video = recipe.media.find((m) => m.type === "video");
@@ -93,14 +111,7 @@ const RecipePage = () => {
                             { label: t("common:delete"), icon: <DeleteIcon />, danger: true, onClick: () => setIsConfirmOpen(true) },
                         ]}
                     />
-                    <IconButton
-                        icon="back"
-                        round
-                        className={styles.back}
-                        type="button"
-                        aria-label={t("common:back")}
-                        onClick={() => navigate(AppRoute.Home)}
-                    />
+                    {backButton}
                 </PageHeader>
             }
         >

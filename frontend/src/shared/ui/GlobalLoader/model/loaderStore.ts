@@ -9,6 +9,8 @@ export interface LoaderOptions {
 
 export interface LoaderState {
     isVisible: boolean;
+    // Котик уже скрыт, но ещё гаснет: контент страницы ждёт, чтобы не просвечивать сквозь него
+    isLeaving: boolean;
     label?: string;
 }
 
@@ -26,12 +28,12 @@ const HANDOFF_TIMEOUT_MS = 15000;
 const tasks = new Map<number, Task>();
 const listeners = new Set<() => void>();
 let nextId = 1;
-let state: LoaderState = { isVisible: false };
+let state: LoaderState = { isVisible: false, isLeaving: false };
 let shownAt = 0;
 let hideTimer: ReturnType<typeof setTimeout> | undefined;
 
 function setState(next: LoaderState) {
-    if (next.isVisible === state.isVisible && next.label === state.label) return;
+    if (next.isVisible === state.isVisible && next.isLeaving === state.isLeaving && next.label === state.label) return;
     state = next;
     listeners.forEach((listener) => listener());
 }
@@ -45,7 +47,7 @@ function update() {
         if (!state.isVisible) shownAt = Date.now();
         // Подпись последней задачи, у которой она есть
         const label = due.reverse().find((task) => task.label)?.label;
-        setState({ isVisible: true, label });
+        setState({ isVisible: true, isLeaving: false, label });
         return;
     }
 
@@ -54,7 +56,7 @@ function update() {
     // Подпись не сбрасываем, чтобы котик уходил с тем же текстом
     hideTimer = setTimeout(() => {
         hideTimer = undefined;
-        setState({ isVisible: false, label: state.label });
+        setState({ isVisible: false, isLeaving: true, label: state.label });
     }, Math.max(0, MIN_VISIBLE_MS - (Date.now() - shownAt)));
 }
 
@@ -97,6 +99,12 @@ export function finishHandedOffLoading() {
     tasks.forEach((task, id) => {
         if (task.isHandedOff) finishLoading(id);
     });
+}
+
+// Котик догас (onExitComplete в GlobalLoader)
+export function finishLeaving() {
+    if (state.isVisible) return;
+    setState({ ...state, isLeaving: false });
 }
 
 export function subscribeLoader(listener: () => void) {

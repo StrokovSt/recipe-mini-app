@@ -1,18 +1,24 @@
+import type { GenerativeModel, Part } from "@google/generative-ai";
 import axios from "axios";
 
 import { type IngredientGroup, UNIT_CODES, type UnitCode } from "@recipe/common";
 
 import cloudinary from "../api/cloudinary";
-import { model } from "../api/gemeni";
+import { model, videoModel } from "../api/gemeni";
 import prisma from "../lib/prisma";
-import { type PromptContext, recipeImagePrompt, recipePrompt } from "../prompts/recipe";
+import { nutritionPrompt, type PromptContext, recipeImagePrompt, recipePrompt, recipeVideoPrompt } from "../prompts/recipe";
 import { MediaItem, ParsedRecipeAI } from "../types/pinterest";
+import { formatIngredient } from "../utils/formatIngredient";
 import { extractMedia, extractText, fetchPage } from "../utils/scraper";
 import { extractPin, fetchCaptions, isPinterestUrl, pinToText, toPlayableVideo } from "./pinterest";
 import { ensureCategories, ensureTags, getFallbackCategory } from "./userDefaults";
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 2000;
+// Видео длиннее ~3 минут (720p) в Gemini не отправляем
+const MAX_VIDEO_BYTES = 60 * 1024 * 1024;
+// Больше этого видео не влезет внутрь запроса к Gemini
+const MAX_INLINE_VIDEO_BYTES = 20 * 1024 * 1024;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -52,34 +58,73 @@ export async function parseRecipeFromUrl(url: string, userId: string) {
 
     const lists = await getUserLists(userId);
     const raw = await generateWithRetry(text, toPromptContext(lists));
-    const media = extractMedia(html);
+    const media = extractMedia(html, url);
     const cover = await storeImage(media.find((item) => item.type === "image")?.url ?? null);
     const video = media.find((item) => item.type === "video")?.url ?? null;
 
-    return { ...normalizeRecipe(raw, lists), media: toMediaList(cover, video) };
+    return { ...(await withNutrition(normalizeRecipe(raw, lists))), media: toMediaList(cover, video) };
 }
 
-// Пин: название, описание и субтитры видео → ИИ. Видео и превью берём всегда:
-// пин с видео без рецепта в тексте сохраняется как рецепт-видео с пустыми ингредиентами и шагами
+// Пин: название, описание и субтитры видео → ИИ. Если в тексте нет ингредиентов или шагов — ИИ смотрит само видео.
+// Видео и превью берём всегда: пин с видео без рецепта сохраняется как рецепт-видео с пустыми ингредиентами и шагами
 async function parsePin(html: string, userId: string) {
     const pin = extractPin(html);
-    const captions = pin.captionsUrl ? await fetchCaptions(pin.captionsUrl) : "";
+    const [captions, video] = await Promise.all([
+        pin.captionsUrl ? fetchCaptions(pin.captionsUrl) : "",
+        pin.video ? toPlayableVideo(pin.video) : null,
+    ]);
     const text = pinToText(pin, captions);
     const lists = await getUserLists(userId);
     const context = toPromptContext(lists);
 
-    const recipe = await recognizePin(text, pin.video ? null : pin.cover, context, lists).catch((error) => {
-        if (pin.video && isNotFound(error)) return emptyRecipe(lists);
+    const fromText = await recognizePin(text, video ? null : pin.cover, context, lists).catch((error) => {
+        if (video && isNotFound(error)) return null;
         throw error;
     });
 
+    const fromVideo = video && !isComplete(fromText) ? await recognizeVideo(video, context, lists) : null;
+    const found = fromVideo ?? fromText;
+    const recipe = found ? await withNutrition(found) : emptyRecipe(lists);
+
     // Обложку заливаем только после распознавания, чтобы при ошибке не оставлять файлы в Cloudinary
-    const [cover, video] = await Promise.all([
-        storeImage(pin.cover),
-        pin.video ? toPlayableVideo(pin.video) : null,
-    ]);
+    const cover = await storeImage(pin.cover);
 
     return { ...recipe, title: recipe.title || pin.title, media: toMediaList(cover, video) };
+}
+
+const isComplete = (recipe: ParsedRecipeAI | null) => !!recipe && recipe.ingredients.length > 0 && recipe.steps.length > 0;
+
+// Видео → рецепт. Любая ошибка импорт не ломает: остаётся то, что нашлось в тексте
+async function recognizeVideo(url: string, context: PromptContext, lists: UserLists) {
+    // HLS (.m3u8) Gemini не читает
+    if (!url.endsWith(".mp4")) return null;
+
+    try {
+        const { headers } = await axios.head(url, { timeout: 5000 });
+        const size = Number(headers["content-length"]) || 0;
+        if (size > MAX_VIDEO_BYTES) return null;
+
+        return normalizeRecipe(await generateFromVideo(url, size, context), lists);
+    } catch (error) {
+        console.warn("Не удалось распознать видео:", error instanceof Error ? error.message : error);
+        return null;
+    }
+}
+
+// Сначала даём Gemini ссылку: файл он скачает сам. Не взял по ссылке — скачиваем и отправляем внутри запроса
+async function generateFromVideo(url: string, size: number, context: PromptContext) {
+    const prompt = { text: recipeVideoPrompt(context) };
+
+    try {
+        return await generatePartsWithRetry(videoModel, [{ fileData: { fileUri: url, mimeType: "video/mp4" } }, prompt]);
+    } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (!size || size > MAX_INLINE_VIDEO_BYTES || message.startsWith("QUOTA_EXCEEDED")) throw error;
+
+        console.warn("Gemini не взял видео по ссылке, отправляем файлом:", message);
+        const { base64, mimeType } = await downloadFile(url);
+        return generatePartsWithRetry(videoModel, [{ inlineData: { mimeType, data: base64 } }, prompt]);
+    }
 }
 
 // Сначала текст пина. Если рецепта в нём нет — картинка пина: часто рецепт написан прямо на ней
@@ -94,7 +139,7 @@ async function recognizePin(text: string, image: string | null, context: PromptC
 
     if (!image) throw new Error("Рецепт не найден");
 
-    const { base64, mimeType } = await downloadImage(image);
+    const { base64, mimeType } = await downloadFile(image);
     return normalizeRecipe(await generateFromImageWithRetry(base64, mimeType, context), lists);
 }
 
@@ -116,8 +161,8 @@ const emptyRecipe = (lists: UserLists): ParsedRecipeAI => ({
     tags: [],
 });
 
-async function downloadImage(url: string) {
-    const { data, headers } = await axios.get<ArrayBuffer>(url, { responseType: "arraybuffer", timeout: 10000 });
+async function downloadFile(url: string) {
+    const { data, headers } = await axios.get<ArrayBuffer>(url, { responseType: "arraybuffer", timeout: 30000 });
     const mimeType = String(headers["content-type"] ?? "image/jpeg").split(";")[0];
     return { base64: Buffer.from(data).toString("base64"), mimeType };
 }
@@ -145,13 +190,13 @@ const toMediaList = (cover: string | null, video: string | null): MediaItem[] =>
 export async function parseRecipeFromImage(base64: string, mimeType: string, userId: string) {
     const lists = await getUserLists(userId);
     const raw = await generateFromImageWithRetry(base64, mimeType, toPromptContext(lists));
-    return { ...normalizeRecipe(raw, lists), media: [] };
+    return { ...(await withNutrition(normalizeRecipe(raw, lists))), media: [] };
 }
 
 export async function parseRecipeFromText(text: string, userId: string) {
     const lists = await getUserLists(userId);
     const raw = await generateWithRetry(text, toPromptContext(lists));
-    return { ...normalizeRecipe(raw, lists), media: [] };
+    return { ...(await withNutrition(normalizeRecipe(raw, lists))), media: [] };
 }
 
 async function getUserLists(userId: string): Promise<UserLists> {
@@ -251,6 +296,28 @@ function normalizeRecipe(raw: RawRecipeAI, lists: UserLists): ParsedRecipeAI {
     };
 }
 
+// КБЖУ не пришло вместе с рецептом — досчитываем отдельным запросом. Не вышло — оставляем пустым
+async function withNutrition(recipe: ParsedRecipeAI): Promise<ParsedRecipeAI> {
+    if (recipe.calories !== null || recipe.ingredients.length === 0) return recipe;
+
+    const ingredients = recipe.ingredients.flatMap((group) => group.items.map(formatIngredient));
+
+    try {
+        const result = await model.generateContent(nutritionPrompt(recipe.title, recipe.servings, ingredients));
+        const raw = parseJson(result.response.text());
+        return {
+            ...recipe,
+            calories: toNutrition(raw.calories),
+            protein: toNutrition(raw.protein),
+            fat: toNutrition(raw.fat),
+            carbs: toNutrition(raw.carbs),
+        };
+    } catch (error) {
+        console.warn("Не удалось оценить КБЖУ:", error instanceof Error ? error.message : error);
+        return recipe;
+    }
+}
+
 async function generateWithRetry(text: string, context: PromptContext, attempt = 1): Promise<RawRecipeAI> {
     try {
         const result = await model.generateContent(recipePrompt(text, context));
@@ -260,20 +327,15 @@ async function generateWithRetry(text: string, context: PromptContext, attempt =
     }
 }
 
-async function generateFromImageWithRetry(base64: string, mimeType: string, context: PromptContext, attempt = 1): Promise<RawRecipeAI> {
+const generateFromImageWithRetry = (base64: string, mimeType: string, context: PromptContext) =>
+    generatePartsWithRetry(model, [{ inlineData: { mimeType, data: base64 } }, { text: recipeImagePrompt(context) }]);
+
+async function generatePartsWithRetry(target: GenerativeModel, parts: Part[], attempt = 1): Promise<RawRecipeAI> {
     try {
-        const result = await model.generateContent([
-            {
-                inlineData: {
-                    mimeType,
-                    data: base64,
-                },
-            },
-            { text: recipeImagePrompt(context) },
-        ]);
+        const result = await target.generateContent(parts);
         return parseJson(result.response.text());
     } catch (error) {
-        return handleRetry(error, attempt, () => generateFromImageWithRetry(base64, mimeType, context, attempt + 1));
+        return handleRetry(error, attempt, () => generatePartsWithRetry(target, parts, attempt + 1));
     }
 }
 

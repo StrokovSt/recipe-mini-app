@@ -1,5 +1,9 @@
 {
     "appName": "Mirabelle",
+    "notFound": {
+        "title": "Seite nicht gefunden",
+        "text": "Diese Seite gibt es nicht. Prüfen Sie den Link."
+    },
     "back": "Zurück",
     "close": "Schließen",
     "decrease": "Weniger",

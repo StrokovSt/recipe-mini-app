@@ -1,5 +1,8 @@
 {
-    "notFound": "Recette introuvable",
+    "notFound": {
+        "title": "Recette introuvable",
+        "text": "Elle a peut-être été supprimée, ou le lien est erroné."
+    },
     "deleteTitle": "Supprimer la recette « {{title}} » ?",
     "deleteText": "Cette action est irréversible.",
     "servings": "Portions",

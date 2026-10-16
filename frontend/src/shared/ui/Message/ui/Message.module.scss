@@ -1,0 +1,26 @@
+// Блок заданной высоты, содержимое по центру. Не flex: 1 на всю страницу:
+// при въезде страницы (сдвиг на 8px) у main появлялась прокрутка и всё дёргалось
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: var(--size-message-height);
+    text-align: center;
+
+    .image {
+        width: var(--size-message-image);
+    }
+
+    .title {
+        font: var(--font-header-lg);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .text {
+        max-width: var(--size-message-text);
+        color: var(--color-text-muted);
+        font: var(--font-sm);
+    }
+}
