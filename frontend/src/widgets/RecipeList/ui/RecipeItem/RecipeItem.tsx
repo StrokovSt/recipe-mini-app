@@ -7,12 +7,15 @@ import type { Recipe } from '@recipe/common';
 import { getCategoryIcon } from '@/entities/category';
 import ClockIcon from '@/shared/assets/icons/icon-clock.svg?react';
 import UserIcon from '@/shared/assets/icons/icon-user.svg?react';
+import { getImageUrl } from '@/shared/lib/image';
 import { IconLabel } from '@/shared/ui/IconLabel';
 import { TagList } from '@/shared/ui/Tag';
 
 import styles from './RecipeItem.module.scss';
 
 const MAX_VISIBLE_TAGS = 5;
+// Ширина обложки в карточке с запасом на плотные экраны
+const COVER_WIDTH = 600;
 
 interface RecipeItemProps {
     recipe: Recipe;
@@ -32,7 +35,7 @@ const RecipeItem = (props: RecipeItemProps) => {
         <Link to={`/recipe/${id}`} className={styles.card}>
             <div className={styles.media}>
                 {cover ? (
-                    <img src={cover.url} alt={title} loading="lazy" className={styles.image} />
+                    <img src={getImageUrl(cover.url, COVER_WIDTH)} alt={title} loading="lazy" className={styles.image} />
                 ) : (
                     <PlaceholderIcon className={styles.placeholder} aria-hidden />
                 )}

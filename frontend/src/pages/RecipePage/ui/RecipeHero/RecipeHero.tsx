@@ -1,11 +1,15 @@
 import { useTranslation } from "react-i18next";
 
 import type { RecipeSourceInfo } from "@/entities/recipe";
+import { getImageUrl } from "@/shared/lib/image";
 
 import { RecipeVideo } from "../RecipeVideo/RecipeVideo";
 import { SourceBadge } from "../SourceBadge/SourceBadge";
 
 import styles from "./RecipeHero.module.scss";
+
+// Обложка во всю ширину экрана, с запасом на плотные экраны
+const COVER_WIDTH = 1200;
 
 interface RecipeHeroProps {
     title: string;
@@ -24,13 +28,15 @@ export function RecipeHero(props: RecipeHeroProps) {
 
     if (!imageUrl && !videoUrl) return null;
 
+    const cover = imageUrl && getImageUrl(imageUrl, COVER_WIDTH);
+
     return (
         <div className={styles.hero}>
             {videoUrl ? (
-                <RecipeVideo url={videoUrl} poster={imageUrl} className={styles.media} />
+                <RecipeVideo url={videoUrl} poster={cover} className={styles.media} />
             ) : (
                 <button type="button" className={styles.media} aria-label={t("openPhoto")} onClick={onImageClick}>
-                    <img src={imageUrl} alt={title} className={styles.image} />
+                    <img src={cover} alt={title} className={styles.image} />
                 </button>
             )}
 

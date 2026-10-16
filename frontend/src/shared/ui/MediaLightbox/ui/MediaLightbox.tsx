@@ -4,9 +4,13 @@ import { type MouseEvent, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useCloseOnBack } from "@/shared/lib/hooks";
+import { getImageUrl } from "@/shared/lib/image";
 import { IconButton } from "@/shared/ui/Buttons";
 
 import styles from "./MediaLightbox.module.scss";
+
+// Фото на весь экран: оригинал с телефона больше и не нужен
+const PHOTO_WIDTH = 1600;
 
 interface MediaItem {
     url: string;
@@ -56,7 +60,7 @@ const MediaLightbox = (props: MediaLightboxProps) => {
                 {current?.type === "video" ? (
                     <video key={current.url} src={current.url} className={styles.media} controls playsInline />
                 ) : (
-                    current && <img src={current.url} className={styles.media} alt="" />
+                    current && <img src={getImageUrl(current.url, PHOTO_WIDTH)} className={styles.media} alt="" />
                 )}
 
                 <IconButton

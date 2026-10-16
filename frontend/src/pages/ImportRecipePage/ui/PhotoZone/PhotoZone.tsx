@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { type ChangeEvent, type DragEvent, useState } from "react";
+import { type ChangeEvent, type DragEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import ImageIcon from "@/shared/assets/icons/icon-image.svg?react";
@@ -25,8 +25,13 @@ const PhotoZone = ({ value, onChange, disabled }: PhotoZoneProps) => {
     const { t } = useTranslation(["recipeForm", "common"]);
     const [isDragging, setIsDragging] = useState(false);
 
+    // Превью освобождаем при замене фото и при уходе со страницы, иначе файл висит в памяти до перезагрузки
+    useEffect(() => {
+        if (!value) return;
+        return () => URL.revokeObjectURL(value.url);
+    }, [value]);
+
     const change = (file: File | null) => {
-        if (value) URL.revokeObjectURL(value.url);
         onChange(file && { file, url: URL.createObjectURL(file) });
     };
 

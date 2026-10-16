@@ -5,11 +5,15 @@ import { useTranslation } from "react-i18next";
 import type { IngredientGroup, RecipeStep } from "@recipe/common";
 
 import { scaleAmount, useFormatQuantity } from "@/entities/recipe";
+import { getImageUrl } from "@/shared/lib/image";
 import { Checkbox } from "@/shared/ui/Checkbox";
 import { SegmentedControl, type SegmentedOption } from "@/shared/ui/SegmentedControl";
 import { Stepper } from "@/shared/ui/Stepper";
 
 import styles from "./RecipeContent.module.scss";
+
+// Ширина миниатюры фото шага с запасом на плотные экраны
+const STEP_PHOTO_WIDTH = 400;
 
 interface RecipeContentProps {
     ingredients: IngredientGroup[];
@@ -122,7 +126,7 @@ export function RecipeContent(props: RecipeContentProps) {
                                                 aria-label={t("openPhoto")}
                                                 onClick={() => onPhotoClick(step.images, photoIndex)}
                                             >
-                                                <img src={url} alt="" loading="lazy" />
+                                                <img src={getImageUrl(url, STEP_PHOTO_WIDTH)} alt="" loading="lazy" />
                                             </button>
                                         ))}
                                     </div>

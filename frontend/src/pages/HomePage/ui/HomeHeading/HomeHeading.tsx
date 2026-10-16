@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
-import logo from "@/shared/assets/images/logo.png";
+import logo from "@/shared/assets/images/logo.webp";
 import { AppMenuButton } from "@/widgets/AppMenu";
 
 import styles from "./HomeHeading.module.scss";
