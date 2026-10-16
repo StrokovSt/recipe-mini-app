@@ -4,8 +4,11 @@
     justify-content: space-between;
 
     .title {
-        font: var(--font-header-xl);
-        font-weight: var(--font-weight-bold);
+        display: flex;
+    }
+
+    .logo {
+        height: var(--size-home-logo);
     }
 
     .actions {

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
+import logo from "@/shared/assets/images/logo.png";
 import { AppMenuButton } from "@/widgets/AppMenu";
 
 import styles from "./HomeHeading.module.scss";
@@ -18,7 +19,9 @@ export function HomeHeading(props: HomeHeadingProps) {
 
     return (
         <div className={styles.heading}>
-            <h1 className={styles.title}>{t("appName")}</h1>
+            <h1 className={styles.title}>
+                <img className={styles.logo} src={logo} alt={t("appName")} />
+            </h1>
             <div className={styles.actions}>
                 {actions}
                 <AppMenuButton disabled={disabled} />
