@@ -1,7 +1,11 @@
+// Поле крупнее обычного и больше воздуха: в шторке оно единственное
 .form {
+    --size-field-height: var(--size-field-height-lg);
+
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-5);
+    padding-block: var(--space-2);
 
     .actions {
         display: grid;

@@ -1,8 +1,5 @@
 import clsx from "clsx";
-import { motion } from "motion/react";
-import { type ReactNode, useId } from "react";
-
-import { TRANSITION_BASE } from "@/shared/config/animation";
+import { type CSSProperties, type ReactNode } from "react";
 
 import styles from "./SegmentedControl.module.scss";
 
@@ -24,11 +21,14 @@ interface SegmentedControlProps<T extends string> {
 export const SegmentedControl = <T extends string>(props: SegmentedControlProps<T>) => {
     const { options, value, onChange, className } = props;
 
-    // Свой layoutId у каждого переключателя, чтобы плашки разных переключателей не перепрыгивали друг к другу
-    const layoutId = useId();
+    // Плашка одна и сдвигается на индекс выбранного варианта. Без layoutId: он мерил позицию на экране
+    // и на телефоне плашка прилетала снизу, когда под переключателем менялась высота контента
+    const index = options.findIndex((option) => option.id === value);
+    const pillStyle = { "--count": options.length, "--index": index } as CSSProperties;
 
     return (
         <div className={clsx(styles.wrap, className)} role="radiogroup">
+            {index >= 0 && <span className={styles.pill} style={pillStyle} />}
             {options.map((option) => {
                 const isActive = option.id === value;
 
@@ -41,7 +41,6 @@ export const SegmentedControl = <T extends string>(props: SegmentedControlProps<
                         className={clsx(styles.option, isActive && styles.optionActive)}
                         onClick={() => onChange(option.id)}
                     >
-                        {isActive && <motion.span layoutId={layoutId} className={styles.pill} transition={TRANSITION_BASE} />}
                         {option.icon}
                         {option.label}
                     </button>

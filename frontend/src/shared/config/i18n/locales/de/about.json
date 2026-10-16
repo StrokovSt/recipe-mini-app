@@ -1,5 +1,14 @@
 {
     "title": "Über die App",
     "subtitle": "Rezepte, die bei dir bleiben",
-    "placeholder": "Infos zur App folgen bald"
+    "description": "Deine persönliche Rezeptsammlung: aus Links, Fotos und eigenen Notizen.",
+    "version": "Version {{version}}",
+    "features": {
+        "title": "Was sie kann",
+        "description": "Das Wichtigste",
+        "import": "Erkennt Rezepte aus Links oder Fotos mit KI",
+        "sources": "Speichert Rezepte aus Pinterest und Telegram samt Video",
+        "nutrition": "Zeigt Kalorien und Nährwerte pro Portion"
+    },
+    "madeWith": "Mit Liebe zum Detail gemacht"
 }

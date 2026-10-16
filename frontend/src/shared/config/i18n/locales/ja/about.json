@@ -1,5 +1,14 @@
 {
     "title": "アプリについて",
-    "subtitle": "ずっと手元に残るレシピ",
-    "placeholder": "アプリ情報は近日公開予定です"
+    "subtitle": "いつもそばにあるレシピ",
+    "description": "リンク、写真、自分のメモから集めた、あなただけのレシピ集。",
+    "version": "バージョン {{version}}",
+    "features": {
+        "title": "できること",
+        "description": "主な機能",
+        "import": "AIでリンクや写真からレシピを読み取ります",
+        "sources": "PinterestやTelegramのレシピを動画ごと保存します",
+        "nutrition": "1人分のカロリーと栄養素を表示します"
+    },
+    "madeWith": "細部までこだわって作りました"
 }

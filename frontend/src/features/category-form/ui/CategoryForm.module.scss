@@ -1,11 +1,14 @@
 @use "@/shared/styles/states";
 
+// Поле и кнопка иконки крупнее обычного и больше воздуха, как в шторке тега
 .form {
-    --icon-picker-offset: var(--space-3);
+    --icon-picker-offset: var(--space-5);
+    --size-field-height: var(--size-field-height-lg);
 
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-5);
+    padding-block: var(--space-2);
 
     .row {
         display: flex;

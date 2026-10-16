@@ -1,6 +1,8 @@
 @use "@/shared/styles/states";
 
 .wrap {
+    position: relative;
+    isolation: isolate;
     display: flex;
     gap: var(--space-1);
     padding: var(--space-1);
@@ -10,9 +12,6 @@
 }
 
 .option {
-    // Свой слой: плашка (z-index -1) ложится под текст, но над подложкой
-    position: relative;
-    z-index: 0;
     display: flex;
     flex: 1;
     align-items: center;
@@ -55,11 +54,16 @@
     }
 }
 
-// Винная плашка под выбранным вариантом
+// Винная плашка под выбранным вариантом: ширина одного варианта, сдвиг на --index вариантов с учётом gap
 .pill {
     position: absolute;
-    inset: 0;
+    top: var(--space-1);
+    bottom: var(--space-1);
+    left: var(--space-1);
     z-index: -1;
-    border-radius: inherit;
+    width: calc((100% - var(--space-1) * (var(--count) + 1)) / var(--count));
+    border-radius: var(--radius-sm);
     background: var(--color-active);
+    transform: translateX(calc(var(--index) * (100% + var(--space-1))));
+    transition: transform var(--transition-base);
 }

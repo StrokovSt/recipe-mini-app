@@ -1,5 +1,14 @@
 {
     "title": "Hakkında",
-    "subtitle": "Seninle kalan tarifler",
-    "placeholder": "Uygulama bilgileri yakında burada"
+    "subtitle": "Sizinle kalan tarifler",
+    "description": "Kişisel tarif koleksiyonunuz: bağlantılardan, fotoğraflardan ve kendi notlarınızdan.",
+    "version": "Sürüm {{version}}",
+    "features": {
+        "title": "Neler yapabilir",
+        "description": "Kısaca",
+        "import": "Yapay zekâ ile bağlantıdan veya fotoğraftan tarifi tanır",
+        "sources": "Pinterest ve Telegram tariflerini videosuyla kaydeder",
+        "nutrition": "Porsiyon başına kalori ve besin değerlerini gösterir"
+    },
+    "madeWith": "Her ayrıntıya özen gösterilerek yapıldı"
 }

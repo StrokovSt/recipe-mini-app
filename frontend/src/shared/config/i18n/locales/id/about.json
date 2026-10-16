@@ -1,5 +1,14 @@
 {
-    "title": "Tentang aplikasi",
+    "title": "Tentang",
     "subtitle": "Resep yang selalu bersamamu",
-    "placeholder": "Info aplikasi akan segera hadir"
+    "description": "Koleksi resep pribadimu: dari tautan, foto, dan catatanmu sendiri.",
+    "version": "Versi {{version}}",
+    "features": {
+        "title": "Apa yang bisa dilakukan",
+        "description": "Intinya",
+        "import": "Mengenali resep dari tautan atau foto dengan AI",
+        "sources": "Menyimpan resep dari Pinterest dan Telegram beserta videonya",
+        "nutrition": "Menampilkan kalori dan nutrisi per porsi"
+    },
+    "madeWith": "Dibuat dengan perhatian pada setiap detail"
 }

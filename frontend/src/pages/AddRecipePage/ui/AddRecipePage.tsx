@@ -31,6 +31,8 @@ const AddRecipePage = () => {
     const { data: drafts = [] } = useDrafts();
     const { mutate: removeDraft } = useDeleteDraft();
     const [isAiSheetOpen, setIsAiSheetOpen] = useState(false);
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    // Не сбрасываем при закрытии, иначе заголовок окна меняется во время анимации
     const [deletingDraft, setDeletingDraft] = useState<DraftSummary | null>(null);
 
     const isAiLocked = user?.aiEnabled === false;
@@ -39,7 +41,12 @@ const AddRecipePage = () => {
     const isDraftLimitReached = drafts.length >= DRAFT_LIMIT;
     const isDisabled = isLimitReached || isDraftLimitReached;
 
-    const closeConfirm = () => setDeletingDraft(null);
+    const askDelete = (draft: DraftSummary) => {
+        setDeletingDraft(draft);
+        setIsConfirmOpen(true);
+    };
+
+    const closeConfirm = () => setIsConfirmOpen(false);
 
     const confirmDelete = () => {
         if (deletingDraft) removeDraft(deletingDraft.id);
@@ -129,7 +136,7 @@ const AddRecipePage = () => {
                                 key={draft.id}
                                 draft={draft}
                                 to={buildRoute.draft(draft.id)}
-                                onDelete={setDeletingDraft}
+                                onDelete={askDelete}
                             />
                         ))}
                     </div>
@@ -152,7 +159,7 @@ const AddRecipePage = () => {
             </BottomSheet>
 
             <ConfirmModal
-                isOpen={deletingDraft !== null}
+                isOpen={isConfirmOpen}
                 onClose={closeConfirm}
                 onConfirm={confirmDelete}
                 title={t("drafts.deleteTitle", { name: deletingDraft?.title || t("drafts.untitled") })}

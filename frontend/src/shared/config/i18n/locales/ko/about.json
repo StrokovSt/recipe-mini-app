@@ -1,5 +1,14 @@
 {
     "title": "앱 정보",
-    "subtitle": "언제나 곁에 남는 레시피",
-    "placeholder": "앱 정보가 곧 표시될 예정이에요"
+    "subtitle": "늘 곁에 있는 레시피",
+    "description": "링크, 사진, 나만의 메모로 모은 개인 레시피 모음.",
+    "version": "버전 {{version}}",
+    "features": {
+        "title": "할 수 있는 일",
+        "description": "핵심 기능",
+        "import": "AI로 링크나 사진에서 레시피를 인식합니다",
+        "sources": "Pinterest와 Telegram 레시피를 영상과 함께 저장합니다",
+        "nutrition": "1인분 칼로리와 영양소를 보여줍니다"
+    },
+    "madeWith": "모든 디테일에 정성을 담았습니다"
 }

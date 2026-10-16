@@ -60,6 +60,7 @@
 
     // Высота всех полей ввода (Input, Textarea)
     --size-field-height: 40px;
+    --size-field-height-lg: 52px; /* поле в шторках создания тега и категории */
 
     // Поиск и кнопка фильтров — высотой с кнопки шапки
     --size-search-height: var(--size-menu-button);
@@ -79,6 +80,8 @@
     --size-dropdown-icon: 18px;
     --size-segmented-icon: 16px;
     --size-section-mark: 28px;
+    --size-about-stamp: 64px; /* печать на странице «О приложении» */
+    --size-about-text: 280px; /* ширина описания под названием */
 
     // Круг с иконкой в карточке выбора способа добавления рецепта
     --size-option-icon: 52px;

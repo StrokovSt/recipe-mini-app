@@ -1,5 +1,14 @@
 {
-    "title": "关于应用",
-    "subtitle": "留在你身边的食谱",
-    "placeholder": "应用信息即将上线"
+    "title": "关于",
+    "subtitle": "与你相伴的食谱",
+    "description": "你的私人食谱合集：来自链接、照片和你自己的笔记。",
+    "version": "版本 {{version}}",
+    "features": {
+        "title": "功能",
+        "description": "核心功能",
+        "import": "借助 AI 从链接或照片识别食谱",
+        "sources": "保存 Pinterest 和 Telegram 的食谱及视频",
+        "nutrition": "显示每份的热量和营养素"
+    },
+    "madeWith": "用心打磨每一个细节"
 }

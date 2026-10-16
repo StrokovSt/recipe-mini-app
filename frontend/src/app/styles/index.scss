@@ -3,10 +3,10 @@
 
 :root {
     /* ─── Палитра бренда (из макета Figma) ─────────────── */
-    --color-brand-sand: #EDE0B8;
-    --color-brand-sand-light: #F5EDD5;
-    --color-brand-sand-mid: #E4D5A2;
-    --color-brand-sand-dark: #D4C49A;
+    --color-brand-sand: #F0E7CC;
+    --color-brand-sand-light: #FAF6EC;
+    --color-brand-sand-mid: #E9DDBA;
+    --color-brand-sand-dark: #DCCFAE;
     --color-brand-wine: #8B2020;
     --color-brand-wine-hover: #7A1C1C;
     --color-brand-vermillion: #C30;
@@ -15,12 +15,13 @@
     --color-brand-ink-muted: #6B5A3E;
     --color-brand-branch: #8B7355;
     --color-brand-sage: #6B7C5A;
-    --color-brand-border: #C0AA7A;
-    --color-brand-border-light: #D8C890;
+    --color-brand-border: #C9B78F;
+    --color-brand-border-light: #E1D5B0;
 
     /* ─── Семантические токены ─────────────────────────── */
     --color-app-bg: var(--color-brand-sand);
     --color-app-image-bg: rgb(236 218 198); /* средний цвет background_list.webp */
+    --color-app-image-veil: color-mix(in srgb, var(--color-app-bg) 50%, transparent); /* вуаль поверх фоновой картинки, приглушает её */
     --color-surface: var(--color-brand-sand-light);
     --color-surface-dim: var(--color-brand-sand-dark);
     --color-text: var(--color-brand-ink);
@@ -161,9 +162,23 @@ button, input, textarea, select {
     min-height: 100dvh;
     margin: 0 auto;
     overflow: hidden;
-    background: var(--color-app-image-bg) url("@/shared/assets/images/background_list.webp") center / cover no-repeat;
 
-    [data-theme="dark"] & {
-        background-image: url("@/shared/assets/images/background_list_dark.webp");
+    // Фон по размеру экрана, а не страницы: иначе cover пересчитывается при смене высоты контента и картинка скачет
+    &::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        max-width: var(--size-app-max-width);
+        margin: 0 auto;
+        background:
+            linear-gradient(var(--color-app-image-veil), var(--color-app-image-veil)),
+            var(--color-app-image-bg) url("@/shared/assets/images/background_list.webp") center / cover no-repeat;
+
+        [data-theme="dark"] & {
+            background-image:
+                linear-gradient(var(--color-app-image-veil), var(--color-app-image-veil)),
+                url("@/shared/assets/images/background_list_dark.webp");
+        }
     }
 }

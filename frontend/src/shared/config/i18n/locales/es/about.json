@@ -1,5 +1,14 @@
 {
     "title": "Acerca de",
     "subtitle": "Recetas que se quedan contigo",
-    "placeholder": "Pronto verás aquí información sobre la app"
+    "description": "Tu colección personal de recetas: desde enlaces, fotos y tus propias notas.",
+    "version": "Versión {{version}}",
+    "features": {
+        "title": "Qué puede hacer",
+        "description": "Lo esencial",
+        "import": "Reconoce una receta desde un enlace o una foto con IA",
+        "sources": "Guarda recetas de Pinterest y Telegram, con vídeo incluido",
+        "nutrition": "Muestra calorías y macros por porción"
+    },
+    "madeWith": "Hecha con atención a cada detalle"
 }

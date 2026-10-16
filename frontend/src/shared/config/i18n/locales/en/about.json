@@ -1,5 +1,14 @@
 {
     "title": "About",
     "subtitle": "Recipes that stay with you",
-    "placeholder": "App info is coming soon"
+    "description": "A personal recipe collection: from links, photos and your own notes.",
+    "version": "Version {{version}}",
+    "features": {
+        "title": "What it can do",
+        "description": "The essentials",
+        "import": "Recognizes a recipe from a link or photo with AI",
+        "sources": "Saves recipes from Pinterest and Telegram, video included",
+        "nutrition": "Shows calories and macros per serving"
+    },
+    "madeWith": "Made with attention to every detail"
 }

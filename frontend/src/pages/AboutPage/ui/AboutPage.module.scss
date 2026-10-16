@@ -1,3 +1,5 @@
+@use "@/shared/styles/card";
+
 .header {
     flex-direction: row;
     align-items: center;
@@ -22,8 +24,72 @@
     }
 }
 
-.placeholder {
-    color: var(--tg-hint);
-    font: var(--font-md);
-    text-align: center;
+.page {
+    // Карточка с названием по центру: печать, имя, описание, версия
+    .hero {
+        @include card.card;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-6) var(--space-4) var(--space-5);
+        text-align: center;
+    }
+
+    // Печать как у SectionCard, только крупнее
+    .stamp {
+        display: grid;
+        width: var(--size-about-stamp);
+        height: var(--size-about-stamp);
+        margin-bottom: var(--space-2);
+        border: 1px solid var(--color-active);
+        color: var(--color-active);
+        font: var(--font-header-md);
+        transform: rotate(-3deg);
+        place-items: center;
+    }
+
+    .name {
+        margin: 0;
+        font: var(--font-header-xl);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .description {
+        max-width: var(--size-about-text);
+        margin: 0;
+        color: var(--color-text-muted);
+        font: var(--font-sm);
+    }
+
+    .version {
+        margin-top: var(--space-2);
+        padding: var(--space-1) var(--space-3);
+        border: 1px solid var(--color-border-strong);
+        border-radius: var(--radius-lg);
+        color: var(--color-text-muted);
+        font: var(--font-ui-xs);
+    }
+
+    .features {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        margin: 0;
+        padding-left: var(--space-5);
+        font: var(--font-ui-sm);
+        list-style: disc;
+
+        li::marker {
+            color: var(--color-active);
+        }
+    }
+
+    .madeWith {
+        color: var(--color-text-muted);
+        font: var(--font-xs);
+        font-style: italic;
+        text-align: center;
+    }
 }
