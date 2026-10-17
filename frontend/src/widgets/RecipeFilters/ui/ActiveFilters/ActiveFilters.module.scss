@@ -1,0 +1,76 @@
+@use "@/shared/styles/states";
+
+// Раскрывается по высоте, поэтому отступ от поиска — внутри, у .list
+.collapse {
+    overflow: hidden;
+}
+
+.list {
+    // Уходящие чипсы на время анимации становятся absolute относительно ряда
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    max-width: 100%;
+    padding: var(--space-1) var(--space-2);
+
+    border: 1px solid var(--color-active);
+    border-radius: var(--radius-lg);
+    outline: none;
+    background: var(--color-active);
+
+    color: var(--color-active-text);
+    font: var(--font-ui-xs);
+    white-space: nowrap;
+
+    cursor: pointer;
+    transition: var(--transition-base);
+    transition-property: border-color, background, color;
+
+    @include states.hover {
+        border-color: var(--color-active-hover);
+        background: var(--color-active-hover);
+    }
+
+    &:focus-visible {
+        border-color: var(--color-accent);
+    }
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .icon {
+        flex-shrink: 0;
+        width: var(--size-filter-chip-icon);
+        height: var(--size-filter-chip-icon);
+    }
+
+    .remove {
+        flex-shrink: 0;
+        width: var(--size-filter-chip-remove);
+        height: var(--size-filter-chip-remove);
+        opacity: 0.8;
+    }
+
+    // «Сбросить всё» — контурный, чтобы не путать с фильтрами
+    &--clear {
+        border-color: var(--color-border);
+        background: transparent;
+        color: var(--tg-hint);
+
+        @include states.hover {
+            border-color: var(--color-active);
+            background: transparent;
+            color: var(--color-active);
+        }
+    }
+}

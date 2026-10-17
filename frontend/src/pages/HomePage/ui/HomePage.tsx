@@ -47,7 +47,7 @@ const HomePage = () => {
         if (params.toString() !== searchParams.toString()) setSearchParams(params, { replace: true });
     };
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-    const { data: recipes = [], isLoading } = useRecipes(filters);
+    const { data: recipes = [], isLoading, isPlaceholderData } = useRecipes(filters);
     const { data: categories = [] } = useCategories();
     const { data: tags = [] } = useTags();
 
@@ -97,7 +97,7 @@ const HomePage = () => {
                 isOpen={isFiltersOpen}
                 onOpenChange={setIsFiltersOpen}
             />
-            <RecipeList recipes={recipes} />
+            <RecipeList recipes={recipes} isDimmed={isPlaceholderData} />
         </PageWrapper>
     );
 };

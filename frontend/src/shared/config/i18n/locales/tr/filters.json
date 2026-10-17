@@ -7,5 +7,7 @@
     "apply": "Uygula",
     "search": "Ara",
     "categories": "Kategoriler",
-    "tags": "Etiketler"
+    "tags": "Etiketler",
+    "clearAll": "Tümünü temizle",
+    "removeFilter": "“{{name}}” filtresini kaldır"
 }

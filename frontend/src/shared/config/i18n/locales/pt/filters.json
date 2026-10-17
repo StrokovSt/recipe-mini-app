@@ -7,5 +7,7 @@
     "apply": "Aplicar",
     "search": "Buscar",
     "categories": "Categorias",
-    "tags": "Tags"
+    "tags": "Tags",
+    "clearAll": "Limpar tudo",
+    "removeFilter": "Remover filtro “{{name}}”"
 }

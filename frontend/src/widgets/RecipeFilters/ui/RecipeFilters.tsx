@@ -14,6 +14,7 @@ import { TagComponent } from '@/shared/ui/Tag';
 
 import { getActiveFilterCount } from '../lib/getActiveFilterCount';
 import { isSameFilters } from '../lib/isSameFilters';
+import ActiveFilters from './ActiveFilters/ActiveFilters';
 import { FilterButton } from './FilterButton/FilterButton';
 
 import styles from './RecipeFilters.module.scss';
@@ -116,6 +117,13 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                     disabled={disabled}
                 />
             </div>
+
+            <ActiveFilters
+                categories={categories}
+                tags={tags}
+                filters={filters}
+                setFilters={setFilters}
+            />
 
             <BottomSheet
                 isOpen={isOpen}

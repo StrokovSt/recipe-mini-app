@@ -7,5 +7,7 @@
     "apply": "Terapkan",
     "search": "Cari",
     "categories": "Kategori",
-    "tags": "Tag"
+    "tags": "Tag",
+    "clearAll": "Hapus semua",
+    "removeFilter": "Hapus filter “{{name}}”"
 }

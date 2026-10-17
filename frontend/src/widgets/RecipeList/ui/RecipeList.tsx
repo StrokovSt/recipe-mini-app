@@ -1,35 +1,71 @@
-import { AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { Recipe } from '@recipe/common';
 
+import { TRANSITION_BASE } from '@/shared/config/animation';
 import { Message } from '@/shared/ui/Message';
 
 import RecipeItem from './RecipeItem/RecipeItem';
 
 import styles from './RecipeList.module.scss'
 
+const HIDDEN = { opacity: 0 };
+const VISIBLE = { opacity: 1 };
+// Пока грузится новый список, прежний приглушён
+const DIMMED = { opacity: 0.6 };
+const CARD_HIDDEN = { opacity: 0, y: 8 };
+const CARD_VISIBLE = { opacity: 1, y: 0 };
+// Лесенка появления: шаг между карточками и сколько карточек ждут своей очереди, остальные идут вместе с последней
+const CARD_STAGGER = 0.04;
+const CARD_STAGGER_MAX = 8;
+
 interface RecipeListProps {
     recipes: Recipe[];
+    isDimmed?: boolean;
 }
 
 const RecipeList = (props: RecipeListProps) => {
-    const { recipes } = props;
+    const { recipes, isDimmed = false } = props;
     const { t } = useTranslation('home');
 
+    // Новый набор рецептов — новый список: прежний гаснет целиком, новый проявляется лесенкой
+    const listKey = recipes.map(({ id }) => id).join();
+
     return (
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
             {recipes.length === 0 ? (
-                <div key="empty">
+                <motion.div
+                    key="empty"
+                    initial={HIDDEN}
+                    animate={VISIBLE}
+                    exit={HIDDEN}
+                    transition={TRANSITION_BASE}
+                >
                     <Message illustration="idea" title={t('empty')} />
-                </div>
+                </motion.div>
             ) : (
-                <div key="list" className={styles.list}>
-                    {recipes.map((recipe) => (
-                        <RecipeItem key={recipe.id} recipe={recipe} />
+                <motion.div
+                    key={listKey}
+                    className={styles.list}
+                    animate={isDimmed ? DIMMED : VISIBLE}
+                    exit={HIDDEN}
+                    transition={TRANSITION_BASE}
+                >
+                    {recipes.map((recipe, index) => (
+                        // Обёртка нужна motion: у самой карточки свой CSS transition на transform
+                        <motion.div
+                            key={recipe.id}
+                            className={styles.item}
+                            initial={CARD_HIDDEN}
+                            animate={CARD_VISIBLE}
+                            transition={{ ...TRANSITION_BASE, delay: Math.min(index, CARD_STAGGER_MAX) * CARD_STAGGER }}
+                        >
+                            <RecipeItem recipe={recipe} />
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             )}
         </AnimatePresence>
     );

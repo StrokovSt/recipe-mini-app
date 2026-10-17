@@ -14,4 +14,10 @@
     );
     grid-auto-rows: 1fr;
     gap: var(--list-gap);
+
+    // Карточка растягивается на всю ячейку, как раньше без обёртки
+    .item {
+        display: grid;
+        min-width: 0;
+    }
 }

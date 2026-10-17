@@ -7,5 +7,7 @@
     "apply": "Застосувати",
     "search": "Пошук",
     "categories": "Категорії",
-    "tags": "Теги"
+    "tags": "Теги",
+    "clearAll": "Скинути все",
+    "removeFilter": "Прибрати фільтр «{{name}}»"
 }
