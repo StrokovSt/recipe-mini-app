@@ -1,10 +1,14 @@
 // Глобальный котик: один на всё приложение. Загрузки регистрируются задачами.
+import type { LoaderName } from "@/shared/ui/Spinner";
+
 // Котик виден, пока есть хоть одна задача, дождавшаяся своей задержки, и не меньше MIN_VISIBLE_MS
 export interface LoaderOptions {
     // Подпись под котиком, например «Распознаём рецепт…»
     label?: string;
     // Через сколько мс показать котика: быстрые загрузки проходят без него. 0 — сразу
     delay?: number;
+    // Какой котик, по умолчанию обычный
+    loader?: LoaderName;
 }
 
 export interface LoaderState {
@@ -12,10 +16,12 @@ export interface LoaderState {
     // Котик уже скрыт, но ещё гаснет: контент страницы ждёт, чтобы не просвечивать сквозь него
     isLeaving: boolean;
     label?: string;
+    loader?: LoaderName;
 }
 
 interface Task {
     label?: string;
+    loader?: LoaderName;
     isDue: boolean;
     isHandedOff: boolean;
     timer?: ReturnType<typeof setTimeout>;
@@ -33,7 +39,12 @@ let shownAt = 0;
 let hideTimer: ReturnType<typeof setTimeout> | undefined;
 
 function setState(next: LoaderState) {
-    if (next.isVisible === state.isVisible && next.isLeaving === state.isLeaving && next.label === state.label) return;
+    if (
+        next.isVisible === state.isVisible
+        && next.isLeaving === state.isLeaving
+        && next.label === state.label
+        && next.loader === state.loader
+    ) return;
     state = next;
     listeners.forEach((listener) => listener());
 }
@@ -45,24 +56,26 @@ function update() {
         clearTimeout(hideTimer);
         hideTimer = undefined;
         if (!state.isVisible) shownAt = Date.now();
-        // Подпись последней задачи, у которой она есть
-        const label = due.reverse().find((task) => task.label)?.label;
-        setState({ isVisible: true, isLeaving: false, label });
+        // Подпись и котик последней задачи, у которой они есть
+        const latest = due.reverse();
+        const label = latest.find((task) => task.label)?.label;
+        const loader = latest.find((task) => task.loader)?.loader;
+        setState({ isVisible: true, isLeaving: false, label, loader });
         return;
     }
 
     if (!state.isVisible || hideTimer) return;
 
-    // Подпись не сбрасываем, чтобы котик уходил с тем же текстом
+    // Подпись и котика не сбрасываем, чтобы он уходил тем же
     hideTimer = setTimeout(() => {
         hideTimer = undefined;
-        setState({ isVisible: false, isLeaving: true, label: state.label });
+        setState({ ...state, isVisible: false, isLeaving: true });
     }, Math.max(0, MIN_VISIBLE_MS - (Date.now() - shownAt)));
 }
 
-export function startLoading({ label, delay = DEFAULT_DELAY }: LoaderOptions = {}): number {
+export function startLoading({ label, delay = DEFAULT_DELAY, loader }: LoaderOptions = {}): number {
     const id = nextId++;
-    const task: Task = { label, isDue: delay === 0, isHandedOff: false };
+    const task: Task = { label, loader, isDue: delay === 0, isHandedOff: false };
 
     if (!task.isDue) {
         task.timer = setTimeout(() => {

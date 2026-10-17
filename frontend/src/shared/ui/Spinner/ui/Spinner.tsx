@@ -3,11 +3,10 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 
-import catPoster from "@/shared/assets/images/cat-loader-poster.webp";
 import SpinnerIcon from "@/shared/assets/spinner.svg?react";
-import catLoaderWebm from "@/shared/assets/video/cat-loader-480.webm";
-import catLoaderMp4 from "@/shared/assets/video/cat-loader-preview.mp4";
 import { TRANSITION_BASE } from "@/shared/config/animation";
+
+import { DEFAULT_LOADER, type LoaderName, LOADERS } from "../config/loaders";
 
 import styles from "./Spinner.module.scss";
 
@@ -20,6 +19,8 @@ interface SpinnerProps {
     // Через сколько мс показать котика. Быстрая загрузка проходит без него, иначе он мелькает на долю секунды.
     // 0 — сразу, например когда пользователь сам запустил долгое действие
     delay?: number;
+    // Какой котик: обычный или, например, с лупой при распознавании рецепта
+    loader?: LoaderName;
 }
 
 const DEFAULT_DELAY = 300;
@@ -29,7 +30,7 @@ const HIDDEN = { opacity: 0, scale: 0.94, filter: "blur(6px)" };
 const VISIBLE = { opacity: 1, scale: 1, filter: "blur(0px)" };
 
 export function Spinner(props: SpinnerProps) {
-    const { size = "md", label, delay = DEFAULT_DELAY } = props;
+    const { size = "md", label, delay = DEFAULT_DELAY, loader = DEFAULT_LOADER } = props;
     const { t } = useTranslation();
     const [isVisible, setIsVisible] = useState(delay === 0);
 
@@ -49,6 +50,8 @@ export function Spinner(props: SpinnerProps) {
 
     if (!isVisible) return null;
 
+    const { webm, mp4, poster } = LOADERS[loader];
+
     // Котик всегда строго по центру экрана. Портал в body, чтобы fixed
     // не зависел от transform/filter анимаций страницы
     return createPortal(
@@ -60,17 +63,19 @@ export function Spinner(props: SpinnerProps) {
             transition={TRANSITION_BASE}
         >
             <video
+                // Смена source у того же video не перезапускает его: при другом котике видео создаётся заново
+                key={loader}
                 className={styles[size]}
                 // Первый кадр, пока само видео не загрузилось
-                poster={catPoster}
+                poster={poster}
                 autoPlay
                 loop
                 muted
                 playsInline
                 aria-label={t("loading")}
             >
-                <source src={catLoaderWebm} type="video/webm" />
-                <source src={catLoaderMp4} type="video/mp4" />
+                <source src={webm} type="video/webm" />
+                <source src={mp4} type="video/mp4" />
             </video>
             {label && <p className={styles.label}>{label}</p>}
         </motion.div>,

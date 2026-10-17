@@ -7,11 +7,11 @@ import { finishLeaving, getLoaderState, subscribeLoader } from "../model/loaderS
 
 // Один котик на всё приложение. Страницы сообщают о загрузке через useLoader
 export function GlobalLoader() {
-    const { isVisible, label } = useSyncExternalStore(subscribeLoader, getLoaderState);
+    const { isVisible, label, loader } = useSyncExternalStore(subscribeLoader, getLoaderState);
 
     return (
         <AnimatePresence onExitComplete={finishLeaving}>
-            {isVisible && <Spinner key="loader" size="xl" label={label} delay={0} />}
+            {isVisible && <Spinner key="loader" size="xl" label={label} loader={loader} delay={0} />}
         </AnimatePresence>
     );
 }

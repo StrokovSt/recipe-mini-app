@@ -29,7 +29,7 @@ const NotFoundPage = () => {
                 </PageHeader>
             }
         >
-            <Message title={t("notFound.title")} text={t("notFound.text")} />
+            <Message illustration="error" title={t("notFound.title")} text={t("notFound.text")} />
         </PageWrapper>
     );
 };

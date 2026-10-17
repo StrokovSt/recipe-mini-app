@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
-import { type FormEvent, useId, useState } from "react";
+import { type FormEvent, useEffect, useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -20,6 +20,7 @@ import { Input } from "@/shared/ui/Input";
 import { PageFooter } from "@/shared/ui/PageFooter";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
+import { preloadLoader } from "@/shared/ui/Spinner";
 
 import PhotoZone, { type Photo } from "./PhotoZone/PhotoZone";
 
@@ -50,8 +51,12 @@ const ImportRecipePage = () => {
     } = useParseRecipeFromImage();
 
     const isParsing = isParsingUrl || isParsingImage || isOpening;
+    // Котик с лупой нужен только здесь: подгружаем его, пока пользователь вставляет ссылку
+    useEffect(() => {
+        preloadLoader("catMagnifier");
+    }, []);
     // Котик не уходит при переходе в форму: его погасит форма, когда отрисуется
-    useLoader(isParsing, { label: t("import.loading"), delay: 0, handOff: true });
+    useLoader(isParsing, { label: t("import.loading"), delay: 0, handOff: true, loader: "catMagnifier" });
     const error = urlParseError ?? imageParseError;
     const errorMessage = error
         ? getErrorMessage(error instanceof ApiError ? error.code : undefined, error.message)

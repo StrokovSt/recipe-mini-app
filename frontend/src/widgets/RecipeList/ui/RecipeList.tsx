@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 
 import type { Recipe } from '@recipe/common';
 
+import { Message } from '@/shared/ui/Message';
+
 import RecipeItem from './RecipeItem/RecipeItem';
 
 import styles from './RecipeList.module.scss'
@@ -19,8 +21,8 @@ const RecipeList = (props: RecipeListProps) => {
     return (
         <AnimatePresence mode="wait">
             {recipes.length === 0 ? (
-                <div key="empty" className={styles.empty}>
-                    {t('empty')}
+                <div key="empty">
+                    <Message illustration="idea" title={t('empty')} />
                 </div>
             ) : (
                 <div key="list" className={styles.list}>

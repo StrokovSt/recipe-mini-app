@@ -57,7 +57,7 @@ const RecipePage = () => {
     if (isError || !recipe) {
         return (
             <PageWrapper className={styles.page} header={<PageHeader className={styles.header}>{backButton}</PageHeader>}>
-                <Message title={t("notFound.title")} text={t("notFound.text")} />
+                <Message illustration="warning" title={t("notFound.title")} text={t("notFound.text")} />
             </PageWrapper>
         );
     }

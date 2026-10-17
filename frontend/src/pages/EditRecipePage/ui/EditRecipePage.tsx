@@ -21,7 +21,7 @@ const EditRecipePage = () => {
     if (!recipe) {
         return (
             <PageWrapper>
-                <Message title={t("recipe:notFound.title")} text={t("recipe:notFound.text")} />
+                <Message illustration="warning" title={t("recipe:notFound.title")} text={t("recipe:notFound.text")} />
             </PageWrapper>
         );
     }

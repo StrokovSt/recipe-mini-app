@@ -16,7 +16,7 @@ export function useIsLoaderShown() {
 
 // Показывает глобального котика, пока isLoading
 export function useLoader(isLoading: boolean, options: UseLoaderOptions = {}) {
-    const { label, delay, handOff = false } = options;
+    const { label, delay, loader, handOff = false } = options;
     const idRef = useRef<number | null>(null);
 
     useEffect(() => {
@@ -25,8 +25,8 @@ export function useLoader(isLoading: boolean, options: UseLoaderOptions = {}) {
             idRef.current = null;
         }
 
-        if (isLoading) idRef.current = startLoading({ label, delay });
-    }, [isLoading, label, delay]);
+        if (isLoading) idRef.current = startLoading({ label, delay, loader });
+    }, [isLoading, label, delay, loader]);
 
     useEffect(() => () => {
         const id = idRef.current;
