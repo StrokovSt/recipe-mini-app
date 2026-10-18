@@ -35,7 +35,7 @@ export function Footer() {
 
     const navItems: NavItem[] = [
         { to: AppRoute.Home, icon: <CollectionIcon />, label: t("collection") },
-        { to: AppRoute.AddRecipe, icon: <AddIcon />, label: "", isAdd: true },
+        { to: AppRoute.AddRecipe, icon: <AddIcon />, label: t("add"), isAdd: true },
         { to: AppRoute.Sections, icon: <SectionsIcon />, label: t("sections") },
     ];
 
@@ -68,6 +68,7 @@ export function Footer() {
                                     <NavLink
                                         key={item.to}
                                         to={item.to}
+                                        aria-label={item.label}
                                         className={({ isActive }) =>
                                             clsx(styles.navBtnAdd, isActive && styles.navBtnAddActive)
                                         }

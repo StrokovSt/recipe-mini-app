@@ -1,3 +1,18 @@
+// Заголовок только для экранного диктора: на экране его нет, но из дерева доступности он не пропадает
+.heading {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    clip-path: inset(50%);
+}
+
 .list {
     --list-gap: var(--space-3);
 

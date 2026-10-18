@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useLayoutEffect, useRef } from "react";
+import { useId, useLayoutEffect, useRef } from "react";
 
 import type { InputProps } from "../../lib/types";
 
@@ -7,6 +7,8 @@ import styles from "./Input.module.scss";
 
 export const Input = (props: InputProps) => {
     const { label, register, error, suffix, className, ...rest } = props;
+    // Связь подписи с полем: экранный диктор читает подпись как название поля, клик по ней ставит фокус
+    const id = useId();
     const measureRef = useRef<HTMLSpanElement>(null);
     const suffixRef = useRef<HTMLSpanElement>(null);
 
@@ -22,6 +24,7 @@ export const Input = (props: InputProps) => {
     return (
         <div className={clsx(styles.wrap, className)}>
             <input
+                id={id}
                 className={clsx(styles.input, {
                     [styles.inputNumber]: rest.type === "number",
                     [styles.inputError]: error,
@@ -32,7 +35,7 @@ export const Input = (props: InputProps) => {
                 {...rest}
                 {...register}
             />
-            <label className={styles.label}>{label}</label>
+            <label htmlFor={id} className={styles.label}>{label}</label>
             {suffix && hasValue && (
                 <>
                     <span ref={measureRef} className={styles.measure} aria-hidden>

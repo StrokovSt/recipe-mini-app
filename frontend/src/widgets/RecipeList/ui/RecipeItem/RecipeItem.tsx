@@ -7,22 +7,35 @@ import type { Recipe } from '@recipe/common';
 import { getCategoryIcon } from '@/entities/category';
 import ClockIcon from '@/shared/assets/icons/icon-clock.svg?react';
 import UserIcon from '@/shared/assets/icons/icon-user.svg?react';
-import { getImageUrl } from '@/shared/lib/image';
+import { getImageSrcSet, getImageUrl } from '@/shared/lib/image';
 import { IconLabel } from '@/shared/ui/IconLabel';
 import { TagList } from '@/shared/ui/Tag';
 
 import styles from './RecipeItem.module.scss';
 
 const MAX_VISIBLE_TAGS = 5;
-// Ширина обложки в карточке с запасом на плотные экраны
-const COVER_WIDTH = 600;
+// Копии обложки с шагом 50px, от 200 до 750: браузер берёт ближайшую к ширине карточки
+// с учётом плотности пикселей. Самая широкая карточка ~246px, на экране 3x это 738px
+const COVER_WIDTHS = Array.from({ length: 12 }, (_, index) => 200 + index * 50);
+// Точная ширина карточки на экране. В sizes нельзя подставить CSS-переменные, поэтому числа
+// повторяют сетку RecipeList: отступы страницы --space-page (20px, до 360px — 12px), промежуток
+// --space-3 (12px), карточка не уже --size-card-min-width (160px), до 4 колонок, приложение не шире 1024px
+const COVER_SIZES = [
+    '(min-width: 1024px) 237px',
+    '(min-width: 716px) calc((100vw - 76px) / 4)',
+    '(min-width: 544px) calc((100vw - 64px) / 3)',
+    '(min-width: 361px) calc((100vw - 52px) / 2)',
+    'calc((100vw - 36px) / 2)',
+].join(', ');
 
 interface RecipeItemProps {
     recipe: Recipe;
+    isEager?: boolean;
+    isPriority?: boolean;
 }
 
 const RecipeItem = (props: RecipeItemProps) => {
-    const { recipe } = props;
+    const { recipe, isEager = false, isPriority = false } = props;
     const { t } = useTranslation(['home', 'common']);
     const { id, title, description, steps, prepTime, cookTime, servings, source, media, tags, category } = recipe;
 
@@ -35,7 +48,15 @@ const RecipeItem = (props: RecipeItemProps) => {
         <Link to={`/recipe/${id}`} className={styles.card}>
             <div className={styles.media}>
                 {cover ? (
-                    <img src={getImageUrl(cover.url, COVER_WIDTH)} alt={title} loading="lazy" className={styles.image} />
+                    <img
+                        src={getImageUrl(cover.url, COVER_WIDTHS[COVER_WIDTHS.length - 1])}
+                        srcSet={getImageSrcSet(cover.url, COVER_WIDTHS)}
+                        sizes={COVER_SIZES}
+                        alt={title}
+                        loading={isEager ? 'eager' : 'lazy'}
+                        fetchPriority={isPriority ? 'high' : undefined}
+                        className={styles.image}
+                    />
                 ) : (
                     <PlaceholderIcon className={styles.placeholder} aria-hidden />
                 )}

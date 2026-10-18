@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 
 import type { TextareaProps } from "../../lib/types";
 
@@ -13,6 +13,8 @@ const fitHeight = (el: HTMLTextAreaElement) => {
 
 export const Textarea = (props: TextareaProps) => {
     const { label, register, error, className, ...rest } = props;
+    // Связь подписи с полем: экранный диктор читает подпись как название поля, клик по ней ставит фокус
+    const id = useId();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
@@ -38,6 +40,7 @@ export const Textarea = (props: TextareaProps) => {
         <div className={clsx(styles.wrap, className)}>
             <textarea
                 ref={textareaRef}
+                id={id}
                 className={clsx(styles.textarea, { [styles.textareaError]: error })}
                 placeholder=" "
                 rows={1}
@@ -46,7 +49,7 @@ export const Textarea = (props: TextareaProps) => {
                 {...rest}
                 {...register}
             />
-            <label className={styles.label}>{label}</label>
+            <label htmlFor={id} className={styles.label}>{label}</label>
             {error && <span className={styles.error}>{error}</span>}
         </div>
     );

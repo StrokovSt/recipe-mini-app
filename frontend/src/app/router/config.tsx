@@ -29,8 +29,14 @@ const PAGES = {
     NotFoundPage: lazyPage(() => import("@/pages/NotFoundPage").then(m => ({ default: m.NotFoundPage }))),
 };
 
-// Подгружаем код всех страниц в фоне после старта, чтобы переходы были без ожидания
-export const preloadPages = () => Object.values(PAGES).forEach(({ preload }) => preload());
+let isPreloaded = false;
+
+// Подгружаем код всех страниц в фоне один раз, чтобы переходы были без ожидания
+export const preloadPages = () => {
+    if (isPreloaded) return;
+    isPreloaded = true;
+    Object.values(PAGES).forEach(({ preload }) => preload());
+};
 
 export const routeConfig: RouteConfig[] = [
     {

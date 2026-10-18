@@ -3,11 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mirabelle</title>
+    <script>
+      // Тёмная тема до старта приложения, чтобы заставка не мигала светлой. Полная логика в shared/lib/theme
+      if (localStorage.getItem("theme") === "dark") document.documentElement.setAttribute("data-theme", "dark");
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Заставка до старта приложения: React заменит её своим содержимым -->
+      <p class="splash">Mirabelle</p>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

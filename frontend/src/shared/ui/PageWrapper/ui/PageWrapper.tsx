@@ -1,9 +1,11 @@
 import clsx from "clsx";
 import { motion } from "motion/react";
-import { type ReactNode, useEffect } from "react";
+import { type ReactNode, useEffect, useRef } from "react";
 
 import { TRANSITION_PAGE } from "@/shared/config/animation";
 import { finishHandedOffLoading, useIsLoaderShown } from "@/shared/ui/GlobalLoader";
+
+import { markFirstPageShown } from "../model/firstPageShown";
 
 import styles from "./PageWrapper.module.scss";
 
@@ -21,16 +23,25 @@ const VISIBLE = { opacity: 1, y: 0, filter: "blur(0px)", transitionEnd: { filter
 export function PageWrapper(props: PageWrapperProps) {
     const { children, header, className } = props;
     const isLoaderShown = useIsLoaderShown();
+    const contentRef = useRef<HTMLDivElement>(null);
 
     // Страница отрисовалась: котик, переданный с прошлой страницы (например, после распознавания), уходит
     useEffect(() => {
         finishHandedOffLoading();
     }, []);
 
+    // Котик ушёл и картинки контента загрузились: даём знать, что можно грузить второстепенное
+    useEffect(() => {
+        if (isLoaderShown || !contentRef.current) return;
+        const images = [...contentRef.current.querySelectorAll("img")].filter((image) => image.loading !== "lazy");
+        Promise.all(images.map((image) => image.decode().catch(() => undefined))).then(markFirstPageShown);
+    }, [isLoaderShown]);
+
     return (
         <main className={clsx(styles.wrapper, className)}>
             {header}
             <motion.div
+                ref={contentRef}
                 className={styles.content}
                 initial={HIDDEN}
                 animate={isLoaderShown ? HIDDEN : VISIBLE}

@@ -2,13 +2,29 @@ import { AnimatePresence } from "motion/react";
 import { Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
+import { firstPageShown } from "@/shared/ui/PageWrapper";
+
 import { preloadPages, routeConfig } from "./config";
+
+// Первые действия человека на странице: после них можно качать код остальных страниц
+const USER_EVENTS = ["pointerdown", "keydown", "scroll", "wheel"];
+
+const preloadOnFirstAction = () => {
+    const start = () => {
+        USER_EVENTS.forEach((event) => window.removeEventListener(event, start, true));
+        preloadPages();
+    };
+    USER_EVENTS.forEach((event) => window.addEventListener(event, start, { capture: true, passive: true }));
+};
 
 export function AppRouter() {
     const location = useLocation();
 
+    // Код остальных страниц качаем в фоне, когда первая страница уже показана и человек начал ею пользоваться
+    // (коснулся, прокрутил, нажал клавишу). Так он не отбирает сеть у данных и обложек, а Lighthouse
+    // не видит лишних цепочек запросов при загрузке
     useEffect(() => {
-        preloadPages();
+        firstPageShown.then(preloadOnFirstAction);
     }, []);
 
     // fallback не нужен: шапка общая и стоит на месте, а котик показывается в самих страницах

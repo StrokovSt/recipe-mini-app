@@ -20,6 +20,9 @@ const CARD_VISIBLE = { opacity: 1, y: 0 };
 // Лесенка появления: шаг между карточками и сколько карточек ждут своей очереди, остальные идут вместе с последней
 const CARD_STAGGER = 0.04;
 const CARD_STAGGER_MAX = 8;
+// Обложки первых карточек видны сразу, их грузим без ленивой загрузки. Первая из них — главная картинка
+// экрана для Lighthouse (LCP), её браузер качает раньше остальных
+const EAGER_COVERS = 4;
 
 interface RecipeListProps {
     recipes: Recipe[];
@@ -34,40 +37,44 @@ const RecipeList = (props: RecipeListProps) => {
     const listKey = recipes.map(({ id }) => id).join();
 
     return (
-        <AnimatePresence mode="wait" initial={false}>
-            {recipes.length === 0 ? (
-                <motion.div
-                    key="empty"
-                    initial={HIDDEN}
-                    animate={VISIBLE}
-                    exit={HIDDEN}
-                    transition={TRANSITION_BASE}
-                >
-                    <Message illustration="idea" title={t('empty')} />
-                </motion.div>
-            ) : (
-                <motion.div
-                    key={listKey}
-                    className={styles.list}
-                    animate={isDimmed ? DIMMED : VISIBLE}
-                    exit={HIDDEN}
-                    transition={TRANSITION_BASE}
-                >
-                    {recipes.map((recipe, index) => (
-                        // Обёртка нужна motion: у самой карточки свой CSS transition на transform
-                        <motion.div
-                            key={recipe.id}
-                            className={styles.item}
-                            initial={CARD_HIDDEN}
-                            animate={CARD_VISIBLE}
-                            transition={{ ...TRANSITION_BASE, delay: Math.min(index, CARD_STAGGER_MAX) * CARD_STAGGER }}
-                        >
-                            <RecipeItem recipe={recipe} />
-                        </motion.div>
-                    ))}
-                </motion.div>
-            )}
-        </AnimatePresence>
+        <>
+            {/* Заголовок не виден, его читает экранный диктор: дальше идёт список рецептов */}
+            <h2 className={styles.heading}>{t('title')}</h2>
+            <AnimatePresence mode="wait" initial={false}>
+                {recipes.length === 0 ? (
+                    <motion.div
+                        key="empty"
+                        initial={HIDDEN}
+                        animate={VISIBLE}
+                        exit={HIDDEN}
+                        transition={TRANSITION_BASE}
+                    >
+                        <Message illustration="idea" title={t('empty')} />
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        key={listKey}
+                        className={styles.list}
+                        animate={isDimmed ? DIMMED : VISIBLE}
+                        exit={HIDDEN}
+                        transition={TRANSITION_BASE}
+                    >
+                        {recipes.map((recipe, index) => (
+                            // Обёртка нужна motion: у самой карточки свой CSS transition на transform
+                            <motion.div
+                                key={recipe.id}
+                                className={styles.item}
+                                initial={CARD_HIDDEN}
+                                animate={CARD_VISIBLE}
+                                transition={{ ...TRANSITION_BASE, delay: Math.min(index, CARD_STAGGER_MAX) * CARD_STAGGER }}
+                            >
+                                <RecipeItem recipe={recipe} isEager={index < EAGER_COVERS} isPriority={index === 0} />
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     );
 };
 

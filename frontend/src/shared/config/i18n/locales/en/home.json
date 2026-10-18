@@ -1,5 +1,6 @@
 {
     "empty": "No recipes yet",
     "servings_one": "{{count}} serving",
-    "servings_other": "{{count}} servings"
+    "servings_other": "{{count}} servings",
+    "title": "Recipes"
 }

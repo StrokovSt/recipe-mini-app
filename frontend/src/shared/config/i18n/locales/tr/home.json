@@ -1,4 +1,5 @@
 {
     "empty": "Henüz tarif yok",
-    "servings": "{{count}} porsiyon"
+    "servings": "{{count}} porsiyon",
+    "title": "Tarifler"
 }

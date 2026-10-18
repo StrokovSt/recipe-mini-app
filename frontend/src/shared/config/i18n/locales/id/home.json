@@ -1,4 +1,5 @@
 {
     "empty": "Belum ada resep",
-    "servings": "{{count}} porsi"
+    "servings": "{{count}} porsi",
+    "title": "Resep"
 }

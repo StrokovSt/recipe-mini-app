@@ -1,4 +1,5 @@
 {
     "empty": "まだレシピがありません",
-    "servings": "{{count}}人分"
+    "servings": "{{count}}人分",
+    "title": "レシピ"
 }

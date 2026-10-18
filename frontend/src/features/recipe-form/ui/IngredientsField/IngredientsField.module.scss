@@ -6,8 +6,6 @@ $row-split-width: 340px;
 
 // Группа — рамка внутри карточки секции, поля в ней на цвете фона приложения
 .group {
-    --field-font-size: var(--font-size-field-sm);
-
     @include compact.block;
 
     container-type: inline-size;

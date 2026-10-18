@@ -13,7 +13,7 @@
     --color-brand-ink: #2C1A0E;
     --color-brand-ink-soft: #4A3728;
     --color-brand-ink-muted: #6B5A3E;
-    --color-brand-branch: #8B7355;
+    --color-brand-branch: #7A6347;
     --color-brand-sage: #6B7C5A;
     --color-brand-border: #C9B78F;
     --color-brand-border-light: #E1D5B0;
@@ -180,5 +180,17 @@ button, input, textarea, select {
                 linear-gradient(var(--color-app-image-veil), var(--color-app-image-veil)),
                 url("@/shared/assets/images/background_list_dark.webp");
         }
+    }
+
+    // Заставка из index.html: видна, пока приложение не стартовало
+    .splash {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        color: var(--color-active);
+        font: var(--font-2xl);
     }
 }

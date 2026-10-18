@@ -1,4 +1,5 @@
 {
     "empty": "Рецептів поки немає",
-    "servings": "{{count}} порц."
+    "servings": "{{count}} порц.",
+    "title": "Рецепти"
 }
