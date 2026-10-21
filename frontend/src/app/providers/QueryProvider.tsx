@@ -22,6 +22,8 @@ const queryClient = new QueryClient({
             },
             refetchOnWindowFocus: false,
             refetchOnReconnect: true,
+            // Без сети всё равно делаем запрос: service worker отдаст сохранённый ответ
+            networkMode: "offlineFirst",
         },
         mutations: {
             retry: 0,

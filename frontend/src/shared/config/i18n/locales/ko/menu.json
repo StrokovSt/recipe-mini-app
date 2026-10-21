@@ -13,5 +13,11 @@
     "about": {
         "title": "앱 정보",
         "hint": "도움말 및 피드백"
+    },
+    "install": {
+        "title": "앱 설치",
+        "hint": "홈 화면에 Mirabelle 추가",
+        "iosTitle": "iPhone에 설치",
+        "iosText": "Safari에서 공유를 누른 다음 '홈 화면에 추가'를 선택하세요."
     }
 }

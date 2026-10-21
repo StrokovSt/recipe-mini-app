@@ -13,5 +13,11 @@
     "about": {
         "title": "アプリについて",
         "hint": "ヘルプとフィードバック"
+    },
+    "install": {
+        "title": "アプリをインストール",
+        "hint": "ホーム画面にMirabelleを追加",
+        "iosTitle": "iPhoneにインストール",
+        "iosText": "Safariで共有ボタンをタップし、「ホーム画面に追加」を選んでください。"
     }
 }

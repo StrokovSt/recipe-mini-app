@@ -13,5 +13,11 @@
     "about": {
         "title": "Tentang aplikasi",
         "hint": "Bantuan dan masukan"
+    },
+    "install": {
+        "title": "Pasang aplikasi",
+        "hint": "Mirabelle di layar utama",
+        "iosTitle": "Pasang di iPhone",
+        "iosText": "Di Safari, ketuk Bagikan, lalu «Tambahkan ke Layar Utama»."
     }
 }

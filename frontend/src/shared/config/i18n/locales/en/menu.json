@@ -13,5 +13,11 @@
     "about": {
         "title": "About",
         "hint": "Help and feedback"
+    },
+    "install": {
+        "title": "Install app",
+        "hint": "Mirabelle on your home screen",
+        "iosTitle": "Install on iPhone",
+        "iosText": "In Safari, tap Share, then Add to Home Screen."
     }
 }

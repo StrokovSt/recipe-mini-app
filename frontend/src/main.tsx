@@ -5,6 +5,7 @@ import App from './app/App'
 import { initAnimations } from './shared/lib/animations'
 import { loadFonts } from './shared/lib/fonts'
 import { initI18n } from './shared/lib/i18n'
+import { initInstallPrompt } from './shared/lib/pwa'
 import { initTheme } from './shared/lib/theme'
 import { preloadLoader } from './shared/ui/Spinner'
 
@@ -18,6 +19,7 @@ import './app/styles/index.scss'
 
 initTheme()
 initAnimations()
+initInstallPrompt()
 
 // Рендерим после загрузки словарей выбранного языка, шрифтов и постера котика,
 // чтобы не мелькали ключи, текст не перескакивал и котик был виден с первой загрузки

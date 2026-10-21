@@ -13,5 +13,11 @@
     "about": {
         "title": "Hakkında",
         "hint": "Yardım ve geri bildirim"
+    },
+    "install": {
+        "title": "Uygulamayı yükle",
+        "hint": "Mirabelle ana ekranında",
+        "iosTitle": "iPhone’a yükle",
+        "iosText": "Safari’de Paylaş’a, ardından «Ana Ekrana Ekle»ye dokunun."
     }
 }

@@ -13,5 +13,11 @@
     "about": {
         "title": "关于应用",
         "hint": "帮助与反馈"
+    },
+    "install": {
+        "title": "安装应用",
+        "hint": "将 Mirabelle 添加到主屏幕",
+        "iosTitle": "在 iPhone 上安装",
+        "iosText": "在 Safari 中点按“分享”，然后选择“添加到主屏幕”。"
     }
 }

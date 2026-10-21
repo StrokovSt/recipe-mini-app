@@ -13,5 +13,11 @@
     "about": {
         "title": "Sobre",
         "hint": "Ajuda e feedback"
+    },
+    "install": {
+        "title": "Instalar app",
+        "hint": "Mirabelle na tela inicial",
+        "iosTitle": "Instalar no iPhone",
+        "iosText": "No Safari, toque em Compartilhar e depois em «Adicionar à Tela de Início»."
     }
 }

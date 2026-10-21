@@ -13,5 +13,11 @@
     "about": {
         "title": "Informazioni",
         "hint": "Aiuto e feedback"
+    },
+    "install": {
+        "title": "Installa l’app",
+        "hint": "Mirabelle nella schermata Home",
+        "iosTitle": "Installa su iPhone",
+        "iosText": "In Safari tocca Condividi, poi «Aggiungi alla schermata Home»."
     }
 }
