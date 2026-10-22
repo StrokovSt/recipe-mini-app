@@ -1,0 +1,1 @@
+export { impactHaptic } from "./impactHaptic";

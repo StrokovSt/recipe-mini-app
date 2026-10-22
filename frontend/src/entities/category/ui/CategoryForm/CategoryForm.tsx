@@ -3,17 +3,12 @@ import { useTranslation } from 'react-i18next';
 
 import type { Category } from '@recipe/common';
 
-import {
-    CATEGORY_ICON_LIST,
-    type CategoryIconName,
-    getCategoryIcon,
-    useCategories,
-    useCreateCategory,
-    useUpdateCategory,
-} from '@/entities/category';
 import { OutlineButton, RegularButton } from '@/shared/ui/Buttons';
 import { IconPicker } from '@/shared/ui/IconPicker';
 import { Input } from '@/shared/ui/Input';
+
+import { CATEGORY_ICON_LIST, type CategoryIconName, getCategoryIcon } from '../../config/categoryIcons';
+import { useCategories, useCreateCategory, useUpdateCategory } from '../../hooks';
 
 import styles from './CategoryForm.module.scss';
 
@@ -21,7 +16,8 @@ const DEFAULT_ICON_NAME: CategoryIconName = 'Cutlery';
 
 interface CategoryFormProps {
     category?: Category | null;
-    onSuccess: () => void;
+    // Получает созданную или изменённую категорию
+    onSuccess: (category: Category) => void;
     onCancel: () => void;
 }
 
@@ -59,6 +55,9 @@ const CategoryForm = (props: CategoryFormProps) => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        // Форма может стоять в шторке внутри формы рецепта: React поднимает submit через портал,
+        // и без этого вместе с категорией сохранился бы рецепт
+        event.stopPropagation();
         if (!trimmedName || isDuplicate) return;
 
         if (category) {

@@ -13,6 +13,13 @@
     clip-path: inset(50%);
 }
 
+// Пустой список: сообщение с котом занимает всё свободное место под поиском
+.empty {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
 .list {
     --list-gap: var(--space-3);
 

@@ -23,7 +23,7 @@ const LeaveSheet = (props: LeaveSheetProps) => {
     const { isOpen, onClose, title, text, actions } = props;
 
     return (
-        <BottomSheet isOpen={isOpen} onClose={onClose} title={title}>
+        <BottomSheet isOpen={isOpen} onClose={onClose} title={title} closeOnBack={false}>
             <p className={styles.text}>{text}</p>
             <div className={styles.actions}>
                 {actions.map(({ label, onClick, variant }) =>

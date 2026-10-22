@@ -3,15 +3,17 @@ import { useTranslation } from 'react-i18next';
 
 import type { Tag } from '@recipe/common';
 
-import { useCreateTag, useRenameTag, useTags } from '@/entities/tag';
 import { OutlineButton, RegularButton } from '@/shared/ui/Buttons';
 import { Input } from '@/shared/ui/Input';
+
+import { useCreateTag, useRenameTag, useTags } from '../../hooks';
 
 import styles from './TagForm.module.scss';
 
 interface TagFormProps {
     tag?: Tag | null;
-    onSuccess: () => void;
+    // Получает созданный или изменённый тег
+    onSuccess: (tag: Tag) => void;
     onCancel: () => void;
 }
 
@@ -39,6 +41,9 @@ const TagForm = (props: TagFormProps) => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        // Форма может стоять в шторке внутри формы рецепта: React поднимает submit через портал,
+        // и без этого вместе с категорией сохранился бы рецепт
+        event.stopPropagation();
         if (!trimmedName || isDuplicate) return;
 
         if (tag) {

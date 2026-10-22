@@ -4,8 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { Tag } from "@recipe/common";
 
 import { buildRoute } from "@/app/router/routes";
-import { TagItem, useDeleteTag, useTags } from "@/entities/tag";
-import { TagForm } from "@/features/tag-form";
+import { TagForm, TagItem, useDeleteTag, useTags } from "@/entities/tag";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 import { AddTile } from "@/shared/ui/Buttons";
 import { ConfirmModal } from "@/shared/ui/Modal";
@@ -53,6 +52,7 @@ export function TagsTab() {
     return (
         <>
             <div className={styles.list}>
+                <AddTile label={t("tags.add")} onClick={openCreate} />
                 {tags.map((tag) => (
                     <TagItem
                         key={tag.id}
@@ -62,7 +62,6 @@ export function TagsTab() {
                         onDelete={askDelete}
                     />
                 ))}
-                <AddTile label={t("tags.add")} onClick={openCreate} />
             </div>
 
             <BottomSheet

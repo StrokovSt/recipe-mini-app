@@ -17,9 +17,7 @@
             "pickIcon": "Simge seç",
             "duplicate": "Bu kategori zaten var",
             "saveFailed": "Kategori kaydedilemedi"
-        },
-        "total_one": "{{count}} kategori",
-        "total_other": "{{count}} kategori"
+        }
     },
     "tags": {
         "title": "Etiketlerim",
@@ -33,9 +31,7 @@
             "name": "Etiket adı",
             "duplicate": "Bu etiket zaten var",
             "saveFailed": "Etiket kaydedilemedi"
-        },
-        "total_one": "{{count}} etiket",
-        "total_other": "{{count}} etiket"
+        }
     },
     "icons": {
         "Soup": "Çorba",

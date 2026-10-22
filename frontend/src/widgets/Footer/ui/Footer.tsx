@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
-import { type ReactNode } from "react";
+import { type MouseEvent, type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { matchPath, NavLink, useLocation } from "react-router-dom";
 
@@ -9,7 +9,12 @@ import AddIcon from "@/shared/assets/icons/icon-add.svg?react";
 import CollectionIcon from "@/shared/assets/icons/icon-collection.svg?react";
 import SectionsIcon from "@/shared/assets/icons/icon-sections.svg?react";
 import { TRANSITION_PAGE } from "@/shared/config/animation";
+import { getAnimations } from "@/shared/lib/animations";
+import { impactHaptic } from "@/shared/lib/haptic";
 import { useSetPageFooterSlot } from "@/shared/ui/PageFooter";
+
+import { type Burst, createPetals } from "./PetalBurst/createPetals";
+import { PetalBurst } from "./PetalBurst/PetalBurst";
 
 import styles from "./Footer.module.scss";
 
@@ -18,6 +23,22 @@ const ACTION_ON: AppRoute[] = [AppRoute.CreateRecipe, AppRoute.Draft, AppRoute.I
 
 const HIDDEN = { opacity: 0 };
 const VISIBLE = { opacity: 1 };
+
+// Центр кнопки «+» внутри приложения: оттуда разлетаются лепестки
+const getBurst = (button: HTMLElement): Burst | null => {
+    const root = document.getElementById("root");
+    if (!root) return null;
+
+    const rect = button.getBoundingClientRect();
+    const rootRect = root.getBoundingClientRect();
+
+    return {
+        id: Date.now(),
+        x: rect.left + rect.width / 2 - rootRect.left,
+        y: rect.top + rect.height / 2 - rootRect.top,
+        petals: createPetals(),
+    };
+};
 
 interface NavItem {
     to: AppRoute;
@@ -32,6 +53,14 @@ export function Footer() {
     const setSlot = useSetPageFooterSlot();
 
     const hasAction = ACTION_ON.some((path) => matchPath(path, pathname));
+
+    const [burst, setBurst] = useState<Burst | null>(null);
+
+    // Нажали «+»: вибрация и лепестки, переход обычный
+    const handleAddClick = (event: MouseEvent<HTMLAnchorElement>) => {
+        impactHaptic();
+        if (getAnimations()) setBurst(getBurst(event.currentTarget));
+    };
 
     const navItems: NavItem[] = [
         { to: AppRoute.Home, icon: <CollectionIcon />, label: t("collection") },
@@ -69,6 +98,7 @@ export function Footer() {
                                         key={item.to}
                                         to={item.to}
                                         aria-label={item.label}
+                                        onClick={handleAddClick}
                                         className={({ isActive }) =>
                                             clsx(styles.navBtnAdd, isActive && styles.navBtnAddActive)
                                         }
@@ -92,6 +122,8 @@ export function Footer() {
                     )}
                 </AnimatePresence>
             </div>
+
+            <PetalBurst burst={burst} onDone={() => setBurst(null)} />
         </motion.footer>
     );
 }

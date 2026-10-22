@@ -5,6 +5,7 @@ import { type PointerEvent, type ReactNode, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import { TRANSITION_BASE } from "@/shared/config/animation";
+import { useCloseOnBack } from "@/shared/lib/hooks";
 import { IconButton } from "@/shared/ui/Buttons";
 
 import styles from "./BottomSheet.module.scss";
@@ -23,12 +24,15 @@ interface BottomSheetProps {
     // Своё содержимое шапки вместо заголовка и подписи
     header?: ReactNode;
     footer?: ReactNode;
+    // Системная «Назад» закрывает шторку. Выключается, где «Назад» уже занята (шторка подтверждения ухода)
+    closeOnBack?: boolean;
     className?: string;
 }
 
 export const BottomSheet = (props: BottomSheetProps) => {
-    const { isOpen, onClose, children, title, subtitle, header, footer, className } = props;
+    const { isOpen, onClose, children, title, subtitle, header, footer, closeOnBack = true, className } = props;
     const { t } = useTranslation();
+    const close = useCloseOnBack(isOpen && closeOnBack, onClose);
 
     const y = useMotionValue(0);
     const startYRef = useRef<number | null>(null);
@@ -54,12 +58,12 @@ export const BottomSheet = (props: BottomSheetProps) => {
         startYRef.current = null;
 
         // При закрытии оставляем шторку где отпустили: дальше вниз её уводит переход закрытия
-        if (y.get() > CLOSE_DISTANCE || y.getVelocity() > CLOSE_VELOCITY) onClose();
+        if (y.get() > CLOSE_DISTANCE || y.getVelocity() > CLOSE_VELOCITY) close();
         else animate(y, 0, TRANSITION_BASE);
     };
 
     return (
-        <Dialog open={isOpen} onClose={onClose} className={styles.root}>
+        <Dialog open={isOpen} onClose={close} className={styles.root}>
             <DialogBackdrop transition className={styles.backdrop} />
 
             <motion.div className={styles.container} style={{ y }}>
@@ -77,7 +81,7 @@ export const BottomSheet = (props: BottomSheetProps) => {
                         icon="close"
                         round
                         className={styles.close}
-                        onClick={onClose}
+                        onClick={close}
                         aria-label={t("close")}
                     />
 

@@ -3,3 +3,11 @@
     grid-template-columns: repeat(auto-fill, minmax(var(--size-category-chip-min-width), 1fr));
     gap: var(--space-2);
 }
+
+// «+ Новая» размером с плитку категории
+.add {
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-2);
+    font: var(--font-ui-xs);
+    font-weight: var(--font-weight-bold);
+}

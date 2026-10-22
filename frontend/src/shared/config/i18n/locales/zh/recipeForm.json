@@ -45,6 +45,8 @@
         "title": "标题",
         "description": "简介",
         "category": "分类",
+        "newCategory": "新建",
+        "newTag": "新建",
         "servings": "份量",
         "servingsSuffix": "份",
         "cookTime": "烹饪时间",

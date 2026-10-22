@@ -45,6 +45,8 @@
         "title": "Judul",
         "description": "Deskripsi",
         "category": "Kategori",
+        "newCategory": "Baru",
+        "newTag": "Baru",
         "servings": "Porsi",
         "servingsSuffix": "porsi",
         "cookTime": "Waktu masak",

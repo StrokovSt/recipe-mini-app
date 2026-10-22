@@ -3,3 +3,17 @@
     flex-wrap: wrap;
     gap: var(--space-2);
 }
+
+// «+ Новый» — пилюля размером с тег
+.add {
+    flex-direction: row;
+    min-height: auto;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-lg);
+    font: var(--font-ui-xs);
+
+    svg {
+        width: var(--font-line-xs);
+        height: var(--font-line-xs);
+    }
+}

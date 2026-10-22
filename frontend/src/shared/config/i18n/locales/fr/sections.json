@@ -17,10 +17,7 @@
             "pickIcon": "Choisir une icône",
             "duplicate": "Cette catégorie existe déjà",
             "saveFailed": "Impossible d'enregistrer la catégorie"
-        },
-        "total_one": "{{count}} catégorie",
-        "total_many": "{{count}} de catégories",
-        "total_other": "{{count}} catégories"
+        }
     },
     "tags": {
         "title": "Mes tags",
@@ -34,10 +31,7 @@
             "name": "Nom du tag",
             "duplicate": "Ce tag existe déjà",
             "saveFailed": "Impossible d'enregistrer le tag"
-        },
-        "total_one": "{{count}} tag",
-        "total_many": "{{count}} de tags",
-        "total_other": "{{count}} tags"
+        }
     },
     "icons": {
         "Soup": "Soupe",

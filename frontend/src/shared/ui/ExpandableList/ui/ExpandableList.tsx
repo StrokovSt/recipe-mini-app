@@ -1,5 +1,5 @@
 import { animate } from 'motion/react';
-import { type ReactElement, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { type ReactElement, type ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ChevronIcon from '@/shared/assets/icons/icon-chevron.svg?react';
@@ -12,6 +12,8 @@ interface ExpandableListProps<T> {
     rows: number;
     renderItem: (item: T) => ReactElement;
     isPinned?: (item: T) => boolean;
+    // Элемент перед списком (например, «+ Новая»): всегда виден и занимает место в рядах
+    leading?: ReactNode;
     className?: string;
 }
 
@@ -48,8 +50,9 @@ const countInRows = (list: HTMLElement, rows: number) => {
 };
 
 export const ExpandableList = <T,>(props: ExpandableListProps<T>) => {
-    const { items, rows, renderItem, isPinned, className } = props;
+    const { items, rows, renderItem, isPinned, leading, className } = props;
     const { t } = useTranslation();
+    const leadingCount = leading ? 1 : 0;
     const [isExpanded, setIsExpanded] = useState(false);
     const [width, setWidth] = useState(0);
     const [measured, setMeasured] = useState<Capacity<T> | null>(null);
@@ -86,8 +89,8 @@ export const ExpandableList = <T,>(props: ExpandableListProps<T>) => {
     useLayoutEffect(() => {
         if (isMeasured || width === 0) return;
 
-        setMeasured({ items, rows, width, value: countInRows(listRef.current!, rows) });
-    }, [isMeasured, items, rows, width]);
+        setMeasured({ items, rows, width, value: countInRows(listRef.current!, rows) - leadingCount });
+    }, [isMeasured, items, rows, width, leadingCount]);
 
     // Раскрытие: все элементы уже отрисованы, анимируем от прежней высоты до полной
     useLayoutEffect(() => {
@@ -138,6 +141,7 @@ export const ExpandableList = <T,>(props: ExpandableListProps<T>) => {
         <>
             <div ref={viewportRef} className={styles.viewport}>
                 <div ref={listRef} className={className}>
+                    {leading}
                     {visibleItems.map(renderItem)}
                 </div>
             </div>

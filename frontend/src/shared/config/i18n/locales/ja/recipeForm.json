@@ -45,6 +45,8 @@
         "title": "タイトル",
         "description": "説明",
         "category": "カテゴリー",
+        "newCategory": "新規",
+        "newTag": "新規",
         "servings": "人数",
         "servingsSuffix": "人分",
         "cookTime": "調理時間",

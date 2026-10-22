@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,7 @@ import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { SectionCard } from "@/shared/ui/SectionCard";
 import { SectionHeading } from "@/shared/ui/SectionHeading";
 
+import { getRiseTransition, RISE_HIDDEN, RISE_VISIBLE } from "../lib/riseIn";
 import { OptionCard } from "./OptionCard/OptionCard";
 
 import styles from "./AddRecipePage.module.scss";
@@ -117,6 +119,7 @@ const AddRecipePage = () => {
                     action={isAiLocked ? t("choose.locked") : t("choose.import.action")}
                     locked={isAiLocked}
                     disabled={isDisabled}
+                    index={1}
                     onClick={handleImport}
                 />
             </SectionCard>
@@ -125,19 +128,24 @@ const AddRecipePage = () => {
 
             {drafts.length > 0 && (
                 <section className={styles.drafts}>
-                    <SectionHeading
-                        title={t("drafts.title")}
-                        hint={t("drafts.hint")}
-                        total={t("drafts.total", { count: drafts.length, limit: DRAFT_LIMIT })}
-                    />
+                    {/* Черновики поднимаются следом за двумя карточками способов */}
+                    <motion.div initial={RISE_HIDDEN} animate={RISE_VISIBLE} transition={getRiseTransition(2)}>
+                        <SectionHeading
+                            title={t("drafts.title")}
+                            hint={t("drafts.hint")}
+                            total={t("drafts.total", { count: drafts.length, limit: DRAFT_LIMIT })}
+                        />
+                    </motion.div>
                     <div className={styles.draftList}>
-                        {drafts.map((draft) => (
-                            <DraftItem
+                        {drafts.map((draft, index) => (
+                            <motion.div
                                 key={draft.id}
-                                draft={draft}
-                                to={buildRoute.draft(draft.id)}
-                                onDelete={askDelete}
-                            />
+                                initial={RISE_HIDDEN}
+                                animate={RISE_VISIBLE}
+                                transition={getRiseTransition(3 + index)}
+                            >
+                                <DraftItem draft={draft} to={buildRoute.draft(draft.id)} onDelete={askDelete} />
+                            </motion.div>
                         ))}
                     </div>
                 </section>
@@ -151,7 +159,7 @@ const AddRecipePage = () => {
                     <RegularButton
                         type="button"
                         label={t("choose.aiLocked.action")}
-                        onClick={() => navigate(AppRoute.CreateRecipe)}
+                        onClick={() => navigate(AppRoute.CreateRecipe, { replace: true })}
                     />
                 }
             >

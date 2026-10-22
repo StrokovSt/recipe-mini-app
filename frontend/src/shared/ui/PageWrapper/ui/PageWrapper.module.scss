@@ -3,15 +3,19 @@
     flex-direction: column;
     gap: var(--space-5);
 
-    // Сверху место под общую шапку, которая лежит поверх main
-    padding: calc(var(--size-page-header) + var(--space-5)) var(--space-page) 0;
+    // Сверху место под общую шапку, которая лежит поверх main.
+    // Снизу запас на сдвиг контента при въезде (y 8px в PageWrapper.tsx): контент растянут на всю высоту,
+    // и без запаса на время анимации у main появлялась бы прокрутка
+    padding: calc(var(--size-page-header) + var(--space-5)) var(--space-page) var(--space-2);
     overflow: hidden auto;
     font-family: var(--font-family-main);
 
     // Раскладка как у main: страницы задают gap через className
+    // Тянется на всю высоту, чтобы сообщение (пустой список, не найдено) встало по центру свободного места
     .content {
         display: flex;
         flex-direction: column;
+        flex-grow: 1;
         gap: inherit;
     }
 }

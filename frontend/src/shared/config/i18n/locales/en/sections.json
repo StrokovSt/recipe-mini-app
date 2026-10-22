@@ -17,9 +17,7 @@
             "pickIcon": "Choose icon",
             "duplicate": "This category already exists",
             "saveFailed": "Couldn't save the category"
-        },
-        "total_one": "{{count}} category",
-        "total_other": "{{count}} categories"
+        }
     },
     "tags": {
         "title": "My tags",
@@ -33,9 +31,7 @@
             "name": "Tag name",
             "duplicate": "This tag already exists",
             "saveFailed": "Couldn't save the tag"
-        },
-        "total_one": "{{count}} tag",
-        "total_other": "{{count}} tags"
+        }
     },
     "icons": {
         "Soup": "Soup",

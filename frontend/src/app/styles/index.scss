@@ -38,12 +38,14 @@
     --tg-header-bg: var(--color-surface);
     --color-active: var(--color-brand-wine);
     --color-active-hover: var(--color-brand-wine-hover);
+    --color-petal: #E8759A; /* лепестки сакуры из «+» */
     --color-active-text: var(--color-surface);
     --color-accent: var(--color-active);
     --color-accent-hover: var(--color-active-hover);
     --color-accent-light: color-mix(in srgb, var(--color-active) 8%, var(--color-surface));
     --color-accent-shadow: color-mix(in srgb, var(--color-active) 24%, transparent);
     --color-hover-bg: color-mix(in srgb, var(--color-active) 8%, var(--color-category-bg));
+    --color-hover-tint: color-mix(in srgb, var(--color-active) 8%, transparent); /* hover у прозрачных элементов: фон страницы просвечивает */
     --color-brush: color-mix(in srgb, var(--color-border-strong) 45%, transparent);
     --color-active-bg: color-mix(in srgb, var(--color-active) 12%, var(--color-category-bg));
     --color-category-bg: var(--color-surface);
@@ -74,6 +76,7 @@
     --color-brand-sand-dark: #46382A;
     --color-brand-wine: #D3655F;
     --color-brand-wine-hover: #E07972;
+    --color-petal: #D9718F;
     --color-brand-vermillion: #E76B47;
     --color-brand-ink: #F3E8C9;
     --color-brand-ink-soft: #D8C9A8;

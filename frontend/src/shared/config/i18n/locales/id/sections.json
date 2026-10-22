@@ -17,8 +17,7 @@
             "pickIcon": "Pilih ikon",
             "duplicate": "Kategori ini sudah ada",
             "saveFailed": "Kategori gagal disimpan"
-        },
-        "total_other": "{{count}} kategori"
+        }
     },
     "tags": {
         "title": "Tag saya",
@@ -32,8 +31,7 @@
             "name": "Nama tag",
             "duplicate": "Tag ini sudah ada",
             "saveFailed": "Tag gagal disimpan"
-        },
-        "total_other": "{{count}} tag"
+        }
     },
     "icons": {
         "Soup": "Sup",

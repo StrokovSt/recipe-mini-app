@@ -4,8 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { Category } from "@recipe/common";
 
 import { buildRoute } from "@/app/router/routes";
-import { CategoryItem, useCategories, useDeleteCategory } from "@/entities/category";
-import { CategoryForm } from "@/features/category-form";
+import { CategoryForm, CategoryItem, useCategories, useDeleteCategory } from "@/entities/category";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 import { AddTile } from "@/shared/ui/Buttons";
 import { ConfirmModal } from "@/shared/ui/Modal";
@@ -53,6 +52,7 @@ const CategoriesTab = () => {
     return (
         <>
             <div className={styles.list}>
+                <AddTile label={t("categories.add")} onClick={openCreate} />
                 {categories.map((category) => (
                     <CategoryItem
                         key={category.id}
@@ -62,7 +62,6 @@ const CategoriesTab = () => {
                         onDelete={askDelete}
                     />
                 ))}
-                <AddTile label={t("categories.add")} onClick={openCreate} />
             </div>
 
             <BottomSheet

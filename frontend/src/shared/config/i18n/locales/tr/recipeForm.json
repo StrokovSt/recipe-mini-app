@@ -45,6 +45,8 @@
         "title": "Başlık",
         "description": "Açıklama",
         "category": "Kategori",
+        "newCategory": "Yeni",
+        "newTag": "Yeni",
         "servings": "Porsiyon",
         "servingsSuffix": "porsiyon",
         "cookTime": "Pişirme",

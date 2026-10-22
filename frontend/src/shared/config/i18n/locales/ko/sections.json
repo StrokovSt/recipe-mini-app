@@ -17,8 +17,7 @@
             "pickIcon": "아이콘 선택",
             "duplicate": "이미 있는 카테고리예요",
             "saveFailed": "카테고리를 저장하지 못했어요"
-        },
-        "total_other": "카테고리 {{count}}개"
+        }
     },
     "tags": {
         "title": "내 태그",
@@ -32,8 +31,7 @@
             "name": "태그 이름",
             "duplicate": "이미 있는 태그예요",
             "saveFailed": "태그를 저장하지 못했어요"
-        },
-        "total_other": "태그 {{count}}개"
+        }
     },
     "icons": {
         "Soup": "수프",

@@ -17,8 +17,7 @@
             "pickIcon": "アイコンを選ぶ",
             "duplicate": "このカテゴリーはすでにあります",
             "saveFailed": "カテゴリーを保存できませんでした"
-        },
-        "total_other": "カテゴリー{{count}}件"
+        }
     },
     "tags": {
         "title": "マイタグ",
@@ -32,8 +31,7 @@
             "name": "タグ名",
             "duplicate": "このタグはすでにあります",
             "saveFailed": "タグを保存できませんでした"
-        },
-        "total_other": "タグ{{count}}件"
+        }
     },
     "icons": {
         "Soup": "スープ",

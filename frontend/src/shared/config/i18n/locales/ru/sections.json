@@ -17,11 +17,7 @@
             "pickIcon": "Выбрать иконку",
             "duplicate": "Такая категория уже есть",
             "saveFailed": "Не удалось сохранить категорию"
-        },
-        "total_one": "{{count}} категория",
-        "total_few": "{{count}} категории",
-        "total_many": "{{count}} категорий",
-        "total_other": "{{count}} категории"
+        }
     },
     "tags": {
         "title": "Мои теги",
@@ -35,11 +31,7 @@
             "name": "Название тега",
             "duplicate": "Такой тег уже есть",
             "saveFailed": "Не удалось сохранить тег"
-        },
-        "total_one": "{{count}} тег",
-        "total_few": "{{count}} тега",
-        "total_many": "{{count}} тегов",
-        "total_other": "{{count}} тега"
+        }
     },
     "icons": {
         "Soup": "Суп",

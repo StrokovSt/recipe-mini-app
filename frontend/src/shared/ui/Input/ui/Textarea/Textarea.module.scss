@@ -34,6 +34,10 @@
 
     &:not(:placeholder-shown) {
         background: color-mix(in srgb, var(--tg-secondary-bg) 95%, black);
+
+        & ~ .label {
+            background: color-mix(in srgb, var(--tg-secondary-bg) 95%, black);
+        }
     }
 
     @include states.hover {
@@ -43,12 +47,20 @@
     @include states.hover(":not(:placeholder-shown)") {
         background: color-mix(in srgb, var(--tg-secondary-bg) 85%, black);
         border-color: var(--tg-hint);
+
+        & ~ .label {
+            background: color-mix(in srgb, var(--tg-secondary-bg) 85%, black);
+        }
     }
 
     &:focus,
     &:not(:placeholder-shown):focus {
         background: var(--tg-secondary-bg);
         border-color: var(--color-accent);
+
+        & ~ .label {
+            background: var(--tg-secondary-bg);
+        }
     }
 
     &:placeholder-shown ~ .label {
@@ -59,18 +71,23 @@
         transform: translateY(-50%);
     }
 
-    &:not(:placeholder-shown) ~ .label {
-        top: calc(var(--space-1) / 2);
+    // Подпись над текстом — полоса цвета поля во всю ширину: длинный текст прокручивается под ней и не просвечивает.
+    // left и padding меняются вместе, поэтому сама подпись при переходе не сдвигается вбок
+    &:not(:placeholder-shown) ~ .label,
+    &:focus ~ .label {
+        top: 1px;
+        left: 1px;
+        width: calc(100% - 2px);
+        max-width: calc(100% - 2px);
+        padding: calc(var(--space-1) / 2 - 1px) calc(var(--space-3) - 1px) 0;
+        border-radius: calc(var(--radius-md) - 1px) calc(var(--radius-md) - 1px) 0 0;
         color: var(--tg-hint);
         font-size: var(--font-size-xs);
         transform: none;
     }
 
     &:focus ~ .label {
-        top: calc(var(--space-1) / 2);
         color: var(--color-accent);
-        font-size: var(--font-size-xs);
-        transform: none;
     }
 
     &:disabled {

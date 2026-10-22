@@ -71,7 +71,7 @@ export function AppMenu(props: AppMenuProps) {
 
                 <nav className={styles.list}>
                     {menuItems.map((item) => (
-                        <Link key={item.to} to={item.to} className={styles.link} onClick={onClose}>
+                        <Link key={item.to} to={item.to} replace className={styles.link} onClick={onClose}>
                             <span className={styles.icon}>{item.icon}</span>
                             <span className={styles.text}>
                                 <span className={styles.linkTitle}>{item.title}</span>

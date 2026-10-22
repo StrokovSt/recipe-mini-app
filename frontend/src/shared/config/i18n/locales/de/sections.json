@@ -17,9 +17,7 @@
             "pickIcon": "Symbol wählen",
             "duplicate": "Diese Kategorie gibt es schon",
             "saveFailed": "Kategorie konnte nicht gespeichert werden"
-        },
-        "total_one": "{{count}} Kategorie",
-        "total_other": "{{count}} Kategorien"
+        }
     },
     "tags": {
         "title": "Meine Tags",
@@ -33,9 +31,7 @@
             "name": "Name des Tags",
             "duplicate": "Diesen Tag gibt es schon",
             "saveFailed": "Tag konnte nicht gespeichert werden"
-        },
-        "total_one": "{{count}} Tag",
-        "total_other": "{{count}} Tags"
+        }
     },
     "icons": {
         "Soup": "Suppe",

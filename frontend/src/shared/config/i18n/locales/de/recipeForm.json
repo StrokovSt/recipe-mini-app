@@ -45,6 +45,8 @@
         "title": "Titel",
         "description": "Beschreibung",
         "category": "Kategorie",
+        "newCategory": "Neu",
+        "newTag": "Neu",
         "servings": "Portionen",
         "servingsSuffix": "Port.",
         "cookTime": "Garzeit",

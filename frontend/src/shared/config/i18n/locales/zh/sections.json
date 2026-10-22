@@ -17,8 +17,7 @@
             "pickIcon": "选择图标",
             "duplicate": "该分类已存在",
             "saveFailed": "无法保存分类"
-        },
-        "total_other": "{{count}} 个分类"
+        }
     },
     "tags": {
         "title": "我的标签",
@@ -32,8 +31,7 @@
             "name": "标签名称",
             "duplicate": "该标签已存在",
             "saveFailed": "无法保存标签"
-        },
-        "total_other": "{{count}} 个标签"
+        }
     },
     "icons": {
         "Soup": "汤",

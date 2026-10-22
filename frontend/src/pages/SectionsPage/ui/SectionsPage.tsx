@@ -1,8 +1,8 @@
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useCategories } from "@/entities/category";
-import { useTags } from "@/entities/tag";
+import { TRANSITION_PAGE } from "@/shared/config/animation";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { SectionHeading } from "@/shared/ui/SectionHeading";
@@ -16,36 +16,45 @@ import styles from "./SectionsPage.module.scss";
 
 type Tab = "categories" | "tags";
 
+// Смена вкладки как переход между страницами: старая гаснет, новая проявляется
+const HIDDEN = { opacity: 0, y: 8, filter: "blur(6px)" };
+const VISIBLE = { opacity: 1, y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } };
+
 const SectionsPage = () => {
     const { t } = useTranslation("sections");
     const [tab, setTab] = useState<Tab>("categories");
-    const { data: categories = [] } = useCategories();
-    const { data: tags = [] } = useTags();
 
     const tabs: SegmentedOption<Tab>[] = [
         { id: "categories", label: t("tabs.categories") },
         { id: "tags", label: t("tabs.tags") },
     ];
 
-    // Заголовок, подсказка и счётчик берутся из раздела словаря текущей вкладки
-    const count = tab === "categories" ? categories.length : tags.length;
-
     return (
         <PageWrapper
             className={styles.page}
             header={
                 <PageHeader>
+                    {/* Заголовок и подсказка берутся из раздела словаря текущей вкладки */}
                     <SectionHeading
                         title={t(`${tab}.title`)}
                         hint={t(`${tab}.hint`)}
-                        total={t(`${tab}.total`, { count })}
                         action={<AppMenuButton />}
                     />
                 </PageHeader>
             }
         >
             <SegmentedControl options={tabs} value={tab} onChange={setTab} />
-            {tab === "categories" ? <CategoriesTab /> : <TagsTab />}
+            <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                    key={tab}
+                    initial={HIDDEN}
+                    animate={VISIBLE}
+                    exit={HIDDEN}
+                    transition={TRANSITION_PAGE}
+                >
+                    {tab === "categories" ? <CategoriesTab /> : <TagsTab />}
+                </motion.div>
+            </AnimatePresence>
         </PageWrapper>
     );
 }

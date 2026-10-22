@@ -44,6 +44,7 @@ const RecipeList = (props: RecipeListProps) => {
                 {recipes.length === 0 ? (
                     <motion.div
                         key="empty"
+                        className={styles.empty}
                         initial={HIDDEN}
                         animate={VISIBLE}
                         exit={HIDDEN}

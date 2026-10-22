@@ -45,6 +45,8 @@
         "title": "Titolo",
         "description": "Descrizione",
         "category": "Categoria",
+        "newCategory": "Nuova",
+        "newTag": "Nuovo",
         "servings": "Porzioni",
         "servingsSuffix": "porz.",
         "cookTime": "Cottura",
