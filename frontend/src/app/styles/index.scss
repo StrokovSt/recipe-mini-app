@@ -61,6 +61,8 @@
     --color-shadow: rgb(44 26 14);
     --color-overlay: rgb(44 26 14 / 38%);
     --color-lightbox-bg: color-mix(in srgb, var(--color-shadow) 88%, transparent); /* фон полноэкранного фото, тёмный в обеих темах */
+    --color-onboarding-dim: color-mix(in srgb, var(--color-shadow) 65%, transparent); /* затемнение вокруг подсвеченной кнопки в обучении */
+    --color-onboarding-ring: color-mix(in srgb, var(--color-app-bg) 80%, transparent); /* светлая кайма подсветки */
     --color-lightbox-dot: rgb(255 255 255);
     --color-media-text: rgb(255 255 255); /* текст и иконки поверх фото и видео */
     --color-media-badge-bg: color-mix(in srgb, var(--color-shadow) 55%, transparent);

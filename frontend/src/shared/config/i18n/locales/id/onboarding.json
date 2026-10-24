@@ -1,0 +1,18 @@
+{
+    "label": "Panduan",
+    "welcome": {
+        "title": "Selamat datang!",
+        "text": "Ini Mirabelle, buku resep Anda. Kami tunjukkan hal utamanya dalam setengah menit."
+    },
+    "home": "Anda di halaman utama: semua resep Anda ada di sini.",
+    "add": "Tambahkan resep dari tautan situs mana pun, dari foto, atau secara manual. AI akan mengurai bahan dan langkahnya.",
+    "search": "Cari resep berdasarkan nama.",
+    "filter": "Saring berdasarkan kategori dan tag.",
+    "sections": "Di sini ada kategori dan tag: buat sendiri agar semuanya rapi.",
+    "menu": "Pengaturan, tema, dan bahasa. Panduan bisa diulang kapan saja lewat “Cara pakai”.",
+    "counter": "{{current}} dari {{total}}",
+    "start": "Ayo mulai",
+    "next": "Berikutnya",
+    "done": "Selesai",
+    "skip": "Lewati"
+}

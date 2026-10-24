@@ -2,7 +2,7 @@
     "appName": "Mirabelle",
     "notFound": {
         "title": "Pagina non trovata",
-        "text": "Questa pagina non esiste. Controlla il link."
+        "text": "Questa pagina non esiste. Controlli il link."
     },
     "back": "Indietro",
     "close": "Chiudi",
@@ -24,9 +24,9 @@
     "iconPicker": "Scegli un'icona",
     "imageInput": {
         "add": "Aggiungi foto",
-        "hint": "o incolla un link qui sotto",
+        "hint": "o incolli un link qui sotto",
         "uploading": "Caricamento foto…",
-        "drop": "Rilascia per caricare",
+        "drop": "Rilasci per caricare",
         "url": "Link dell'immagine",
         "apply": "Usa il link",
         "remove": "Rimuovi immagine",
@@ -39,15 +39,15 @@
         "retry": "Riprova"
     },
     "errors": {
-        "PARSE_FAILED": "Nessuna ricetta trovata. Prova un altro link o un’altra immagine.",
+        "PARSE_FAILED": "Nessuna ricetta trovata. Provi un altro link o un’altra immagine.",
         "RECIPE_NOT_FOUND": "Ricetta non trovata.",
         "INVALID_URL": "Link non valido.",
-        "AI_UNAVAILABLE": "Il servizio di IA non è al momento disponibile. Riprova più tardi.",
-        "AI_QUOTA_EXCEEDED": "Limite giornaliero di richieste raggiunto. Riprova domani.",
+        "AI_UNAVAILABLE": "Il servizio di IA non è al momento disponibile. Riprovi più tardi.",
+        "AI_QUOTA_EXCEEDED": "Limite giornaliero di richieste raggiunto. Riprovi domani.",
         "VALIDATION_ERROR": "Dati non validi.",
-        "LIMIT_REACHED": "Limite di ricette raggiunto. Abbonati per l'accesso illimitato.",
+        "LIMIT_REACHED": "Limite di ricette raggiunto. Si abboni per l'accesso illimitato.",
         "AI_DISABLED": "Il riconoscimento con IA non è disponibile per questo account.",
-        "DRAFT_LIMIT_REACHED": "Puoi tenere fino a 5 bozze. Eliminane una per iniziarne una nuova.",
+        "DRAFT_LIMIT_REACHED": "Può tenere fino a 5 bozze. Ne elimini una per iniziarne una nuova.",
         "unknown": "Qualcosa è andato storto."
     }
 }

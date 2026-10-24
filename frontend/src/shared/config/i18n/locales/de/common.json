@@ -24,7 +24,7 @@
     "iconPicker": "Symbol auswählen",
     "imageInput": {
         "add": "Foto hinzufügen",
-        "hint": "oder füge unten einen Link ein",
+        "hint": "oder fügen Sie unten einen Link ein",
         "uploading": "Foto wird hochgeladen…",
         "drop": "Zum Hochladen loslassen",
         "url": "Bild-Link",
@@ -39,15 +39,15 @@
         "retry": "Erneut versuchen"
     },
     "errors": {
-        "PARSE_FAILED": "Kein Rezept gefunden. Versuch einen anderen Link oder ein anderes Bild.",
+        "PARSE_FAILED": "Kein Rezept gefunden. Versuchen Sie einen anderen Link oder ein anderes Bild.",
         "RECIPE_NOT_FOUND": "Rezept nicht gefunden.",
         "INVALID_URL": "Ungültiger Link.",
-        "AI_UNAVAILABLE": "Der KI-Dienst ist vorübergehend nicht verfügbar. Versuch es später noch einmal.",
-        "AI_QUOTA_EXCEEDED": "Das Tageslimit für Anfragen ist erreicht. Versuch es morgen wieder.",
+        "AI_UNAVAILABLE": "Der KI-Dienst ist vorübergehend nicht verfügbar. Versuchen Sie es später noch einmal.",
+        "AI_QUOTA_EXCEEDED": "Das Tageslimit für Anfragen ist erreicht. Versuchen Sie es morgen wieder.",
         "VALIDATION_ERROR": "Ungültige Daten.",
-        "LIMIT_REACHED": "Rezeptlimit erreicht. Schließ ein Abo ab, um unbegrenzt Rezepte zu speichern.",
+        "LIMIT_REACHED": "Rezeptlimit erreicht. Schließen Sie ein Abo ab, um unbegrenzt Rezepte zu speichern.",
         "AI_DISABLED": "KI-Erkennung ist für dieses Konto nicht verfügbar.",
-        "DRAFT_LIMIT_REACHED": "Du kannst bis zu 5 Entwürfe behalten. Lösche einen, um einen neuen zu beginnen.",
+        "DRAFT_LIMIT_REACHED": "Sie können bis zu 5 Entwürfe behalten. Löschen Sie einen, um einen neuen zu beginnen.",
         "unknown": "Etwas ist schiefgelaufen."
     }
 }

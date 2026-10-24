@@ -1,10 +1,10 @@
 {
     "choose": {
         "title": "Neues Rezept",
-        "subtitle": "wähle, wie du es hinzufügst",
-        "intro": "Fülle das Rezept selbst aus oder lass die KI es aus einem Link oder Foto erkennen.",
+        "subtitle": "wählen Sie, wie Sie es hinzufügen",
+        "intro": "Füllen Sie das Rezept selbst aus oder lassen Sie die KI es aus einem Link oder Foto erkennen.",
         "methods": "Art des Hinzufügens",
-        "saved": "wird in deiner Sammlung gespeichert",
+        "saved": "wird in Ihrer Sammlung gespeichert",
         "locked": "Nicht verfügbar",
         "manual": {
             "title": "Manuell erstellen",
@@ -13,22 +13,22 @@
         },
         "import": {
             "title": "Aus Link oder Foto",
-            "description": "Die KI erstellt einen Entwurf, den du prüfen und ergänzen kannst",
+            "description": "Die KI erstellt einen Entwurf, den Sie prüfen und ergänzen können",
             "action": "Rezept erkennen"
         },
         "aiLocked": {
             "title": "Erkennung nicht verfügbar",
-            "text": "Die Erkennung aus Links und Fotos ist für dein Konto noch nicht verfügbar. Du kannst das Rezept manuell hinzufügen.",
+            "text": "Die Erkennung aus Links und Fotos ist für Ihr Konto noch nicht verfügbar. Sie können das Rezept manuell hinzufügen.",
             "action": "Manuell erstellen"
         },
         "limit": {
             "title": "Rezeptlimit erreicht",
-            "text": "{{current}} von {{limit}} gespeichert. Lösche nicht benötigte Rezepte, um neue hinzuzufügen."
+            "text": "{{current}} von {{limit}} gespeichert. Löschen Sie nicht benötigte Rezepte, um neue hinzuzufügen."
         }
     },
     "form": {
         "newTitle": "Neues Rezept",
-        "newSubtitle": "wird in deiner Sammlung gespeichert",
+        "newSubtitle": "wird in Ihrer Sammlung gespeichert",
         "editTitle": "Rezept bearbeiten",
         "aiSubtitle": "von KI erkannt, bitte prüfen"
     },
@@ -94,12 +94,12 @@
         "photo": "Bild hinzufügen",
         "photoHint": "Screenshot oder Foto eines Rezepts",
         "submit": "Rezept erkennen",
-        "note": "Die KI erstellt einen Entwurf, den du bearbeiten kannst",
+        "note": "Die KI erstellt einen Entwurf, den Sie bearbeiten können",
         "loading": "Rezept wird erkannt…"
     },
     "drafts": {
         "title": "Entwürfe",
-        "hint": "mach dort weiter, wo du aufgehört hast",
+        "hint": "machen Sie dort weiter, wo Sie aufgehört haben",
         "total": "{{count}} von {{limit}}",
         "untitled": "Ohne Titel",
         "actions": "Aktionen für Entwurf „{{name}}“",
@@ -107,25 +107,25 @@
         "deleteText": "Der Entwurf wird endgültig gelöscht.",
         "limit": {
             "title": "Entwurfslimit erreicht",
-            "text": "{{count}} von {{limit}} gespeichert. Lösche einen nicht benötigten Entwurf oder speichere ihn als Rezept, um einen neuen zu beginnen."
+            "text": "{{count}} von {{limit}} gespeichert. Löschen Sie einen nicht benötigten Entwurf oder speichern Sie ihn als Rezept, um einen neuen zu beginnen."
         }
     },
     "draftStatus": {
         "saving": "Entwurf wird gespeichert…",
         "saved": "Entwurf gespeichert",
-        "error": "Entwurf nicht gespeichert, prüfe die Verbindung"
+        "error": "Entwurf nicht gespeichert, prüfen Sie die Verbindung"
     },
     "leave": {
         "draft": {
             "title": "Formular verlassen?",
-            "text": "Das Rezept bleibt in den Entwürfen, du findest es auf der Seite zum Hinzufügen.",
+            "text": "Das Rezept bleibt in den Entwürfen, Sie finden es auf der Seite zum Hinzufügen.",
             "keep": "In Entwürfen behalten",
             "delete": "Entwurf löschen",
             "continue": "Weiter bearbeiten"
         },
         "edit": {
             "title": "Änderungen speichern?",
-            "text": "Deine Änderungen am Rezept sind noch nicht gespeichert.",
+            "text": "Ihre Änderungen am Rezept sind noch nicht gespeichert.",
             "save": "Speichern",
             "discard": "Ohne Speichern verlassen"
         }

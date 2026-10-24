@@ -45,6 +45,8 @@ interface NavItem {
     icon: ReactNode;
     label: string;
     isAdd?: boolean;
+    // Метка для обучения на главной (features/onboarding)
+    onboarding?: string;
 }
 
 export function Footer() {
@@ -63,9 +65,9 @@ export function Footer() {
     };
 
     const navItems: NavItem[] = [
-        { to: AppRoute.Home, icon: <CollectionIcon />, label: t("collection") },
-        { to: AppRoute.AddRecipe, icon: <AddIcon />, label: t("add"), isAdd: true },
-        { to: AppRoute.Sections, icon: <SectionsIcon />, label: t("sections") },
+        { to: AppRoute.Home, icon: <CollectionIcon />, label: t("collection"), onboarding: "home" },
+        { to: AppRoute.AddRecipe, icon: <AddIcon />, label: t("add"), isAdd: true, onboarding: "add" },
+        { to: AppRoute.Sections, icon: <SectionsIcon />, label: t("sections"), onboarding: "sections" },
     ];
 
     return (
@@ -98,6 +100,7 @@ export function Footer() {
                                         key={item.to}
                                         to={item.to}
                                         aria-label={item.label}
+                                        data-onboarding={item.onboarding}
                                         onClick={handleAddClick}
                                         className={({ isActive }) =>
                                             clsx(styles.navBtnAdd, isActive && styles.navBtnAddActive)
@@ -109,6 +112,7 @@ export function Footer() {
                                     <NavLink
                                         key={item.to}
                                         to={item.to}
+                                        data-onboarding={item.onboarding}
                                         className={({ isActive }) =>
                                             clsx(styles.navBtn, isActive && styles.navBtnActive)
                                         }

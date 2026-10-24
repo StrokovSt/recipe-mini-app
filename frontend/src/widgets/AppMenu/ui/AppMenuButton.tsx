@@ -28,6 +28,7 @@ export function AppMenuButton(props: AppMenuButtonProps) {
                 aria-expanded={isMenuOpen}
                 onClick={() => setIsMenuOpen(true)}
                 disabled={disabled}
+                data-onboarding="menu"
             />
             <AppMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
         </>

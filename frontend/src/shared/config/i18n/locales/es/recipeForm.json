@@ -1,10 +1,10 @@
 {
     "choose": {
         "title": "Nueva receta",
-        "subtitle": "elige cómo añadirla",
-        "intro": "Completa la receta tú mismo o deja que la IA la reconozca a partir de un enlace o una foto.",
+        "subtitle": "elija cómo añadirla",
+        "intro": "Complete la receta usted mismo o deje que la IA la reconozca a partir de un enlace o una foto.",
         "methods": "Forma de añadir",
-        "saved": "se guardará en tu colección",
+        "saved": "se guardará en su colección",
         "locked": "No disponible",
         "manual": {
             "title": "Crear manualmente",
@@ -13,24 +13,24 @@
         },
         "import": {
             "title": "Desde un enlace o una foto",
-            "description": "La IA prepara un borrador que puedes revisar y completar",
+            "description": "La IA prepara un borrador que puede revisar y completar",
             "action": "Reconocer receta"
         },
         "aiLocked": {
             "title": "Reconocimiento no disponible",
-            "text": "El reconocimiento desde enlaces y fotos aún no está disponible para tu cuenta. Puedes añadir la receta manualmente.",
+            "text": "El reconocimiento desde enlaces y fotos aún no está disponible para su cuenta. Puede añadir la receta manualmente.",
             "action": "Crear manualmente"
         },
         "limit": {
             "title": "Límite de recetas alcanzado",
-            "text": "{{current}} de {{limit}} guardadas. Elimina las recetas que no necesites para añadir nuevas."
+            "text": "{{current}} de {{limit}} guardadas. Elimine las recetas que no necesite para añadir nuevas."
         }
     },
     "form": {
         "newTitle": "Nueva receta",
-        "newSubtitle": "se guardará en tu colección",
+        "newSubtitle": "se guardará en su colección",
         "editTitle": "Editar receta",
-        "aiSubtitle": "reconocida por IA, revísala"
+        "aiSubtitle": "reconocida por IA, revísela"
     },
     "sections": {
         "cover": "Portada",
@@ -82,7 +82,7 @@
     "validation": {
         "titleRequired": "El título es obligatorio",
         "titleTooLong": "Máximo {{max}} caracteres",
-        "ingredientEmpty": "Escribe el nombre",
+        "ingredientEmpty": "Escriba el nombre",
         "stepEmpty": "El paso no puede estar vacío",
         "amountInvalid": "Mayor que 0"
     },
@@ -94,12 +94,12 @@
         "photo": "Añadir imagen",
         "photoHint": "Captura o foto de una receta",
         "submit": "Reconocer receta",
-        "note": "La IA preparará un borrador que podrás editar",
+        "note": "La IA preparará un borrador que podrá editar",
         "loading": "Reconociendo la receta…"
     },
     "drafts": {
         "title": "Borradores",
-        "hint": "continúa donde lo dejaste",
+        "hint": "continúe donde lo dejó",
         "total": "{{count}} de {{limit}}",
         "untitled": "Sin título",
         "actions": "Acciones del borrador «{{name}}»",
@@ -107,18 +107,18 @@
         "deleteText": "El borrador se eliminará de forma permanente.",
         "limit": {
             "title": "Límite de borradores alcanzado",
-            "text": "{{count}} de {{limit}} guardados. Elimina un borrador que no necesites o guárdalo como receta para empezar uno nuevo."
+            "text": "{{count}} de {{limit}} guardados. Elimine un borrador que no necesite o guárdelo como receta para empezar uno nuevo."
         }
     },
     "draftStatus": {
         "saving": "Guardando borrador…",
         "saved": "Borrador guardado",
-        "error": "Borrador no guardado, revisa la conexión"
+        "error": "Borrador no guardado, revise la conexión"
     },
     "leave": {
         "draft": {
             "title": "¿Salir del formulario?",
-            "text": "La receta queda en borradores, puedes volver a ella en la página de añadir.",
+            "text": "La receta queda en borradores, puede volver a ella en la página de añadir.",
             "keep": "Guardar en borradores",
             "delete": "Eliminar borrador",
             "continue": "Seguir editando"

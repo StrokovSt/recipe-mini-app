@@ -1,0 +1,18 @@
+{
+    "label": "Tour",
+    "welcome": {
+        "title": "Welcome!",
+        "text": "This is Mirabelle, your recipe book. Let me show you the basics in half a minute."
+    },
+    "home": "You’re on the home screen: all your recipes are here.",
+    "add": "Add recipes from a link to any site, from a photo or by hand. AI sorts out the ingredients and steps for you.",
+    "search": "Find recipes by name.",
+    "filter": "Narrow them down by categories and tags.",
+    "sections": "Categories and tags live here. Create your own to keep things tidy.",
+    "menu": "Settings, theme and language. You can always take the tour again from “How to use”.",
+    "counter": "{{current}} of {{total}}",
+    "start": "Let’s go",
+    "next": "Next",
+    "done": "Done",
+    "skip": "Skip"
+}

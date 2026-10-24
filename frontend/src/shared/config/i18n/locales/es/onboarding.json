@@ -1,0 +1,18 @@
+{
+    "label": "Guía",
+    "welcome": {
+        "title": "¡Bienvenido!",
+        "text": "Esto es Mirabelle, su libro de recetas. Le enseño lo principal en medio minuto."
+    },
+    "home": "Está en la pantalla principal: aquí están todas sus recetas.",
+    "add": "Añada recetas desde un enlace de cualquier web, una foto o a mano. La IA extrae los ingredientes y los pasos.",
+    "search": "Busque recetas por nombre.",
+    "filter": "Filtre por categorías y etiquetas.",
+    "sections": "Aquí están las categorías y etiquetas: cree las suyas para tenerlo todo en orden.",
+    "menu": "Ajustes, tema e idioma. Puede repetir la guía cuando quiera en «Cómo usar».",
+    "counter": "{{current}} de {{total}}",
+    "start": "Empezar",
+    "next": "Siguiente",
+    "done": "Listo",
+    "skip": "Omitir"
+}

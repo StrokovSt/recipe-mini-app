@@ -14,6 +14,10 @@
         "title": "关于应用",
         "hint": "帮助与反馈"
     },
+    "help": {
+        "title": "使用方法",
+        "hint": "应用简短引导"
+    },
     "install": {
         "title": "安装应用",
         "hint": "将 Mirabelle 添加到主屏幕",

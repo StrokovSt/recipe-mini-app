@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -19,8 +18,8 @@ import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { SectionCard } from "@/shared/ui/SectionCard";
 import { SectionHeading } from "@/shared/ui/SectionHeading";
+import { preloadLoader } from "@/shared/ui/Spinner";
 
-import { getRiseTransition, RISE_HIDDEN, RISE_VISIBLE } from "../lib/riseIn";
 import { OptionCard } from "./OptionCard/OptionCard";
 
 import styles from "./AddRecipePage.module.scss";
@@ -61,6 +60,8 @@ const AddRecipePage = () => {
             return;
         }
 
+        // Котик с лупой нужен только при распознавании: подгружаем его, пока пользователь вставляет ссылку
+        preloadLoader("catMagnifier");
         navigate(AppRoute.ImportRecipe);
     };
 
@@ -119,7 +120,6 @@ const AddRecipePage = () => {
                     action={isAiLocked ? t("choose.locked") : t("choose.import.action")}
                     locked={isAiLocked}
                     disabled={isDisabled}
-                    index={1}
                     onClick={handleImport}
                 />
             </SectionCard>
@@ -128,24 +128,14 @@ const AddRecipePage = () => {
 
             {drafts.length > 0 && (
                 <section className={styles.drafts}>
-                    {/* Черновики поднимаются следом за двумя карточками способов */}
-                    <motion.div initial={RISE_HIDDEN} animate={RISE_VISIBLE} transition={getRiseTransition(2)}>
-                        <SectionHeading
-                            title={t("drafts.title")}
-                            hint={t("drafts.hint")}
-                            total={t("drafts.total", { count: drafts.length, limit: DRAFT_LIMIT })}
-                        />
-                    </motion.div>
+                    <SectionHeading
+                        title={t("drafts.title")}
+                        hint={t("drafts.hint")}
+                        total={t("drafts.total", { count: drafts.length, limit: DRAFT_LIMIT })}
+                    />
                     <div className={styles.draftList}>
-                        {drafts.map((draft, index) => (
-                            <motion.div
-                                key={draft.id}
-                                initial={RISE_HIDDEN}
-                                animate={RISE_VISIBLE}
-                                transition={getRiseTransition(3 + index)}
-                            >
-                                <DraftItem draft={draft} to={buildRoute.draft(draft.id)} onDelete={askDelete} />
-                            </motion.div>
+                        {drafts.map((draft) => (
+                            <DraftItem key={draft.id} draft={draft} to={buildRoute.draft(draft.id)} onDelete={askDelete} />
                         ))}
                     </div>
                 </section>

@@ -21,7 +21,7 @@
     },
     "tags": {
         "title": "Mes tags",
-        "hint": "Retrouve vite tes recettes",
+        "hint": "Retrouvez vite vos recettes",
         "add": "Nouveau tag",
         "unused": "Pas encore utilisé",
         "actions": "Actions pour le tag « {{name}} »",

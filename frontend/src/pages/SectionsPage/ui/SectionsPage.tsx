@@ -17,8 +17,8 @@ import styles from "./SectionsPage.module.scss";
 type Tab = "categories" | "tags";
 
 // Смена вкладки как переход между страницами: старая гаснет, новая проявляется
-const HIDDEN = { opacity: 0, y: 8, filter: "blur(6px)" };
-const VISIBLE = { opacity: 1, y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } };
+const HIDDEN = { opacity: 0, transform: "translateY(8px)" };
+const VISIBLE = { opacity: 1, transform: "translateY(0px)", transitionEnd: { transform: "none" } };
 
 const SectionsPage = () => {
     const { t } = useTranslation("sections");

@@ -14,6 +14,10 @@
         "title": "앱 정보",
         "hint": "도움말 및 피드백"
     },
+    "help": {
+        "title": "사용 방법",
+        "hint": "앱 간단 안내"
+    },
     "install": {
         "title": "앱 설치",
         "hint": "홈 화면에 Mirabelle 추가",

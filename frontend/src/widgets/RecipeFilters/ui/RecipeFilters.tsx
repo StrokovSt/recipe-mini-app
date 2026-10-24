@@ -108,6 +108,7 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                     onChange={handleSearchChange}
                     placeholder={t('searchPlaceholder')}
                     disabled={disabled}
+                    data-onboarding="search"
                 />
 
                 <FilterButton
@@ -115,6 +116,7 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                     activeCount={activeCount}
                     onClick={() => onOpenChange(true)}
                     disabled={disabled}
+                    data-onboarding="filter"
                 />
             </div>
 

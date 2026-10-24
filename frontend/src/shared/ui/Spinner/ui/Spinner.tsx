@@ -26,8 +26,8 @@ interface SpinnerProps {
 const DEFAULT_DELAY = 300;
 
 // Появление и исчезновение: проявляется из размытия, как стекло
-const HIDDEN = { opacity: 0, scale: 0.94, filter: "blur(6px)" };
-const VISIBLE = { opacity: 1, scale: 1, filter: "blur(0px)" };
+const HIDDEN = { opacity: 0, transform: "scale(0.94)", filter: "blur(6px)" };
+const VISIBLE = { opacity: 1, transform: "scale(1)", filter: "blur(0px)" };
 
 export function Spinner(props: SpinnerProps) {
     const { size = "md", label, delay = DEFAULT_DELAY, loader = DEFAULT_LOADER } = props;

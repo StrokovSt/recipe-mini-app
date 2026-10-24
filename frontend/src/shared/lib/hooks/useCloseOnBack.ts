@@ -1,6 +1,7 @@
-import { useEffect, useEffectEvent, useRef } from "react";
+import { useEffect, useEffectEvent, useId, useRef } from "react";
 
-// Отметка своей записи в истории: по ней понятно, что мы всё ещё на ней
+// Отметка своей записи в истории: по ней понятно, что мы всё ещё на ней.
+// В отметке id окна: следующее окно, открытое сразу за этим, своей записью не собьёт проверку
 const HISTORY_MARK = "closeOnBack";
 
 // Пока окно открыто, системная «Назад» на телефоне закрывает его, а не уводит со страницы:
@@ -8,6 +9,7 @@ const HISTORY_MARK = "closeOnBack";
 // Возвращает close: закрывать окно кнопками надо через неё, чтобы запись ушла вместе с окном.
 // Переход на другую страницу прямо из окна делаем с replace: он займёт место лишней записи
 export const useCloseOnBack = (isOpen: boolean, onClose: () => void) => {
+    const id = useId();
     const hasHistoryEntryRef = useRef(false);
 
     const handlePopState = useEffectEvent(() => {
@@ -19,12 +21,12 @@ export const useCloseOnBack = (isOpen: boolean, onClose: () => void) => {
         if (!isOpen) return;
 
         if (!hasHistoryEntryRef.current) {
-            window.history.pushState({ ...window.history.state, [HISTORY_MARK]: true }, "");
+            window.history.pushState({ ...window.history.state, [HISTORY_MARK]: id }, "");
             hasHistoryEntryRef.current = true;
         }
         window.addEventListener("popstate", handlePopState);
         return () => window.removeEventListener("popstate", handlePopState);
-    }, [isOpen]);
+    }, [isOpen, id]);
 
     // Окно закрыли не через close (сохранили форму в шторке и т. п.): убираем свою запись,
     // иначе первое «Назад» потом ничего не сделает. Если запись уже заменили переходом, не трогаем.
@@ -34,9 +36,9 @@ export const useCloseOnBack = (isOpen: boolean, onClose: () => void) => {
 
         hasHistoryEntryRef.current = false;
         window.setTimeout(() => {
-            if (window.history.state?.[HISTORY_MARK]) window.history.back();
+            if (window.history.state?.[HISTORY_MARK] === id) window.history.back();
         });
-    }, [isOpen]);
+    }, [isOpen, id]);
 
     return () => {
         if (hasHistoryEntryRef.current) window.history.back();

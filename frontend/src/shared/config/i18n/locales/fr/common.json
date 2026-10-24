@@ -24,9 +24,9 @@
     "iconPicker": "Choisir une icône",
     "imageInput": {
         "add": "Ajouter une photo",
-        "hint": "ou colle un lien ci-dessous",
+        "hint": "ou collez un lien ci-dessous",
         "uploading": "Envoi de la photo…",
-        "drop": "Dépose pour envoyer",
+        "drop": "Déposez pour envoyer",
         "url": "Lien de l'image",
         "apply": "Utiliser le lien",
         "remove": "Retirer l'image",
@@ -39,13 +39,13 @@
         "retry": "Réessayer"
     },
     "errors": {
-        "PARSE_FAILED": "Aucune recette trouvée. Essaie un autre lien ou une autre image.",
+        "PARSE_FAILED": "Aucune recette trouvée. Essayez un autre lien ou une autre image.",
         "RECIPE_NOT_FOUND": "Recette introuvable.",
         "INVALID_URL": "Lien non valide.",
-        "AI_UNAVAILABLE": "Le service d'IA est temporairement indisponible. Réessaie plus tard.",
-        "AI_QUOTA_EXCEEDED": "Limite quotidienne de requêtes atteinte. Réessaie demain.",
+        "AI_UNAVAILABLE": "Le service d'IA est temporairement indisponible. Réessayez plus tard.",
+        "AI_QUOTA_EXCEEDED": "Limite quotidienne de requêtes atteinte. Réessayez demain.",
         "VALIDATION_ERROR": "Données non valides.",
-        "LIMIT_REACHED": "Limite de recettes atteinte. Abonne-toi pour un accès illimité.",
+        "LIMIT_REACHED": "Limite de recettes atteinte. Abonnez-vous pour un accès illimité.",
         "AI_DISABLED": "La reconnaissance par IA n'est pas disponible pour ce compte.",
         "DRAFT_LIMIT_REACHED": "Vous pouvez garder jusqu'à 5 brouillons. Supprimez-en un pour en commencer un nouveau.",
         "unknown": "Une erreur s'est produite."

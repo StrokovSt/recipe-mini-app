@@ -1,0 +1,18 @@
+{
+    "label": "Visite guidée",
+    "welcome": {
+        "title": "Bienvenue !",
+        "text": "Voici Mirabelle, votre livre de recettes. Je vous montre l’essentiel en trente secondes."
+    },
+    "home": "Vous êtes sur l’accueil : toutes vos recettes sont ici.",
+    "add": "Ajoutez des recettes depuis un lien de n’importe quel site, une photo ou à la main. L’IA repère les ingrédients et les étapes.",
+    "search": "Cherchez des recettes par nom.",
+    "filter": "Filtrez par catégories et tags.",
+    "sections": "Ici, les catégories et les tags : créez les vôtres pour mettre de l’ordre.",
+    "menu": "Paramètres, thème et langue. Vous pouvez refaire la visite à tout moment via « Mode d’emploi ».",
+    "counter": "{{current}} sur {{total}}",
+    "start": "C’est parti",
+    "next": "Suivant",
+    "done": "Terminé",
+    "skip": "Passer"
+}

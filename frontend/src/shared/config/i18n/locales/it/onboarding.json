@@ -1,0 +1,18 @@
+{
+    "label": "Guida",
+    "welcome": {
+        "title": "Benvenuto!",
+        "text": "Questa è Mirabelle, il suo ricettario. Le mostro l’essenziale in mezzo minuto."
+    },
+    "home": "È nella schermata principale: qui ci sono tutte le sue ricette.",
+    "add": "Aggiunga ricette da un link di qualsiasi sito, da una foto o a mano. L’IA riconosce ingredienti e passaggi.",
+    "search": "Cerchi le ricette per nome.",
+    "filter": "Filtri per categorie e tag.",
+    "sections": "Qui ci sono categorie e tag: crei i suoi per fare ordine.",
+    "menu": "Impostazioni, tema e lingua. Può rivedere la guida quando vuole da «Come si usa».",
+    "counter": "{{current}} di {{total}}",
+    "start": "Iniziamo",
+    "next": "Avanti",
+    "done": "Fatto",
+    "skip": "Salta"
+}

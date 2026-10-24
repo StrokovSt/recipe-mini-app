@@ -1,6 +1,6 @@
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import clsx from "clsx";
-import { type MouseEvent, useEffect } from "react";
+import { type KeyboardEvent, type MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useCloseOnBack } from "@/shared/lib/hooks";
@@ -33,16 +33,11 @@ const MediaLightbox = (props: MediaLightboxProps) => {
     const hasPrev = index > 0;
     const hasNext = index < media.length - 1;
 
-    useEffect(() => {
-        if (!isOpen) return;
-
-        const handleKey = (e: KeyboardEvent) => {
-            if (e.key === "ArrowLeft" && hasPrev) onChange(index - 1);
-            if (e.key === "ArrowRight" && hasNext) onChange(index + 1);
-        };
-        document.addEventListener("keydown", handleKey);
-        return () => document.removeEventListener("keydown", handleKey);
-    }, [isOpen, index, hasPrev, hasNext, onChange]);
+    // Листаем стрелками: фокус всегда внутри окна (Headless UI), поэтому ловим на самой панели
+    const panelKeyDownHandler = (e: KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === "ArrowLeft" && hasPrev) onChange(index - 1);
+        if (e.key === "ArrowRight" && hasNext) onChange(index + 1);
+    };
 
     // Закрываем только по пустому месту: клики по картинке, видео и кнопкам сюда не считаются
     const panelClickHandler = (e: MouseEvent<HTMLDivElement>) => {
@@ -53,7 +48,12 @@ const MediaLightbox = (props: MediaLightboxProps) => {
         <Dialog open={isOpen} onClose={close} className={styles.root}>
             <DialogBackdrop transition className={styles.backdrop} />
 
-            <DialogPanel transition className={styles.panel} onClick={panelClickHandler}>
+            <DialogPanel
+                transition
+                className={styles.panel}
+                onClick={panelClickHandler}
+                onKeyDown={panelKeyDownHandler}
+            >
                 {current?.type === "video" ? (
                     <video key={current.url} src={current.url} className={styles.media} controls playsInline />
                 ) : (

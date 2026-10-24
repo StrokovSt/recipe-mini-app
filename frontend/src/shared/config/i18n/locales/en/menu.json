@@ -14,6 +14,10 @@
         "title": "About",
         "hint": "Help and feedback"
     },
+    "help": {
+        "title": "How to use",
+        "hint": "A short tour of the app"
+    },
     "install": {
         "title": "Install app",
         "hint": "Mirabelle on your home screen",

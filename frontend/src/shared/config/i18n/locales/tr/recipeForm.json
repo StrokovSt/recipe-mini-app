@@ -1,8 +1,8 @@
 {
     "choose": {
         "title": "Yeni tarif",
-        "subtitle": "nasıl ekleyeceğini seç",
-        "intro": "Tarifi kendin doldur ya da yapay zekânın bir bağlantıdan veya fotoğraftan tanımasına izin ver.",
+        "subtitle": "nasıl ekleyeceğinizi seçin",
+        "intro": "Tarifi kendiniz doldurun ya da yapay zekânın bir bağlantıdan veya fotoğraftan tanımasına izin verin.",
         "methods": "Ekleme yöntemi",
         "saved": "koleksiyonuna kaydedilir",
         "locked": "Kullanılamıyor",
@@ -13,24 +13,24 @@
         },
         "import": {
             "title": "Bağlantı veya fotoğraftan",
-            "description": "Yapay zekâ kontrol edip tamamlayabileceğin bir taslak hazırlar",
+            "description": "Yapay zekâ kontrol edip tamamlayabileceğiniz bir taslak hazırlar",
             "action": "Tarifi tanı"
         },
         "aiLocked": {
             "title": "Tanıma kullanılamıyor",
-            "text": "Bağlantı ve fotoğraflardan tanıma hesabın için henüz kullanılamıyor. Tarifi elle ekleyebilirsin.",
+            "text": "Bağlantı ve fotoğraflardan tanıma hesabınız için henüz kullanılamıyor. Tarifi elle ekleyebilirsiniz.",
             "action": "Elle oluştur"
         },
         "limit": {
             "title": "Tarif sınırına ulaşıldı",
-            "text": "{{limit}} tariften {{current}} tanesi kaydedildi. Yeni tarif eklemek için gereksiz olanları sil."
+            "text": "{{limit}} tariften {{current}} tanesi kaydedildi. Yeni tarif eklemek için gereksiz olanları silin."
         }
     },
     "form": {
         "newTitle": "Yeni tarif",
         "newSubtitle": "koleksiyonuna kaydedilir",
         "editTitle": "Tarifi düzenle",
-        "aiSubtitle": "yapay zekâ tanıdı, kontrol et"
+        "aiSubtitle": "yapay zekâ tanıdı, kontrol edin"
     },
     "sections": {
         "cover": "Kapak",
@@ -94,7 +94,7 @@
         "photo": "Görsel ekle",
         "photoHint": "Tarifin ekran görüntüsü veya fotoğrafı",
         "submit": "Tarifi tanı",
-        "note": "Yapay zekâ düzenleyebileceğin bir taslak hazırlayacak",
+        "note": "Yapay zekâ düzenleyebileceğiniz bir taslak hazırlayacak",
         "loading": "Tarif tanınıyor…"
     },
     "drafts": {

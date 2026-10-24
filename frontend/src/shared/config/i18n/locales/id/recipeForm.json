@@ -4,7 +4,7 @@
         "subtitle": "pilih cara menambahkannya",
         "intro": "Isi resep sendiri atau biarkan AI mengenalinya dari tautan atau foto.",
         "methods": "Cara menambahkan",
-        "saved": "akan disimpan di koleksimu",
+        "saved": "akan disimpan di koleksi Anda",
         "locked": "Tidak tersedia",
         "manual": {
             "title": "Buat manual",
@@ -13,12 +13,12 @@
         },
         "import": {
             "title": "Dari tautan atau foto",
-            "description": "AI menyiapkan draf yang bisa kamu periksa dan lengkapi",
+            "description": "AI menyiapkan draf yang bisa Anda periksa dan lengkapi",
             "action": "Kenali resep"
         },
         "aiLocked": {
             "title": "Pengenalan tidak tersedia",
-            "text": "Pengenalan dari tautan dan foto belum tersedia untuk akunmu. Kamu bisa menambahkan resep secara manual.",
+            "text": "Pengenalan dari tautan dan foto belum tersedia untuk akun Anda. Anda bisa menambahkan resep secara manual.",
             "action": "Buat manual"
         },
         "limit": {
@@ -28,7 +28,7 @@
     },
     "form": {
         "newTitle": "Resep baru",
-        "newSubtitle": "akan disimpan di koleksimu",
+        "newSubtitle": "akan disimpan di koleksi Anda",
         "editTitle": "Edit resep",
         "aiSubtitle": "dikenali AI, periksa dulu"
     },
@@ -94,7 +94,7 @@
         "photo": "Tambah gambar",
         "photoHint": "Tangkapan layar atau foto resep",
         "submit": "Kenali resep",
-        "note": "AI akan menyiapkan draf yang bisa kamu ubah",
+        "note": "AI akan menyiapkan draf yang bisa Anda ubah",
         "loading": "Mengenali resep…"
     },
     "drafts": {

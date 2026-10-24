@@ -4,7 +4,7 @@
         "subtitle": "选择添加方式",
         "intro": "自己填写食谱，或让 AI 从链接或照片中识别。",
         "methods": "添加方式",
-        "saved": "将保存到你的收藏",
+        "saved": "将保存到您的收藏",
         "locked": "不可用",
         "manual": {
             "title": "手动创建",
@@ -13,12 +13,12 @@
         },
         "import": {
             "title": "通过链接或照片",
-            "description": "AI 会生成草稿，你可以检查并补充",
+            "description": "AI 会生成草稿，您可以检查并补充",
             "action": "识别食谱"
         },
         "aiLocked": {
             "title": "识别不可用",
-            "text": "你的账户暂时无法使用链接和照片识别。你可以手动添加食谱。",
+            "text": "您的账户暂时无法使用链接和照片识别。您可以手动添加食谱。",
             "action": "手动创建"
         },
         "limit": {
@@ -28,7 +28,7 @@
     },
     "form": {
         "newTitle": "新食谱",
-        "newSubtitle": "将保存到你的收藏",
+        "newSubtitle": "将保存到您的收藏",
         "editTitle": "编辑食谱",
         "aiSubtitle": "AI 已识别，请检查"
     },

@@ -14,6 +14,10 @@
         "title": "Hakkında",
         "hint": "Yardım ve geri bildirim"
     },
+    "help": {
+        "title": "Nasıl kullanılır",
+        "hint": "Uygulamanın kısa tanıtımı"
+    },
     "install": {
         "title": "Uygulamayı yükle",
         "hint": "Mirabelle ana ekranında",

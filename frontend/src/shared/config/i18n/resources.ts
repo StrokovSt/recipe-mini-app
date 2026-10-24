@@ -4,6 +4,7 @@ import type filters from "./locales/ru/filters.json";
 import type footer from "./locales/ru/footer.json";
 import type home from "./locales/ru/home.json";
 import type menu from "./locales/ru/menu.json";
+import type onboarding from "./locales/ru/onboarding.json";
 import type profile from "./locales/ru/profile.json";
 import type recipe from "./locales/ru/recipe.json";
 import type recipeForm from "./locales/ru/recipeForm.json";
@@ -20,6 +21,7 @@ export interface Resources {
     footer: typeof footer;
     home: typeof home;
     menu: typeof menu;
+    onboarding: typeof onboarding;
     profile: typeof profile;
     recipe: typeof recipe;
     recipeForm: typeof recipeForm;

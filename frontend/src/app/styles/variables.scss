@@ -73,6 +73,10 @@
     --size-loader-md: 120px;
     --size-loader-lg: 180px;
     --size-loader-xl: 240px;
+    --size-onboarding-card: 340px;
+    --size-onboarding-image: 120px;
+    --size-onboarding-hole-padding: 6px;
+    --size-onboarding-hole-ring: 2px;
     --size-nav-action: 56px;
     --size-petal: 20px; /* лепесток, вылетающий из «+» */
     --size-avatar: 40px;
@@ -192,6 +196,7 @@
     // ─── Z-index ──────────────────────────────────────────────
     --z-above: 10;
     --z-modal: 100;
+    --z-onboarding: 200;
 }
 
 // Узкие телефоны: контенту нужна каждая точка ширины. В @media нельзя подставить CSS-переменную,

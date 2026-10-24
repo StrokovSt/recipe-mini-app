@@ -24,9 +24,9 @@
     "iconPicker": "Simge seç",
     "imageInput": {
         "add": "Fotoğraf ekle",
-        "hint": "veya aşağıya bir bağlantı yapıştır",
+        "hint": "veya aşağıya bir bağlantı yapıştırın",
         "uploading": "Fotoğraf yükleniyor…",
-        "drop": "Yüklemek için bırak",
+        "drop": "Yüklemek için bırakın",
         "url": "Görsel bağlantısı",
         "apply": "Bağlantıyı kullan",
         "remove": "Görseli kaldır",
@@ -39,13 +39,13 @@
         "retry": "Tekrar dene"
     },
     "errors": {
-        "PARSE_FAILED": "Tarif bulunamadı. Başka bir bağlantı veya görsel dene.",
+        "PARSE_FAILED": "Tarif bulunamadı. Başka bir bağlantı veya görsel deneyin.",
         "RECIPE_NOT_FOUND": "Tarif bulunamadı.",
         "INVALID_URL": "Geçersiz bağlantı.",
-        "AI_UNAVAILABLE": "Yapay zekâ hizmeti geçici olarak kullanılamıyor. Daha sonra tekrar dene.",
-        "AI_QUOTA_EXCEEDED": "Günlük istek sınırına ulaşıldı. Yarın tekrar dene.",
+        "AI_UNAVAILABLE": "Yapay zekâ hizmeti geçici olarak kullanılamıyor. Daha sonra tekrar deneyin.",
+        "AI_QUOTA_EXCEEDED": "Günlük istek sınırına ulaşıldı. Yarın tekrar deneyin.",
         "VALIDATION_ERROR": "Geçersiz veri.",
-        "LIMIT_REACHED": "Tarif sınırına ulaşıldı. Sınırsız erişim için abone ol.",
+        "LIMIT_REACHED": "Tarif sınırına ulaşıldı. Sınırsız erişim için abone olun.",
         "AI_DISABLED": "Yapay zekâ ile tanıma bu hesap için kullanılamıyor.",
         "DRAFT_LIMIT_REACHED": "En fazla 5 taslak tutabilirsiniz. Yenisini başlatmak için birini silin.",
         "unknown": "Bir şeyler ters gitti."

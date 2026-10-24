@@ -1,10 +1,10 @@
 {
     "choose": {
         "title": "Nuova ricetta",
-        "subtitle": "scegli come aggiungerla",
-        "intro": "Compila la ricetta da solo o lascia che l'IA la riconosca da un link o da una foto.",
+        "subtitle": "scelga come aggiungerla",
+        "intro": "Compili la ricetta da sé o lasci che l'IA la riconosca da un link o da una foto.",
         "methods": "Modo di aggiunta",
-        "saved": "verrà salvata nella tua raccolta",
+        "saved": "verrà salvata nella sua raccolta",
         "locked": "Non disponibile",
         "manual": {
             "title": "Crea manualmente",
@@ -18,19 +18,19 @@
         },
         "aiLocked": {
             "title": "Riconoscimento non disponibile",
-            "text": "Il riconoscimento da link e foto non è ancora disponibile per il tuo account. Puoi aggiungere la ricetta manualmente.",
+            "text": "Il riconoscimento da link e foto non è ancora disponibile per il suo account. Può aggiungere la ricetta manualmente.",
             "action": "Crea manualmente"
         },
         "limit": {
             "title": "Limite di ricette raggiunto",
-            "text": "{{current}} di {{limit}} salvate. Elimina le ricette che non ti servono per aggiungerne di nuove."
+            "text": "{{current}} di {{limit}} salvate. Elimini le ricette che non le servono per aggiungerne di nuove."
         }
     },
     "form": {
         "newTitle": "Nuova ricetta",
-        "newSubtitle": "verrà salvata nella tua raccolta",
+        "newSubtitle": "verrà salvata nella sua raccolta",
         "editTitle": "Modifica ricetta",
-        "aiSubtitle": "riconosciuta dall’IA, controlla"
+        "aiSubtitle": "riconosciuta dall’IA, la controlli"
     },
     "sections": {
         "cover": "Copertina",
@@ -82,7 +82,7 @@
     "validation": {
         "titleRequired": "Il titolo è obbligatorio",
         "titleTooLong": "Massimo {{max}} caratteri",
-        "ingredientEmpty": "Inserisci il nome",
+        "ingredientEmpty": "Inserisca il nome",
         "stepEmpty": "Il passaggio non può essere vuoto",
         "amountInvalid": "Maggiore di 0"
     },
@@ -99,7 +99,7 @@
     },
     "drafts": {
         "title": "Bozze",
-        "hint": "riprendi da dove avevi lasciato",
+        "hint": "riprenda da dove aveva lasciato",
         "total": "{{count}} di {{limit}}",
         "untitled": "Senza titolo",
         "actions": "Azioni per la bozza «{{name}}»",
@@ -107,18 +107,18 @@
         "deleteText": "La bozza verrà eliminata definitivamente.",
         "limit": {
             "title": "Limite di bozze raggiunto",
-            "text": "{{count}} di {{limit}} salvate. Elimina una bozza che non ti serve o salvala come ricetta per iniziarne una nuova."
+            "text": "{{count}} di {{limit}} salvate. Elimini una bozza che non le serve o la salvi come ricetta per iniziarne una nuova."
         }
     },
     "draftStatus": {
         "saving": "Salvataggio bozza…",
         "saved": "Bozza salvata",
-        "error": "Bozza non salvata, controlla la connessione"
+        "error": "Bozza non salvata, controlli la connessione"
     },
     "leave": {
         "draft": {
             "title": "Uscire dal modulo?",
-            "text": "La ricetta resta nelle bozze, puoi ritrovarla nella pagina di aggiunta.",
+            "text": "La ricetta resta nelle bozze, può ritrovarla nella pagina di aggiunta.",
             "keep": "Tieni nelle bozze",
             "delete": "Elimina bozza",
             "continue": "Continua a modificare"

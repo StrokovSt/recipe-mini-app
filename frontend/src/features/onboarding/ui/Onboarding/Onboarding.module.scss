@@ -1,0 +1,77 @@
+// Слой поверх всего приложения, включая шапку, футер и шторки
+.layer {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-onboarding);
+}
+
+// Окошко в затемнении: тень на весь экран вокруг подсвеченной кнопки
+.hole {
+    position: absolute;
+    box-shadow:
+        0 0 0 var(--size-onboarding-hole-ring) var(--color-onboarding-ring),
+        0 0 0 100vmax var(--color-onboarding-dim);
+    pointer-events: none;
+}
+
+.card {
+    position: absolute;
+    right: var(--space-page);
+    left: var(--space-page);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: var(--size-onboarding-card);
+    margin: 0 auto;
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+
+    // Приветствие по центру экрана
+    &.centered {
+        top: 0;
+        bottom: 0;
+        height: fit-content;
+        margin: auto;
+    }
+}
+
+.counter {
+    color: var(--color-text-muted);
+    font: var(--font-sm);
+    font-style: italic;
+}
+
+.text {
+    font: var(--font-md);
+}
+
+// Первый шаг: котик и приветствие по центру
+.welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    text-align: center;
+
+    .image {
+        width: var(--size-onboarding-image);
+    }
+
+    .title {
+        font: var(--font-header-lg);
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-2);
+
+    .next {
+        flex-grow: 1;
+    }
+}

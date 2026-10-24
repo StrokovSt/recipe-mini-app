@@ -14,6 +14,10 @@
         "title": "Sobre",
         "hint": "Ajuda e feedback"
     },
+    "help": {
+        "title": "Como usar",
+        "hint": "Um tour rápido pelo app"
+    },
     "install": {
         "title": "Instalar app",
         "hint": "Mirabelle na tela inicial",

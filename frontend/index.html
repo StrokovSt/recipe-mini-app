@@ -18,14 +18,13 @@
       /* Заставка с котиком: видна с первого кадра, ещё до скриптов и стилей приложения, поэтому стили здесь,
          а цвета и размеры числами: фон = --color-app-bg, котик = --size-loader-xl и стоит там же, где GlobalLoader.
          Убирает её shared/lib/splash, когда первая страница показана целиком */
-      html,
+      /* Фон только у body, не у html: тогда он уходит на весь холст и не перекрывает фоновую картинку (#root::before) */
       body,
       #splash {
         margin: 0;
         background: #f0e7cc;
       }
 
-      [data-theme="dark"],
       [data-theme="dark"] body,
       [data-theme="dark"] #splash {
         background: #1d1814;

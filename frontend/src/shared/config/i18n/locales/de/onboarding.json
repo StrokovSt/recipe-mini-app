@@ -1,0 +1,18 @@
+{
+    "label": "Einführung",
+    "welcome": {
+        "title": "Willkommen!",
+        "text": "Das ist Mirabelle, Ihr Rezeptbuch. Ich zeige Ihnen in einer halben Minute das Wichtigste."
+    },
+    "home": "Sie sind auf der Startseite: Hier sind alle Ihre Rezepte.",
+    "add": "Fügen Sie Rezepte hinzu: per Link von jeder Website, per Foto oder von Hand. Die KI erkennt Zutaten und Schritte selbst.",
+    "search": "Suchen Sie Rezepte nach Namen.",
+    "filter": "Filtern Sie nach Kategorien und Tags.",
+    "sections": "Hier sind Kategorien und Tags: Legen Sie eigene an, um Ordnung zu schaffen.",
+    "menu": "Einstellungen, Design und Sprache. Die Einführung können Sie jederzeit unter „So funktioniert’s“ wiederholen.",
+    "counter": "{{current}} von {{total}}",
+    "start": "Los geht’s",
+    "next": "Weiter",
+    "done": "Fertig",
+    "skip": "Überspringen"
+}

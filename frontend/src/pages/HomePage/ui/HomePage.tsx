@@ -6,6 +6,7 @@ import { useCategories } from "@/entities/category";
 import { useRecipes } from '@/entities/recipe';
 import type { GetRecipesProps } from '@/entities/recipe/types';
 import { useTags } from '@/entities/tag';
+import { Onboarding } from '@/features/onboarding';
 import { TRANSITION_BASE } from '@/shared/config/animation';
 import { useIsHiddenBehind } from '@/shared/lib/hooks';
 import { useLoader } from '@/shared/ui/GlobalLoader';
@@ -98,6 +99,7 @@ const HomePage = () => {
                 onOpenChange={setIsFiltersOpen}
             />
             <RecipeList recipes={recipes} isDimmed={isPlaceholderData} />
+            <Onboarding />
         </PageWrapper>
     );
 };

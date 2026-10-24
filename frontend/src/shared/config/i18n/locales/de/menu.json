@@ -14,10 +14,14 @@
         "title": "Über die App",
         "hint": "Hilfe und Feedback"
     },
+    "help": {
+        "title": "So funktioniert’s",
+        "hint": "Kurze Einführung in die App"
+    },
     "install": {
         "title": "App installieren",
         "hint": "Mirabelle auf dem Home-Bildschirm",
         "iosTitle": "Auf dem iPhone installieren",
-        "iosText": "Tippe in Safari auf „Teilen“ und dann auf „Zum Home-Bildschirm“."
+        "iosText": "Tippen Sie in Safari auf „Teilen“ und dann auf „Zum Home-Bildschirm“."
     }
 }

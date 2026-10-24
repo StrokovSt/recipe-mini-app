@@ -7,7 +7,6 @@
     position: fixed;
     inset: 0;
     background: var(--color-lightbox-bg);
-    backdrop-filter: blur(6px);
 
     transition: opacity var(--transition-overlay);
 

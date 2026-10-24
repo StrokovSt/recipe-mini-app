@@ -1,10 +1,12 @@
 import WebApp from "@twa-dev/sdk";
 import { type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
+import { startOnboarding } from "@/features/onboarding";
 import ChevronIcon from "@/shared/assets/icons/icon-chevron-right.svg?react";
+import HelpIcon from "@/shared/assets/icons/icon-help.svg?react";
 import InfoIcon from "@/shared/assets/icons/icon-info.svg?react";
 import InstallIcon from "@/shared/assets/icons/icon-install.svg?react";
 import SettingsIcon from "@/shared/assets/icons/icon-settings.svg?react";
@@ -32,6 +34,7 @@ export function AppMenu(props: AppMenuProps) {
     const { t } = useTranslation("menu");
     const installMode = useInstallMode();
     const [isIosHintOpen, setIsIosHintOpen] = useState(false);
+    const navigate = useNavigate();
 
     const menuItems: MenuItem[] = [
         { to: AppRoute.Profile, icon: <UserIcon />, title: t("profile.title"), hint: t("profile.hint") },
@@ -47,6 +50,13 @@ export function AppMenu(props: AppMenuProps) {
         onClose();
         if (installMode === "ios") setIsIosHintOpen(true);
         else promptInstall();
+    };
+
+    // Обучение идёт на главной: переходим туда (replace — из открытой шторки) и запускаем заново
+    const handleHelp = () => {
+        onClose();
+        navigate(AppRoute.Home, { replace: true });
+        startOnboarding();
     };
 
     return (
@@ -80,6 +90,15 @@ export function AppMenu(props: AppMenuProps) {
                             <ChevronIcon className={styles.chevron} />
                         </Link>
                     ))}
+
+                    <button type="button" className={styles.link} onClick={handleHelp}>
+                        <span className={styles.icon}><HelpIcon /></span>
+                        <span className={styles.text}>
+                            <span className={styles.linkTitle}>{t("help.title")}</span>
+                            <span className={styles.linkHint}>{t("help.hint")}</span>
+                        </span>
+                        <ChevronIcon className={styles.chevron} />
+                    </button>
 
                     {installMode && (
                         <button type="button" className={styles.link} onClick={handleInstall}>

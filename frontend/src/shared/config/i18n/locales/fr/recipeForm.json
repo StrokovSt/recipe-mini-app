@@ -1,10 +1,10 @@
 {
     "choose": {
         "title": "Nouvelle recette",
-        "subtitle": "choisis comment l'ajouter",
-        "intro": "Remplis la recette toi-même ou laisse l'IA la reconnaître à partir d'un lien ou d'une photo.",
+        "subtitle": "choisissez comment l'ajouter",
+        "intro": "Remplissez la recette vous-même ou laissez l'IA la reconnaître à partir d'un lien ou d'une photo.",
         "methods": "Mode d'ajout",
-        "saved": "enregistrée dans ta collection",
+        "saved": "enregistrée dans votre collection",
         "locked": "Indisponible",
         "manual": {
             "title": "Créer manuellement",
@@ -18,17 +18,17 @@
         },
         "aiLocked": {
             "title": "Reconnaissance indisponible",
-            "text": "La reconnaissance à partir de liens et de photos n'est pas encore disponible pour ton compte. Tu peux ajouter la recette manuellement.",
+            "text": "La reconnaissance à partir de liens et de photos n'est pas encore disponible pour votre compte. Vous pouvez ajouter la recette manuellement.",
             "action": "Créer manuellement"
         },
         "limit": {
             "title": "Limite de recettes atteinte",
-            "text": "{{current}} sur {{limit}} enregistrées. Supprime des recettes inutiles pour en ajouter de nouvelles."
+            "text": "{{current}} sur {{limit}} enregistrées. Supprimez des recettes inutiles pour en ajouter de nouvelles."
         }
     },
     "form": {
         "newTitle": "Nouvelle recette",
-        "newSubtitle": "enregistrée dans ta collection",
+        "newSubtitle": "enregistrée dans votre collection",
         "editTitle": "Modifier la recette",
         "aiSubtitle": "reconnue par l’IA, à vérifier"
     },

@@ -1,0 +1,18 @@
+{
+    "label": "Tour",
+    "welcome": {
+        "title": "Olá!",
+        "text": "Esta é a Mirabelle, seu livro de receitas. Mostro o principal em meio minuto."
+    },
+    "home": "Você está na tela inicial: aqui ficam todas as suas receitas.",
+    "add": "Adicione receitas por link de qualquer site, por foto ou à mão. A IA organiza ingredientes e passos.",
+    "search": "Busque receitas pelo nome.",
+    "filter": "Filtre por categorias e tags.",
+    "sections": "Aqui ficam as categorias e tags: crie as suas para manter tudo organizado.",
+    "menu": "Configurações, tema e idioma. Você pode refazer o tour quando quiser em “Como usar”.",
+    "counter": "{{current}} de {{total}}",
+    "start": "Vamos lá",
+    "next": "Próximo",
+    "done": "Pronto",
+    "skip": "Pular"
+}

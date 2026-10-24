@@ -158,27 +158,27 @@
     }
 }
 
-.measure {
-    position: absolute;
-    top: 50%;
-    left: var(--space-3);
-    font: var(--font-ui-md);
-    font-size: var(--field-font-size, var(--font-size-md));
-    font-weight: var(--font-weight-bold);
-    white-space: pre;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(-50%);
-}
-
-// На одной строке с текстом: отступ сверху как у поля плюс рамка
-.suffix {
+// Суффикс («мин.», «шт.») на одной строке с текстом, сразу за ним: отступ сверху и слева как у текста поля плюс рамка
+.after {
     position: absolute;
     top: calc(var(--space-3) + 1px);
-    left: var(--space-3);
-
-    color: var(--tg-hint);
-    font: var(--font-ui-md);
-    font-size: var(--field-font-size, var(--font-size-md));
+    left: calc(var(--space-3) + 1px);
+    display: flex;
+    gap: var(--space-1);
     pointer-events: none;
+
+    // Копия значения тем же шрифтом, что в поле: занимает его ширину
+    .ghost {
+        font: var(--font-ui-md);
+        font-size: var(--field-font-size, var(--font-size-md));
+        font-weight: var(--font-weight-bold);
+        white-space: pre;
+        visibility: hidden;
+    }
+
+    .suffix {
+        color: var(--tg-hint);
+        font: var(--font-ui-md);
+        font-size: var(--field-font-size, var(--font-size-md));
+    }
 }

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useId, useLayoutEffect, useRef } from "react";
+import { useId } from "react";
 
 import type { InputProps } from "../../lib/types";
 
@@ -9,17 +9,8 @@ export const Input = (props: InputProps) => {
     const { label, register, error, suffix, className, ...rest } = props;
     // Связь подписи с полем: экранный диктор читает подпись как название поля, клик по ней ставит фокус
     const id = useId();
-    const measureRef = useRef<HTMLSpanElement>(null);
-    const suffixRef = useRef<HTMLSpanElement>(null);
 
     const hasValue = !!rest.value || !!rest.defaultValue;
-
-    useLayoutEffect(() => {
-        if (measureRef.current && suffixRef.current) {
-            const width = measureRef.current.offsetWidth;
-            suffixRef.current.style.left = `calc(var(--space-3) + 1px + ${width}px + var(--space-1))`;
-        }
-    }, [rest.value]);
 
     return (
         <div className={clsx(styles.wrap, className)}>
@@ -37,12 +28,11 @@ export const Input = (props: InputProps) => {
             />
             <label htmlFor={id} className={styles.label}>{label}</label>
             {suffix && hasValue && (
-                <>
-                    <span ref={measureRef} className={styles.measure} aria-hidden>
-                        {rest.value}
-                    </span>
-                    <span ref={suffixRef} className={styles.suffix}>{suffix}</span>
-                </>
+                // Суффикс встаёт сразу за текстом: перед ним невидимая копия значения той же ширины
+                <span className={styles.after}>
+                    <span className={styles.ghost} aria-hidden>{rest.value}</span>
+                    <span className={styles.suffix}>{suffix}</span>
+                </span>
             )}
             {error && <span className={styles.error}>{error}</span>}
         </div>

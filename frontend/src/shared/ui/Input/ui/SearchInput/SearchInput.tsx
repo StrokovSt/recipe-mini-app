@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { type LabelHTMLAttributes, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import SearchIcon from "@/shared/assets/icons/icon-search.svg?react";
@@ -8,7 +8,8 @@ import { IconButton } from "@/shared/ui/Buttons";
 
 import styles from "./SearchInput.module.scss";
 
-interface SearchInputProps {
+// Остальные атрибуты (data-*) уходят на корневой label
+interface SearchInputProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, "onChange"> {
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;
@@ -19,14 +20,16 @@ interface SearchInputProps {
 
 export const SearchInput = (props: SearchInputProps) => {
     const { t } = useTranslation();
-    const { value, onChange, placeholder = t("search"), delay = 400, className, disabled } = props;
+    const { value, onChange, placeholder = t("search"), delay = 400, className, disabled, ...rest } = props;
     const [query, setQuery] = useState(value);
+    const [prevValue, setPrevValue] = useState(value);
     const { run: debouncedChange, cancel } = useDebouncedCallback(onChange, delay);
 
-    // Синхронизация, если значение поменяли снаружи (например, сброс фильтров)
-    useEffect(() => {
+    // Значение поменяли снаружи (например, сброс фильтров): подхватываем его прямо при отрисовке
+    if (value !== prevValue) {
+        setPrevValue(value);
         setQuery(value);
-    }, [value]);
+    }
 
     const handleChange = (next: string) => {
         setQuery(next);
@@ -40,7 +43,7 @@ export const SearchInput = (props: SearchInputProps) => {
     };
 
     return (
-        <label className={clsx(styles.wrap, className)}>
+        <label className={clsx(styles.wrap, className)} {...rest}>
             <SearchIcon className={styles.icon} aria-hidden />
             <input
                 type="search"

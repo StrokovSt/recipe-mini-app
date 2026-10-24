@@ -2,6 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import App from './app/App'
+import { preloadOnFirstAction } from './app/router'
+import { initOnboarding } from './features/onboarding'
 import { initAnimations } from './shared/lib/animations'
 import { loadFonts } from './shared/lib/fonts'
 import { initI18n } from './shared/lib/i18n'
@@ -27,6 +29,8 @@ initInstallPrompt()
 const loaderReady = preloadLoader()
 startSplash()
 hideSplashWhen(firstPageShown)
+firstPageShown.then(preloadOnFirstAction)
+initOnboarding()
 
 // Рендерим после загрузки словарей выбранного языка, шрифтов и постера котика,
 // чтобы не мелькали ключи, текст не перескакивал и котик был виден с первой загрузки

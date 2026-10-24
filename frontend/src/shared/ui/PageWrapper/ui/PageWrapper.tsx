@@ -15,8 +15,9 @@ interface PageWrapperProps {
     className?: string;
 }
 
-const HIDDEN = { opacity: 0, y: 8, filter: "blur(6px)" };
-const VISIBLE = { opacity: 1, y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } };
+// transform строкой, а не y: так motion отдаёт анимацию браузеру (WAAPI) и она идёт мимо основного потока
+const HIDDEN = { opacity: 0, transform: "translateY(8px)" };
+const VISIBLE = { opacity: 1, transform: "translateY(0px)", transitionEnd: { transform: "none" } };
 
 // Анимируется только контент: шапка при переходах стоит на месте, как footer.
 // Пока котик на экране или гаснет, контент ждёт скрытым и всплывает после него

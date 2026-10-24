@@ -14,10 +14,14 @@
         "title": "Acerca de",
         "hint": "Ayuda y comentarios"
     },
+    "help": {
+        "title": "Cómo usar",
+        "hint": "Una breve guía de la app"
+    },
     "install": {
         "title": "Instalar la app",
-        "hint": "Mirabelle en tu pantalla de inicio",
+        "hint": "Mirabelle en su pantalla de inicio",
         "iosTitle": "Instalar en iPhone",
-        "iosText": "En Safari, toca Compartir y luego «Añadir a pantalla de inicio»."
+        "iosText": "En Safari, toque Compartir y luego «Añadir a pantalla de inicio»."
     }
 }
