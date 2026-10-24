@@ -95,6 +95,9 @@
         "photoHint": "食谱截图或照片",
         "submit": "识别食谱",
         "note": "AI 会生成一份可编辑的草稿",
+        "done": "食谱已识别",
+        "failed": "无法识别食谱",
+        "open": "打开",
         "loading": "正在识别食谱…"
     },
     "drafts": {
@@ -115,6 +118,7 @@
         "saved": "草稿已保存",
         "error": "草稿未保存，请检查网络连接"
     },
+    "saveError": "食谱未保存",
     "leave": {
         "draft": {
             "title": "离开表单？",

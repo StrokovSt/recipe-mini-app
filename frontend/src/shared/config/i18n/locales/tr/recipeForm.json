@@ -95,6 +95,9 @@
         "photoHint": "Tarifin ekran görüntüsü veya fotoğrafı",
         "submit": "Tarifi tanı",
         "note": "Yapay zekâ düzenleyebileceğiniz bir taslak hazırlayacak",
+        "done": "Tarif tanındı",
+        "failed": "Tarif tanınamadı",
+        "open": "Aç",
         "loading": "Tarif tanınıyor…"
     },
     "drafts": {
@@ -115,6 +118,7 @@
         "saved": "Taslak kaydedildi",
         "error": "Taslak kaydedilemedi, bağlantınızı kontrol edin"
     },
+    "saveError": "Tarif kaydedilmedi",
     "leave": {
         "draft": {
             "title": "Formdan çıkılsın mı?",

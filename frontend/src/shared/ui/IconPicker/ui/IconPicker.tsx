@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import type { FC, SVGProps } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -31,7 +31,7 @@ const IconPicker = (props: IconPickerProps) => {
     return (
         <AnimatePresence initial={false}>
             {isOpen && (
-                <motion.div
+                <m.div
                     className={clsx(styles.collapse, className)}
                     initial={COLLAPSED}
                     animate={EXPANDED}
@@ -54,7 +54,7 @@ const IconPicker = (props: IconPickerProps) => {
                             </button>
                         ))}
                     </div>
-                </motion.div>
+                </m.div>
             )}
         </AnimatePresence>
     );

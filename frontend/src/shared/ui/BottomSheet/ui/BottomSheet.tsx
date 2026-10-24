@@ -1,6 +1,6 @@
 import { Description, Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import clsx from "clsx";
-import { animate, motion, useMotionValue } from "motion/react";
+import { animate, m, useMotionValue } from "motion/react";
 import { type PointerEvent, type ReactNode, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -66,7 +66,7 @@ export const BottomSheet = (props: BottomSheetProps) => {
         <Dialog open={isOpen} onClose={close} className={styles.root}>
             <DialogBackdrop transition className={styles.backdrop} />
 
-            <motion.div className={styles.container} style={{ y }}>
+            <m.div className={styles.container} style={{ y }}>
                 <DialogPanel transition className={clsx(styles.panel, className)}>
                     <div
                         className={styles.handle}
@@ -100,7 +100,7 @@ export const BottomSheet = (props: BottomSheetProps) => {
 
                     {footer && <footer className={styles.footer}>{footer}</footer>}
                 </DialogPanel>
-            </motion.div>
+            </m.div>
         </Dialog>
     );
 };

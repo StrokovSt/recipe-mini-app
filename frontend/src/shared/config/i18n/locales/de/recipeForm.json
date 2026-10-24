@@ -95,6 +95,9 @@
         "photoHint": "Screenshot oder Foto eines Rezepts",
         "submit": "Rezept erkennen",
         "note": "Die KI erstellt einen Entwurf, den Sie bearbeiten können",
+        "done": "Rezept erkannt",
+        "failed": "Rezept konnte nicht erkannt werden",
+        "open": "Öffnen",
         "loading": "Rezept wird erkannt…"
     },
     "drafts": {
@@ -115,6 +118,7 @@
         "saved": "Entwurf gespeichert",
         "error": "Entwurf nicht gespeichert, prüfen Sie die Verbindung"
     },
+    "saveError": "Rezept nicht gespeichert",
     "leave": {
         "draft": {
             "title": "Formular verlassen?",

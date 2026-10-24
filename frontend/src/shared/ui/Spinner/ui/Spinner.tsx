@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
@@ -55,7 +55,7 @@ export function Spinner(props: SpinnerProps) {
     // Котик всегда строго по центру экрана. Портал в body, чтобы fixed
     // не зависел от transform/filter анимаций страницы
     return createPortal(
-        <motion.div
+        <m.div
             className={styles.overlay}
             initial={HIDDEN}
             animate={VISIBLE}
@@ -78,7 +78,7 @@ export function Spinner(props: SpinnerProps) {
                 <source src={mp4} type="video/mp4" />
             </video>
             {label && <p className={styles.label}>{label}</p>}
-        </motion.div>,
+        </m.div>,
         document.body
     );
 }

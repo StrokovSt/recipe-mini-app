@@ -1,10 +1,11 @@
-import WebApp from "@twa-dev/sdk";
+import { getTelegram } from "@/shared/lib/telegram";
 
 // Делится ссылкой: в Telegram открывает выбор чата, в браузере — системное меню «Поделиться»,
 // а где его нет, копирует ссылку. "copied" — скопировали, стоит показать подсказку
 export const shareLink = async (url: string, text: string): Promise<"shared" | "copied"> => {
-    if (WebApp.initData) {
-        WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`);
+    const telegram = getTelegram();
+    if (telegram?.initData) {
+        telegram.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`);
         return "shared";
     }
 

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { type ReactNode, useEffect, useRef } from "react";
 
 import { TRANSITION_PAGE } from "@/shared/config/animation";
@@ -41,7 +41,7 @@ export function PageWrapper(props: PageWrapperProps) {
     return (
         <main className={clsx(styles.wrapper, className)}>
             {header}
-            <motion.div
+            <m.div
                 ref={contentRef}
                 className={styles.content}
                 initial={HIDDEN}
@@ -50,7 +50,7 @@ export function PageWrapper(props: PageWrapperProps) {
                 transition={TRANSITION_PAGE}
             >
                 {children}
-            </motion.div>
+            </m.div>
         </main>
     );
 }

@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -45,7 +45,7 @@ const SectionsPage = () => {
         >
             <SegmentedControl options={tabs} value={tab} onChange={setTab} />
             <AnimatePresence mode="wait" initial={false}>
-                <motion.div
+                <m.div
                     key={tab}
                     initial={HIDDEN}
                     animate={VISIBLE}
@@ -53,7 +53,7 @@ const SectionsPage = () => {
                     transition={TRANSITION_PAGE}
                 >
                     {tab === "categories" ? <CategoriesTab /> : <TagsTab />}
-                </motion.div>
+                </m.div>
             </AnimatePresence>
         </PageWrapper>
     );

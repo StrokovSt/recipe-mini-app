@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -65,7 +65,7 @@ const ActiveFilters = (props: ActiveFiltersProps) => {
     return (
         <AnimatePresence initial={false}>
             {count > 0 && (
-                <motion.div
+                <m.div
                     className={styles.collapse}
                     initial={COLLAPSED}
                     animate={EXPANDED}
@@ -75,7 +75,7 @@ const ActiveFilters = (props: ActiveFiltersProps) => {
                     <div className={styles.list}>
                         <AnimatePresence mode="popLayout" initial={false}>
                             {category && CategoryIcon && (
-                                <motion.button
+                                <m.button
                                     key={category.id}
                                     type="button"
                                     className={styles.chip}
@@ -86,11 +86,11 @@ const ActiveFilters = (props: ActiveFiltersProps) => {
                                     <CategoryIcon className={styles.icon} aria-hidden />
                                     <span className={styles.label}>{category.name}</span>
                                     <CloseIcon className={styles.remove} aria-hidden />
-                                </motion.button>
+                                </m.button>
                             )}
 
                             {selectedTags.map((tag) => (
-                                <motion.button
+                                <m.button
                                     key={tag.id}
                                     type="button"
                                     className={styles.chip}
@@ -100,11 +100,11 @@ const ActiveFilters = (props: ActiveFiltersProps) => {
                                 >
                                     <span className={styles.label}>#{tag.name}</span>
                                     <CloseIcon className={styles.remove} aria-hidden />
-                                </motion.button>
+                                </m.button>
                             ))}
 
                             {count >= CLEAR_ALL_MIN_COUNT && (
-                                <motion.button
+                                <m.button
                                     key="clear-all"
                                     type="button"
                                     className={`${styles.chip} ${styles['chip--clear']}`}
@@ -112,11 +112,11 @@ const ActiveFilters = (props: ActiveFiltersProps) => {
                                     {...chipMotion}
                                 >
                                     {t('clearAll')}
-                                </motion.button>
+                                </m.button>
                             )}
                         </AnimatePresence>
                     </div>
-                </motion.div>
+                </m.div>
             )}
         </AnimatePresence>
     );

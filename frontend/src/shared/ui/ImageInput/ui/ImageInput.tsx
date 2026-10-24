@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { type ChangeEvent, type DragEvent, type KeyboardEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -160,7 +160,7 @@ export const ImageInput = (props: ImageInputProps) => {
 
             <AnimatePresence initial={false}>
                 {!value && (
-                    <motion.div
+                    <m.div
                         className={styles.url}
                         initial={URL_ROW_HIDDEN}
                         animate={URL_ROW_VISIBLE}
@@ -188,7 +188,7 @@ export const ImageInput = (props: ImageInputProps) => {
                             disabled={!url.trim() || isUploading}
                             onClick={applyUrl}
                         />
-                    </motion.div>
+                    </m.div>
                 )}
             </AnimatePresence>
         </div>

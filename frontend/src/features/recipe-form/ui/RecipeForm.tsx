@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Controller, FormProvider, type Resolver, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useBlocker, useNavigate } from "react-router-dom";
@@ -9,9 +9,12 @@ import { useBlocker, useNavigate } from "react-router-dom";
 import { AppRoute } from "@/app/router";
 import { DRAFT_KEYS } from "@/entities/draft";
 import { useCreateRecipe, useUploadMedia } from "@/entities/recipe";
+import { ApiError } from "@/shared/api";
 import { getAnimations } from "@/shared/lib/animations";
+import { getErrorMessage } from "@/shared/lib/errors";
 import { IconButton, RegularButton } from "@/shared/ui/Buttons";
 import { ImageInput } from "@/shared/ui/ImageInput";
+import { Modal } from "@/shared/ui/Modal";
 import { PageFooter } from "@/shared/ui/PageFooter";
 import { PageHeader } from "@/shared/ui/PageHeader";
 
@@ -66,6 +69,9 @@ const RecipeForm = (props: RecipeFormProps) => {
     const { mutate: createRecipe, isPending: isSaving } = useCreateRecipe();
     const { mutateAsync: uploadMedia } = useUploadMedia();
     const isPending = isPendingProp ?? isSaving;
+    // Рецепт не сохранился (лимит рецептов, нет сети): объясняем в окне. Текст отдельно от isOpen,
+    // чтобы он не сменился, пока окно закрывается
+    const [saveError, setSaveError] = useState({ isOpen: false, message: "" });
 
     const uploadCover = async (file: File) => (await uploadMedia(file)).url;
 
@@ -151,9 +157,13 @@ const RecipeForm = (props: RecipeFormProps) => {
                     if (draftId) queryClient.invalidateQueries({ queryKey: DRAFT_KEYS.lists() });
                     navigate(AppRoute.Home);
                 },
-                onError: () => {
+                onError: (error) => {
                     isLeavingRef.current = false;
                     autosave.resume();
+                    setSaveError({
+                        isOpen: true,
+                        message: getErrorMessage(error instanceof ApiError ? error.code : undefined),
+                    });
                 },
             }
         );
@@ -223,6 +233,14 @@ const RecipeForm = (props: RecipeFormProps) => {
                 text={draft ? t("leave.draft.text") : t("leave.edit.text")}
                 actions={leaveActions}
             />
+
+            <Modal
+                isOpen={saveError.isOpen}
+                onClose={() => setSaveError((prev) => ({ ...prev, isOpen: false }))}
+                title={t("saveError")}
+            >
+                <p>{saveError.message}</p>
+            </Modal>
         </FormProvider>
     );
 };

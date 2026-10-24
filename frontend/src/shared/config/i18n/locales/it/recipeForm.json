@@ -95,6 +95,9 @@
         "photoHint": "Screenshot o foto di una ricetta",
         "submit": "Riconosci ricetta",
         "note": "L’IA preparerà una bozza modificabile",
+        "done": "Ricetta riconosciuta",
+        "failed": "Impossibile riconoscere la ricetta",
+        "open": "Apri",
         "loading": "Riconoscimento della ricetta…"
     },
     "drafts": {
@@ -115,6 +118,7 @@
         "saved": "Bozza salvata",
         "error": "Bozza non salvata, controlli la connessione"
     },
+    "saveError": "Ricetta non salvata",
     "leave": {
         "draft": {
             "title": "Uscire dal modulo?",

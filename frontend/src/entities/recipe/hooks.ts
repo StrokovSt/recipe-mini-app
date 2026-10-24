@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { type QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { CreateRecipeDto, Recipe } from "@recipe/common";
 
@@ -18,6 +18,12 @@ export const RECIPE_KEYS = {
 // Ключи списков тегов и категорий: у них есть счётчик рецептов, его нужно обновлять после изменений рецептов
 const TAGS_KEY = ["tags"] as const;
 const CATEGORIES_KEY = ["categories"] as const;
+
+// После добавления и удаления рецепта открывается главная. Если перейти сразу, она покажет старый список
+// из кэша, а через мгновение новый, и список моргнёт. Поэтому mutation ждёт свежие списки (onSuccess возвращает
+// промис), и только потом срабатывает переход. refetchType "all": главная ещё не открыта, её список неактивен
+const refetchRecipeLists = (queryClient: QueryClient) =>
+    queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.lists(), refetchType: "all" });
 
 export function useRecipes(filters: GetRecipesProps) {
     const queryClient = useQueryClient();
@@ -49,10 +55,10 @@ export function useCreateRecipe() {
     return useMutation({
         mutationFn: (recipe: CreateRecipeDto) => recipeApi.create(recipe),
         onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.lists() });
-        queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.categories() });
-        queryClient.invalidateQueries({ queryKey: TAGS_KEY });
-        queryClient.invalidateQueries({ queryKey: CATEGORIES_KEY });
+            queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.categories() });
+            queryClient.invalidateQueries({ queryKey: TAGS_KEY });
+            queryClient.invalidateQueries({ queryKey: CATEGORIES_KEY });
+            return refetchRecipeLists(queryClient);
         },
     });
 }
@@ -78,22 +84,10 @@ export function useDeleteRecipe() {
     return useMutation({
         mutationFn: (id: string) => recipeApi.delete(id),
         onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.lists() });
-        queryClient.invalidateQueries({ queryKey: TAGS_KEY });
-        queryClient.invalidateQueries({ queryKey: CATEGORIES_KEY });
+            queryClient.invalidateQueries({ queryKey: TAGS_KEY });
+            queryClient.invalidateQueries({ queryKey: CATEGORIES_KEY });
+            return refetchRecipeLists(queryClient);
         },
-    });
-}
-
-export function useParseRecipe() {
-    return useMutation({
-        mutationFn: (url: string) => recipeApi.parse(url),
-    });
-}
-
-export function useParseRecipeFromImage() {
-    return useMutation({
-        mutationFn: (file: File) => recipeApi.parseFromImage(file),
     });
 }
 

@@ -9,15 +9,22 @@ import styles from "./PageFooter.module.scss";
 interface PageFooterProps {
     children: ReactNode;
     className?: string;
+    // Прячет плашку футера целиком, вместе с винным фоном: действие сейчас ни к чему (рецепт уже распознаётся)
+    isHidden?: boolean;
 }
 
 // Действие страницы (кнопка сохранения формы) порталом в общий футер вместо навигации.
 // Плашка футера остаётся на месте, меняется только содержимое
 export function PageFooter(props: PageFooterProps) {
-    const { children, className } = props;
+    const { children, className, isHidden = false } = props;
     const slot = usePageFooterSlot();
 
     if (!slot) return null;
 
-    return createPortal(<div className={clsx(styles.footer, className)}>{children}</div>, slot);
+    return createPortal(
+        <div className={clsx(styles.footer, className)} data-footer-hidden={isHidden || undefined}>
+            {children}
+        </div>,
+        slot,
+    );
 }

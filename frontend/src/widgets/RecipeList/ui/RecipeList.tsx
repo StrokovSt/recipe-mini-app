@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, type Variants } from 'motion/react';
+import { AnimatePresence, m, type Variants } from 'motion/react';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -53,7 +53,7 @@ const RecipeList = (props: RecipeListProps) => {
             <h2 className={styles.heading}>{t('title')}</h2>
             <AnimatePresence mode="wait" initial={false}>
                 {recipes.length === 0 ? (
-                    <motion.div
+                    <m.div
                         key={emptyKey}
                         className={styles.empty}
                         initial={HIDDEN}
@@ -62,9 +62,9 @@ const RecipeList = (props: RecipeListProps) => {
                         transition={TRANSITION_BASE}
                     >
                         <Message illustration="empty" title={t(`${emptyKey}.title`)} text={t(`${emptyKey}.text`)} />
-                    </motion.div>
+                    </m.div>
                 ) : (
-                    <motion.div
+                    <m.div
                         key={listKey}
                         className={styles.list}
                         animate={isDimmed ? DIMMED : VISIBLE}
@@ -74,7 +74,7 @@ const RecipeList = (props: RecipeListProps) => {
                         {/* Первый список появляется вместе со страницей: его карточки без своей анимации (initial={false} выше) */}
                         {recipes.map((recipe, index) => (
                             // Обёртка нужна motion: у самой карточки свой CSS transition на transform
-                            <motion.div
+                            <m.div
                                 key={recipe.id}
                                 className={styles.item}
                                 variants={CARD_VARIANTS}
@@ -83,9 +83,9 @@ const RecipeList = (props: RecipeListProps) => {
                                 animate="visible"
                             >
                                 <RecipeItem recipe={recipe} isEager={index < EAGER_COVERS} isPriority={index === 0} />
-                            </motion.div>
+                            </m.div>
                         ))}
-                    </motion.div>
+                    </m.div>
                 )}
             </AnimatePresence>
         </>

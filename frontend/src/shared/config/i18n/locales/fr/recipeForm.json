@@ -95,6 +95,9 @@
         "photoHint": "Capture d’écran ou photo d’une recette",
         "submit": "Reconnaître la recette",
         "note": "L’IA préparera un brouillon modifiable",
+        "done": "Recette reconnue",
+        "failed": "Impossible de reconnaître la recette",
+        "open": "Ouvrir",
         "loading": "Reconnaissance de la recette…"
     },
     "drafts": {
@@ -115,6 +118,7 @@
         "saved": "Brouillon enregistré",
         "error": "Brouillon non enregistré, vérifiez la connexion"
     },
+    "saveError": "Recette non enregistrée",
     "leave": {
         "draft": {
             "title": "Quitter le formulaire ?",

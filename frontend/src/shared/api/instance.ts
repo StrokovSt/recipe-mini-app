@@ -1,7 +1,8 @@
-import WebApp from "@twa-dev/sdk";
 import axios, { isAxiosError } from 'axios';
 
 import type { AppError } from "@recipe/common";
+
+import { getTelegram } from "@/shared/lib/telegram";
 
 export class ApiError extends Error {
     code: string;
@@ -22,8 +23,9 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-    const userId = WebApp.initDataUnsafe?.user?.id?.toString() ?? "dev-user";
-    const initData = WebApp.initData;
+    const telegram = getTelegram();
+    const userId = telegram?.initDataUnsafe?.user?.id?.toString() ?? "dev-user";
+    const initData = telegram?.initData;
 
     config.headers["x-user-id"] = userId;
     if (initData) {

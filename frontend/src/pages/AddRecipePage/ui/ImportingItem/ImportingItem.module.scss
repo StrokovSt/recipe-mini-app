@@ -1,0 +1,39 @@
+// Та же строка, что у черновика (Tile row): высота как у строки с кнопкой «⋯»
+.item {
+    display: grid;
+    align-content: center;
+    grid-template: "icon title" auto "icon subtitle" auto / auto minmax(0, 1fr);
+    column-gap: var(--space-3);
+    min-height: calc(var(--size-tile-action) + 2 * var(--space-2));
+    padding: var(--space-2) var(--space-3);
+
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+
+    .icon {
+        grid-area: icon;
+        align-self: center;
+        width: var(--size-tile-icon);
+        height: var(--size-tile-icon);
+        color: var(--color-accent);
+    }
+
+    .title {
+        grid-area: title;
+        margin: 0;
+        color: var(--color-text-muted);
+        font: var(--font-ui-sm);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .subtitle {
+        grid-area: subtitle;
+        margin: 0;
+        overflow: hidden;
+        color: var(--color-text-muted);
+        font: var(--font-ui-xs);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

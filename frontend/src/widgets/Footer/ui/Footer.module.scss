@@ -19,7 +19,7 @@
     background: var(--color-surface);
     box-shadow: var(--shadow-lg);
     transition: var(--transition-base);
-    transition-property: max-width, padding, background-color, border-color;
+    transition-property: max-width, padding, background-color, border-color, opacity;
 
     // На форме плашка сама становится винной кнопкой и сужается до максимума
     &Action {
@@ -27,6 +27,21 @@
         padding: 0;
         border-color: var(--color-active);
         background-color: var(--color-active);
+    }
+
+    // Страница спрятала своё действие (PageFooter isHidden): плашки не видно, нажать на неё нельзя
+    &:has([data-footer-hidden]) {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    // Уведомление над плашкой, с запасом на круглую «+», которая выступает над ней
+    .toast {
+        position: absolute;
+        right: 0;
+        bottom: calc(100% + var(--space-6));
+        left: 0;
+        z-index: var(--z-above);
     }
 }
 

@@ -1,5 +1,6 @@
-import WebApp from "@twa-dev/sdk";
 import { useSyncExternalStore } from "react";
+
+import { getTelegram } from "@/shared/lib/telegram";
 
 // Событие Chrome, Edge и Android: с ним можно показать системное окно установки по своей кнопке
 interface BeforeInstallPromptEvent extends Event {
@@ -23,7 +24,7 @@ const isIos = () =>
 
 // Внутри Telegram и в уже установленном приложении кнопка не нужна
 const getInstallMode = (): InstallMode => {
-    if (WebApp.initData || isStandalone()) return null;
+    if (getTelegram()?.initData || isStandalone()) return null;
     if (deferredPrompt) return "prompt";
     return isIos() ? "ios" : null;
 };

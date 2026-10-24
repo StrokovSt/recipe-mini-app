@@ -95,6 +95,9 @@
         "photoHint": "Tangkapan layar atau foto resep",
         "submit": "Kenali resep",
         "note": "AI akan menyiapkan draf yang bisa Anda ubah",
+        "done": "Resep dikenali",
+        "failed": "Resep tidak dapat dikenali",
+        "open": "Buka",
         "loading": "Mengenali resep…"
     },
     "drafts": {
@@ -115,6 +118,7 @@
         "saved": "Draf tersimpan",
         "error": "Draf tidak tersimpan, periksa koneksi"
     },
+    "saveError": "Resep tidak tersimpan",
     "leave": {
         "draft": {
             "title": "Keluar dari formulir?",

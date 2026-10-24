@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import { type Dispatch, type SetStateAction, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -69,7 +69,7 @@ const HomePage = () => {
                         actions={
                             <AnimatePresence initial={false}>
                                 {isFiltersHidden && (
-                                    <motion.div
+                                    <m.div
                                         initial={HIDDEN}
                                         animate={VISIBLE}
                                         exit={HIDDEN}
@@ -81,7 +81,7 @@ const HomePage = () => {
                                             activeCount={getActiveFilterCount(filters)}
                                             onClick={() => setIsFiltersOpen(true)}
                                         />
-                                    </motion.div>
+                                    </m.div>
                                 )}
                             </AnimatePresence>
                         }

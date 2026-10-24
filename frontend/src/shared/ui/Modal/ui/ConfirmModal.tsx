@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import { OutlineButton, RegularButton } from "@/shared/ui/Buttons";
 
-import { Modal } from "./Modal";
+import { Modal } from "./LazyModal";
 
 import styles from "./Modal.module.scss";
 

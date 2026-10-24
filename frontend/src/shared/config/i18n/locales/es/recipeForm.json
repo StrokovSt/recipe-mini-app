@@ -95,6 +95,9 @@
         "photoHint": "Captura o foto de una receta",
         "submit": "Reconocer receta",
         "note": "La IA preparará un borrador que podrá editar",
+        "done": "Receta reconocida",
+        "failed": "No se pudo reconocer la receta",
+        "open": "Abrir",
         "loading": "Reconociendo la receta…"
     },
     "drafts": {
@@ -115,6 +118,7 @@
         "saved": "Borrador guardado",
         "error": "Borrador no guardado, revise la conexión"
     },
+    "saveError": "La receta no se guardó",
     "leave": {
         "draft": {
             "title": "¿Salir del formulario?",

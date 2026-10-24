@@ -1,4 +1,3 @@
-import WebApp from "@twa-dev/sdk";
 import { type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,6 +11,7 @@ import InstallIcon from "@/shared/assets/icons/icon-install.svg?react";
 import SettingsIcon from "@/shared/assets/icons/icon-settings.svg?react";
 import UserIcon from "@/shared/assets/icons/icon-user.svg?react";
 import { promptInstall, useInstallMode } from "@/shared/lib/pwa";
+import { getTelegram } from "@/shared/lib/telegram";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 import { Modal } from "@/shared/ui/Modal";
 
@@ -42,7 +42,7 @@ export function AppMenu(props: AppMenuProps) {
         { to: AppRoute.About, icon: <InfoIcon />, title: t("about.title"), hint: t("about.hint") },
     ];
 
-    const user = WebApp.initDataUnsafe?.user;
+    const user = getTelegram()?.initDataUnsafe?.user;
     const name = user?.first_name ?? t("guest");
 
     // На iPhone нет системного окна установки: закрываем меню и показываем, где эта кнопка в Safari

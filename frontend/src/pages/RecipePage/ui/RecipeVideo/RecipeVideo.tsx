@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { motion, type TargetAndTransition } from "motion/react";
+import { m, type TargetAndTransition } from "motion/react";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -58,7 +58,7 @@ export function RecipeVideo(props: RecipeVideoProps) {
         <div className={clsx(styles.player, className)}>
             {poster && <img src={poster} alt="" className={styles.poster} />}
 
-            <motion.div
+            <m.div
                 className={clsx(styles.screen, isOpen && styles.open)}
                 animate={PHASE_ANIMATION[phase]}
                 onAnimationComplete={animationCompleteHandler}
@@ -86,7 +86,7 @@ export function RecipeVideo(props: RecipeVideoProps) {
                         onClick={close}
                     />
                 )}
-            </motion.div>
+            </m.div>
 
             {!isOpen && (
                 <IconButton

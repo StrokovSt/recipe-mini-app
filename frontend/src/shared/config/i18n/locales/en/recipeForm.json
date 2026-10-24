@@ -95,6 +95,9 @@
         "photoHint": "Screenshot or photo of a recipe",
         "submit": "Recognize recipe",
         "note": "AI will prepare a draft you can edit",
+        "done": "Recipe recognized",
+        "failed": "Couldn't recognize the recipe",
+        "open": "Open",
         "loading": "Recognizing the recipe…"
     },
     "drafts": {
@@ -115,6 +118,7 @@
         "saved": "Draft saved",
         "error": "Draft not saved, check your connection"
     },
+    "saveError": "Recipe not saved",
     "leave": {
         "draft": {
             "title": "Leave the form?",

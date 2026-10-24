@@ -1,6 +1,5 @@
-import WebApp from "@twa-dev/sdk";
-
 import { FALLBACK_LANGUAGE, type Language, LANGUAGES } from "@/shared/config/i18n";
+import { getTelegram } from "@/shared/lib/telegram";
 
 import { LANGUAGE_STORAGE_KEY } from "./setLanguage";
 
@@ -15,7 +14,7 @@ function toLanguage(code: string | null | undefined): Language | undefined {
 export function detectLanguage(): Language {
     const candidates = [
         localStorage.getItem(LANGUAGE_STORAGE_KEY),
-        WebApp.initDataUnsafe?.user?.language_code,
+        getTelegram()?.initDataUnsafe?.user?.language_code,
         ...navigator.languages,
     ];
 

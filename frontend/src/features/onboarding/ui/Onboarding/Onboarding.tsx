@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { type KeyboardEvent, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
@@ -60,7 +60,7 @@ export function Onboarding() {
     return createPortal(
         <AnimatePresence onExitComplete={() => setHole(null)}>
             {step && hole && (
-                <motion.div
+                <m.div
                     key="onboarding"
                     className={styles.layer}
                     role="dialog"
@@ -72,10 +72,10 @@ export function Onboarding() {
                     transition={TRANSITION_BASE}
                     onKeyDown={handleKeyDown}
                 >
-                    <motion.div className={styles.hole} initial={hole} animate={hole} transition={TRANSITION_BASE} />
+                    <m.div className={styles.hole} initial={hole} animate={hole} transition={TRANSITION_BASE} />
 
                     <AnimatePresence mode="wait">
-                        <motion.div
+                        <m.div
                             key={step.id}
                             className={clsx(styles.card, !step.target && styles.centered)}
                             style={step.target ? getCardStyle(hole) : undefined}
@@ -106,9 +106,9 @@ export function Onboarding() {
                                     />
                                 </div>
                             </div>
-                        </motion.div>
+                        </m.div>
                     </AnimatePresence>
-                </motion.div>
+                </m.div>
             )}
         </AnimatePresence>,
         document.body

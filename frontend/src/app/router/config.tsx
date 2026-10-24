@@ -1,32 +1,19 @@
-import { type ComponentType, lazy } from "react";
+import { lazyWithPreload } from "@/shared/lib/lazy";
 
 import { AppRoute, type RouteConfig } from "./routes";
 
-type PageModule = { default: ComponentType };
-
-// lazy с фоновой подгрузкой. Если код страницы уже загружен, lazy получает его синхронно
-// и React не показывает пустой Suspense (~300мс) при первом переходе на страницу
-const lazyPage = (load: () => Promise<PageModule>) => {
-    let loaded: PageModule | undefined;
-    const preload = () => load().then((module) => (loaded = module));
-    const syncModule = (module: PageModule) => ({ then: (resolve: (value: PageModule) => void) => resolve(module) });
-    const Page = lazy(() => (loaded ? syncModule(loaded) : preload()) as Promise<PageModule>);
-
-    return { Page, preload };
-};
-
 const PAGES = {
-    HomePage: lazyPage(() => import("@/pages/HomePage").then(m => ({ default: m.HomePage }))),
-    RecipePage: lazyPage(() => import("@/pages/RecipePage").then(m => ({ default: m.RecipePage }))),
-    AddRecipePage: lazyPage(() => import("@/pages/AddRecipePage").then(m => ({ default: m.AddRecipePage }))),
-    ImportRecipePage: lazyPage(() => import("@/pages/ImportRecipePage").then(m => ({ default: m.ImportRecipePage }))),
-    CreateRecipePage: lazyPage(() => import("@/pages/CreateRecipePage").then(m => ({ default: m.CreateRecipePage }))),
-    SectionsPage: lazyPage(() => import("@/pages/SectionsPage").then(m => ({ default: m.SectionsPage }))),
-    EditRecipePage: lazyPage(() => import("@/pages/EditRecipePage").then(m => ({ default: m.EditRecipePage }))),
-    ProfilePage: lazyPage(() => import("@/pages/ProfilePage").then(m => ({ default: m.ProfilePage }))),
-    SettingsPage: lazyPage(() => import("@/pages/SettingsPage").then(m => ({ default: m.SettingsPage }))),
-    AboutPage: lazyPage(() => import("@/pages/AboutPage").then(m => ({ default: m.AboutPage }))),
-    NotFoundPage: lazyPage(() => import("@/pages/NotFoundPage").then(m => ({ default: m.NotFoundPage }))),
+    HomePage: lazyWithPreload(() => import("@/pages/HomePage").then(m => ({ default: m.HomePage }))),
+    RecipePage: lazyWithPreload(() => import("@/pages/RecipePage").then(m => ({ default: m.RecipePage }))),
+    AddRecipePage: lazyWithPreload(() => import("@/pages/AddRecipePage").then(m => ({ default: m.AddRecipePage }))),
+    ImportRecipePage: lazyWithPreload(() => import("@/pages/ImportRecipePage").then(m => ({ default: m.ImportRecipePage }))),
+    CreateRecipePage: lazyWithPreload(() => import("@/pages/CreateRecipePage").then(m => ({ default: m.CreateRecipePage }))),
+    SectionsPage: lazyWithPreload(() => import("@/pages/SectionsPage").then(m => ({ default: m.SectionsPage }))),
+    EditRecipePage: lazyWithPreload(() => import("@/pages/EditRecipePage").then(m => ({ default: m.EditRecipePage }))),
+    ProfilePage: lazyWithPreload(() => import("@/pages/ProfilePage").then(m => ({ default: m.ProfilePage }))),
+    SettingsPage: lazyWithPreload(() => import("@/pages/SettingsPage").then(m => ({ default: m.SettingsPage }))),
+    AboutPage: lazyWithPreload(() => import("@/pages/AboutPage").then(m => ({ default: m.AboutPage }))),
+    NotFoundPage: lazyWithPreload(() => import("@/pages/NotFoundPage").then(m => ({ default: m.NotFoundPage }))),
 };
 
 let isPreloaded = false;
@@ -41,50 +28,50 @@ export const preloadPages = () => {
 export const routeConfig: RouteConfig[] = [
     {
         path: AppRoute.Home,
-        element: PAGES.HomePage.Page,
+        element: PAGES.HomePage.Component,
     },
     {
         path: AppRoute.Recipe,
-        element: PAGES.RecipePage.Page,
+        element: PAGES.RecipePage.Component,
     },
     {
         path: AppRoute.AddRecipe,
-        element: PAGES.AddRecipePage.Page,
+        element: PAGES.AddRecipePage.Component,
     },
     {
         path: AppRoute.ImportRecipe,
-        element: PAGES.ImportRecipePage.Page,
+        element: PAGES.ImportRecipePage.Component,
     },
     {
         path: AppRoute.CreateRecipe,
-        element: PAGES.CreateRecipePage.Page,
+        element: PAGES.CreateRecipePage.Component,
     },
     {
         path: AppRoute.Draft,
-        element: PAGES.CreateRecipePage.Page,
+        element: PAGES.CreateRecipePage.Component,
     },
     {
         path: AppRoute.Sections,
-        element: PAGES.SectionsPage.Page,
+        element: PAGES.SectionsPage.Component,
     },
     { 
         path: AppRoute.EditRecipe,
-        element: PAGES.EditRecipePage.Page,
+        element: PAGES.EditRecipePage.Component,
     },
     {
         path: AppRoute.Profile,
-        element: PAGES.ProfilePage.Page,
+        element: PAGES.ProfilePage.Component,
     },
     {
         path: AppRoute.Settings,
-        element: PAGES.SettingsPage.Page,
+        element: PAGES.SettingsPage.Component,
     },
     {
         path: AppRoute.About,
-        element: PAGES.AboutPage.Page,
+        element: PAGES.AboutPage.Component,
     },
     {
         path: AppRoute.NotFound,
-        element: PAGES.NotFoundPage.Page,
+        element: PAGES.NotFoundPage.Component,
     },
 ];

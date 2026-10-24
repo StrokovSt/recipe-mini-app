@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m } from "motion/react";
 
 import type { Burst } from "./createPetals";
 
@@ -21,7 +21,7 @@ export function PetalBurst({ burst, onDone }: PetalBurstProps) {
     return (
         <div key={burst.id} className={styles.burst} style={{ left: burst.x, top: burst.y }} aria-hidden>
             {burst.petals.map((petal, index) => (
-                <motion.svg
+                <m.svg
                     key={index}
                     className={styles.petal}
                     viewBox="0 0 20 24"
@@ -37,7 +37,7 @@ export function PetalBurst({ burst, onDone }: PetalBurstProps) {
                     onAnimationComplete={index === 0 ? onDone : undefined}
                 >
                     <path d={PETAL_PATH} />
-                </motion.svg>
+                </m.svg>
             ))}
         </div>
     );

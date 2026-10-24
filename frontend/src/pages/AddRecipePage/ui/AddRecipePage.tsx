@@ -9,6 +9,7 @@ import { AppRoute } from "@/app/router";
 import { buildRoute } from "@/app/router/routes";
 import { DraftItem, useDeleteDraft, useDrafts } from "@/entities/draft";
 import { useMe } from "@/entities/user";
+import { useImportsInProgress } from "@/features/recipe-form";
 import FormIcon from "@/shared/assets/icons/icon-form.svg?react";
 import ImageIcon from "@/shared/assets/icons/icon-image.svg?react";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
@@ -20,6 +21,7 @@ import { SectionCard } from "@/shared/ui/SectionCard";
 import { SectionHeading } from "@/shared/ui/SectionHeading";
 import { preloadLoader } from "@/shared/ui/Spinner";
 
+import { ImportingItem } from "./ImportingItem/ImportingItem";
 import { OptionCard } from "./OptionCard/OptionCard";
 
 import styles from "./AddRecipePage.module.scss";
@@ -30,6 +32,7 @@ const AddRecipePage = () => {
     const navigate = useNavigate();
     const { data: user } = useMe({ fresh: true });
     const { data: drafts = [] } = useDrafts();
+    const importing = useImportsInProgress();
     const { mutate: removeDraft } = useDeleteDraft();
     const [isAiSheetOpen, setIsAiSheetOpen] = useState(false);
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
@@ -126,7 +129,7 @@ const AddRecipePage = () => {
 
             <p className={styles.saved}>{t("choose.saved")}</p>
 
-            {drafts.length > 0 && (
+            {(drafts.length > 0 || importing.length > 0) && (
                 <section className={styles.drafts}>
                     <SectionHeading
                         title={t("drafts.title")}
@@ -134,6 +137,7 @@ const AddRecipePage = () => {
                         total={t("drafts.total", { count: drafts.length, limit: DRAFT_LIMIT })}
                     />
                     <div className={styles.draftList}>
+                        {importing.map(({ id, source }) => <ImportingItem key={id} source={source} />)}
                         {drafts.map((draft) => (
                             <DraftItem key={draft.id} draft={draft} to={buildRoute.draft(draft.id)} onDelete={askDelete} />
                         ))}

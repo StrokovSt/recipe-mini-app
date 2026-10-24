@@ -1,1 +1,1 @@
-export { BottomSheet } from "./ui/BottomSheet";
+export { BottomSheet, preloadBottomSheet } from "./ui/LazyBottomSheet";

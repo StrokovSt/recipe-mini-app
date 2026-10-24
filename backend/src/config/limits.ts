@@ -5,7 +5,7 @@ export const enum Plan {
 
 export const PLAN_LIMITS = {
     [Plan.FREE]: {
-        recipes: 15,
+        recipes: 50,
         mediaPerRecipe: 3,
     },
     [Plan.PRO]: {

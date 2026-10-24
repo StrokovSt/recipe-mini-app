@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { type MouseEvent, type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { matchPath, NavLink, useLocation } from "react-router-dom";
@@ -12,6 +12,7 @@ import { TRANSITION_PAGE } from "@/shared/config/animation";
 import { getAnimations } from "@/shared/lib/animations";
 import { impactHaptic } from "@/shared/lib/haptic";
 import { useSetPageFooterSlot } from "@/shared/ui/PageFooter";
+import { Toast } from "@/shared/ui/Toast";
 
 import { type Burst, createPetals } from "./PetalBurst/createPetals";
 import { PetalBurst } from "./PetalBurst/PetalBurst";
@@ -71,12 +72,12 @@ export function Footer() {
     ];
 
     return (
-        <motion.footer className={styles.footer} initial={HIDDEN} animate={VISIBLE} transition={TRANSITION_PAGE}>
+        <m.footer className={styles.footer} initial={HIDDEN} animate={VISIBLE} transition={TRANSITION_PAGE}>
             {/* Плашка стоит на месте, навигация и кнопка формы сменяют друг друга внутри */}
             <div className={clsx(styles.nav, hasAction && styles.navAction)}>
                 <AnimatePresence mode="wait" initial={false}>
                     {hasAction ? (
-                        <motion.div
+                        <m.div
                             key="action"
                             ref={setSlot}
                             className={styles.action}
@@ -86,7 +87,7 @@ export function Footer() {
                             transition={TRANSITION_PAGE}
                         />
                     ) : (
-                        <motion.nav
+                        <m.nav
                             key="nav"
                             className={styles.items}
                             initial={HIDDEN}
@@ -122,12 +123,15 @@ export function Footer() {
                                     </NavLink>
                                 )
                             )}
-                        </motion.nav>
+                        </m.nav>
                     )}
                 </AnimatePresence>
+
+                {/* Уведомления над плашкой, например «Рецепт распознан» */}
+                <Toast className={styles.toast} />
             </div>
 
             <PetalBurst burst={burst} onDone={() => setBurst(null)} />
-        </motion.footer>
+        </m.footer>
     );
 }

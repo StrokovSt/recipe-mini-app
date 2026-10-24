@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
+import { createError, ErrorCode } from "@recipe/common";
+
 import { PLAN_LIMITS } from "../config/limits";
 import prisma from "../lib/prisma";
 import { ensureUser } from "../services/user";
@@ -24,9 +26,9 @@ export const checkRecipeLimit = async (req: Request, res: Response, next: NextFu
     });
 
     if (count >= limit) {
+        // code, как у остальных ошибок: по нему фронтенд показывает понятный текст на языке интерфейса
         res.status(403).json({
-            error: "LIMIT_REACHED",
-            message: `Лимит ${limit} рецептов для бесплатного плана достигнут`,
+            ...createError(ErrorCode.LIMIT_REACHED, `Лимит ${limit} рецептов для бесплатного плана достигнут`),
             limit,
             current: count,
         });

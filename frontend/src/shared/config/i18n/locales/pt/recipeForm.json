@@ -95,6 +95,9 @@
         "photoHint": "Captura de tela ou foto de uma receita",
         "submit": "Reconhecer receita",
         "note": "A IA vai preparar um rascunho editável",
+        "done": "Receita reconhecida",
+        "failed": "Não foi possível reconhecer a receita",
+        "open": "Abrir",
         "loading": "Reconhecendo a receita…"
     },
     "drafts": {
@@ -115,6 +118,7 @@
         "saved": "Rascunho salvo",
         "error": "Rascunho não salvo, verifique a conexão"
     },
+    "saveError": "Receita não salva",
     "leave": {
         "draft": {
             "title": "Sair do formulário?",

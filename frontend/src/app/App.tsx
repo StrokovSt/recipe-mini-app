@@ -1,3 +1,4 @@
+import { MotionProvider } from "@/app/providers/MotionProvider";
 import { QueryProvider } from "@/app/providers/QueryProvider";
 import { RouterProvider } from "@/app/providers/RouterProvider";
 import { SettingsSync } from "@/app/providers/SettingsSync";
@@ -10,20 +11,22 @@ import { Footer } from "@/widgets/Footer";
 
 export default function App() {
     return (
-        <QueryProvider>
-            <SettingsSync />
-            <RouterProvider>
-                <PageHeaderProvider>
-                    <PageFooterProvider>
-                        <PageHeaderBar />
-                        <ErrorBoundary>
-                            <AppRouter />
-                        </ErrorBoundary>
-                        <Footer />
-                        <GlobalLoader />
-                    </PageFooterProvider>
-                </PageHeaderProvider>
-            </RouterProvider>
-        </QueryProvider>
+        <MotionProvider>
+            <QueryProvider>
+                <SettingsSync />
+                <RouterProvider>
+                    <PageHeaderProvider>
+                        <PageFooterProvider>
+                            <PageHeaderBar />
+                            <ErrorBoundary>
+                                <AppRouter />
+                            </ErrorBoundary>
+                            <Footer />
+                            <GlobalLoader />
+                        </PageFooterProvider>
+                    </PageHeaderProvider>
+                </RouterProvider>
+            </QueryProvider>
+        </MotionProvider>
     );
 }
