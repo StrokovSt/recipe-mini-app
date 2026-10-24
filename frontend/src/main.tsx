@@ -6,7 +6,9 @@ import { initAnimations } from './shared/lib/animations'
 import { loadFonts } from './shared/lib/fonts'
 import { initI18n } from './shared/lib/i18n'
 import { initInstallPrompt } from './shared/lib/pwa'
+import { hideSplashWhen, startSplash } from './shared/lib/splash'
 import { initTheme } from './shared/lib/theme'
+import { firstPageShown } from './shared/ui/PageWrapper'
 import { preloadLoader } from './shared/ui/Spinner'
 
 import '@fontsource-variable/literata/opsz.css'
@@ -21,9 +23,14 @@ initTheme()
 initAnimations()
 initInstallPrompt()
 
+// Котик-заставка из index.html закрывает загрузку целиком: интерфейс появляется сразу весь, а не по частям
+const loaderReady = preloadLoader()
+startSplash()
+hideSplashWhen(firstPageShown)
+
 // Рендерим после загрузки словарей выбранного языка, шрифтов и постера котика,
 // чтобы не мелькали ключи, текст не перескакивал и котик был виден с первой загрузки
-Promise.all([initI18n(), loadFonts(), preloadLoader()]).then(() => {
+Promise.all([initI18n(), loadFonts(), loaderReady]).then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <App />

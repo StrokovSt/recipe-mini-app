@@ -23,6 +23,15 @@
         z-index: var(--z-modal);
         background: var(--color-video-bg);
     }
+
+    // Там же и того же размера, что «Назад» в шапке страницы (вложено, чтобы перебить размер круглой IconButton)
+    .close {
+        position: absolute;
+        top: calc(env(safe-area-inset-top) + var(--space-3));
+        right: var(--space-page);
+        width: var(--size-menu-button);
+        height: var(--size-menu-button);
+    }
 }
 
 .video {
@@ -47,10 +56,4 @@
     height: var(--size-play-button);
     box-shadow: var(--shadow-lg);
     color: var(--color-active);
-}
-
-.close {
-    position: absolute;
-    top: calc(env(safe-area-inset-top) + var(--space-3));
-    right: var(--space-3);
 }

@@ -1,4 +1,5 @@
 // Глобальный котик: один на всё приложение. Загрузки регистрируются задачами.
+import { isSplashShown, splashHidden } from "@/shared/lib/splash";
 import type { LoaderName } from "@/shared/ui/Spinner";
 
 // Котик виден, пока есть хоть одна задача, дождавшаяся своей задержки, и не меньше MIN_VISIBLE_MS
@@ -77,10 +78,18 @@ export function startLoading({ label, delay = DEFAULT_DELAY, loader }: LoaderOpt
     const id = nextId++;
     const task: Task = { label, loader, isDue: delay === 0, isHandedOff: false };
 
+    const markDue = () => {
+        if (!tasks.has(id)) return;
+        task.isDue = true;
+        update();
+    };
+
+    // Пока на экране заставка с котиком, второй котик под ней не нужен: он только продлил бы
+    // заставку на своё минимальное время. Если загрузка переживёт заставку, котик появится после неё
     if (!task.isDue) {
         task.timer = setTimeout(() => {
-            task.isDue = true;
-            update();
+            if (isSplashShown()) splashHidden.then(markDue);
+            else markDue();
         }, delay);
     }
 

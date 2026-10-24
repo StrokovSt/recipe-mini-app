@@ -14,11 +14,51 @@
       // Тёмная тема до старта приложения, чтобы заставка не мигала светлой. Полная логика в shared/lib/theme
       if (localStorage.getItem("theme") === "dark") document.documentElement.setAttribute("data-theme", "dark");
     </script>
+    <style>
+      /* Заставка с котиком: видна с первого кадра, ещё до скриптов и стилей приложения, поэтому стили здесь,
+         а цвета и размеры числами: фон = --color-app-bg, котик = --size-loader-xl и стоит там же, где GlobalLoader.
+         Убирает её shared/lib/splash, когда первая страница показана целиком */
+      html,
+      body,
+      #splash {
+        margin: 0;
+        background: #f0e7cc;
+      }
+
+      [data-theme="dark"],
+      [data-theme="dark"] body,
+      [data-theme="dark"] #splash {
+        background: #1d1814;
+      }
+
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.3s ease;
+      }
+
+      #splash.hidden {
+        opacity: 0;
+      }
+
+      #splash video {
+        width: 240px;
+      }
+    </style>
   </head>
   <body>
-    <div id="root">
-      <!-- Заставка до старта приложения: React заменит её своим содержимым -->
-      <p class="splash">Mirabelle</p>
+    <div id="root"></div>
+    <!-- Заставка: котик-загрузчик, пока приложение грузится целиком. Видео запускает shared/lib/splash,
+         когда его уже качает preloadLoader, а до того виден первый кадр -->
+    <div id="splash">
+      <video poster="/src/shared/assets/video/loaders/cat-poster.webp" muted loop playsinline preload="none">
+        <source src="/src/shared/assets/video/loaders/cat.webm" type="video/webm" />
+        <source src="/src/shared/assets/video/loaders/cat.mp4" type="video/mp4" />
+      </video>
     </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

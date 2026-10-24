@@ -184,16 +184,4 @@ button, input, textarea, select {
                 url("@/shared/assets/images/background_list_dark.webp");
         }
     }
-
-    // Заставка из index.html: видна, пока приложение не стартовало
-    .splash {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0;
-        color: var(--color-active);
-        font: var(--font-2xl);
-    }
 }
