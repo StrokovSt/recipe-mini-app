@@ -84,30 +84,27 @@ export function Onboarding() {
                             exit={CARD_HIDDEN}
                             transition={TRANSITION_PAGE}
                         >
-                            {step.target ? (
-                                <>
-                                    <span className={styles.counter}>
-                                        {t("counter", { current: stepNumber, total })}
-                                    </span>
-                                    <p className={styles.text}>{t(step.id)}</p>
-                                </>
-                            ) : (
-                                <div className={styles.welcome}>
-                                    <img className={styles.image} src={catIdea} alt="" />
-                                    <h2 className={styles.title}>{t("welcome.title")}</h2>
-                                    <p className={styles.text}>{t("welcome.text")}</p>
-                                </div>
-                            )}
+                            {/* Как у шторки: заголовок и номер шага в полупрозрачной шапке */}
+                            <header className={styles.header}>
+                                <h2 className={styles.title}>{t(`${step.id}.title`)}</h2>
+                                {step.target && (
+                                    <span className={styles.counter}>{t("counter", { current: stepNumber, total })}</span>
+                                )}
+                            </header>
 
-                            <div className={styles.actions}>
-                                {!isLast && <OutlineButton label={t("skip")} onClick={close} />}
-                                <RegularButton
-                                    // Фокус на главной кнопке: Enter листает дальше
-                                    autoFocus
-                                    className={styles.next}
-                                    label={t(stepNumber === 0 ? "start" : isLast ? "done" : "next")}
-                                    onClick={handleNext}
-                                />
+                            <div className={styles.body}>
+                                {!step.target && <img className={styles.image} src={catIdea} alt="" />}
+                                <p className={styles.text}>{t(`${step.id}.text`)}</p>
+
+                                <div className={styles.actions}>
+                                    {!isLast && <OutlineButton label={t("skip")} onClick={close} />}
+                                    <RegularButton
+                                        // Фокус на главной кнопке: Enter листает дальше
+                                        autoFocus
+                                        label={t(stepNumber === 0 ? "start" : isLast ? "done" : "next")}
+                                        onClick={handleNext}
+                                    />
+                                </div>
                             </div>
                         </motion.div>
                     </AnimatePresence>

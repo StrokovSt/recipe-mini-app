@@ -20,7 +20,7 @@
     },
     "install": {
         "title": "Pasang aplikasi",
-        "hint": "Mirabelle di layar utama",
+        "hint": "Kokoro di layar utama",
         "iosTitle": "Pasang di iPhone",
         "iosText": "Di Safari, ketuk Bagikan, lalu «Tambahkan ke Layar Utama»."
     }

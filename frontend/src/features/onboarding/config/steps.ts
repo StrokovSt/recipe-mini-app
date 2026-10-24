@@ -1,5 +1,5 @@
 // Шаги обучения на главной. target — значение data-onboarding у подсвечиваемой кнопки,
-// без него шаг по центру экрана с котиком. Текст шага — onboarding:<id>
+// без него шаг по центру экрана с котиком. Заголовок и текст шага — onboarding:<id>.title и .text
 export type OnboardingStep =
     | { id: "welcome"; target?: undefined }
     | { id: "home" | "add" | "search" | "filter" | "sections" | "menu"; target: string };

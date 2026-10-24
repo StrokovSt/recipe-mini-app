@@ -1,7 +1,14 @@
 {
-    "empty": "Ancora nessuna ricetta",
-    "servings_one": "{{count}} porzione",
+    "empty": {
+        "title": "Ancora nessuna ricetta",
+        "text": "Qui nascerà il Suo ricettario. Aggiunga la prima ricetta con il pulsante «+» in basso."
+    },
+    "emptyFiltered": {
+        "title": "Nessun risultato",
+        "text": "Provi a cambiare la ricerca o a togliere qualche filtro."
+    },
     "servings_many": "{{count}} porzioni",
+    "servings_one": "{{count}} porzione",
     "servings_other": "{{count}} porzioni",
     "title": "Ricette"
 }

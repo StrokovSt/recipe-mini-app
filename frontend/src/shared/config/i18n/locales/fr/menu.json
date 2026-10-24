@@ -20,7 +20,7 @@
     },
     "install": {
         "title": "Installer l’application",
-        "hint": "Mirabelle sur l’écran d’accueil",
+        "hint": "Kokoro sur l’écran d’accueil",
         "iosTitle": "Installer sur iPhone",
         "iosText": "Dans Safari, touchez Partager, puis « Sur l’écran d’accueil »."
     }

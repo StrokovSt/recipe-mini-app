@@ -1,15 +1,33 @@
 {
     "label": "Visite guidée",
     "welcome": {
-        "title": "Bienvenue !",
-        "text": "Voici Mirabelle, votre livre de recettes. Je vous montre l’essentiel en trente secondes."
+        "title": "Bienvenue dans Kokoro",
+        "text": "Toutes vos recettes vont vivre ici. Je vous fais faire le tour, ce ne sera pas long."
     },
-    "home": "Vous êtes sur l’accueil : toutes vos recettes sont ici.",
-    "add": "Ajoutez des recettes depuis un lien de n’importe quel site, une photo ou à la main. L’IA repère les ingrédients et les étapes.",
-    "search": "Cherchez des recettes par nom.",
-    "filter": "Filtrez par catégories et tags.",
-    "sections": "Ici, les catégories et les tags : créez les vôtres pour mettre de l’ordre.",
-    "menu": "Paramètres, thème et langue. Vous pouvez refaire la visite à tout moment via « Mode d’emploi ».",
+    "home": {
+        "title": "Vos recettes",
+        "text": "Tout ce que vous avez enregistré se trouve ici, sur l’accueil."
+    },
+    "add": {
+        "title": "Ajoutez des recettes",
+        "text": "Collez un lien de n’importe quel site, importez une photo ou écrivez la recette vous-même."
+    },
+    "search": {
+        "title": "Recherche rapide",
+        "text": "Commencez à taper le nom, et la recette apparaît."
+    },
+    "filter": {
+        "title": "Filtres",
+        "text": "Choisissez une catégorie ou des tags pour ne voir que l’essentiel."
+    },
+    "sections": {
+        "title": "Tout est bien rangé",
+        "text": "Vos catégories et tags sont ici. Créez les vôtres pour ne perdre aucune recette."
+    },
+    "menu": {
+        "title": "Menu",
+        "text": "Paramètres, thème et langue. Vous pouvez refaire la visite via « Mode d’emploi »."
+    },
     "counter": "{{current}} sur {{total}}",
     "start": "C’est parti",
     "next": "Suivant",

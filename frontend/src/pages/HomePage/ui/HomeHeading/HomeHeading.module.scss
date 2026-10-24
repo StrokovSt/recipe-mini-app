@@ -7,8 +7,23 @@
         display: flex;
     }
 
-    .logo {
+    .logo,
+    .logoDark {
         height: var(--size-home-logo);
+    }
+
+    .logoDark {
+        display: none;
+    }
+
+    [data-theme="dark"] & {
+        .logo {
+            display: none;
+        }
+
+        .logoDark {
+            display: block;
+        }
     }
 
     .actions {

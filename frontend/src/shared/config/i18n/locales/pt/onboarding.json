@@ -1,15 +1,33 @@
 {
     "label": "Tour",
     "welcome": {
-        "title": "Olá!",
-        "text": "Esta é a Mirabelle, seu livro de receitas. Mostro o principal em meio minuto."
+        "title": "Boas-vindas ao Kokoro",
+        "text": "Aqui vão morar todas as suas receitas. Vou mostrar onde fica cada coisa, não vai demorar."
     },
-    "home": "Você está na tela inicial: aqui ficam todas as suas receitas.",
-    "add": "Adicione receitas por link de qualquer site, por foto ou à mão. A IA organiza ingredientes e passos.",
-    "search": "Busque receitas pelo nome.",
-    "filter": "Filtre por categorias e tags.",
-    "sections": "Aqui ficam as categorias e tags: crie as suas para manter tudo organizado.",
-    "menu": "Configurações, tema e idioma. Você pode refazer o tour quando quiser em “Como usar”.",
+    "home": {
+        "title": "Suas receitas",
+        "text": "Tudo o que você salvou fica aqui, na tela inicial."
+    },
+    "add": {
+        "title": "Adicione receitas",
+        "text": "Cole um link de qualquer site, envie uma foto ou escreva a receita você mesmo."
+    },
+    "search": {
+        "title": "Busca rápida",
+        "text": "Comece a digitar o nome e a receita aparece."
+    },
+    "filter": {
+        "title": "Filtros",
+        "text": "Escolha uma categoria ou tags para ver só o que precisa."
+    },
+    "sections": {
+        "title": "Tudo organizado",
+        "text": "Aqui ficam suas categorias e tags. Crie as suas para nenhuma receita se perder."
+    },
+    "menu": {
+        "title": "Menu",
+        "text": "Configurações, tema e idioma. Você pode refazer o tour em “Como usar”."
+    },
     "counter": "{{current}} de {{total}}",
     "start": "Vamos lá",
     "next": "Próximo",

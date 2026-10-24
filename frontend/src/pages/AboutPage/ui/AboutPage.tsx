@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import seal from "@/shared/assets/images/seal.webp";
 import { IconButton } from "@/shared/ui/Buttons";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
@@ -38,9 +39,8 @@ const AboutPage = () => {
             }
         >
             <section className={styles.hero}>
-                {/* «Меню, набор блюд» по-японски, как печать */}
-                <span className={styles.stamp} aria-hidden>献立</span>
-                <h2 className={styles.name}>{t("common:appName")}</h2>
+                {/* Название уже на печати, отдельной подписью не дублируем */}
+                <img className={styles.stamp} src={seal} alt={t("common:appName")} />
                 <p className={styles.description}>{t("description")}</p>
                 <span className={styles.version}>{t("version", { version })}</span>
             </section>

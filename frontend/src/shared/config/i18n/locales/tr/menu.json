@@ -20,7 +20,7 @@
     },
     "install": {
         "title": "Uygulamayı yükle",
-        "hint": "Mirabelle ana ekranında",
+        "hint": "Kokoro ana ekranında",
         "iosTitle": "iPhone’a yükle",
         "iosText": "Safari’de Paylaş’a, ardından «Ana Ekrana Ekle»ye dokunun."
     }

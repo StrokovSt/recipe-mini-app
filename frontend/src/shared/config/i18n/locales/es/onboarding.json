@@ -1,15 +1,33 @@
 {
     "label": "Guía",
     "welcome": {
-        "title": "¡Bienvenido!",
-        "text": "Esto es Mirabelle, su libro de recetas. Le enseño lo principal en medio minuto."
+        "title": "Bienvenido a Kokoro",
+        "text": "Aquí vivirán todas sus recetas. Le enseño dónde está cada cosa, no tardaremos mucho."
     },
-    "home": "Está en la pantalla principal: aquí están todas sus recetas.",
-    "add": "Añada recetas desde un enlace de cualquier web, una foto o a mano. La IA extrae los ingredientes y los pasos.",
-    "search": "Busque recetas por nombre.",
-    "filter": "Filtre por categorías y etiquetas.",
-    "sections": "Aquí están las categorías y etiquetas: cree las suyas para tenerlo todo en orden.",
-    "menu": "Ajustes, tema e idioma. Puede repetir la guía cuando quiera en «Cómo usar».",
+    "home": {
+        "title": "Sus recetas",
+        "text": "Todo lo que ha guardado está aquí, en la pantalla principal."
+    },
+    "add": {
+        "title": "Añada recetas",
+        "text": "Pegue un enlace de cualquier web, suba una foto o escriba la receta usted mismo."
+    },
+    "search": {
+        "title": "Búsqueda rápida",
+        "text": "Empiece a escribir el nombre y la receta aparecerá."
+    },
+    "filter": {
+        "title": "Filtros",
+        "text": "Elija una categoría o etiquetas para ver solo lo que necesita."
+    },
+    "sections": {
+        "title": "Todo en orden",
+        "text": "Aquí están sus categorías y etiquetas. Cree las suyas para que ninguna receta se pierda."
+    },
+    "menu": {
+        "title": "Menú",
+        "text": "Ajustes, tema e idioma. Puede repetir la guía en «Cómo usar»."
+    },
     "counter": "{{current}} de {{total}}",
     "start": "Empezar",
     "next": "Siguiente",

@@ -1,15 +1,33 @@
 {
     "label": "Panduan",
     "welcome": {
-        "title": "Selamat datang!",
-        "text": "Ini Mirabelle, buku resep Anda. Kami tunjukkan hal utamanya dalam setengah menit."
+        "title": "Selamat datang di Kokoro",
+        "text": "Semua resep Anda akan tinggal di sini. Kami tunjukkan letak semuanya, tidak akan lama."
     },
-    "home": "Anda di halaman utama: semua resep Anda ada di sini.",
-    "add": "Tambahkan resep dari tautan situs mana pun, dari foto, atau secara manual. AI akan mengurai bahan dan langkahnya.",
-    "search": "Cari resep berdasarkan nama.",
-    "filter": "Saring berdasarkan kategori dan tag.",
-    "sections": "Di sini ada kategori dan tag: buat sendiri agar semuanya rapi.",
-    "menu": "Pengaturan, tema, dan bahasa. Panduan bisa diulang kapan saja lewat “Cara pakai”.",
+    "home": {
+        "title": "Resep Anda",
+        "text": "Semua yang sudah Anda simpan ada di sini, di halaman utama."
+    },
+    "add": {
+        "title": "Tambahkan resep",
+        "text": "Tempel tautan dari situs mana pun, unggah foto, atau tulis resepnya sendiri."
+    },
+    "search": {
+        "title": "Pencarian cepat",
+        "text": "Mulai ketik nama, dan resepnya akan ditemukan."
+    },
+    "filter": {
+        "title": "Filter",
+        "text": "Pilih kategori atau tag untuk melihat yang Anda perlukan saja."
+    },
+    "sections": {
+        "title": "Semua tertata rapi",
+        "text": "Kategori dan tag Anda ada di sini. Buat sendiri agar tidak ada resep yang hilang."
+    },
+    "menu": {
+        "title": "Menu",
+        "text": "Pengaturan, tema, dan bahasa. Panduan ini bisa diulang lewat “Cara pakai”."
+    },
     "counter": "{{current}} dari {{total}}",
     "start": "Ayo mulai",
     "next": "Berikutnya",

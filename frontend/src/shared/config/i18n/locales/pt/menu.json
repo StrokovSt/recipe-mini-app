@@ -20,7 +20,7 @@
     },
     "install": {
         "title": "Instalar app",
-        "hint": "Mirabelle na tela inicial",
+        "hint": "Kokoro na tela inicial",
         "iosTitle": "Instalar no iPhone",
         "iosText": "No Safari, toque em Compartilhar e depois em «Adicionar à Tela de Início»."
     }

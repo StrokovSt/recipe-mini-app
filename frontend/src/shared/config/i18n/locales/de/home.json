@@ -1,5 +1,12 @@
 {
-    "empty": "Noch keine Rezepte",
+    "empty": {
+        "title": "Noch keine Rezepte",
+        "text": "Hier entsteht Ihr Kochbuch. Fügen Sie Ihr erstes Rezept mit der Schaltfläche „+“ unten hinzu."
+    },
+    "emptyFiltered": {
+        "title": "Nichts gefunden",
+        "text": "Ändern Sie die Suche oder entfernen Sie einige Filter."
+    },
     "servings_one": "{{count}} Portion",
     "servings_other": "{{count}} Portionen",
     "title": "Rezepte"

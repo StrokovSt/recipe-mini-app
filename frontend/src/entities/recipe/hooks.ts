@@ -1,8 +1,9 @@
-import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import type { CreateRecipeDto } from "@recipe/common";
+import type { CreateRecipeDto, Recipe } from "@recipe/common";
 
 import { recipeApi } from "./api";
+import { filterRecipes } from "./lib/filterRecipes";
 import type { GetRecipesProps } from "./types";
 
 export const RECIPE_KEYS = {
@@ -19,11 +20,18 @@ const TAGS_KEY = ["tags"] as const;
 const CATEGORIES_KEY = ["categories"] as const;
 
 export function useRecipes(filters: GetRecipesProps) {
+    const queryClient = useQueryClient();
+
     return useQuery({
         queryKey: RECIPE_KEYS.list(filters ?? {}),
         queryFn: () => recipeApi.getAll(filters),
-        // При смене фильтров показываем прежний список, пока грузится новый (без скачка прокрутки)
-        placeholderData: keepPreviousData,
+        // Пока грузится новый список, показываем прежний (без скачка прокрутки). Если прежнего нет
+        // (пришли на главную из разделов с категорией или тегом), отбираем рецепты из уже загруженного полного списка
+        placeholderData: (previous) => {
+            if (previous) return previous;
+            const all = queryClient.getQueryData<Recipe[]>(RECIPE_KEYS.list({}));
+            return all && filterRecipes(all, filters);
+        },
     });
 }
 

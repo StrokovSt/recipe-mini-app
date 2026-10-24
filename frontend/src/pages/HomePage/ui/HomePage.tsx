@@ -98,7 +98,11 @@ const HomePage = () => {
                 isOpen={isFiltersOpen}
                 onOpenChange={setIsFiltersOpen}
             />
-            <RecipeList recipes={recipes} isDimmed={isPlaceholderData} />
+            <RecipeList
+                recipes={recipes}
+                isDimmed={isPlaceholderData}
+                isFiltered={Boolean(filters.search) || getActiveFilterCount(filters) > 0}
+            />
             <Onboarding />
         </PageWrapper>
     );

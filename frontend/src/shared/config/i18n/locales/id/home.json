@@ -1,5 +1,12 @@
 {
-    "empty": "Belum ada resep",
+    "empty": {
+        "title": "Belum ada resep",
+        "text": "Di sinilah buku resep Anda akan berada. Tambahkan resep pertama Anda dengan tombol «+» di bawah."
+    },
+    "emptyFiltered": {
+        "title": "Tidak ada yang ditemukan",
+        "text": "Coba ubah pencarian atau hapus beberapa filter."
+    },
     "servings": "{{count}} porsi",
     "title": "Resep"
 }

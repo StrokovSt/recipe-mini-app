@@ -20,7 +20,7 @@
     },
     "install": {
         "title": "Install app",
-        "hint": "Mirabelle on your home screen",
+        "hint": "Kokoro on your home screen",
         "iosTitle": "Install on iPhone",
         "iosText": "In Safari, tap Share, then Add to Home Screen."
     }

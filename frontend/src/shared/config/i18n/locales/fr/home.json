@@ -1,7 +1,14 @@
 {
-    "empty": "Aucune recette pour l'instant",
-    "servings_one": "{{count}} portion",
+    "empty": {
+        "title": "Pas encore de recettes",
+        "text": "C’est ici que vivra votre livre de cuisine. Ajoutez votre première recette avec le bouton « + » en bas."
+    },
+    "emptyFiltered": {
+        "title": "Aucun résultat",
+        "text": "Modifiez votre recherche ou retirez quelques filtres."
+    },
     "servings_many": "{{count}} portions",
+    "servings_one": "{{count}} portion",
     "servings_other": "{{count}} portions",
     "title": "Recettes"
 }

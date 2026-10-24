@@ -36,11 +36,14 @@ const EAGER_COVERS = 4;
 interface RecipeListProps {
     recipes: Recipe[];
     isDimmed?: boolean;
+    // Список отобран поиском или фильтрами: пустой значит «ничего не нашлось», а не «рецептов нет»
+    isFiltered?: boolean;
 }
 
 const RecipeList = (props: RecipeListProps) => {
-    const { recipes, isDimmed = false } = props;
+    const { recipes, isDimmed = false, isFiltered = false } = props;
     const { t } = useTranslation('home');
+    const emptyKey = isFiltered ? 'emptyFiltered' : 'empty';
     // Новый набор рецептов — новый список: прежний гаснет целиком, новый проявляется лесенкой
     const listKey = recipes.map(({ id }) => id).join();
 
@@ -51,14 +54,14 @@ const RecipeList = (props: RecipeListProps) => {
             <AnimatePresence mode="wait" initial={false}>
                 {recipes.length === 0 ? (
                     <motion.div
-                        key="empty"
+                        key={emptyKey}
                         className={styles.empty}
                         initial={HIDDEN}
                         animate={VISIBLE}
                         exit={HIDDEN}
                         transition={TRANSITION_BASE}
                     >
-                        <Message illustration="idea" title={t('empty')} />
+                        <Message illustration="empty" title={t(`${emptyKey}.title`)} text={t(`${emptyKey}.text`)} />
                     </motion.div>
                 ) : (
                     <motion.div

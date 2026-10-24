@@ -1,5 +1,12 @@
 {
-    "empty": "No recipes yet",
+    "empty": {
+        "title": "No recipes yet",
+        "text": "This is where your cookbook will live. Add your first recipe with the + button below."
+    },
+    "emptyFiltered": {
+        "title": "Nothing found",
+        "text": "Try changing your search or removing some filters."
+    },
     "servings_one": "{{count}} serving",
     "servings_other": "{{count}} servings",
     "title": "Recipes"

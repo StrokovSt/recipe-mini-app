@@ -20,7 +20,7 @@
     },
     "install": {
         "title": "App installieren",
-        "hint": "Mirabelle auf dem Home-Bildschirm",
+        "hint": "Kokoro auf dem Home-Bildschirm",
         "iosTitle": "Auf dem iPhone installieren",
         "iosText": "Tippen Sie in Safari auf „Teilen“ und dann auf „Zum Home-Bildschirm“."
     }

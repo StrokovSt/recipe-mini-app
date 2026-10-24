@@ -1,5 +1,12 @@
 {
-    "empty": "Henüz tarif yok",
+    "empty": {
+        "title": "Henüz tarif yok",
+        "text": "Yemek defteriniz burada olacak. İlk tarifinizi aşağıdaki «+» düğmesiyle ekleyin."
+    },
+    "emptyFiltered": {
+        "title": "Hiçbir şey bulunamadı",
+        "text": "Aramayı değiştirmeyi veya bazı filtreleri kaldırmayı deneyin."
+    },
     "servings": "{{count}} porsiyon",
     "title": "Tarifler"
 }

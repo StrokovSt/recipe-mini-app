@@ -1,3 +1,5 @@
+@use "@/shared/styles/bar";
+
 // Слой поверх всего приложения, включая шапку, футер и шторки
 .layer {
     position: fixed;
@@ -5,29 +7,31 @@
     z-index: var(--z-onboarding);
 }
 
-// Окошко в затемнении: тень на весь экран вокруг подсвеченной кнопки
+// Окошко в затемнении: тень на весь экран вокруг подсвеченной кнопки.
+// У круглой кнопки тень тоже круглая, поэтому радиус берём больше диагонали экрана, иначе угол остаётся светлым
 .hole {
     position: absolute;
     box-shadow:
         0 0 0 var(--size-onboarding-hole-ring) var(--color-onboarding-ring),
-        0 0 0 100vmax var(--color-onboarding-dim);
+        0 0 0 150vmax var(--color-onboarding-dim);
     pointer-events: none;
 }
 
+// Карточка подсказки
 .card {
     position: absolute;
     right: var(--space-page);
     left: var(--space-page);
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
     max-width: var(--size-onboarding-card);
     margin: 0 auto;
-    padding: var(--space-4);
+    overflow: hidden;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     background: var(--color-surface);
     box-shadow: var(--shadow-lg);
+    color: var(--color-text);
 
     // Приветствие по центру экрана
     &.centered {
@@ -38,31 +42,44 @@
     }
 }
 
-.counter {
-    color: var(--color-text-muted);
-    font: var(--font-sm);
-    font-style: italic;
-}
+// Шапка — полупрозрачная полоса, как у шторки: заголовок и номер шага
+.header {
+    @include bar.bar(bottom);
 
-.text {
-    font: var(--font-md);
-}
-
-// Первый шаг: котик и приветствие по центру
-.welcome {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--space-2);
-    text-align: center;
-
-    .image {
-        width: var(--size-onboarding-image);
-    }
+    gap: var(--space-1);
+    padding: var(--space-4);
 
     .title {
+        margin: 0;
         font: var(--font-header-lg);
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--font-weight-extrabold);
+    }
+
+    .counter {
+        color: var(--tg-hint);
+        font: var(--font-sm);
+        font-style: italic;
+    }
+}
+
+// Описание и кнопки
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4);
+
+    .text {
+        margin: 0;
+        font: var(--font-md);
+    }
+
+    // Котик в приветствии
+    .image {
+        width: var(--size-onboarding-image);
+        margin: 0 auto;
     }
 }
 
@@ -70,8 +87,5 @@
     display: flex;
     justify-content: flex-end;
     gap: var(--space-2);
-
-    .next {
-        flex-grow: 1;
-    }
+    margin-top: var(--space-2);
 }

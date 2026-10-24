@@ -1,15 +1,33 @@
 {
     "label": "Einführung",
     "welcome": {
-        "title": "Willkommen!",
-        "text": "Das ist Mirabelle, Ihr Rezeptbuch. Ich zeige Ihnen in einer halben Minute das Wichtigste."
+        "title": "Willkommen bei Kokoro",
+        "text": "Hier wohnen bald alle Ihre Rezepte. Ich zeige Ihnen, wo was ist – das dauert nicht lange."
     },
-    "home": "Sie sind auf der Startseite: Hier sind alle Ihre Rezepte.",
-    "add": "Fügen Sie Rezepte hinzu: per Link von jeder Website, per Foto oder von Hand. Die KI erkennt Zutaten und Schritte selbst.",
-    "search": "Suchen Sie Rezepte nach Namen.",
-    "filter": "Filtern Sie nach Kategorien und Tags.",
-    "sections": "Hier sind Kategorien und Tags: Legen Sie eigene an, um Ordnung zu schaffen.",
-    "menu": "Einstellungen, Design und Sprache. Die Einführung können Sie jederzeit unter „So funktioniert’s“ wiederholen.",
+    "home": {
+        "title": "Ihre Rezepte",
+        "text": "Alles, was Sie gespeichert haben, finden Sie hier auf der Startseite."
+    },
+    "add": {
+        "title": "Rezepte hinzufügen",
+        "text": "Fügen Sie einen Link von einer beliebigen Website ein, laden Sie ein Foto hoch oder schreiben Sie das Rezept selbst."
+    },
+    "search": {
+        "title": "Schnelle Suche",
+        "text": "Tippen Sie einfach den Namen ein, und das Rezept ist gefunden."
+    },
+    "filter": {
+        "title": "Filter",
+        "text": "Wählen Sie eine Kategorie oder Tags, um nur das Passende zu sehen."
+    },
+    "sections": {
+        "title": "Alles an seinem Platz",
+        "text": "Hier sind Ihre Kategorien und Tags. Legen Sie eigene an, damit kein Rezept verloren geht."
+    },
+    "menu": {
+        "title": "Menü",
+        "text": "Einstellungen, Design und Sprache. Die Einführung können Sie unter „So funktioniert’s“ jederzeit wiederholen."
+    },
     "counter": "{{current}} von {{total}}",
     "start": "Los geht’s",
     "next": "Weiter",

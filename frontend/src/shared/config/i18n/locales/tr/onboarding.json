@@ -1,15 +1,33 @@
 {
     "label": "Tanıtım",
     "welcome": {
-        "title": "Hoş geldiniz!",
-        "text": "Bu Mirabelle, sizin tarif defteriniz. Size yarım dakikada temel şeyleri göstereyim."
+        "title": "Kokoro’ya hoş geldiniz",
+        "text": "Tüm tarifleriniz burada yaşayacak. Size neyin nerede olduğunu göstereyim, uzun sürmez."
     },
-    "home": "Ana sayfadasınız: tüm tarifleriniz burada.",
-    "add": "Tarifleri herhangi bir sitenin bağlantısından, fotoğraftan ya da elle ekleyin. Malzemeleri ve adımları yapay zekâ ayıklar.",
-    "search": "Tarifleri adına göre arayın.",
-    "filter": "Kategori ve etiketlere göre filtreleyin.",
-    "sections": "Kategoriler ve etiketler burada: düzen için kendinizinkileri oluşturun.",
-    "menu": "Ayarlar, tema ve dil. Tanıtımı istediğiniz zaman “Nasıl kullanılır” bölümünden tekrar izleyebilirsiniz.",
+    "home": {
+        "title": "Tarifleriniz",
+        "text": "Kaydettiğiniz her şey burada, ana sayfada."
+    },
+    "add": {
+        "title": "Tarif ekleyin",
+        "text": "Herhangi bir sitenin bağlantısını yapıştırın, fotoğraf yükleyin ya da tarifi kendiniz yazın."
+    },
+    "search": {
+        "title": "Hızlı arama",
+        "text": "Adını yazmaya başlayın, tarif hemen bulunsun."
+    },
+    "filter": {
+        "title": "Filtreler",
+        "text": "Yalnızca ihtiyacınız olanı görmek için bir kategori veya etiket seçin."
+    },
+    "sections": {
+        "title": "Her şey yerli yerinde",
+        "text": "Kategorileriniz ve etiketleriniz burada. Hiçbir tarif kaybolmasın diye kendinizinkileri oluşturun."
+    },
+    "menu": {
+        "title": "Menü",
+        "text": "Ayarlar, tema ve dil. Tanıtımı “Nasıl kullanılır” bölümünden tekrar izleyebilirsiniz."
+    },
     "counter": "{{current}} / {{total}}",
     "start": "Başlayalım",
     "next": "İleri",

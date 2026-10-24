@@ -1,15 +1,33 @@
 {
     "label": "Guida",
     "welcome": {
-        "title": "Benvenuto!",
-        "text": "Questa è Mirabelle, il suo ricettario. Le mostro l’essenziale in mezzo minuto."
+        "title": "Benvenuto in Kokoro",
+        "text": "Qui vivranno tutte le sue ricette. Le mostro dove si trova tutto, non ci vorrà molto."
     },
-    "home": "È nella schermata principale: qui ci sono tutte le sue ricette.",
-    "add": "Aggiunga ricette da un link di qualsiasi sito, da una foto o a mano. L’IA riconosce ingredienti e passaggi.",
-    "search": "Cerchi le ricette per nome.",
-    "filter": "Filtri per categorie e tag.",
-    "sections": "Qui ci sono categorie e tag: crei i suoi per fare ordine.",
-    "menu": "Impostazioni, tema e lingua. Può rivedere la guida quando vuole da «Come si usa».",
+    "home": {
+        "title": "Le sue ricette",
+        "text": "Tutto ciò che ha salvato è raccolto qui, nella schermata principale."
+    },
+    "add": {
+        "title": "Aggiunga ricette",
+        "text": "Incolli un link da qualsiasi sito, carichi una foto o scriva la ricetta da sé."
+    },
+    "search": {
+        "title": "Ricerca veloce",
+        "text": "Inizi a digitare il nome e la ricetta salterà fuori."
+    },
+    "filter": {
+        "title": "Filtri",
+        "text": "Scelga una categoria o dei tag per vedere solo ciò che serve."
+    },
+    "sections": {
+        "title": "Tutto in ordine",
+        "text": "Qui ci sono le sue categorie e i tag. Ne crei di propri, così nessuna ricetta andrà persa."
+    },
+    "menu": {
+        "title": "Menu",
+        "text": "Impostazioni, tema e lingua. Può rivedere la guida da «Come si usa»."
+    },
     "counter": "{{current}} di {{total}}",
     "start": "Iniziamo",
     "next": "Avanti",
