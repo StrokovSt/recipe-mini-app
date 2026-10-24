@@ -10,6 +10,7 @@
     <meta name="theme-color" content="#F0E7CC" />
     <meta name="apple-mobile-web-app-title" content="Kokoro" />
     <title>Kokoro</title>
+    <meta name="description" content="Kokoro — личная коллекция рецептов: сохраняйте их по ссылке или фото, ИИ сам распознает ингредиенты и шаги." />
     <script>
       // Тёмная тема до старта приложения, чтобы заставка не мигала светлой. Полная логика в shared/lib/theme
       if (localStorage.getItem("theme") === "dark") document.documentElement.setAttribute("data-theme", "dark");
@@ -52,7 +53,7 @@
   <body>
     <div id="root"></div>
     <!-- Заставка: котик-загрузчик, пока приложение грузится целиком. Видео запускает shared/lib/splash,
-         когда его уже качает preloadLoader, а до того виден первый кадр -->
+         пока оно качается, виден первый кадр -->
     <div id="splash">
       <video poster="/src/shared/assets/video/loaders/cat-poster.webp" muted loop playsinline preload="none">
         <source src="/src/shared/assets/video/loaders/cat.webm" type="video/webm" />

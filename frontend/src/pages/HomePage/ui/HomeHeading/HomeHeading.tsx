@@ -21,9 +21,9 @@ export function HomeHeading(props: HomeHeadingProps) {
     return (
         <div className={styles.heading}>
             <h1 className={styles.title}>
-                <img className={styles.logo} src={logo} alt={t("appName")} />
-                {/* В тёмной теме тот же логотип со светлыми буквами */}
-                <img className={styles.logoDark} src={logoDark} alt={t("appName")} />
+                <img className={styles.logo} src={logo} alt={t("appName")} loading="lazy" />
+                {/* В тёмной теме тот же логотип со светлыми буквами. lazy: спрятанный CSS логотип браузер не качает */}
+                <img className={styles.logoDark} src={logoDark} alt={t("appName")} loading="lazy" />
             </h1>
             <div className={styles.actions}>
                 {actions}

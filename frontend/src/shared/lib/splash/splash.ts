@@ -15,7 +15,7 @@ export const splashHidden = new Promise<void>((resolve) => {
 
 export const isSplashShown = () => getSplash() !== null;
 
-// Котик оживает: видео к этому моменту уже качается (preloadLoader), до того виден первый кадр
+// Котик оживает: видео начинает качаться здесь же, пока оно в пути, виден первый кадр (постер)
 export function startSplash() {
     if (!getAnimations()) return;
     getSplash()?.querySelector("video")?.play().catch(() => undefined);

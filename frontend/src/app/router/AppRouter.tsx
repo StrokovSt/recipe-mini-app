@@ -12,8 +12,8 @@ export function AppRouter() {
         <Suspense fallback={null}>
             <AnimatePresence mode="wait" initial={false}>
                 <Routes location={location} key={location.pathname}>
-                    {routeConfig.map(({ path, element: Element }) => (
-                        <Route key={path} path={path} element={<Element />} />
+                    {routeConfig.map(({ path, page: { Component } }) => (
+                        <Route key={path} path={path} element={<Component />} />
                     ))}
                 </Routes>
             </AnimatePresence>

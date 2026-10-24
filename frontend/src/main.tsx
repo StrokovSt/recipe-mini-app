@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client'
 
 import App from './app/App'
 import { loadMotionFeatures } from './app/providers/loadMotionFeatures'
-import { preloadOnFirstAction } from './app/router'
+import { preloadCurrentPage, preloadOnFirstAction } from './app/router'
 import { initOnboarding } from './features/onboarding'
 import { initAnimations } from './shared/lib/animations'
 import { loadFonts } from './shared/lib/fonts'
-import { initI18n } from './shared/lib/i18n'
+import { initI18n, warmUpNumberFormat } from './shared/lib/i18n'
 import { initInstallPrompt } from './shared/lib/pwa'
 import { hideSplashWhen, startSplash } from './shared/lib/splash'
 import { loadTelegram } from './shared/lib/telegram'
@@ -23,6 +23,8 @@ import '@fontsource-variable/noto-serif/wght.css'
 import '@fontsource-variable/noto-serif/wght-italic.css'
 import './app/styles/index.scss'
 
+// Код открытой страницы качается параллельно со шрифтами и словарями, к рендеру он уже готов
+preloadCurrentPage()
 initAnimations()
 initInstallPrompt()
 
@@ -31,6 +33,7 @@ const loaderReady = preloadLoader()
 startSplash()
 hideSplashWhen(firstPageShown)
 firstPageShown.then(preloadOnFirstAction)
+firstPageShown.then(warmUpNumberFormat)
 initOnboarding()
 
 // Тема и язык могут браться из Telegram, поэтому определяем их после его SDK (на сайте он не качается)

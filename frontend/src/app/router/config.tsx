@@ -1,3 +1,5 @@
+import { matchPath } from "react-router-dom";
+
 import { lazyWithPreload } from "@/shared/lib/lazy";
 
 import { AppRoute, type RouteConfig } from "./routes";
@@ -28,50 +30,55 @@ export const preloadPages = () => {
 export const routeConfig: RouteConfig[] = [
     {
         path: AppRoute.Home,
-        element: PAGES.HomePage.Component,
+        page: PAGES.HomePage,
     },
     {
         path: AppRoute.Recipe,
-        element: PAGES.RecipePage.Component,
+        page: PAGES.RecipePage,
     },
     {
         path: AppRoute.AddRecipe,
-        element: PAGES.AddRecipePage.Component,
+        page: PAGES.AddRecipePage,
     },
     {
         path: AppRoute.ImportRecipe,
-        element: PAGES.ImportRecipePage.Component,
+        page: PAGES.ImportRecipePage,
     },
     {
         path: AppRoute.CreateRecipe,
-        element: PAGES.CreateRecipePage.Component,
+        page: PAGES.CreateRecipePage,
     },
     {
         path: AppRoute.Draft,
-        element: PAGES.CreateRecipePage.Component,
+        page: PAGES.CreateRecipePage,
     },
     {
         path: AppRoute.Sections,
-        element: PAGES.SectionsPage.Component,
+        page: PAGES.SectionsPage,
     },
     { 
         path: AppRoute.EditRecipe,
-        element: PAGES.EditRecipePage.Component,
+        page: PAGES.EditRecipePage,
     },
     {
         path: AppRoute.Profile,
-        element: PAGES.ProfilePage.Component,
+        page: PAGES.ProfilePage,
     },
     {
         path: AppRoute.Settings,
-        element: PAGES.SettingsPage.Component,
+        page: PAGES.SettingsPage,
     },
     {
         path: AppRoute.About,
-        element: PAGES.AboutPage.Component,
+        page: PAGES.AboutPage,
     },
     {
         path: AppRoute.NotFound,
-        element: PAGES.NotFoundPage.Component,
+        page: PAGES.NotFoundPage,
     },
 ];
+
+// Код страницы, которую открыли, качаем сразу при запуске, вместе со шрифтами и словарями, а не после первого рендера
+export const preloadCurrentPage = () => {
+    routeConfig.find(({ path }) => matchPath(path, location.pathname))?.page.preload();
+};

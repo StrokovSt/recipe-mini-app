@@ -29,6 +29,7 @@ export const buildRoute = {
 
 export interface RouteConfig {
     path: AppRoute;
-    element: ComponentType;
+    // Страница из lazyWithPreload: компонент и загрузка его кода заранее
+    page: { Component: ComponentType; preload: () => Promise<unknown> };
     protected?: boolean;
 }
