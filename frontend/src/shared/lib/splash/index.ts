@@ -1,1 +1,1 @@
-export { hideSplashWhen, isSplashShown, splashHidden, startSplash } from "./splash";
+export { hideSplashWhen, isSplashShown, splashHidden } from "./splash";

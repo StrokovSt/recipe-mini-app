@@ -9,11 +9,11 @@ import { initAnimations } from './shared/lib/animations'
 import { loadFonts } from './shared/lib/fonts'
 import { initI18n, warmUpNumberFormat } from './shared/lib/i18n'
 import { initInstallPrompt } from './shared/lib/pwa'
-import { hideSplashWhen, startSplash } from './shared/lib/splash'
+import { hideSplashWhen } from './shared/lib/splash'
 import { loadTelegram } from './shared/lib/telegram'
 import { initTheme } from './shared/lib/theme'
 import { firstPageShown } from './shared/ui/PageWrapper'
-import { DEFAULT_LOADER, getLoaderSrc, preloadLoader } from './shared/ui/Spinner'
+import { preloadLoader } from './shared/ui/Spinner'
 
 import '@fontsource-variable/literata/wght.css'
 import '@fontsource-variable/literata/wght-italic.css'
@@ -28,9 +28,8 @@ preloadCurrentPage()
 initAnimations()
 initInstallPrompt()
 
-// Котик-заставка из index.html закрывает загрузку целиком: интерфейс появляется сразу весь, а не по частям
+// Заставка с печатью из index.html закрывает загрузку целиком: интерфейс появляется сразу весь, а не по частям
 const loaderReady = preloadLoader()
-startSplash(getLoaderSrc(DEFAULT_LOADER))
 hideSplashWhen(firstPageShown)
 firstPageShown.then(preloadOnFirstAction)
 firstPageShown.then(warmUpNumberFormat)
@@ -43,7 +42,7 @@ const settingsReady = loadTelegram().then(() => {
 })
 
 // Рендерим после загрузки словарей выбранного языка, шрифтов, постера котика и движка анимаций,
-// чтобы не мелькали ключи, текст не перескакивал, котик был виден с первой загрузки и страница сразу проявлялась
+// чтобы не мелькали ключи, текст не перескакивал, котик был виден с первой же загрузки данных и страница сразу проявлялась
 Promise.all([settingsReady, loadFonts(), loaderReady, loadMotionFeatures()]).then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>

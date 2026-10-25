@@ -12,50 +12,248 @@
     <title>Kokoro</title>
     <meta name="description" content="Kokoro — личная коллекция рецептов: сохраняйте их по ссылке или фото, ИИ сам распознает ингредиенты и шаги." />
     <script>
-      // Тёмная тема до старта приложения, чтобы заставка не мигала светлой. Полная логика в shared/lib/theme
+      // Тёмная тема и выключенные анимации до старта приложения, чтобы заставка не мигала светлой и не двигалась зря.
+      // Полная логика в shared/lib/theme и shared/lib/animations
       if (localStorage.getItem("theme") === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      const savedAnimations = localStorage.getItem("animations");
+      const isMotionOff = savedAnimations ? savedAnimations === "off" : matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (isMotionOff) document.documentElement.setAttribute("data-animations", "off");
     </script>
     <style>
-      /* Заставка с котиком: видна с первого кадра, ещё до скриптов и стилей приложения, поэтому стили здесь,
-         а цвета и размеры числами: фон = --color-app-bg, котик = --size-loader-xl и стоит там же, где GlobalLoader.
-         Убирает её shared/lib/splash, когда первая страница показана целиком */
+      /* Заставка с печатью: видна с первого кадра, ещё до скриптов и стилей приложения, поэтому стили здесь,
+         а цвета и размеры числами. Фон как у приложения (body и #root::before в index.scss), поэтому главная
+         открывается без шва. Убирает её shared/lib/splash, когда первая страница показана целиком */
       /* Фон только у body, не у html: тогда он уходит на весь холст и не перекрывает фоновую картинку (#root::before) */
-      body,
-      #splash {
+      body {
         margin: 0;
         background: #f0e7cc;
       }
 
-      [data-theme="dark"] body,
-      [data-theme="dark"] #splash {
+      [data-theme="dark"] body {
         background: #1d1814;
       }
 
+      /* Круглое «окно» в заставке: при уходе растёт из центра и открывает главную */
+      @property --splash-hole {
+        syntax: "<length-percentage>";
+        inherits: false;
+        initial-value: -1px;
+      }
+
       #splash {
+        --splash-glow: rgb(139 32 32 / 32%);
+        --splash-ring: rgb(139 32 32 / 55%);
         position: fixed;
         inset: 0;
         z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.3s ease;
+        display: grid;
+        place-items: center;
+        background: rgb(236 218 198);
+        -webkit-mask: radial-gradient(circle, transparent var(--splash-hole), #000 calc(var(--splash-hole) + 1px));
+        mask: radial-gradient(circle, transparent var(--splash-hole), #000 calc(var(--splash-hole) + 1px));
       }
 
-      #splash.hidden {
+      /* Картинка только в колонке приложения, как #root::before (--size-app-max-width), вуаль = --color-app-image-veil */
+      #splash::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        max-width: 1024px;
+        margin: 0 auto;
+        background:
+          linear-gradient(rgb(240 231 204 / 50%), rgb(240 231 204 / 50%)),
+          url("/src/shared/assets/images/background_list.webp") center / cover no-repeat;
+      }
+
+      [data-theme="dark"] #splash {
+        --splash-glow: rgb(211 101 95 / 30%);
+        --splash-ring: rgb(211 101 95 / 55%);
+        background: rgb(44 36 31);
+      }
+
+      [data-theme="dark"] #splash::before {
+        background-image:
+          linear-gradient(rgb(29 24 20 / 50%), rgb(29 24 20 / 50%)),
+          url("/src/shared/assets/images/background_list_dark.webp");
+      }
+
+      /* Печать, свечение за ней и круг туши лежат друг на друге в одной клетке */
+      /* Клетка ровно по печати: свечение шире неё и выходит за края поровну, не раздвигая клетку */
+      .splash-stamp {
+        position: relative;
+        display: grid;
+        grid-template: 129px / 128px;
+        place-items: center;
+      }
+
+      .splash-stamp > * {
+        grid-area: 1 / 1;
+      }
+
+      .splash-seal {
+        width: 100%;
+        height: auto;
         opacity: 0;
       }
 
-      #splash video {
-        width: 240px;
+      .splash-glow {
+        width: 300px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--splash-glow) 0, transparent 62%);
+        opacity: 0;
+      }
+
+      .splash-ring {
+        width: 100%;
+        aspect-ratio: 1;
+        border: 2px solid var(--splash-ring);
+        border-radius: 50%;
+        opacity: 0;
+      }
+
+      /* Печать загрузилась (класс in ставит её onload): ставится, вдавливается и пружинит, от неё расходится круг туши,
+         проступает свечение. Пока приложение грузится, печать дышит, свечение пульсирует, круги расходятся.
+         Все задержки считаются от появления печати. Анимации с тем же именем при добавлении класса out не перезапускаются,
+         поэтому волны и свечение доигрывают без рывка */
+      #splash.in .splash-seal {
+        animation: splash-stamp 0.65s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+      }
+
+      #splash.in .splash-stamp {
+        animation: splash-float 2.4s 0.85s ease-in-out infinite;
+      }
+
+      #splash.in .splash-ring {
+        animation: splash-ink 0.7s 0.32s ease-out forwards, splash-ripple 2.4s 1.25s ease-out infinite;
+      }
+
+      #splash.in .splash-glow {
+        animation: splash-glow-in 0.6s 0.25s ease-out forwards, splash-breathe 2.4s 0.85s ease-in-out infinite;
+      }
+
+      /* Уход (класс out ставит shared/lib/splash): печать сжимается, раздувается и тает, из центра раскрывается главная */
+      #splash.out {
+        animation: splash-hole 0.6s 0.15s cubic-bezier(0.55, 0, 0.35, 1) forwards;
+      }
+
+      #splash.out .splash-stamp {
+        animation-play-state: paused;
+      }
+
+      #splash.out .splash-seal {
+        animation: splash-burst 0.6s cubic-bezier(0.5, 0, 0.2, 1) forwards;
+      }
+
+      #splash.out .splash-glow {
+        animation:
+          splash-glow-in 0.6s 0.25s ease-out forwards,
+          splash-breathe 2.4s 0.85s ease-in-out infinite,
+          splash-glow-out 0.6s cubic-bezier(0.5, 0, 0.2, 1) forwards;
+      }
+
+      /* Анимации выключены: печать просто стоит, заставка убирается сразу */
+      [data-animations="off"] #splash .splash-seal {
+        opacity: 1;
+        transform: rotate(-3deg);
+        animation: none;
+      }
+
+      [data-animations="off"] #splash :is(.splash-stamp, .splash-ring, .splash-glow) {
+        animation: none;
+      }
+
+      /* Компьютер (мышь и экран шире колонки приложения): анимация печати там неуместна. Печать просто стоит,
+         заставка гаснет. Планшеты и телефоны (палец) анимацию оставляют */
+      @media (pointer: fine) and (min-width: 1025px) {
+        #splash:is(.in, .out) .splash-seal {
+          opacity: 1;
+          transform: rotate(-3deg);
+          animation: none;
+        }
+
+        #splash:is(.in, .out) :is(.splash-stamp, .splash-ring, .splash-glow) {
+          animation: none;
+        }
+
+        #splash.out {
+          animation: splash-fade 0.3s ease forwards;
+        }
+      }
+
+      @keyframes splash-stamp {
+        0% { opacity: 0; transform: scale(1.4) rotate(-12deg); filter: blur(6px); }
+        55% { opacity: 1; transform: scale(0.94) rotate(-3deg); filter: blur(0); }
+        78% { transform: scale(1.02) rotate(-3deg); }
+        100% { opacity: 1; transform: scale(1) rotate(-3deg); filter: none; }
+      }
+
+      @keyframes splash-float {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-2.5%) scale(1.04); }
+      }
+
+      @keyframes splash-ink {
+        0% { opacity: 0.9; transform: scale(0.95); }
+        100% { opacity: 0; transform: scale(1.7); }
+      }
+
+      @keyframes splash-ripple {
+        0% { opacity: 0; transform: scale(0.98); }
+        15% { opacity: 0.6; transform: scale(1.08); }
+        100% { opacity: 0; transform: scale(2); }
+      }
+
+      @keyframes splash-glow-in {
+        from { opacity: 0; transform: scale(0.6); }
+        to { opacity: 0.8; transform: scale(1); }
+      }
+
+      @keyframes splash-breathe {
+        0%, 100% { opacity: 0.8; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.15); }
+      }
+
+      @keyframes splash-burst {
+        0% { opacity: 1; transform: scale(1) rotate(-3deg); }
+        25% { opacity: 1; transform: scale(0.88) rotate(-3deg); }
+        100% { opacity: 0; transform: scale(6) rotate(-3deg); }
+      }
+
+      /* Без 0%: начинается с того размера и яркости, какие были в момент готовности */
+      @keyframes splash-glow-out {
+        25% { transform: scale(0.85); }
+        100% { opacity: 0; transform: scale(5); }
+      }
+
+      /* 101% = за самый дальний угол экрана. Прозрачность в конце: в браузерах без @property окно не растёт,
+         и заставка просто гаснет */
+      @keyframes splash-hole {
+        80% { opacity: 1; }
+        100% { --splash-hole: 101%; opacity: 0; }
+      }
+      @keyframes splash-fade {
+        to { opacity: 0; }
       }
     </style>
   </head>
   <body>
     <div id="root"></div>
-    <!-- Заставка: котик-загрузчик, пока приложение грузится целиком. Видео ставит и запускает shared/lib/splash
-         (формат зависит от браузера), до того и пока оно качается, виден первый кадр -->
+    <!-- Заставка: печать Kokoro, пока приложение грузится целиком. Анимация начинается, когда печать загрузилась -->
     <div id="splash">
-      <video poster="/src/shared/assets/video/loaders/cat-poster.webp" muted loop playsinline preload="none"></video>
+      <div class="splash-stamp">
+        <div class="splash-glow"></div>
+        <div class="splash-ring"></div>
+        <img
+          class="splash-seal"
+          src="/src/shared/assets/images/seal.webp"
+          alt=""
+          width="128"
+          height="129"
+          fetchpriority="high"
+          onload="document.getElementById('splash').classList.add('in')"
+        />
+      </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,5 +1,3 @@
-import { isSplashShown } from "@/shared/lib/splash";
-
 import { DEFAULT_LOADER, type LoaderName, LOADERS } from "../config/loaders";
 import { getLoaderSrc } from "./getLoaderSrc";
 
@@ -12,8 +10,7 @@ const MAX_WAIT_MS = 1000;
 // Обычный котик грузится при старте, остальные там, где понадобятся
 export function preloadLoader(name: LoaderName = DEFAULT_LOADER): Promise<unknown> {
     const { poster } = LOADERS[name];
-    // Пока видна заставка, это же видео качает она сама: второй запрос шёл бы параллельно и скачал файл ещё раз
-    if (!isSplashShown()) fetch(getLoaderSrc(name)).catch(() => undefined);
+    fetch(getLoaderSrc(name)).catch(() => undefined);
 
     const image = new Image();
     image.src = poster;
