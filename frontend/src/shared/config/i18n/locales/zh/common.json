@@ -34,6 +34,11 @@
         "broken": "无法加载图片",
         "uploadFailed": "照片上传失败"
     },
+    "loadError": {
+        "title": "加载失败",
+        "text": "请检查您的网络连接后重试。",
+        "retry": "重试"
+    },
     "errorBoundary": {
         "title": "出了点问题",
         "retry": "重试"

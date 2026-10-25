@@ -4,8 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { buildRoute } from "@/app/router/routes";
 import { useRecipe, useUpdateRecipe } from "@/entities/recipe";
 import { EMPTY_FORM_VALUES, getCover, getVideo, RecipeForm, type RecipeFormValues, toMedia } from "@/features/recipe-form";
+import { ApiError } from "@/shared/api";
 import { useLoader } from "@/shared/ui/GlobalLoader";
-import { Message } from "@/shared/ui/Message";
+import { LoadErrorMessage, Message } from "@/shared/ui/Message";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 
 const EditRecipePage = () => {
@@ -13,15 +14,20 @@ const EditRecipePage = () => {
     const navigate = useNavigate();
     const { t } = useTranslation(["recipeForm", "recipe"]);
 
-    const { data: recipe, isLoading } = useRecipe(id!);
-    useLoader(isLoading);
+    const { data: recipe, isLoading, error, isFetching, refetch } = useRecipe(id!);
+    useLoader(isLoading || (!recipe && isFetching));
     const { mutate: updateRecipe, isPending } = useUpdateRecipe();
 
     if (isLoading) return null;
+    // 404 — рецепта нет. Другая ошибка или нет сети — рецепт есть, но не загрузился
     if (!recipe) {
         return (
             <PageWrapper>
-                <Message illustration="warning" title={t("recipe:notFound.title")} text={t("recipe:notFound.text")} />
+                {error instanceof ApiError && error.status === 404 ? (
+                    <Message illustration="warning" title={t("recipe:notFound.title")} text={t("recipe:notFound.text")} />
+                ) : (
+                    <LoadErrorMessage onRetry={() => refetch()} />
+                )}
             </PageWrapper>
         );
     }

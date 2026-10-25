@@ -34,6 +34,11 @@
         "broken": "No se pudo cargar la imagen",
         "uploadFailed": "No se pudo subir la foto"
     },
+    "loadError": {
+        "title": "No se pudo cargar",
+        "text": "Compruebe su conexión e inténtelo de nuevo.",
+        "retry": "Reintentar"
+    },
     "errorBoundary": {
         "title": "Algo salió mal",
         "retry": "Intentar de nuevo"

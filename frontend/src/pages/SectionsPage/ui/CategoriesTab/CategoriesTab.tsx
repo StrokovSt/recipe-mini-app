@@ -7,6 +7,7 @@ import { buildRoute } from "@/app/router/routes";
 import { CategoryForm, CategoryItem, useCategories, useDeleteCategory } from "@/entities/category";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 import { AddTile } from "@/shared/ui/Buttons";
+import { LoadErrorMessage } from "@/shared/ui/Message";
 import { ConfirmModal } from "@/shared/ui/Modal";
 import { Spinner } from "@/shared/ui/Spinner";
 
@@ -14,7 +15,10 @@ import styles from "./CategoriesTab.module.scss";
 
 const CategoriesTab = () => {
     const { t } = useTranslation("sections");
-    const { data: categories = [], isLoading } = useCategories();
+    const { data, isLoading, isError, isPaused, isFetching, refetch } = useCategories();
+    const categories = data ?? [];
+    // Список не пришёл (сервер не ответил или нет сети): вместо пустого раздела — ошибка и «Повторить»
+    const isFailed = !data && (isError || isPaused);
     const { mutate: remove } = useDeleteCategory();
 
     const [isFormOpen, setIsFormOpen] = useState(false);
@@ -47,7 +51,8 @@ const CategoriesTab = () => {
         closeConfirm();
     };
 
-    if (isLoading) return <Spinner size="md" />;
+    if (isLoading || (isFailed && isFetching)) return <Spinner size="md" />;
+    if (isFailed) return <LoadErrorMessage onRetry={() => refetch()} />;
 
     return (
         <>

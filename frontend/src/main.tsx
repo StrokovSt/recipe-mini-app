@@ -13,10 +13,10 @@ import { hideSplashWhen, startSplash } from './shared/lib/splash'
 import { loadTelegram } from './shared/lib/telegram'
 import { initTheme } from './shared/lib/theme'
 import { firstPageShown } from './shared/ui/PageWrapper'
-import { preloadLoader } from './shared/ui/Spinner'
+import { DEFAULT_LOADER, getLoaderSrc, preloadLoader } from './shared/ui/Spinner'
 
-import '@fontsource-variable/literata/opsz.css'
-import '@fontsource-variable/literata/opsz-italic.css'
+import '@fontsource-variable/literata/wght.css'
+import '@fontsource-variable/literata/wght-italic.css'
 import '@fontsource-variable/noto-sans/wght.css'
 import '@fontsource-variable/noto-sans/wght-italic.css'
 import '@fontsource-variable/noto-serif/wght.css'
@@ -30,7 +30,7 @@ initInstallPrompt()
 
 // Котик-заставка из index.html закрывает загрузку целиком: интерфейс появляется сразу весь, а не по частям
 const loaderReady = preloadLoader()
-startSplash()
+startSplash(getLoaderSrc(DEFAULT_LOADER))
 hideSplashWhen(firstPageShown)
 firstPageShown.then(preloadOnFirstAction)
 firstPageShown.then(warmUpNumberFormat)

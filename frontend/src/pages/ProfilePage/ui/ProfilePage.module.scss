@@ -1,3 +1,5 @@
+@use "@/shared/styles/card";
+
 .header {
     flex-direction: row;
     align-items: center;
@@ -22,8 +24,117 @@
     }
 }
 
-.placeholder {
-    color: var(--tg-hint);
-    font: var(--font-md);
+.page {
+    gap: var(--space-3);
+}
+
+// Карточка с аватаром, как в макете: по центру, с декоративным кольцом в углу
+.user {
+    @include card.card;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-6) var(--space-4) var(--space-5);
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: calc(var(--size-profile-ring) / -3);
+        right: calc(var(--size-profile-ring) / -3);
+        width: var(--size-profile-ring);
+        height: var(--size-profile-ring);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-full);
+    }
+
+    .avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--size-profile-avatar);
+        height: var(--size-profile-avatar);
+        margin-bottom: var(--space-2);
+        border-radius: var(--radius-full);
+        background: var(--color-active);
+        box-shadow: 0 var(--space-1) var(--space-3) var(--color-accent-shadow);
+        color: var(--color-active-text);
+        font: var(--font-header-xl);
+        object-fit: cover;
+    }
+
+    .name {
+        font: var(--font-header-lg);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .username {
+        color: var(--color-text-muted);
+        font: var(--font-ui-xs);
+    }
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+
+    .stat {
+        @include card.card;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: var(--space-3);
+        color: var(--color-text-muted);
+        font: var(--font-ui-xs);
+    }
+
+    .value {
+        color: var(--color-active);
+        font: var(--font-header-lg);
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+// Строки «название — значение» через тонкую линию
+.info {
+    @include card.card;
+
+    padding-block: 0;
+
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        padding-block: var(--space-4);
+
+        & + .row {
+            border-top: 1px solid var(--color-border);
+        }
+    }
+
+    dt {
+        color: var(--color-text-muted);
+        font: var(--font-ui-sm);
+    }
+
+    dd {
+        min-width: 0;
+        font: var(--font-ui-sm);
+        font-weight: var(--font-weight-medium);
+        text-align: right;
+        overflow-wrap: anywhere;
+    }
+}
+
+.synced {
+    color: var(--color-text-muted);
+    font: var(--font-xs);
+    font-style: italic;
     text-align: center;
 }

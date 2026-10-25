@@ -34,6 +34,11 @@
         "broken": "Bild konnte nicht geladen werden",
         "uploadFailed": "Foto konnte nicht hochgeladen werden"
     },
+    "loadError": {
+        "title": "Laden fehlgeschlagen",
+        "text": "Prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
+        "retry": "Erneut versuchen"
+    },
     "errorBoundary": {
         "title": "Etwas ist schiefgelaufen",
         "retry": "Erneut versuchen"

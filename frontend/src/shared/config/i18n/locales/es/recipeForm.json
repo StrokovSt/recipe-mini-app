@@ -1,10 +1,9 @@
 {
     "choose": {
         "title": "Nueva receta",
-        "subtitle": "elija cómo añadirla",
+        "subtitle": "Elija cómo añadirla",
         "intro": "Complete la receta usted mismo o deje que la IA la reconozca a partir de un enlace o una foto.",
         "methods": "Forma de añadir",
-        "saved": "se guardará en su colección",
         "locked": "No disponible",
         "manual": {
             "title": "Crear manualmente",
@@ -28,9 +27,9 @@
     },
     "form": {
         "newTitle": "Nueva receta",
-        "newSubtitle": "se guardará en su colección",
+        "newSubtitle": "Se guardará en su colección",
         "editTitle": "Editar receta",
-        "aiSubtitle": "reconocida por IA, revísela"
+        "aiSubtitle": "Reconocida por IA, revísela"
     },
     "sections": {
         "cover": "Portada",
@@ -88,7 +87,7 @@
     },
     "import": {
         "title": "Importar receta",
-        "subtitle": "reconocimiento con IA",
+        "subtitle": "Reconocimiento con IA",
         "link": "Enlace a la receta",
         "or": "o",
         "photo": "Añadir imagen",

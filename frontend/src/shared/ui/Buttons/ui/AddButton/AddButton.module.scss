@@ -1,6 +1,10 @@
 @use "@/shared/styles/states";
+@use "@/shared/styles/tap-area";
 
 .btn {
+    @include tap-area.tap-area;
+
+    position: relative;
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;

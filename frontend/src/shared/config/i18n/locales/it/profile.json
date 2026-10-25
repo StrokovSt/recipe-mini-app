@@ -1,10 +1,18 @@
 {
     "title": "Il mio profilo",
     "subtitle": "Tutto ciò che ha raccolto e cucinato",
-    "placeholder": "Presto qui compariranno i dati del profilo",
     "stats": {
-        "total": "Ricette",
-        "categories": "Categorie",
-        "pinterest": "Pinterest"
-    }
+        "recipes_one": "ricetta",
+        "recipes_many": "ricette",
+        "recipes_other": "ricette",
+        "categories_one": "categoria",
+        "categories_many": "categorie",
+        "categories_other": "categorie"
+    },
+    "info": {
+        "name": "Nome",
+        "telegramId": "ID Telegram",
+        "language": "Lingua"
+    },
+    "synced": "I dati del profilo sono sincronizzati con Telegram"
 }

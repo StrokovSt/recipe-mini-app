@@ -4,7 +4,6 @@
         "subtitle": "选择添加方式",
         "intro": "自己填写食谱，或让 AI 从链接或照片中识别。",
         "methods": "添加方式",
-        "saved": "将保存到您的收藏",
         "locked": "不可用",
         "manual": {
             "title": "手动创建",

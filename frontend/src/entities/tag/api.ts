@@ -4,21 +4,18 @@ import { api } from "@/shared/api";
 
 export const tagApi = {
     getAll: async (): Promise<Tag[]> => {
-        const { data } = await api.get<Tag[]>("/api/tags");
-        return data;
+        return api.get<Tag[]>("/api/tags");
     },
 
     create: async (name: string): Promise<Tag> => {
-        const { data } = await api.post<Tag>("/api/tags", { name });
-        return data;
+        return api.post<Tag>("/api/tags", { name });
     },
 
     rename: async (id: string, name: string): Promise<Tag> => {
-        const { data } = await api.patch<Tag>(`/api/tags/${id}`, { name });
-        return data;
+        return api.patch<Tag>(`/api/tags/${id}`, { name });
     },
 
     delete: async (id: string): Promise<void> => {
         await api.delete(`/api/tags/${id}`);
     },
-};
+};

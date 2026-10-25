@@ -1,10 +1,14 @@
 {
     "title": "내 프로필",
     "subtitle": "모으고 요리한 모든 것",
-    "placeholder": "프로필 정보가 곧 표시될 예정이에요",
     "stats": {
-        "total": "레시피",
-        "categories": "카테고리",
-        "pinterest": "Pinterest"
-    }
+        "recipes_other": "레시피",
+        "categories_other": "카테고리"
+    },
+    "info": {
+        "name": "이름",
+        "telegramId": "텔레그램 ID",
+        "language": "언어"
+    },
+    "synced": "프로필 정보는 텔레그램과 동기화됩니다"
 }

@@ -1,10 +1,20 @@
 {
     "title": "Мой профиль",
     "subtitle": "Всё, что вы собрали и приготовили",
-    "placeholder": "Скоро здесь появятся данные профиля",
     "stats": {
-        "total": "Рецептов",
-        "categories": "Категорий",
-        "pinterest": "Pinterest"
-    }
+        "recipes_one": "рецепт",
+        "recipes_few": "рецепта",
+        "recipes_many": "рецептов",
+        "recipes_other": "рецепта",
+        "categories_one": "категория",
+        "categories_few": "категории",
+        "categories_many": "категорий",
+        "categories_other": "категории"
+    },
+    "info": {
+        "name": "Имя",
+        "telegramId": "Telegram ID",
+        "language": "Язык"
+    },
+    "synced": "Данные профиля синхронизируются с Telegram"
 }

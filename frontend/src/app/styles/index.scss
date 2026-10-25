@@ -46,6 +46,7 @@
     --color-accent-shadow: color-mix(in srgb, var(--color-active) 24%, transparent);
     --color-hover-bg: color-mix(in srgb, var(--color-active) 8%, var(--color-category-bg));
     --color-hover-tint: color-mix(in srgb, var(--color-active) 8%, transparent); /* hover у прозрачных элементов: фон страницы просвечивает */
+    --color-add-tile-bg: color-mix(in srgb, var(--color-surface) 70%, transparent); /* подложка плитки «Новая категория»: текст не теряется на картинке фона */
     --color-brush: color-mix(in srgb, var(--color-border-strong) 45%, transparent);
     --color-active-bg: color-mix(in srgb, var(--color-active) 12%, var(--color-category-bg));
     --color-category-bg: var(--color-surface);

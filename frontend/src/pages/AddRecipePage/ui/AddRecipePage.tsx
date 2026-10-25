@@ -127,8 +127,6 @@ const AddRecipePage = () => {
                 />
             </SectionCard>
 
-            <p className={styles.saved}>{t("choose.saved")}</p>
-
             {(drafts.length > 0 || importing.length > 0) && (
                 <section className={styles.drafts}>
                     <SectionHeading

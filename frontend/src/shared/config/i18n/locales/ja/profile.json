@@ -1,10 +1,14 @@
 {
     "title": "マイプロフィール",
     "subtitle": "集めたレシピと作った料理のすべて",
-    "placeholder": "プロフィール情報は近日公開予定です",
     "stats": {
-        "total": "レシピ",
-        "categories": "カテゴリー",
-        "pinterest": "Pinterest"
-    }
+        "recipes_other": "レシピ",
+        "categories_other": "カテゴリ"
+    },
+    "info": {
+        "name": "名前",
+        "telegramId": "Telegram ID",
+        "language": "言語"
+    },
+    "synced": "プロフィール情報はTelegramと同期されます"
 }

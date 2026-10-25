@@ -1,0 +1,13 @@
+// Невидимая зона нажатия вокруг маленькой кнопки: на телефоне легче попасть, вид не меняется.
+// Зона по центру кнопки, не меньше --size-tap-area. Кнопке нужен position: relative
+@mixin tap-area {
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: max(100%, var(--size-tap-area));
+        height: max(100%, var(--size-tap-area));
+        transform: translate(-50%, -50%);
+    }
+}

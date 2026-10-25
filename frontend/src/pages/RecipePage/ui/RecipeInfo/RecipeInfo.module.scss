@@ -1,5 +1,6 @@
 @use "@/shared/styles/card";
 @use "@/shared/styles/states";
+@use "@/shared/styles/tap-area";
 
 .info {
     @include card.card;
@@ -46,6 +47,9 @@
 }
 
 .more {
+    @include tap-area.tap-area;
+
+    position: relative;
     padding: 0;
     border: none;
     background: none;

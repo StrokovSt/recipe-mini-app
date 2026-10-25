@@ -15,10 +15,13 @@ export const splashHidden = new Promise<void>((resolve) => {
 
 export const isSplashShown = () => getSplash() !== null;
 
-// Котик оживает: видео начинает качаться здесь же, пока оно в пути, виден первый кадр (постер)
-export function startSplash() {
-    if (!getAnimations()) return;
-    getSplash()?.querySelector("video")?.play().catch(() => undefined);
+// Котик оживает: видео начинает качаться здесь же, пока оно в пути, виден первый кадр (постер).
+// Файл выбирает лоадер (shared/ui/Spinner): браузерам Apple нужен другой формат
+export function startSplash(src: string) {
+    const video = getSplash()?.querySelector("video");
+    if (!video || !getAnimations()) return;
+    video.src = src;
+    video.play().catch(() => undefined);
 }
 
 export function hideSplash() {

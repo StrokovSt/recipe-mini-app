@@ -1,10 +1,16 @@
 {
     "title": "My profile",
     "subtitle": "Everything you've collected and cooked",
-    "placeholder": "Profile details are coming soon",
     "stats": {
-        "total": "Recipes",
-        "categories": "Categories",
-        "pinterest": "Pinterest"
-    }
+        "recipes_one": "recipe",
+        "recipes_other": "recipes",
+        "categories_one": "category",
+        "categories_other": "categories"
+    },
+    "info": {
+        "name": "Name",
+        "telegramId": "Telegram ID",
+        "language": "Language"
+    },
+    "synced": "Profile data is synced with Telegram"
 }

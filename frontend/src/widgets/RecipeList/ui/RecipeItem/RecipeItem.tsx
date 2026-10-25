@@ -45,7 +45,7 @@ const RecipeItem = (props: RecipeItemProps) => {
     const time = (prepTime ?? 0) + (cookTime ?? 0);
 
     return (
-        <Link to={`/recipe/${id}`} className={styles.card}>
+        <Link to={`/recipe/${id}`} state={{ fromList: true }} className={styles.card}>
             <div className={styles.media}>
                 {cover ? (
                     <img

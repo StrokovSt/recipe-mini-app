@@ -1,6 +1,7 @@
 import { isSplashShown } from "@/shared/lib/splash";
 
 import { DEFAULT_LOADER, type LoaderName, LOADERS } from "../config/loaders";
+import { getLoaderSrc } from "./getLoaderSrc";
 
 // Медленная сеть не держит запуск дольше этого
 const MAX_WAIT_MS = 1000;
@@ -10,10 +11,9 @@ const MAX_WAIT_MS = 1000;
 // пока видео в пути, вместо него виден неподвижный котик.
 // Обычный котик грузится при старте, остальные там, где понадобятся
 export function preloadLoader(name: LoaderName = DEFAULT_LOADER): Promise<unknown> {
-    const { webm, mp4, poster } = LOADERS[name];
-    const canPlayWebm = document.createElement("video").canPlayType("video/webm") !== "";
+    const { poster } = LOADERS[name];
     // Пока видна заставка, это же видео качает она сама: второй запрос шёл бы параллельно и скачал файл ещё раз
-    if (!isSplashShown()) fetch(canPlayWebm ? webm : mp4).catch(() => undefined);
+    if (!isSplashShown()) fetch(getLoaderSrc(name)).catch(() => undefined);
 
     const image = new Image();
     image.src = poster;

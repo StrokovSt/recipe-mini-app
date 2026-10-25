@@ -1,10 +1,14 @@
 {
     "title": "Profil saya",
     "subtitle": "Semua yang sudah Anda kumpulkan dan masak",
-    "placeholder": "Data profil akan segera hadir",
     "stats": {
-        "total": "Resep",
-        "categories": "Kategori",
-        "pinterest": "Pinterest"
-    }
+        "recipes_other": "resep",
+        "categories_other": "kategori"
+    },
+    "info": {
+        "name": "Nama",
+        "telegramId": "ID Telegram",
+        "language": "Bahasa"
+    },
+    "synced": "Data profil disinkronkan dengan Telegram"
 }

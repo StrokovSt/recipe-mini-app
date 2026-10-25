@@ -1,10 +1,9 @@
 {
     "choose": {
         "title": "Yeni tarif",
-        "subtitle": "nasıl ekleyeceğinizi seçin",
+        "subtitle": "Nasıl ekleyeceğinizi seçin",
         "intro": "Tarifi kendiniz doldurun ya da yapay zekânın bir bağlantıdan veya fotoğraftan tanımasına izin verin.",
         "methods": "Ekleme yöntemi",
-        "saved": "koleksiyonuna kaydedilir",
         "locked": "Kullanılamıyor",
         "manual": {
             "title": "Elle oluştur",
@@ -28,9 +27,9 @@
     },
     "form": {
         "newTitle": "Yeni tarif",
-        "newSubtitle": "koleksiyonuna kaydedilir",
+        "newSubtitle": "Koleksiyonunuza kaydedilir",
         "editTitle": "Tarifi düzenle",
-        "aiSubtitle": "yapay zekâ tanıdı, kontrol edin"
+        "aiSubtitle": "Yapay zekâ tanıdı, kontrol edin"
     },
     "sections": {
         "cover": "Kapak",
@@ -88,7 +87,7 @@
     },
     "import": {
         "title": "Tarifi içe aktar",
-        "subtitle": "yapay zekâ ile tanıma",
+        "subtitle": "Yapay zekâ ile tanıma",
         "link": "Tarif bağlantısı",
         "or": "veya",
         "photo": "Görsel ekle",

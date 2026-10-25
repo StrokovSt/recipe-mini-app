@@ -80,6 +80,8 @@
     --size-nav-action: 56px;
     --size-petal: 20px; /* лепесток, вылетающий из «+» */
     --size-avatar: 40px;
+    --size-profile-avatar: 72px; /* аватар на странице профиля */
+    --size-profile-ring: 120px; /* декоративное кольцо в углу карточки профиля */
     --size-menu-icon: 40px;
     --size-dropdown-min-width: 170px;
     --size-dropdown-icon: 18px;
@@ -127,6 +129,7 @@
     --size-amount-field: 64px;
     --size-unit-field: 80px;
     --size-row-remove: 28px;
+    --size-tap-area: 44px; /* меньшая зона нажатия маленьких кнопок на телефоне (совет Apple) */
 
     // Плюс в кнопке-пилюле «+ Группа», «+ Ингредиент»
     --size-pill-icon: 14px;

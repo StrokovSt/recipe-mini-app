@@ -1,10 +1,16 @@
 {
     "title": "Profilim",
     "subtitle": "Topladığınız ve pişirdiğiniz her şey",
-    "placeholder": "Profil bilgileri yakında burada",
     "stats": {
-        "total": "Tarif",
-        "categories": "Kategori",
-        "pinterest": "Pinterest"
-    }
+        "recipes_one": "tarif",
+        "recipes_other": "tarif",
+        "categories_one": "kategori",
+        "categories_other": "kategori"
+    },
+    "info": {
+        "name": "Ad",
+        "telegramId": "Telegram kimliği",
+        "language": "Dil"
+    },
+    "synced": "Profil verileri Telegram ile senkronize edilir"
 }

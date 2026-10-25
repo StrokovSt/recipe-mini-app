@@ -1,10 +1,9 @@
 {
     "choose": {
         "title": "Resep baru",
-        "subtitle": "pilih cara menambahkannya",
+        "subtitle": "Pilih cara menambahkannya",
         "intro": "Isi resep sendiri atau biarkan AI mengenalinya dari tautan atau foto.",
         "methods": "Cara menambahkan",
-        "saved": "akan disimpan di koleksi Anda",
         "locked": "Tidak tersedia",
         "manual": {
             "title": "Buat manual",
@@ -28,9 +27,9 @@
     },
     "form": {
         "newTitle": "Resep baru",
-        "newSubtitle": "akan disimpan di koleksi Anda",
+        "newSubtitle": "Akan disimpan di koleksi Anda",
         "editTitle": "Edit resep",
-        "aiSubtitle": "dikenali AI, periksa dulu"
+        "aiSubtitle": "Dikenali AI, periksa dulu"
     },
     "sections": {
         "cover": "Sampul",
@@ -88,7 +87,7 @@
     },
     "import": {
         "title": "Impor resep",
-        "subtitle": "pengenalan AI",
+        "subtitle": "Pengenalan AI",
         "link": "Tautan resep",
         "or": "atau",
         "photo": "Tambah gambar",

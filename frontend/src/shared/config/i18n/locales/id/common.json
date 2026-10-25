@@ -34,6 +34,11 @@
         "broken": "Gambar tidak dapat dimuat",
         "uploadFailed": "Foto gagal diunggah"
     },
+    "loadError": {
+        "title": "Gagal memuat",
+        "text": "Periksa koneksi Anda dan coba lagi.",
+        "retry": "Coba lagi"
+    },
     "errorBoundary": {
         "title": "Terjadi kesalahan",
         "retry": "Coba lagi"

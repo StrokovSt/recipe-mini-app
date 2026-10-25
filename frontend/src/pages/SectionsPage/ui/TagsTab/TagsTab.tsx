@@ -7,6 +7,7 @@ import { buildRoute } from "@/app/router/routes";
 import { TagForm, TagItem, useDeleteTag, useTags } from "@/entities/tag";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 import { AddTile } from "@/shared/ui/Buttons";
+import { LoadErrorMessage } from "@/shared/ui/Message";
 import { ConfirmModal } from "@/shared/ui/Modal";
 import { Spinner } from "@/shared/ui/Spinner";
 
@@ -14,7 +15,10 @@ import styles from "./TagsTab.module.scss";
 
 export function TagsTab() {
     const { t } = useTranslation("sections");
-    const { data: tags = [], isLoading } = useTags();
+    const { data, isLoading, isError, isPaused, isFetching, refetch } = useTags();
+    const tags = data ?? [];
+    // Список не пришёл (сервер не ответил или нет сети): вместо пустого раздела — ошибка и «Повторить»
+    const isFailed = !data && (isError || isPaused);
     const { mutate: remove } = useDeleteTag();
 
     const [isFormOpen, setIsFormOpen] = useState(false);
@@ -47,7 +51,8 @@ export function TagsTab() {
         closeConfirm();
     };
 
-    if (isLoading) return <Spinner size="md" />;
+    if (isLoading || (isFailed && isFetching)) return <Spinner size="md" />;
+    if (isFailed) return <LoadErrorMessage onRetry={() => refetch()} />;
 
     return (
         <>

@@ -1,10 +1,9 @@
 {
     "choose": {
         "title": "New recipe",
-        "subtitle": "choose how to add it",
+        "subtitle": "Choose how to add it",
         "intro": "Fill in the recipe yourself or let AI recognize it from a link or photo.",
         "methods": "How to add",
-        "saved": "saved to your collection",
         "locked": "Unavailable",
         "manual": {
             "title": "Create manually",
@@ -28,9 +27,9 @@
     },
     "form": {
         "newTitle": "New recipe",
-        "newSubtitle": "saved to your collection",
+        "newSubtitle": "Saved to your collection",
         "editTitle": "Edit recipe",
-        "aiSubtitle": "recognized by AI, please check"
+        "aiSubtitle": "Recognized by AI, please check"
     },
     "sections": {
         "cover": "Cover",

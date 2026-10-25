@@ -1,8 +1,10 @@
 import clsx from "clsx";
 import { m } from "motion/react";
-import { type ReactNode, useEffect, useRef } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { TRANSITION_PAGE } from "@/shared/config/animation";
+import { getSavedScroll, saveScroll } from "@/shared/lib/scroll";
 import { finishHandedOffLoading, useIsLoaderShown } from "@/shared/ui/GlobalLoader";
 
 import { markFirstPageShown } from "../model/firstPageShown";
@@ -25,6 +27,13 @@ export function PageWrapper(props: PageWrapperProps) {
     const { children, header, className } = props;
     const isLoaderShown = useIsLoaderShown();
     const contentRef = useRef<HTMLDivElement>(null);
+    const { key } = useLocation();
+
+    // Один раз при появлении страницы: вернулись «Назад» — встаём туда, где ушли.
+    // Функция в useState, чтобы ref не перезапускался при каждой отрисовке
+    const [restoreScroll] = useState(() => (node: HTMLElement | null) => {
+        if (node) node.scrollTop = getSavedScroll(key);
+    });
 
     // Страница отрисовалась: котик, переданный с прошлой страницы (например, после распознавания), уходит
     useEffect(() => {
@@ -39,7 +48,11 @@ export function PageWrapper(props: PageWrapperProps) {
     }, [isLoaderShown]);
 
     return (
-        <main className={clsx(styles.wrapper, className)}>
+        <main
+            ref={restoreScroll}
+            className={clsx(styles.wrapper, className)}
+            onScroll={(event) => saveScroll(key, event.currentTarget.scrollTop)}
+        >
             {header}
             <m.div
                 ref={contentRef}

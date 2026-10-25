@@ -34,6 +34,11 @@
         "broken": "Impossibile caricare l'immagine",
         "uploadFailed": "Impossibile caricare la foto"
     },
+    "loadError": {
+        "title": "Impossibile caricare",
+        "text": "Controlli la connessione e riprovi.",
+        "retry": "Riprova"
+    },
     "errorBoundary": {
         "title": "Qualcosa è andato storto",
         "retry": "Riprova"

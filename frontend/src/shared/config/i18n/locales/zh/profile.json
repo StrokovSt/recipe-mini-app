@@ -1,10 +1,14 @@
 {
     "title": "我的资料",
     "subtitle": "您收藏和做过的一切",
-    "placeholder": "个人资料即将上线",
     "stats": {
-        "total": "食谱",
-        "categories": "分类",
-        "pinterest": "Pinterest"
-    }
+        "recipes_other": "食谱",
+        "categories_other": "分类"
+    },
+    "info": {
+        "name": "名字",
+        "telegramId": "Telegram ID",
+        "language": "语言"
+    },
+    "synced": "个人资料与 Telegram 同步"
 }

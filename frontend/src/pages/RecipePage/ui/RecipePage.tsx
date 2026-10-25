@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
 import { buildRoute } from "@/app/router/routes";
 import { getRecipeSource, useDeleteRecipe, useRecipe } from "@/entities/recipe";
+import { ApiError } from "@/shared/api";
 import DeleteIcon from "@/shared/assets/icons/icon-delete.svg?react";
 import EditIcon from "@/shared/assets/icons/icon-edit.svg?react";
 import { shareLink } from "@/shared/lib/share";
@@ -12,7 +13,7 @@ import { IconButton } from "@/shared/ui/Buttons";
 import { Dropdown } from "@/shared/ui/Dropdown";
 import { useLoader } from "@/shared/ui/GlobalLoader";
 import { MediaLightbox } from "@/shared/ui/MediaLightbox";
-import { Message } from "@/shared/ui/Message";
+import { LoadErrorMessage, Message } from "@/shared/ui/Message";
 import { ConfirmModal } from "@/shared/ui/Modal";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
@@ -30,6 +31,7 @@ const COPIED_HINT_MS = 2000;
 const RecipePage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
+    const location = useLocation();
     const { t } = useTranslation(["recipe", "common"]);
     // Фото и индекс не сбрасываем при закрытии: окно гаснет плавно и до конца показывает то же фото
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -38,9 +40,17 @@ const RecipePage = () => {
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [isLinkCopied, setIsLinkCopied] = useState(false);
 
-    const { data: recipe, isLoading, isError } = useRecipe(id!);
+    const { data: recipe, isLoading, error, isFetching, refetch } = useRecipe(id!);
     const { mutate: deleteRecipe } = useDeleteRecipe();
-    useLoader(isLoading);
+    // «Повторить» после ошибки тоже показывает котика
+    useLoader(isLoading || (!recipe && isFetching));
+
+    // Открыли из списка: возвращаемся в ту же запись истории, прокрутка и фильтры на месте.
+    // Иначе (ссылка, после сохранения) — на главную
+    const goBack = () => {
+        if ((location.state as { fromList?: boolean } | null)?.fromList) navigate(-1);
+        else navigate(AppRoute.Home);
+    };
 
     const backButton = (
         <IconButton
@@ -49,15 +59,20 @@ const RecipePage = () => {
             className={styles.back}
             type="button"
             aria-label={t("common:back")}
-            onClick={() => navigate(AppRoute.Home)}
+            onClick={goBack}
         />
     );
 
     if (isLoading) return null;
-    if (isError || !recipe) {
+    // 404 — рецепта нет. Другая ошибка или нет сети — рецепт есть, но не загрузился
+    if (!recipe) {
         return (
             <PageWrapper className={styles.page} header={<PageHeader className={styles.header}>{backButton}</PageHeader>}>
-                <Message illustration="warning" title={t("notFound.title")} text={t("notFound.text")} />
+                {error instanceof ApiError && error.status === 404 ? (
+                    <Message illustration="warning" title={t("notFound.title")} text={t("notFound.text")} />
+                ) : (
+                    <LoadErrorMessage onRetry={() => refetch()} />
+                )}
             </PageWrapper>
         );
     }

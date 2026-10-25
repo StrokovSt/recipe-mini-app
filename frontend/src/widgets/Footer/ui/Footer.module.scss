@@ -19,7 +19,7 @@
     background: var(--color-surface);
     box-shadow: var(--shadow-lg);
     transition: var(--transition-base);
-    transition-property: max-width, padding, background-color, border-color, opacity;
+    transition-property: max-width, padding, background-color, border-color, box-shadow, opacity;
 
     // На форме плашка сама становится винной кнопкой и сужается до максимума
     &Action {
@@ -27,6 +27,13 @@
         padding: 0;
         border-color: var(--color-active);
         background-color: var(--color-active);
+    }
+
+    // Действие неактивно: плашка прозрачная, видна только бледная кнопка, как неактивные кнопки в шторках
+    &Action:has(:disabled) {
+        border-color: transparent;
+        background-color: transparent;
+        box-shadow: none;
     }
 
     // Страница спрятала своё действие (PageFooter isHidden): плашки не видно, нажать на неё нельзя

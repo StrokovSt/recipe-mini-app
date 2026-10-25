@@ -1,10 +1,9 @@
 {
     "choose": {
         "title": "Nouvelle recette",
-        "subtitle": "choisissez comment l'ajouter",
+        "subtitle": "Choisissez comment l'ajouter",
         "intro": "Remplissez la recette vous-même ou laissez l'IA la reconnaître à partir d'un lien ou d'une photo.",
         "methods": "Mode d'ajout",
-        "saved": "enregistrée dans votre collection",
         "locked": "Indisponible",
         "manual": {
             "title": "Créer manuellement",
@@ -28,9 +27,9 @@
     },
     "form": {
         "newTitle": "Nouvelle recette",
-        "newSubtitle": "enregistrée dans votre collection",
+        "newSubtitle": "Enregistrée dans votre collection",
         "editTitle": "Modifier la recette",
-        "aiSubtitle": "reconnue par l’IA, à vérifier"
+        "aiSubtitle": "Reconnue par l’IA, à vérifier"
     },
     "sections": {
         "cover": "Couverture",
@@ -88,7 +87,7 @@
     },
     "import": {
         "title": "Importer une recette",
-        "subtitle": "reconnaissance par IA",
+        "subtitle": "Reconnaissance par IA",
         "link": "Lien vers la recette",
         "or": "ou",
         "photo": "Ajouter une image",

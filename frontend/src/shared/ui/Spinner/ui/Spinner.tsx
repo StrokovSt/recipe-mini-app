@@ -7,6 +7,7 @@ import SpinnerIcon from "@/shared/assets/spinner.svg?react";
 import { TRANSITION_BASE } from "@/shared/config/animation";
 
 import { DEFAULT_LOADER, type LoaderName, LOADERS } from "../config/loaders";
+import { getLoaderSrc } from "../lib/getLoaderSrc";
 
 import styles from "./Spinner.module.scss";
 
@@ -50,7 +51,7 @@ export function Spinner(props: SpinnerProps) {
 
     if (!isVisible) return null;
 
-    const { webm, mp4, poster } = LOADERS[loader];
+    const { poster } = LOADERS[loader];
 
     // Котик всегда строго по центру экрана. Портал в body, чтобы fixed
     // не зависел от transform/filter анимаций страницы
@@ -63,9 +64,10 @@ export function Spinner(props: SpinnerProps) {
             transition={TRANSITION_BASE}
         >
             <video
-                // Смена source у того же video не перезапускает его: при другом котике видео создаётся заново
+                // При другом котике видео создаётся заново, а не меняет src на ходу
                 key={loader}
                 className={styles[size]}
+                src={getLoaderSrc(loader)}
                 // Первый кадр, пока само видео не загрузилось
                 poster={poster}
                 autoPlay
@@ -73,10 +75,7 @@ export function Spinner(props: SpinnerProps) {
                 muted
                 playsInline
                 aria-label={t("loading")}
-            >
-                <source src={webm} type="video/webm" />
-                <source src={mp4} type="video/mp4" />
-            </video>
+            />
             {label && <p className={styles.label}>{label}</p>}
         </m.div>,
         document.body

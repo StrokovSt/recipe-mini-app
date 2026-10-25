@@ -1,3 +1,5 @@
+@use "@/shared/styles/tap-area";
+
 // Общие стили ингредиентов и шагов: блок в рамке, узкий крестик удаления, текст ошибки
 
 @mixin block {
@@ -8,6 +10,9 @@
 
 // Крестик высотой с поле, узкий, чтобы полю осталось больше места
 @mixin remove {
+    @include tap-area.tap-area;
+
+    position: relative;
     width: var(--size-row-remove);
     height: var(--size-field-height);
 

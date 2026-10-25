@@ -1,14 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { isAxiosError } from "axios";
 import { type ReactNode } from "react";
 
 import { ApiError } from "@/shared/api";
 
-// Код ответа: ApiError, если бэкенд прислал code, иначе обычная ошибка axios (например, 404 «Рецепт не найден»)
-const getStatus = (error: Error) => {
-    if (error instanceof ApiError) return error.status;
-    if (isAxiosError(error)) return error.response?.status;
-};
+// Код ответа (например, 404 «Рецепт не найден»). Без сети кода нет
+const getStatus = (error: Error) => (error instanceof ApiError ? error.status : undefined);
 
 const queryClient = new QueryClient({
     defaultOptions: {

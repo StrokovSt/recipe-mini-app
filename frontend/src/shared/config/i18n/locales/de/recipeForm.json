@@ -1,10 +1,9 @@
 {
     "choose": {
         "title": "Neues Rezept",
-        "subtitle": "wählen Sie, wie Sie es hinzufügen",
+        "subtitle": "Wählen Sie, wie Sie es hinzufügen",
         "intro": "Füllen Sie das Rezept selbst aus oder lassen Sie die KI es aus einem Link oder Foto erkennen.",
         "methods": "Art des Hinzufügens",
-        "saved": "wird in Ihrer Sammlung gespeichert",
         "locked": "Nicht verfügbar",
         "manual": {
             "title": "Manuell erstellen",
@@ -28,9 +27,9 @@
     },
     "form": {
         "newTitle": "Neues Rezept",
-        "newSubtitle": "wird in Ihrer Sammlung gespeichert",
+        "newSubtitle": "Wird in Ihrer Sammlung gespeichert",
         "editTitle": "Rezept bearbeiten",
-        "aiSubtitle": "von KI erkannt, bitte prüfen"
+        "aiSubtitle": "Von KI erkannt, bitte prüfen"
     },
     "sections": {
         "cover": "Titelbild",
