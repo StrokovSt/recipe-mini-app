@@ -34,9 +34,17 @@
         filter: brightness(1.1);
     }
 
+    // Фокус с клавиатуры. Кнопкам меню Headless UI возвращает фокус после закрытия, в том числе по клику мимо,
+    // и браузер считает его :focus-visible. У них фокус с клавиатуры отмечает data-focus
     &:not([aria-pressed="true"]) {
-        &:focus-visible {
+        &:is(:focus-visible:not([data-headlessui-state]), [data-focus]) {
             background: var(--icon-button-hover-bg);
+        }
+
+        // Открыто меню этой кнопки (data-open ставит Headless UI): подсвечена, как при наведении
+        &[data-open] {
+            background: var(--icon-button-hover-bg);
+            filter: brightness(1.05);
         }
 
         @include states.hover(":not(:disabled)") {
@@ -44,7 +52,7 @@
         }
     }
 
-    &:focus-visible {
+    &:is(:focus-visible:not([data-headlessui-state]), [data-focus]) {
         border-color: var(--color-active);
     }
 
@@ -59,7 +67,8 @@
 .default {
     color: var(--tg-hint);
 
-    &:focus-visible:not([aria-pressed="true"]) {
+    &:is(:focus-visible:not([data-headlessui-state]), [data-focus]):not([aria-pressed="true"]),
+    &[data-open]:not([aria-pressed="true"]) {
         --icon-button-hover-bg: var(--color-hover-bg);
 
         border-color: var(--color-active);
