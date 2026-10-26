@@ -116,14 +116,14 @@
     "drafts": {
         "title": "Taslaklar",
         "hint": "kaldığınız yerden devam edin",
-        "total": "{{count}} / {{limit}}",
+        "all": "Tüm taslaklar · {{count}}",
         "untitled": "Başlıksız",
         "actions": "“{{name}}” taslağı için işlemler",
         "deleteTitle": "“{{name}}” taslağı silinsin mi?",
         "deleteText": "Taslak kalıcı olarak silinecek.",
-        "limit": {
-            "title": "Taslak sınırına ulaşıldı",
-            "text": "{{count}} / {{limit}} kayıtlı. Yeni bir taslak başlatmak için gereksiz bir taslağı silin veya tarif olarak kaydedin."
+        "empty": {
+            "title": "Taslak yok",
+            "text": "Başladığınız ama henüz kaydetmediğiniz tarifler burada görünecek."
         }
     },
     "draftStatus": {

@@ -62,7 +62,9 @@
     --size-field-height: 40px;
     --size-field-height-lg: 52px; /* крупное поле (шторки тега и категории) и кнопка формы в футере */
     --size-line-field-height: 52px; /* поле «строкой» в форме рецепта: без рамки, с линией снизу, подпись поднимается над текстом */
+    --size-line-field-compact: 40px; /* поле «строкой» без видимой подписи (строки ингредиентов) */
     --size-nutrition-tile: 64px; /* плитка КБЖУ в форме рецепта */
+    --size-nutrition-tile-row: 48px; /* плитка КБЖУ на узком экране: число и подпись в строку */
 
     // Поиск и кнопка фильтров — высотой с кнопки шапки
     --size-search-height: var(--size-menu-button);
@@ -80,6 +82,10 @@
     --size-onboarding-hole-padding: 6px;
     --size-onboarding-hole-ring: 2px;
     --size-nav-action: 56px;
+
+    // Высота футера: отступ сверху + плашка навигации (круглая «+», отступы и рамка) + отступ снизу.
+    // Футер лежит поверх main, и снизу страницы столько места, чтобы последнее не пряталось под ним
+    --size-page-footer: calc(var(--space-6) + var(--size-nav-action) + 2 * var(--space-2) + 2px + var(--space-3));
     --size-nav-icon-stroke: 2.25; /* толщина линий иконок нижнего меню */
     --size-petal: 20px; /* лепесток, вылетающий из «+» */
     --size-avatar: 40px;

@@ -28,7 +28,7 @@ const focusNextField = (input: HTMLInputElement) => {
     fields[fields.indexOf(input) + 1]?.focus();
 };
 
-// Поле с единицей ингредиента (выглядит как остальные поля), по тапу или фокусу шторка со всеми единицами по группам.
+// Поле с единицей ингредиента (выглядит как остальные поля строки, без видимой подписи), по тапу или фокусу шторка со всеми единицами по группам.
 // Поле не readOnly, иначе «Далее» на клавиатуре его пропускает; печатать в нём нельзя: inputMode none и значение не меняется
 const UnitSelect = ({ value, onChange, className }: UnitSelectProps) => {
     const { t, i18n } = useTranslation(["recipeForm", "units"]);
@@ -58,6 +58,7 @@ const UnitSelect = ({ value, onChange, className }: UnitSelectProps) => {
         <>
             <Input
                 variant="line"
+                hideLabel
                 inputMode="none"
                 autoComplete="off"
                 label={t("ingredients.unit")}

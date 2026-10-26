@@ -35,6 +35,11 @@
         .error {
             border-radius: var(--radius-sm);
         }
+
+        // Без подписи строки над текстом нет: плашка садится на верхний край поля, чтобы меньше закрывать текст
+        .noLabel ~ .error {
+            transform: translateY(-50%);
+        }
     }
 }
 
@@ -235,6 +240,16 @@
         color: var(--color-accent);
     }
 
+    // Без видимой подписи (hideLabel): места над текстом под неё не нужно, поле ниже, в пустом видна подсказка
+    &.noLabel {
+        height: var(--size-line-field-compact);
+        padding-top: var(--space-2);
+
+        &::placeholder {
+            color: var(--tg-hint);
+        }
+    }
+
     &:disabled {
         @include states.disabled;
     }
@@ -251,7 +266,8 @@
             border-bottom-color: var(--color-error);
         }
 
-        & ~ .lineLabel {
+        & ~ .lineLabel,
+        &::placeholder {
             color: var(--color-error);
         }
     }
@@ -270,4 +286,14 @@
     white-space: nowrap;
     transition: all var(--transition-base);
     pointer-events: none;
+}
+
+// Подпись только для экранного диктора (hideLabel)
+.hiddenLabel {
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
 }

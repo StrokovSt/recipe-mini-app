@@ -52,7 +52,6 @@
         "VALIDATION_ERROR": "Datos no válidos.",
         "LIMIT_REACHED": "Ha alcanzado el límite de recetas. Suscríbase para tener acceso ilimitado.",
         "AI_DISABLED": "El reconocimiento con IA no está disponible para esta cuenta.",
-        "DRAFT_LIMIT_REACHED": "Puede guardar hasta 5 borradores. Elimine uno para empezar otro.",
         "unknown": "Algo salió mal."
     }
 }

@@ -117,14 +117,14 @@
     "drafts": {
         "title": "Bozze",
         "hint": "riprenda da dove aveva lasciato",
-        "total": "{{count}} di {{limit}}",
+        "all": "Tutte le bozze · {{count}}",
         "untitled": "Senza titolo",
         "actions": "Azioni per la bozza «{{name}}»",
         "deleteTitle": "Eliminare la bozza «{{name}}»?",
         "deleteText": "La bozza verrà eliminata definitivamente.",
-        "limit": {
-            "title": "Limite di bozze raggiunto",
-            "text": "{{count}} di {{limit}} salvate. Elimini una bozza che non le serve o la salvi come ricetta per iniziarne una nuova."
+        "empty": {
+            "title": "Nessuna bozza",
+            "text": "Qui compariranno le ricette che ha iniziato e non ha ancora salvato."
         }
     },
     "draftStatus": {

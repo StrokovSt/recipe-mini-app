@@ -7,6 +7,7 @@ export const AppRoute = {
     ImportRecipe: "/add/import",
     CreateRecipe: "/add/form",
     Draft: "/add/draft/:id",
+    Drafts: "/add/drafts",
     EditRecipe: "/edit/:id",
     Sections: "/sections",
     Profile: "/profile",

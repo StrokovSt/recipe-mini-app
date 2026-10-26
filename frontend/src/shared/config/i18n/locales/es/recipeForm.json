@@ -117,14 +117,14 @@
     "drafts": {
         "title": "Borradores",
         "hint": "continúe donde lo dejó",
-        "total": "{{count}} de {{limit}}",
+        "all": "Todos los borradores · {{count}}",
         "untitled": "Sin título",
         "actions": "Acciones del borrador «{{name}}»",
         "deleteTitle": "¿Eliminar el borrador «{{name}}»?",
         "deleteText": "El borrador se eliminará de forma permanente.",
-        "limit": {
-            "title": "Límite de borradores alcanzado",
-            "text": "{{count}} de {{limit}} guardados. Elimine un borrador que no necesite o guárdelo como receta para empezar uno nuevo."
+        "empty": {
+            "title": "No hay borradores",
+            "text": "Aquí aparecerán las recetas que empezó y aún no ha guardado."
         }
     },
     "draftStatus": {

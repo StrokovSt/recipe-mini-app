@@ -43,7 +43,7 @@ $row-split-width: 300px;
 
         // Строки в две линии разделены шире, чтобы ингредиенты не сливались
         @container (width < #{$row-split-width}) {
-            gap: var(--space-3);
+            gap: var(--space-4);
         }
     }
 
@@ -111,8 +111,8 @@ $row-split-width: 300px;
         position: relative;
         display: grid;
         width: var(--size-row-grip);
-        height: var(--size-line-field-height);
-        padding: calc(var(--space-5) - var(--space-2)) 0 0;
+        height: var(--size-line-field-compact);
+        padding: 0;
         border: none;
         border-radius: var(--radius-sm);
         outline: none;

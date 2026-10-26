@@ -3,10 +3,11 @@
     flex-direction: column;
     gap: var(--space-5);
 
-    // Сверху место под общую шапку, которая лежит поверх main.
-    // Снизу запас на сдвиг контента при въезде (y 8px в PageWrapper.tsx): контент растянут на всю высоту,
+    // Сверху и снизу место под общие шапку и футер, которые лежат поверх main.
+    // Снизу ещё запас на сдвиг контента при въезде (y 8px в PageWrapper.tsx): контент растянут на всю высоту,
     // и без запаса на время анимации у main появлялась бы прокрутка
-    padding: calc(var(--size-page-header) + var(--space-5)) var(--space-page) var(--space-2);
+    padding: calc(var(--size-page-header) + var(--space-5)) var(--space-page)
+        calc(var(--size-page-footer) + var(--space-2));
     overflow: hidden auto;
     font-family: var(--font-family-main);
 

@@ -115,14 +115,14 @@
     "drafts": {
         "title": "Draf",
         "hint": "lanjutkan dari bagian terakhir",
-        "total": "{{count}} dari {{limit}}",
+        "all": "Semua draf · {{count}}",
         "untitled": "Tanpa judul",
         "actions": "Tindakan untuk draf “{{name}}”",
         "deleteTitle": "Hapus draf “{{name}}”?",
         "deleteText": "Draf akan dihapus secara permanen.",
-        "limit": {
-            "title": "Batas draf tercapai",
-            "text": "{{count}} dari {{limit}} tersimpan. Hapus draf yang tidak diperlukan atau simpan sebagai resep untuk memulai yang baru."
+        "empty": {
+            "title": "Tidak ada draf",
+            "text": "Resep yang Anda mulai tetapi belum disimpan akan muncul di sini."
         }
     },
     "draftStatus": {

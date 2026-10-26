@@ -10,6 +10,7 @@ const PAGES = {
     AddRecipePage: lazyWithPreload(() => import("@/pages/AddRecipePage").then(m => ({ default: m.AddRecipePage }))),
     ImportRecipePage: lazyWithPreload(() => import("@/pages/ImportRecipePage").then(m => ({ default: m.ImportRecipePage }))),
     CreateRecipePage: lazyWithPreload(() => import("@/pages/CreateRecipePage").then(m => ({ default: m.CreateRecipePage }))),
+    DraftsPage: lazyWithPreload(() => import("@/pages/DraftsPage").then(m => ({ default: m.DraftsPage }))),
     SectionsPage: lazyWithPreload(() => import("@/pages/SectionsPage").then(m => ({ default: m.SectionsPage }))),
     EditRecipePage: lazyWithPreload(() => import("@/pages/EditRecipePage").then(m => ({ default: m.EditRecipePage }))),
     ProfilePage: lazyWithPreload(() => import("@/pages/ProfilePage").then(m => ({ default: m.ProfilePage }))),
@@ -51,6 +52,10 @@ export const routeConfig: RouteConfig[] = [
     {
         path: AppRoute.Draft,
         page: PAGES.CreateRecipePage,
+    },
+    {
+        path: AppRoute.Drafts,
+        page: PAGES.DraftsPage,
     },
     {
         path: AppRoute.Sections,

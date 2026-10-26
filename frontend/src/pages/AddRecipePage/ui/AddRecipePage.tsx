@@ -2,29 +2,28 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import type { DraftSummary } from "@recipe/common";
-import { DRAFT_LIMIT } from "@recipe/common";
-
 import { AppRoute } from "@/app/router";
-import { buildRoute } from "@/app/router/routes";
-import { DraftItem, useDeleteDraft, useDrafts } from "@/entities/draft";
+import { useDrafts } from "@/entities/draft";
 import { useMe } from "@/entities/user";
 import { useImportsInProgress } from "@/features/recipe-form";
 import FormIcon from "@/shared/assets/icons/icon-form.svg?react";
 import ImageIcon from "@/shared/assets/icons/icon-image.svg?react";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
-import { IconButton, RegularButton } from "@/shared/ui/Buttons";
-import { ConfirmModal } from "@/shared/ui/Modal";
+import { IconButton, OutlineButton, RegularButton } from "@/shared/ui/Buttons";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { SectionCard } from "@/shared/ui/SectionCard";
 import { SectionHeading } from "@/shared/ui/SectionHeading";
 import { preloadLoader } from "@/shared/ui/Spinner";
+import { DraftList } from "@/widgets/DraftList";
 
 import { ImportingItem } from "./ImportingItem/ImportingItem";
 import { OptionCard } from "./OptionCard/OptionCard";
 
 import styles from "./AddRecipePage.module.scss";
+
+// Сколько последних черновиков видно здесь, остальные на странице «Все черновики»
+const DRAFTS_PREVIEW = 3;
 
 // Выбор способа добавления: вручную или распознать по ссылке и фото
 const AddRecipePage = () => {
@@ -33,29 +32,10 @@ const AddRecipePage = () => {
     const { data: user } = useMe({ fresh: true });
     const { data: drafts = [] } = useDrafts();
     const importing = useImportsInProgress();
-    const { mutate: removeDraft } = useDeleteDraft();
     const [isAiSheetOpen, setIsAiSheetOpen] = useState(false);
-    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-    // Не сбрасываем при закрытии, иначе заголовок окна меняется во время анимации
-    const [deletingDraft, setDeletingDraft] = useState<DraftSummary | null>(null);
 
     const isAiLocked = user?.aiEnabled === false;
     const isLimitReached = user?.recipeLimit != null && user.recipeCount >= user.recipeLimit;
-    // Новый рецепт начинается с черновика, поэтому при полном списке черновиков начать нельзя
-    const isDraftLimitReached = drafts.length >= DRAFT_LIMIT;
-    const isDisabled = isLimitReached || isDraftLimitReached;
-
-    const askDelete = (draft: DraftSummary) => {
-        setDeletingDraft(draft);
-        setIsConfirmOpen(true);
-    };
-
-    const closeConfirm = () => setIsConfirmOpen(false);
-
-    const confirmDelete = () => {
-        if (deletingDraft) removeDraft(deletingDraft.id);
-        closeConfirm();
-    };
 
     const handleImport = () => {
         if (isAiLocked) {
@@ -95,13 +75,6 @@ const AddRecipePage = () => {
                 </p>
             )}
 
-            {!isLimitReached && isDraftLimitReached && (
-                <p className={styles.limit} role="status">
-                    <strong>{t("drafts.limit.title")}</strong>
-                    {t("drafts.limit.text", { count: drafts.length, limit: DRAFT_LIMIT })}
-                </p>
-            )}
-
             <SectionCard
                 mark="一"
                 title={t("choose.methods")}
@@ -113,7 +86,7 @@ const AddRecipePage = () => {
                     title={t("choose.manual.title")}
                     description={t("choose.manual.description")}
                     action={t("choose.manual.action")}
-                    disabled={isDisabled}
+                    disabled={isLimitReached}
                     onClick={() => navigate(AppRoute.CreateRecipe)}
                 />
                 <OptionCard
@@ -122,7 +95,7 @@ const AddRecipePage = () => {
                     description={t("choose.import.description")}
                     action={isAiLocked ? t("choose.locked") : t("choose.import.action")}
                     locked={isAiLocked}
-                    disabled={isDisabled}
+                    disabled={isLimitReached}
                     onClick={handleImport}
                 />
             </SectionCard>
@@ -132,14 +105,18 @@ const AddRecipePage = () => {
                     <SectionHeading
                         title={t("drafts.title")}
                         hint={t("drafts.hint")}
-                        total={t("drafts.total", { count: drafts.length, limit: DRAFT_LIMIT })}
+                        total={String(drafts.length)}
                     />
-                    <div className={styles.draftList}>
+                    <DraftList drafts={drafts.slice(0, DRAFTS_PREVIEW)}>
                         {importing.map(({ id, source }) => <ImportingItem key={id} source={source} />)}
-                        {drafts.map((draft) => (
-                            <DraftItem key={draft.id} draft={draft} to={buildRoute.draft(draft.id)} onDelete={askDelete} />
-                        ))}
-                    </div>
+                    </DraftList>
+                    {drafts.length > DRAFTS_PREVIEW && (
+                        <OutlineButton
+                            type="button"
+                            label={t("drafts.all", { count: drafts.length })}
+                            onClick={() => navigate(AppRoute.Drafts)}
+                        />
+                    )}
                 </section>
             )}
 
@@ -157,14 +134,6 @@ const AddRecipePage = () => {
             >
                 <p className={styles.sheetText}>{t("choose.aiLocked.text")}</p>
             </BottomSheet>
-
-            <ConfirmModal
-                isOpen={isConfirmOpen}
-                onClose={closeConfirm}
-                onConfirm={confirmDelete}
-                title={t("drafts.deleteTitle", { name: deletingDraft?.title || t("drafts.untitled") })}
-                text={t("drafts.deleteText")}
-            />
         </PageWrapper>
     );
 };

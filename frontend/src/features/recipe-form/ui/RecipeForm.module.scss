@@ -44,13 +44,18 @@
         @include footer-action.footer-action;
     }
 
-    // Подпись автосохранения висит над плашкой, в отступе футера: высота плашки не меняется
+    // Подпись автосохранения висит над плашкой, в отступе футера: высота плашки не меняется.
+    // Под ней прокручивается форма, поэтому у подписи своя подложка
     .draftStatus {
         position: absolute;
         right: 0;
         bottom: 100%;
         left: 0;
-        margin: 0 0 var(--space-1);
+        width: fit-content;
+        margin: 0 auto var(--space-1);
+        padding: 0 var(--space-2);
+        border-radius: var(--radius-lg);
+        background: var(--color-surface);
         color: var(--color-text-muted);
         font: var(--font-ui-xs);
         text-align: center;

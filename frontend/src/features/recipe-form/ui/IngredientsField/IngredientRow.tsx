@@ -68,6 +68,7 @@ const IngredientRow = (props: IngredientRowProps) => {
             </button>
             <Input
                 variant="line"
+                hideLabel
                 register={register(`${name}.name`)}
                 label={t("ingredients.name")}
                 error={errors.ingredients?.[groupIndex]?.items?.[index]?.name?.message}

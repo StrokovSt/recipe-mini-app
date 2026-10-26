@@ -52,7 +52,6 @@
         "VALIDATION_ERROR": "Data tidak valid.",
         "LIMIT_REACHED": "Batas resep tercapai. Berlangganan untuk akses tanpa batas.",
         "AI_DISABLED": "Pengenalan dengan AI tidak tersedia untuk akun ini.",
-        "DRAFT_LIMIT_REACHED": "Anda dapat menyimpan hingga 5 draf. Hapus satu untuk memulai yang baru.",
         "unknown": "Terjadi kesalahan."
     }
 }

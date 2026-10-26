@@ -1,5 +1,13 @@
 @use "@/shared/styles/states";
 
+// Уже этой ширины плитки встают 2×2: в ряд из четырёх подписи («углеводы, г») переносились бы.
+// В @container нельзя подставить CSS-переменную, поэтому граница здесь, а не в variables.scss
+$grid-split-width: 340px;
+
+.fields {
+    container-type: inline-size;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -71,4 +79,38 @@
     transition: var(--transition-base);
     transition-property: transform, color;
     pointer-events: none;
+}
+
+// Плитки 2×2: число и сразу за ним подпись в одну строку, вместе по центру плитки. Поле шириной с число
+// (--digits из NutritionFields.tsx, цифра шириной 1ch), в пустой плитке без фокуса оно сжимается до нуля
+@container (width < #{$grid-split-width}) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tile {
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: center;
+        min-height: var(--size-nutrition-tile-row);
+        padding: var(--space-2) var(--space-3);
+    }
+
+    .input {
+        flex: none;
+        width: calc(max(var(--digits), 1) * 1ch);
+
+        &:placeholder-shown:not(:focus) {
+            width: 0;
+        }
+
+        &:placeholder-shown:not(:focus) ~ .caption {
+            margin-left: 0;
+            transform: none;
+        }
+    }
+
+    .caption {
+        margin-left: var(--space-2);
+    }
 }

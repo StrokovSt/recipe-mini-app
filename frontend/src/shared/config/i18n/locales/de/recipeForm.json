@@ -116,14 +116,14 @@
     "drafts": {
         "title": "Entwürfe",
         "hint": "machen Sie dort weiter, wo Sie aufgehört haben",
-        "total": "{{count}} von {{limit}}",
+        "all": "Alle Entwürfe · {{count}}",
         "untitled": "Ohne Titel",
         "actions": "Aktionen für Entwurf „{{name}}“",
         "deleteTitle": "Entwurf „{{name}}“ löschen?",
         "deleteText": "Der Entwurf wird endgültig gelöscht.",
-        "limit": {
-            "title": "Entwurfslimit erreicht",
-            "text": "{{count}} von {{limit}} gespeichert. Löschen Sie einen nicht benötigten Entwurf oder speichern Sie ihn als Rezept, um einen neuen zu beginnen."
+        "empty": {
+            "title": "Keine Entwürfe",
+            "text": "Hier erscheinen Rezepte, die Sie begonnen, aber noch nicht gespeichert haben."
         }
     },
     "draftStatus": {

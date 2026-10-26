@@ -1,11 +1,15 @@
 @use "@/shared/styles/states";
 
 .footer {
-    // Всегда вторая строка сетки #root: пока грузится код страницы и main ещё нет,
-    // footer не должен подниматься в первую строку
-    grid-row: 2;
+    // Лежит поверх низа страницы: контент прокручивается под ним и виден в отступах вокруг плашки.
+    // Нажатия в отступах проходят к контенту, ловит их только сама плашка
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
     padding: var(--space-3);
     padding-top: var(--space-6);
+    pointer-events: none;
 }
 
 // Плашка; position — опора для подписи над ней (автосохранение формы)
@@ -18,6 +22,7 @@
     background: var(--color-surface);
     box-shadow: var(--shadow-lg);
     transition: var(--transition-base);
+    pointer-events: auto;
     transition-property: max-width, padding, background-color, border-color, box-shadow, opacity;
 
     // На форме плашка сама становится винной кнопкой и сужается до максимума

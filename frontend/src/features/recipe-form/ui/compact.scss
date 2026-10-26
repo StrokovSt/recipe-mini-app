@@ -2,14 +2,13 @@
 
 // Общие стили ингредиентов и шагов: узкий крестик удаления, текст ошибки
 
-// Крестик высотой с поле «строкой», значок на уровне текста поля. Узкий, чтобы полю осталось больше места
+// Крестик высотой с поле строки ингредиента, значок на уровне текста поля. Узкий, чтобы полю осталось больше места
 @mixin remove {
     @include tap-area.tap-area;
 
     position: relative;
     width: var(--size-row-remove);
-    height: var(--size-line-field-height);
-    padding-top: calc(var(--space-5) - var(--space-2));
+    height: var(--size-line-field-compact);
 
     svg {
         width: var(--size-row-icon);

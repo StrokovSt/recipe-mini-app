@@ -117,14 +117,14 @@
     "drafts": {
         "title": "Rascunhos",
         "hint": "continue de onde parou",
-        "total": "{{count}} de {{limit}}",
+        "all": "Todos os rascunhos · {{count}}",
         "untitled": "Sem título",
         "actions": "Ações do rascunho «{{name}}»",
         "deleteTitle": "Excluir o rascunho «{{name}}»?",
         "deleteText": "O rascunho será excluído permanentemente.",
-        "limit": {
-            "title": "Limite de rascunhos atingido",
-            "text": "{{count}} de {{limit}} salvos. Exclua um rascunho que não precisa ou salve-o como receita para começar um novo."
+        "empty": {
+            "title": "Nenhum rascunho",
+            "text": "Aqui aparecerão as receitas que você começou e ainda não salvou."
         }
     },
     "draftStatus": {

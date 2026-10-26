@@ -21,7 +21,7 @@ const parse = (text: string) => {
 
 const format = (value: number | null) => (value === null ? "" : String(value));
 
-// Количество ингредиента полем «строкой», может быть дробным. Текст хранится отдельно от числа,
+// Количество ингредиента полем «строкой» без видимой подписи, может быть дробным. Текст хранится отдельно от числа,
 // чтобы «0,» не превращалось в «0» прямо во время ввода
 const AmountInput = (props: AmountInputProps) => {
     const { value, onChange, onBlur, label, className, error } = props;
@@ -45,6 +45,7 @@ const AmountInput = (props: AmountInputProps) => {
     return (
         <Input
             variant="line"
+            hideLabel
             type="text"
             inputMode="decimal"
             label={label}

@@ -116,14 +116,14 @@
     "drafts": {
         "title": "Drafts",
         "hint": "pick up where you left off",
-        "total": "{{count}} of {{limit}}",
+        "all": "All drafts · {{count}}",
         "untitled": "Untitled",
         "actions": "Actions for draft “{{name}}”",
         "deleteTitle": "Delete draft “{{name}}”?",
         "deleteText": "The draft will be deleted permanently.",
-        "limit": {
-            "title": "Draft limit reached",
-            "text": "{{count}} of {{limit}} saved. Delete a draft you don't need or save it as a recipe to start a new one."
+        "empty": {
+            "title": "No drafts",
+            "text": "Recipes you started but haven't saved yet will appear here."
         }
     },
     "draftStatus": {

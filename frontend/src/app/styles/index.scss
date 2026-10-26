@@ -163,7 +163,6 @@ button, input, textarea, select {
 #root {
     position: relative;
     display: grid;
-    grid-template-rows: 1fr auto;
     width: 100vw;
     width: 100dvw;
     max-width: var(--size-app-max-width);

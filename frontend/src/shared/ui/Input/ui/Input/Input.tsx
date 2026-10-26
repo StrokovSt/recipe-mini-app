@@ -6,7 +6,7 @@ import type { InputProps } from "../../lib/types";
 import styles from "./Input.module.scss";
 
 export const Input = (props: InputProps) => {
-    const { label, register, error, suffix, variant = "box", className, ...rest } = props;
+    const { label, register, error, suffix, variant = "box", hideLabel, className, ...rest } = props;
     // Связь подписи с полем: экранный диктор читает подпись как название поля, клик по ней ставит фокус
     const id = useId();
     const isLine = variant === "line";
@@ -20,14 +20,21 @@ export const Input = (props: InputProps) => {
                 className={clsx(isLine ? styles.lineInput : styles.input, {
                     [styles.inputNumber]: rest.type === "number",
                     [styles.inputError]: error,
+                    [styles.noLabel]: hideLabel,
                 })}
-                placeholder=" "
+                // Пробел вместо подсказки: по :placeholder-shown подпись видит, что поле пустое
+                placeholder={hideLabel ? label : " "}
                 autoComplete="off"
                 aria-invalid={error ? true : undefined}
                 {...rest}
                 {...register}
             />
-            <label htmlFor={id} className={isLine ? styles.lineLabel : styles.label}>{label}</label>
+            <label
+                htmlFor={id}
+                className={clsx(isLine ? styles.lineLabel : styles.label, hideLabel && styles.hiddenLabel)}
+            >
+                {label}
+            </label>
             {suffix && hasValue && (
                 // Суффикс встаёт сразу за текстом: перед ним невидимая копия значения той же ширины
                 <span className={styles.after}>

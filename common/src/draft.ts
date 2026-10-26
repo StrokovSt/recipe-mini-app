@@ -1,8 +1,5 @@
 import type { RecipeSource } from "./recipe";
 
-// Сколько черновиков может быть у пользователя одновременно
-export const DRAFT_LIMIT = 5;
-
 // Откуда начат черновик: распознан ИИ или заполняется вручную
 export type DraftOrigin = "ai" | "manual";
 

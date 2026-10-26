@@ -117,14 +117,14 @@
     "drafts": {
         "title": "Brouillons",
         "hint": "reprenez là où vous vous êtes arrêté",
-        "total": "{{count}} sur {{limit}}",
+        "all": "Tous les brouillons · {{count}}",
         "untitled": "Sans titre",
         "actions": "Actions pour le brouillon « {{name}} »",
         "deleteTitle": "Supprimer le brouillon « {{name}} » ?",
         "deleteText": "Le brouillon sera supprimé définitivement.",
-        "limit": {
-            "title": "Limite de brouillons atteinte",
-            "text": "{{count}} sur {{limit}} enregistrés. Supprimez un brouillon inutile ou enregistrez-le comme recette pour en commencer un nouveau."
+        "empty": {
+            "title": "Aucun brouillon",
+            "text": "Les recettes que vous avez commencées sans les enregistrer apparaîtront ici."
         }
     },
     "draftStatus": {

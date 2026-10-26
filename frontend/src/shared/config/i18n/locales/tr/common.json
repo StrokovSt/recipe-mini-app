@@ -52,7 +52,6 @@
         "VALIDATION_ERROR": "Geçersiz veri.",
         "LIMIT_REACHED": "Tarif sınırına ulaşıldı. Sınırsız erişim için abone olun.",
         "AI_DISABLED": "Yapay zekâ ile tanıma bu hesap için kullanılamıyor.",
-        "DRAFT_LIMIT_REACHED": "En fazla 5 taslak tutabilirsiniz. Yenisini başlatmak için birini silin.",
         "unknown": "Bir şeyler ters gitti."
     }
 }

@@ -115,14 +115,14 @@
     "drafts": {
         "title": "草稿",
         "hint": "从上次停下的地方继续",
-        "total": "{{count}} / {{limit}}",
+        "all": "全部草稿 · {{count}}",
         "untitled": "无标题",
         "actions": "草稿“{{name}}”的操作",
         "deleteTitle": "删除草稿“{{name}}”？",
         "deleteText": "草稿将被永久删除。",
-        "limit": {
-            "title": "已达草稿上限",
-            "text": "已保存 {{count}} / {{limit}}。删除不需要的草稿或将其保存为食谱，即可开始新的草稿。"
+        "empty": {
+            "title": "暂无草稿",
+            "text": "您开始填写但尚未保存的食谱会显示在这里。"
         }
     },
     "draftStatus": {

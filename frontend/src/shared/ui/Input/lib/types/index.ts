@@ -9,6 +9,8 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
     error?: string;
     suffix?: string;
     variant?: FieldVariant;
+    // Подпись только для экранного диктора, в пустом поле она видна подсказкой, а поле ниже. Только для variant="line"
+    hideLabel?: boolean;
 }
 
 type FormValues = FieldValues;

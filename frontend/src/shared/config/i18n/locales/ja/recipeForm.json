@@ -115,14 +115,14 @@
     "drafts": {
         "title": "下書き",
         "hint": "途中から再開できます",
-        "total": "{{count}} / {{limit}}",
+        "all": "すべての下書き · {{count}}",
         "untitled": "無題",
         "actions": "下書き「{{name}}」の操作",
         "deleteTitle": "下書き「{{name}}」を削除しますか？",
         "deleteText": "下書きは完全に削除されます。",
-        "limit": {
-            "title": "下書きの上限に達しました",
-            "text": "{{limit}} 件中 {{count}} 件を保存済み。新しく始めるには、不要な下書きを削除するかレシピとして保存してください。"
+        "empty": {
+            "title": "下書きはありません",
+            "text": "作成途中でまだ保存していないレシピがここに表示されます。"
         }
     },
     "draftStatus": {

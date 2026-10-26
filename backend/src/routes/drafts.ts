@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
 
-import { createError, DRAFT_LIMIT, ErrorCode } from "@recipe/common";
-
 import prisma from "../lib/prisma";
 import { validateId } from "../middleware/validate";
 import { createDraftSchema, updateDraftSchema } from "../validation/draft";
@@ -70,17 +68,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         }
 
         const userId = req.userId as string;
-        const count = await prisma.draft.count({ where: { userId } });
-
-        if (count >= DRAFT_LIMIT) {
-            res.status(403).json({
-                ...createError(ErrorCode.DRAFT_LIMIT_REACHED, `Можно хранить не больше ${DRAFT_LIMIT} черновиков`),
-                limit: DRAFT_LIMIT,
-                current: count,
-            });
-            return;
-        }
-
         const { title, origin, source, data } = parsed.data;
 
         const draft = await prisma.draft.create({
