@@ -14,15 +14,16 @@ interface StepPhotosProps {
     onRemove: (index: number) => void;
     // Загружает файл на сервер и возвращает ссылку на картинку
     onUpload: (file: File) => Promise<string>;
-    className?: string;
 }
 
-// Фото шага: миниатюры с крестиком и плитка добавления (выбор нескольких файлов или перетаскивание)
-const StepPhotos = ({ images, onAdd, onRemove, onUpload, className }: StepPhotosProps) => {
+// Фото шага: миниатюры с крестиком и плитка добавления (выбор нескольких файлов или перетаскивание).
+// Пока фото нет, вместо плитки небольшая кнопка «Фото», чтобы шаг не вырастал
+const StepPhotos = ({ images, onAdd, onRemove, onUpload }: StepPhotosProps) => {
     const { t } = useTranslation(["recipeForm", "common"]);
     const [uploading, setUploading] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const [hasError, setHasError] = useState(false);
+    const isEmpty = images.length === 0 && uploading === 0;
 
     // Файлы грузятся параллельно, пока идут — на их месте плитки со спиннером
     const uploadFiles = async (files: File[]) => {
@@ -57,7 +58,7 @@ const StepPhotos = ({ images, onAdd, onRemove, onUpload, className }: StepPhotos
     };
 
     return (
-        <div className={className}>
+        <div>
             <ul className={styles.list}>
                 {images.map((url, index) => (
                     <li key={`${index}:${url}`} className={styles.photo}>
@@ -81,7 +82,7 @@ const StepPhotos = ({ images, onAdd, onRemove, onUpload, className }: StepPhotos
 
                 <li>
                     <label
-                        className={clsx(styles.add, isDragging && styles.dragging)}
+                        className={clsx(styles.add, isEmpty && styles.chip, isDragging && styles.dragging)}
                         onDragOver={handleDragOver}
                         onDragLeave={() => setIsDragging(false)}
                         onDrop={handleDrop}

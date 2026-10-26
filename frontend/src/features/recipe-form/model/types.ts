@@ -5,6 +5,9 @@ import type { RecipeFormValues } from "./schema";
 // Откуда рецепт, если его распознал ИИ; без него «other» и пустая ссылка
 export type RecipeFormSource = Pick<ParsedRecipe, "source" | "sourceUrl">;
 
+// Вкладка карточки «Ингредиенты | Приготовление», совпадает с именем поля формы
+export type ContentTab = keyof Pick<RecipeFormValues, "ingredients" | "steps">;
+
 // Черновик, в который форма сохраняется сама. id нет, пока черновик не создан
 export interface RecipeFormDraft {
     id?: string;

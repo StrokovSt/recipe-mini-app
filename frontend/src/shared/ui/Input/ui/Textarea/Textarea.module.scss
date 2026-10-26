@@ -1,3 +1,4 @@
+@use "@/shared/styles/field-line";
 @use "@/shared/styles/states";
 
 // Как Input: в одну строку высотой 40px, дальше растёт по тексту
@@ -8,6 +9,18 @@
     background: var(--tg-secondary-bg);
     cursor: text;
     transition: all var(--transition-base);
+
+    // Вариант «строкой» (variant="line"), как у Input: без рамки и фона, плашка ошибки скруглена целиком
+    &.line {
+        @include field-line.wrap;
+
+        border-radius: 0;
+        background: none;
+
+        .error {
+            border-radius: var(--radius-sm);
+        }
+    }
 }
 
 .textarea {
@@ -144,4 +157,92 @@
     font-weight: var(--font-weight-bold);
     white-space: nowrap;
     pointer-events: none;
+}
+
+// Поле «строкой», как у Input: подпись внутри и при вводе уезжает вверх, вместо рамки линия снизу.
+// В одну строку высотой с Input «строкой», дальше растёт по тексту без прокрутки: прокрученный текст
+// уходил бы под подпись. Шрифт можно задать снаружи переменной --field-font
+.lineTextarea {
+    @include field-line.line;
+
+    display: block;
+    width: 100%;
+    min-height: var(--size-line-field-height);
+    padding: var(--space-5) 0 var(--space-2);
+    overflow: hidden;
+    color: var(--tg-text);
+    font: var(--field-font, var(--font-ui-md));
+    resize: none;
+
+    &::placeholder {
+        color: transparent;
+        user-select: none;
+    }
+
+    // Пустое поле без фокуса: подпись на месте первой строки и тем же шрифтом
+    &:placeholder-shown:not(:focus) ~ .lineLabel {
+        top: calc(var(--space-5) + var(--font-line-md) / 2);
+        font: var(--field-font, var(--font-ui-md));
+        transform: translateY(-50%);
+    }
+
+    &:focus ~ .lineLabel {
+        color: var(--color-accent);
+    }
+
+    // Без видимой подписи (hideLabel): места над текстом под неё не нужно, в пустом поле видна подсказка
+    &.noLabel {
+        min-height: 0;
+        padding-top: var(--space-2);
+
+        &::placeholder {
+            color: var(--tg-hint);
+        }
+    }
+
+    &:disabled {
+        @include states.disabled;
+    }
+
+    // Ошибка: линия цвета ошибки и толще, подпись тоже цвета ошибки, в любом состоянии поля
+    &.textareaError {
+        &,
+        &:focus {
+            border-bottom-color: var(--color-error);
+            box-shadow: 0 1px 0 var(--color-error);
+        }
+
+        @include states.hover {
+            border-bottom-color: var(--color-error);
+        }
+
+        & ~ .lineLabel {
+            color: var(--color-error);
+        }
+    }
+}
+
+// Поднятая подпись поля «строкой»: мелко над текстом, длинная обрезается многоточием
+.lineLabel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    overflow: hidden;
+    color: var(--tg-hint);
+    font: var(--font-ui-xs);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all var(--transition-base);
+    pointer-events: none;
+}
+
+// Подпись только для экранного диктора (hideLabel)
+.hiddenLabel {
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
 }

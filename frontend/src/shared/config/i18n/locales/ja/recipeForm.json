@@ -35,8 +35,7 @@
         "cover": "カバー写真",
         "main": "基本情報",
         "ingredients": "材料",
-        "steps": "作り方",
-        "optional": "任意"
+        "steps": "作り方"
     },
     "submitAdd": "コレクションに追加",
     "submitEdit": "変更を保存",
@@ -47,7 +46,6 @@
         "newCategory": "新規",
         "newTag": "新規",
         "servings": "人数",
-        "servingsSuffix": "人分",
         "cookTime": "調理時間",
         "timeSuffix": "分",
         "nutrition": "1人分の栄養",
@@ -67,17 +65,32 @@
         "unitTitle": "単位",
         "noUnit": "単位なし",
         "remove": "材料を削除",
+        "reorder": "材料を移動",
         "removeGroup": "グループを削除",
         "add": "材料",
-        "addGroup": "グループ"
+        "addGroup": "グループ",
+        "removed": "材料を削除しました",
+        "groupRemoved": "グループを削除しました",
+        "paste": "リストを貼り付け",
+        "pasteHint": "材料は1行に1つずつ入力してください。分量と単位は自動で読み取ります。",
+        "pasteLabel": "材料リスト",
+        "pastePreview": "結果：{{count}}",
+        "pasteSubmit_other": "材料を{{count}}件追加"
     },
     "steps": {
         "item": "手順 {{number}}",
+        "placeholder": "手順を入力してください",
+        "reorder": "手順 {{number}} を移動",
         "add": "手順",
         "remove": "手順を削除",
+        "moveUp": "上へ移動",
+        "moveDown": "下へ移動",
+        "actions": "手順 {{number}} の操作",
         "photo": "写真",
-        "removePhoto": "写真を削除"
+        "removePhoto": "写真を削除",
+        "removed": "手順を削除しました"
     },
+    "restore": "元に戻す",
     "validation": {
         "titleRequired": "タイトルは必須です",
         "titleTooLong": "{{max}}文字以内で入力してください",

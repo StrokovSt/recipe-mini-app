@@ -10,21 +10,21 @@
     align-items: center;
     gap: var(--space-1);
     width: fit-content;
-    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+    padding: var(--space-2) var(--space-4) var(--space-2) var(--space-3);
     border: 1px solid color-mix(in srgb, var(--color-active) 30%, transparent);
     border-radius: var(--radius-lg);
     background: transparent;
     color: var(--color-active);
-    font: var(--font-ui-xs);
-    font-weight: var(--font-weight-medium);
+    font: var(--font-ui-sm);
+    font-weight: var(--font-weight-bold);
     white-space: nowrap;
     cursor: pointer;
     transition: var(--transition-base);
     transition-property: border-color, background-color;
 
     svg {
-        width: var(--size-pill-icon);
-        height: var(--size-pill-icon);
+        width: var(--size-add-button-icon);
+        height: var(--size-add-button-icon);
     }
 
     @include states.hover(":not(:disabled)") {

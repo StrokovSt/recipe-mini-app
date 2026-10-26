@@ -66,7 +66,7 @@
     gap: var(--space-1);
     width: var(--size-step-photo-width);
     height: var(--size-step-photo-height);
-    border: 1.5px dashed var(--color-border-strong);
+    border: 1.5px dashed var(--color-border-field);
     border-radius: var(--radius-sm);
     background: color-mix(in srgb, var(--color-surface) 40%, transparent);
     color: var(--color-icon);
@@ -88,6 +88,24 @@
         border-color: var(--color-active);
         background: var(--color-hover-bg);
         color: var(--color-active);
+    }
+
+    // Фото ещё нет: пилюля в строку вместо плитки
+    &.chip {
+        flex-direction: row;
+        gap: var(--space-2);
+        width: auto;
+        height: var(--size-step-photo-chip);
+        padding: 0 var(--space-4) 0 var(--space-3);
+        border-width: 1px;
+        border-radius: var(--radius-sm);
+        font: var(--font-ui-sm);
+        font-weight: var(--font-weight-medium);
+
+        svg {
+            width: var(--size-row-icon);
+            height: var(--size-row-icon);
+        }
     }
 
     &.dragging {

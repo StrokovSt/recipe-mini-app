@@ -35,8 +35,7 @@
         "cover": "Sampul",
         "main": "Info dasar",
         "ingredients": "Bahan",
-        "steps": "Cara membuat",
-        "optional": "opsional"
+        "steps": "Cara membuat"
     },
     "submitAdd": "Tambahkan ke koleksi",
     "submitEdit": "Simpan perubahan",
@@ -47,7 +46,6 @@
         "newCategory": "Baru",
         "newTag": "Baru",
         "servings": "Porsi",
-        "servingsSuffix": "porsi",
         "cookTime": "Waktu masak",
         "timeSuffix": "mnt",
         "nutrition": "Gizi per porsi",
@@ -67,17 +65,32 @@
         "unitTitle": "Satuan ukuran",
         "noUnit": "Tanpa satuan",
         "remove": "Hapus bahan",
+        "reorder": "Pindahkan bahan",
         "removeGroup": "Hapus grup",
         "add": "Bahan",
-        "addGroup": "Grup"
+        "addGroup": "Grup",
+        "removed": "Bahan dihapus",
+        "groupRemoved": "Grup dihapus",
+        "paste": "Tempel daftar",
+        "pasteHint": "Satu bahan per baris. Jumlah dan satuan akan kami kenali.",
+        "pasteLabel": "Daftar bahan",
+        "pastePreview": "Hasil: {{count}}",
+        "pasteSubmit_other": "Tambahkan {{count}} bahan"
     },
     "steps": {
         "item": "Langkah {{number}}",
+        "placeholder": "Jelaskan langkahnya",
+        "reorder": "Pindahkan langkah {{number}}",
         "add": "Langkah",
         "remove": "Hapus langkah",
+        "moveUp": "Pindahkan ke atas",
+        "moveDown": "Pindahkan ke bawah",
+        "actions": "Tindakan langkah {{number}}",
         "photo": "Foto",
-        "removePhoto": "Hapus foto"
+        "removePhoto": "Hapus foto",
+        "removed": "Langkah dihapus"
     },
+    "restore": "Urungkan",
     "validation": {
         "titleRequired": "Judul wajib diisi",
         "titleTooLong": "Maksimal {{max}} karakter",

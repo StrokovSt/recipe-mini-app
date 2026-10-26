@@ -35,8 +35,7 @@
         "cover": "Couverture",
         "main": "L'essentiel",
         "ingredients": "Ingrédients",
-        "steps": "Préparation",
-        "optional": "facultatif"
+        "steps": "Préparation"
     },
     "submitAdd": "Ajouter à la collection",
     "submitEdit": "Enregistrer les modifications",
@@ -47,7 +46,6 @@
         "newCategory": "Nouvelle",
         "newTag": "Nouveau",
         "servings": "Portions",
-        "servingsSuffix": "pers.",
         "cookTime": "Cuisson",
         "timeSuffix": "min",
         "nutrition": "Valeurs nutritionnelles par portion",
@@ -67,17 +65,34 @@
         "unitTitle": "Unité de mesure",
         "noUnit": "Sans unité",
         "remove": "Retirer l'ingrédient",
+        "reorder": "Déplacer l'ingrédient",
         "removeGroup": "Retirer le groupe",
         "add": "Ingrédient",
-        "addGroup": "Groupe"
+        "addGroup": "Groupe",
+        "removed": "Ingrédient supprimé",
+        "groupRemoved": "Groupe supprimé",
+        "paste": "Coller une liste",
+        "pasteHint": "Un ingrédient par ligne. Nous reconnaîtrons les quantités et les unités.",
+        "pasteLabel": "Liste d'ingrédients",
+        "pastePreview": "Résultat : {{count}}",
+        "pasteSubmit_one": "Ajouter {{count}} ingrédient",
+        "pasteSubmit_many": "Ajouter {{count}} d'ingrédients",
+        "pasteSubmit_other": "Ajouter {{count}} ingrédients"
     },
     "steps": {
         "item": "Étape {{number}}",
+        "placeholder": "Décrivez l'étape",
+        "reorder": "Déplacer l'étape {{number}}",
         "add": "Étape",
         "remove": "Supprimer l'étape",
+        "moveUp": "Monter",
+        "moveDown": "Descendre",
+        "actions": "Actions de l'étape {{number}}",
         "photo": "Photo",
-        "removePhoto": "Retirer la photo"
+        "removePhoto": "Retirer la photo",
+        "removed": "Étape supprimée"
     },
+    "restore": "Annuler",
     "validation": {
         "titleRequired": "Le titre est obligatoire",
         "titleTooLong": "{{max}} caractères maximum",

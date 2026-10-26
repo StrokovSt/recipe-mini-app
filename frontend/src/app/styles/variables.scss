@@ -61,6 +61,8 @@
     // Высота всех полей ввода (Input, Textarea)
     --size-field-height: 40px;
     --size-field-height-lg: 52px; /* крупное поле (шторки тега и категории) и кнопка формы в футере */
+    --size-line-field-height: 52px; /* поле «строкой» в форме рецепта: без рамки, с линией снизу, подпись поднимается над текстом */
+    --size-nutrition-tile: 64px; /* плитка КБЖУ в форме рецепта */
 
     // Поиск и кнопка фильтров — высотой с кнопки шапки
     --size-search-height: var(--size-menu-button);
@@ -78,6 +80,7 @@
     --size-onboarding-hole-padding: 6px;
     --size-onboarding-hole-ring: 2px;
     --size-nav-action: 56px;
+    --size-nav-icon-stroke: 2.25; /* толщина линий иконок нижнего меню */
     --size-petal: 20px; /* лепесток, вылетающий из «+» */
     --size-avatar: 40px;
     --size-profile-avatar: 72px; /* аватар на странице профиля */
@@ -87,6 +90,10 @@
     --size-dropdown-icon: 18px;
     --size-segmented-icon: 16px;
     --size-section-mark: 28px;
+    --size-seal-sm: 22px; /* высота печати «Шаг N» на рамке шага в форме рецепта */
+    --size-tab-error-dot: 8px; /* точка на печати вкладки, где есть ошибки */
+    --size-step-menu-width: 32px; /* пилюля ⋯ на рамке шага */
+    --size-step-photo-chip: 36px; /* кнопка «Фото» у шага без фото */
     --size-about-stamp: 128px; /* круглая печать на странице «О приложении» */
     --size-about-text: 280px; /* ширина описания под названием */
     --size-message-image: 160px; /* картинка в сообщении по центру страницы */
@@ -99,7 +106,7 @@
     --size-banner-stripe: 3px;
 
     // Поле картинки (обложка рецепта): общая высота зоны со строкой ссылки или превью, иконка в пустой зоне
-    --size-image-input-height: 224px;
+    --size-image-input-height: 148px;
     --size-image-input-icon: 32px;
     --size-switch-width: 44px;
     --size-switch-height: 24px;
@@ -126,13 +133,16 @@
     --size-category-chip-min-width: 88px;
 
     // Строка ингредиента: ширина количества, единицы и крестика
-    --size-amount-field: 64px;
-    --size-unit-field: 80px;
+    --size-amount-field: 44px;
+    --size-unit-field: 64px;
     --size-row-remove: 28px;
+    --size-row-grip: 20px; /* ⋮⋮ для перетаскивания строки ингредиента */
     --size-tap-area: 44px; /* меньшая зона нажатия маленьких кнопок на телефоне (совет Apple) */
 
     // Плюс в кнопке-пилюле «+ Группа», «+ Ингредиент»
     --size-pill-icon: 14px;
+    --size-add-button-icon: 18px; /* «+» в кнопках «Ингредиент», «Шаг», «Группа» */
+    --size-toggle-icon: 20px; /* стрелка у сворачиваемой строки («КБЖУ на порцию») */
 
     // Шаг рецепта: кружок с номером, миниатюры фото, их иконка и крестик
     --size-step-number: 28px;

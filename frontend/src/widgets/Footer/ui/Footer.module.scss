@@ -11,7 +11,6 @@
 // Плашка; position — опора для подписи над ней (автосохранение формы)
 .nav {
     position: relative;
-    max-width: 100%;
     margin: 0 auto;
     padding: var(--space-2) 0;
     border: 1px solid var(--color-border);
@@ -78,18 +77,15 @@
 
     @include states.hover {
         color: var(--color-active);
-
-        .navIcon {
-            background: var(--color-hover-bg);
-        }
     }
 
+    // Выбранный пункт: иконка залита винным, без подложки
     &Active {
         color: var(--color-active);
         pointer-events: none;
 
-        .navIcon {
-            background: var(--color-active-bg);
+        svg :is(path, rect) {
+            fill: currentcolor;
         }
     }
 }
@@ -97,8 +93,15 @@
 .navIcon {
     display: flex;
     padding: var(--space-1) var(--space-4);
-    border-radius: var(--radius-md);
-    transition: background var(--transition-base);
+
+    svg {
+        stroke-width: var(--size-nav-icon-stroke);
+
+        :is(path, rect) {
+            transition: var(--transition-base);
+            transition-property: fill, stroke;
+        }
+    }
 }
 
 .navLabel {
@@ -119,7 +122,6 @@
     border: 4px solid var(--color-app-bg);
     border-radius: var(--radius-full);
     background: var(--color-active);
-    box-shadow: 0 6px 16px color-mix(in srgb, var(--color-active) 40%, transparent);
     color: var(--color-active-text);
     transition: transform var(--transition-fast), box-shadow var(--transition-base), filter var(--transition-base);
 

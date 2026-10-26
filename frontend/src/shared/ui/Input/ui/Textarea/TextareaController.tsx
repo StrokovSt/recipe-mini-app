@@ -4,7 +4,7 @@ import type { TextareaControllerProps } from "../../lib/types";
 import { Textarea } from "./Textarea";
 
 export const TextareaController = <TForm extends FieldValues>(props: TextareaControllerProps<TForm>) => {
-    const { name, control, rules, label, disabled, className } = props;
+    const { name, control, rules, label, disabled, variant, hideLabel, placeholder, className } = props;
 
     return (
         <Controller
@@ -15,6 +15,9 @@ export const TextareaController = <TForm extends FieldValues>(props: TextareaCon
                 <Textarea
                     label={label}
                     disabled={disabled}
+                    variant={variant}
+                    hideLabel={hideLabel}
+                    placeholder={placeholder}
                     className={className}
                     error={fieldState.error?.message}
                     value={field.value ?? ""}

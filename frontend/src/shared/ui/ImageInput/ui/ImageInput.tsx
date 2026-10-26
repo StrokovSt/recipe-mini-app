@@ -25,7 +25,7 @@ interface ImageInputProps {
 }
 
 // Картинка из файла (выбор или перетаскивание) или по ссылке. Высота всегда одна:
-// пока картинки нет — зона и строка ссылки, потом превью на всю высоту с кнопкой сброса
+// пока картинки нет — зона и поле ссылки «строкой», потом превью на всю высоту с кнопкой сброса
 export const ImageInput = (props: ImageInputProps) => {
     const { value, onChange, onUpload, className } = props;
     const { t } = useTranslation();
@@ -169,6 +169,7 @@ export const ImageInput = (props: ImageInputProps) => {
                     >
                         <Input
                             label={t("imageInput.url")}
+                            variant="line"
                             type="url"
                             inputMode="url"
                             value={url}
@@ -182,6 +183,7 @@ export const ImageInput = (props: ImageInputProps) => {
                         />
                         <IconButton
                             icon="forward"
+                            variant="empty"
                             type="button"
                             className={styles.apply}
                             aria-label={t("imageInput.apply")}

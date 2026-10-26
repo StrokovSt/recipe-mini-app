@@ -35,8 +35,7 @@
         "cover": "封面",
         "main": "基本信息",
         "ingredients": "食材",
-        "steps": "做法",
-        "optional": "可选"
+        "steps": "做法"
     },
     "submitAdd": "添加到收藏",
     "submitEdit": "保存更改",
@@ -47,7 +46,6 @@
         "newCategory": "新建",
         "newTag": "新建",
         "servings": "份量",
-        "servingsSuffix": "份",
         "cookTime": "烹饪时间",
         "timeSuffix": "分钟",
         "nutrition": "每份营养",
@@ -67,17 +65,32 @@
         "unitTitle": "计量单位",
         "noUnit": "无单位",
         "remove": "删除食材",
+        "reorder": "移动食材",
         "removeGroup": "删除分组",
         "add": "食材",
-        "addGroup": "分组"
+        "addGroup": "分组",
+        "removed": "食材已删除",
+        "groupRemoved": "分组已删除",
+        "paste": "粘贴清单",
+        "pasteHint": "每行一种食材，用量和单位会自动识别。",
+        "pasteLabel": "食材清单",
+        "pastePreview": "结果：{{count}}",
+        "pasteSubmit_other": "添加 {{count}} 种食材"
     },
     "steps": {
         "item": "步骤 {{number}}",
+        "placeholder": "请描述这一步",
+        "reorder": "移动步骤 {{number}}",
         "add": "步骤",
         "remove": "删除步骤",
+        "moveUp": "上移",
+        "moveDown": "下移",
+        "actions": "步骤 {{number}} 操作",
         "photo": "照片",
-        "removePhoto": "移除照片"
+        "removePhoto": "移除照片",
+        "removed": "步骤已删除"
     },
+    "restore": "撤销",
     "validation": {
         "titleRequired": "标题为必填项",
         "titleTooLong": "最多 {{max}} 个字符",

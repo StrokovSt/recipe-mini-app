@@ -35,8 +35,7 @@
         "cover": "Copertina",
         "main": "Informazioni di base",
         "ingredients": "Ingredienti",
-        "steps": "Preparazione",
-        "optional": "facoltativo"
+        "steps": "Preparazione"
     },
     "submitAdd": "Aggiungi alla raccolta",
     "submitEdit": "Salva modifiche",
@@ -47,7 +46,6 @@
         "newCategory": "Nuova",
         "newTag": "Nuovo",
         "servings": "Porzioni",
-        "servingsSuffix": "porz.",
         "cookTime": "Cottura",
         "timeSuffix": "min",
         "nutrition": "Valori nutrizionali per porzione",
@@ -67,17 +65,34 @@
         "unitTitle": "Unità di misura",
         "noUnit": "Senza unità",
         "remove": "Rimuovi ingrediente",
+        "reorder": "Sposta ingrediente",
         "removeGroup": "Rimuovi gruppo",
         "add": "Ingrediente",
-        "addGroup": "Gruppo"
+        "addGroup": "Gruppo",
+        "removed": "Ingrediente rimosso",
+        "groupRemoved": "Gruppo rimosso",
+        "paste": "Incolla un elenco",
+        "pasteHint": "Un ingrediente per riga. Quantità e unità le riconosciamo noi.",
+        "pasteLabel": "Elenco degli ingredienti",
+        "pastePreview": "Risultato: {{count}}",
+        "pasteSubmit_one": "Aggiungi {{count}} ingrediente",
+        "pasteSubmit_many": "Aggiungi {{count}} di ingredienti",
+        "pasteSubmit_other": "Aggiungi {{count}} ingredienti"
     },
     "steps": {
         "item": "Passaggio {{number}}",
+        "placeholder": "Descriva il passaggio",
+        "reorder": "Sposta il passaggio {{number}}",
         "add": "Passaggio",
         "remove": "Rimuovi passaggio",
+        "moveUp": "Sposta su",
+        "moveDown": "Sposta giù",
+        "actions": "Azioni del passaggio {{number}}",
         "photo": "Foto",
-        "removePhoto": "Rimuovi foto"
+        "removePhoto": "Rimuovi foto",
+        "removed": "Passaggio rimosso"
     },
+    "restore": "Annulla",
     "validation": {
         "titleRequired": "Il titolo è obbligatorio",
         "titleTooLong": "Massimo {{max}} caratteri",

@@ -1,12 +1,19 @@
-import { Controller, useFieldArray, useFormContext } from "react-hook-form";
+import { Reorder } from "motion/react";
+import { type KeyboardEvent, useRef, useState } from "react";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { AddButton, IconButton } from "@/shared/ui/Buttons";
-import { Input } from "@/shared/ui/Input";
+import type { Ingredient } from "@recipe/common";
 
-import { EMPTY_INGREDIENT, type RecipeFormValues } from "../../model/schema";
-import AmountInput from "../AmountInput/AmountInput";
-import UnitSelect from "../UnitSelect/UnitSelect";
+import FormIcon from "@/shared/assets/icons/icon-form.svg?react";
+import { collapseAndRemove } from "@/shared/lib/animations";
+import { AddButton } from "@/shared/ui/Buttons";
+
+import { EMPTY_INGREDIENT, isEmptyIngredient, type RecipeFormValues } from "../../model/schema";
+import { useReorderList } from "../../model/useReorderList";
+import { useUndoToast } from "../../model/useUndoToast";
+import PasteSheet from "../PasteSheet/PasteSheet";
+import IngredientRow from "./IngredientRow";
 
 import styles from "./IngredientsField.module.scss";
 
@@ -14,63 +21,87 @@ interface GroupItemsProps {
     groupIndex: number;
 }
 
-// Строки ингредиентов группы: название, количество, единица и удаление
+// Строки ингредиентов группы с «+ Ингредиент» и «Вставить списком» под ними
 const GroupItems = ({ groupIndex }: GroupItemsProps) => {
     const { t } = useTranslation("recipeForm");
-    const { control, register, formState: { errors } } = useFormContext<RecipeFormValues>();
-    const { fields, append, remove } = useFieldArray({ control, name: `ingredients.${groupIndex}.items` });
-    const itemErrors = errors.ingredients?.[groupIndex]?.items;
+    const { control, setFocus, getValues } = useFormContext<RecipeFormValues>();
+    const { fields, append, insert, update, move, remove, replace } = useFieldArray({
+        control,
+        name: `ingredients.${groupIndex}.items`,
+    });
+    const showUndo = useUndoToast();
+    const [isPasteOpen, setIsPasteOpen] = useState(false);
+    const listRef = useRef<HTMLUListElement>(null);
+    const { groupProps, getItem } = useReorderList(fields, move, listRef);
+
+    // Строка плавно схлопывается и удаляется, непустую можно вернуть из уведомления.
+    // Единственная строка группы не пропадает, а очищается
+    const removeRow = (row: HTMLElement) => {
+        const removeFromForm = () => {
+            // Пока строка схлопывалась, выше могли удалить другую: её место берём по порядку в списке
+            const index = Array.from(listRef.current?.children ?? []).indexOf(row);
+            if (index === -1) return;
+
+            const item = getValues(`ingredients.${groupIndex}.items.${index}`);
+            const isLast = getValues(`ingredients.${groupIndex}.items`).length === 1;
+
+            if (isLast) update(index, EMPTY_INGREDIENT);
+            else remove(index);
+            if (isEmptyIngredient(item)) return;
+
+            showUndo(t("ingredients.removed"), () => (isLast ? update(index, item) : insert(index, item)));
+        };
+
+        if (fields.length === 1) removeFromForm();
+        else void collapseAndRemove(row, removeFromForm);
+    };
+
+    // Вставленный список встаёт в конец группы, пустые строки группы он заменяет
+    const addPasted = (items: Ingredient[]) => {
+        const rows = getValues(`ingredients.${groupIndex}.items`);
+        replace([...rows.filter((row) => !isEmptyIngredient(row)), ...items]);
+    };
+
+    // Enter не отправляет форму, а ведёт дальше: из названия в количество, из количества в название следующей строки.
+    // В последней строке добавляет новую, фокус в неё ставит сам append
+    const handleRowKeyDown = (event: KeyboardEvent<HTMLLIElement>, index: number) => {
+        if (event.key !== "Enter" || !(event.target instanceof HTMLInputElement)) return;
+        event.preventDefault();
+
+        const [name, amount] = event.currentTarget.querySelectorAll("input");
+        if (event.target === name) {
+            amount.focus();
+        } else if (index < fields.length - 1) {
+            setFocus(`ingredients.${groupIndex}.items.${index + 1}.name`);
+        } else {
+            append(EMPTY_INGREDIENT);
+        }
+    };
 
     return (
         <>
-            <ul className={styles.list}>
+            <Reorder.Group ref={listRef} as="ul" {...groupProps} className={styles.list}>
                 {fields.map((field, index) => (
-                    <li key={field.id} className={styles.row}>
-                        <Input
-                            register={register(`ingredients.${groupIndex}.items.${index}.name`)}
-                            label={t("ingredients.name")}
-                            error={itemErrors?.[index]?.name?.message}
-                            className={styles.name}
-                        />
-                        <Controller
-                            control={control}
-                            name={`ingredients.${groupIndex}.items.${index}.amount`}
-                            render={({ field: amount, fieldState }) => (
-                                <AmountInput
-                                    value={amount.value}
-                                    onChange={amount.onChange}
-                                    onBlur={amount.onBlur}
-                                    label={t("ingredients.amount")}
-                                    className={styles.amount}
-                                    error={fieldState.error?.message}
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name={`ingredients.${groupIndex}.items.${index}.unit`}
-                            render={({ field: unit }) => (
-                                <UnitSelect
-                                    value={unit.value}
-                                    onChange={unit.onChange}
-                                    className={styles.unit}
-                                />
-                            )}
-                        />
-                        {fields.length > 1 && (
-                            <IconButton
-                                icon="close"
-                                variant="empty"
-                                type="button"
-                                className={styles.remove}
-                                aria-label={t("ingredients.remove")}
-                                onClick={() => remove(index)}
-                            />
-                        )}
-                    </li>
+                    <IngredientRow
+                        key={field.id}
+                        groupIndex={groupIndex}
+                        index={index}
+                        count={fields.length}
+                        reorder={getItem(field, index)}
+                        onRemove={removeRow}
+                        onKeyDown={(event) => handleRowKeyDown(event, index)}
+                    />
                 ))}
-            </ul>
-            <AddButton label={t("ingredients.add")} onClick={() => append(EMPTY_INGREDIENT)} />
+            </Reorder.Group>
+            <div className={styles.actions}>
+                <AddButton label={t("ingredients.add")} onClick={() => append(EMPTY_INGREDIENT)} />
+                <button type="button" className={styles.paste} onClick={() => setIsPasteOpen(true)}>
+                    <FormIcon aria-hidden />
+                    {t("ingredients.paste")}
+                </button>
+            </div>
+
+            <PasteSheet isOpen={isPasteOpen} onClose={() => setIsPasteOpen(false)} onAdd={addPasted} />
         </>
     );
 };

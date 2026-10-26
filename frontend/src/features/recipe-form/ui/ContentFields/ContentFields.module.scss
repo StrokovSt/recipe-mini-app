@@ -1,0 +1,31 @@
+@use "@/shared/styles/card";
+
+// Карточка, как секции формы; под вкладками отступ space-4, как под заголовком секции
+.card {
+    @include card.card;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    > :first-child {
+        margin-bottom: var(--space-1);
+    }
+}
+
+// Содержимое вкладки
+.panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+// Обводка цветом фона отделяет точку и от вина выбранной вкладки
+.errorDot {
+    flex-shrink: 0;
+    width: var(--size-tab-error-dot);
+    height: var(--size-tab-error-dot);
+    border-radius: var(--radius-full);
+    background: var(--color-error);
+    box-shadow: 0 0 0 2px var(--color-app-bg);
+}

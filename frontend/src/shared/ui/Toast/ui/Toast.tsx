@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { AnimatePresence, m } from "motion/react";
 import { useSyncExternalStore } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { TRANSITION_BASE } from "@/shared/config/animation";
 
@@ -18,14 +18,17 @@ interface ToastProps {
     className?: string;
 }
 
-// Короткое уведомление, например «Рецепт распознан · Открыть». Показывается через showToast
+// Короткое уведомление, например «Рецепт распознан · Открыть» или «Шаг удалён · Вернуть». Показывается через showToast
 export function Toast(props: ToastProps) {
     const { className } = props;
     const toast = useSyncExternalStore(subscribeToast, getToast);
+    const { pathname } = useLocation();
+    const isShown = toast !== null && (!toast.path || toast.path === pathname);
+    const action = toast?.action;
 
     return (
         <AnimatePresence>
-            {toast && (
+            {isShown && (
                 <m.div
                     key={toast.id}
                     className={clsx(styles.toast, className)}
@@ -36,16 +39,22 @@ export function Toast(props: ToastProps) {
                     transition={TRANSITION_BASE}
                 >
                     <p className={styles.text}>{toast.text}</p>
-                    {toast.action && (
-                        <Link
-                            to={toast.action.to}
-                            state={toast.action.state}
-                            className={styles.action}
-                            onClick={hideToast}
-                        >
-                            {toast.action.label}
+                    {action && ("to" in action ? (
+                        <Link to={action.to} state={action.state} className={styles.action} onClick={hideToast}>
+                            {action.label}
                         </Link>
-                    )}
+                    ) : (
+                        <button
+                            type="button"
+                            className={styles.action}
+                            onClick={() => {
+                                action.onClick();
+                                hideToast();
+                            }}
+                        >
+                            {action.label}
+                        </button>
+                    ))}
                 </m.div>
             )}
         </AnimatePresence>

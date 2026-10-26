@@ -35,8 +35,7 @@
         "cover": "대표 사진",
         "main": "기본 정보",
         "ingredients": "재료",
-        "steps": "조리 과정",
-        "optional": "선택 사항"
+        "steps": "조리 과정"
     },
     "submitAdd": "컬렉션에 추가",
     "submitEdit": "변경 사항 저장",
@@ -47,7 +46,6 @@
         "newCategory": "새로 만들기",
         "newTag": "새로 만들기",
         "servings": "인분",
-        "servingsSuffix": "인분",
         "cookTime": "조리 시간",
         "timeSuffix": "분",
         "nutrition": "1인분 영양 정보",
@@ -67,17 +65,32 @@
         "unitTitle": "단위",
         "noUnit": "단위 없음",
         "remove": "재료 삭제",
+        "reorder": "재료 이동",
         "removeGroup": "그룹 삭제",
         "add": "재료",
-        "addGroup": "그룹"
+        "addGroup": "그룹",
+        "removed": "재료가 삭제되었습니다",
+        "groupRemoved": "그룹이 삭제되었습니다",
+        "paste": "목록으로 붙여넣기",
+        "pasteHint": "재료를 한 줄에 하나씩 입력해 주세요. 양과 단위는 자동으로 인식합니다.",
+        "pasteLabel": "재료 목록",
+        "pastePreview": "결과: {{count}}",
+        "pasteSubmit_other": "재료 {{count}}개 추가"
     },
     "steps": {
         "item": "{{number}}단계",
+        "placeholder": "단계를 설명해 주세요",
+        "reorder": "{{number}}단계 이동",
         "add": "단계",
         "remove": "단계 삭제",
+        "moveUp": "위로 이동",
+        "moveDown": "아래로 이동",
+        "actions": "{{number}}단계 작업",
         "photo": "사진",
-        "removePhoto": "사진 삭제"
+        "removePhoto": "사진 삭제",
+        "removed": "단계가 삭제되었습니다"
     },
+    "restore": "실행 취소",
     "validation": {
         "titleRequired": "제목을 입력하세요",
         "titleTooLong": "최대 {{max}}자까지 입력할 수 있어요",

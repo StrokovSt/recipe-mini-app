@@ -33,6 +33,10 @@ const stepSchema = z.object({
 export const EMPTY_INGREDIENT: Ingredient = { name: "", amount: null, unit: null };
 export const EMPTY_STEP: RecipeStep = { text: "", images: [] };
 
+// Пустая строка удаляется молча, без «Вернуть»
+export const isEmptyIngredient = (item: Ingredient) =>
+    item.name.trim() === "" && item.amount === null && item.unit === null;
+
 export const recipeSchema = z.object({
     title: z.string()
         .min(1, { error: () => i18next.t("recipeForm:validation.titleRequired") })

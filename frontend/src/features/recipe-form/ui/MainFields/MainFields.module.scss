@@ -1,8 +1,20 @@
-// Числа по два в строку: порции и время, КБЖУ
+@use "@/shared/styles/states";
+
+// Название крупно, шрифтом заголовков
+.title {
+    --field-font: var(--font-weight-bold) var(--font-size-xl) / var(--font-line-xl) var(--font-family-header);
+}
+
+// Описание курсивом, основным шрифтом
+.description {
+    --field-font: italic var(--font-md);
+}
+
+// Порции и время в одну строку
 .numbers {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-3);
+    column-gap: var(--space-6);
 }
 
 // Подпись над списком, как заголовки разделов в шторке фильтров
@@ -11,4 +23,50 @@
     color: var(--tg-hint);
     font: var(--font-ui-sm);
     font-weight: var(--font-weight-bold);
+}
+
+// КБЖУ отделено линией: строка с подписью нажимается целиком, плитки под ней
+.nutrition {
+    border-top: 1px solid var(--color-border);
+}
+
+// «КБЖУ на порцию» высотой с поле: стрелка показывает, свёрнуто или открыто
+.toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: var(--size-line-field-height);
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--color-text-soft);
+    font: var(--font-ui-sm);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: color var(--transition-base);
+
+    svg {
+        width: var(--size-toggle-icon);
+        height: var(--size-toggle-icon);
+        transition: transform var(--transition-base);
+    }
+
+    &:focus-visible {
+        outline: none;
+        color: var(--color-active);
+    }
+
+    @include states.hover {
+        color: var(--color-active);
+    }
+
+    &[aria-expanded="true"] svg {
+        transform: rotate(180deg);
+    }
+}
+
+// Высота анимируется вместе с плитками
+.collapse {
+    overflow: hidden;
 }

@@ -1,13 +1,20 @@
+@use "@/shared/styles/states";
+@use "@/shared/styles/tap-area";
 @use "../compact";
 
 // Уже этой ширины группы строка ингредиента делится на две: название и количество с единицей.
 // В @container нельзя подставить CSS-переменную, поэтому граница здесь, а не в variables.scss
-$row-split-width: 340px;
+$row-split-width: 300px;
 
-// Группа — рамка внутри карточки секции, поля в ней на цвете фона приложения
+// Группы отделены друг от друга заметнее, чем строки внутри
+.groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+// Группа: название винным, под ним строки ингредиентов полями «строкой»
 .group {
-    @include compact.block;
-
     container-type: inline-size;
     display: flex;
     flex-direction: column;
@@ -15,49 +22,59 @@ $row-split-width: 340px;
 
     .groupHeader {
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         gap: var(--space-2);
     }
 
-    // Название группы винным: рамка, подпись и текст поля берут цвета из этих переменных
+    // Название группы винным, крупнее и с засечками: поле берёт цвета и шрифт из этих переменных
     .groupTitle {
-        --color-border: color-mix(in srgb, var(--color-active) 30%, transparent);
-        --tg-hint: color-mix(in srgb, var(--color-active) 60%, transparent);
+        --field-font: var(--font-weight-bold) var(--font-size-lg) / var(--font-line-lg) var(--font-family-header);
+        --color-border-field: color-mix(in srgb, var(--color-active) 40%, transparent);
+        --tg-hint: color-mix(in srgb, var(--color-active) 70%, transparent);
         --tg-text: var(--color-active);
+
+        flex: 1;
+        min-width: 0;
     }
 
-    // Ингредиенты разделены пунктиром, отступ под линией такой же, как над ней
     .list {
-        --row-gap: var(--space-2);
-
         display: flex;
         flex-direction: column;
-        gap: var(--row-gap);
 
         // Строки в две линии разделены шире, чтобы ингредиенты не сливались
         @container (width < #{$row-split-width}) {
-            --row-gap: var(--space-3);
+            gap: var(--space-3);
         }
     }
 
-    // Название, количество, единица, удаление
+    // ⋮⋮, название, количество, единица и крестик в одну строку. Иконки стоят вплотную к полям,
+    // а между полями отступ шире (margin), чтобы их линии не сливались: так названию остаётся больше места
     .row {
         display: grid;
-        align-items: center;
-        grid-template-columns: minmax(0, 1fr) var(--size-amount-field) var(--size-unit-field) auto;
-        gap: var(--space-2);
+        align-items: end;
+        grid-template-columns:
+            var(--size-row-grip) minmax(0, 1fr) var(--size-amount-field) var(--size-unit-field)
+            var(--size-row-remove);
+        column-gap: var(--space-1);
+        border-radius: var(--radius-sm);
+        transition: box-shadow var(--transition-base), background-color var(--transition-base);
 
-        &:not(:first-child) {
-            padding-top: var(--row-gap);
-            border-top: 1px dashed var(--color-border);
+        // Строку тянут: она приподнята над остальными
+        &.dragging {
+            background: var(--color-surface);
+            box-shadow: var(--shadow-md);
         }
 
-        // На узком экране название на всю строку, количество и единица делят вторую пополам
+        // В узкой группе название на всю строку, количество и единица делят вторую пополам
         @container (width < #{$row-split-width}) {
             grid-template-areas:
-                "name name remove"
-                "amount unit unit";
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+                "grip name name remove"
+                ". amount unit .";
+            grid-template-columns: var(--size-row-grip) minmax(0, 1fr) minmax(0, 1fr) var(--size-row-remove);
+
+            .grip {
+                grid-area: grip;
+            }
 
             .name {
                 grid-area: name;
@@ -65,6 +82,7 @@ $row-split-width: 340px;
 
             .amount {
                 grid-area: amount;
+                margin-left: 0;
             }
 
             .unit {
@@ -74,19 +92,98 @@ $row-split-width: 340px;
             .remove {
                 grid-area: remove;
             }
-
-            // Единственная строка без крестика: название до правого края
-            &:not(:has(.remove)) {
-                grid-template-areas:
-                    "name name"
-                    "amount unit";
-                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            }
         }
+    }
+
+    .amount,
+    .unit {
+        margin-left: var(--space-1);
     }
 
     .remove {
         @include compact.remove;
+    }
+
+    // ⋮⋮ высотой с поле, значок на уровне текста. Тянуть можно и пальцем: прокрутка страницы на нём выключена
+    .grip {
+        @include tap-area.tap-area;
+
+        position: relative;
+        display: grid;
+        width: var(--size-row-grip);
+        height: var(--size-line-field-height);
+        padding: calc(var(--space-5) - var(--space-2)) 0 0;
+        border: none;
+        border-radius: var(--radius-sm);
+        outline: none;
+        background: none;
+        color: var(--color-text-muted);
+        cursor: grab;
+        touch-action: none;
+        user-select: none;
+        place-items: center;
+        transition: color var(--transition-base);
+
+        svg {
+            width: var(--size-row-grip);
+            height: var(--size-row-grip);
+        }
+
+        @include states.hover {
+            color: var(--color-active);
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 0 3px var(--color-accent-shadow);
+            color: var(--color-active);
+        }
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    // «+ Ингредиент» слева, «Вставить списком» справа
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-2);
+        margin-top: var(--space-1);
+    }
+
+    // Текстовая кнопка, тише «+ Ингредиент»: ей пользуются реже
+    .paste {
+        @include tap-area.tap-area;
+
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-1);
+        padding: var(--space-2) 0;
+        border: none;
+        border-radius: var(--radius-sm);
+        outline: none;
+        background: none;
+        color: var(--color-text-soft);
+        font: var(--font-ui-sm);
+        font-weight: var(--font-weight-bold);
+        cursor: pointer;
+        transition: color var(--transition-base);
+
+        svg {
+            width: var(--size-add-button-icon);
+            height: var(--size-add-button-icon);
+        }
+
+        @include states.hover {
+            color: var(--color-active);
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 0 3px var(--color-accent-shadow);
+        }
     }
 }
 

@@ -35,8 +35,7 @@
         "cover": "Kapak",
         "main": "Temel bilgiler",
         "ingredients": "Malzemeler",
-        "steps": "Hazırlanışı",
-        "optional": "isteğe bağlı"
+        "steps": "Hazırlanışı"
     },
     "submitAdd": "Koleksiyona ekle",
     "submitEdit": "Değişiklikleri kaydet",
@@ -47,7 +46,6 @@
         "newCategory": "Yeni",
         "newTag": "Yeni",
         "servings": "Porsiyon",
-        "servingsSuffix": "porsiyon",
         "cookTime": "Pişirme",
         "timeSuffix": "dk",
         "nutrition": "Porsiyon başına besin değeri",
@@ -67,17 +65,33 @@
         "unitTitle": "Ölçü birimi",
         "noUnit": "Birimsiz",
         "remove": "Malzemeyi kaldır",
+        "reorder": "Malzemeyi taşı",
         "removeGroup": "Grubu kaldır",
         "add": "Malzeme",
-        "addGroup": "Grup"
+        "addGroup": "Grup",
+        "removed": "Malzeme kaldırıldı",
+        "groupRemoved": "Grup kaldırıldı",
+        "paste": "Liste olarak yapıştır",
+        "pasteHint": "Her malzemeyi yeni bir satıra yazın. Miktarları ve birimleri biz ayırırız.",
+        "pasteLabel": "Malzeme listesi",
+        "pastePreview": "Sonuç: {{count}}",
+        "pasteSubmit_one": "{{count}} malzeme ekle",
+        "pasteSubmit_other": "{{count}} malzeme ekle"
     },
     "steps": {
         "item": "Adım {{number}}",
+        "placeholder": "Adımı açıklayın",
+        "reorder": "{{number}}. adımı taşı",
         "add": "Adım",
         "remove": "Adımı kaldır",
+        "moveUp": "Yukarı taşı",
+        "moveDown": "Aşağı taşı",
+        "actions": "Adım {{number}} işlemleri",
         "photo": "Fotoğraf",
-        "removePhoto": "Fotoğrafı kaldır"
+        "removePhoto": "Fotoğrafı kaldır",
+        "removed": "Adım kaldırıldı"
     },
+    "restore": "Geri al",
     "validation": {
         "titleRequired": "Başlık zorunlu",
         "titleTooLong": "En fazla {{max}} karakter",

@@ -35,8 +35,7 @@
         "cover": "Обложка",
         "main": "Основное",
         "ingredients": "Ингредиенты",
-        "steps": "Приготовление",
-        "optional": "необязательно"
+        "steps": "Приготовление"
     },
     "submitAdd": "Добавить в коллекцию",
     "submitEdit": "Сохранить изменения",
@@ -47,8 +46,7 @@
         "newCategory": "Новая",
         "newTag": "Новый",
         "servings": "Порции",
-        "servingsSuffix": "порц.",
-        "cookTime": "Время, мин",
+        "cookTime": "Время",
         "timeSuffix": "мин.",
         "nutrition": "КБЖУ на порцию",
         "calories": "Калории",
@@ -67,17 +65,35 @@
         "unitTitle": "Единица измерения",
         "noUnit": "Без единицы",
         "remove": "Удалить ингредиент",
+        "reorder": "Переместить ингредиент",
         "removeGroup": "Удалить группу",
         "add": "Ингредиент",
-        "addGroup": "Группа"
+        "addGroup": "Группа",
+        "removed": "Ингредиент удалён",
+        "groupRemoved": "Группа удалена",
+        "paste": "Вставить списком",
+        "pasteHint": "Каждый ингредиент с новой строки. Количество и единицы разберём сами.",
+        "pasteLabel": "Список ингредиентов",
+        "pastePreview": "Получится: {{count}}",
+        "pasteSubmit_one": "Добавить {{count}} ингредиент",
+        "pasteSubmit_few": "Добавить {{count}} ингредиента",
+        "pasteSubmit_many": "Добавить {{count}} ингредиентов",
+        "pasteSubmit_other": "Добавить {{count}} ингредиента"
     },
     "steps": {
         "item": "Шаг {{number}}",
+        "placeholder": "Опишите шаг",
+        "reorder": "Переместить шаг {{number}}",
         "add": "Шаг",
         "remove": "Удалить шаг",
+        "moveUp": "Переместить выше",
+        "moveDown": "Переместить ниже",
+        "actions": "Шаг {{number}}: действия",
         "photo": "Фото",
-        "removePhoto": "Убрать фото"
+        "removePhoto": "Убрать фото",
+        "removed": "Шаг удалён"
     },
+    "restore": "Вернуть",
     "validation": {
         "titleRequired": "Название обязательно",
         "titleTooLong": "Не более {{max}} символов",

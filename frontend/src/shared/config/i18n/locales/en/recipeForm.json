@@ -35,8 +35,7 @@
         "cover": "Cover",
         "main": "Basics",
         "ingredients": "Ingredients",
-        "steps": "Method",
-        "optional": "optional"
+        "steps": "Method"
     },
     "submitAdd": "Add to collection",
     "submitEdit": "Save changes",
@@ -47,7 +46,6 @@
         "newCategory": "New",
         "newTag": "New",
         "servings": "Servings",
-        "servingsSuffix": "serv.",
         "cookTime": "Cook time",
         "timeSuffix": "min",
         "nutrition": "Nutrition per serving",
@@ -67,17 +65,33 @@
         "unitTitle": "Unit of measure",
         "noUnit": "No unit",
         "remove": "Remove ingredient",
+        "reorder": "Move ingredient",
         "removeGroup": "Remove group",
         "add": "Ingredient",
-        "addGroup": "Group"
+        "addGroup": "Group",
+        "removed": "Ingredient removed",
+        "groupRemoved": "Group removed",
+        "paste": "Paste a list",
+        "pasteHint": "One ingredient per line. We'll pick out amounts and units.",
+        "pasteLabel": "Ingredient list",
+        "pastePreview": "Result: {{count}}",
+        "pasteSubmit_one": "Add {{count}} ingredient",
+        "pasteSubmit_other": "Add {{count}} ingredients"
     },
     "steps": {
         "item": "Step {{number}}",
+        "placeholder": "Describe the step",
+        "reorder": "Move step {{number}}",
         "add": "Step",
         "remove": "Remove step",
+        "moveUp": "Move up",
+        "moveDown": "Move down",
+        "actions": "Step {{number}} actions",
         "photo": "Photo",
-        "removePhoto": "Remove photo"
+        "removePhoto": "Remove photo",
+        "removed": "Step removed"
     },
+    "restore": "Undo",
     "validation": {
         "titleRequired": "Title is required",
         "titleTooLong": "No more than {{max}} characters",

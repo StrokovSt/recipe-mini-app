@@ -1,47 +1,145 @@
+@use "@/shared/styles/states";
+@use "@/shared/styles/tap-area";
 @use "../compact";
 
+// Сверху место под печать первого шага, между шагами под печать следующего
 .list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-6);
+    margin-top: var(--space-2);
 }
 
-// Шаг в рамке: номер слева, справа текст, под ним фото; крестик в правом столбце
+// Шаг в рамке: «Шаг N» и ⋯ сидят на верхней рамке, текст на всю ширину, под ним фото
 .step {
-    @include compact.block;
-
-    display: grid;
-    align-items: start;
-    grid-template-columns: var(--size-step-number) minmax(0, 1fr) auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    transition: box-shadow var(--transition-base);
 
-    .content {
-        grid-column: 2 / -1;
+    // Шаг тянут: он приподнят над остальными
+    &.dragging {
+        box-shadow: var(--shadow-md);
     }
 
-    // Единственный шаг без крестика: текст до правого края
-    &:not(:has(.remove)) .text {
-        grid-column: 2 / -1;
-    }
-
-    .remove {
-        @include compact.remove;
+    // Рамка карточки заменяет линию под полем, линия видна только в фокусе и при ошибке.
+    // Фон в фокусе выходит за текст шире, чем у мелких полей
+    .text {
+        --color-border-field: transparent;
+        --field-font: var(--font-md);
+        --field-focus-bleed: var(--space-2);
     }
 }
 
-// Номер шага в кружке, курсивом с засечками, как в Figma
-.number {
-    display: grid;
-    width: var(--size-step-number);
-    height: var(--size-step-number);
-    margin-top: calc((var(--size-field-height) - var(--size-step-number)) / 2);
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius-full);
-    background: var(--tg-secondary-bg);
+// «⋮⋮ Шаг N» печатью на рамке, как номера секций; фон карточки перекрывает рамку под ней.
+// За печать шаг перетаскивают: прокрутка страницы на ней выключена, чтобы тянуть пальцем
+.seal {
+    @include tap-area.tap-area;
+
+    position: absolute;
+    top: calc(var(--size-seal-sm) / -2);
+    left: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--space-1) / 2);
+    height: var(--size-seal-sm);
+    padding: 0 var(--space-2) 0 var(--space-1);
+    border: 1px solid var(--color-active);
+    outline: none;
+    background: var(--color-surface);
     color: var(--color-active);
     font: var(--font-header-sm);
     font-style: italic;
+    font-weight: var(--font-weight-bold);
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    transition: var(--transition-base);
+    transition-property: box-shadow, background-color;
+    transform: rotate(-3deg);
+
+    svg {
+        flex-shrink: 0;
+        width: var(--size-row-icon);
+        height: var(--size-row-icon);
+    }
+
+    @include states.hover {
+        background: var(--color-active-bg);
+    }
+
+    &:focus-visible {
+        background: var(--color-active-bg);
+        box-shadow: 0 0 0 3px var(--color-accent-shadow);
+    }
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+// ⋯ пилюлей на рамке справа, открывает меню шага
+.menuButton {
+    @include tap-area.tap-area;
+
+    position: absolute;
+    top: calc(var(--size-seal-sm) / -2);
+    right: var(--space-4);
+    display: grid;
+    width: var(--size-step-menu-width);
+    height: var(--size-seal-sm);
+    padding: 0;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    outline: none;
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: var(--transition-base);
+    transition-property: border-color, color, background-color;
     place-items: center;
+
+    svg {
+        width: var(--size-row-icon);
+        height: var(--size-row-icon);
+    }
+
+    @include states.hover {
+        border-color: var(--color-active);
+        color: var(--color-active);
+    }
+
+    // Меню открыто (data-open ставит Headless UI) или фокус с клавиатуры
+    &[data-open],
+    &[data-focus] {
+        border-color: var(--color-active);
+        background: var(--color-active-bg);
+        color: var(--color-active);
+    }
+}
+
+// Стрелка «назад», повёрнутая вверх и вниз
+.up {
+    transform: rotate(90deg);
+}
+
+.down {
+    transform: rotate(-90deg);
+}
+
+// «+ Шаг» пунктиром на всю ширину, как место под следующий шаг
+.add {
+    justify-content: center;
+    width: 100%;
+    height: var(--size-line-field-height);
+    border-style: dashed;
+    border-color: var(--color-border-field);
+    border-radius: var(--radius-md);
 }
 
 .error {

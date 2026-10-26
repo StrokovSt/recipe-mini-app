@@ -57,6 +57,7 @@ const UnitSelect = ({ value, onChange, className }: UnitSelectProps) => {
     return (
         <>
             <Input
+                variant="line"
                 inputMode="none"
                 autoComplete="off"
                 label={t("ingredients.unit")}

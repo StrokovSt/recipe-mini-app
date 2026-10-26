@@ -12,10 +12,11 @@ const fitHeight = (el: HTMLTextAreaElement) => {
 };
 
 export const Textarea = (props: TextareaProps) => {
-    const { label, register, error, className, ...rest } = props;
+    const { label, register, error, variant = "box", hideLabel, placeholder, className, ...rest } = props;
     // Связь подписи с полем: экранный диктор читает подпись как название поля, клик по ней ставит фокус
     const id = useId();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const isLine = variant === "line";
 
     useEffect(() => {
         if (textareaRef.current) fitHeight(textareaRef.current);
@@ -37,19 +38,28 @@ export const Textarea = (props: TextareaProps) => {
     }, []);
 
     return (
-        <div className={clsx(styles.wrap, className)}>
+        <div className={clsx(styles.wrap, isLine && styles.line, className)}>
             <textarea
                 ref={textareaRef}
                 id={id}
-                className={clsx(styles.textarea, { [styles.textareaError]: error })}
-                placeholder=" "
+                className={clsx(isLine ? styles.lineTextarea : styles.textarea, {
+                    [styles.textareaError]: error,
+                    [styles.noLabel]: hideLabel,
+                })}
+                // Пробел вместо подсказки: по :placeholder-shown подпись видит, что поле пустое
+                placeholder={hideLabel ? placeholder : " "}
                 rows={1}
                 autoComplete="off"
                 aria-invalid={error ? true : undefined}
                 {...rest}
                 {...register}
             />
-            <label htmlFor={id} className={styles.label}>{label}</label>
+            <label
+                htmlFor={id}
+                className={clsx(isLine ? styles.lineLabel : styles.label, hideLabel && styles.hiddenLabel)}
+            >
+                {label}
+            </label>
             {error && <span className={styles.error}>{error}</span>}
         </div>
     );

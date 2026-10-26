@@ -1,15 +1,13 @@
 // Одно уведомление на всё приложение: новое заменяет прежнее и само уходит через TOAST_MS
-export interface ToastAction {
-    label: string;
-    to: string;
-    state?: unknown;
-}
+// Справа от текста: ссылка (например, «Открыть» черновик) или кнопка (например, «Вернуть» удалённый шаг)
+export type ToastAction = { label: string } & ({ to: string; state?: unknown } | { onClick: () => void });
 
 export interface ToastData {
     id: number;
     text: string;
-    // Ссылка справа от текста, например «Открыть» черновик
     action?: ToastAction;
+    // Только на этой странице: действие относится к ней (форма), на другой странице уведомление не видно
+    path?: string;
 }
 
 const TOAST_MS = 6000;

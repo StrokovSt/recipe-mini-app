@@ -35,8 +35,7 @@
         "cover": "Обкладинка",
         "main": "Основне",
         "ingredients": "Інгредієнти",
-        "steps": "Приготування",
-        "optional": "необов'язково"
+        "steps": "Приготування"
     },
     "submitAdd": "Додати до колекції",
     "submitEdit": "Зберегти зміни",
@@ -47,8 +46,7 @@
         "newCategory": "Нова",
         "newTag": "Новий",
         "servings": "Порції",
-        "servingsSuffix": "порц.",
-        "cookTime": "Час, хв",
+        "cookTime": "Час",
         "timeSuffix": "хв",
         "nutrition": "КБЖВ на порцію",
         "calories": "Калорії",
@@ -67,17 +65,35 @@
         "unitTitle": "Одиниця виміру",
         "noUnit": "Без одиниці",
         "remove": "Видалити інгредієнт",
+        "reorder": "Перемістити інгредієнт",
         "removeGroup": "Видалити групу",
         "add": "Інгредієнт",
-        "addGroup": "Група"
+        "addGroup": "Група",
+        "removed": "Інгредієнт видалено",
+        "groupRemoved": "Групу видалено",
+        "paste": "Вставити списком",
+        "pasteHint": "Кожен інгредієнт з нового рядка. Кількість і одиниці розберемо самі.",
+        "pasteLabel": "Список інгредієнтів",
+        "pastePreview": "Вийде: {{count}}",
+        "pasteSubmit_one": "Додати {{count}} інгредієнт",
+        "pasteSubmit_few": "Додати {{count}} інгредієнти",
+        "pasteSubmit_many": "Додати {{count}} інгредієнтів",
+        "pasteSubmit_other": "Додати {{count}} інгредієнта"
     },
     "steps": {
         "item": "Крок {{number}}",
+        "placeholder": "Опишіть крок",
+        "reorder": "Перемістити крок {{number}}",
         "add": "Крок",
         "remove": "Видалити крок",
+        "moveUp": "Перемістити вище",
+        "moveDown": "Перемістити нижче",
+        "actions": "Крок {{number}}: дії",
         "photo": "Фото",
-        "removePhoto": "Прибрати фото"
+        "removePhoto": "Прибрати фото",
+        "removed": "Крок видалено"
     },
+    "restore": "Повернути",
     "validation": {
         "titleRequired": "Назва обов'язкова",
         "titleTooLong": "Не більше {{max}} символів",

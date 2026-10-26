@@ -1,0 +1,44 @@
+@use "states";
+
+// Поле «строкой» (форма рецепта): без рамки и фона, только линия снизу цвета --color-border-field.
+// В фокусе линия цвета акцента и толще (тенью, текст не сдвигается)
+@mixin line {
+    border: 0;
+    border-bottom: 1px solid var(--color-border-field);
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    transition: var(--transition-base);
+    transition-property: border-color, box-shadow;
+
+    @include states.hover {
+        border-bottom-color: var(--color-text-muted);
+    }
+
+    &:focus {
+        border-bottom-color: var(--color-active);
+        box-shadow: 0 1px 0 var(--color-active);
+    }
+}
+
+// Обёртка поля «строкой»: в фокусе фон за полем чуть темнеет, вдобавок к линии. Подложка выходит
+// за текст по бокам на --field-focus-bleed, чтобы текст не прилипал к её краю
+@mixin wrap {
+    isolation: isolate;
+
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        background: var(--color-field-focus-bg);
+        opacity: 0;
+        transition: opacity var(--transition-base);
+        pointer-events: none;
+        inset: 0 calc(-1 * var(--field-focus-bleed, var(--space-1)));
+    }
+
+    &:focus-within::before {
+        opacity: 1;
+    }
+}

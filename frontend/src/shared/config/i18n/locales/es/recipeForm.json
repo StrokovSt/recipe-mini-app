@@ -35,8 +35,7 @@
         "cover": "Portada",
         "main": "Lo básico",
         "ingredients": "Ingredientes",
-        "steps": "Preparación",
-        "optional": "opcional"
+        "steps": "Preparación"
     },
     "submitAdd": "Añadir a la colección",
     "submitEdit": "Guardar cambios",
@@ -47,7 +46,6 @@
         "newCategory": "Nueva",
         "newTag": "Nueva",
         "servings": "Raciones",
-        "servingsSuffix": "rac.",
         "cookTime": "Cocción",
         "timeSuffix": "min",
         "nutrition": "Valor nutricional por porción",
@@ -67,17 +65,34 @@
         "unitTitle": "Unidad de medida",
         "noUnit": "Sin unidad",
         "remove": "Quitar ingrediente",
+        "reorder": "Mover ingrediente",
         "removeGroup": "Quitar grupo",
         "add": "Ingrediente",
-        "addGroup": "Grupo"
+        "addGroup": "Grupo",
+        "removed": "Ingrediente eliminado",
+        "groupRemoved": "Grupo eliminado",
+        "paste": "Pegar una lista",
+        "pasteHint": "Un ingrediente por línea. Nosotros detectamos cantidades y unidades.",
+        "pasteLabel": "Lista de ingredientes",
+        "pastePreview": "Resultado: {{count}}",
+        "pasteSubmit_one": "Añadir {{count}} ingrediente",
+        "pasteSubmit_many": "Añadir {{count}} de ingredientes",
+        "pasteSubmit_other": "Añadir {{count}} ingredientes"
     },
     "steps": {
         "item": "Paso {{number}}",
+        "placeholder": "Describa el paso",
+        "reorder": "Mover el paso {{number}}",
         "add": "Paso",
         "remove": "Eliminar paso",
+        "moveUp": "Subir",
+        "moveDown": "Bajar",
+        "actions": "Acciones del paso {{number}}",
         "photo": "Foto",
-        "removePhoto": "Quitar foto"
+        "removePhoto": "Quitar foto",
+        "removed": "Paso eliminado"
     },
+    "restore": "Deshacer",
     "validation": {
         "titleRequired": "El título es obligatorio",
         "titleTooLong": "Máximo {{max}} caracteres",

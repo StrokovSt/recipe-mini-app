@@ -4,7 +4,7 @@ import type { InputControllerProps } from "../../lib/types";
 import { Input } from "./Input";
 
 export const InputController = <TForm extends FieldValues>(props: InputControllerProps<TForm>) => {
-    const { name, control, rules, label, suffix, type, disabled, className } = props;
+    const { name, control, rules, label, suffix, type, disabled, variant, className } = props;
     // Числа вводятся только цифрами: текстовое поле с цифровой клавиатурой, остальные символы отбрасываем
     const isNumber = type === "number";
 
@@ -20,6 +20,7 @@ export const InputController = <TForm extends FieldValues>(props: InputControlle
                     type={isNumber ? "text" : type}
                     inputMode={isNumber ? "numeric" : undefined}
                     disabled={disabled}
+                    variant={variant}
                     className={className}
                     error={fieldState.error?.message}
                     value={field.value ?? ""}

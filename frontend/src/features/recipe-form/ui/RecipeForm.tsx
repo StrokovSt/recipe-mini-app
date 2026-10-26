@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useEffect, useId, useRef, useState } from "react";
-import { Controller, FormProvider, type Resolver, useForm } from "react-hook-form";
+import { Controller, type FieldErrors, FormProvider, type Resolver, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useBlocker, useNavigate } from "react-router-dom";
 
@@ -20,13 +20,12 @@ import { PageHeader } from "@/shared/ui/PageHeader";
 
 import { toMedia } from "../model/cover";
 import { dropEmptyRows, EMPTY_FORM_VALUES, type RecipeFormValues, recipeSchema } from "../model/schema";
-import type { RecipeFormProps } from "../model/types";
+import type { ContentTab, RecipeFormProps } from "../model/types";
 import { useDraftAutosave } from "../model/useDraftAutosave";
+import ContentFields from "./ContentFields/ContentFields";
 import FormSection from "./FormSection/FormSection";
-import IngredientsField from "./IngredientsField/IngredientsField";
 import LeaveSheet, { type LeaveAction } from "./LeaveSheet/LeaveSheet";
 import MainFields from "./MainFields/MainFields";
-import StepsField from "./StepsField/StepsField";
 
 import styles from "./RecipeForm.module.scss";
 
@@ -54,6 +53,7 @@ const RecipeForm = (props: RecipeFormProps) => {
     const formRef = useRef<HTMLFormElement>(null);
     // Кнопка сохранения в футере, вне формы: связана с ней через атрибут form
     const formId = useId();
+    const [contentTab, setContentTab] = useState<ContentTab>("ingredients");
 
     // Не сохранилось из-за ошибок: прокручиваем к самой верхней, как по якорю
     useEffect(() => {
@@ -114,7 +114,7 @@ const RecipeForm = (props: RecipeFormProps) => {
                 variant: "primary",
                 onClick: () => {
                     stay();
-                    handleSubmit(handleSave)();
+                    submit();
                 },
             },
             { label: t("leave.edit.discard"), variant: "danger", onClick: leave },
@@ -169,6 +169,15 @@ const RecipeForm = (props: RecipeFormProps) => {
         );
     };
 
+    // Ошибки только на скрытой вкладке: открываем её, иначе к ошибке не прокрутить
+    const handleInvalid = (errors: FieldErrors<RecipeFormValues>) => {
+        if (errors[contentTab]) return;
+        if (errors.ingredients) setContentTab("ingredients");
+        else if (errors.steps) setContentTab("steps");
+    };
+
+    const submit = handleSubmit(handleSave, handleInvalid);
+
     return (
         <FormProvider {...methods}>
             <PageHeader className={styles.header}>
@@ -186,7 +195,15 @@ const RecipeForm = (props: RecipeFormProps) => {
                 />
             </PageHeader>
 
-            <form ref={formRef} id={formId} className={styles.form} onSubmit={handleSubmit(handleSave)}>
+            {/* Проверяет схема, а не браузер: иначе недописанная ссылка на обложку (поле type="url")
+                останавливала бы сохранение всплывающей подсказкой браузера */}
+            <form
+                ref={formRef}
+                id={formId}
+                className={styles.form}
+                noValidate
+                onSubmit={submit}
+            >
                 <FormSection mark="一" title={t("sections.cover")}>
                     <Controller
                         control={control}
@@ -203,9 +220,7 @@ const RecipeForm = (props: RecipeFormProps) => {
 
                 <MainFields />
 
-                <IngredientsField />
-
-                <StepsField />
+                <ContentFields tab={contentTab} onTabChange={setContentTab} />
             </form>
 
             <PageFooter className={styles.footer}>

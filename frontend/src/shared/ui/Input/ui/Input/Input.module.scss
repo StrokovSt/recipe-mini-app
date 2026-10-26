@@ -1,3 +1,4 @@
+@use "@/shared/styles/field-line";
 @use "@/shared/styles/states";
 
 // Поле высотой 40px: подпись внутри, при вводе уезжает вверх мелким шрифтом, как в поиске на главной.
@@ -12,6 +13,29 @@
     background: var(--tg-secondary-bg);
     cursor: text;
     transition: all var(--transition-base);
+
+    // Вариант «строкой» (variant="line"): без рамки и фона, линия снизу у самого поля
+    &.line {
+        @include field-line.wrap;
+
+        border-radius: 0;
+        background: none;
+
+        // Суффикс на строке текста, под поднятой подписью
+        .after {
+            top: var(--space-5);
+            left: 0;
+
+            .ghost {
+                font: var(--field-font, var(--font-ui-md));
+            }
+        }
+
+        // Та же плашка ошибки справа на строке поднятой подписи; угла рамки нет, скругляем целиком
+        .error {
+            border-radius: var(--radius-sm);
+        }
+    }
 }
 
 .input {
@@ -181,4 +205,69 @@
         font: var(--font-ui-md);
         font-size: var(--field-font-size, var(--font-size-md));
     }
+}
+
+// Поле «строкой»: подпись, как у обычного поля, стоит внутри и при вводе уезжает вверх, но вместо рамки линия снизу.
+// Шрифт можно задать снаружи переменной --field-font (крупное название рецепта)
+.lineInput {
+    @include field-line.line;
+
+    width: 100%;
+    height: var(--size-line-field-height);
+    padding: var(--space-5) 0 var(--space-2);
+    color: var(--tg-text);
+    font: var(--field-font, var(--font-ui-md));
+    text-overflow: ellipsis;
+
+    &::placeholder {
+        color: transparent;
+        user-select: none;
+    }
+
+    // Пустое поле без фокуса: подпись на месте текста и тем же шрифтом
+    &:placeholder-shown:not(:focus) ~ .lineLabel {
+        top: calc(var(--space-5) + (var(--size-line-field-height) - var(--space-5) - var(--space-2)) / 2);
+        font: var(--field-font, var(--font-ui-md));
+        transform: translateY(-50%);
+    }
+
+    &:focus ~ .lineLabel {
+        color: var(--color-accent);
+    }
+
+    &:disabled {
+        @include states.disabled;
+    }
+
+    // Ошибка: линия цвета ошибки и толще, подпись тоже цвета ошибки, в любом состоянии поля
+    &.inputError {
+        &,
+        &:focus {
+            border-bottom-color: var(--color-error);
+            box-shadow: 0 1px 0 var(--color-error);
+        }
+
+        @include states.hover {
+            border-bottom-color: var(--color-error);
+        }
+
+        & ~ .lineLabel {
+            color: var(--color-error);
+        }
+    }
+}
+
+// Поднятая подпись поля «строкой»: мелко над текстом, длинная обрезается многоточием
+.lineLabel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    overflow: hidden;
+    color: var(--tg-hint);
+    font: var(--font-ui-xs);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all var(--transition-base);
+    pointer-events: none;
 }

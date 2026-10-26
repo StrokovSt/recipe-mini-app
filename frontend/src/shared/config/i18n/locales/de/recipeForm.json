@@ -35,8 +35,7 @@
         "cover": "Titelbild",
         "main": "Grunddaten",
         "ingredients": "Zutaten",
-        "steps": "Zubereitung",
-        "optional": "optional"
+        "steps": "Zubereitung"
     },
     "submitAdd": "Zur Sammlung hinzufügen",
     "submitEdit": "Änderungen speichern",
@@ -47,7 +46,6 @@
         "newCategory": "Neu",
         "newTag": "Neu",
         "servings": "Portionen",
-        "servingsSuffix": "Port.",
         "cookTime": "Garzeit",
         "timeSuffix": "Min.",
         "nutrition": "Nährwerte pro Portion",
@@ -67,17 +65,33 @@
         "unitTitle": "Maßeinheit",
         "noUnit": "Ohne Einheit",
         "remove": "Zutat entfernen",
+        "reorder": "Zutat verschieben",
         "removeGroup": "Gruppe entfernen",
         "add": "Zutat",
-        "addGroup": "Gruppe"
+        "addGroup": "Gruppe",
+        "removed": "Zutat entfernt",
+        "groupRemoved": "Gruppe entfernt",
+        "paste": "Als Liste einfügen",
+        "pasteHint": "Jede Zutat in eine eigene Zeile. Mengen und Einheiten erkennen wir selbst.",
+        "pasteLabel": "Zutatenliste",
+        "pastePreview": "Ergebnis: {{count}}",
+        "pasteSubmit_one": "{{count}} Zutat hinzufügen",
+        "pasteSubmit_other": "{{count}} Zutaten hinzufügen"
     },
     "steps": {
         "item": "Schritt {{number}}",
+        "placeholder": "Beschreiben Sie den Schritt",
+        "reorder": "Schritt {{number}} verschieben",
         "add": "Schritt",
         "remove": "Schritt entfernen",
+        "moveUp": "Nach oben",
+        "moveDown": "Nach unten",
+        "actions": "Aktionen für Schritt {{number}}",
         "photo": "Foto",
-        "removePhoto": "Foto entfernen"
+        "removePhoto": "Foto entfernen",
+        "removed": "Schritt entfernt"
     },
+    "restore": "Rückgängig",
     "validation": {
         "titleRequired": "Titel ist erforderlich",
         "titleTooLong": "Höchstens {{max}} Zeichen",
