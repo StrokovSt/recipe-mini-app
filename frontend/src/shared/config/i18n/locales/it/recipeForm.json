@@ -23,6 +23,10 @@
         "limit": {
             "title": "Limite di ricette raggiunto",
             "text": "{{current}} di {{limit}} salvate. Elimini le ricette che non le servono per aggiungerne di nuove."
+        },
+        "limitNear": {
+            "title": "Limite di ricette quasi raggiunto",
+            "text": "{{current}} su {{limit}} salvate."
         }
     },
     "form": {

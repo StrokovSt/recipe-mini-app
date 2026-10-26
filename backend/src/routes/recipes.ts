@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 
-import { IngredientGroup, MediaInput, RecipeStep } from "@recipe/common";
+import { IngredientGroup, MediaInput, RecipeStep, searchRecipes } from "@recipe/common";
 
 import prisma from "../lib/prisma";
 import { checkRecipeLimit } from "../middleware/checkLimits";
@@ -93,14 +93,6 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
                     }
                     : {}),
 
-                // Поиск по названию
-                ...(search
-                    ? {
-                        title: {
-                            contains: search as string
-                        },
-                    }
-                    : {}),
             },
 
             include: RECIPE_INCLUDE,
@@ -110,7 +102,9 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
             },
         });
 
-        res.json(recipes.map(parseRecipe));
+        // Поиск по названию и ингредиентам делаем здесь, а не в базе: SQLite не умеет сравнивать
+        // кириллицу без регистра, а ингредиенты лежат в JSON. Для личной коллекции этого хватает
+        res.json(searchRecipes(recipes.map(parseRecipe), search as string | undefined));
     }
     catch (error) {
         next(error);

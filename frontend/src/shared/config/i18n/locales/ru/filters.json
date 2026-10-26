@@ -9,5 +9,9 @@
     "categories": "Категории",
     "tags": "Теги",
     "clearAll": "Сбросить всё",
-    "removeFilter": "Убрать фильтр «{{name}}»"
+    "removeFilter": "Убрать фильтр «{{name}}»",
+    "history": "Недавние запросы",
+    "clearHistory": "Очистить",
+    "removeQuery": "Удалить «{{query}}» из истории",
+    "historyEmpty": "Здесь появятся ваши недавние запросы"
 }

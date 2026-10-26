@@ -23,6 +23,10 @@
         "limit": {
             "title": "Limite de recettes atteinte",
             "text": "{{current}} sur {{limit}} enregistrées. Supprimez des recettes inutiles pour en ajouter de nouvelles."
+        },
+        "limitNear": {
+            "title": "Limite de recettes presque atteinte",
+            "text": "{{current}} sur {{limit}} enregistrées."
         }
     },
     "form": {

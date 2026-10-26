@@ -9,5 +9,9 @@
     "categories": "Kategoriler",
     "tags": "Etiketler",
     "clearAll": "Tümünü temizle",
-    "removeFilter": "“{{name}}” filtresini kaldır"
+    "removeFilter": "“{{name}}” filtresini kaldır",
+    "history": "Son aramalar",
+    "clearHistory": "Temizle",
+    "removeQuery": "“{{query}}” aramasını geçmişten kaldır",
+    "historyEmpty": "Son aramalarınız burada görünecek"
 }

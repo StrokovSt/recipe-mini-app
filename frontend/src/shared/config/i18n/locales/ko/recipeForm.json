@@ -23,6 +23,10 @@
         "limit": {
             "title": "레시피 한도에 도달했습니다",
             "text": "{{limit}}개 중 {{current}}개 저장됨. 새 레시피를 추가하려면 필요 없는 레시피를 삭제하세요."
+        },
+        "limitNear": {
+            "title": "레시피 한도에 거의 도달했습니다",
+            "text": "{{limit}}개 중 {{current}}개 저장됨."
         }
     },
     "form": {

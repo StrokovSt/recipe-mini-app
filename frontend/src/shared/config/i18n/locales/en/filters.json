@@ -9,5 +9,9 @@
     "categories": "Categories",
     "tags": "Tags",
     "clearAll": "Clear all",
-    "removeFilter": "Remove filter “{{name}}”"
+    "removeFilter": "Remove filter “{{name}}”",
+    "history": "Recent searches",
+    "clearHistory": "Clear",
+    "removeQuery": "Remove “{{query}}” from history",
+    "historyEmpty": "Your recent searches will appear here"
 }

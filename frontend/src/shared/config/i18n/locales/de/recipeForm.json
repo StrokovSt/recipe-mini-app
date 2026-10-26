@@ -23,6 +23,10 @@
         "limit": {
             "title": "Rezeptlimit erreicht",
             "text": "{{current}} von {{limit}} gespeichert. Löschen Sie nicht benötigte Rezepte, um neue hinzuzufügen."
+        },
+        "limitNear": {
+            "title": "Rezeptlimit fast erreicht",
+            "text": "{{current}} von {{limit}} gespeichert."
         }
     },
     "form": {

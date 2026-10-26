@@ -23,6 +23,10 @@
         "limit": {
             "title": "Límite de recetas alcanzado",
             "text": "{{current}} de {{limit}} guardadas. Elimine las recetas que no necesite para añadir nuevas."
+        },
+        "limitNear": {
+            "title": "Casi en el límite de recetas",
+            "text": "{{current}} de {{limit}} guardadas."
         }
     },
     "form": {

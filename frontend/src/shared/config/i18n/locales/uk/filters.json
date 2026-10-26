@@ -9,5 +9,9 @@
     "categories": "Категорії",
     "tags": "Теги",
     "clearAll": "Скинути все",
-    "removeFilter": "Прибрати фільтр «{{name}}»"
+    "removeFilter": "Прибрати фільтр «{{name}}»",
+    "history": "Нещодавні запити",
+    "clearHistory": "Очистити",
+    "removeQuery": "Видалити «{{query}}» з історії",
+    "historyEmpty": "Тут з'являться ваші нещодавні запити"
 }

@@ -24,6 +24,8 @@ import styles from "./AddRecipePage.module.scss";
 
 // Сколько последних черновиков видно здесь, остальные на странице «Все черновики»
 const DRAFTS_PREVIEW = 3;
+// Когда до лимита рецептов осталось столько или меньше, предупреждаем заранее
+const LIMIT_WARNING_LEFT = 5;
 
 // Выбор способа добавления: вручную или распознать по ссылке и фото
 const AddRecipePage = () => {
@@ -36,6 +38,8 @@ const AddRecipePage = () => {
 
     const isAiLocked = user?.aiEnabled === false;
     const isLimitReached = user?.recipeLimit != null && user.recipeCount >= user.recipeLimit;
+    const isLimitNear = user?.recipeLimit != null && !isLimitReached
+        && user.recipeLimit - user.recipeCount <= LIMIT_WARNING_LEFT;
 
     const handleImport = () => {
         if (isAiLocked) {
@@ -72,6 +76,13 @@ const AddRecipePage = () => {
                 <p className={styles.limit} role="status">
                     <strong>{t("choose.limit.title")}</strong>
                     {t("choose.limit.text", { current: user.recipeCount, limit: user.recipeLimit })}
+                </p>
+            )}
+
+            {isLimitNear && (
+                <p className={styles.limit} role="status">
+                    <strong>{t("choose.limitNear.title")}</strong>
+                    {t("choose.limitNear.text", { current: user.recipeCount, limit: user.recipeLimit })}
                 </p>
             )}
 

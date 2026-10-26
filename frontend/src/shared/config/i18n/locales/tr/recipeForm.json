@@ -23,6 +23,10 @@
         "limit": {
             "title": "Tarif sınırına ulaşıldı",
             "text": "{{limit}} tariften {{current}} tanesi kaydedildi. Yeni tarif eklemek için gereksiz olanları silin."
+        },
+        "limitNear": {
+            "title": "Tarif sınırına az kaldı",
+            "text": "{{limit}} tariften {{current}} tanesi kayıtlı."
         }
     },
     "form": {

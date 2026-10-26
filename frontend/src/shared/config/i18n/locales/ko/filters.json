@@ -9,5 +9,9 @@
     "categories": "카테고리",
     "tags": "태그",
     "clearAll": "모두 지우기",
-    "removeFilter": "필터 '{{name}}' 제거"
+    "removeFilter": "필터 '{{name}}' 제거",
+    "history": "최근 검색어",
+    "clearHistory": "지우기",
+    "removeQuery": "기록에서 '{{query}}' 삭제",
+    "historyEmpty": "최근 검색어가 여기에 표시됩니다"
 }

@@ -9,5 +9,9 @@
     "categories": "分类",
     "tags": "标签",
     "clearAll": "全部清除",
-    "removeFilter": "移除筛选「{{name}}」"
+    "removeFilter": "移除筛选「{{name}}」",
+    "history": "最近搜索",
+    "clearHistory": "清除",
+    "removeQuery": "从历史记录中删除「{{query}}」",
+    "historyEmpty": "您最近的搜索会显示在这里"
 }

@@ -1,10 +1,11 @@
-import { type Dispatch, memo, type Ref, type SetStateAction, useState } from 'react';
+import { type Dispatch, type FocusEvent, type KeyboardEvent, memo, type Ref, type SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { Category, Tag } from '@recipe/common';
 
 import { getCategoryIcon } from '@/entities/category';
 import type { GetRecipesProps } from '@/entities/recipe/types';
+import { addToSearchHistory, SearchHistory } from '@/features/search-history';
 import { BottomSheet } from '@/shared/ui/BottomSheet';
 import { OutlineButton, RegularButton } from '@/shared/ui/Buttons';
 import { CategoryComponent } from '@/shared/ui/CategoryComponent';
@@ -21,6 +22,8 @@ import styles from './RecipeFilters.module.scss';
 
 // Сколько рядов категорий и тегов видно в свёрнутом фильтре
 const COLLAPSED_ROWS = 2;
+// Задержка поиска на главной, мс. Подольше, чтобы запрос ушёл и попал в историю, когда человек допечатал
+const SEARCH_DELAY = 800;
 
 interface RecipeFiltersProps {
     categories: Category[];
@@ -51,12 +54,44 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
         if (isOpen) setDraft(filters);
     }
 
-    // Поиск на странице применяется сразу
+    // Список недавних запросов открыт, пока поле поиска в фокусе. Набранный текст (по нему фильтруется список)
+    // берём из поля сразу, не дожидаясь задержки поиска, а при смене поиска снаружи (шторка, история) подхватываем при отрисовке
+    const [isSearchFocused, setIsSearchFocused] = useState(false);
+    const [query, setQuery] = useState(filters.search ?? '');
+    const [prevSearch, setPrevSearch] = useState(filters.search);
+
+    if (filters.search !== prevSearch) {
+        setPrevSearch(filters.search);
+        setQuery(filters.search ?? '');
+    }
+
+    // Поиск на странице применяется после задержки и сразу запоминается в истории
     const handleSearchChange = (search: string) => {
+        setQuery(search);
+        addToSearchHistory(search);
         setFilters((prev) => ({
             ...prev,
             search: search || undefined,
         }));
+    };
+
+    // Список следит только за самим полем ввода: нажатие на крестик очистки уводит фокус с поля и закрывает список
+    const handleSearchFocus = (event: FocusEvent<HTMLLabelElement>) => {
+        if (event.target instanceof HTMLInputElement) setIsSearchFocused(true);
+    };
+
+    const handleSearchBlur = (event: FocusEvent<HTMLLabelElement>) => {
+        if (event.target instanceof HTMLInputElement) setIsSearchFocused(false);
+    };
+
+    // Enter прячет клавиатуру, вместе с ней закрывается список
+    const handleSearchKeyDown = (event: KeyboardEvent<HTMLLabelElement>) => {
+        if (event.key === 'Enter' && event.target instanceof HTMLInputElement) event.target.blur();
+    };
+
+    const handleHistoryPick = (search: string) => {
+        handleSearchChange(search);
+        if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
     };
 
     const handleDraftSearchChange = (search: string) => {
@@ -109,6 +144,11 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                     placeholder={t('searchPlaceholder')}
                     disabled={disabled}
                     data-onboarding="search"
+                    delay={SEARCH_DELAY}
+                    onFocus={handleSearchFocus}
+                    onBlur={handleSearchBlur}
+                    onInput={(event) => setQuery((event.target as HTMLInputElement).value)}
+                    onKeyDown={handleSearchKeyDown}
                 />
 
                 <FilterButton
@@ -118,6 +158,8 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                     disabled={disabled}
                     data-onboarding="filter"
                 />
+
+                <SearchHistory isOpen={isSearchFocused} query={query} onPick={handleHistoryPick} />
             </div>
 
             <ActiveFilters

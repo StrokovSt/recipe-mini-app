@@ -1,4 +1,6 @@
+// Опора для панели истории поиска
 .bar {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--space-3);

@@ -1,0 +1,122 @@
+@use "@/shared/styles/states";
+
+.panel {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    right: 0;
+    left: 0;
+    z-index: var(--z-dropdown);
+    padding: var(--space-2) 0;
+    overflow: hidden;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-4);
+}
+
+.title {
+    color: var(--tg-hint);
+    font: var(--font-ui-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.clear {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--tg-hint);
+    font: var(--font-ui-xs);
+
+    cursor: pointer;
+    transition: color var(--transition-base);
+
+    @include states.hover {
+        color: var(--color-active);
+    }
+}
+
+.empty {
+    margin: 0;
+    padding: var(--space-2) var(--space-4);
+    color: var(--tg-hint);
+    font: var(--font-ui-sm);
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+// Строка из двух кнопок: запрос во всю ширину и крестик справа
+.item {
+    display: flex;
+    align-items: center;
+
+    transition: background var(--transition-base);
+
+    @include states.hover {
+        background: color-mix(in srgb, var(--color-surface) 94%, black);
+    }
+}
+
+.query {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+    padding: var(--space-3) var(--space-2) var(--space-3) var(--space-4);
+
+    border: none;
+    background: none;
+    color: var(--tg-text);
+    font: var(--font-ui-md);
+    text-align: left;
+
+    cursor: pointer;
+
+    span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    svg {
+        flex-shrink: 0;
+        width: var(--size-search-history-icon);
+        height: var(--size-search-history-icon);
+        color: var(--tg-hint);
+    }
+}
+
+.remove {
+    display: flex;
+    flex-shrink: 0;
+    padding: var(--space-3) var(--space-4);
+
+    border: none;
+    background: none;
+    color: var(--tg-hint);
+
+    cursor: pointer;
+    transition: color var(--transition-base);
+
+    @include states.hover {
+        color: var(--color-active);
+    }
+
+    svg {
+        width: var(--size-search-history-remove);
+        height: var(--size-search-history-remove);
+    }
+}

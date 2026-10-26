@@ -23,6 +23,10 @@
         "limit": {
             "title": "Recipe limit reached",
             "text": "{{current}} of {{limit}} saved. Delete recipes you don't need to add new ones."
+        },
+        "limitNear": {
+            "title": "Almost at the recipe limit",
+            "text": "{{current}} of {{limit}} saved."
         }
     },
     "form": {

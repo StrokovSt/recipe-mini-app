@@ -9,5 +9,9 @@
     "categories": "カテゴリー",
     "tags": "タグ",
     "clearAll": "すべてクリア",
-    "removeFilter": "フィルター「{{name}}」を解除"
+    "removeFilter": "フィルター「{{name}}」を解除",
+    "history": "最近の検索",
+    "clearHistory": "クリア",
+    "removeQuery": "「{{query}}」を履歴から削除",
+    "historyEmpty": "最近の検索がここに表示されます"
 }

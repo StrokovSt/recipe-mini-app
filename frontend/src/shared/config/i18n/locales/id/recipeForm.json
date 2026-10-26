@@ -23,6 +23,10 @@
         "limit": {
             "title": "Batas resep tercapai",
             "text": "{{current}} dari {{limit}} tersimpan. Hapus resep yang tidak diperlukan untuk menambah yang baru."
+        },
+        "limitNear": {
+            "title": "Batas resep hampir tercapai",
+            "text": "{{current}} dari {{limit}} tersimpan."
         }
     },
     "form": {

@@ -162,6 +162,10 @@
     --size-filter-chip-icon: 14px;
     --size-filter-chip-remove: 12px;
 
+    // Список недавних запросов под поиском на главной: часики и крестик
+    --size-search-history-icon: 18px;
+    --size-search-history-remove: 14px;
+
     // Обложка рецепта от верха экрана, вместе с зоной под шапкой
     --size-recipe-cover: 320px;
     --size-play-button: 56px;
@@ -213,6 +217,7 @@
     --transition-overlay: 0.3s ease;
 
     // ─── Z-index ──────────────────────────────────────────────
+    --z-dropdown: 5;
     --z-above: 10;
     --z-modal: 100;
     --z-onboarding: 200;

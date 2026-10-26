@@ -9,5 +9,9 @@
     "categories": "Kategori",
     "tags": "Tag",
     "clearAll": "Hapus semua",
-    "removeFilter": "Hapus filter “{{name}}”"
+    "removeFilter": "Hapus filter “{{name}}”",
+    "history": "Pencarian terakhir",
+    "clearHistory": "Hapus",
+    "removeQuery": "Hapus “{{query}}” dari riwayat",
+    "historyEmpty": "Pencarian terakhir Anda akan muncul di sini"
 }
