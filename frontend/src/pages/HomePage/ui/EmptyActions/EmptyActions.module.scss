@@ -1,0 +1,12 @@
+// Кнопки одна под другой, во всю ширину текста сообщения
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: var(--size-message-text);
+    max-width: 100%;
+
+    .button {
+        width: 100%;
+    }
+}

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { collapseAndRemove } from "@/shared/lib/animations";
+import { collapseAndRemove, insertAndExpand } from "@/shared/lib/animations";
 import { AddButton, IconButton } from "@/shared/ui/Buttons";
 import { Input } from "@/shared/ui/Input";
 
@@ -35,7 +35,9 @@ const IngredientsField = () => {
             remove(index);
             if (!group.title?.trim() && group.items.every(isEmptyIngredient)) return;
 
-            showUndo(t("ingredients.groupRemoved"), () => insert(index, group));
+            showUndo(t("ingredients.groupRemoved"), () =>
+                insertAndExpand(() => insert(index, group), () => listRef.current?.children[index]),
+            );
         });
     };
 

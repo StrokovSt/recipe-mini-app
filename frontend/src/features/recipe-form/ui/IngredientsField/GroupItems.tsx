@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import type { Ingredient } from "@recipe/common";
 
 import FormIcon from "@/shared/assets/icons/icon-form.svg?react";
-import { collapseAndRemove } from "@/shared/lib/animations";
+import { collapseAndRemove, insertAndExpand } from "@/shared/lib/animations";
 import { AddButton } from "@/shared/ui/Buttons";
 
 import { EMPTY_INGREDIENT, isEmptyIngredient, type RecipeFormValues } from "../../model/schema";
@@ -49,7 +49,10 @@ const GroupItems = ({ groupIndex }: GroupItemsProps) => {
             else remove(index);
             if (isEmptyIngredient(item)) return;
 
-            showUndo(t("ingredients.removed"), () => (isLast ? update(index, item) : insert(index, item)));
+            showUndo(t("ingredients.removed"), () => {
+                if (isLast) update(index, item);
+                else insertAndExpand(() => insert(index, item), () => listRef.current?.children[index]);
+            });
         };
 
         if (fields.length === 1) removeFromForm();

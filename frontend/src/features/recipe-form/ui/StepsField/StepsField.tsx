@@ -4,7 +4,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { useUploadMedia } from "@/entities/recipe";
-import { collapseAndRemove } from "@/shared/lib/animations";
+import { collapseAndRemove, insertAndExpand } from "@/shared/lib/animations";
 import { AddButton } from "@/shared/ui/Buttons";
 
 import { EMPTY_STEP, type RecipeFormValues } from "../../model/schema";
@@ -38,7 +38,13 @@ const StepsField = () => {
             remove(index);
             if (!step.text.trim() && step.images.length === 0) return;
 
-            showUndo(t("steps.removed"), () => insert(index, step));
+            // Если шаг был последним, вместе с ним появляется и весь список: раскрываем список
+            showUndo(t("steps.removed"), () =>
+                insertAndExpand(
+                    () => insert(index, step),
+                    () => (listRef.current?.children.length === 1 ? listRef.current : listRef.current?.children[index]),
+                ),
+            );
         });
     };
 

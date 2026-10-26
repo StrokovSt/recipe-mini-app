@@ -16,12 +16,15 @@ import { PageWrapper } from '@/shared/ui/PageWrapper';
 import { FilterButton, getActiveFilterCount, RecipeFilters } from '@/widgets/RecipeFilters';
 import { RecipeList } from '@/widgets/RecipeList';
 
+import { EmptyActions } from './EmptyActions/EmptyActions';
 import { HomeHeading } from './HomeHeading/HomeHeading';
 
 import styles from './HomePage.module.scss';
 
 const HIDDEN = { opacity: 0, scale: 0.6 };
 const VISIBLE = { opacity: 1, scale: 1 };
+// Один элемент на все отрисовки: список обёрнут в memo и не перерисовывается из-за новых кнопок
+const EMPTY_ACTIONS = <EmptyActions />;
 
 const HomePage = () => {
     // Поиск, категория и теги живут в адресе: на главную ведут плитки разделов, а после возврата назад всё на месте
@@ -109,6 +112,7 @@ const HomePage = () => {
                     recipes={recipes ?? []}
                     isDimmed={isPlaceholderData}
                     isFiltered={Boolean(filters.search) || getActiveFilterCount(filters) > 0}
+                    emptyAction={EMPTY_ACTIONS}
                 />
             )}
             <Onboarding />

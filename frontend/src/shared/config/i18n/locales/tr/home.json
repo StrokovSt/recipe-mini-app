@@ -1,7 +1,9 @@
 {
     "empty": {
         "title": "Henüz tarif yok",
-        "text": "Yemek defteriniz burada olacak. İlk tarifinizi aşağıdaki «+» düğmesiyle ekleyin."
+        "text": "Herhangi bir siteden veya Pinterest’ten bir tarif bağlantısı yapıştırın, yapay zekâ onu malzemelere ve adımlara ayırır.",
+        "import": "Bağlantıyla ekle",
+        "manual": "Elle yaz"
     },
     "emptyFiltered": {
         "title": "Hiçbir şey bulunamadı",

@@ -1,5 +1,5 @@
 import { AnimatePresence, m, type Variants } from 'motion/react';
-import { memo } from 'react';
+import { memo, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { Recipe } from '@recipe/common';
@@ -38,10 +38,12 @@ interface RecipeListProps {
     isDimmed?: boolean;
     // Список отобран поиском или фильтрами: пустой значит «ничего не нашлось», а не «рецептов нет»
     isFiltered?: boolean;
+    // Кнопки под сообщением о пустой коллекции (не для «ничего не нашлось»)
+    emptyAction?: ReactNode;
 }
 
 const RecipeList = (props: RecipeListProps) => {
-    const { recipes, isDimmed = false, isFiltered = false } = props;
+    const { recipes, isDimmed = false, isFiltered = false, emptyAction } = props;
     const { t } = useTranslation('home');
     const emptyKey = isFiltered ? 'emptyFiltered' : 'empty';
     // Новый набор рецептов — новый список: прежний гаснет целиком, новый проявляется лесенкой
@@ -61,7 +63,12 @@ const RecipeList = (props: RecipeListProps) => {
                         exit={HIDDEN}
                         transition={TRANSITION_BASE}
                     >
-                        <Message illustration="empty" title={t(`${emptyKey}.title`)} text={t(`${emptyKey}.text`)} />
+                        <Message
+                            illustration="empty"
+                            title={t(`${emptyKey}.title`)}
+                            text={t(`${emptyKey}.text`)}
+                            action={!isFiltered && emptyAction}
+                        />
                     </m.div>
                 ) : (
                     <m.div

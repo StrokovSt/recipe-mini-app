@@ -1,7 +1,9 @@
 {
     "empty": {
         "title": "No recipes yet",
-        "text": "This is where your cookbook will live. Add your first recipe with the + button below."
+        "text": "Paste a link to a recipe from any website or Pinterest, and AI will break it down into ingredients and steps.",
+        "import": "Add from a link",
+        "manual": "Write manually"
     },
     "emptyFiltered": {
         "title": "Nothing found",

@@ -1,7 +1,9 @@
 {
     "empty": {
         "title": "Aún no hay recetas",
-        "text": "Aquí vivirá su recetario. Añada su primera receta con el botón «+» de abajo."
+        "text": "Pegue el enlace de una receta de cualquier sitio web o de Pinterest y la IA la dividirá en ingredientes y pasos.",
+        "import": "Añadir por enlace",
+        "manual": "Escribir manualmente"
     },
     "emptyFiltered": {
         "title": "No se encontró nada",

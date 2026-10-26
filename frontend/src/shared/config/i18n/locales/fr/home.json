@@ -1,7 +1,9 @@
 {
     "empty": {
         "title": "Pas encore de recettes",
-        "text": "C’est ici que vivra votre livre de cuisine. Ajoutez votre première recette avec le bouton « + » en bas."
+        "text": "Collez le lien d’une recette depuis n’importe quel site ou Pinterest, l’IA la découpera en ingrédients et en étapes.",
+        "import": "Ajouter par lien",
+        "manual": "Saisir manuellement"
     },
     "emptyFiltered": {
         "title": "Aucun résultat",

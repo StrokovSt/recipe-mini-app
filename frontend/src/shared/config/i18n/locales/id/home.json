@@ -1,7 +1,9 @@
 {
     "empty": {
         "title": "Belum ada resep",
-        "text": "Di sinilah buku resep Anda akan berada. Tambahkan resep pertama Anda dengan tombol «+» di bawah."
+        "text": "Tempel tautan resep dari situs mana pun atau Pinterest, AI akan memecahnya menjadi bahan dan langkah.",
+        "import": "Tambah dari tautan",
+        "manual": "Tulis manual"
     },
     "emptyFiltered": {
         "title": "Tidak ada yang ditemukan",
