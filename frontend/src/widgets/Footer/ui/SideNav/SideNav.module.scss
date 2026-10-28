@@ -1,0 +1,150 @@
+@use "@/shared/styles/states";
+
+// Колонка слева во всю высоту экрана. Ширина — --size-side-nav: рейка на планшете, панель на компьютере.
+// Контент под неё не заходит: у #root такой же отступ слева
+// Свой цвет и тень справа: навигация не сливается с полосой шапки
+.side {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: var(--z-above);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    width: var(--size-side-nav);
+    padding: var(--space-5) var(--space-4);
+    overflow-y: auto;
+    border-right: 1px solid var(--color-border);
+    background: var(--color-side-nav-bg);
+    box-shadow: var(--shadow-side-nav);
+}
+
+// Логотип ведёт на главную. В тёмной теме тот же логотип со светлыми буквами
+.brand {
+    display: flex;
+    padding: 0 var(--space-2);
+
+    .logo,
+    .logoDark,
+    .seal {
+        height: var(--size-home-logo);
+    }
+
+    .logoDark {
+        display: none;
+    }
+
+    [data-theme="dark"] & {
+        .logo {
+            display: none;
+        }
+
+        .logoDark {
+            display: block;
+        }
+    }
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: var(--size-side-link);
+    padding: 0 var(--space-3);
+    border: 1px solid transparent;
+    border-left-width: var(--size-side-active-line);
+    border-radius: var(--radius-md);
+    background: none;
+    color: var(--color-text-soft);
+    font: var(--font-ui-sm);
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition-base);
+    transition-property: background-color, color, border-color;
+
+    // В рейке пункты бледнее, как в нижней плашке. Стоит до наведения и выбранного пункта, иначе перебьёт их цвет
+    .rail & {
+        color: var(--color-text-muted);
+    }
+
+    @include states.hover {
+        background-color: var(--color-hover-tint);
+        color: var(--color-active);
+    }
+
+    // Выбранный пункт: подсветка, бледная винная рамка и винная линия слева по скруглению, залитая иконка
+    &.linkActive {
+        border-color: var(--color-side-active-border);
+        border-left-color: var(--color-active);
+        background-color: var(--color-active-bg);
+        color: var(--color-active);
+        pointer-events: none;
+
+        svg :is(path, rect) {
+            fill: currentcolor;
+        }
+    }
+}
+
+.icon {
+    display: flex;
+    flex-shrink: 0;
+
+    svg {
+        width: var(--size-side-icon);
+        height: var(--size-side-icon);
+        stroke-width: var(--size-nav-icon-stroke);
+
+        :is(path, rect) {
+            transition: var(--transition-base);
+            transition-property: fill, stroke;
+        }
+    }
+}
+
+// Пункты меню: отдельная группа под чертой
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+}
+
+// Рейка: все пункты — квадратные кнопки-иконки по центру, без подписей
+.rail {
+    align-items: center;
+    padding-inline: var(--space-2);
+
+    .nav,
+    .menu {
+        align-items: center;
+        align-self: stretch;
+        gap: var(--space-2);
+    }
+
+    // Меню в рейке прижато к низу
+    .menu {
+        margin-top: auto;
+    }
+
+    .link {
+        justify-content: center;
+        width: var(--size-rail-item);
+        min-height: var(--size-rail-item);
+        padding: 0;
+    }
+
+    .icon svg {
+        width: var(--size-rail-icon);
+        height: var(--size-rail-icon);
+    }
+}

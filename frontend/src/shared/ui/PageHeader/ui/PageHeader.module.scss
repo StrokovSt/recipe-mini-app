@@ -1,4 +1,5 @@
 @use "@/shared/styles/bar";
+@use "@/shared/styles/media";
 
 // Общая полоса шапки: поверх main сверху колонки, контент уезжает под неё
 .bar {
@@ -17,10 +18,26 @@
 
     // Контент страницы уезжает под шапку и размывается
     backdrop-filter: blur(5px);
+
+    // Планшет и компьютер: полоса правее навигации, края — по ширине контента (PageWrapper; 100% здесь — ширина #root).
+    // В строку: справа от шапки страницы встаёт кнопка формы (widgets/Footer)
+    @include media.tablet {
+        left: var(--size-side-nav);
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-4);
+        padding-inline: max(var(--space-page), calc((100% - var(--size-side-nav) - var(--size-content-max-width)) / 2));
+    }
 }
 
 .header {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+
+    // Планшет и компьютер: занимает строку полосы, кнопка формы справа
+    @include media.tablet {
+        flex: 1;
+        min-width: 0;
+    }
 }

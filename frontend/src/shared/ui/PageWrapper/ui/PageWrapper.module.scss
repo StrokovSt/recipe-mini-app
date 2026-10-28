@@ -1,3 +1,5 @@
+@use "@/shared/styles/media";
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -10,6 +12,11 @@
         calc(var(--size-page-footer) + var(--space-2));
     overflow: hidden auto;
     font-family: var(--font-family-main);
+
+    // Планшет и компьютер: контент не шире --size-content-max-width, по центру места правее навигации
+    @include media.tablet {
+        padding-inline: max(var(--space-page), calc((100% - var(--size-content-max-width)) / 2));
+    }
 
     // Раскладка как у main: страницы задают gap через className
     // Тянется на всю высоту, чтобы сообщение (пустой список, не найдено) встало по центру свободного места

@@ -148,8 +148,30 @@
     }
 
     svg {
-        width: 30px;
-        height: 30px;
+        width: var(--size-nav-add-icon);
+        height: var(--size-nav-add-icon);
         transition: transform var(--transition-base);
     }
+}
+
+// Планшет и компьютер: кнопка формы последней в полосе шапки, справа от заголовка страницы
+.headerAction {
+    display: flex;
+    flex-shrink: 0;
+    order: 1;
+
+    // Страница спрятала своё действие (PageFooter isHidden)
+    &:has([data-footer-hidden]) {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+// Планшет и компьютер: уведомление справа под шапкой
+.sideToast {
+    position: fixed;
+    top: calc(var(--size-page-header) + var(--space-3));
+    right: var(--space-page);
+    z-index: var(--z-above);
+    width: var(--size-toast-width);
 }

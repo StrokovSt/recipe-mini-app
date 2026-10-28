@@ -1,0 +1,26 @@
+// Границы раскладок по ширине экрана. В @media нельзя подставить CSS-переменную, поэтому числа здесь.
+// Те же числа для JS — в shared/lib/layout (useLayoutMode)
+$tablet: 768px;
+$desktop: 1200px;
+$wide: 1920px;
+
+// Планшет и шире: навигация сбоку узкой рейкой, нижней плашки нет
+@mixin tablet {
+    @media (width >= $tablet) {
+        @content;
+    }
+}
+
+// Компьютер и шире: рейка становится боковой панелью
+@mixin desktop {
+    @media (width >= $desktop) {
+        @content;
+    }
+}
+
+// Очень широкий экран (ultrawide)
+@mixin wide {
+    @media (width >= $wide) {
+        @content;
+    }
+}

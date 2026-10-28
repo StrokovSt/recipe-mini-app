@@ -1,3 +1,5 @@
+@use "@/shared/styles/media";
+
 // Кнопка формы в футере: заполняет винную плашку целиком, своей рамки и скругления нет
 @mixin footer-action {
     flex: 1;
@@ -9,4 +11,15 @@
     border-radius: calc(var(--radius-lg) - 1px);
     font: var(--font-ui-md);
     font-weight: var(--font-weight-bold);
+
+    // Планшет и компьютер: обычная кнопка справа в полосе шапки (widgets/Footer)
+    @include media.tablet {
+        flex: none;
+        align-self: auto;
+        min-height: var(--size-menu-button);
+        padding-inline: var(--space-6);
+        border-radius: var(--radius-md);
+        font: var(--font-ui-sm);
+        font-weight: var(--font-weight-bold);
+    }
 }

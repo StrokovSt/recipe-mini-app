@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { AnimatePresence, m } from "motion/react";
 import { type MouseEvent, type ReactNode, useState } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { matchPath, NavLink, useLocation } from "react-router-dom";
 
@@ -11,11 +12,14 @@ import SectionsIcon from "@/shared/assets/icons/icon-sections.svg?react";
 import { TRANSITION_PAGE } from "@/shared/config/animation";
 import { getAnimations } from "@/shared/lib/animations";
 import { impactHaptic } from "@/shared/lib/haptic";
+import { useLayoutMode } from "@/shared/lib/layout";
 import { useSetPageFooterSlot } from "@/shared/ui/PageFooter";
+import { usePageHeaderBar } from "@/shared/ui/PageHeader";
 import { Toast } from "@/shared/ui/Toast";
 
 import { type Burst, createPetals } from "./PetalBurst/createPetals";
 import { PetalBurst } from "./PetalBurst/PetalBurst";
+import { SideNav } from "./SideNav/SideNav";
 
 import styles from "./Footer.module.scss";
 
@@ -25,18 +29,14 @@ const ACTION_ON: AppRoute[] = [AppRoute.CreateRecipe, AppRoute.Draft, AppRoute.I
 const HIDDEN = { opacity: 0 };
 const VISIBLE = { opacity: 1 };
 
-// Центр кнопки «+» внутри приложения: оттуда разлетаются лепестки
-const getBurst = (button: HTMLElement): Burst | null => {
-    const root = document.getElementById("root");
-    if (!root) return null;
-
+// Центр кнопки «+» на экране: оттуда разлетаются лепестки
+const getBurst = (button: HTMLElement): Burst => {
     const rect = button.getBoundingClientRect();
-    const rootRect = root.getBoundingClientRect();
 
     return {
         id: Date.now(),
-        x: rect.left + rect.width / 2 - rootRect.left,
-        y: rect.top + rect.height / 2 - rootRect.top,
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
         petals: createPetals(),
     };
 };
@@ -54,6 +54,8 @@ export function Footer() {
     const { t } = useTranslation("footer");
     const { pathname } = useLocation();
     const setSlot = useSetPageFooterSlot();
+    const bar = usePageHeaderBar();
+    const mode = useLayoutMode();
 
     const hasAction = ACTION_ON.some((path) => matchPath(path, pathname));
 
@@ -70,6 +72,18 @@ export function Footer() {
         { to: AppRoute.AddRecipe, icon: <AddIcon />, label: t("add"), isAdd: true, onboarding: "add" },
         { to: AppRoute.Sections, icon: <SectionsIcon />, label: t("sections"), onboarding: "sections" },
     ];
+
+    // Планшет и компьютер: навигация слева, кнопка формы справа в полосе шапки, где в программах ждут «Сохранить»
+    if (mode !== "phone") {
+        return (
+            <>
+                <SideNav isRail={mode === "tablet"} onAddClick={handleAddClick} />
+                {hasAction && bar && createPortal(<div ref={setSlot} className={styles.headerAction} />, bar)}
+                <Toast className={styles.sideToast} />
+                <PetalBurst burst={burst} onDone={() => setBurst(null)} />
+            </>
+        );
+    }
 
     return (
         <m.footer className={styles.footer} initial={HIDDEN} animate={VISIBLE} transition={TRANSITION_PAGE}>

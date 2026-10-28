@@ -7,6 +7,16 @@
         display: flex;
     }
 
+    // Планшет и компьютер: вместо логотипа название раздела, как на странице разделов
+    .text {
+        overflow: hidden;
+        color: var(--color-text);
+        font: var(--font-header-lg);
+        font-weight: var(--font-weight-bold);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     .logo,
     .logoDark {
         height: var(--size-home-logo);

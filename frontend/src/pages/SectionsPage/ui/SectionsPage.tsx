@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { TRANSITION_PAGE } from "@/shared/config/animation";
+import { useLayoutMode } from "@/shared/lib/layout";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 import { SectionHeading } from "@/shared/ui/SectionHeading";
@@ -23,6 +24,7 @@ const VISIBLE = { opacity: 1, transform: "translateY(0px)", transitionEnd: { tra
 const SectionsPage = () => {
     const { t } = useTranslation("sections");
     const [tab, setTab] = useState<Tab>("categories");
+    const mode = useLayoutMode();
 
     const tabs: SegmentedOption<Tab>[] = [
         { id: "categories", label: t("tabs.categories") },
@@ -38,7 +40,8 @@ const SectionsPage = () => {
                     <SectionHeading
                         title={t(`${tab}.title`)}
                         hint={t(`${tab}.hint`)}
-                        action={<AppMenuButton />}
+                        // На планшете и компьютере меню в боковой навигации
+                        action={mode === "phone" && <AppMenuButton />}
                     />
                 </PageHeader>
             }

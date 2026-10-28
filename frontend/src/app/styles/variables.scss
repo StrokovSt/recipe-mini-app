@@ -1,3 +1,5 @@
+@use "@/shared/styles/media";
+
 :root {
   // ─── Typography ───────────────────────────────────────────
     --font-family-main: "Literata Variable", serif;
@@ -52,6 +54,19 @@
 
     // ─── Sizes ────────────────────────────────────────────────
     --size-app-max-width: 1024px;
+
+    // Планшет и компьютер (shared/styles/media): ширина контента по центру и навигация сбоку.
+    // --size-side-nav — сколько места навигация занимает сейчас: на телефоне 0, она внизу
+    --size-content-max-width: 1200px;
+    --size-side-nav: 0px;
+    --size-rail: 88px; /* узкая рейка на планшете */
+    --size-sidebar: 256px; /* боковая панель на компьютере */
+    --size-side-link: 44px; /* строка-ссылка в боковой панели */
+    --size-side-icon: 20px;
+    --size-rail-item: 44px; /* кнопка-иконка в рейке */
+    --size-rail-icon: 22px;
+    --size-side-active-line: 2px; /* винная линия слева у выбранного пункта навигации */
+    --size-toast-width: 360px; /* уведомление в правом верхнем углу на планшете и компьютере */
     --size-control-height: 56px;
     --size-action-button: 48px;
     --size-header-button: 40px;
@@ -82,6 +97,7 @@
     --size-onboarding-hole-padding: 6px;
     --size-onboarding-hole-ring: 2px;
     --size-nav-action: 56px;
+    --size-nav-add-icon: 30px; /* «+» в круглой винной кнопке навигации */
 
     // Высота футера: отступ сверху + плашка навигации (круглая «+», отступы и рамка) + отступ снизу.
     // Футер лежит поверх main, и снизу страницы столько места, чтобы последнее не пряталось под ним
@@ -202,6 +218,7 @@
     --shadow-lg: 0 4px 20px color-mix(in srgb, var(--color-shadow) 14%, transparent), 0 1px 4px color-mix(in srgb, var(--color-shadow) 8%, transparent);
     --shadow-sheet: 0 -8px 30px color-mix(in srgb, var(--color-shadow) 20%, transparent);
     --shadow-accent: 0 5px 16px var(--color-accent-shadow);
+    --shadow-side-nav: 4px 0 20px color-mix(in srgb, var(--color-shadow) 10%, transparent); /* тень справа от боковой навигации */
 
     // ─── States ─────────────────────────────────────────────
     --opacity-disabled: 0.4;
@@ -228,6 +245,21 @@
 @media (width <= 360px) {
     :root {
         --space-page: var(--space-3);
+    }
+}
+
+// Планшет: навигация рейкой слева, нижней плашки нет — снизу страницы место под неё не нужно
+@include media.tablet {
+    :root {
+        --size-side-nav: var(--size-rail);
+        --size-page-footer: 0px;
+    }
+}
+
+// Компьютер: вместо рейки боковая панель
+@include media.desktop {
+    :root {
+        --size-side-nav: var(--size-sidebar);
     }
 }
 

@@ -1,4 +1,5 @@
 @use "@/shared/styles/footer-action";
+@use "@/shared/styles/media";
 
 .header {
     flex-direction: row;
@@ -59,6 +60,13 @@
         color: var(--color-text-muted);
         font: var(--font-ui-xs);
         text-align: center;
+
+        // Планшет и компьютер: подпись в полосе шапки слева от кнопки
+        @include media.tablet {
+            position: static;
+            margin: 0;
+            background: none;
+        }
     }
 
     .draftError {
