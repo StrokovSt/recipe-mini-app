@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 6 80 80" fill="none">
+  <defs>
+    <linearGradient id="porridge-pot" x1="16" y1="30" x2="76" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d98a5a" />
+      <stop offset="0.6" stop-color="#b65f33" />
+      <stop offset="1" stop-color="#7f3c1d" />
+    </linearGradient>
+    <linearGradient id="porridge-grain" x1="22" y1="22" x2="70" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a97448" />
+      <stop offset="1" stop-color="#6f4527" />
+    </linearGradient>
+  </defs>
+  <g id="porridge-artwork">
+    <ellipse cx="46" cy="70" rx="32" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Wooden spoon behind -->
+    <path d="M62 30L82 10" stroke="#d09150" stroke-width="3.6" stroke-linecap="round" />
+    <path d="M62 30L82 10" stroke="#493326" stroke-width="1" stroke-linecap="round" stroke-opacity="0.35" />
+    <!-- Clay pot body -->
+    <path d="M18 34C14 42 16 56 26 63C31 66.5 39 68 46 68C53 68 61 66.5 66 63C76 56 78 42 74 34H18Z" fill="url(#porridge-pot)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" />
+    <!-- Painted folk pattern band -->
+    <path d="M19 46C31 50 61 50 73 46" stroke="#fff2d6" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.8" />
+    <circle cx="33" cy="54" r="2.2" fill="#fff2d6" fill-opacity="0.85" />
+    <circle cx="46" cy="56" r="2.2" fill="#fff2d6" fill-opacity="0.85" />
+    <circle cx="59" cy="54" r="2.2" fill="#fff2d6" fill-opacity="0.85" />
+    <!-- Rim -->
+    <ellipse cx="46" cy="33" rx="30" ry="8" fill="#c8754a" stroke="#493326" stroke-width="2.05" />
+    <!-- Buckwheat inside -->
+    <ellipse cx="46" cy="32" rx="25.5" ry="5.8" fill="url(#porridge-grain)" stroke="#493326" stroke-width="1.85" />
+    <path d="M28 31.5L30 30.5M35 34L37 33M41 30L43 29.5M52 34L54 33M58 30.5L60 31.5M63 33L64.5 32M47 35L48.5 34" stroke="#d6a676" stroke-width="1.6" stroke-linecap="round" />
+    <!-- Melting butter cube -->
+    <path d="M42 27L50 26L53 30L45 31.5Z" fill="#f8de85" stroke="#493326" stroke-width="1.85" stroke-linejoin="round" />
+    <path d="M45 31.5L53 30L53 32C50 33.5 47 33.5 45 33Z" fill="#f2c95a" stroke="#493326" stroke-width="1.5" stroke-linejoin="round" />
+    <!-- Steam -->
+    <path d="M34 22C32 19 35 17 33 14M58 22C56 19 59 17 57 14" stroke="#c7b08a" stroke-width="1.94" stroke-linecap="round" />
+  </g>
+</svg>

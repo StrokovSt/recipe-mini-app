@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,7 +8,9 @@ import DeleteIcon from '@/shared/assets/icons/icon-delete.svg?react';
 import EditIcon from '@/shared/assets/icons/icon-edit.svg?react';
 import { Tile } from '@/shared/ui/Tile';
 
-import { getCategoryIcon } from '../../config/categoryIcons';
+import { getCategoryIcon, getCategoryIconName } from '../../config/categoryIcons';
+
+import styles from './CategoryItem.module.scss';
 
 interface CategoryItemProps {
     category: Category;
@@ -21,6 +24,8 @@ const CategoryItem = (props: CategoryItemProps) => {
     const { category, to, onEdit, onDelete } = props;
     const { t } = useTranslation(['sections', 'common']);
     const Icon = getCategoryIcon(category.iconName);
+    // Цвет плитки под картинку: класс с ключом картинки (CategoryItem.module.scss)
+    const theme = getCategoryIconName(category.iconName).toLowerCase();
     const count = category.recipeCount;
 
     // Без счётчика с бэка подпись не показываем
@@ -30,6 +35,7 @@ const CategoryItem = (props: CategoryItemProps) => {
 
     return (
         <Tile
+            className={clsx(styles.tile, styles[theme])}
             icon={<Icon />}
             title={category.name}
             subtitle={subtitle}

@@ -17,14 +17,15 @@ interface TileProps {
     menuLabel: string;
     // Строка на всю ширину: иконка слева, название и подпись в центре, без стрелки
     row?: boolean;
+    className?: string;
 }
 
 // Плитка раздела: вся плитка ведёт по ссылке, в углу меню действий
 export const Tile = (props: TileProps) => {
-    const { icon, title, to, subtitle, menu, menuLabel, row } = props;
+    const { icon, title, to, subtitle, menu, menuLabel, row, className } = props;
 
     return (
-        <article className={clsx(styles.tile, row && styles.row)}>
+        <article className={clsx(styles.tile, row && styles.row, className)}>
             <span className={styles.icon} aria-hidden>{icon}</span>
             {/* Одно действие — сразу кнопка, меню из одного пункта не нужно */}
             {menu.length === 1 ? (

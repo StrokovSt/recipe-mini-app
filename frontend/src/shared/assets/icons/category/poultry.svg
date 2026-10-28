@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 5.95 80 80" fill="none">
+  <defs>
+    <linearGradient id="poultry-teriyakiGlaze" x1="20" y1="18" x2="72" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e89246" />
+      <stop offset="0.55" stop-color="#ce531b" />
+      <stop offset="1" stop-color="#8c2c11" />
+    </linearGradient>
+  </defs>
+  <g id="poultry-artwork">
+    <ellipse cx="48" cy="67" rx="35" ry="6" fill="#493326" fill-opacity="0.15" />
+    <!-- Rice-paper ceramic platter with cinnabar rim -->
+    <ellipse cx="48" cy="54" rx="36" ry="12" fill="#fff2d6" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="48" cy="54" rx="31" ry="9" fill="#f1ddb7" stroke="#bf4536" stroke-width="2.05" stroke-dasharray="4 2" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Sage leaf garnish underneath -->
+    <path d="M18 49C22 43 31 42 36 47C30 52 22 53 18 49Z" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M62 52C68 47 76 48 80 53C74 57 66 56 62 52Z" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Bone cuff on left -->
+    <path d="M22 39L14 43C11.5 41.5 11.5 38 14 37.5C13 35 16 33 18.5 35L25 34" fill="#FFFDF9" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Glazed Roasted Poultry body -->
+    <path d="M24 36C24 25 36 18 52 19C66 20 75 29 73 41C71 50 58 55 44 53C32 51 24 44 24 36Z" fill="url(#poultry-teriyakiGlaze)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Glossy caramel highlight & slice marks -->
+    <path d="M35 25C43 22 55 23 63 28" stroke="#f5dcb2" stroke-width="2.81" stroke-linecap="round" stroke-opacity="0.75" stroke-linejoin="round" />
+    <path d="M44 22C47 28 48 35 46 42M54 23C57 29 58 36 56 43M63 26C65 31 66 37 64 42" stroke="#681f0d" stroke-width="1.73" stroke-linecap="round" stroke-opacity="0.7" stroke-linejoin="round" />
+    <!-- Toasted sesame seeds -->
+    <circle cx="38" cy="33" r="1.1" fill="#fff2d6" />
+    <circle cx="42" cy="36" r="1.1" fill="#fff2d6" />
+    <circle cx="51" cy="32" r="1.1" fill="#fff2d6" />
+    <circle cx="60" cy="35" r="1.1" fill="#fff2d6" />
+    <!-- Yuzu / lemon wedge -->
+    <path d="M28 53C28 47 34 43 40 45L32 57C29.5 56 28 54.8 28 53Z" fill="#ebc25b" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+  </g>
+</svg>

@@ -14,7 +14,9 @@
     gap: var(--space-5);
     width: var(--size-side-nav);
     padding: var(--space-5) var(--space-4);
-    overflow-y: auto;
+
+    // Всегда в высоту экрана, без своей прокрутки: прокручивается только список категорий
+    overflow: hidden;
     border-right: 1px solid var(--color-border);
     background: var(--color-side-nav-bg);
     box-shadow: var(--shadow-side-nav);
@@ -25,9 +27,12 @@
     display: flex;
     padding: 0 var(--space-2);
 
+    // Не сжимаются, пока рейка меняет ширину
     .logo,
     .logoDark,
     .seal {
+        flex-shrink: 0;
+        max-width: none;
         height: var(--size-home-logo);
     }
 
@@ -88,7 +93,8 @@
         color: var(--color-active);
         pointer-events: none;
 
-        svg :is(path, rect) {
+        // Картинки категорий цветные, заливаем только иконки меню
+        &:not(.categoryList *) svg :is(path, rect) {
             fill: currentcolor;
         }
     }
@@ -110,6 +116,49 @@
     }
 }
 
+// Категории: клик фильтрует главную. Сжимается, когда не хватает высоты экрана. Под чертой, как меню
+.categories {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-height: 0;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+}
+
+.categoryList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-height: 0;
+    overflow-y: auto;
+}
+
+// Заголовок группы, мелкими заглавными
+.group {
+    margin: 0 var(--space-3) var(--space-1);
+    color: var(--color-text-muted);
+    font: var(--font-ui-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+// Название растягивается, длинное обрезается многоточием, число рецептов справа
+.label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.count {
+    color: var(--color-text-muted);
+    font: var(--font-ui-xs);
+}
+
 // Пункты меню: отдельная группа под чертой
 .menu {
     display: flex;
@@ -119,16 +168,37 @@
     border-top: 1px solid var(--color-border);
 }
 
-// Рейка: все пункты — квадратные кнопки-иконки по центру, без подписей
+// Рейка: все пункты — квадратные кнопки-иконки без подписей. Поверх модальных окон не встаёт: они позже в разметке.
+// Раскрытая рейка — та же колонка, только шире. Насколько она раскрыта, от 0 до 1, SideNav кладёт в --rail-progress:
+// от него ширина, место под ручку справа, тень (панель приподнимается), подписи, категории и стрелка
 .rail {
-    align-items: center;
-    padding-inline: var(--space-2);
+    z-index: var(--z-modal);
+    width: calc(var(--size-rail) + (var(--size-sidebar) - var(--size-rail)) * var(--rail-progress, 0));
+    padding-inline: calc((var(--size-rail) - var(--size-rail-item)) / 2)
+        calc((var(--size-rail) - var(--size-rail-item)) / 2 + var(--space-3) * var(--rail-progress, 0));
+    box-shadow:
+        var(--shadow-side-nav),
+        var(--space-2) 0 var(--space-6)
+            color-mix(in srgb, var(--color-shadow) calc(var(--rail-progress, 0) * 20%), transparent);
+    touch-action: pan-y;
 
+    // Иначе мышью ссылку или печать тащит сам браузер, и шторка не тянется
+    a,
+    img {
+        -webkit-user-drag: none;
+    }
+
+    // Печать чуть крупнее кнопок, по центру над ними
+    .brand {
+        margin-inline: calc((var(--size-rail-item) - var(--size-home-logo)) / 2);
+        padding: 0;
+    }
+
+    // Пункты не уже квадрата: пока шторку сжимают, они не мнутся, а уходят под отступ справа
     .nav,
     .menu {
-        align-items: center;
-        align-self: stretch;
         gap: var(--space-2);
+        min-width: var(--size-rail-item);
     }
 
     // Меню в рейке прижато к низу
@@ -136,15 +206,103 @@
         margin-top: auto;
     }
 
+    // Черта под навигацией и в свёрнутой рейке, на том же месте, что над категориями в раскрытой.
+    // Отступы как у черты на компьютере: сверху промежуток колонки, снизу --space-4
+    .nav {
+        padding-bottom: var(--space-5);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .categories {
+        margin-top: calc(var(--space-4) - var(--space-5));
+        padding-top: 0;
+        border-top: none;
+    }
+
+    // Список категорий прокручивается сам, без этого браузер забирает у шторки и движение вбок
+    .categoryList {
+        touch-action: pan-y;
+    }
+
+    // Иконка по центру квадрата и на том же месте в раскрытой рейке. Подпись в свёрнутой прячется за краем кнопки,
+    // в раскрытой справа такой же отступ, как на компьютере
     .link {
-        justify-content: center;
-        width: var(--size-rail-item);
+        min-width: var(--size-rail-item);
         min-height: var(--size-rail-item);
-        padding: 0;
+        padding: 0 var(--space-3) 0
+            calc((var(--size-rail-item) - var(--size-rail-icon)) / 2 - var(--size-side-active-line));
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     .icon svg {
         width: var(--size-rail-icon);
         height: var(--size-rail-icon);
+    }
+
+    // Подписи и категории проявляются во второй половине раскрытия. Обрезаются без многоточия, оно прыгало бы по буквам
+    .label,
+    .count,
+    .categories {
+        opacity: clamp(0, calc(var(--rail-progress, 0) * 2 - 0.6), 1);
+    }
+
+    .label {
+        text-overflow: clip;
+    }
+
+    // Стрелка «Развернуть» поворачивается вместе с раскрытием и становится «Свернуть»
+    .toggle .icon {
+        transform: rotate(calc(var(--rail-progress, 0) * 180deg));
+    }
+}
+
+// Затемнение под рейкой: прозрачность задаёт раскрытие. Нажимается, только когда рейка раскрыта
+.scrim {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    background: var(--color-overlay);
+    pointer-events: none;
+}
+
+.scrimActive {
+    pointer-events: auto;
+}
+
+// Ручка на правом краю рейки, как у шторки, едет вместе с краем (ширина — как у .rail).
+// Зона захвата во всю высоту, наполовину заходит на контент; видимая полоска — ::before, внутри рейки у края
+.handle {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--size-rail) + (var(--size-sidebar) - var(--size-rail)) * var(--rail-progress, 0) - var(--size-handle-zone) / 2);
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size-handle-zone);
+    cursor: grab;
+    touch-action: none;
+
+    &:active {
+        cursor: grabbing;
+    }
+
+    // Пока ручку держат или тянут, полоска подсвечивается
+    @include states.active {
+        &::before {
+            background: var(--color-active);
+        }
+    }
+
+    &::before {
+        content: "";
+        width: var(--size-handle-thickness);
+        height: var(--size-handle-length);
+        border-radius: calc(var(--size-handle-thickness) / 2);
+        background: var(--color-text-muted);
+        transition: background var(--transition-base);
+        transform: translateX(calc(-1 * var(--space-2)));
     }
 }

@@ -37,7 +37,7 @@
       @property --splash-hole {
         syntax: "<length-percentage>";
         inherits: false;
-        initial-value: -1px;
+        initial-value: 0px;
       }
 
       #splash {
@@ -49,8 +49,6 @@
         display: grid;
         place-items: center;
         background: rgb(236 218 198);
-        -webkit-mask: radial-gradient(circle, transparent var(--splash-hole), #000 calc(var(--splash-hole) + 1px));
-        mask: radial-gradient(circle, transparent var(--splash-hole), #000 calc(var(--splash-hole) + 1px));
       }
 
       /* Картинка только в колонке приложения, как #root::before (--size-app-max-width), вуаль = --color-app-image-veil */
@@ -132,9 +130,14 @@
         animation: splash-glow-in 0.6s 0.25s ease-out forwards, splash-breathe 2.4s 0.85s ease-in-out infinite;
       }
 
-      /* Уход (класс out ставит shared/lib/splash): печать сжимается, раздувается и тает, из центра раскрывается главная */
+      /* Уход (класс out ставит shared/lib/splash): печать сжимается, раздувается и тает, из центра раскрывается главная.
+         Маска с окном только на уходе. Safari не берёт начальное значение окна из @property и считает маску
+         прозрачной целиком: поэтому окно задано явно, а в паузе перед анимацией держится её первый кадр (both) */
       #splash.out {
-        animation: splash-hole 0.6s 0.15s cubic-bezier(0.55, 0, 0.35, 1) forwards;
+        --splash-hole: 0px;
+        -webkit-mask: radial-gradient(circle, transparent var(--splash-hole), #000 calc(var(--splash-hole) + 1px));
+        mask: radial-gradient(circle, transparent var(--splash-hole), #000 calc(var(--splash-hole) + 1px));
+        animation: splash-hole 0.6s 0.15s cubic-bezier(0.55, 0, 0.35, 1) both;
       }
 
       #splash.out .splash-stamp {
@@ -164,8 +167,9 @@
       }
 
       /* Компьютер (мышь и экран шире колонки приложения): анимация печати там неуместна. Печать просто стоит,
-         заставка гаснет. Планшеты и телефоны (палец) анимацию оставляют */
-      @media (pointer: fine) and (min-width: 1025px) {
+         заставка гаснет. Планшеты и телефоны (палец) анимацию оставляют, в том числе айпэд с клавиатурой и трекпадом:
+         у него есть сенсорный экран (any-pointer: coarse) */
+      @media (pointer: fine) and (min-width: 1025px) and (not (any-pointer: coarse)) {
         #splash:is(.in, .out) .splash-seal {
           opacity: 1;
           transform: rotate(-3deg);
@@ -229,6 +233,7 @@
       /* 101% = за самый дальний угол экрана. Прозрачность в конце: в браузерах без @property окно не растёт,
          и заставка просто гаснет */
       @keyframes splash-hole {
+        0% { --splash-hole: 0px; opacity: 1; }
         80% { opacity: 1; }
         100% { --splash-hole: 101%; opacity: 0; }
       }

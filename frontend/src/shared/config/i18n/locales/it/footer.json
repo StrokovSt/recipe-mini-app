@@ -1,5 +1,7 @@
 {
     "collection": "Raccolta",
     "sections": "Sezioni",
-    "add": "Aggiungi ricetta"
+    "add": "Aggiungi ricetta",
+    "expand": "Espandi pannello",
+    "collapse": "Comprimi pannello"
 }

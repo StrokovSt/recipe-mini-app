@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 3 80 80" fill="none">
+  <defs>
+    <linearGradient id="grill-hibachiBody" x1="16" y1="42" x2="80" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#514036" />
+      <stop offset="1" stop-color="#261D18" />
+    </linearGradient>
+    <linearGradient id="grill-skewerMeat" x1="24" y1="18" x2="72" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e5653f" />
+      <stop offset="0.6" stop-color="#bf4536" />
+      <stop offset="1" stop-color="#7f1714" />
+    </linearGradient>
+  </defs>
+  <g id="grill-artwork">
+    <ellipse cx="48" cy="68" rx="34" ry="5.5" fill="#493326" fill-opacity="0.16" />
+    <!-- Tabletop hibachi grill base -->
+    <path d="M18 42H78L73 63C72 65 70 66 67 66H29C26 66 24 65 23 63L18 42Z" fill="url(#grill-hibachiBody)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Glowing charcoal air vent -->
+    <rect x="37" y="51" width="22" height="7" rx="3" fill="#bf4536" stroke="#fff2d6" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="43" cy="54.5" r="1.6" fill="#edb96c" />
+    <circle cx="48" cy="54.5" r="1.6" fill="#edb96c" />
+    <circle cx="53" cy="54.5" r="1.6" fill="#edb96c" />
+    <!-- Grill grate -->
+    <rect x="14" y="38" width="68" height="4.5" rx="2.2" fill="#493326" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Skewer 1 (back) -->
+    <path d="M14 23L84 17" stroke="#d09150" stroke-width="2.59" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="25" y="16" width="11" height="10" rx="3.5" transform="rotate(-5 25 16)" fill="url(#grill-skewerMeat)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="39" y="15.5" width="8" height="9" rx="2.5" transform="rotate(-5 39 15.5)" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="50" y="14" width="11" height="10" rx="3.5" transform="rotate(-5 50 14)" fill="url(#grill-skewerMeat)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="68" cy="18" r="5.5" fill="#7c4c2a" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M66 16L70 20M70 16L66 20" stroke="#fff2d6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Skewer 2 (front) -->
+    <path d="M12 34L82 28" stroke="#d09150" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="22" y="27" width="11.5" height="10.5" rx="3.5" transform="rotate(-5 22 27)" fill="url(#grill-skewerMeat)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="36.5" y="26.5" width="8.5" height="9.5" rx="2.5" transform="rotate(-5 36.5 26.5)" fill="#fff2d6" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="48" y="25" width="11.5" height="10.5" rx="3.5" transform="rotate(-5 48 25)" fill="url(#grill-skewerMeat)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="62.5" y="24.5" width="8.5" height="9.5" rx="2.5" transform="rotate(-5 62.5 24.5)" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

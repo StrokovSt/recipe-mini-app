@@ -1,5 +1,7 @@
 {
     "collection": "Koleksiyon",
     "sections": "Bölümler",
-    "add": "Tarif ekle"
+    "add": "Tarif ekle",
+    "expand": "Paneli genişlet",
+    "collapse": "Paneli daralt"
 }

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="11 5.25 77 77" fill="none">
+  <defs>
+    <linearGradient id="pickles-jarGlass" x1="22" y1="18" x2="64" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFDF8" stop-opacity="0.92" />
+      <stop offset="1" stop-color="#efddb9" stop-opacity="0.88" />
+    </linearGradient>
+    <linearGradient id="pickles-brineLiquid" x1="25" y1="28" x2="61" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f3d89b" stop-opacity="0.75" />
+      <stop offset="1" stop-color="#e4a24f" stop-opacity="0.85" />
+    </linearGradient>
+  </defs>
+  <g id="pickles-artwork">
+    <ellipse cx="48" cy="68" rx="33" ry="5.5" fill="#493326" fill-opacity="0.14" />
+    <!-- Glass canning jar -->
+    <rect x="23" y="21" width="40" height="44" rx="9" fill="url(#pickles-jarGlass)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="26" y="28" width="34" height="34" rx="6.5" fill="url(#pickles-brineLiquid)" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Pickled vegetables inside jar -->
+    <circle cx="35" cy="38" r="5.5" fill="#fff2d6" stroke="#d1923d" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="49" cy="48" r="5.5" fill="#fff2d6" stroke="#d1923d" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M44 33C49 32 54 36 53 42C48 42 44 38 44 33Z" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M30 47C32 53 39 57 44 55C41 50 35 47 30 47Z" fill="#bf4536" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Kraft paper cloth lid & twine -->
+    <path d="M25 14H61C63 14 65 16 65 18.5C65 21 62 23 59 22H27C24 23 21 21 21 18.5C21 16 23 14 25 14Z" fill="#edd5ae" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M25 21H61" stroke="#bf4536" stroke-width="2.16" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Hanging Kokoro hanko tag -->
+    <rect x="39" y="23" width="9" height="11" rx="1.8" fill="#fff2d6" stroke="#bf4536" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="43.5" cy="28.5" r="2" fill="#bf4536" />
+    <!-- Small ceramic side dish with pickles -->
+    <ellipse cx="71" cy="58" rx="13" ry="6.5" fill="#493326" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="71" cy="56.8" rx="11" ry="5" fill="#fff2d6" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="68.5" cy="56.5" r="3" fill="#eabd56" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="73.5" cy="56.8" r="2.8" fill="#829c51" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

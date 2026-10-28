@@ -1,42 +1,46 @@
 import type { FC, SVGProps } from "react";
 
-import AppleIcon from "@/shared/assets/icons/category/icon-apple.svg?react";
-import BeefIcon from "@/shared/assets/icons/category/icon-beef.svg?react";
-import BreadIcon from "@/shared/assets/icons/category/icon-bread.svg?react";
-import BurgerIcon from "@/shared/assets/icons/category/icon-burger.svg?react";
-import CakeIcon from "@/shared/assets/icons/category/icon-cake.svg?react";
-import CakeSliceIcon from "@/shared/assets/icons/category/icon-cake-slice.svg?react";
-import CanapeIcon from "@/shared/assets/icons/category/icon-canape.svg?react";
-import CarrotIcon from "@/shared/assets/icons/category/icon-carrot.svg?react";
-import CheeseIcon from "@/shared/assets/icons/category/icon-cheese.svg?react";
-import ChiliIcon from "@/shared/assets/icons/category/icon-chili.svg?react";
-import CoffeeIcon from "@/shared/assets/icons/category/icon-coffee.svg?react";
-import CookieIcon from "@/shared/assets/icons/category/icon-cookie.svg?react";
-import CookingPotIcon from "@/shared/assets/icons/category/icon-cooking-pot.svg?react";
-import CupSodaIcon from "@/shared/assets/icons/category/icon-cup-soda.svg?react";
-import DrumstickIcon from "@/shared/assets/icons/category/icon-drumstick.svg?react";
-import EggIcon from "@/shared/assets/icons/category/icon-egg.svg?react";
-import FishIcon from "@/shared/assets/icons/category/icon-fish.svg?react";
-import GrillIcon from "@/shared/assets/icons/category/icon-grill.svg?react";
-import HeartIcon from "@/shared/assets/icons/category/icon-heart.svg?react";
-import IceCreamIcon from "@/shared/assets/icons/category/icon-ice-cream.svg?react";
-import JarIcon from "@/shared/assets/icons/category/icon-jar.svg?react";
-import MushroomIcon from "@/shared/assets/icons/category/icon-mushroom.svg?react";
-import PanIcon from "@/shared/assets/icons/category/icon-pan.svg?react";
-import PastaIcon from "@/shared/assets/icons/category/icon-pasta.svg?react";
-import PizzaIcon from "@/shared/assets/icons/category/icon-pizza.svg?react";
-import RamenIcon from "@/shared/assets/icons/category/icon-ramen.svg?react";
-import RiceIcon from "@/shared/assets/icons/category/icon-rice.svg?react";
-import SaladIcon from "@/shared/assets/icons/category/icon-salad.svg?react";
-import SauceBoatIcon from "@/shared/assets/icons/category/icon-sauce-boat.svg?react";
-import ShrimpIcon from "@/shared/assets/icons/category/icon-shrimp.svg?react";
-import SoupIcon from "@/shared/assets/icons/category/icon-soup.svg?react";
-import StarIcon from "@/shared/assets/icons/category/icon-star.svg?react";
-import SushiIcon from "@/shared/assets/icons/category/icon-sushi.svg?react";
-import TacoIcon from "@/shared/assets/icons/category/icon-taco.svg?react";
-import UtensilsIcon from "@/shared/assets/icons/category/icon-utensils.svg?react";
-import VeganIcon from "@/shared/assets/icons/category/icon-vegan.svg?react";
-import WineIcon from "@/shared/assets/icons/category/icon-wine.svg?react";
+import BakingIcon from "@/shared/assets/icons/category/baking.svg?react";
+import BentoIcon from "@/shared/assets/icons/category/bento.svg?react";
+import BerriesIcon from "@/shared/assets/icons/category/berries.svg?react";
+import BreakfastIcon from "@/shared/assets/icons/category/breakfast.svg?react";
+import BurgerIcon from "@/shared/assets/icons/category/burger.svg?react";
+import CheeseIcon from "@/shared/assets/icons/category/cheese.svg?react";
+import CitrusIcon from "@/shared/assets/icons/category/citrus.svg?react";
+import CoffeeIcon from "@/shared/assets/icons/category/coffee.svg?react";
+import DessertsIcon from "@/shared/assets/icons/category/desserts.svg?react";
+import DrinksIcon from "@/shared/assets/icons/category/drinks.svg?react";
+import DumplingsIcon from "@/shared/assets/icons/category/dumplings.svg?react";
+import FishIcon from "@/shared/assets/icons/category/fish.svg?react";
+import FruitsIcon from "@/shared/assets/icons/category/fruits.svg?react";
+import GrillIcon from "@/shared/assets/icons/category/grill.svg?react";
+import MeatIcon from "@/shared/assets/icons/category/meat.svg?react";
+import MiscIcon from "@/shared/assets/icons/category/misc.svg?react";
+import MochiIcon from "@/shared/assets/icons/category/mochi.svg?react";
+import MushroomsIcon from "@/shared/assets/icons/category/mushrooms.svg?react";
+import OnigiriIcon from "@/shared/assets/icons/category/onigiri.svg?react";
+import PastaIcon from "@/shared/assets/icons/category/pasta.svg?react";
+import PicklesIcon from "@/shared/assets/icons/category/pickles.svg?react";
+import PiesIcon from "@/shared/assets/icons/category/pies.svg?react";
+import PizzaIcon from "@/shared/assets/icons/category/pizza.svg?react";
+import PorridgeIcon from "@/shared/assets/icons/category/porridge.svg?react";
+import PoultryIcon from "@/shared/assets/icons/category/poultry.svg?react";
+import PreservesIcon from "@/shared/assets/icons/category/preserves.svg?react";
+import PumpkinIcon from "@/shared/assets/icons/category/pumpkin.svg?react";
+import RamenIcon from "@/shared/assets/icons/category/ramen.svg?react";
+import RiceIcon from "@/shared/assets/icons/category/rice.svg?react";
+import SaladsIcon from "@/shared/assets/icons/category/salads.svg?react";
+import SaucesIcon from "@/shared/assets/icons/category/sauces.svg?react";
+import SeafoodIcon from "@/shared/assets/icons/category/seafood.svg?react";
+import SnacksIcon from "@/shared/assets/icons/category/snacks.svg?react";
+import SoupsIcon from "@/shared/assets/icons/category/soups.svg?react";
+import SpicesIcon from "@/shared/assets/icons/category/spices.svg?react";
+import StewIcon from "@/shared/assets/icons/category/stew.svg?react";
+import StreetfoodIcon from "@/shared/assets/icons/category/streetfood.svg?react";
+import SushiIcon from "@/shared/assets/icons/category/sushi.svg?react";
+import TeaIcon from "@/shared/assets/icons/category/tea.svg?react";
+import VegIcon from "@/shared/assets/icons/category/veg.svg?react";
+import WokIcon from "@/shared/assets/icons/category/wok.svg?react";
 
 type SvgIcon = FC<SVGProps<SVGSVGElement>>;
 
@@ -44,69 +48,105 @@ interface CategoryIconConfig {
     Icon: SvgIcon;
 }
 
-// Библиотека иконок для категорий. Ключ — iconName, который хранится в категории.
+// Библиотека картинок для категорий. Ключ — iconName, который хранится в категории.
 // Ключи базовых категорий совпадают с backend/src/config/defaults.ts (DEFAULT_CATEGORIES).
-// Подписи иконок — в словаре sections (icons.<ключ>)
+// Подписи картинок — в словаре sections (icons.<ключ>), цвета плиток — в shared/styles/category-colors.scss
 export const CATEGORY_ICONS = {
-    // Базовые категории
-    Soup: { Icon: SoupIcon },
-    CakeSlice: { Icon: CakeSliceIcon },
-    Cake: { Icon: CakeIcon },
-    Salad: { Icon: SaladIcon },
-    Utensils: { Icon: PastaIcon },
-    Beef: { Icon: BeefIcon },
-    Fish: { Icon: FishIcon },
-    Egg: { Icon: EggIcon },
-    Vegan: { Icon: VeganIcon },
-    CupSoda: { Icon: CupSodaIcon },
-    Drumstick: { Icon: DrumstickIcon },
-    Shrimp: { Icon: ShrimpIcon },
-    Canape: { Icon: CanapeIcon },
-    Rice: { Icon: RiceIcon },
-    SauceBoat: { Icon: SauceBoatIcon },
-    Jar: { Icon: JarIcon },
-
-    // Дополнительные иконки для своих категорий
+    Misc: { Icon: MiscIcon },
+    Soups: { Icon: SoupsIcon },
+    Baking: { Icon: BakingIcon },
+    Desserts: { Icon: DessertsIcon },
+    Salads: { Icon: SaladsIcon },
+    Snacks: { Icon: SnacksIcon },
+    Pasta: { Icon: PastaIcon },
     Pizza: { Icon: PizzaIcon },
     Burger: { Icon: BurgerIcon },
-    Sushi: { Icon: SushiIcon },
-    Taco: { Icon: TacoIcon },
+    Meat: { Icon: MeatIcon },
+    Fish: { Icon: FishIcon },
+    Seafood: { Icon: SeafoodIcon },
+    Breakfast: { Icon: BreakfastIcon },
+    Veg: { Icon: VegIcon },
+    Drinks: { Icon: DrinksIcon },
     Ramen: { Icon: RamenIcon },
-    Bread: { Icon: BreadIcon },
-    Cheese: { Icon: CheeseIcon },
+    Rice: { Icon: RiceIcon },
+    Porridge: { Icon: PorridgeIcon },
+    Onigiri: { Icon: OnigiriIcon },
+    Dumplings: { Icon: DumplingsIcon },
+    Bento: { Icon: BentoIcon },
+    Sushi: { Icon: SushiIcon },
+    Stew: { Icon: StewIcon },
+    Wok: { Icon: WokIcon },
+    Poultry: { Icon: PoultryIcon },
     Grill: { Icon: GrillIcon },
-    Chili: { Icon: ChiliIcon },
-    Mushroom: { Icon: MushroomIcon },
-    Carrot: { Icon: CarrotIcon },
-    Apple: { Icon: AppleIcon },
-    IceCream: { Icon: IceCreamIcon },
-    Cookie: { Icon: CookieIcon },
+    Sauces: { Icon: SaucesIcon },
+    Pickles: { Icon: PicklesIcon },
+    Mochi: { Icon: MochiIcon },
+    Tea: { Icon: TeaIcon },
     Coffee: { Icon: CoffeeIcon },
-    Wine: { Icon: WineIcon },
-    CookingPot: { Icon: CookingPotIcon },
-    Pan: { Icon: PanIcon },
-    Star: { Icon: StarIcon },
-    Heart: { Icon: HeartIcon },
-    Cutlery: { Icon: UtensilsIcon },
+    Fruits: { Icon: FruitsIcon },
+    Mushrooms: { Icon: MushroomsIcon },
+    Pies: { Icon: PiesIcon },
+    Cheese: { Icon: CheeseIcon },
+    Spices: { Icon: SpicesIcon },
+    Streetfood: { Icon: StreetfoodIcon },
+    Berries: { Icon: BerriesIcon },
+    Citrus: { Icon: CitrusIcon },
+    Preserves: { Icon: PreservesIcon },
+    Pumpkin: { Icon: PumpkinIcon },
 } as const satisfies Record<string, CategoryIconConfig>;
 
 export type CategoryIconName = keyof typeof CATEGORY_ICONS;
 
-// Список для выбора иконки при создании своей категории
+// Ключи старых иконок, которые ещё хранятся в базе, → новые картинки. Сохранится уже новый ключ
+const LEGACY_ICON_NAMES: Record<string, CategoryIconName> = {
+    Soup: "Soups",
+    CakeSlice: "Baking",
+    Cake: "Desserts",
+    Salad: "Salads",
+    Utensils: "Pasta",
+    Beef: "Meat",
+    Egg: "Breakfast",
+    Vegan: "Veg",
+    CupSoda: "Drinks",
+    Drumstick: "Poultry",
+    Shrimp: "Seafood",
+    Canape: "Snacks",
+    SauceBoat: "Sauces",
+    Jar: "Preserves",
+    Taco: "Streetfood",
+    Bread: "Pies",
+    Chili: "Spices",
+    Mushroom: "Mushrooms",
+    Carrot: "Pumpkin",
+    Apple: "Fruits",
+    IceCream: "Desserts",
+    Cookie: "Baking",
+    Wine: "Drinks",
+    CookingPot: "Stew",
+    Pan: "Wok",
+    Star: "Misc",
+    Heart: "Misc",
+    Cutlery: "Misc",
+};
+
+// Список для выбора картинки при создании своей категории
 export const CATEGORY_ICON_LIST = (Object.keys(CATEGORY_ICONS) as CategoryIconName[]).map((name) => ({
     name,
     ...CATEGORY_ICONS[name],
 }));
 
-// Иконка для категорий без iconName или с неизвестной иконкой
-export const DEFAULT_CATEGORY_ICON: SvgIcon = CATEGORY_ICONS.Cutlery.Icon;
+// Картинка для категорий без iconName или с неизвестной иконкой
+export const DEFAULT_CATEGORY_ICON_NAME: CategoryIconName = "Misc";
+export const DEFAULT_CATEGORY_ICON: SvgIcon = CATEGORY_ICONS[DEFAULT_CATEGORY_ICON_NAME].Icon;
 
 const isCategoryIconName = (name: string): name is CategoryIconName => name in CATEGORY_ICONS;
 
-export const getCategoryIcon = (iconName?: string | null): SvgIcon => {
-    if (iconName && isCategoryIconName(iconName)) {
-        return CATEGORY_ICONS[iconName].Icon;
-    }
+// Ключ картинки с учётом старых иконок
+export const getCategoryIconName = (iconName?: string | null): CategoryIconName => {
+    if (!iconName) return DEFAULT_CATEGORY_ICON_NAME;
+    if (isCategoryIconName(iconName)) return iconName;
 
-    return DEFAULT_CATEGORY_ICON;
+    return LEGACY_ICON_NAMES[iconName] ?? DEFAULT_CATEGORY_ICON_NAME;
 };
+
+export const getCategoryIcon = (iconName?: string | null): SvgIcon => CATEGORY_ICONS[getCategoryIconName(iconName)].Icon;

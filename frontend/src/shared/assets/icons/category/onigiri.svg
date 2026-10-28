@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 1.19 84 84" fill="none">
+  <defs>
+    <linearGradient id="onigiri-sasaLeaf" x1="12" y1="44" x2="84" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9dbb72" />
+      <stop offset="0.55" stop-color="#829c51" />
+      <stop offset="1" stop-color="#648345" />
+    </linearGradient>
+    <linearGradient id="onigiri-onigiriRice" x1="22" y1="16" x2="64" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFDF9" />
+      <stop offset="0.7" stop-color="#fff2d6" />
+      <stop offset="1" stop-color="#e6d1b6" />
+    </linearGradient>
+  </defs>
+  <g id="onigiri-artwork">
+    <ellipse cx="48" cy="68" rx="34" ry="5.5" fill="#493326" fill-opacity="0.14" />
+    <!-- Bamboo leaf platter -->
+    <path d="M10 56C24 44 64 42 86 52C72 65 32 67 10 56Z" fill="url(#onigiri-sasaLeaf)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M14 55.5C36 52 62 51.5 82 52.5" stroke="#fff2d6" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.7" stroke-linejoin="round" />
+    <!-- Back Onigiri -->
+    <path d="M51 17C54.5 11.5 62.5 11.5 66 17L79 39C82.5 45 78.2 52.5 71.2 52.5H45.8C38.8 52.5 34.5 45 38 39L51 17Z" fill="url(#onigiri-onigiriRice)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Salmon/sesame topping on back onigiri -->
+    <path d="M53 18C56 14.5 61 14.5 64 18C62 21 55 21 53 18Z" fill="#e56844" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M50 39H67V52.5H50V39Z" fill="#493326" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Front Main Onigiri -->
+    <path d="M31 20C34.8 14 43.2 14 47 20L61 44C64.8 50.5 60.2 58.5 52.6 58.5H25.4C17.8 58.5 13.2 50.5 17 44L31 20Z" fill="url(#onigiri-onigiriRice)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Nori wrap on front onigiri -->
+    <path d="M28 41H50V58.5H28V41Z" fill="#493326" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M31 44V55" stroke="#574237" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Kokoro 5-petal cinnabar plum blossom garnish -->
+    <circle cx="39" cy="27.5" r="2.3" fill="#bf4536" />
+    <circle cx="42" cy="29.8" r="2.3" fill="#bf4536" />
+    <circle cx="40.8" cy="33.3" r="2.3" fill="#bf4536" />
+    <circle cx="37.2" cy="33.3" r="2.3" fill="#bf4536" />
+    <circle cx="36" cy="29.8" r="2.3" fill="#bf4536" />
+    <circle cx="39" cy="30.8" r="1.2" fill="#fff2d6" />
+    <!-- Sesame seeds -->
+    <circle cx="26" cy="38" r="1" fill="#d59136" />
+    <circle cx="52" cy="37" r="1" fill="#493326" />
+    <circle cx="47" cy="33" r="1" fill="#d59136" />
+  </g>
+</svg>

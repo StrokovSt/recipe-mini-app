@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="7.65 7 79 79" fill="none">
+  <defs>
+    <linearGradient id="baking-ceramic" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0d3" />
+      <stop offset="1" stop-color="#d6b98a" />
+    </linearGradient>
+    <linearGradient id="baking-cream" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4dc" />
+      <stop offset="1" stop-color="#efd29b" />
+    </linearGradient>
+    <linearGradient id="baking-red" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#df8b69" />
+      <stop offset="1" stop-color="#be513b" />
+    </linearGradient>
+    <linearGradient id="baking-ochre" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecc074" />
+      <stop offset="1" stop-color="#c48b45" />
+    </linearGradient>
+    <linearGradient id="baking-sage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b1c97e" />
+      <stop offset="1" stop-color="#6d9448" />
+    </linearGradient>
+    <linearGradient id="baking-plum" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bf8db3" />
+      <stop offset="1" stop-color="#8c5d8d" />
+    </linearGradient>
+    <linearGradient id="baking-fish" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bdd0b5" />
+      <stop offset="1" stop-color="#6f997d" />
+    </linearGradient>
+    <filter id="baking-wash" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="4" result="paper" />
+      <feColorMatrix in="paper" type="saturate" values="0" result="grain" />
+      <feComponentTransfer in="grain" result="pigment">
+        <feFuncA type="linear" slope=".06" />
+      </feComponentTransfer>
+      <feComposite in="pigment" in2="SourceGraphic" operator="in" result="clipped" />
+      <feBlend in="SourceGraphic" in2="clipped" mode="multiply" />
+    </filter>
+    <filter id="baking-ink" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="2" seed="7" result="hand" />
+      <feDisplacementMap in="SourceGraphic" in2="hand" scale=".15" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <linearGradient id="baking-breadCrust" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#efc16a" />
+      <stop offset="1" stop-color="#bd7c34" />
+    </linearGradient>
+    <linearGradient id="baking-croissantGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#f5d182" />
+      <stop offset="1" stop-color="#ce8e3d" />
+    </linearGradient>
+  </defs>
+  <g id="baking-artwork">
+    <ellipse cx="48" cy="67" rx="34" ry="6" fill="#493326" fill-opacity="0.15" />
+    <path d="M12 49C12 31 24 20 41 20C58 20 68 31 68 49C68 55 63 59 56 59H24C17 59 12 55 12 49Z" fill="url(#baking-breadCrust)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M18 45C20 33 29 24 41 24C49 24 56 28 60 35" stroke="#f5e0b2" stroke-width="3.24" stroke-linecap="round" stroke-opacity="0.7" stroke-linejoin="round" />
+    <path d="M27 31C30 35 31 41 30 46" stroke="#FFF3D1" stroke-width="3.02" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M39 27C42 32 43 39 42 45" stroke="#FFF3D1" stroke-width="3.24" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M51 30C53 34 54 40 53 45" stroke="#FFF3D1" stroke-width="2.81" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M44 56C42 46 50 38 63 38C76 38 84 46 82 56C80.5 62 74 63 69 58C66 55 60 55 57 58C52 63 45.5 62 44 56Z" fill="url(#baking-croissantGrad)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M53 42C56 48 56 54 54 58M73 42C70 48 70 54 72 58M63 38V55" stroke="#FFF1C9" stroke-width="2.16" stroke-linecap="round" stroke-opacity="0.7" stroke-linejoin="round" />
+  </g>
+</svg>

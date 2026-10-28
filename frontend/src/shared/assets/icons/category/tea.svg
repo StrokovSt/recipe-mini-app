@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="4.14 5.5 83 83" fill="none">
+  <defs>
+    <linearGradient id="tea-kyusuClay" x1="16" y1="22" x2="62" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#624d40" />
+      <stop offset="0.6" stop-color="#382B24" />
+      <stop offset="1" stop-color="#241B16" />
+    </linearGradient>
+    <linearGradient id="tea-matchaBowl" x1="48" y1="42" x2="82" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff2d6" />
+      <stop offset="1" stop-color="#decaa8" />
+    </linearGradient>
+  </defs>
+  <g id="tea-artwork">
+    <ellipse cx="48" cy="68" rx="35" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Kyusu Teapot wooden side handle -->
+    <path d="M19 32L9 25C7 23.5 9.5 19.5 12 21L23 28" fill="#d39a57" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Kyusu Teapot spout -->
+    <path d="M55 34L66 26C68 25 70 28 68 30L58 41" fill="#382B24" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Kyusu Teapot body -->
+    <ellipse cx="38" cy="41" rx="22" ry="16" fill="url(#tea-kyusuClay)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="38" cy="27" rx="12" ry="4" fill="#554134" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="38" cy="23.5" r="3" fill="#bf4536" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M22 41C32 44 44 44 54 41" stroke="#829c51" stroke-width="1.94" stroke-linecap="round" stroke-opacity="0.75" stroke-linejoin="round" />
+    <!-- Ceramic tea cup with matcha in front-right -->
+    <path d="M50 45H82C81 58 74 64 66 64C58 64 51 58 50 45Z" fill="url(#tea-matchaBowl)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <ellipse cx="66" cy="45" rx="16" ry="5.2" fill="#FFFDF9" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="66" cy="45.3" rx="13.2" ry="3.8" fill="#829c51" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M60 45C63 43.8 69 43.8 72 45" stroke="#ccdbad" stroke-width="1.62" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- 5-petal Kokoro plum blossom on cup -->
+    <circle cx="66" cy="54" r="1.8" fill="#bf4536" />
+    <circle cx="68" cy="55.5" r="1.8" fill="#bf4536" />
+    <circle cx="67.2" cy="57.8" r="1.8" fill="#bf4536" />
+    <circle cx="64.8" cy="57.8" r="1.8" fill="#bf4536" />
+    <circle cx="64" cy="55.5" r="1.8" fill="#bf4536" />
+    <circle cx="66" cy="56.2" r="0.9" fill="#fff2d6" />
+  </g>
+</svg>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="9.88 1.75 80 80" fill="none">
+  <defs>
+    <linearGradient id="soups-ceramic" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0d3" />
+      <stop offset="1" stop-color="#d6b98a" />
+    </linearGradient>
+    <linearGradient id="soups-cream" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4dc" />
+      <stop offset="1" stop-color="#efd29b" />
+    </linearGradient>
+    <linearGradient id="soups-red" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#df8b69" />
+      <stop offset="1" stop-color="#be513b" />
+    </linearGradient>
+    <linearGradient id="soups-ochre" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecc074" />
+      <stop offset="1" stop-color="#c48b45" />
+    </linearGradient>
+    <linearGradient id="soups-sage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b1c97e" />
+      <stop offset="1" stop-color="#6d9448" />
+    </linearGradient>
+    <linearGradient id="soups-plum" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bf8db3" />
+      <stop offset="1" stop-color="#8c5d8d" />
+    </linearGradient>
+    <linearGradient id="soups-fish" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bdd0b5" />
+      <stop offset="1" stop-color="#6f997d" />
+    </linearGradient>
+    <filter id="soups-wash" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="3" result="paper" />
+      <feColorMatrix in="paper" type="saturate" values="0" result="grain" />
+      <feComponentTransfer in="grain" result="pigment">
+        <feFuncA type="linear" slope=".06" />
+      </feComponentTransfer>
+      <feComposite in="pigment" in2="SourceGraphic" operator="in" result="clipped" />
+      <feBlend in="SourceGraphic" in2="clipped" mode="multiply" />
+    </filter>
+    <filter id="soups-ink" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="2" seed="7" result="hand" />
+      <feDisplacementMap in="SourceGraphic" in2="hand" scale=".15" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <linearGradient id="soups-soupBowl" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#fff3d9" />
+      <stop offset="1" stop-color="#d9bd91" />
+    </linearGradient>
+    <linearGradient id="soups-soupBroth" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#ea9b55" />
+      <stop offset="1" stop-color="#c25836" />
+    </linearGradient>
+    <linearGradient id="soups-soupLadle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#dfb377" />
+      <stop offset="1" stop-color="#a16f3c" />
+    </linearGradient>
+  </defs>
+  <g id="soups-artwork">
+    <ellipse cx="46" cy="68" rx="32" ry="6" fill="#493326" fill-opacity="0.15" />
+    <path d="M62 29L82 11C84 9.2 87 11.8 85.2 14L67 33" fill="url(#soups-soupLadle)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M14 36C14 53 27.5 65 46 65C64.5 65 78 53 78 36H14Z" fill="url(#soups-soupBowl)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M31 63.5H61C62.5 66.5 60.5 68 58 68H34C31.5 68 29.5 66.5 31 63.5Z" fill="#bf4536" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M18 44C27 47.5 65 47.5 74 44" stroke="#bf4536" stroke-width="2.38" stroke-linecap="round" stroke-opacity="0.75" stroke-linejoin="round" />
+    <ellipse cx="46" cy="35" rx="32" ry="11.5" fill="#fff2d6" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="46" cy="35.5" rx="28.5" ry="9.5" fill="url(#soups-soupBroth)" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M33 34C36 31.5 42 32 44.5 35C47 38 41 40.5 36.5 39C32.5 37.8 30.8 35.8 33 34Z" fill="#FFF9F0" fill-opacity="0.92" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="56" cy="33.5" rx="7.5" ry="5" transform="rotate(-10 56 33.5)" fill="#FFFDF7" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="56.5" cy="33.8" rx="4.2" ry="3" transform="rotate(-10 56.5 33.8)" fill="#e8a143" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="38" cy="35.5" r="2.2" fill="#829c51" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="43" cy="33" r="1.8" fill="#829c51" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="48" cy="38.5" r="2" fill="#64863f" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M26 36.5C29 38.5 33 39 36 37.5" stroke="#f09485" stroke-width="1.94" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M35 21C33.5 17.5 36.5 15 35 11.5" stroke="#bf4536" stroke-width="1.94" stroke-linecap="round" stroke-opacity="0.7" stroke-linejoin="round" />
+    <path d="M46 19C44.5 15.5 47.5 13 46 9.5" stroke="#bf4536" stroke-width="1.94" stroke-linecap="round" stroke-opacity="0.7" stroke-linejoin="round" />
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 6.06 76 76" fill="none">
+  <defs>
+    <linearGradient id="streetfood-taiyakiGold" x1="16" y1="16" x2="76" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#efca81" />
+      <stop offset="0.55" stop-color="#e59132" />
+      <stop offset="1" stop-color="#ac5815" />
+    </linearGradient>
+  </defs>
+  <g id="streetfood-artwork">
+    <ellipse cx="48" cy="68" rx="34" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Paper sleeve wrapper with cinnabar Kokoro wave & seal -->
+    <path d="M38 40L78 34L72 64H34L38 40Z" fill="#fff2d6" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <rect x="57" y="47" width="9" height="10" rx="1.8" stroke="#bf4536" stroke-width="1.51" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="61.5" cy="52" r="2" fill="#bf4536" />
+    <!-- Golden Taiyaki pastry fish -->
+    <path d="M16 37C18 24 32 17 48 20C57 21.5 64 27 68 31L80 23L78 44L66 41C58 49 44 53 30 49C21 46.5 15 42 16 37Z" fill="url(#streetfood-taiyakiGold)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Dorsal fin -->
+    <path d="M36 19C41 13 50 13 55 20" fill="#e59132" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Eye & gill & waffle scale arcs -->
+    <circle cx="26" cy="34" r="2.3" fill="#493326" />
+    <circle cx="25.3" cy="33.3" r="0.8" fill="#fff2d6" />
+    <path d="M33 27C36 32 36 39 33 44" stroke="#894311" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M41 29C44 31 44 35 41 37M49 28C52 30 52 34 49 36M42 38C45 40 45 44 42 46M51 37C54 39 54 43 51 45M58 32C61 34 61 38 58 40" stroke="#894311" stroke-width="1.62" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

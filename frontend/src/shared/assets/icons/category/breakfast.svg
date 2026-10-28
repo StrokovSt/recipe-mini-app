@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 8.9 76 76" fill="none">
+  <defs>
+    <linearGradient id="breakfast-ceramic" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0d3" />
+      <stop offset="1" stop-color="#d6b98a" />
+    </linearGradient>
+    <linearGradient id="breakfast-cream" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4dc" />
+      <stop offset="1" stop-color="#efd29b" />
+    </linearGradient>
+    <linearGradient id="breakfast-red" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#df8b69" />
+      <stop offset="1" stop-color="#be513b" />
+    </linearGradient>
+    <linearGradient id="breakfast-ochre" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecc074" />
+      <stop offset="1" stop-color="#c48b45" />
+    </linearGradient>
+    <linearGradient id="breakfast-sage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b1c97e" />
+      <stop offset="1" stop-color="#6d9448" />
+    </linearGradient>
+    <linearGradient id="breakfast-plum" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bf8db3" />
+      <stop offset="1" stop-color="#8c5d8d" />
+    </linearGradient>
+    <linearGradient id="breakfast-fish" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bdd0b5" />
+      <stop offset="1" stop-color="#6f997d" />
+    </linearGradient>
+    <filter id="breakfast-wash" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="10" result="paper" />
+      <feColorMatrix in="paper" type="saturate" values="0" result="grain" />
+      <feComponentTransfer in="grain" result="pigment">
+        <feFuncA type="linear" slope=".06" />
+      </feComponentTransfer>
+      <feComposite in="pigment" in2="SourceGraphic" operator="in" result="clipped" />
+      <feBlend in="SourceGraphic" in2="clipped" mode="multiply" />
+    </filter>
+    <filter id="breakfast-ink" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="2" seed="7" result="hand" />
+      <feDisplacementMap in="SourceGraphic" in2="hand" scale=".15" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <linearGradient id="breakfast-pancakeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#edc274" />
+      <stop offset="1" stop-color="#c18a38" />
+    </linearGradient>
+    <linearGradient id="breakfast-yolkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#ffe072" />
+      <stop offset="1" stop-color="#edac32" />
+    </linearGradient>
+  </defs>
+  <g id="breakfast-artwork">
+    <ellipse cx="48" cy="67" rx="34" ry="6" fill="#493326" fill-opacity="0.15" />
+    <ellipse cx="38" cy="52" rx="23" ry="8.5" fill="#efbf7e" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="38" cy="49" rx="23" ry="8" fill="#e38420" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="38" cy="43" rx="24" ry="8.5" fill="#f2cc94" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="38" cy="40" rx="24" ry="8" fill="#e58f2c" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="38" cy="34" rx="24" ry="8.5" fill="#f5d5ad" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="38" cy="31" rx="23" ry="7.8" fill="url(#breakfast-pancakeTop)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M30 28C30 24 35 22 39 22C44 22 48 25 47 29C46 33 45 38 43 38C41 38 41 33 38 33C35 33 30 32 30 28Z" fill="#FFFDF8" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="36" cy="24" r="3.2" fill="#bf4536" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="42" cy="25.5" r="3" fill="#493326" />
+    <path d="M44 55C41 49 48 42 58 42C66 42 71 39 76 43C82 47 83 56 76 60C68 64 47 62 44 55Z" fill="#FFFDF9" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <ellipse cx="63" cy="51" rx="8.5" ry="6.5" fill="url(#breakfast-yolkGrad)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="60.5" cy="49" rx="2.5" ry="1.5" fill="#f5eab2" fill-opacity="0.8" />
+  </g>
+</svg>

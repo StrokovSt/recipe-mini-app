@@ -1,33 +1,33 @@
 // Резервная категория: создаётся каждому пользователю, удалить её нельзя
 export const FALLBACK_CATEGORY = {
     name: "Разное",
-    iconName: "Cutlery",
+    iconName: "Misc",
 };
 
 export const DEFAULT_CATEGORIES = [
     {
         name: "Супы",
-        iconName: "Soup",
+        iconName: "Soups",
     },
     {
         name: "Выпечка",
-        iconName: "CakeSlice",
+        iconName: "Baking",
     },
     {
         name: "Десерты",
-        iconName: "Cake",
+        iconName: "Desserts",
     },
     {
         name: "Салаты",
-        iconName: "Salad",
+        iconName: "Salads",
     },
     {
         name: "Паста",
-        iconName: "Utensils",
+        iconName: "Pasta",
     },
     {
         name: "Мясные блюда",
-        iconName: "Beef",
+        iconName: "Meat",
     },
     {
         name: "Рыба",
@@ -35,39 +35,39 @@ export const DEFAULT_CATEGORIES = [
     },
     {
         name: "Завтраки",
-        iconName: "Egg",
+        iconName: "Breakfast",
     },
     {
         name: "Вегетарианское",
-        iconName: "Vegan",
+        iconName: "Veg",
     },
     {
         name: "Напитки",
-        iconName: "CupSoda",
+        iconName: "Drinks",
     },
     {
         name: "Птица",
-        iconName: "Drumstick",
+        iconName: "Poultry",
     },
     {
         name: "Морепродукты",
-        iconName: "Shrimp",
+        iconName: "Seafood",
     },
     {
         name: "Закуски",
-        iconName: "Canape",
+        iconName: "Snacks",
     },
     {
         name: "Гарниры и крупы",
-        iconName: "Rice",
+        iconName: "Porridge",
     },
     {
         name: "Соусы",
-        iconName: "SauceBoat",
+        iconName: "Sauces",
     },
     {
         name: "Заготовки",
-        iconName: "Jar",
+        iconName: "Preserves",
     },
 ];
 

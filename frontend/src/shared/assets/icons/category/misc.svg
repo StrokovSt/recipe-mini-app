@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 6 80 80" fill="none">
+  <defs>
+    <linearGradient id="misc-cover" x1="12" y1="30" x2="84" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c9574a" />
+      <stop offset="1" stop-color="#8f2a22" />
+    </linearGradient>
+    <linearGradient id="misc-page" x1="16" y1="18" x2="80" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFDF8" />
+      <stop offset="1" stop-color="#ecdcbc" />
+    </linearGradient>
+  </defs>
+  <g id="misc-artwork">
+    <ellipse cx="48" cy="70" rx="35" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Book cover -->
+    <path d="M13 34L48 40L83 34V60L48 66L13 60V34Z" fill="url(#misc-cover)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Open pages -->
+    <path d="M16 26C27 22 39 24 48 31V61C39 55 27 53 16 57V26Z" fill="url(#misc-page)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M80 26C69 22 57 24 48 31V61C57 55 69 53 80 57V26Z" fill="url(#misc-page)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Text lines -->
+    <path d="M22 33C28 31.5 35 32 41 35M22 39C28 37.5 35 38 41 41M22 45C27 43.8 32 44 36 46" stroke="#c7b08a" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Little dish sketch on right page -->
+    <path d="M56 41H74C73.5 46 69.5 49 65 49C60.5 49 56.5 46 56 41Z" fill="#fff2d6" stroke="#493326" stroke-width="1.73" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M60 37.5C60.8 36 62 36 62.5 34.5M66 37.5C66.8 36 68 36 68.5 34.5" stroke="#bf4536" stroke-width="1.5" stroke-linecap="round" />
+    <!-- Ribbon bookmark -->
+    <path d="M51 31V70L54 66.5L57 70V29" fill="#829c51" stroke="#493326" stroke-width="1.85" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Wooden spoon resting on top -->
+    <path d="M28 19L60 15" stroke="#b06b2b" stroke-width="3.24" stroke-linecap="round" />
+    <ellipse cx="66" cy="14.3" rx="7" ry="4.2" transform="rotate(-7 66 14.3)" fill="#e2a868" stroke="#493326" stroke-width="2.05" />
+    <path d="M28 19L60 15" stroke="#493326" stroke-width="0.9" stroke-linecap="round" stroke-opacity="0.4" />
+  </g>
+</svg>

@@ -7,12 +7,10 @@ import { OutlineButton, RegularButton } from '@/shared/ui/Buttons';
 import { IconPicker } from '@/shared/ui/IconPicker';
 import { Input } from '@/shared/ui/Input';
 
-import { CATEGORY_ICON_LIST, type CategoryIconName, getCategoryIcon } from '../../config/categoryIcons';
+import { CATEGORY_ICON_LIST, getCategoryIcon, getCategoryIconName } from '../../config/categoryIcons';
 import { useCategories, useCreateCategory, useUpdateCategory } from '../../hooks';
 
 import styles from './CategoryForm.module.scss';
-
-const DEFAULT_ICON_NAME: CategoryIconName = 'Cutlery';
 
 interface CategoryFormProps {
     category?: Category | null;
@@ -26,7 +24,7 @@ const CategoryForm = (props: CategoryFormProps) => {
     const { t } = useTranslation(['sections', 'common']);
 
     const [name, setName] = useState(category?.name ?? '');
-    const [iconName, setIconName] = useState(category?.iconName ?? DEFAULT_ICON_NAME);
+    const [iconName, setIconName] = useState<string>(getCategoryIconName(category?.iconName));
     const [isPickerOpen, setIsPickerOpen] = useState(false);
 
     const { data: categories = [] } = useCategories();

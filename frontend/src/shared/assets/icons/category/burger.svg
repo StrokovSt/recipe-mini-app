@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 6 80 80" fill="none">
+  <defs>
+    <linearGradient id="burger-bun" x1="18" y1="14" x2="76" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2c47e" />
+      <stop offset="0.6" stop-color="#e09440" />
+      <stop offset="1" stop-color="#b8651d" />
+    </linearGradient>
+    <linearGradient id="burger-patty" x1="16" y1="44" x2="78" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7d4a2c" />
+      <stop offset="1" stop-color="#4a2a18" />
+    </linearGradient>
+  </defs>
+  <g id="burger-artwork">
+    <ellipse cx="47" cy="70" rx="32" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Bottom bun -->
+    <path d="M18 56H76C76 62 72 66 66 66H28C22 66 18 62 18 56Z" fill="url(#burger-bun)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" />
+    <!-- Patty -->
+    <rect x="15" y="45" width="64" height="11" rx="5.5" fill="url(#burger-patty)" stroke="#493326" stroke-width="2.05" />
+    <path d="M22 50H30M38 51H46M54 50H62M68 51H73" stroke="#a46a44" stroke-width="1.5" stroke-linecap="round" />
+    <!-- Cheese melting -->
+    <path d="M16 43H78L74 47L70 52L66 47H52L48 51L44 47H28L25 50L22 46Z" fill="#f4c94e" stroke="#493326" stroke-width="1.85" stroke-linejoin="round" />
+    <!-- Tomato -->
+    <rect x="20" y="38" width="54" height="6" rx="3" fill="#bf4536" stroke="#493326" stroke-width="1.85" />
+    <!-- Lettuce -->
+    <path d="M15 37C19 33 23 39 27 35C31 31 35 38 39 34C43 30 47 37 51 33C55 29 59 36 63 32C67 29 71 35 75 32C78 31 80 34 79 37C74 40 20 41 15 37Z" fill="#8fb35a" stroke="#493326" stroke-width="1.85" stroke-linejoin="round" />
+    <!-- Top bun -->
+    <path d="M17 33C17 20 30 13 47 13C64 13 77 20 77 33H17Z" fill="url(#burger-bun)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" />
+    <path d="M27 22C30 18 36 16 40 16" stroke="#fff2d6" stroke-width="2.2" stroke-linecap="round" stroke-opacity="0.7" />
+    <!-- Sesame seeds -->
+    <ellipse cx="36" cy="22" rx="1.6" ry="0.9" transform="rotate(-20 36 22)" fill="#fff2d6" />
+    <ellipse cx="47" cy="19" rx="1.6" ry="0.9" fill="#fff2d6" />
+    <ellipse cx="58" cy="22" rx="1.6" ry="0.9" transform="rotate(20 58 22)" fill="#fff2d6" />
+    <ellipse cx="42" cy="27" rx="1.6" ry="0.9" transform="rotate(10 42 27)" fill="#fff2d6" />
+    <ellipse cx="53" cy="27" rx="1.6" ry="0.9" transform="rotate(-10 53 27)" fill="#fff2d6" />
+    <ellipse cx="65" cy="27" rx="1.6" ry="0.9" transform="rotate(25 65 27)" fill="#fff2d6" />
+  </g>
+</svg>

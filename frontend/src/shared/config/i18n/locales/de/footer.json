@@ -1,5 +1,7 @@
 {
     "collection": "Sammlung",
     "sections": "Bereiche",
-    "add": "Rezept hinzufügen"
+    "add": "Rezept hinzufügen",
+    "expand": "Leiste aufklappen",
+    "collapse": "Leiste einklappen"
 }

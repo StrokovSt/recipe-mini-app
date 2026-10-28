@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 4.5 80 80" fill="none">
+  <defs>
+    <linearGradient id="sushi-getaWood" x1="12" y1="42" x2="84" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2d6aa" />
+      <stop offset="0.6" stop-color="#d9a96d" />
+      <stop offset="1" stop-color="#b07737" />
+    </linearGradient>
+    <linearGradient id="sushi-salmonTop" x1="44" y1="32" x2="78" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ef9c80" />
+      <stop offset="0.6" stop-color="#e7593c" />
+      <stop offset="1" stop-color="#c42f18" />
+    </linearGradient>
+  </defs>
+  <g id="sushi-artwork">
+    <ellipse cx="48" cy="68" rx="35" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Wooden Geta board feet -->
+    <rect x="24" y="57" width="8" height="7" rx="1.5" fill="#9e6528" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="64" y="57" width="8" height="7" rx="1.5" fill="#9e6528" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Wooden Geta platter -->
+    <path d="M12 49L24 39H78L84 49V55C84 56.5 82.8 57.5 81 57.5H15C13.2 57.5 12 56.5 12 55V49Z" fill="url(#sushi-getaWood)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Back Maki Roll 1 -->
+    <path d="M22 25V41C22 44.5 27.4 47 34 47C40.6 47 46 44.5 46 41V25H22Z" fill="#493326" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="34" cy="25" rx="12" ry="6" fill="#fff2d6" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="32.5" cy="25" rx="4.2" ry="2.4" fill="#e7583e" />
+    <ellipse cx="37.5" cy="25.5" rx="3" ry="1.8" fill="#829c51" />
+    <!-- Back Maki Roll 2 -->
+    <path d="M42 21V36C42 39.2 47 41.5 53 41.5C59 41.5 64 39.2 64 36V21H42Z" fill="#493326" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="53" cy="21" rx="11" ry="5.5" fill="#fff2d6" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="51.8" cy="21" rx="4" ry="2.2" fill="#e7583e" />
+    <ellipse cx="56.5" cy="21.5" rx="2.8" ry="1.6" fill="#98b35c" />
+    <!-- Front Salmon Nigiri -->
+    <path d="M47 43C47 38 54 36 62 36C70 36 76 38.5 76 43.5C76 47.5 70 49.5 61.5 49.5C53 49.5 47 47.5 47 43Z" fill="#fff2d6" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M45 41C47 34 56 32 65 33C73 34 79 38 78 43C71 45.5 53 45.5 45 41Z" fill="url(#sushi-salmonTop)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M52 35C55 38 56 41 56 43.5M65 34.5C68 37.5 69 40.5 69 43" stroke="#FFE6D8" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Nori belt on nigiri -->
+    <path d="M58 33L57 49.5H63L64 33H58Z" fill="#493326" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Wasabi leaf & pickled ginger -->
+    <circle cx="26" cy="48.5" r="3.5" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="33" cy="49.5" r="4" fill="#f5b8b0" stroke="#bf4536" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

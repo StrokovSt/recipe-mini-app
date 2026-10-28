@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 3.75 80 80" fill="none">
+  <defs>
+    <linearGradient id="mochi-sakuraDango" x1="20" y1="14" x2="36" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FAD4D0" />
+      <stop offset="1" stop-color="#e18f88" />
+    </linearGradient>
+    <linearGradient id="mochi-matchaDango" x1="44" y1="34" x2="60" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#afbc8c" />
+      <stop offset="1" stop-color="#7d8b59" />
+    </linearGradient>
+    <linearGradient id="mochi-daifukuBody" x1="48" y1="36" x2="80" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFDF9" />
+      <stop offset="1" stop-color="#ecd8bc" />
+    </linearGradient>
+  </defs>
+  <g id="mochi-artwork">
+    <ellipse cx="48" cy="68" rx="35" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Dark espresso wooden sweet tray -->
+    <path d="M12 55H84L79 63H17L12 55Z" fill="#493326" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M16 55H80" stroke="#bf4536" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Bamboo skewer for Hanami Dango -->
+    <path d="M16 14L64 53" stroke="#d09150" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Green matcha dango (bottom on skewer) -->
+    <circle cx="49" cy="41" r="8.5" fill="url(#mochi-matchaDango)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- White rice dango (middle on skewer) -->
+    <circle cx="38" cy="32" r="8.5" fill="#fff2d6" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Pink sakura dango (top on skewer) -->
+    <circle cx="27" cy="23" r="8.5" fill="url(#mochi-sakuraDango)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="24.5" cy="20" rx="2.5" ry="1.4" transform="rotate(-25 24.5 20)" fill="#FFFDF9" fill-opacity="0.65" />
+    <!-- Strawberry Daifuku Mochi on right -->
+    <path d="M48 51C48 42 55 37 64 37C73 37 80 42 80 51C80 55 75 56.5 64 56.5C53 56.5 48 55 48 51Z" fill="url(#mochi-daifukuBody)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Cinnabar strawberry peeking out of mochi -->
+    <path d="M64 27C68.5 27 71 31.5 69.5 36.5C68 40.5 65.5 42 64 42C62.5 42 60 40.5 58.5 36.5C57 31.5 59.5 27 64 27Z" fill="#bf4536" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M60.5 27.5C62.5 25.5 65.5 25.5 67.5 27.5" stroke="#829c51" stroke-width="2.16" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="62.5" cy="32.5" r="0.8" fill="#fff2d6" />
+    <circle cx="65.5" cy="33.5" r="0.8" fill="#fff2d6" />
+    <circle cx="64" cy="36.5" r="0.8" fill="#fff2d6" />
+  </g>
+</svg>

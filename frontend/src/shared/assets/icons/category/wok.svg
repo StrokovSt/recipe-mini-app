@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5.28 1.59 90 90" fill="none">
+  <defs>
+    <linearGradient id="wok-wokPan" x1="12" y1="32" x2="72" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#53443c" />
+      <stop offset="0.55" stop-color="#493326" />
+      <stop offset="1" stop-color="#18120F" />
+    </linearGradient>
+    <linearGradient id="wok-wokHandle" x1="68" y1="18" x2="92" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e8b87c" />
+      <stop offset="1" stop-color="#ae6b2c" />
+    </linearGradient>
+  </defs>
+  <g id="wok-artwork">
+    <ellipse cx="43" cy="68" rx="31" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Helper loop handle on left -->
+    <path d="M14 38C9 37 8 32 13 31" stroke="#493326" stroke-width="2.81" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Wooden handle on right -->
+    <path d="M66 32L87 20C90 18.5 92.5 22.5 89.5 24.5L69 37" fill="url(#wok-wokHandle)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M72 28.5L74.5 33" stroke="#bf4536" stroke-width="2.16" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Deep Wok body -->
+    <path d="M12 35C14 54 26 63 42 63C58 63 70 54 72 35H12Z" fill="url(#wok-wokPan)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <ellipse cx="42" cy="35" rx="30" ry="10.5" fill="#443429" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Stir-fry ingredients inside wok -->
+    <!-- Golden tofu cubes -->
+    <rect x="25" y="29" width="8.5" height="7.5" rx="2" transform="rotate(-10 25 29)" fill="#fff2d6" stroke="#c9812e" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="44" y="31" width="8.5" height="7.5" rx="2" transform="rotate(8 44 31)" fill="#fff2d6" stroke="#c9812e" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Cinnabar red pepper strips -->
+    <path d="M34 37C38 33 44 33 48 37" stroke="#bf4536" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M22 36C26 39 32 40 37 38" stroke="#e64d36" stroke-width="3.24" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Sage green snap peas / broccoli -->
+    <path d="M36 28C41 25 48 26 52 30C47 33 40 32 36 28Z" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="57" cy="34" r="4.5" fill="#7e9455" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Warm flame accent under wok -->
+    <path d="M33 64C35 61 38 61 39 64M42 65C44 61 47 61 48 65M50 64C52 61.5 54 61.5 55 64" stroke="#bf4536" stroke-width="1.94" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

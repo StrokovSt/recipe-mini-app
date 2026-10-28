@@ -1,5 +1,7 @@
 {
     "collection": "Koleksi",
     "sections": "Bagian",
-    "add": "Tambah resep"
+    "add": "Tambah resep",
+    "expand": "Perluas panel",
+    "collapse": "Ciutkan panel"
 }

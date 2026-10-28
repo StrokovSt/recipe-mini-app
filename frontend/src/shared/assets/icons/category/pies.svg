@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="9 9.75 78 78" fill="none">
+  <defs>
+    <linearGradient id="pies-pieCrust" x1="16" y1="18" x2="78" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2d197" />
+      <stop offset="0.55" stop-color="#e3993a" />
+      <stop offset="1" stop-color="#b06116" />
+    </linearGradient>
+    <linearGradient id="pies-pieDish" x1="14" y1="44" x2="82" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFDF9" />
+      <stop offset="1" stop-color="#e8d6b7" />
+    </linearGradient>
+  </defs>
+  <g id="pies-artwork">
+    <ellipse cx="48" cy="68" rx="35" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Fluted ceramic pie dish -->
+    <path d="M15 43H81L75 61C74 63.5 62 65.5 48 65.5C34 65.5 22 63.5 21 61L15 43Z" fill="url(#pies-pieDish)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M20 53C33 56.5 63 56.5 76 53" stroke="#bf4536" stroke-width="2.16" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Pie top with berry filling & golden lattice -->
+    <ellipse cx="48" cy="39" rx="33" ry="15" fill="url(#pies-pieCrust)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="48" cy="38.5" rx="27" ry="11.5" fill="#bf4536" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Lattice pastry strips -->
+    <path d="M27 32L57 48M36 28L66 44M47 27L72 40" stroke="#f0c985" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M69 32L39 48M60 28L30 44M49 27L24 40" stroke="#ebb059" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Scalloped crust rim highlights -->
+    <path d="M20 35C22 33 25 33 27 35M76 35C74 33 71 33 69 35" stroke="#FFF3D1" stroke-width="1.94" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Sage leaf & berry garnish in center -->
+    <path d="M48 35C52 31 57 31 59 35C55 38 51 38 48 35Z" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="46" cy="36" r="3.2" fill="#bf4536" stroke="#fff2d6" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="50" cy="37.5" r="2.8" fill="#a21814" stroke="#fff2d6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

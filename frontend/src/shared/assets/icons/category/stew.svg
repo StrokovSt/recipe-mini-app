@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3.5 -3.06 87 87" fill="none">
+  <defs>
+    <linearGradient id="stew-donabePot" x1="14" y1="34" x2="78" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#543e33" />
+      <stop offset="0.6" stop-color="#493326" />
+      <stop offset="1" stop-color="#1B1410" />
+    </linearGradient>
+    <linearGradient id="stew-curryStew" x1="20" y1="26" x2="72" y2="42" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e5802c" />
+      <stop offset="0.6" stop-color="#bd5717" />
+      <stop offset="1" stop-color="#893711" />
+    </linearGradient>
+    <linearGradient id="stew-woodLid" x1="28" y1="10" x2="76" y2="26" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#efca94" />
+      <stop offset="1" stop-color="#c38440" />
+    </linearGradient>
+  </defs>
+  <g id="stew-artwork">
+    <ellipse cx="47" cy="68" rx="34" ry="6" fill="#493326" fill-opacity="0.16" />
+    <!-- Tilted wooden lid at top-right -->
+    <ellipse cx="56" cy="19" rx="22" ry="6.5" transform="rotate(-12 56 19)" fill="url(#stew-woodLid)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="47" y="10" width="15" height="4.5" rx="2" transform="rotate(-12 47 10)" fill="#b06d2b" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Donabe claypot handles -->
+    <path d="M15 38H9C7.5 38 7 41 9 42.5L16 45" fill="#493326" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M79 38H85C86.5 38 87 41 85 42.5L78 45" fill="#493326" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Donabe claypot body -->
+    <path d="M15 36C15 54 28 65 47 65C66 65 79 54 79 36H15Z" fill="url(#stew-donabePot)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M20 48C32 52 62 52 74 48" stroke="#bf4536" stroke-width="2.38" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="47" cy="35.5" rx="32" ry="11" fill="#fff2d6" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="47" cy="36" rx="28.5" ry="9" fill="url(#stew-curryStew)" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Stew ingredients: carrot, potato, braised meat, herbs -->
+    <circle cx="34" cy="35" r="4.5" fill="#e7723b" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="44" y="31" width="9" height="7" rx="2.5" transform="rotate(10 44 31)" fill="#f3d69f" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="59" cy="36.5" rx="5.5" ry="3.8" fill="#7e2b18" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="40" cy="39" r="2.2" fill="#829c51" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="52" cy="39.5" r="2" fill="#829c51" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Warm steam wisps -->
+    <path d="M26 24C24.5 20 27.5 17 26 13" stroke="#bf4536" stroke-width="1.94" stroke-linecap="round" stroke-opacity="0.7" stroke-linejoin="round" />
+    <path d="M35 22C33.5 18 36.5 15 35 11" stroke="#829c51" stroke-width="1.94" stroke-linecap="round" stroke-opacity="0.7" stroke-linejoin="round" />
+  </g>
+</svg>

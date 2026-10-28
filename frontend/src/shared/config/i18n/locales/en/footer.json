@@ -1,5 +1,7 @@
 {
     "collection": "Collection",
     "sections": "Sections",
-    "add": "Add recipe"
+    "add": "Add recipe",
+    "expand": "Expand panel",
+    "collapse": "Collapse panel"
 }

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 5.75 80 80" fill="none">
+  <defs>
+    <linearGradient id="bento-bentoBox" x1="12" y1="18" x2="84" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#483328" />
+      <stop offset="1" stop-color="#231914" />
+    </linearGradient>
+    <linearGradient id="bento-tamagoGrad" x1="50" y1="22" x2="74" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f1db8f" />
+      <stop offset="1" stop-color="#e59c2f" />
+    </linearGradient>
+  </defs>
+  <g id="bento-artwork">
+    <ellipse cx="48" cy="68" rx="36" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Outer Bento Box with Cinnabar Lacquer Rim -->
+    <rect x="13" y="18" width="70" height="46" rx="9" fill="url(#bento-bentoBox)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="17" y="22" width="62" height="38" rx="6" fill="#bf4536" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Left compartment: Steamed Rice + Cinnabar Plum Blossom -->
+    <rect x="20" y="25" width="27" height="32" rx="4" fill="#fff2d6" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="33.5" cy="39" r="2.4" fill="#bf4536" />
+    <circle cx="36.2" cy="41" r="2.4" fill="#bf4536" />
+    <circle cx="35.2" cy="44.2" r="2.4" fill="#bf4536" />
+    <circle cx="31.8" cy="44.2" r="2.4" fill="#bf4536" />
+    <circle cx="30.8" cy="41" r="2.4" fill="#bf4536" />
+    <circle cx="33.5" cy="41.8" r="1.2" fill="#fff2d6" />
+    <circle cx="25" cy="30" r="0.9" fill="#493326" />
+    <circle cx="41" cy="31" r="0.9" fill="#493326" />
+    <circle cx="26" cy="51" r="0.9" fill="#493326" />
+    <circle cx="42" cy="50" r="0.9" fill="#493326" />
+    <!-- Top-right compartment: Tamagoyaki rolled omelette -->
+    <rect x="50" y="25" width="26" height="14.5" rx="3.5" fill="#32241D" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="52.5" y="27" width="10" height="10.5" rx="2.5" fill="url(#bento-tamagoGrad)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M55.5 30.5H59.5V34H55.5" stroke="#ac6215" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="64" y="27" width="10" height="10.5" rx="2.5" fill="url(#bento-tamagoGrad)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M67 30.5H71V34H67" stroke="#ac6215" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Bottom-right compartment: Sage greenery & glazed bites -->
+    <rect x="50" y="42" width="26" height="15" rx="3.5" fill="#32241D" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="57" cy="49.5" r="5" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="55.5" cy="48" r="2.2" fill="#adbc7f" />
+    <circle cx="59" cy="48.5" r="2" fill="#758353" />
+    <circle cx="69" cy="49.5" r="4.8" fill="#d54830" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M67.5 47.5C68.5 46.8 70 46.8 71 47.5" stroke="#fff2d6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

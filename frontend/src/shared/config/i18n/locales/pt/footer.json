@@ -1,5 +1,7 @@
 {
     "collection": "Coleção",
     "sections": "Seções",
-    "add": "Adicionar receita"
+    "add": "Adicionar receita",
+    "expand": "Expandir painel",
+    "collapse": "Recolher painel"
 }

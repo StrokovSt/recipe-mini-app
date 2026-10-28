@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="11.16 6.76 72 72" fill="none">
+  <defs>
+    <linearGradient id="salads-ceramic" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0d3" />
+      <stop offset="1" stop-color="#d6b98a" />
+    </linearGradient>
+    <linearGradient id="salads-cream" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4dc" />
+      <stop offset="1" stop-color="#efd29b" />
+    </linearGradient>
+    <linearGradient id="salads-red" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#df8b69" />
+      <stop offset="1" stop-color="#be513b" />
+    </linearGradient>
+    <linearGradient id="salads-ochre" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecc074" />
+      <stop offset="1" stop-color="#c48b45" />
+    </linearGradient>
+    <linearGradient id="salads-sage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b1c97e" />
+      <stop offset="1" stop-color="#6d9448" />
+    </linearGradient>
+    <linearGradient id="salads-plum" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bf8db3" />
+      <stop offset="1" stop-color="#8c5d8d" />
+    </linearGradient>
+    <linearGradient id="salads-fish" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bdd0b5" />
+      <stop offset="1" stop-color="#6f997d" />
+    </linearGradient>
+    <filter id="salads-wash" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="6" result="paper" />
+      <feColorMatrix in="paper" type="saturate" values="0" result="grain" />
+      <feComponentTransfer in="grain" result="pigment">
+        <feFuncA type="linear" slope=".06" />
+      </feComponentTransfer>
+      <feComposite in="pigment" in2="SourceGraphic" operator="in" result="clipped" />
+      <feBlend in="SourceGraphic" in2="clipped" mode="multiply" />
+    </filter>
+    <filter id="salads-ink" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="2" seed="7" result="hand" />
+      <feDisplacementMap in="SourceGraphic" in2="hand" scale=".15" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <linearGradient id="salads-leafBack" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#92b86b" />
+      <stop offset="1" stop-color="#587d3c" />
+    </linearGradient>
+    <linearGradient id="salads-leafFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#bbd77b" />
+      <stop offset="1" stop-color="#78a751" />
+    </linearGradient>
+  </defs>
+  <g id="salads-artwork">
+    <ellipse cx="48" cy="67" rx="31" ry="6" fill="#493326" fill-opacity="0.15" />
+    <path d="M22 56C14 48 13 35 20 27C18 19 26 12 35 16C41 10 52 12 56 20C65 18 72 26 68 35C74 42 70 53 60 56C50 60 30 62 22 56Z" fill="url(#salads-leafBack)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M30 60C23 54 24 43 31 37C30 29 38 23 46 27C52 21 63 23 66 31C75 30 81 38 76 46C80 53 74 61 65 62C54 64 37 65 30 60Z" fill="url(#salads-leafFront)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M26 57C34 45 45 34 58 26M42 42L36 33M48 37L55 39M38 48L47 51" stroke="#E8FAD0" stroke-width="2.38" stroke-linecap="round" stroke-opacity="0.8" stroke-linejoin="round" />
+    <circle cx="64" cy="52" r="9.5" fill="#bf4536" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="64" cy="52" r="6.5" fill="#ee8677" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="62" cy="50" r="1" fill="#f5e2b2" />
+    <circle cx="66" cy="51" r="1" fill="#f5e2b2" />
+    <circle cx="64" cy="55" r="1" fill="#f5e2b2" />
+    <ellipse cx="26" cy="51" rx="5.5" ry="4" transform="rotate(-24 26 51)" fill="#493326" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="25" cy="50" rx="2" ry="1" transform="rotate(-24 25 50)" fill="#885e71" />
+  </g>
+</svg>

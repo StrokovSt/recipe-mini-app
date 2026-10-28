@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 5.75 77 77" fill="none">
+  <defs>
+    <linearGradient id="mushrooms-shiitakeCap" x1="16" y1="16" x2="60" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9a5e3a" />
+      <stop offset="0.55" stop-color="#693f26" />
+      <stop offset="1" stop-color="#382216" />
+    </linearGradient>
+    <linearGradient id="mushrooms-shiitakeStem" x1="30" y1="38" x2="48" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFDF9" />
+      <stop offset="1" stop-color="#e6cfae" />
+    </linearGradient>
+  </defs>
+  <g id="mushrooms-artwork">
+    <ellipse cx="48" cy="68" rx="34" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Sage leaves behind -->
+    <path d="M14 54C16 45 24 41 32 45C28 53 20 56 14 54Z" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M62 56C68 48 77 47 83 52C77 59 68 60 62 56Z" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Large Shiitake stem -->
+    <path d="M33 38H44L47 58C47.5 61.5 44 64 38.5 64C33 64 29.5 61.5 30 58L33 38Z" fill="url(#mushrooms-shiitakeStem)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Large Shiitake cap with decorative star cracks (hana-donko) -->
+    <path d="M15 36C15 22 26 15 39 15C52 15 63 22 63 36C63 41 55 43 39 43C23 43 15 41 15 36Z" fill="url(#mushrooms-shiitakeCap)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M33 21L45 29M45 21L33 29M39 19V31" stroke="#fff2d6" stroke-width="2.16" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Second tilted Shiitake on right -->
+    <path d="M56 47L63 45L68 60C68.5 62.5 65.5 64.5 62 64.5C58.5 64.5 56 62.5 56 60V47Z" fill="url(#mushrooms-shiitakeStem)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M46 44C48 34 57 30 67 32C77 34 83 41 81 49C79 53 71 53 62 51C53 49 45 48 46 44Z" fill="url(#mushrooms-shiitakeCap)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M60 37L68 43M68 37L60 43" stroke="#fff2d6" stroke-width="1.84" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Enoki mushroom cluster on left -->
+    <path d="M26 62C23 55 21 48 22 41M29 62C27 55 26 49 28 43" stroke="#fff2d6" stroke-width="2.38" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="22" cy="40" r="3" fill="#fff2d6" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="28" cy="42" r="2.8" fill="#fff2d6" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

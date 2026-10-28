@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 6.75 76 76" fill="none">
+  <defs>
+    <linearGradient id="spices-cinnamonBark" x1="16" y1="28" x2="64" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d4803f" />
+      <stop offset="1" stop-color="#8d4214" />
+    </linearGradient>
+    <linearGradient id="spices-spiceSpoon" x1="36" y1="16" x2="82" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#efc992" />
+      <stop offset="1" stop-color="#b87833" />
+    </linearGradient>
+  </defs>
+  <g id="spices-artwork">
+    <ellipse cx="48" cy="68" rx="34" ry="5.5" fill="#493326" fill-opacity="0.14" />
+    <!-- Cinnamon sticks tied with red cord -->
+    <path d="M16 49L56 27C59 25.5 62 30 59 32L19 54C16 55.5 13 51 16 49Z" fill="url(#spices-cinnamonBark)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M20 55L60 33C63 31.5 66 36 63 38L23 60C20 61.5 17 57 20 55Z" fill="url(#spices-cinnamonBark)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M35 37L43 49" stroke="#bf4536" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Wooden spoon with fragrant cinnabar/saffron spice mound -->
+    <path d="M48 48C48 41 56 37 66 37C76 37 82 41 82 48C82 54 75 58 65 58C55 58 48 54 48 48Z" fill="url(#spices-spiceSpoon)" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M52 47C54 39 62 36 69 39C75 41 78 46 76 50C71 54 57 54 52 47Z" fill="#bf4536" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="63" cy="44" r="1.2" fill="#fff2d6" />
+    <circle cx="68" cy="46" r="1" fill="#edb96c" />
+    <!-- Star anise (badian) -->
+    <circle cx="31" cy="27" r="3" fill="#572e1b" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M31 16V38M20 27H42M23 19L39 35M39 19L23 35" stroke="#7d3e20" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="31" cy="27" r="2.2" fill="#e59144" />
+    <!-- Sage green cardamom pods -->
+    <ellipse cx="44" cy="59" rx="5" ry="3" transform="rotate(-15 44 59)" fill="#829c51" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="52" cy="62" rx="4.5" ry="2.8" transform="rotate(12 52 62)" fill="#829c51" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

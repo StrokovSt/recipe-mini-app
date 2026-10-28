@@ -1,0 +1,25 @@
+@use "sass:list";
+@use "@/shared/styles/category-colors" as *;
+
+// Плитка категории: крупная картинка и свои цвета под неё (Tile берёт их из --tile-*)
+.tile {
+    --size-tile-icon: var(--size-category-picture);
+    --tile-hover-bg: color-mix(in srgb, var(--tile-accent) 8%, var(--tile-bg));
+
+    @each $name, $colors in $category-colors {
+        $accent: list.nth($colors, 3);
+
+        &.#{$name} {
+            --tile-bg: #{list.nth($colors, 1)};
+            --tile-border: #{list.nth($colors, 2)};
+            --tile-accent: #{$accent};
+
+            // В тёмной теме тот же оттенок поверх тёмной карточки
+            [data-theme="dark"] & {
+                --tile-bg: color-mix(in srgb, #{$accent} 18%, var(--color-surface));
+                --tile-border: color-mix(in srgb, #{$accent} 40%, var(--color-surface));
+                --tile-accent: color-mix(in srgb, #{$accent} 50%, var(--color-text));
+            }
+        }
+    }
+}

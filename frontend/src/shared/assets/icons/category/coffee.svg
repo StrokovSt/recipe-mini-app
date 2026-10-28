@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="11 9.25 72 72" fill="none">
+  <defs>
+    <linearGradient id="coffee-mugCream" x1="24" y1="36" x2="66" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFDF9" />
+      <stop offset="0.65" stop-color="#fff2d6" />
+      <stop offset="1" stop-color="#e0cca9" />
+    </linearGradient>
+    <linearGradient id="coffee-dripperRed" x1="26" y1="16" x2="64" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d24137" />
+      <stop offset="1" stop-color="#a11d18" />
+    </linearGradient>
+  </defs>
+  <g id="coffee-artwork">
+    <ellipse cx="47" cy="68" rx="32" ry="5.5" fill="#493326" fill-opacity="0.15" />
+    <!-- Mug handle -->
+    <path d="M62 43H69C73 43 75 46.5 75 50.5C75 54.5 72.5 58 68.5 58H61" stroke="#493326" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Handcrafted ceramic mug -->
+    <path d="M26 38H62V55C62 61.5 56.5 65 44 65C31.5 65 26 61.5 26 55V38Z" fill="url(#coffee-mugCream)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Espresso base dip glaze on mug -->
+    <path d="M26.5 54H61.5V55C61.5 61.5 56.5 65 44 65C31.5 65 26.5 61.5 26.5 55V54Z" fill="#493326" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Saucer / coaster plate -->
+    <rect x="20" y="36" width="48" height="3.8" rx="1.9" fill="#d09150" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Cinnabar Ceramic V60 Dripper on top -->
+    <path d="M24 17H64L55 36H33L24 17Z" fill="url(#coffee-dripperRed)" stroke="#493326" stroke-width="2.05" stroke-linejoin="round" stroke-linecap="round" />
+    <path d="M61 21H67C70 21 71 24 69 27L59 32" stroke="#bf4536" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Ribbed lines on dripper -->
+    <path d="M33 20L38 33M44 20V33M55 20L50 33" stroke="#fff2d6" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.7" stroke-linejoin="round" />
+    <!-- Roasted coffee beans at base -->
+    <ellipse cx="21" cy="62" rx="4.8" ry="3.4" transform="rotate(-20 21 62)" fill="#3B281E" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M18 63C20 61.5 22 61.5 24 60.8" stroke="#cea17a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="69" cy="63" rx="4.5" ry="3.2" transform="rotate(18 69 63)" fill="#3B281E" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M66.5 62C68.5 62.5 70 63 71.5 64" stroke="#cea17a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 15 86 86" fill="none">
+  <defs>
+    <linearGradient id="preserves-ceramic" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0d3" />
+      <stop offset="1" stop-color="#d6b98a" />
+    </linearGradient>
+    <linearGradient id="preserves-cream" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4dc" />
+      <stop offset="1" stop-color="#efd29b" />
+    </linearGradient>
+    <linearGradient id="preserves-red" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#df8b69" />
+      <stop offset="1" stop-color="#be513b" />
+    </linearGradient>
+    <linearGradient id="preserves-ochre" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecc074" />
+      <stop offset="1" stop-color="#c48b45" />
+    </linearGradient>
+    <linearGradient id="preserves-sage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b1c97e" />
+      <stop offset="1" stop-color="#6d9448" />
+    </linearGradient>
+    <linearGradient id="preserves-plum" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bf8db3" />
+      <stop offset="1" stop-color="#8c5d8d" />
+    </linearGradient>
+    <linearGradient id="preserves-fish" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bdd0b5" />
+      <stop offset="1" stop-color="#6f997d" />
+    </linearGradient>
+    <filter id="preserves-wash" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="20" result="paper" />
+      <feColorMatrix in="paper" type="saturate" values="0" result="grain" />
+      <feComponentTransfer in="grain" result="pigment">
+        <feFuncA type="linear" slope=".06" />
+      </feComponentTransfer>
+      <feComposite in="pigment" in2="SourceGraphic" operator="in" result="clipped" />
+      <feBlend in="SourceGraphic" in2="clipped" mode="multiply" />
+    </filter>
+    <filter id="preserves-ink" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="2" seed="7" result="hand" />
+      <feDisplacementMap in="SourceGraphic" in2="hand" scale=".15" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </defs>
+  <g id="preserves-artwork">
+    <g filter="url(#preserves-ink)">
+      <g stroke="#563d2a" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" filter="url(#preserves-wash)">
+        <ellipse cx="64" cy="94" rx="35" ry="3" fill="#836d51" opacity=".12" stroke="none" />
+        <path d="M37 29h51v13q11 8 9 20l-3 24q-28 12-62 0l-2-24q-1-12 7-20z" fill="#edd8ba" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M35 57q30 5 57-1l-3 26q-24 8-52 0z" fill="url(#preserves-red)" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="m34 34-7-7 12-7 11 3 12-4 10 3 12-2 15 8-10 7" fill="#ebdebc" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M35 36q25-8 54-1" fill="none" stroke="#997d5a" stroke-width="2.16" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="m40 26 5 5m10-8 3 7m13-7-2 8m14-6-5 6" stroke="#b55e44" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="m44 61 35-1 2 18-38 2z" fill="#f2e0b5" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="m51 70 7-3 7 5 8-5" fill="none" stroke="#9b896c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M38 43q27 3 49-1" fill="none" stroke="#a97f52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </g>
+</svg>

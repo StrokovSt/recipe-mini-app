@@ -1,5 +1,7 @@
 {
     "collection": "Collection",
     "sections": "Rubriques",
-    "add": "Ajouter une recette"
+    "add": "Ajouter une recette",
+    "expand": "Déplier le panneau",
+    "collapse": "Replier le panneau"
 }

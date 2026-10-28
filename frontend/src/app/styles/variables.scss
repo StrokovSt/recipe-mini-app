@@ -65,6 +65,9 @@
     --size-side-icon: 20px;
     --size-rail-item: 44px; /* кнопка-иконка в рейке */
     --size-rail-icon: 22px;
+    --size-handle-length: 40px; /* полоска-ручка у края рейки */
+    --size-handle-thickness: 4px;
+    --size-handle-zone: 40px; /* зона захвата ручки пальцем, половина заходит на контент */
     --size-side-active-line: 2px; /* винная линия слева у выбранного пункта навигации */
     --size-toast-width: 360px; /* уведомление в правом верхнем углу на планшете и компьютере */
     --size-control-height: 56px;
@@ -137,6 +140,10 @@
     --size-tile-action: 40px;
     --size-tile-icon: 32px;
     --size-tile-arrow: 16px;
+    --size-category-picture: 56px;
+    --size-icon-picker-option: 56px;
+    --size-icon-picker-icon: 40px;
+    --size-icon-picker-max-height: 40dvh;
 
     // Стрелка или галочка в конце строки-кнопки (выбор языка)
     --size-row-icon: 16px;

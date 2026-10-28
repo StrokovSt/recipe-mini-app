@@ -42,10 +42,20 @@ export const isSameHole = (a: Hole | null, b: Hole | null) =>
     a === b
     || (a !== null && b !== null && a.left === b.left && a.top === b.top && a.width === b.width && a.height === b.height);
 
-// Подсказка под кнопкой, если та в верхней половине экрана, иначе над ней
+// Ширина боковой навигации (планшет, компьютер); на телефоне 0
+const readSideNavWidth = () =>
+    parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--size-side-nav")) || 0;
+
+// Подсказка под кнопкой, если та в верхней половине экрана, иначе над ней.
+// Кнопка в боковой навигации: подсказка справа от неё, вровень с её верхним или нижним краем
 export const getCardStyle = (hole: Hole): CSSProperties => {
-    if (hole.top + hole.height / 2 < window.innerHeight / 2) {
-        return { top: `calc(${hole.top + hole.height}px + var(--space-3))` };
+    const isUpper = hole.top + hole.height / 2 < window.innerHeight / 2;
+
+    if (hole.left < readSideNavWidth()) {
+        const side = { left: `calc(${hole.left + hole.width}px + var(--space-3))`, right: "auto", margin: 0 };
+        return isUpper ? { ...side, top: hole.top } : { ...side, bottom: window.innerHeight - hole.top - hole.height };
     }
+
+    if (isUpper) return { top: `calc(${hole.top + hole.height}px + var(--space-3))` };
     return { bottom: `calc(${window.innerHeight - hole.top}px + var(--space-3))` };
 };

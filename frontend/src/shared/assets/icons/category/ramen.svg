@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="9 1.94 81 81" fill="none">
+  <defs>
+    <linearGradient id="ramen-ramenBowl" x1="14" y1="34" x2="78" y2="68" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#483227" />
+      <stop offset="0.6" stop-color="#493326" />
+      <stop offset="1" stop-color="#1D1511" />
+    </linearGradient>
+    <linearGradient id="ramen-ramenBroth" x1="18" y1="26" x2="74" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e99e4b" />
+      <stop offset="0.6" stop-color="#de721b" />
+      <stop offset="1" stop-color="#ab4615" />
+    </linearGradient>
+    <linearGradient id="ramen-eggYolkRamen" x1="52" y1="27" x2="64" y2="37" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ecb962" />
+      <stop offset="1" stop-color="#e35820" />
+    </linearGradient>
+  </defs>
+  <g id="ramen-artwork">
+    <ellipse cx="47" cy="69" rx="32" ry="5.5" fill="#493326" fill-opacity="0.16" />
+    <!-- Nori sheets tucked behind -->
+    <rect x="20" y="14" width="15" height="22" rx="2.5" transform="rotate(-14 20 14)" fill="#493326" stroke="#503d31" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="31" y="12" width="14" height="21" rx="2.5" transform="rotate(-4 31 12)" fill="#352922" stroke="#584437" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Chopsticks -->
+    <path d="M24 11L86 19" stroke="#d09150" stroke-width="3.24" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M24 16L86 22" stroke="#b06b2b" stroke-width="3.02" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Ceramic Donburi Bowl -->
+    <path d="M13 36C13 54 27 65 47 65C67 65 81 54 81 36H13Z" fill="url(#ramen-ramenBowl)" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M31 63.5H63C64.2 66.8 62 68.5 59 68.5H35C32 68.5 29.8 66.8 31 63.5Z" fill="#bf4536" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Cinnabar key-fret & wave accent on bowl -->
+    <path d="M16 43C28 46.5 66 46.5 78 43" stroke="#bf4536" stroke-width="2.59" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M22 48.5C32 51.2 62 51.2 72 48.5" stroke="#fff2d6" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.7" stroke-linejoin="round" />
+    <!-- Bowl rim & broth -->
+    <ellipse cx="47" cy="35" rx="34" ry="11.5" fill="#fff2d6" stroke="#493326" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="47" cy="35.5" rx="30.5" ry="9.5" fill="url(#ramen-ramenBroth)" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Wavy golden noodles -->
+    <path d="M22 36C25 33 29 33 32 36C35 39 39 39 42 36C45 33 49 33 52 36" stroke="#f5e3b0" stroke-width="2.81" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M25 39.5C28 36.8 32 36.8 35 39.5C38 42.2 42 42.2 45 39.5C48 36.8 52 36.8 55 39.5" stroke="#efca7c" stroke-width="2.59" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Ajitama egg half -->
+    <ellipse cx="59" cy="33" rx="9" ry="6" transform="rotate(-8 59 33)" fill="#FFFDF8" stroke="#e0ba88" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <ellipse cx="59" cy="33.3" rx="5.2" ry="3.6" transform="rotate(-8 59 33.3)" fill="url(#ramen-eggYolkRamen)" stroke="#493326" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Narutomaki with cinnabar spiral -->
+    <ellipse cx="38" cy="32.5" rx="7.2" ry="5" transform="rotate(8 38 32.5)" fill="#FFFDF9" stroke="#edc9ba" stroke-width="2.05" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M38 32.5C39.2 31.5 40.5 32.3 40.2 33.5C39.8 34.8 37.8 35.2 36.5 34.2C34.8 33 35.2 30.5 37.2 29.8C39.6 29 42.2 30.5 42.2 33" stroke="#bf4536" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Sage green scallions -->
+    <circle cx="46" cy="39" r="2.2" fill="#829c51" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="50.5" cy="37.5" r="1.9" fill="#6b9348" stroke="#493326" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="43.5" cy="35.5" r="1.7" fill="#a0c267" />
+  </g>
+</svg>

@@ -1,5 +1,7 @@
 {
     "collection": "收藏",
     "sections": "目录",
-    "add": "添加食谱"
+    "add": "添加食谱",
+    "expand": "展开面板",
+    "collapse": "收起面板"
 }
