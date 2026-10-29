@@ -15,4 +15,7 @@
     );
     grid-auto-rows: 1fr;
     gap: var(--list-gap);
+
+    // Между рядами место под пилюлю ⋯ на рамке плитки
+    row-gap: var(--space-5);
 }

@@ -3,6 +3,7 @@ import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 import ForwardIcon from "@/shared/assets/icons/icon-forward.svg?react";
+import MoreIcon from "@/shared/assets/icons/icon-more.svg?react";
 import { IconButton } from "@/shared/ui/Buttons";
 import { Dropdown, type DropdownItem } from "@/shared/ui/Dropdown";
 
@@ -17,15 +18,17 @@ interface TileProps {
     menuLabel: string;
     // Строка на всю ширину: иконка слева, название и подпись в центре, без стрелки
     row?: boolean;
+    // Низкая плитка: иконка рядом с названием, ⋯ пилюлей на верхней рамке, как у шагов рецепта
+    compact?: boolean;
     className?: string;
 }
 
 // Плитка раздела: вся плитка ведёт по ссылке, в углу меню действий
 export const Tile = (props: TileProps) => {
-    const { icon, title, to, subtitle, menu, menuLabel, row, className } = props;
+    const { icon, title, to, subtitle, menu, menuLabel, row, compact, className } = props;
 
     return (
-        <article className={clsx(styles.tile, row && styles.row, className)}>
+        <article className={clsx(styles.tile, row && styles.row, compact && styles.compact, className)}>
             <span className={styles.icon} aria-hidden>{icon}</span>
             {/* Одно действие — сразу кнопка, меню из одного пункта не нужно */}
             {menu.length === 1 ? (
@@ -40,7 +43,15 @@ export const Tile = (props: TileProps) => {
                 </IconButton>
             ) : (
                 <Dropdown
-                    trigger={<IconButton icon="more" round className={styles.more} aria-label={menuLabel} />}
+                    trigger={
+                        compact ? (
+                            <button type="button" className={styles.more} aria-label={menuLabel}>
+                                <MoreIcon />
+                            </button>
+                        ) : (
+                            <IconButton icon="more" round className={styles.more} aria-label={menuLabel} />
+                        )
+                    }
                     items={menu}
                 />
             )}

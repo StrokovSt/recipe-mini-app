@@ -1,5 +1,37 @@
+@use "sass:list";
+@use "sass:map";
+@use "@/shared/styles/category-colors" as *;
+
+// Цвета тегов берём из палитры категорий: семь непохожих оттенков.
+// Порядок такой, чтобы похожие (суп и ягоды, суп и паста) не стояли рядом даже на стыке круга.
+// Количество совпадает с TAG_COLOR_COUNT в config/tagColors.ts
+$tag-palette: salads, soups, fish, citrus, berries, veg, pasta;
+
+// Плитка тега: цвет по месту в списке (Tile берёт его из --tile-*)
+.tile {
+    --tile-hover-bg: color-mix(in srgb, var(--tile-accent) 8%, var(--tile-bg));
+
+    @each $name in $tag-palette {
+        $colors: map.get($category-colors, $name);
+        $accent: list.nth($colors, 3);
+
+        &.color#{list.index($tag-palette, $name) - 1} {
+            --tile-bg: #{list.nth($colors, 1)};
+            --tile-border: #{list.nth($colors, 2)};
+            --tile-accent: #{$accent};
+
+            // В тёмной теме тот же оттенок поверх тёмной карточки, как у категорий
+            [data-theme="dark"] & {
+                --tile-bg: color-mix(in srgb, #{$accent} 18%, var(--color-surface));
+                --tile-border: color-mix(in srgb, #{$accent} 40%, var(--color-surface));
+                --tile-accent: color-mix(in srgb, #{$accent} 50%, var(--color-text));
+            }
+        }
+    }
+}
+
 .hash {
-    color: var(--color-active);
-    font: var(--font-ui-xl);
+    color: var(--tile-accent, var(--color-active));
+    font: var(--font-ui-sm);
     font-weight: var(--font-weight-bold);
 }

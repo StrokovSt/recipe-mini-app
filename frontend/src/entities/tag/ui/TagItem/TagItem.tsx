@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,23 +8,29 @@ import DeleteIcon from '@/shared/assets/icons/icon-delete.svg?react';
 import EditIcon from '@/shared/assets/icons/icon-edit.svg?react';
 import { Tile } from '@/shared/ui/Tile';
 
+import { TAG_COLOR_COUNT } from '../../config/tagColors';
+
 import styles from './TagItem.module.scss';
 
 interface TagItemProps {
     tag: Tag;
     // Куда ведёт плитка
     to: string;
+    // Место тега в списке: цвета идут по кругу, соседние плитки всегда разного цвета
+    colorIndex: number;
     onEdit: (tag: Tag) => void;
     onDelete: (tag: Tag) => void;
 }
 
 const TagItem = (props: TagItemProps) => {
-    const { tag, to, onEdit, onDelete } = props;
+    const { tag, to, colorIndex, onEdit, onDelete } = props;
     const { t } = useTranslation(['sections', 'common']);
     const recipeCount = tag.recipeCount ?? 0;
 
     return (
         <Tile
+            compact
+            className={clsx(styles.tile, styles[`color${colorIndex % TAG_COLOR_COUNT}`])}
             icon={<span className={styles.hash}>#</span>}
             title={tag.name}
             subtitle={

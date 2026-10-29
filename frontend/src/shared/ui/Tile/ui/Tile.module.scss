@@ -1,5 +1,6 @@
 @use "@/shared/styles/brush";
 @use "@/shared/styles/states";
+@use "@/shared/styles/tap-area";
 
 .tile {
     @include brush.brush-underline;
@@ -114,6 +115,59 @@
 
         .subtitle {
             align-self: start;
+        }
+    }
+
+    // Низкая плитка: «#» и название в одной строке, ⋯ пилюлей на верхней рамке (как в шагах рецепта)
+    &.compact {
+        grid-template: "icon title title" auto "subtitle subtitle arrow" auto / auto minmax(0, 1fr) auto;
+        gap: var(--space-1);
+
+        .icon {
+            height: auto;
+        }
+
+        .title {
+            margin-top: 0;
+        }
+
+        // Фон плитки перекрывает рамку под пилюлей
+        .more {
+            @include tap-area.tap-area;
+
+            position: absolute;
+            grid-area: auto;
+            top: calc(var(--size-seal-sm) / -2);
+            right: var(--space-3);
+            display: grid;
+            width: var(--size-step-menu-width);
+            height: var(--size-seal-sm);
+            padding: 0;
+            border: 1px solid var(--tile-border, var(--color-border-strong));
+            border-radius: var(--radius-full);
+            outline: none;
+            background: var(--tile-bg, var(--color-surface));
+            color: var(--tile-accent, var(--color-text-muted));
+            cursor: pointer;
+            transition: var(--transition-base);
+            transition-property: border-color, background-color;
+            place-items: center;
+
+            svg {
+                width: var(--size-row-icon);
+                height: var(--size-row-icon);
+            }
+
+            @include states.hover {
+                border-color: var(--tile-accent, var(--color-active));
+            }
+
+            // Меню открыто (data-open ставит Headless UI) или фокус с клавиатуры
+            &[data-open],
+            &[data-focus] {
+                border-color: var(--tile-accent, var(--color-active));
+                background: var(--tile-hover-bg, var(--color-active-bg));
+            }
         }
     }
 }
