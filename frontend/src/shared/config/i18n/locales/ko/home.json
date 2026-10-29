@@ -10,5 +10,13 @@
         "text": "검색어를 바꾸거나 필터를 일부 해제해 보세요."
     },
     "servings": "{{count}}인분",
-    "title": "레시피"
+    "title": "레시피",
+    "categories": "카테고리",
+    "tags": "태그",
+    "yourCollection": "나의 컬렉션",
+    "resetFilters": "필터 초기화",
+    "allRecipes": "모든 레시피",
+    "recipeCount": "{{count}}개",
+    "noRecipes": "비어 있음",
+    "total": "전체: {{count}}"
 }

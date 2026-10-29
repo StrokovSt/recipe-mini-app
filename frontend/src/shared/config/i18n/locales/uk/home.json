@@ -10,5 +10,13 @@
         "text": "Спробуйте змінити пошук або прибрати частину фільтрів."
     },
     "servings": "{{count}} порц.",
-    "title": "Рецепти"
+    "title": "Рецепти",
+    "categories": "Категорії",
+    "tags": "Теги",
+    "yourCollection": "Ваша колекція",
+    "resetFilters": "Скинути фільтри",
+    "allRecipes": "Усі рецепти",
+    "recipeCount": "{{count}} рец.",
+    "noRecipes": "Порожньо",
+    "total": "Усього: {{count}}"
 }

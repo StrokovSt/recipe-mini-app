@@ -141,6 +141,13 @@
     --size-tile-icon: 32px;
     --size-tile-arrow: 16px;
     --size-category-picture: 56px;
+    --size-strip-item: 168px; /* карточка в ряду категорий на компьютере */
+    --size-strip-picture: 40px;
+    --size-bento-column: 300px; /* колонка живой сетки: на широком экране колонок больше, широкая карточка не шире 800px */
+    --size-bento-min-columns: 4; /* меньше колонок не бывает: узор сетки держится на четырёх */
+    --size-bento-row: 332px; /* строка живой сетки: высокая карточка на две строки — 680px */
+    --size-bento-image: 170px; /* фото малой карточки живой сетки */
+    --size-header-search: 560px; /* поиск в шапке на компьютере */
     --size-icon-picker-option: 56px;
     --size-icon-picker-icon: 40px;
     --size-icon-picker-max-height: 40dvh;

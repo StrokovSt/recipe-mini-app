@@ -3,5 +3,7 @@
     "sections": "섹션",
     "add": "레시피 추가",
     "expand": "패널 펼치기",
-    "collapse": "패널 접기"
+    "collapse": "패널 접기",
+    "library": "라이브러리",
+    "account": "계정"
 }

@@ -3,5 +3,7 @@
     "sections": "Rubriques",
     "add": "Ajouter une recette",
     "expand": "Déplier le panneau",
-    "collapse": "Replier le panneau"
+    "collapse": "Replier le panneau",
+    "library": "Bibliothèque",
+    "account": "Compte"
 }

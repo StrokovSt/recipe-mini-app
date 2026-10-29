@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 // Кнопка фильтров в шапке того же размера, что и меню
 .filterButton {
     width: var(--size-menu-button);
@@ -7,4 +9,72 @@
         width: 45%;
         height: 45%;
     }
+}
+
+// Компьютер: место под поиск, во всю зону поиска шапки
+.searchSlot {
+    flex: 1;
+    min-width: 0;
+}
+
+// Компьютер: категории и теги под заголовком
+.browse {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+// Заголовок раздела над сеткой: название слева, число рецептов справа, черта снизу
+.titleRow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.title {
+    margin: 0;
+    font: var(--font-header-xl);
+    font-weight: var(--font-weight-bold);
+}
+
+// Выбранная категория после тире, приглушённее основного названия
+.titleCategory {
+    color: var(--color-text-soft);
+}
+
+// Сброс фильтров: заметная винная кнопка справа, прижимает к себе «Всего»
+.reset {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    gap: var(--space-1);
+    margin-left: auto;
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--color-active);
+    border-radius: var(--radius-lg);
+    background: var(--color-active-bg);
+    color: var(--color-active);
+    font: var(--font-ui-sm);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: var(--transition-base);
+    transition-property: background-color, color;
+
+    svg {
+        width: var(--size-side-icon);
+        height: var(--size-side-icon);
+    }
+
+    @include states.hover {
+        background-color: var(--color-active);
+        color: var(--color-active-text);
+    }
+}
+
+.total {
+    color: var(--color-text-muted);
+    font: var(--font-ui-sm);
 }

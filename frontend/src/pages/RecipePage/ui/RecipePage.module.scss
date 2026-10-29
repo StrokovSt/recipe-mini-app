@@ -1,3 +1,4 @@
+@use "@/shared/styles/media";
 @use "@/shared/styles/states";
 
 .page {
@@ -40,5 +41,64 @@
         width: var(--size-menu-button);
         height: var(--size-menu-button);
         margin-left: auto;
+    }
+}
+
+// Путь к рецепту: «Коллекция / Супы / Борщ», последнее — текущий рецепт
+.breadcrumbs {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+    color: var(--color-text-muted);
+    font: var(--font-ui-sm);
+    white-space: nowrap;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        @include states.hover {
+            color: var(--color-active);
+        }
+    }
+
+    .current {
+        overflow: hidden;
+        color: var(--color-text);
+        font-weight: var(--font-weight-bold);
+        text-overflow: ellipsis;
+    }
+}
+
+// Телефон и планшет: обёрток нет, блоки идут столбиком, как раньше
+.layout,
+.aside,
+.main {
+    display: contents;
+}
+
+// Компьютер: фото слева на всю высоту экрана и стоит на месте, рецепт справа
+@include media.desktop {
+    .layout {
+        display: grid;
+        align-items: start;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+        gap: var(--space-6);
+    }
+
+    .aside {
+        position: sticky;
+        top: 0;
+        display: block;
+        height: calc(100dvh - var(--size-page-header) - 2 * var(--space-5));
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5);
+        min-width: 0;
     }
 }

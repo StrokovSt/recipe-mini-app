@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -10,6 +11,8 @@ import UserIcon from '@/shared/assets/icons/icon-user.svg?react';
 import { getImageSrcSet, getImageUrl } from '@/shared/lib/image';
 import { IconLabel } from '@/shared/ui/IconLabel';
 import { TagList } from '@/shared/ui/Tag';
+
+import type { BentoLayout } from '../../lib/getBentoPlacements';
 
 import styles from './RecipeItem.module.scss';
 
@@ -27,15 +30,22 @@ const COVER_SIZES = [
     '(min-width: 361px) calc((100vw - 52px) / 2)',
     'calc((100vw - 36px) / 2)',
 ].join(', ');
+// Живая сетка компьютера: колонка до ~390px, фото широкой карточки ~440px, высокой — на две строки (680px)
+// и обрезается по бокам, поэтому шире
+const BENTO_COVER_SIZES: Record<BentoLayout, string> = { small: '390px', wide: '440px', tall: '520px' };
+
+// Вид карточки в живой сетке компьютера: обычная, широкая (фото слева, текст справа), высокая (на две строки)
+export type RecipeItemLayout = 'regular' | BentoLayout;
 
 interface RecipeItemProps {
     recipe: Recipe;
     isEager?: boolean;
     isPriority?: boolean;
+    layout?: RecipeItemLayout;
 }
 
 const RecipeItem = (props: RecipeItemProps) => {
-    const { recipe, isEager = false, isPriority = false } = props;
+    const { recipe, isEager = false, isPriority = false, layout = 'regular' } = props;
     const { t } = useTranslation(['home', 'common']);
     const { id, title, description, steps, prepTime, cookTime, servings, source, media, tags, category } = recipe;
 
@@ -45,13 +55,13 @@ const RecipeItem = (props: RecipeItemProps) => {
     const time = (prepTime ?? 0) + (cookTime ?? 0);
 
     return (
-        <Link to={`/recipe/${id}`} state={{ fromList: true }} className={styles.card}>
+        <Link to={`/recipe/${id}`} state={{ fromList: true }} className={clsx(styles.card, styles[layout])}>
             <div className={styles.media}>
                 {cover ? (
                     <img
                         src={getImageUrl(cover.url, COVER_WIDTHS[COVER_WIDTHS.length - 1])}
                         srcSet={getImageSrcSet(cover.url, COVER_WIDTHS)}
-                        sizes={COVER_SIZES}
+                        sizes={layout === 'regular' ? COVER_SIZES : BENTO_COVER_SIZES[layout]}
                         alt={title}
                         loading={isEager ? 'eager' : 'lazy'}
                         fetchPriority={isPriority ? 'high' : undefined}

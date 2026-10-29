@@ -43,3 +43,21 @@
         min-width: 0;
     }
 }
+
+// Живая сетка на компьютере: число колонок считает RecipeList по ширине (--bento-columns), места карточкам
+// даёт lib/getBentoPlacements. Строки одной высоты. Широкая карточка хвоста — на две колонки
+.list.bento {
+    --list-gap: var(--space-4);
+
+    grid-template-columns: repeat(var(--bento-columns, var(--size-bento-min-columns)), minmax(0, 1fr));
+    grid-auto-rows: var(--size-bento-row);
+
+    // Карточка не выше строки, даже если текст длинный: лишнее обрезает сама карточка
+    .item {
+        min-height: 0;
+    }
+
+    .wide {
+        grid-column: span 2;
+    }
+}

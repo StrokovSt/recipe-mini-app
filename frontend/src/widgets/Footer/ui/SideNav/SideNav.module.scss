@@ -159,13 +159,44 @@
     font: var(--font-ui-xs);
 }
 
-// Пункты меню: отдельная группа под чертой
+// Пункты меню: отдельная группа под чертой, прижата к низу
 .menu {
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
+    margin-top: auto;
     padding-top: var(--space-4);
     border-top: 1px solid var(--color-border);
+}
+
+// Компьютер: «Добавить рецепт» — винная кнопка во всю ширину панели, как главное действие
+.add {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: var(--size-side-link);
+    border-radius: var(--radius-md);
+    background: var(--color-active);
+    color: var(--color-active-text);
+    font: var(--font-ui-sm);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    transition: background-color var(--transition-base);
+
+    svg {
+        width: var(--size-side-icon);
+        height: var(--size-side-icon);
+    }
+
+    @include states.hover {
+        background-color: var(--color-active-hover);
+    }
+}
+
+.addActive {
+    pointer-events: none;
 }
 
 // Рейка: все пункты — квадратные кнопки-иконки без подписей. Поверх модальных окон не встаёт: они позже в разметке.
@@ -199,11 +230,6 @@
     .menu {
         gap: var(--space-2);
         min-width: var(--size-rail-item);
-    }
-
-    // Меню в рейке прижато к низу
-    .menu {
-        margin-top: auto;
     }
 
     // Черта под навигацией и в свёрнутой рейке, на том же месте, что над категориями в раскрытой.

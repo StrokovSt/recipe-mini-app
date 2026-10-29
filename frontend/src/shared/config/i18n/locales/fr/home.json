@@ -12,5 +12,13 @@
     "servings_many": "{{count}} portions",
     "servings_one": "{{count}} portion",
     "servings_other": "{{count}} portions",
-    "title": "Recettes"
+    "title": "Recettes",
+    "categories": "Catégories",
+    "tags": "Tags",
+    "yourCollection": "Votre collection",
+    "resetFilters": "Réinitialiser les filtres",
+    "allRecipes": "Toutes les recettes",
+    "recipeCount": "{{count}} rec.",
+    "noRecipes": "Vide",
+    "total": "Total : {{count}}"
 }

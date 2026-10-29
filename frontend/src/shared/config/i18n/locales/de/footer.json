@@ -3,5 +3,7 @@
     "sections": "Bereiche",
     "add": "Rezept hinzufügen",
     "expand": "Leiste aufklappen",
-    "collapse": "Leiste einklappen"
+    "collapse": "Leiste einklappen",
+    "library": "Bibliothek",
+    "account": "Konto"
 }

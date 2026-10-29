@@ -115,4 +115,75 @@
         gap: var(--space-2);
         margin-top: auto;
     }
+
+    // Малая карточка в живой сетке: фото одной высоты на любой ширине, строки сетки ровные
+    // Высоту карточек живой сетки задаёт строка: лишний текст обрезается, а не растягивает её. Мазок под карточкой виден
+    &.small,
+    &.wide,
+    &.tall {
+        min-height: 0;
+
+        .body {
+            min-height: 0;
+            overflow: hidden;
+        }
+    }
+
+    &.small .media {
+        flex-shrink: 0;
+        height: var(--size-bento-image);
+        aspect-ratio: auto;
+    }
+
+    // Широкой и высокой карточке высоту задаёт строка сетки, а не фото: оно лишь заполняет место
+    &.wide,
+    &.tall {
+        .image {
+            position: absolute;
+            inset: 0;
+        }
+    }
+
+    // Широкая карточка в живой сетке: фото слева на всю высоту, текст справа крупнее
+    &.wide {
+        flex-direction: row;
+
+        .media {
+            flex: 0 0 55%;
+            aspect-ratio: auto;
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+        }
+
+        .body {
+            gap: var(--space-3);
+            padding: var(--space-5);
+        }
+
+        .title {
+            font-size: var(--font-size-xl);
+            line-height: var(--font-line-xl);
+        }
+
+        .description {
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+        }
+    }
+
+    // Высокая карточка на две строки сетки: фото растягивается, название крупнее
+    &.tall {
+        .media {
+            flex: 1;
+            aspect-ratio: auto;
+        }
+
+        // Текст по содержимому, всё остальное место у фото
+        .body {
+            flex: none;
+        }
+
+        .title {
+            font-size: var(--font-size-lg);
+        }
+    }
 }

@@ -3,7 +3,7 @@ import { AnimatePresence, m } from "motion/react";
 import { type MouseEvent, type ReactNode, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { matchPath, NavLink, useLocation } from "react-router-dom";
+import { matchPath, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
 import AddIcon from "@/shared/assets/icons/icon-add.svg?react";
@@ -13,6 +13,7 @@ import { TRANSITION_PAGE } from "@/shared/config/animation";
 import { getAnimations } from "@/shared/lib/animations";
 import { impactHaptic } from "@/shared/lib/haptic";
 import { useLayoutMode } from "@/shared/lib/layout";
+import { IconButton } from "@/shared/ui/Buttons";
 import { useSetPageFooterSlot } from "@/shared/ui/PageFooter";
 import { usePageHeaderBar } from "@/shared/ui/PageHeader";
 import { Toast } from "@/shared/ui/Toast";
@@ -51,20 +52,21 @@ interface NavItem {
 }
 
 export function Footer() {
-    const { t } = useTranslation("footer");
+    const { t } = useTranslation(["footer", "menu"]);
     const { pathname } = useLocation();
     const setSlot = useSetPageFooterSlot();
     const bar = usePageHeaderBar();
     const mode = useLayoutMode();
+    const navigate = useNavigate();
 
     const hasAction = ACTION_ON.some((path) => matchPath(path, pathname));
 
     const [burst, setBurst] = useState<Burst | null>(null);
 
-    // Нажали «+»: вибрация и лепестки, переход обычный
+    // Нажали «+»: вибрация и лепестки, переход обычный. Лепестки только у «+» в плашке на телефоне
     const handleAddClick = (event: MouseEvent<HTMLAnchorElement>) => {
         impactHaptic();
-        if (getAnimations()) setBurst(getBurst(event.currentTarget));
+        if (mode === "phone" && getAnimations()) setBurst(getBurst(event.currentTarget));
     };
 
     const navItems: NavItem[] = [
@@ -79,8 +81,19 @@ export function Footer() {
             <>
                 <SideNav isRail={mode === "tablet"} onAddClick={handleAddClick} />
                 {hasAction && bar && createPortal(<div ref={setSlot} className={styles.headerAction} />, bar)}
+                {/* Компьютер: профиль справа в шапке, как на сайтах */}
+                {mode !== "tablet" && bar && createPortal(
+                    <IconButton
+                        icon="user"
+                        round
+                        type="button"
+                        className={clsx(styles.headerProfile, pathname === AppRoute.Profile && styles.headerProfileActive)}
+                        aria-label={t("menu:profile.title")}
+                        onClick={() => navigate(AppRoute.Profile)}
+                    />,
+                    bar
+                )}
                 <Toast className={styles.sideToast} />
-                <PetalBurst burst={burst} onDone={() => setBurst(null)} />
             </>
         );
     }

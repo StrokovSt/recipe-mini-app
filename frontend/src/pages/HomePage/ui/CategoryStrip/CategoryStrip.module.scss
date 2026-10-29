@@ -1,0 +1,99 @@
+@use "sass:list";
+@use "@/shared/styles/category-colors" as *;
+@use "@/shared/styles/states";
+
+// Плитки категорий (только на компьютере): сетка из равных колонок, длинное название обрезается
+.strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--size-strip-item), 1fr));
+    gap: var(--space-3);
+}
+
+// Вкладка: картинка категории, название и число рецептов. Цвета те же, что у плиток категорий (--tile-*)
+.item {
+    --tile-bg: var(--color-surface);
+    --tile-border: var(--color-border);
+    --tile-accent: var(--color-active);
+
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--tile-border);
+    border-radius: var(--radius-md);
+    background: var(--tile-bg);
+    color: var(--color-text);
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition-base);
+    transition-property: border-color, box-shadow, transform;
+
+    @include states.hover {
+        border-color: var(--tile-accent);
+    }
+
+    &.active {
+        border-color: var(--tile-accent);
+        box-shadow: inset 0 0 0 1px var(--tile-accent);
+    }
+
+    @each $name, $colors in $category-colors {
+        $accent: list.nth($colors, 3);
+
+        &.#{$name} {
+            --tile-bg: #{list.nth($colors, 1)};
+            --tile-border: #{list.nth($colors, 2)};
+            --tile-accent: #{$accent};
+
+            [data-theme="dark"] & {
+                --tile-bg: color-mix(in srgb, #{$accent} 18%, var(--color-surface));
+                --tile-border: color-mix(in srgb, #{$accent} 40%, var(--color-surface));
+                --tile-accent: color-mix(in srgb, #{$accent} 50%, var(--color-text));
+            }
+        }
+    }
+
+    // «Все рецепты»: иконка коллекции в цвете акцента
+    &.all .picture {
+        color: var(--color-active);
+
+        svg {
+            width: 60%;
+            height: 60%;
+        }
+    }
+}
+
+.picture {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: var(--size-strip-picture);
+    height: var(--size-strip-picture);
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.name {
+    overflow: hidden;
+    font: var(--font-ui-sm);
+    font-weight: var(--font-weight-bold);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.count {
+    color: var(--color-text-muted);
+    font: var(--font-ui-xs);
+}

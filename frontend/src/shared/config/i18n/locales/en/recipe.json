@@ -1,4 +1,5 @@
 {
+    "breadcrumbs": "Recipe path",
     "notFound": {
         "title": "Recipe not found",
         "text": "It may have been deleted, or the link is wrong."

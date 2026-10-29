@@ -1,3 +1,4 @@
+@use "@/shared/styles/media";
 @use "@/shared/styles/states";
 
 .footer {
@@ -160,11 +161,30 @@
     flex-shrink: 0;
     order: 1;
 
+    // Компьютер: в зоне кнопок шапки
+    @include media.desktop {
+        grid-area: actions;
+        justify-self: end;
+    }
+
     // Страница спрятала своё действие (PageFooter isHidden)
     &:has([data-footer-hidden]) {
         opacity: 0;
         pointer-events: none;
     }
+}
+
+// Компьютер: профиль в своей зоне у правого края шапки, правее кнопок
+.headerProfile {
+    flex-shrink: 0;
+    grid-area: profile;
+    width: var(--size-menu-button);
+    height: var(--size-menu-button);
+}
+
+.headerProfileActive {
+    border-color: var(--color-active);
+    color: var(--color-active);
 }
 
 // Планшет и компьютер: уведомление справа под шапкой

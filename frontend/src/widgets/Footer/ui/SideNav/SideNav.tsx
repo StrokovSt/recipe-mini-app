@@ -76,8 +76,8 @@ export function SideNav(props: SideNavProps) {
     const hasPannedRef = useRef(false);
 
     const isOpen = isRail && isExpanded;
-    // Подписи и категории: на компьютере всегда, на планшете в раскрытой рейке
-    const isFull = !isRail || isRevealed;
+    // Категории только в раскрытой рейке на планшете. На компьютере они рядом карточек на главной
+    const isFull = isRail && isRevealed;
 
     // Шторка доезжает до конца с того места, где она сейчас
     const settle = (open: boolean) => {
@@ -136,14 +136,24 @@ export function SideNav(props: SideNavProps) {
         event.stopPropagation();
     };
 
+    const addLink: SideLink = {
+        to: AppRoute.AddRecipe,
+        icon: <AddIcon />,
+        label: t("add"),
+        onboarding: "add",
+        onClick: onAddClick,
+    };
+
+    // На компьютере «Добавить рецепт» — отдельная винная кнопка под логотипом, в рейке — пункт среди остальных
     const navLinks: SideLink[] = [
         { to: AppRoute.Home, icon: <CollectionIcon />, label: t("collection"), onboarding: "home" },
-        { to: AppRoute.AddRecipe, icon: <AddIcon />, label: t("add"), onboarding: "add", onClick: onAddClick },
+        ...(isRail ? [addLink] : []),
         { to: AppRoute.Sections, icon: <SectionsIcon />, label: t("sections"), onboarding: "sections" },
     ];
 
     const menuLinks: SideLink[] = [
-        { to: AppRoute.Profile, icon: <UserIcon />, label: t("menu:profile.title") },
+        // На компьютере профиль справа в шапке (widgets/Footer)
+        ...(isRail ? [{ to: AppRoute.Profile, icon: <UserIcon />, label: t("menu:profile.title") }] : []),
         { to: AppRoute.Settings, icon: <SettingsIcon />, label: t("menu:settings.title") },
         { to: AppRoute.About, icon: <InfoIcon />, label: t("menu:about.title") },
     ];
@@ -221,7 +231,20 @@ export function SideNav(props: SideNavProps) {
                     )}
                 </Link>
 
-                <nav className={styles.nav}>
+                {!isRail && (
+                    <NavLink
+                        to={addLink.to}
+                        data-onboarding={addLink.onboarding}
+                        onClick={addLink.onClick}
+                        className={({ isActive }) => clsx(styles.add, isActive && styles.addActive)}
+                    >
+                        {addLink.icon}
+                        {addLink.label}
+                    </NavLink>
+                )}
+
+                <nav className={styles.nav} aria-labelledby={isRail ? undefined : "side-nav-library"}>
+                    {!isRail && <h2 id="side-nav-library" className={styles.group}>{t("library")}</h2>}
                     {/* «Развернуть» в одной группе с навигацией, первой */}
                     {isRail && (
                         <button
@@ -284,6 +307,7 @@ export function SideNav(props: SideNavProps) {
 
                 {/* Пункты меню (в рейке прижаты к низу); обучение подсвечивает их вместо бургера */}
                 <nav className={styles.menu} aria-label={t("menu:open")} data-onboarding="menu">
+                    {!isRail && <h2 className={styles.group}>{t("account")}</h2>}
                     {menuLinks.map((link) => (
                         <NavLink
                             key={link.to}

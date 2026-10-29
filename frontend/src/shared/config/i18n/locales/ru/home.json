@@ -10,5 +10,13 @@
         "text": "Попробуйте изменить поиск или убрать часть фильтров."
     },
     "servings": "{{count}} пор.",
-    "title": "Рецепты"
+    "title": "Рецепты",
+    "categories": "Категории",
+    "tags": "Теги",
+    "yourCollection": "Ваша коллекция",
+    "resetFilters": "Сбросить фильтры",
+    "allRecipes": "Все рецепты",
+    "recipeCount": "{{count}} рец.",
+    "noRecipes": "Пусто",
+    "total": "Всего: {{count}}"
 }

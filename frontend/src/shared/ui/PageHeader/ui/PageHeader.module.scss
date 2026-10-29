@@ -28,6 +28,16 @@
         gap: var(--space-4);
         padding-inline: max(var(--space-page), calc((100% - var(--size-side-nav) - var(--size-content-max-width)) / 2));
     }
+
+    // Компьютер: шапка одного цвета с боковой панелью и во всю ширину, как у сайтов.
+    // Зоны: заголовок или путь, поиск (не шире --size-header-search, по центру), кнопки, профиль
+    @include media.desktop {
+        display: grid;
+        grid-template-areas: "title search actions profile";
+        grid-template-columns: minmax(0, 1fr) minmax(0, var(--size-header-search)) minmax(0, 1fr) auto;
+        padding-inline: var(--space-6);
+        background: var(--color-side-nav-bg);
+    }
 }
 
 .header {
@@ -40,4 +50,21 @@
         flex: 1;
         min-width: 0;
     }
+
+    @include media.desktop {
+        grid-area: title;
+    }
+}
+
+.search {
+    display: flex;
+    grid-area: search;
+}
+
+.actions {
+    display: flex;
+    grid-area: actions;
+    align-items: center;
+    justify-self: end;
+    gap: var(--space-2);
 }

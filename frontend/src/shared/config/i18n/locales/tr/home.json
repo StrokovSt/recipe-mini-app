@@ -10,5 +10,13 @@
         "text": "Aramayı değiştirmeyi veya bazı filtreleri kaldırmayı deneyin."
     },
     "servings": "{{count}} porsiyon",
-    "title": "Tarifler"
+    "title": "Tarifler",
+    "categories": "Kategoriler",
+    "tags": "Etiketler",
+    "yourCollection": "Koleksiyonunuz",
+    "resetFilters": "Filtreleri sıfırla",
+    "allRecipes": "Tüm tarifler",
+    "recipeCount": "{{count}} tarif",
+    "noRecipes": "Boş",
+    "total": "Toplam: {{count}}"
 }

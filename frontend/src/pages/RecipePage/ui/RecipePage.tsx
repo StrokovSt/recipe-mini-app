@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
 import { buildRoute } from "@/app/router/routes";
@@ -8,6 +8,7 @@ import { getRecipeSource, useDeleteRecipe, useRecipe } from "@/entities/recipe";
 import { ApiError } from "@/shared/api";
 import DeleteIcon from "@/shared/assets/icons/icon-delete.svg?react";
 import EditIcon from "@/shared/assets/icons/icon-edit.svg?react";
+import { useLayoutMode } from "@/shared/lib/layout";
 import { shareLink } from "@/shared/lib/share";
 import { IconButton } from "@/shared/ui/Buttons";
 import { Dropdown } from "@/shared/ui/Dropdown";
@@ -32,7 +33,9 @@ const RecipePage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const location = useLocation();
-    const { t } = useTranslation(["recipe", "common"]);
+    const { t } = useTranslation(["recipe", "common", "footer"]);
+    const mode = useLayoutMode();
+    const isDesktop = mode === "desktop" || mode === "wide";
     // Фото и индекс не сбрасываем при закрытии: окно гаснет плавно и до конца показывает то же фото
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
@@ -105,57 +108,80 @@ const RecipePage = () => {
         }
     };
 
+    const headerButtons = (
+        <>
+            {recipe.telegraphUrl && (
+                <IconButton
+                    icon={isLinkCopied ? "check" : "share"}
+                    round
+                    type="button"
+                    aria-label={t(isLinkCopied ? "shareCopied" : "share")}
+                    onClick={handleShare}
+                />
+            )}
+            <Dropdown
+                trigger={<IconButton icon="more" round type="button" aria-label={t("actions")} />}
+                items={[
+                    { label: t("common:edit"), icon: <EditIcon />, onClick: () => navigate(buildRoute.editRecipe(recipe.id)) },
+                    { label: t("common:delete"), icon: <DeleteIcon />, danger: true, onClick: () => setIsConfirmOpen(true) },
+                ]}
+            />
+            {backButton}
+        </>
+    );
+
     return (
         <PageWrapper
             className={styles.page}
             header={
-                <PageHeader className={styles.header}>
-                    {recipe.telegraphUrl && (
-                        <IconButton
-                            icon={isLinkCopied ? "check" : "share"}
-                            round
-                            type="button"
-                            aria-label={t(isLinkCopied ? "shareCopied" : "share")}
-                            onClick={handleShare}
-                        />
+                // Компьютер: путь к рецепту слева в шапке, кнопки в своей зоне справа. Телефон и планшет: только кнопки
+                <PageHeader className={styles.header} actions={isDesktop && headerButtons}>
+                    {isDesktop ? (
+                        <nav className={styles.breadcrumbs} aria-label={t("breadcrumbs")}>
+                            <Link to={AppRoute.Home}>{t("footer:collection")}</Link>
+                            <span aria-hidden>/</span>
+                            <Link to={`${AppRoute.Home}?category=${recipe.categoryId}`}>{recipe.category.name}</Link>
+                            <span aria-hidden>/</span>
+                            <span className={styles.current} aria-current="page">{recipe.title}</span>
+                        </nav>
+                    ) : (
+                        headerButtons
                     )}
-                    <Dropdown
-                        trigger={<IconButton icon="more" round type="button" aria-label={t("actions")} />}
-                        items={[
-                            { label: t("common:edit"), icon: <EditIcon />, onClick: () => navigate(buildRoute.editRecipe(recipe.id)) },
-                            { label: t("common:delete"), icon: <DeleteIcon />, danger: true, onClick: () => setIsConfirmOpen(true) },
-                        ]}
-                    />
-                    {backButton}
                 </PageHeader>
             }
         >
-            <RecipeHero
-                title={recipe.title}
-                imageUrl={cover?.url}
-                videoUrl={video?.url}
-                source={source}
-                onImageClick={() => openLightbox(images.map((image) => image.url), 0)}
-            />
+            {/* Компьютер: крупное фото слева стоит на месте, рецепт справа прокручивается. На телефоне обёрток нет */}
+            <div className={styles.layout}>
+                <div className={styles.aside}>
+                    <RecipeHero
+                        title={recipe.title}
+                        imageUrl={cover?.url}
+                        videoUrl={video?.url}
+                        source={source}
+                        onImageClick={() => openLightbox(images.map((image) => image.url), 0)}
+                    />
+                </div>
+                <div className={styles.main}>
+                    {/* Без обложки плашке источника негде лежать — ставим её над названием */}
+                    {!cover && !video && source && <SourceBadge source={source} />}
 
-            {/* Без обложки плашке источника негде лежать — ставим её над названием */}
-            {!cover && !video && source && <SourceBadge source={source} />}
+                    <RecipeInfo
+                        title={recipe.title}
+                        category={recipe.category.name}
+                        description={recipe.description}
+                        time={totalTime}
+                        tags={recipe.tags.map(({ tag }) => tag)}
+                        nutrition={recipe}
+                    />
 
-            <RecipeInfo
-                title={recipe.title}
-                category={recipe.category.name}
-                description={recipe.description}
-                time={totalTime}
-                tags={recipe.tags.map(({ tag }) => tag)}
-                nutrition={recipe}
-            />
-
-            <RecipeContent
-                ingredients={recipe.ingredients}
-                steps={recipe.steps}
-                servings={recipe.servings ?? 1}
-                onPhotoClick={openLightbox}
-            />
+                    <RecipeContent
+                        ingredients={recipe.ingredients}
+                        steps={recipe.steps}
+                        servings={recipe.servings ?? 1}
+                        onPhotoClick={openLightbox}
+                    />
+                </div>
+            </div>
 
             <ConfirmModal
                 isOpen={isConfirmOpen}

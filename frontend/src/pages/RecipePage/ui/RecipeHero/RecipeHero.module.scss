@@ -1,9 +1,19 @@
+@use "@/shared/styles/media";
+
 // Отрицательные отступы съедают поля PageWrapper: обложка от верха экрана и от края до края
 .hero {
     position: relative;
     height: var(--size-recipe-cover);
     margin: calc(-1 * (var(--size-page-header) + var(--space-5))) calc(-1 * var(--space-page)) 0;
     background: var(--color-surface-dim);
+
+    // Компьютер: крупный блок слева во всю высоту колонки, со скруглением
+    @include media.desktop {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        border-radius: var(--radius-lg);
+    }
 }
 
 .media {

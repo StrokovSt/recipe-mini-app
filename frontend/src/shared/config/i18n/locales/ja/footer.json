@@ -3,5 +3,7 @@
     "sections": "セクション",
     "add": "レシピを追加",
     "expand": "パネルを開く",
-    "collapse": "パネルを閉じる"
+    "collapse": "パネルを閉じる",
+    "library": "ライブラリ",
+    "account": "アカウント"
 }

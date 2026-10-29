@@ -1,4 +1,6 @@
+import clsx from 'clsx';
 import { type Dispatch, type FocusEvent, type KeyboardEvent, memo, type Ref, type SetStateAction, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 import type { Category, Tag } from '@recipe/common';
@@ -35,11 +37,13 @@ interface RecipeFiltersProps {
     onOpenChange: (isOpen: boolean) => void;
     // Поиск и кнопка фильтров неактивны, пока грузится список
     disabled?: boolean;
+    // Компьютер: поиск с кнопкой фильтров встают сюда (в шапку), а категории и теги выбираются на странице
+    barContainer?: HTMLElement | null;
     ref?: Ref<HTMLElement>;
 }
 
 const RecipeFilters = (props: RecipeFiltersProps) => {
-    const {categories, tags, filters, setFilters, isOpen, onOpenChange, disabled, ref} = props;
+    const {categories, tags, filters, setFilters, isOpen, onOpenChange, disabled, barContainer, ref} = props;
     const { t } = useTranslation('filters');
 
     const activeCount = getActiveFilterCount(filters);
@@ -134,40 +138,42 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
         onOpenChange(false);
     };
 
-    return (
-        <article ref={ref}>
-            <div className={styles.bar}>
-                <SearchInput
-                    className={styles.search}
-                    value={filters.search ?? ""}
-                    onChange={handleSearchChange}
-                    placeholder={t('searchPlaceholder')}
-                    disabled={disabled}
-                    data-onboarding="search"
-                    delay={SEARCH_DELAY}
-                    onFocus={handleSearchFocus}
-                    onBlur={handleSearchBlur}
-                    onInput={(event) => setQuery((event.target as HTMLInputElement).value)}
-                    onKeyDown={handleSearchKeyDown}
-                />
-
-                <FilterButton
-                    className={styles.filter}
-                    activeCount={activeCount}
-                    onClick={() => onOpenChange(true)}
-                    disabled={disabled}
-                    data-onboarding="filter"
-                />
-
-                <SearchHistory isOpen={isSearchFocused} query={query} onPick={handleHistoryPick} />
-            </div>
-
-            <ActiveFilters
-                categories={categories}
-                tags={tags}
-                filters={filters}
-                setFilters={setFilters}
+    const bar = (
+        <div className={styles.bar}>
+            <SearchInput
+                className={styles.search}
+                value={filters.search ?? ""}
+                onChange={handleSearchChange}
+                placeholder={t('searchPlaceholder')}
+                disabled={disabled}
+                data-onboarding="search"
+                delay={SEARCH_DELAY}
+                onFocus={handleSearchFocus}
+                onBlur={handleSearchBlur}
+                onInput={(event) => setQuery((event.target as HTMLInputElement).value)}
+                onKeyDown={handleSearchKeyDown}
             />
+
+            <FilterButton
+                className={styles.filter}
+                activeCount={activeCount}
+                onClick={() => onOpenChange(true)}
+                disabled={disabled}
+                data-onboarding="filter"
+            />
+
+            <SearchHistory isOpen={isSearchFocused} query={query} onPick={handleHistoryPick} />
+        </div>
+    );
+
+    return (
+        // На компьютере здесь остаётся только окно фильтров: блок не занимает места на странице
+        <article ref={ref} className={clsx(barContainer && styles.portalled)}>
+            {barContainer ? (
+                createPortal(bar, barContainer)
+            ) : (
+                <ActiveFilters categories={categories} tags={tags} filters={filters} setFilters={setFilters} />
+            )}
 
             <BottomSheet
                 isOpen={isOpen}

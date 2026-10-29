@@ -1,4 +1,5 @@
 {
+    "breadcrumbs": "Caminho da receita",
     "notFound": {
         "title": "Receita não encontrada",
         "text": "Talvez tenha sido excluída ou o link esteja errado."

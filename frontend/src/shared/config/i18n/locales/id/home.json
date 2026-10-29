@@ -10,5 +10,13 @@
         "text": "Coba ubah pencarian atau hapus beberapa filter."
     },
     "servings": "{{count}} porsi",
-    "title": "Resep"
+    "title": "Resep",
+    "categories": "Kategori",
+    "tags": "Tag",
+    "yourCollection": "Koleksi Anda",
+    "resetFilters": "Atur ulang filter",
+    "allRecipes": "Semua resep",
+    "recipeCount": "{{count}} resep",
+    "noRecipes": "Kosong",
+    "total": "Total: {{count}}"
 }

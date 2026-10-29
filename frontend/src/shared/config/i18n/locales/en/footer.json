@@ -3,5 +3,7 @@
     "sections": "Sections",
     "add": "Add recipe",
     "expand": "Expand panel",
-    "collapse": "Collapse panel"
+    "collapse": "Collapse panel",
+    "library": "Library",
+    "account": "Account"
 }

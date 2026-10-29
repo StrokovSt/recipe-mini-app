@@ -18,6 +18,11 @@
         padding-inline: max(var(--space-page), calc((100% - var(--size-content-max-width)) / 2));
     }
 
+    // Компьютер: контент во всю ширину, края как у шапки
+    @include media.desktop {
+        padding-inline: var(--space-6);
+    }
+
     // Раскладка как у main: страницы задают gap через className
     // Тянется на всю высоту, чтобы сообщение (пустой список, не найдено) встало по центру свободного места
     .content {

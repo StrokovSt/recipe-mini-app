@@ -11,5 +11,13 @@
     },
     "servings_one": "{{count}} serving",
     "servings_other": "{{count}} servings",
-    "title": "Recipes"
+    "title": "Recipes",
+    "categories": "Categories",
+    "tags": "Tags",
+    "yourCollection": "Your collection",
+    "resetFilters": "Reset filters",
+    "allRecipes": "All recipes",
+    "recipeCount": "{{count}} rec.",
+    "noRecipes": "Empty",
+    "total": "Total: {{count}}"
 }
