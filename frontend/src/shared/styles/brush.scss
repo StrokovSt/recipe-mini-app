@@ -22,3 +22,70 @@
         background: var(--color-active);
     }
 }
+
+// Фото с краем сухой кисти: маска обрезает края, будто фото нанесено кистью по бумаге.
+// Форма — атрибут data-brush на обёртке фото: 1–6, у соседних карточек мазки разные; tall — для фото вдвое выше
+// ширины, чтобы мазки не растягивались. Маски нарисованы в пару к brush-wash: фото чуть отступает туда,
+// где из-под него выглядывает мазок
+@mixin brush-photo {
+    mask: url("@/shared/assets/images/brush/photo-1.webp") center / 100% 100% no-repeat;
+
+    @each $shape in 2, 3, 4, 5, 6, tall {
+        [data-brush="#{$shape}"] & {
+            mask-image: url("@/shared/assets/images/brush/photo-#{$shape}.webp");
+        }
+    }
+}
+
+// Мазок под фото в два движения кисти: основной цвета $color — широкий, выступает слева и сверху;
+// дополнительный цвета $stroke-color — уже, сдвинут вправо и вниз. Сухая фактура (пропуски, следы щетины)
+// нарисована в самих масках. Мазок чуть шире обёртки (--size-brush-bleed) и может выйти за край карточки.
+// Подключается в саму обёртку фото с data-brush, всё её содержимое ложится поверх
+@mixin brush-wash($color, $stroke-color) {
+    position: relative;
+    isolation: isolate;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        inset: calc(-1 * var(--size-brush-bleed));
+        z-index: -1;
+        background: $color;
+        mask: url("@/shared/assets/images/brush/wash-1.webp") center / 100% 100% no-repeat;
+    }
+
+    &::after {
+        background: $stroke-color;
+        mask-image: url("@/shared/assets/images/brush/stroke-1.webp");
+    }
+
+    @each $shape in 2, 3, 4, 5, 6, tall {
+        &[data-brush="#{$shape}"] {
+            &::before {
+                mask-image: url("@/shared/assets/images/brush/wash-#{$shape}.webp");
+            }
+
+            &::after {
+                mask-image: url("@/shared/assets/images/brush/stroke-#{$shape}.webp");
+            }
+        }
+    }
+}
+
+// Сухой росчерк кисти цвета $color под строкой: тонкий, с рваными концами. Подключается в сам элемент,
+// занимает его ::after; место под росчерк задаёт тот, кто подключает (отступ снизу)
+@mixin brush-rule($color) {
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: calc(-1 * var(--space-1));
+        width: 72%;
+        height: var(--size-brush-rule);
+        background: $color;
+        mask: url("@/shared/assets/images/brush/rule.webp") center / 100% 100% no-repeat;
+    }
+}

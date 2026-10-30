@@ -30,7 +30,7 @@
         background: var(--tile-hover-bg, var(--color-hover-bg));
     }
 
-    @include states.hover(":not(:has(.more:hover, .more:active))") {
+    @include states.hover(":not(:has(.more:hover, .more:active, .seal:hover, .seal:active))") {
         @include brush.brush-underline-active;
 
         border-color: var(--tile-accent, var(--color-active));
@@ -60,6 +60,47 @@
         svg {
             width: 60%;
             height: 60%;
+        }
+    }
+
+    // ⋯ пилюлей на верхней рамке низкой плитки, как у шагов рецепта. Фон плитки перекрывает рамку под пилюлей.
+    // Поверх ссылки, растянутой на всю плитку, иначе нажатие на нижнюю половину уходит в неё
+    .seal {
+        @include tap-area.tap-area;
+
+        position: absolute;
+        top: calc(var(--size-seal-menu-height) / -2);
+        right: var(--space-3);
+        z-index: 1;
+        grid-area: auto;
+        display: grid;
+        width: var(--size-seal-menu-width);
+        height: var(--size-seal-menu-height);
+        padding: 0;
+        border: 1px solid var(--tile-border, var(--color-border-strong));
+        border-radius: var(--radius-lg);
+        outline: none;
+        background: var(--tile-bg, var(--color-surface));
+        color: var(--tile-accent, var(--color-text-muted));
+        cursor: pointer;
+        transition: var(--transition-base);
+        transition-property: border-color, background-color;
+        place-items: center;
+
+        svg {
+            width: var(--size-icon-md);
+            height: var(--size-icon-md);
+        }
+
+        @include states.hover {
+            border-color: var(--tile-accent, var(--color-active));
+        }
+
+        // Меню открыто (data-open ставит Headless UI) или фокус с клавиатуры
+        &[data-open],
+        &[data-focus] {
+            border-color: var(--tile-accent, var(--color-active));
+            background: var(--tile-hover-bg, var(--color-active-bg));
         }
     }
 
@@ -118,7 +159,7 @@
         }
     }
 
-    // Низкая плитка: «#» и название в одной строке, ⋯ пилюлей на верхней рамке (как в шагах рецепта)
+    // Низкая плитка: «#» и название в одной строке
     &.compact {
         grid-template: "icon title title" auto "subtitle subtitle arrow" auto / auto minmax(0, 1fr) auto;
         gap: var(--space-1);
@@ -129,45 +170,6 @@
 
         .title {
             margin-top: 0;
-        }
-
-        // Фон плитки перекрывает рамку под пилюлей
-        .more {
-            @include tap-area.tap-area;
-
-            position: absolute;
-            grid-area: auto;
-            top: calc(var(--size-seal-sm) / -2);
-            right: var(--space-3);
-            display: grid;
-            width: var(--size-step-menu-width);
-            height: var(--size-seal-sm);
-            padding: 0;
-            border: 1px solid var(--tile-border, var(--color-border-strong));
-            border-radius: var(--radius-full);
-            outline: none;
-            background: var(--tile-bg, var(--color-surface));
-            color: var(--tile-accent, var(--color-text-muted));
-            cursor: pointer;
-            transition: var(--transition-base);
-            transition-property: border-color, background-color;
-            place-items: center;
-
-            svg {
-                width: var(--size-row-icon);
-                height: var(--size-row-icon);
-            }
-
-            @include states.hover {
-                border-color: var(--tile-accent, var(--color-active));
-            }
-
-            // Меню открыто (data-open ставит Headless UI) или фокус с клавиатуры
-            &[data-open],
-            &[data-focus] {
-                border-color: var(--tile-accent, var(--color-active));
-                background: var(--tile-hover-bg, var(--color-active-bg));
-            }
         }
     }
 }

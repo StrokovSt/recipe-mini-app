@@ -1,6 +1,8 @@
 import i18next from "i18next";
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
+import { RegularButton } from "@/shared/ui/Buttons";
+
 import styles from "./ErrorBoundary.module.scss";
 
 interface Props {
@@ -40,12 +42,7 @@ export class ErrorBoundary extends Component<Props, State> {
                     <p className={styles.subtext}>
                         {this.state.error?.message}
                     </p>
-                    <button
-                        onClick={this.reset}
-                        className={styles.button}
-                    >
-                        {i18next.t("errorBoundary.retry")}
-                    </button>
+                    <RegularButton label={i18next.t("errorBoundary.retry")} onClick={this.reset} />
                 </div>
             );
         }

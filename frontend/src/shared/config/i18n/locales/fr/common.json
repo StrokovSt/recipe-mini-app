@@ -17,10 +17,10 @@
     "loading": "Chargement",
     "search": "Rechercher",
     "clearSearch": "Effacer la recherche",
-    "nothingFound": "Aucun résultat",
     "showMore": "Afficher {{count}} de plus",
     "collapse": "Réduire",
     "minutes": "{{count}} min",
+    "servingsShort": "{{count}} port.",
     "iconPicker": "Choisir une icône",
     "imageInput": {
         "add": "Ajouter une photo",

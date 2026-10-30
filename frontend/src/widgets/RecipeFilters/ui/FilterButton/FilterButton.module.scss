@@ -9,11 +9,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        min-width: 20px;
-        height: 20px;
+        min-width: var(--size-badge);
+        height: var(--size-badge);
         padding: 0 var(--space-1);
 
-        border-radius: 10px;
+        border-radius: calc(var(--size-badge) / 2);
         background: var(--color-error);
 
         color: var(--tg-button-text);

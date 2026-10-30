@@ -17,8 +17,8 @@
     transition-property: border-color, background, color, transform, filter;
 
     svg {
-        width: 22px;
-        height: 22px;
+        width: var(--size-icon-lg);
+        height: var(--size-icon-lg);
     }
 
     &:disabled {

@@ -1,6 +1,10 @@
 # Dependencies
 node_modules/
 
+# Playwright: отчёты и разница скриншотов (эталоны в frontend/e2e/__screenshots__ коммитятся)
+test-results/
+playwright-report/
+
 # Build
 dist/
 build/

@@ -17,10 +17,10 @@
     "loading": "Yükleniyor",
     "search": "Ara",
     "clearSearch": "Aramayı temizle",
-    "nothingFound": "Hiçbir şey bulunamadı",
     "showMore": "{{count}} tane daha göster",
     "collapse": "Daha az göster",
     "minutes": "{{count}} dk",
+    "servingsShort": "{{count}} porsiyon",
     "iconPicker": "Simge seç",
     "imageInput": {
         "add": "Fotoğraf ekle",

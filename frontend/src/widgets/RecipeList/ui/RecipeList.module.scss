@@ -1,3 +1,5 @@
+@use "@/shared/styles/media";
+
 // Заголовок только для экранного диктора: на экране его нет, но из дерева доступности он не пропадает
 .heading {
     position: absolute;
@@ -36,6 +38,11 @@
     );
     grid-auto-rows: 1fr;
     gap: var(--list-gap);
+
+    // Узкий телефон: две карточки не помещаются, одна на всю ширину
+    @include media.narrow {
+        grid-template-columns: minmax(0, 1fr);
+    }
 
     // Карточка растягивается на всю ячейку, как раньше без обёртки
     .item {

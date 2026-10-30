@@ -49,8 +49,8 @@
         }
 
         svg {
-            width: 18px;
-            height: 18px;
+            width: var(--size-icon-sm);
+            height: var(--size-icon-sm);
         }
     }
 }
@@ -59,8 +59,8 @@
     position: absolute;
     top: 50%;
     left: var(--space-4);
-    width: 20px;
-    height: 20px;
+    width: var(--size-icon-md);
+    height: var(--size-icon-md);
 
     pointer-events: none;
     transform: translateY(-50%);

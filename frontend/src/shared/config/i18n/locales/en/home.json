@@ -9,8 +9,6 @@
         "title": "Nothing found",
         "text": "Try changing your search or removing some filters."
     },
-    "servings_one": "{{count}} serving",
-    "servings_other": "{{count}} servings",
     "title": "Recipes",
     "categories": "Categories",
     "tags": "Tags",

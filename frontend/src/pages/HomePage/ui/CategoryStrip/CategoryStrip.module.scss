@@ -1,4 +1,3 @@
-@use "sass:list";
 @use "@/shared/styles/category-colors" as *;
 @use "@/shared/styles/states";
 
@@ -11,9 +10,9 @@
 
 // Вкладка: картинка категории, название и число рецептов. Цвета те же, что у плиток категорий (--tile-*)
 .item {
-    --tile-bg: var(--color-surface);
-    --tile-border: var(--color-border);
-    --tile-accent: var(--color-active);
+    --tile-bg: var(--category-bg, var(--color-surface));
+    --tile-border: var(--category-border, var(--color-border));
+    --tile-accent: var(--category-accent, var(--color-active));
 
     display: flex;
     flex-shrink: 0;
@@ -39,21 +38,7 @@
         box-shadow: inset 0 0 0 1px var(--tile-accent);
     }
 
-    @each $name, $colors in $category-colors {
-        $accent: list.nth($colors, 3);
-
-        &.#{$name} {
-            --tile-bg: #{list.nth($colors, 1)};
-            --tile-border: #{list.nth($colors, 2)};
-            --tile-accent: #{$accent};
-
-            [data-theme="dark"] & {
-                --tile-bg: color-mix(in srgb, #{$accent} 18%, var(--color-surface));
-                --tile-border: color-mix(in srgb, #{$accent} 40%, var(--color-surface));
-                --tile-accent: color-mix(in srgb, #{$accent} 50%, var(--color-text));
-            }
-        }
-    }
+    @include category-color-vars;
 
     // «Все рецепты»: иконка коллекции в цвете акцента
     &.all .picture {

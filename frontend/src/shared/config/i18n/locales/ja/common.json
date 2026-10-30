@@ -17,10 +17,10 @@
     "loading": "読み込み中",
     "search": "検索",
     "clearSearch": "検索をクリア",
-    "nothingFound": "見つかりませんでした",
     "showMore": "さらに{{count}}件表示",
     "collapse": "折りたたむ",
     "minutes": "{{count}}分",
+    "servingsShort": "{{count}}人分",
     "iconPicker": "アイコンを選択",
     "imageInput": {
         "add": "写真を追加",

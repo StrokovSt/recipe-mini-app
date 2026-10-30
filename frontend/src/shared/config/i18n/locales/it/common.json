@@ -17,10 +17,10 @@
     "loading": "Caricamento",
     "search": "Cerca",
     "clearSearch": "Cancella ricerca",
-    "nothingFound": "Nessun risultato",
     "showMore": "Mostra altri {{count}}",
     "collapse": "Mostra meno",
     "minutes": "{{count}} min",
+    "servingsShort": "{{count}} porz.",
     "iconPicker": "Scegli un'icona",
     "imageInput": {
         "add": "Aggiungi foto",

@@ -26,26 +26,33 @@ interface TileProps {
 // Плитка раздела: вся плитка ведёт по ссылке, в углу меню действий
 export const Tile = (props: TileProps) => {
     const { icon, title, to, subtitle, menu, menuLabel, row, compact, className } = props;
+    const single = menu.length === 1 ? menu[0] : undefined;
 
     return (
         <article className={clsx(styles.tile, row && styles.row, compact && styles.compact, className)}>
             <span className={styles.icon} aria-hidden>{icon}</span>
             {/* Одно действие — сразу кнопка, меню из одного пункта не нужно */}
-            {menu.length === 1 ? (
+            {single && !compact && (
                 <IconButton
                     round
-                    variant={menu[0].danger ? "danger" : "default"}
+                    variant={single.danger ? "danger" : "default"}
                     className={styles.more}
-                    aria-label={menu[0].label}
-                    onClick={menu[0].onClick}
+                    aria-label={single.label}
+                    onClick={single.onClick}
                 >
-                    {menu[0].icon}
+                    {single.icon}
                 </IconButton>
-            ) : (
+            )}
+            {single && compact && (
+                <button type="button" className={styles.seal} aria-label={single.label} onClick={single.onClick}>
+                    {single.icon}
+                </button>
+            )}
+            {!single && (
                 <Dropdown
                     trigger={
                         compact ? (
-                            <button type="button" className={styles.more} aria-label={menuLabel}>
+                            <button type="button" className={styles.seal} aria-label={menuLabel}>
                                 <MoreIcon />
                             </button>
                         ) : (

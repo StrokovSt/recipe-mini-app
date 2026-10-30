@@ -18,8 +18,8 @@
     cursor: pointer;
 
     svg {
-        width: 20px;
-        height: 20px;
+        width: var(--size-icon-md);
+        height: var(--size-icon-md);
         transition: transform var(--transition-base);
     }
 

@@ -35,8 +35,8 @@
         transition-property: border-color, background;
 
         svg {
-            width: 28px;
-            height: 28px;
+            width: var(--size-icon-xl);
+            height: var(--size-icon-xl);
         }
 
         &:focus-visible {

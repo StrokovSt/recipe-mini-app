@@ -172,7 +172,10 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
             {barContainer ? (
                 createPortal(bar, barContainer)
             ) : (
-                <ActiveFilters categories={categories} tags={tags} filters={filters} setFilters={setFilters} />
+                <>
+                    {bar}
+                    <ActiveFilters categories={categories} tags={tags} filters={filters} setFilters={setFilters} />
+                </>
             )}
 
             <BottomSheet

@@ -1,3 +1,5 @@
+@use "sass:list";
+
 // Цвета плиток категорий под каждую картинку: подложка, рамка и акцент (рамка при наведении).
 // Ключ — iconName в нижнем регистре (entities/category/config/categoryIcons.ts)
 $category-colors: (
@@ -43,3 +45,24 @@ $category-colors: (
     pizza: (#F6E1C8, #E5C9A6, #B5452C),
     burger: (#F4E3C6, #E3CCA4, #A35A1E),
 );
+
+// Цвета категории классом с ключом картинки: подложка, рамка и акцент в --category-bg/-border/-accent.
+// Ими красятся плитка категории и подпись категории на карточке рецепта
+@mixin category-color-vars {
+    @each $name, $colors in $category-colors {
+        $accent: list.nth($colors, 3);
+
+        &.#{$name} {
+            --category-bg: #{list.nth($colors, 1)};
+            --category-border: #{list.nth($colors, 2)};
+            --category-accent: #{$accent};
+
+            // В тёмной теме тот же оттенок поверх тёмной карточки
+            [data-theme="dark"] & {
+                --category-bg: color-mix(in srgb, #{$accent} 18%, var(--color-surface));
+                --category-border: color-mix(in srgb, #{$accent} 40%, var(--color-surface));
+                --category-accent: color-mix(in srgb, #{$accent} 50%, var(--color-text));
+            }
+        }
+    }
+}

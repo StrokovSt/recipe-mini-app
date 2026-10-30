@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import type { Recipe } from '@recipe/common';
 
 import { TRANSITION_BASE } from '@/shared/config/animation';
+import { getBrushShape } from '@/shared/lib/brush';
 import { Message } from '@/shared/ui/Message';
 
 import { getBentoPlacements } from '../lib/getBentoPlacements';
@@ -130,6 +131,7 @@ const RecipeList = (props: RecipeListProps) => {
                                         isEager={index < EAGER_COVERS}
                                         isPriority={index === 0}
                                         layout={layout}
+                                        brush={getBrushShape(index)}
                                     />
                                 </m.div>
                             );

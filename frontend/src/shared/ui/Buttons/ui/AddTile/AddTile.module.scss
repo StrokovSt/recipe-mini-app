@@ -15,8 +15,8 @@
     background: var(--color-add-tile-bg);
 
     color: var(--color-text-soft);
-    font: var(--font-xs);
-    font-weight: var(--font-weight-extrabold);
+    font: var(--font-ui-xs);
+    font-weight: var(--font-weight-bold);
 
     cursor: pointer;
 
@@ -27,8 +27,8 @@
         background-color var(--transition-slow);
 
     svg {
-        width: 24px;
-        height: 24px;
+        width: var(--size-icon-lg);
+        height: var(--size-icon-lg);
     }
 
     &:focus-visible {

@@ -22,6 +22,8 @@
     "lint": "eslint .",
     "lint:css": "npm run lint:css:fix --workspace frontend",
     "test": "npm run test --workspace frontend",
+    "test:screens": "npm run test:screens --workspace frontend",
+    "test:screens:update": "npm run test:screens:update --workspace frontend",
     "check": "npm run typecheck && npm run lint && npm run lint:css --workspace frontend && npm run i18n:check --workspace frontend && npm test"
   },
   "devDependencies": {

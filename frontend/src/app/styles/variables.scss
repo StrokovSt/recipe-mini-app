@@ -91,6 +91,8 @@
     --size-page-header: calc(var(--size-menu-button) + 2 * var(--space-3) + 1px);
     --size-brush-height: 10px;
     --size-brush-offset: 6px;
+    --size-brush-rule: 7px; /* сухой росчерк под временем и порциями карточки */
+    --size-brush-bleed: 8px; /* мазок под фото карточки выходит за обёртку фото, чуть дальше края карточки */
     --size-sheet-close: clamp(28px, 8vw, 40px);
     --size-loader-md: 120px;
     --size-loader-lg: 180px;
@@ -117,7 +119,8 @@
     --size-section-mark: 28px;
     --size-seal-sm: 22px; /* высота печати «Шаг N» на рамке шага в форме рецепта */
     --size-tab-error-dot: 8px; /* точка на печати вкладки, где есть ошибки */
-    --size-step-menu-width: 32px; /* пилюля ⋯ на рамке шага */
+    --size-seal-menu-width: 44px; /* пилюля ⋯ на рамке шага и низкой плитки (теги) */
+    --size-seal-menu-height: 28px;
     --size-step-photo-chip: 36px; /* кнопка «Фото» у шага без фото */
     --size-about-stamp: 128px; /* круглая печать на странице «О приложении» */
     --size-about-text: 280px; /* ширина описания под названием */
@@ -154,6 +157,16 @@
 
     // Стрелка или галочка в конце строки-кнопки (выбор языка)
     --size-row-icon: 16px;
+
+    // Общая шкала иконок для мест без своего размера
+    --size-icon-xs: 14px;
+    --size-icon-sm: 18px;
+    --size-icon-md: 20px;
+    --size-icon-lg: 22px;
+    --size-icon-xl: 28px;
+    --size-sheet-handle-width: 40px; /* полоска-ручка шторки */
+    --size-sheet-handle-height: 4px;
+    --size-badge: 20px; /* счётчик на кнопке фильтров */
     --size-sheet-handle-zone: 44px;
 
     // Отступ сверху шторки под полоску захвата

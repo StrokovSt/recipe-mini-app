@@ -76,9 +76,9 @@
 
     &::before {
         content: "";
-        width: 40px;
-        height: 4px;
-        border-radius: 2px;
+        width: var(--size-sheet-handle-width);
+        height: var(--size-sheet-handle-height);
+        border-radius: calc(var(--size-sheet-handle-height) / 2);
         background: var(--color-border-strong);
         transition: background var(--transition-base);
     }

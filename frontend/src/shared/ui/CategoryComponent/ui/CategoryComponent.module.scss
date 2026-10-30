@@ -26,8 +26,8 @@
 
     svg {
         flex-shrink: 0;
-        width: 28px;
-        height: 28px;
+        width: var(--size-icon-xl);
+        height: var(--size-icon-xl);
         color: var(--color-accent);
 
         transition: color var(--transition-base), stroke-width var(--transition-base);

@@ -10,7 +10,7 @@
 
     svg {
         flex-shrink: 0;
-        width: 14px;
-        height: 14px;
+        width: var(--size-icon-xs);
+        height: var(--size-icon-xs);
     }
 }

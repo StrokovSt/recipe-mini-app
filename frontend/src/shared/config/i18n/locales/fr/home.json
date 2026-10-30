@@ -9,9 +9,6 @@
         "title": "Aucun résultat",
         "text": "Modifiez votre recherche ou retirez quelques filtres."
     },
-    "servings_many": "{{count}} portions",
-    "servings_one": "{{count}} portion",
-    "servings_other": "{{count}} portions",
     "title": "Recettes",
     "categories": "Catégories",
     "tags": "Tags",

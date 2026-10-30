@@ -17,10 +17,10 @@
     "loading": "Загрузка",
     "search": "Поиск",
     "clearSearch": "Очистить поиск",
-    "nothingFound": "Ничего не найдено",
     "showMore": "Показать ещё {{count}}",
     "collapse": "Свернуть",
     "minutes": "{{count}} мин",
+    "servingsShort": "{{count}} пор.",
     "iconPicker": "Выбор иконки",
     "imageInput": {
         "add": "Добавить фото",

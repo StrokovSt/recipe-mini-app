@@ -1,4 +1,6 @@
 @use "@/shared/styles/brush";
+@use "@/shared/styles/category-colors" as *;
+@use "@/shared/styles/media";
 @use "@/shared/styles/states";
 
 @mixin raised {
@@ -27,6 +29,9 @@
     transition: var(--transition-base);
     transition-property: transform, border-color, background, box-shadow;
 
+    // Цвета категории (category-colors.scss) на всю карточку: ими красятся мазок под фото и росчерк под временем
+    @include category-color-vars;
+
     @media (hover: hover) {
         &:hover {
             @include raised;
@@ -43,42 +48,54 @@
         @include brush.brush-underline-active;
     }
 
+    // Фото с краем сухой кисти на мазке цвета категории: основной темнее, дополнительный светлее. Форма — data-brush.
+    // Мазок слегка выходит за край карточки, поэтому без overflow: размер обёртке задают aspect-ratio и сетка,
+    // а фото лежит поверх абсолютно и не растягивает её
     .media {
-        position: relative;
-        display: grid;
-        place-items: center;
         aspect-ratio: 4 / 3;
-        overflow: hidden;
-        border-radius: var(--radius-md) var(--radius-md) 0 0;
-        background: color-mix(in srgb, var(--color-category-bg) 88%, black);
+        margin: var(--space-1) var(--space-1) 0;
+
+        @include brush.brush-wash(
+            color-mix(in srgb, color-mix(in srgb, var(--category-accent) 80%, black) 80%, transparent),
+            color-mix(in srgb, color-mix(in srgb, var(--category-accent) 45%, var(--category-bg)) 80%, transparent)
+        );
     }
 
+    // Без фото: картинка категории на пустом мазке той же формы, что и фото
     .placeholder {
-        width: 40%;
-        height: 40%;
-        opacity: 0.45;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        padding: 22% 30%;
+        background: var(--category-bg);
         color: var(--color-accent);
+
+        @include brush.brush-photo;
     }
 
     .image {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform var(--transition-slow);
+
+        @include brush.brush-photo;
     }
 
     .badge {
         position: absolute;
         top: var(--space-2);
         right: var(--space-2);
-        padding: 2px var(--space-2);
+        padding: 0 var(--space-2);
 
         border-radius: var(--radius-sm);
-        background: rgb(0 0 0 / 60%);
+        background: var(--color-media-badge-bg);
 
-        color: #fff;
+        color: var(--color-media-text);
         font: var(--font-ui-xs);
-        font-size: 10px;
         font-weight: var(--font-weight-bold);
     }
 
@@ -87,33 +104,55 @@
         flex: 1;
         flex-direction: column;
         gap: var(--space-2);
+        min-width: 0;
         padding: var(--space-3);
     }
 
-    .title,
+    // Название в одну строку, под ним время и порции, описание не больше двух строк:
+    // карточки одной высоты и читаются с одного взгляда
+    .title {
+        overflow: hidden;
+        font: var(--font-size-md) / var(--font-line-sm) var(--font-family-header);
+        font-weight: var(--font-weight-bold);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     .description {
         display: -webkit-box;
         overflow: hidden;
+        color: var(--tg-hint);
+        font: var(--font-sm);
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         line-clamp: 2;
     }
 
-    .title {
-        font: var(--font-size-md) / var(--font-line-sm) var(--font-family-header);
-        font-weight: var(--font-weight-bold);
-    }
-
-    .description {
-        color: var(--tg-hint);
-        font: var(--font-sm);
-    }
-
+    // Время и порции подчёркнуты сухим росчерком кисти цвета категории
     .meta {
-        display: flex;
-        justify-content: space-between;
-        gap: var(--space-2);
-        margin-top: auto;
+        padding-bottom: var(--space-2);
+        color: var(--tg-hint);
+        font: var(--font-ui-xs);
+        white-space: nowrap;
+
+        span + span::before {
+            content: "·";
+            margin: 0 var(--space-2);
+        }
+
+        @include brush.brush-rule(color-mix(in srgb, var(--category-accent) 55%, transparent));
+    }
+
+    // Узкий телефон, карточка одна в ряду: фото слева, текст справа
+    @include media.narrow {
+        flex-direction: row;
+
+        .media {
+            flex: 0 0 40%;
+            align-self: flex-start;
+            aspect-ratio: 1;
+            margin: var(--space-3) 0 var(--space-3) var(--space-3);
+        }
     }
 
     // Малая карточка в живой сетке: фото одной высоты на любой ширине, строки сетки ровные
@@ -135,15 +174,6 @@
         aspect-ratio: auto;
     }
 
-    // Широкой и высокой карточке высоту задаёт строка сетки, а не фото: оно лишь заполняет место
-    &.wide,
-    &.tall {
-        .image {
-            position: absolute;
-            inset: 0;
-        }
-    }
-
     // Широкая карточка в живой сетке: фото слева на всю высоту, текст справа крупнее
     &.wide {
         flex-direction: row;
@@ -151,7 +181,6 @@
         .media {
             flex: 0 0 55%;
             aspect-ratio: auto;
-            border-radius: var(--radius-md) 0 0 var(--radius-md);
         }
 
         .body {
@@ -162,11 +191,6 @@
         .title {
             font-size: var(--font-size-xl);
             line-height: var(--font-line-xl);
-        }
-
-        .description {
-            -webkit-line-clamp: 4;
-            line-clamp: 4;
         }
     }
 

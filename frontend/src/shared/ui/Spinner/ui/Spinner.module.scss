@@ -7,8 +7,8 @@
 }
 
 .spinner {
-    width: 24px;
-    height: 24px;
+    width: var(--size-icon-lg);
+    height: var(--size-icon-lg);
     color: var(--color-accent);
 }
 
