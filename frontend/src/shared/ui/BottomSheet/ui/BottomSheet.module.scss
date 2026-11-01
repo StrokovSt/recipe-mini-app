@@ -1,4 +1,5 @@
 @use "@/shared/styles/bar";
+@use "@/shared/styles/media";
 @use "@/shared/styles/states";
 
 .root {
@@ -157,4 +158,43 @@
     gap: var(--space-3);
     margin: 0 calc(-1 * var(--space-5)) calc(-1 * (var(--space-5) + env(safe-area-inset-bottom)));
     padding: var(--space-4) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom));
+}
+
+// Компьютер: шторки нет, вместо неё обычное окно по центру экрана, как Modal. Тянуть его не за что
+@include media.desktop {
+    .container {
+        top: 0;
+        align-items: center;
+        padding: var(--space-6);
+    }
+
+    .panel {
+        --size-sheet-top: var(--space-5);
+
+        max-width: var(--size-dialog-max-width);
+        padding-bottom: var(--space-5);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+        transition: var(--transition-base);
+        transition-property: opacity, transform;
+
+        &[data-closed] {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+    }
+
+    .handle {
+        display: none;
+    }
+
+    .close {
+        top: var(--space-4);
+    }
+
+    .footer {
+        margin-bottom: calc(-1 * var(--space-5));
+        padding-bottom: var(--space-5);
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
 }

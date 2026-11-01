@@ -204,23 +204,28 @@ const RecipeForm = (props: RecipeFormProps) => {
                 noValidate
                 onSubmit={submit}
             >
-                <FormSection mark="一" title={t("sections.cover")}>
-                    <Controller
-                        control={control}
-                        name="cover"
-                        render={({ field }) => (
-                            <ImageInput
-                                value={field.value}
-                                onChange={field.onChange}
-                                onUpload={uploadCover}
-                            />
-                        )}
-                    />
-                </FormSection>
+                {/* Компьютер: слева обложка и основное, справа ингредиенты и шаги. На телефоне обёрток нет */}
+                <div className={styles.aside}>
+                    <FormSection mark="一" title={t("sections.cover")}>
+                        <Controller
+                            control={control}
+                            name="cover"
+                            render={({ field }) => (
+                                <ImageInput
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    onUpload={uploadCover}
+                                />
+                            )}
+                        />
+                    </FormSection>
 
-                <MainFields />
+                    <MainFields />
+                </div>
 
-                <ContentFields tab={contentTab} onTabChange={setContentTab} />
+                <div className={styles.main}>
+                    <ContentFields tab={contentTab} onTabChange={setContentTab} />
+                </div>
             </form>
 
             <PageFooter className={styles.footer}>

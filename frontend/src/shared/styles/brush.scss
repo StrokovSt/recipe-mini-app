@@ -23,14 +23,15 @@
     }
 }
 
+// Формы мазка: data-brush на карточке, 1–6 по очереди (shared/lib/brush), tall — для фото вдвое выше ширины
+$shapes: 2, 3, 4, 5, 6, tall;
+
 // Фото с краем сухой кисти: маска обрезает края, будто фото нанесено кистью по бумаге.
-// Форма — атрибут data-brush на обёртке фото: 1–6, у соседних карточек мазки разные; tall — для фото вдвое выше
-// ширины, чтобы мазки не растягивались. Маски нарисованы в пару к brush-wash: фото чуть отступает туда,
-// где из-под него выглядывает мазок
+// Маски нарисованы в пару к brush-wash: фото чуть отступает туда, где из-под него выглядывает мазок
 @mixin brush-photo {
     mask: url("@/shared/assets/images/brush/photo-1.webp") center / 100% 100% no-repeat;
 
-    @each $shape in 2, 3, 4, 5, 6, tall {
+    @each $shape in $shapes {
         [data-brush="#{$shape}"] & {
             mask-image: url("@/shared/assets/images/brush/photo-#{$shape}.webp");
         }
@@ -40,7 +41,7 @@
 // Мазок под фото в два движения кисти: основной цвета $color — широкий, выступает слева и сверху;
 // дополнительный цвета $stroke-color — уже, сдвинут вправо и вниз. Сухая фактура (пропуски, следы щетины)
 // нарисована в самих масках. Мазок чуть шире обёртки (--size-brush-bleed) и может выйти за край карточки.
-// Подключается в саму обёртку фото с data-brush, всё её содержимое ложится поверх
+// Подключается в обёртку фото внутри элемента с data-brush, всё содержимое обёртки ложится поверх
 @mixin brush-wash($color, $stroke-color) {
     position: relative;
     isolation: isolate;
@@ -60,8 +61,8 @@
         mask-image: url("@/shared/assets/images/brush/stroke-1.webp");
     }
 
-    @each $shape in 2, 3, 4, 5, 6, tall {
-        &[data-brush="#{$shape}"] {
+    @each $shape in $shapes {
+        [data-brush="#{$shape}"] & {
             &::before {
                 mask-image: url("@/shared/assets/images/brush/wash-#{$shape}.webp");
             }
@@ -73,7 +74,7 @@
     }
 }
 
-// Сухой росчерк кисти цвета $color под строкой: тонкий, с рваными концами. Подключается в сам элемент,
+// Сухой росчерк кисти цвета $color под строкой, форма по data-brush предка. Подключается в сам элемент,
 // занимает его ::after; место под росчерк задаёт тот, кто подключает (отступ снизу)
 @mixin brush-rule($color) {
     position: relative;
@@ -86,6 +87,12 @@
         width: 72%;
         height: var(--size-brush-rule);
         background: $color;
-        mask: url("@/shared/assets/images/brush/rule.webp") center / 100% 100% no-repeat;
+        mask: url("@/shared/assets/images/brush/rule-1.webp") center / 100% 100% no-repeat;
+    }
+
+    @each $shape in 2, 3, 4, 5, 6 {
+        [data-brush="#{$shape}"] &::after {
+            mask-image: url("@/shared/assets/images/brush/rule-#{$shape}.webp");
+        }
     }
 }

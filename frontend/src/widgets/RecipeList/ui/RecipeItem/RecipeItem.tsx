@@ -56,8 +56,10 @@ const RecipeItem = (props: RecipeItemProps) => {
     const theme = getCategoryIconName(category.iconName).toLowerCase();
 
     return (
-        <Link to={`/recipe/${id}`} state={{ fromList: true }} className={clsx(styles.card, styles[layout], styles[theme])}>
-            <div className={styles.media} data-brush={layout === 'tall' ? 'tall' : brush}>
+        <Link to={`/recipe/${id}`} state={{ fromList: true }} className={clsx(styles.card, styles[layout], styles[theme])}
+            data-brush={layout === 'tall' ? 'tall' : brush}
+        >
+            <div className={styles.media}>
                 {cover ? (
                     <img
                         src={getImageUrl(cover.url, COVER_WIDTHS[COVER_WIDTHS.length - 1])}

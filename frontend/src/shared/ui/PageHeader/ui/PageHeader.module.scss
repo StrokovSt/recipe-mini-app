@@ -37,6 +37,12 @@
         grid-template-columns: minmax(0, 1fr) minmax(0, var(--size-header-search)) minmax(0, 1fr) auto;
         padding-inline: var(--space-6);
         background: var(--color-side-nav-bg);
+
+        // Без поиска (форма, рецепт): заголовку всё место до кнопок, длинный не переносится
+        &:not(:has(.search)) {
+            grid-template-areas: "title actions profile";
+            grid-template-columns: minmax(0, 1fr) auto auto;
+        }
     }
 }
 

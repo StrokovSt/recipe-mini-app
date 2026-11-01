@@ -140,6 +140,7 @@
     --size-switch-height: 24px;
     --size-switch-knob: 18px;
     --size-modal-max-width: 400px;
+    --size-dialog-max-width: clamp(560px, 42vw, 960px); /* шторка на компьютере — окно по центру: растёт с шириной экрана (1440 → 605px, 1920 → 806px) */
     --size-tile-action: 40px;
     --size-tile-icon: 32px;
     --size-tile-arrow: 16px;

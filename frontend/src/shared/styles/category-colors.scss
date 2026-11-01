@@ -59,8 +59,8 @@ $category-colors: (
 
             // В тёмной теме тот же оттенок поверх тёмной карточки
             [data-theme="dark"] & {
-                --category-bg: color-mix(in srgb, #{$accent} 18%, var(--color-surface));
-                --category-border: color-mix(in srgb, #{$accent} 40%, var(--color-surface));
+                --category-bg: color-mix(in srgb, #{$accent} 24%, var(--color-surface));
+                --category-border: color-mix(in srgb, #{$accent} 60%, var(--color-surface));
                 --category-accent: color-mix(in srgb, #{$accent} 50%, var(--color-text));
             }
         }

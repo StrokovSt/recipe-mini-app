@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import type { Category, Tag } from '@recipe/common';
 
-import { getCategoryIcon } from '@/entities/category';
+import { getCategoryIcon, getCategoryIconName } from '@/entities/category';
 import type { GetRecipesProps } from '@/entities/recipe/types';
 import { addToSearchHistory, SearchHistory } from '@/features/search-history';
 import { BottomSheet } from '@/shared/ui/BottomSheet';
@@ -226,6 +226,7 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                                     key={category.id}
                                     label={category.name}
                                     icon={<Icon />}
+                                    colorKey={getCategoryIconName(category.iconName).toLowerCase()}
                                     isActive={draft.categoryId === category.id}
                                     onClick={() =>
                                         handleCategoryChange(

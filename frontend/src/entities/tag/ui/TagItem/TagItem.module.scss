@@ -22,8 +22,8 @@ $tag-palette: salads, soups, fish, citrus, berries, veg, pasta;
 
             // В тёмной теме тот же оттенок поверх тёмной карточки, как у категорий
             [data-theme="dark"] & {
-                --tile-bg: color-mix(in srgb, #{$accent} 18%, var(--color-surface));
-                --tile-border: color-mix(in srgb, #{$accent} 40%, var(--color-surface));
+                --tile-bg: color-mix(in srgb, #{$accent} 24%, var(--color-surface));
+                --tile-border: color-mix(in srgb, #{$accent} 60%, var(--color-surface));
                 --tile-accent: color-mix(in srgb, #{$accent} 50%, var(--color-text));
             }
         }

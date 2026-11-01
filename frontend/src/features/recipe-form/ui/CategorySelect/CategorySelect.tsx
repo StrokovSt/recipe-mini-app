@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { CategoryForm, getCategoryIcon, useCategories } from "@/entities/category";
+import { CategoryForm, getCategoryIcon, getCategoryIconName, useCategories } from "@/entities/category";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 import { AddTile } from "@/shared/ui/Buttons";
 import { CategoryComponent } from "@/shared/ui/CategoryComponent";
@@ -49,6 +49,7 @@ const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
                             key={category.id}
                             label={category.name}
                             icon={<Icon />}
+                            colorKey={getCategoryIconName(category.iconName).toLowerCase()}
                             isActive={category.id === selectedId}
                             onClick={() => onChange(category.id)}
                         />

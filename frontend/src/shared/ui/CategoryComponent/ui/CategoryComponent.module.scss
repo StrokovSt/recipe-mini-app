@@ -1,7 +1,11 @@
+@use "@/shared/styles/category-colors" as *;
 @use "@/shared/styles/states";
 
+// Плитка категории в цветах своей картинки (colorKey, category-colors.scss), без ключа — нейтральная
 .category {
     --category-bg: var(--color-category-bg);
+    --category-border: transparent;
+    --category-accent: var(--color-active);
 
     display: flex;
     flex-direction: column;
@@ -10,7 +14,7 @@
     min-width: 0;
     padding: var(--space-3) var(--space-2);
 
-    border: 1px solid transparent;
+    border: 1px solid var(--category-border);
     border-radius: var(--radius-md);
     outline: none;
     background: var(--category-bg);
@@ -22,7 +26,7 @@
 
     cursor: pointer;
     transition: var(--transition-base);
-    transition-property: border-color, background;
+    transition-property: border-color, background, box-shadow;
 
     svg {
         flex-shrink: 0;
@@ -35,7 +39,7 @@
 
     &:not([aria-pressed="true"]) {
         &:focus-visible {
-            background: var(--color-hover-bg);
+            background: color-mix(in srgb, var(--category-accent) 8%, var(--category-bg));
 
             svg {
                 transform: scale(1.2);
@@ -44,7 +48,7 @@
         }
 
         @include states.hover {
-            background: var(--color-hover-bg);
+            background: color-mix(in srgb, var(--category-accent) 8%, var(--category-bg));
 
             svg {
                 transform: scale(1.2);
@@ -62,14 +66,16 @@
     }
 
     &--isActive {
-        --category-bg: var(--color-active-bg);
-
-        border-color: var(--color-active);
+        border-color: var(--category-accent);
+        background: color-mix(in srgb, var(--category-accent) 12%, var(--category-bg));
+        box-shadow: inset 0 0 0 1px var(--category-accent);
 
         svg {
-            color: var(--color-active);
+            color: var(--category-accent);
         }
     }
+
+    @include category-color-vars;
 }
 
 .label {

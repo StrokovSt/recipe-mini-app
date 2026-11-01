@@ -13,6 +13,9 @@
 }
 
 .card {
+    // Оттенок мазков карточки, по форме мазка меняется ниже
+    --brush-accent: var(--category-accent);
+
     @include brush.brush-underline;
 
     display: flex;
@@ -32,6 +35,30 @@
     // Цвета категории (category-colors.scss) на всю карточку: ими красятся мазок под фото и росчерк под временем
     @include category-color-vars;
 
+    // Оттенок мазка по его форме (data-brush): у карточек одной категории подряд цвет чуть разный —
+    // светлее, темнее, теплее или холоднее. Браузер без относительных цветов красит всё акцентом категории
+    @supports (color: oklch(from red l c h)) {
+        &[data-brush="2"] {
+            --brush-accent: oklch(from var(--category-accent) calc(l + 0.07) c calc(h + 20));
+        }
+
+        &[data-brush="3"] {
+            --brush-accent: oklch(from var(--category-accent) calc(l - 0.05) calc(c * 1.1) calc(h - 15));
+        }
+
+        &[data-brush="4"] {
+            --brush-accent: oklch(from var(--category-accent) calc(l + 0.12) calc(c * 0.8) h);
+        }
+
+        &[data-brush="5"] {
+            --brush-accent: oklch(from var(--category-accent) calc(l - 0.08) c calc(h + 10));
+        }
+
+        &[data-brush="6"] {
+            --brush-accent: oklch(from var(--category-accent) calc(l + 0.03) c calc(h - 25));
+        }
+    }
+
     @media (hover: hover) {
         &:hover {
             @include raised;
@@ -48,7 +75,7 @@
         @include brush.brush-underline-active;
     }
 
-    // Фото с краем сухой кисти на мазке цвета категории: основной темнее, дополнительный светлее. Форма — data-brush.
+    // Фото с краем сухой кисти на мазке цвета категории: основной темнее, дополнительный светлее.
     // Мазок слегка выходит за край карточки, поэтому без overflow: размер обёртке задают aspect-ratio и сетка,
     // а фото лежит поверх абсолютно и не растягивает её
     .media {
@@ -56,8 +83,8 @@
         margin: var(--space-1) var(--space-1) 0;
 
         @include brush.brush-wash(
-            color-mix(in srgb, color-mix(in srgb, var(--category-accent) 80%, black) 80%, transparent),
-            color-mix(in srgb, color-mix(in srgb, var(--category-accent) 45%, var(--category-bg)) 80%, transparent)
+            color-mix(in srgb, color-mix(in srgb, var(--brush-accent) 80%, black) 80%, transparent),
+            color-mix(in srgb, color-mix(in srgb, var(--brush-accent) 45%, var(--category-bg)) 80%, transparent)
         );
     }
 
@@ -140,7 +167,7 @@
             margin: 0 var(--space-2);
         }
 
-        @include brush.brush-rule(color-mix(in srgb, var(--category-accent) 55%, transparent));
+        @include brush.brush-rule(color-mix(in srgb, var(--brush-accent) 55%, transparent));
     }
 
     // Узкий телефон, карточка одна в ряду: фото слева, текст справа

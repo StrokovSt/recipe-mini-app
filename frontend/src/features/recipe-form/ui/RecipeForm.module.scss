@@ -39,6 +39,29 @@
     gap: var(--space-6);
 }
 
+// Телефон и планшет: обёрток нет, секции идут столбиком, как раньше
+.aside,
+.main {
+    display: contents;
+}
+
+// Компьютер: две колонки, как у страницы рецепта. Слева обложка и основное, справа ингредиенты и шаги
+@include media.desktop {
+    .form {
+        display: grid;
+        align-items: start;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    }
+
+    .aside,
+    .main {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+        min-width: 0;
+    }
+}
+
 // Кнопка сохранения на всю плашку футера
 .footer {
     .submit {
