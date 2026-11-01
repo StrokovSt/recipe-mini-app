@@ -1,18 +1,7 @@
+// Плитки категорий: не уже --size-category-tile-min-width, шире экран — больше плиток в строке
 .list {
-    --list-gap: var(--space-3);
-    --list-max-columns: 4;
-
     display: grid;
-    grid-template-columns: repeat(
-        auto-fill,
-        minmax(
-            max(
-                var(--size-category-min-width),
-                calc((100% - (var(--list-max-columns) - 1) * var(--list-gap)) / var(--list-max-columns))
-            ),
-            1fr
-        )
-    );
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--size-category-tile-min-width)), 1fr));
     grid-auto-rows: 1fr;
-    gap: var(--list-gap);
+    gap: var(--space-4);
 }

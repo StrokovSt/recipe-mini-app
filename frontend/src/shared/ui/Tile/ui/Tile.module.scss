@@ -159,6 +159,85 @@
         }
     }
 
+    // Плитка гуашью: вместо рамки и фона мазок краски, при наведении плитка просто приподнимается.
+    // Фокус с клавиатуры отмечает винный мазок поверх (brush-underline-active выше)
+    &.painted {
+        @include brush.brush-tile(
+            var(--tile-paint, var(--color-surface)),
+            var(--tile-paint-dark, var(--color-surface-dim)),
+            var(--tile-paint-light, var(--color-hover-bg)),
+            var(--tile-paint-edge, var(--color-border)),
+            ".paint",
+            ".fill"
+        );
+
+        align-content: center;
+        min-height: var(--size-tile-min-height, auto);
+        padding: var(--space-3) var(--space-4) var(--space-3) var(--space-6);
+        border-color: transparent;
+        background: none;
+        transition-property: transform;
+
+        // Наведение: краска впитывается — тёмный мазок насыщеннее, кромка темнеет и проявляется
+        &::after,
+        .fill::before {
+            transition: var(--transition-slow);
+            transition-property: filter;
+        }
+
+        &:has(.title:focus-visible) {
+            border-color: transparent;
+            background: none;
+        }
+
+        @include states.hover(":not(:has(.more:hover, .more:active, .seal:hover, .seal:active))") {
+            border-color: transparent;
+            background: none;
+            transform: translateY(calc(-1 * var(--size-hover-lift)));
+
+            &::after {
+                background: var(--tile-paint-edge, var(--color-border));
+            }
+
+            .fill::before {
+                filter: saturate(1.4) brightness(0.9);
+            }
+
+            // Кромка проявляется: темнеет сильнее мазка, плитка будто обводится
+            &::after {
+                filter: saturate(1.5) brightness(0.75);
+            }
+        }
+
+        // Название в одну строку, длинное обрезается многоточием (как у обычной плитки) и не заходит под «⋯»
+        .title {
+            padding-right: var(--size-tile-action);
+            font: var(--font-header-lg);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .subtitle {
+            color: color-mix(in srgb, var(--color-text) 80%, transparent);
+            font: var(--font-ui-sm);
+        }
+
+        // Картинка слева, название и подпись справа; «⋯» в правом верхнем углу поверх плитки
+        &.row {
+            grid-template: "icon title" auto "icon subtitle" auto / auto minmax(0, 1fr);
+        }
+
+        // «⋯» отдельным бумажным кружком поверх краски: светлый фон, тонкая рамка, значок в цвет акцента
+        .more {
+            --icon-button-bg: color-mix(in srgb, var(--color-surface) 85%, transparent);
+
+            position: absolute;
+            top: var(--space-2);
+            right: var(--space-2);
+            border-color: var(--color-border);
+            color: var(--color-active);
+        }
+    }
+
     // Низкая плитка: «#» и название в одной строке
     &.compact {
         grid-template: "icon title title" auto "subtitle subtitle arrow" auto / auto minmax(0, 1fr) auto;

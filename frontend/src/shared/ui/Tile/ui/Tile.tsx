@@ -20,16 +20,27 @@ interface TileProps {
     row?: boolean;
     // Низкая плитка: иконка рядом с названием, ⋯ пилюлей на верхней рамке, как у шагов рецепта
     compact?: boolean;
+    // Плитка гуашью: форма мазка 1–6 (shared/lib/brush), цвет краски задаёт родитель через --tile-paint
+    brush?: number;
     className?: string;
 }
 
 // Плитка раздела: вся плитка ведёт по ссылке, в углу меню действий
 export const Tile = (props: TileProps) => {
-    const { icon, title, to, subtitle, menu, menuLabel, row, compact, className } = props;
+    const { icon, title, to, subtitle, menu, menuLabel, row, compact, brush, className } = props;
     const single = menu.length === 1 ? menu[0] : undefined;
 
     return (
-        <article className={clsx(styles.tile, row && styles.row, compact && styles.compact, className)}>
+        <article
+            className={clsx(styles.tile, row && styles.row, compact && styles.compact, brush && styles.painted, className)}
+            data-brush={brush}
+        >
+            {/* Мазки гуашью внутри плитки (Tile.module.scss, brush-tile) */}
+            {brush && (
+                <span className={styles.paint} aria-hidden>
+                    <span className={styles.fill} />
+                </span>
+            )}
             <span className={styles.icon} aria-hidden>{icon}</span>
             {/* Одно действие — сразу кнопка, меню из одного пункта не нужно */}
             {single && !compact && (

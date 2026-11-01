@@ -92,6 +92,7 @@
     --size-brush-height: 10px;
     --size-brush-offset: 6px;
     --size-brush-rule: 7px; /* сухой росчерк под временем и порциями карточки */
+    --size-hover-lift: 2px; /* плитка приподнимается при наведении */
     --size-brush-bleed: 8px; /* мазок под фото карточки выходит за обёртку фото, чуть дальше края карточки */
     --size-sheet-close: clamp(28px, 8vw, 40px);
     --size-loader-md: 120px;
@@ -145,6 +146,7 @@
     --size-tile-icon: 32px;
     --size-tile-arrow: 16px;
     --size-category-picture: 56px;
+    --size-category-tile-picture: 64px; /* картинка на плитке категории гуашью */
     --size-strip-item: 168px; /* карточка в ряду категорий на компьютере */
     --size-strip-picture: 40px;
     --size-bento-column: 300px; /* колонка живой сетки: на широком экране колонок больше, широкая карточка не шире 800px */
@@ -178,6 +180,8 @@
     --size-footer-action-max-width: 320px; /* кнопка формы в футере на широком экране */
     --size-card-min-width: 160px;
     --size-category-min-width: 150px;
+    --size-category-tile-min-width: 240px; /* плитка категории гуашью: шире экран — больше плиток в строке */
+    --size-category-tile-height: 104px;
 
     // Плитка-чип категории в шторке фильтров и в форме рецепта
     --size-category-chip-min-width: 88px;
@@ -246,6 +250,7 @@
     --shadow-lg: 0 4px 20px color-mix(in srgb, var(--color-shadow) 14%, transparent), 0 1px 4px color-mix(in srgb, var(--color-shadow) 8%, transparent);
     --shadow-sheet: 0 -8px 30px color-mix(in srgb, var(--color-shadow) 20%, transparent);
     --shadow-accent: 0 5px 16px var(--color-accent-shadow);
+    --shadow-paint: drop-shadow(0 3px 3px color-mix(in srgb, var(--color-shadow) 13%, transparent)) drop-shadow(0 7px 8px color-mix(in srgb, var(--color-shadow) 7%, transparent)); /* мягкая тень плитки гуашью по её форме (filter) */
     --shadow-side-nav: 4px 0 20px color-mix(in srgb, var(--color-shadow) 10%, transparent); /* тень справа от боковой навигации */
 
     // ─── States ─────────────────────────────────────────────

@@ -5,6 +5,7 @@ import type { Category } from "@recipe/common";
 
 import { buildRoute } from "@/app/router/routes";
 import { CategoryForm, CategoryItem, useCategories, useDeleteCategory } from "@/entities/category";
+import { getBrushShape } from "@/shared/lib/brush";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 import { AddTile } from "@/shared/ui/Buttons";
 import { LoadErrorMessage } from "@/shared/ui/Message";
@@ -58,11 +59,12 @@ const CategoriesTab = () => {
         <>
             <div className={styles.list}>
                 <AddTile label={t("categories.add")} onClick={openCreate} />
-                {categories.map((category) => (
+                {categories.map((category, index) => (
                     <CategoryItem
                         key={category.id}
                         category={category}
                         to={buildRoute.homeByCategory(category.id)}
+                        brush={getBrushShape(index)}
                         onEdit={openEdit}
                         onDelete={askDelete}
                     />

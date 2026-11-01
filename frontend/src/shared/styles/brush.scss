@@ -1,3 +1,5 @@
+@use "sass:list";
+
 // Мазок кистью под карточкой: по умолчанию еле заметный, в активном состоянии винный.
 // brush-underline подключается в блок карточки, brush-underline-active — в её hover/active-состояния.
 @mixin brush-underline {
@@ -93,6 +95,98 @@ $shapes: 2, 3, 4, 5, 6, tall;
     @each $shape in 2, 3, 4, 5, 6 {
         [data-brush="#{$shape}"] &::after {
             mask-image: url("@/shared/assets/images/brush/rule-#{$shape}.webp");
+        }
+    }
+}
+
+// Плитка гуашью в четыре слоя, кисти нарисованы белыми масками (shared/assets/images/brushes), цвет задаёт CSS:
+// 1) заливка формы $paint; 2) тёмный мазок внутри $dark; 3) второй мазок светлее $light; 4) рваная кромка $edge.
+// Разметка: в плитке $paint-class (мягкая тень по форме), в нём $fill-class — заливка с маской формы,
+// мазки — его ::before и ::after (маска родителя обрезает их по форме). Кромка — ::after самой плитки.
+// Тень вешается на обёртку: filter у элемента с маской обрезался бы вместе с ним.
+// Набор кистей по data-brush плитки (1–6); мазок чуть шире плитки (--size-brush-bleed)
+$tile-shapes: soft-wide, double-brush, dry-corner, rough-oval, streaked, uneven-edge;
+$tile-patterns: diagonal-light, horizontal-dry, pigment-cloud, cross-hatch, speckled, side-swipe;
+$tile-edges: frame-soft, frame-broken-top, frame-dry-bottom, frame-open-side, frame-grainy, frame-scraped;
+
+@function tile-brush($kind, $index, $names) {
+    @return url("@/shared/assets/images/brushes/tile-#{$kind}-0#{$index}-#{list.nth($names, $index)}.webp");
+}
+
+@mixin brush-tile($paint, $dark, $light, $edge, $paint-class, $fill-class) {
+    position: relative;
+    isolation: isolate;
+
+    #{$paint-class} {
+        position: absolute;
+        inset: calc(-1 * var(--size-brush-bleed));
+        z-index: -1;
+        pointer-events: none;
+        filter: var(--shadow-paint);
+    }
+
+    #{$fill-class},
+    #{$fill-class}::before,
+    #{$fill-class}::after,
+    &::after {
+        position: absolute;
+        pointer-events: none;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: 100% 100%;
+    }
+
+    #{$fill-class} {
+        inset: 0;
+        background: $paint;
+    }
+
+    #{$fill-class}::before,
+    #{$fill-class}::after {
+        content: "";
+        inset: 0;
+    }
+
+    #{$fill-class}::before {
+        background: $dark;
+    }
+
+    #{$fill-class}::after {
+        background: $light;
+    }
+
+    // Кромка поверх заливки, по форме плитки
+    &::after {
+        content: "";
+        inset: calc(-1 * var(--size-brush-bleed));
+        z-index: -1;
+        height: auto;
+        background: $edge;
+        mask-composite: intersect;
+    }
+
+    @for $i from 1 through 6 {
+        $shape: tile-brush(shape, $i, $tile-shapes);
+
+        // Светлый мазок берём из другого набора, чтобы он не повторял тёмный
+        $light-index: ($i + 1) % 6 + 1;
+
+        &[data-brush="#{$i}"] {
+            #{$fill-class} {
+                mask-image: $shape;
+            }
+
+            #{$fill-class}::before {
+                mask-image: tile-brush(pattern, $i, $tile-patterns);
+            }
+
+            #{$fill-class}::after {
+                mask-image: tile-brush(pattern, $light-index, $tile-patterns);
+            }
+
+            &::after {
+                mask-image: tile-brush(edge, $i, $tile-edges), $shape;
+            }
         }
     }
 }
