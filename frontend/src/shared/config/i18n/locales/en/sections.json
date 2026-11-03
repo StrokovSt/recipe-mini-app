@@ -4,6 +4,18 @@
         "categories": "Categories",
         "tags": "Tags"
     },
+    "create": {
+        "categories": {
+            "title": "Create your own category",
+            "text": "Sort your recipes onto handy shelves"
+        },
+        "tags": {
+            "title": "Create your own tag",
+            "text": "Mark recipes to find the right ones fast"
+        },
+        "action": "Create"
+    },
+    "quote": "An orderly kitchen is like a quiet garden: cooking comes easier",
     "editing": "Editing",
     "categories": {
         "title": "My categories",

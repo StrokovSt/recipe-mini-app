@@ -11,6 +11,8 @@ import { LoadErrorMessage } from "@/shared/ui/Message";
 import { ConfirmModal } from "@/shared/ui/Modal";
 import { Spinner } from "@/shared/ui/Spinner";
 
+import { SectionsLayout } from "../SectionsLayout/SectionsLayout";
+
 import styles from "./CategoriesTab.module.scss";
 
 const CategoriesTab = () => {
@@ -56,18 +58,20 @@ const CategoriesTab = () => {
 
     return (
         <>
-            <div className={styles.list}>
-                <AddTile label={t("categories.add")} onClick={openCreate} />
-                {categories.map((category) => (
-                    <CategoryItem
-                        key={category.id}
-                        category={category}
-                        to={buildRoute.homeByCategory(category.id)}
-                        onEdit={openEdit}
-                        onDelete={askDelete}
-                    />
-                ))}
-            </div>
+            <SectionsLayout createTitle={t("create.categories.title")} createText={t("create.categories.text")} onCreate={openCreate}>
+                <div className={styles.list}>
+                    <AddTile className={styles.add} label={t("categories.add")} onClick={openCreate} />
+                    {categories.map((category) => (
+                        <CategoryItem
+                            key={category.id}
+                            category={category}
+                            to={buildRoute.homeByCategory(category.id)}
+                            onEdit={openEdit}
+                            onDelete={askDelete}
+                        />
+                    ))}
+                </div>
+            </SectionsLayout>
 
             <BottomSheet
                 isOpen={isFormOpen}

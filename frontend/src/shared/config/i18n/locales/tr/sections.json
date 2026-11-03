@@ -4,6 +4,18 @@
         "categories": "Kategoriler",
         "tags": "Etiketler"
     },
+    "create": {
+        "categories": {
+            "title": "Kendi kategorinizi oluşturun",
+            "text": "Tariflerinizi kullanışlı raflara yerleştirin"
+        },
+        "tags": {
+            "title": "Kendi etiketinizi oluşturun",
+            "text": "Tarifleri işaretleyin, aradığınızı hızla bulun"
+        },
+        "action": "Oluştur"
+    },
+    "quote": "Düzenli bir mutfak sessiz bir bahçe gibidir: yemek yapmak kolaylaşır",
     "editing": "Düzenleme",
     "categories": {
         "title": "Kategorilerim",

@@ -4,6 +4,18 @@
         "categories": "카테고리",
         "tags": "태그"
     },
+    "create": {
+        "categories": {
+            "title": "나만의 카테고리 만들기",
+            "text": "레시피를 편리한 선반에 정리하세요"
+        },
+        "tags": {
+            "title": "나만의 태그 만들기",
+            "text": "레시피에 표시해 두고 빠르게 찾으세요"
+        },
+        "action": "만들기"
+    },
+    "quote": "정돈된 주방은 고요한 정원과 같아요. 요리가 한결 쉬워집니다",
     "editing": "편집",
     "categories": {
         "title": "내 카테고리",

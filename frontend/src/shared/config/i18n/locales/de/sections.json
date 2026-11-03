@@ -4,6 +4,18 @@
         "categories": "Kategorien",
         "tags": "Tags"
     },
+    "create": {
+        "categories": {
+            "title": "Erstellen Sie Ihre eigene Kategorie",
+            "text": "Ordnen Sie Ihre Rezepte in praktische Fächer"
+        },
+        "tags": {
+            "title": "Erstellen Sie Ihren eigenen Tag",
+            "text": "Markieren Sie Rezepte, um sie schnell wiederzufinden"
+        },
+        "action": "Erstellen"
+    },
+    "quote": "Ordnung in der Küche ist wie Stille im Garten: Mit ihr kocht es sich leichter",
     "editing": "Bearbeiten",
     "categories": {
         "title": "Meine Kategorien",

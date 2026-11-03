@@ -4,6 +4,18 @@
         "categories": "Categorie",
         "tags": "Tag"
     },
+    "create": {
+        "categories": {
+            "title": "Crei la Sua categoria",
+            "text": "Sistemi le ricette su comodi scaffali"
+        },
+        "tags": {
+            "title": "Crei il Suo tag",
+            "text": "Contrassegni le ricette per ritrovarle subito"
+        },
+        "action": "Crea"
+    },
+    "quote": "Una cucina in ordine è come un giardino quieto: ci si cucina meglio",
     "editing": "Modifica",
     "categories": {
         "title": "Le mie categorie",

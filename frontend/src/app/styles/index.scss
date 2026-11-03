@@ -76,10 +76,12 @@
     --color-video-bg: rgb(0 0 0); /* фон развёрнутого видео, страница под ним не просвечивает */
     --color-scrollbar-thumb: color-mix(in srgb, var(--color-brand-ink-muted) 40%, transparent);
     --texture-paper: url("@/shared/assets/images/textures/paper-light.webp"); /* текстура бумаги для плиток */
+    --color-sakura: #E68EA6; /* ветка сакуры на плитке категории при наведении */
 }
 
 [data-theme="dark"] {
     --texture-paper: url("@/shared/assets/images/textures/paper-dark.webp");
+    --color-sakura: #B86F82;
     --color-brand-sand: #1D1814;
     --color-brand-sand-light: #29211A;
     --color-brand-sand-mid: #352A20;

@@ -151,6 +151,13 @@
     --size-tile-icon: 32px;
     --size-tile-arrow: 16px;
     --size-category-picture: 56px;
+    --size-category-picture-desktop: 72px; /* крупная картинка категории на компьютере */
+    --size-section-tile-min-height: 120px; /* высота плитки категории и тега на компьютере */
+    --size-sections-aside: 340px; /* блок «Создать» справа в разделах */
+    --size-category-row-min-width-desktop: 240px; /* самая узкая плитка категории на компьютере */
+    --size-sections-aside-picture: 140px;
+    --size-tile-seal-border: 2px; /* рамка пилюли ⋯ у плитки категории на компьютере */
+    --size-quote-seal: 40px; /* печать у фразы под сеткой разделов */
     --size-category-tile-picture: 64px; /* картинка на плитке категории гуашью */
     --size-category-tile-picture-pair: 40px; /* она же на телефоне, где плитки по две в ряд */
     --size-strip-item: 196px; /* карточка в ряду категорий на компьютере */

@@ -4,6 +4,18 @@
         "categories": "Catégories",
         "tags": "Tags"
     },
+    "create": {
+        "categories": {
+            "title": "Créez votre propre catégorie",
+            "text": "Rangez vos recettes sur des étagères pratiques"
+        },
+        "tags": {
+            "title": "Créez votre propre tag",
+            "text": "Marquez vos recettes pour les retrouver vite"
+        },
+        "action": "Créer"
+    },
+    "quote": "Une cuisine en ordre, c’est comme un jardin paisible : on y cuisine plus facilement",
     "editing": "Modification",
     "categories": {
         "title": "Mes catégories",

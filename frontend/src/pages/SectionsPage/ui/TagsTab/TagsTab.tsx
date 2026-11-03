@@ -11,6 +11,8 @@ import { LoadErrorMessage } from "@/shared/ui/Message";
 import { ConfirmModal } from "@/shared/ui/Modal";
 import { Spinner } from "@/shared/ui/Spinner";
 
+import { SectionsLayout } from "../SectionsLayout/SectionsLayout";
+
 import styles from "./TagsTab.module.scss";
 
 export function TagsTab() {
@@ -56,19 +58,21 @@ export function TagsTab() {
 
     return (
         <>
-            <div className={styles.list}>
-                <AddTile label={t("tags.add")} onClick={openCreate} />
-                {tags.map((tag, index) => (
-                    <TagItem
-                        key={tag.id}
-                        tag={tag}
-                        colorIndex={index}
-                        to={buildRoute.homeByTag(tag.id)}
-                        onEdit={openEdit}
-                        onDelete={askDelete}
-                    />
-                ))}
-            </div>
+            <SectionsLayout createTitle={t("create.tags.title")} createText={t("create.tags.text")} onCreate={openCreate}>
+                <div className={styles.list}>
+                    <AddTile className={styles.add} label={t("tags.add")} onClick={openCreate} />
+                    {tags.map((tag, index) => (
+                        <TagItem
+                            key={tag.id}
+                            tag={tag}
+                            colorIndex={index}
+                            to={buildRoute.homeByTag(tag.id)}
+                            onEdit={openEdit}
+                            onDelete={askDelete}
+                        />
+                    ))}
+                </div>
+            </SectionsLayout>
 
             <BottomSheet
                 isOpen={isFormOpen}

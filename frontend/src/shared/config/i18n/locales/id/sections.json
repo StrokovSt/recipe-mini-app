@@ -4,6 +4,18 @@
         "categories": "Kategori",
         "tags": "Tag"
     },
+    "create": {
+        "categories": {
+            "title": "Buat kategori Anda sendiri",
+            "text": "Susun resep Anda di rak yang praktis"
+        },
+        "tags": {
+            "title": "Buat tag Anda sendiri",
+            "text": "Tandai resep agar cepat ditemukan"
+        },
+        "action": "Buat"
+    },
+    "quote": "Dapur yang rapi seperti taman yang tenang: memasak jadi lebih mudah",
     "editing": "Edit",
     "categories": {
         "title": "Kategori saya",

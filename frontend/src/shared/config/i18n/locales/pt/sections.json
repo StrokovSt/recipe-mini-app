@@ -4,6 +4,18 @@
         "categories": "Categorias",
         "tags": "Tags"
     },
+    "create": {
+        "categories": {
+            "title": "Crie sua própria categoria",
+            "text": "Organize suas receitas em prateleiras práticas"
+        },
+        "tags": {
+            "title": "Crie sua própria tag",
+            "text": "Marque receitas para encontrá-las rapidamente"
+        },
+        "action": "Criar"
+    },
+    "quote": "Uma cozinha em ordem é como um jardim tranquilo: nela se cozinha melhor",
     "editing": "Edição",
     "categories": {
         "title": "Minhas categorias",

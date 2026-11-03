@@ -1,4 +1,6 @@
 @use "@/shared/styles/category-colors" as *;
+@use "@/shared/styles/media";
+@use "@/shared/styles/sakura-tile";
 
 // Плитка категории: крупная картинка и свои цвета под неё (Tile берёт их из --tile-*)
 .tile {
@@ -9,4 +11,27 @@
     --tile-hover-bg: color-mix(in srgb, var(--tile-accent) 8%, var(--tile-bg));
 
     @include category-color-vars;
+
+    // Компьютер: рамка от руки и ветка сакуры, как у категорий на главной. Как на референсе: крупная картинка слева,
+    // название и число рецептов блоком в правом нижнем углу, стрелка рядом с числом, ⋯ пилюлей внутри справа сверху
+    @include media.desktop {
+        @include sakura-tile.sakura-tile("@/shared/assets/images/tile/frame.webp", ":has(:focus-visible)");
+
+        --tile-seal-top: var(--space-2);
+        --tile-seal-right: var(--space-2);
+        --tile-seal-border: var(--tile-frame);
+        --tile-seal-border-width: var(--size-tile-seal-border);
+        --tile-hover-border: transparent;
+
+        // Фон плитки при наведении не меняется: светлеет только ветка, иначе фон и ветка перерисовываются вместе и мигают
+        --tile-hover-bg: var(--tile-bg);
+        --tile-row-template:
+            "icon . ." 1fr
+            "icon title ." auto
+            "icon subtitle arrow" auto
+            / minmax(0, 1fr) fit-content(60%) auto;
+        --tile-title-font: var(--font-header-md);
+        --tile-subtitle-font: var(--font-sm);
+        --tile-row-padding: var(--space-3) var(--space-4);
+    }
 }

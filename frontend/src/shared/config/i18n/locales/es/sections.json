@@ -4,6 +4,18 @@
         "categories": "Categorías",
         "tags": "Etiquetas"
     },
+    "create": {
+        "categories": {
+            "title": "Cree su propia categoría",
+            "text": "Ordene sus recetas en estantes prácticos"
+        },
+        "tags": {
+            "title": "Cree su propia etiqueta",
+            "text": "Marque sus recetas para encontrarlas rápido"
+        },
+        "action": "Crear"
+    },
+    "quote": "Una cocina ordenada es como un jardín en calma: en ella se cocina mejor",
     "editing": "Edición",
     "categories": {
         "title": "Mis categorías",

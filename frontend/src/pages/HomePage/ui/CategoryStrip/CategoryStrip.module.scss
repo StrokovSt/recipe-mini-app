@@ -1,5 +1,5 @@
 @use "@/shared/styles/category-colors" as *;
-@use "@/shared/styles/states";
+@use "@/shared/styles/sakura-tile";
 
 // Плитки категорий (только на компьютере): сетка из равных колонок, длинное название обрезается
 .strip {
@@ -14,29 +14,24 @@
     --tile-border: var(--category-border, var(--color-border));
     --tile-accent: var(--category-accent, var(--color-active));
 
+    // Рамка от руки и ветка сакуры, как у плиток категорий в разделах; выбранная категория горит, как при наведении
+    @include sakura-tile.sakura-tile("@/shared/assets/images/tile/frame-strip.webp", ":is(.active, :focus-visible)");
+
+    position: relative;
+    isolation: isolate;
     display: flex;
     flex-shrink: 0;
     align-items: center;
     gap: var(--space-3);
     min-width: 0;
     padding: var(--space-2) var(--space-3);
-    border: 1px solid var(--tile-border);
+    border: 1px solid transparent;
     border-radius: var(--radius-md);
+    outline: none;
     background: var(--tile-bg);
     color: var(--color-text);
     text-align: left;
     cursor: pointer;
-    transition: var(--transition-base);
-    transition-property: border-color, box-shadow, transform;
-
-    @include states.hover {
-        border-color: var(--tile-accent);
-    }
-
-    &.active {
-        border-color: var(--tile-accent);
-        box-shadow: inset 0 0 0 1px var(--tile-accent);
-    }
 
     @include category-color-vars;
 
@@ -70,9 +65,10 @@
     min-width: 0;
 }
 
+// Название с засечками, число рецептов шрифтом текста, как у плиток категорий в разделах
 .name {
     overflow: hidden;
-    font: var(--font-ui-sm);
+    font: var(--font-header-sm);
     font-weight: var(--font-weight-bold);
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -80,5 +76,5 @@
 
 .count {
     color: var(--color-text-muted);
-    font: var(--font-ui-xs);
+    font: var(--font-sm);
 }

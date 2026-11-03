@@ -4,9 +4,16 @@
     --list-gap: var(--space-3);
     --list-max-columns: 4;
 
-    // Компьютер: места больше, плиток в строке тоже
+    // Компьютер: справа блок «Создать», плиток в строке меньше, зато они крупнее
     @include media.desktop {
-        --list-max-columns: 6;
+        --list-max-columns: 4;
+
+        // Между рядами место под пилюлю ⋯ на рамке плитки
+        row-gap: var(--space-5);
+
+        > * {
+            min-height: var(--size-section-tile-min-height);
+        }
     }
 
     display: grid;
@@ -24,5 +31,12 @@
     gap: var(--list-gap);
 
     // Между рядами место под пилюлю ⋯ на рамке плитки
-    row-gap: var(--space-5);
+    row-gap: var(--space-4);
+}
+
+// «Новая …» на компьютере не нужна: её заменяет блок «Создать» справа
+.add {
+    @include media.desktop {
+        display: none;
+    }
 }

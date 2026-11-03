@@ -1,0 +1,58 @@
+@use "states";
+
+// Плитка категории на компьютере: рамка нарисована от руки (то толще, то тоньше), за содержимым ветка сакуры с туманом.
+// В покое фон бледный, при наведении (и в состоянии $lit) яркий и розовый, рамка в цвет категории.
+// Плитке нужны position: relative и isolation: isolate, цвета берутся из --tile-accent и --tile-border.
+// $frame — маска рамки под пропорции плитки: растягивается на всю плитку
+@mixin sakura-tile($frame, $lit: null) {
+    --tile-frame: color-mix(in srgb, var(--tile-accent) 40%, var(--tile-border));
+
+    border-color: transparent;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    // Ветка с туманом на всю плитку, ветка в левом верхнем углу.
+    // Прозрачность заложена в сам цвет, при наведении меняется только цвет
+    &::before {
+        inset: 0;
+        border-radius: inherit;
+        background: color-mix(in srgb, var(--color-text-muted) 12%, transparent);
+        transition: background-color var(--transition-slow);
+        mask: url("@/shared/assets/images/tile/sakura.webp") left top / cover no-repeat;
+    }
+
+    &::after {
+        inset: -1px;
+        background: var(--tile-frame);
+        transition: background-color var(--transition-base);
+        mask: url($frame) center / 100% 100% no-repeat;
+    }
+
+    @include states.hover {
+        @include sakura-tile-lit;
+    }
+
+    @if $lit {
+        &#{$lit} {
+            @include sakura-tile-lit;
+        }
+    }
+}
+
+@mixin sakura-tile-lit {
+    border-color: transparent;
+
+    &::before {
+        background: color-mix(in srgb, var(--color-sakura) 90%, transparent);
+    }
+
+    &::after {
+        background: var(--tile-accent);
+    }
+}

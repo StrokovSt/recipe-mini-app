@@ -4,8 +4,12 @@
     position: relative;
 
     // На время анимации высоты лишние ряды обрезаются снизу. По бокам и сверху запас, чтобы не резать
-    // то, что выступает за плитки (мазок гуашью, тень): overflow: hidden обрезал бы их по краю
+    // то, что выступает за плитки (мазок гуашью, тень): overflow: hidden обрезал бы их по краю.
+    // overflow: clip нужен для прокрутки: без него скрытые ряды держат высоту прокрутки шторки,
+    // и после сворачивания содержимое резко прыгало вверх
     &[data-animating] {
+        overflow: clip;
+        overflow-clip-margin: calc(2 * var(--size-brush-bleed));
         clip-path: inset(
             calc(-2 * var(--size-brush-bleed)) calc(-2 * var(--size-brush-bleed))
             calc(-1 * var(--size-brush-bleed)) calc(-2 * var(--size-brush-bleed))
