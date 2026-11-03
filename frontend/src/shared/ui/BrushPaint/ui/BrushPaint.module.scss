@@ -1,0 +1,104 @@
+@use "@/shared/styles/brush";
+@use "@/shared/styles/media";
+
+// Слои по порядку: заливка формы, тёмный мазок, светлый мазок, кромка. Кисти — белые маски
+// (shared/assets/images/brushes), цвет каждому слою задаёт CSS. Мазки обрезает маска заливки,
+// кромку — пересечение с формой. Тень висит на обёртке: filter у элемента с маской обрезался бы вместе с ним
+.brush {
+    position: absolute;
+    inset: calc(-1 * var(--size-brush-bleed));
+    z-index: -1;
+    pointer-events: none;
+}
+
+.shadow {
+    position: absolute;
+    inset: 0;
+    filter: var(--shadow-paint);
+}
+
+.fill,
+.fill::before,
+.fill::after,
+.edge {
+    position: absolute;
+    inset: 0;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 100% 100%;
+}
+
+.fill {
+    background: var(--paint, var(--color-surface));
+    transition: background var(--transition-base);
+
+    &::before,
+    &::after {
+        content: "";
+    }
+
+    // Наведение: краска впитывается — тёмный мазок насыщеннее
+    &::before {
+        background: var(--paint-dark, var(--color-surface-dim));
+        filter:
+            saturate(calc(1 + 0.4 * var(--paint-hover, 0)))
+            brightness(calc(1 - 0.1 * var(--paint-hover, 0)));
+        transition: var(--transition-slow);
+        transition-property: filter;
+    }
+
+    &::after {
+        background: var(--paint-light, var(--color-hover-bg));
+    }
+}
+
+// Проще: только заливка и кромка
+.simple .fill::before,
+.simple .fill::after {
+    display: none;
+}
+
+// Телефон, плитки по две в ряд: плитка маленькая, рисунок проще — без светлого мазка
+@include media.phone-pair {
+    .fill::after {
+        display: none;
+    }
+}
+
+// Кромка при наведении темнеет сильнее мазка: элемент будто обводится
+.edge {
+    background: var(--paint-edge, var(--color-border));
+    filter:
+        saturate(calc(1 + 0.5 * var(--paint-hover, 0)))
+        brightness(calc(1 - 0.25 * var(--paint-hover, 0)));
+    transition: var(--transition-slow);
+    transition-property: filter, background;
+    mask-composite: intersect;
+}
+
+// Набор кистей по месту родителя среди соседей: первый — по умолчанию, дальше :nth-child по кругу
+@for $i from 1 through 6 {
+    $shape: brush.tile-brush(shape, $i, brush.$tile-shapes);
+    $dark: brush.tile-brush(pattern, $i, brush.$tile-patterns);
+
+    // Светлый мазок из другого набора, чтобы он не повторял тёмный
+    $light: brush.tile-brush(pattern, ($i + 1) % 6 + 1, brush.$tile-patterns);
+    $edge: brush.tile-brush(edge, $i, brush.$tile-edges);
+    $place: if($i == 1, "", ":nth-child(6n + #{$i}) > .brush ");
+
+    #{$place}.fill {
+        mask-image: $shape;
+
+        &::before {
+            mask-image: $dark;
+        }
+
+        &::after {
+            mask-image: $light;
+        }
+    }
+
+    #{$place}.edge {
+        mask-image: $edge, $shape;
+    }
+}

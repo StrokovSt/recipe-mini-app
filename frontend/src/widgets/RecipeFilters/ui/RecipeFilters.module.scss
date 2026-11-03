@@ -1,3 +1,5 @@
+@use "@/shared/styles/states";
+
 // Компьютер: поиск в шапке, выбранное видно в категориях и тегах на странице
 .portalled {
     display: contents;
@@ -10,9 +12,26 @@
     align-items: center;
     gap: var(--space-3);
 
+    // Поиск и кнопка фильтров скруглены полностью, как на референсе
+    .search {
+        border-radius: calc(var(--size-search-height) / 2);
+    }
+
     .filter {
         width: var(--size-search-height);
         height: var(--size-search-height);
+        border-radius: calc(var(--size-search-height) / 2);
+
+        // Компьютер: с подписью «Фильтры». Широкая кнопка при нажатии сжимается чуть-чуть, иначе сильно пружинит
+        &.labelled {
+            gap: var(--space-3);
+            width: auto;
+            padding: 0 var(--space-5);
+
+            @include states.active(":not(:disabled)") {
+                transform: scale(0.96);
+            }
+        }
     }
 }
 
@@ -55,10 +74,12 @@
         height: calc(var(--size-search-height) - 2px);
         padding-top: var(--space-4);
         padding-bottom: var(--space-1);
+        font-family: var(--font-family-main);
     }
 
     // Плавающий лейбл с узкой строкой, чтобы над ним и под текстом остались отступы
     span {
+        font-family: var(--font-family-main);
         line-height: var(--font-line-xs);
     }
 }

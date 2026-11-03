@@ -12,6 +12,13 @@ $wide: 1920px;
     }
 }
 
+// Телефон не уже 360px (до планшета): плитки категорий по две в ряд
+@mixin phone-pair {
+    @media ($narrow <= width < $tablet) {
+        @content;
+    }
+}
+
 // Планшет и шире: навигация сбоку узкой рейкой, нижней плашки нет
 @mixin tablet {
     @media (width >= $tablet) {

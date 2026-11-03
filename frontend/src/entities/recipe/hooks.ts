@@ -27,16 +27,16 @@ const refetchRecipeLists = (queryClient: QueryClient) =>
 
 export function useRecipes(filters: GetRecipesProps) {
     const queryClient = useQueryClient();
+    const getAll = () => queryClient.getQueryData<Recipe[]>(RECIPE_KEYS.list({}));
 
     return useQuery({
         queryKey: RECIPE_KEYS.list(filters ?? {}),
         queryFn: () => recipeApi.getAll(filters),
-        // Пока грузится новый список, показываем прежний (без скачка прокрутки). Если прежнего нет
-        // (пришли на главную из разделов с категорией или тегом), отбираем рецепты из уже загруженного полного списка
+        // Пока грузится новый список, сразу показываем его же, отобранный из уже загруженного полного списка
+        // (те же условия, что у сервера): сетка не задерживается на прежнем фильтре. Полного списка нет — прежний
         placeholderData: (previous) => {
-            if (previous) return previous;
-            const all = queryClient.getQueryData<Recipe[]>(RECIPE_KEYS.list({}));
-            return all && filterRecipes(all, filters);
+            const all = getAll();
+            return all ? filterRecipes(all, filters) : previous;
         },
     });
 }

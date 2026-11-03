@@ -1,5 +1,11 @@
 @use "@/shared/styles/states";
 
+// «Ничего не найдено» и ошибка загрузки: картинка там же и того же размера, что котик с лупой на месте сетки
+.page {
+    --message-max-height: var(--size-inline-loader-area);
+    --size-message-image: var(--size-loader-lg);
+}
+
 // Кнопка фильтров в шапке того же размера, что и меню
 .filterButton {
     width: var(--size-menu-button);
@@ -21,13 +27,13 @@
 .browse {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-2);
 }
 
-// Заголовок раздела над сеткой: название слева, число рецептов справа, черта снизу
+// Заголовок раздела над сеткой: название и число рецептов под ним слева, сброс фильтров справа, черта снизу
 .titleRow {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: var(--space-4);
     padding-bottom: var(--space-3);
@@ -45,23 +51,21 @@
     color: var(--color-text-soft);
 }
 
-// Сброс фильтров: заметная винная кнопка справа, прижимает к себе «Всего»
+// Сброс фильтров: тихая ссылка с иконкой справа, как на референсе
 .reset {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     align-self: center;
-    gap: var(--space-1);
-    margin-left: auto;
-    padding: var(--space-1) var(--space-3);
-    border: 1px solid var(--color-active);
-    border-radius: var(--radius-lg);
-    background: var(--color-active-bg);
+    gap: var(--space-2);
+    padding: var(--space-1) 0;
+    border: none;
+    background: none;
     color: var(--color-active);
     font: var(--font-ui-sm);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
     cursor: pointer;
-    transition: var(--transition-base);
-    transition-property: background-color, color;
+    transition: color var(--transition-base);
 
     svg {
         width: var(--size-side-icon);
@@ -69,12 +73,19 @@
     }
 
     @include states.hover {
-        background-color: var(--color-active);
-        color: var(--color-active-text);
+        color: var(--color-active-hover);
+    }
+
+    &:focus-visible {
+        border-radius: var(--radius-sm);
+        outline: var(--size-focus-ring) solid var(--color-active);
+        outline-offset: var(--space-1);
     }
 }
 
+// Число рецептов под заголовком
 .total {
+    margin: var(--space-1) 0 0;
     color: var(--color-text-muted);
-    font: var(--font-ui-sm);
+    font: var(--font-md);
 }

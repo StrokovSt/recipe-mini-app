@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 import SpinnerIcon from "@/shared/assets/spinner.svg?react";
 import { TRANSITION_BASE } from "@/shared/config/animation";
 
-import { DEFAULT_LOADER, type LoaderName, LOADERS } from "../config/loaders";
-import { getLoaderSrc } from "../lib/getLoaderSrc";
+import { DEFAULT_LOADER, type LoaderName } from "../config/loaders";
+import { getLoaderPoster, getLoaderSrc } from "../lib/getLoaderSrc";
 
 import styles from "./Spinner.module.scss";
 
@@ -22,6 +22,8 @@ interface SpinnerProps {
     delay?: number;
     // Какой котик: обычный или, например, с лупой при распознавании рецепта
     loader?: LoaderName;
+    // На месте содержимого (по центру родителя с заданной высотой), а не по центру экрана поверх всего
+    inline?: boolean;
 }
 
 const DEFAULT_DELAY = 300;
@@ -31,7 +33,7 @@ const HIDDEN = { opacity: 0, transform: "scale(0.94)", filter: "blur(6px)" };
 const VISIBLE = { opacity: 1, transform: "scale(1)", filter: "blur(0px)" };
 
 export function Spinner(props: SpinnerProps) {
-    const { size = "md", label, delay = DEFAULT_DELAY, loader = DEFAULT_LOADER } = props;
+    const { size = "md", label, delay = DEFAULT_DELAY, loader = DEFAULT_LOADER, inline = false } = props;
     const { t } = useTranslation();
     const [isVisible, setIsVisible] = useState(delay === 0);
 
@@ -51,13 +53,9 @@ export function Spinner(props: SpinnerProps) {
 
     if (!isVisible) return null;
 
-    const { poster } = LOADERS[loader];
-
-    // Котик всегда строго по центру экрана. Портал в body, чтобы fixed
-    // не зависел от transform/filter анимаций страницы
-    return createPortal(
+    const content = (
         <m.div
-            className={styles.overlay}
+            className={inline ? styles.inline : styles.overlay}
             initial={HIDDEN}
             animate={VISIBLE}
             exit={HIDDEN}
@@ -69,7 +67,7 @@ export function Spinner(props: SpinnerProps) {
                 className={styles[size]}
                 src={getLoaderSrc(loader)}
                 // Первый кадр, пока само видео не загрузилось
-                poster={poster}
+                poster={getLoaderPoster(loader)}
                 autoPlay
                 loop
                 muted
@@ -77,7 +75,11 @@ export function Spinner(props: SpinnerProps) {
                 aria-label={t("loading")}
             />
             {label && <p className={styles.label}>{label}</p>}
-        </m.div>,
-        document.body
+        </m.div>
     );
+
+    if (inline) return content;
+
+    // По центру экрана: портал в body, чтобы fixed не зависел от transform/filter анимаций страницы
+    return createPortal(content, document.body);
 }

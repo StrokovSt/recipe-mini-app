@@ -8,6 +8,7 @@ import type { Recipe } from '@recipe/common';
 import { TRANSITION_BASE } from '@/shared/config/animation';
 import { getBrushShape } from '@/shared/lib/brush';
 import { Message } from '@/shared/ui/Message';
+import { Spinner } from '@/shared/ui/Spinner';
 
 import { getBentoPlacements } from '../lib/getBentoPlacements';
 import RecipeItem from './RecipeItem/RecipeItem';
@@ -16,8 +17,8 @@ import styles from './RecipeList.module.scss'
 
 const HIDDEN = { opacity: 0 };
 const VISIBLE = { opacity: 1 };
-// Пока грузится новый список, прежний приглушён
-const DIMMED = { opacity: 0.6 };
+// Прежний список, пока он спрятан под котиком, уходит сразу: иначе после котика он мелькнул бы перед новым
+const HIDDEN_INSTANTLY = { opacity: 0, transition: { duration: 0 } };
 // Лесенка появления нового списка: шаг между карточками и сколько карточек ждут своей очереди, остальные идут вместе с последней
 const CARD_STAGGER = 0.04;
 const CARD_STAGGER_MAX = 8;
@@ -49,7 +50,8 @@ const countBentoColumns = (list: HTMLElement) => {
 
 interface RecipeListProps {
     recipes: Recipe[];
-    isDimmed?: boolean;
+    // Новый список ещё грузится: через --delay-loader сетка прячется, на её месте котик с лупой
+    isUpdating?: boolean;
     // Список отобран поиском или фильтрами: пустой значит «ничего не нашлось», а не «рецептов нет»
     isFiltered?: boolean;
     // Кнопки под сообщением о пустой коллекции (не для «ничего не нашлось»)
@@ -59,7 +61,7 @@ interface RecipeListProps {
 }
 
 const RecipeList = (props: RecipeListProps) => {
-    const { recipes, isDimmed = false, isFiltered = false, emptyAction, isBento = false } = props;
+    const { recipes, isUpdating = false, isFiltered = false, emptyAction, isBento = false } = props;
     const { t } = useTranslation('home');
     const emptyKey = isFiltered ? 'emptyFiltered' : 'empty';
     // Новый набор рецептов — новый список: прежний гаснет целиком, новый проявляется лесенкой
@@ -80,66 +82,73 @@ const RecipeList = (props: RecipeListProps) => {
     };
 
     return (
-        <>
-            {/* Заголовок не виден, его читает экранный диктор: дальше идёт список рецептов */}
-            <h2 className={styles.heading}>{t('title')}</h2>
-            <AnimatePresence mode="wait" initial={false}>
-                {recipes.length === 0 ? (
-                    <m.div
-                        key={emptyKey}
-                        className={styles.empty}
-                        initial={HIDDEN}
-                        animate={VISIBLE}
-                        exit={HIDDEN}
-                        transition={TRANSITION_BASE}
-                    >
-                        <Message
-                            illustration="empty"
-                            title={t(`${emptyKey}.title`)}
-                            text={t(`${emptyKey}.text`)}
-                            action={!isFiltered && emptyAction}
-                        />
-                    </m.div>
-                ) : (
-                    <m.div
-                        key={listKey}
-                        ref={observeBento}
-                        className={clsx(styles.list, isBento && styles.bento)}
-                        style={isBento ? { '--bento-columns': bentoColumns || undefined } as MotionStyle : undefined}
-                        animate={isDimmed ? DIMMED : VISIBLE}
-                        exit={HIDDEN}
-                        transition={TRANSITION_BASE}
-                    >
-                        {/* Первый список появляется вместе со страницей: его карточки без своей анимации (initial={false} выше) */}
-                        {recipes.map((recipe, index) => {
-                            const placement = placements[index];
-                            const layout = placement?.layout ?? 'regular';
+        <div className={styles.stage}>
+            <div className={clsx(styles.content, isUpdating && styles.updating)}>
+                {/* Заголовок не виден, его читает экранный диктор: дальше идёт список рецептов */}
+                <h2 className={styles.heading}>{t('title')}</h2>
+                <AnimatePresence mode="wait" initial={false}>
+                    {recipes.length === 0 ? (
+                        <m.div
+                            key={emptyKey}
+                            className={styles.empty}
+                            initial={HIDDEN}
+                            animate={VISIBLE}
+                            exit={isUpdating ? HIDDEN_INSTANTLY : HIDDEN}
+                            transition={TRANSITION_BASE}
+                        >
+                            <Message
+                                illustration="empty"
+                                title={t(`${emptyKey}.title`)}
+                                text={t(`${emptyKey}.text`)}
+                                action={!isFiltered && emptyAction}
+                            />
+                        </m.div>
+                    ) : (
+                        <m.div
+                            key={listKey}
+                            ref={observeBento}
+                            className={clsx(styles.list, isBento && styles.bento)}
+                            style={isBento ? { '--bento-columns': bentoColumns || undefined } as MotionStyle : undefined}
+                            animate={VISIBLE}
+                            exit={isUpdating ? HIDDEN_INSTANTLY : HIDDEN}
+                            transition={TRANSITION_BASE}
+                        >
+                            {/* Первый список появляется вместе со страницей: его карточки без своей анимации (initial={false} выше) */}
+                            {recipes.map((recipe, index) => {
+                                const placement = placements[index];
+                                const layout = placement?.layout ?? 'regular';
 
-                            return (
-                                // Обёртка нужна motion: у самой карточки свой CSS transition на transform
-                                <m.div
-                                    key={recipe.id}
-                                    className={clsx(styles.item, styles[layout])}
-                                    style={placement && { gridColumn: placement.column, gridRow: placement.row }}
-                                    variants={CARD_VARIANTS}
-                                    custom={index}
-                                    initial="hidden"
-                                    animate="visible"
-                                >
-                                    <RecipeItem
-                                        recipe={recipe}
-                                        isEager={index < EAGER_COVERS}
-                                        isPriority={index === 0}
-                                        layout={layout}
-                                        brush={getBrushShape(index)}
-                                    />
-                                </m.div>
-                            );
-                        })}
-                    </m.div>
-                )}
-            </AnimatePresence>
-        </>
+                                return (
+                                    // Обёртка нужна motion: у самой карточки свой CSS transition на transform
+                                    <m.div
+                                        key={recipe.id}
+                                        className={clsx(styles.item, styles[layout])}
+                                        style={placement && { gridColumn: placement.column, gridRow: placement.row }}
+                                        variants={CARD_VARIANTS}
+                                        custom={index}
+                                        initial="hidden"
+                                        animate="visible"
+                                    >
+                                        <RecipeItem
+                                            recipe={recipe}
+                                            isEager={index < EAGER_COVERS}
+                                            isPriority={index === 0}
+                                            layout={layout}
+                                            brush={getBrushShape(index)}
+                                        />
+                                    </m.div>
+                                );
+                            })}
+                        </m.div>
+                    )}
+                </AnimatePresence>
+            </div>
+            {isUpdating && (
+                <div className={styles.loader}>
+                    <Spinner size="lg" inline loader="catMagnifier" />
+                </div>
+            )}
+        </div>
     );
 };
 

@@ -6,6 +6,9 @@ const MAX_SPLASH_MS = 15000;
 // Сколько ещё ждать картинку печати, если приложение готово раньше неё (медленная сеть, планшет)
 const MAX_SEAL_WAIT_MS = 1500;
 
+// Компьютер (мышь, широкий экран): заставки нет, страница появляется сразу. Тот же запрос в index.html прячет её стилями
+const NO_SPLASH_QUERY = "(pointer: fine) and (min-width: 1025px) and (not (any-pointer: coarse))";
+
 const getSplash = () => document.getElementById("splash");
 
 let resolveSplashHidden: () => void = () => {};
@@ -61,6 +64,12 @@ export function hideSplash() {
 }
 
 export function hideSplashWhen(ready: Promise<unknown>) {
+    const splash = getSplash();
+    if (splash && matchMedia(NO_SPLASH_QUERY).matches) {
+        removeSplash(splash);
+        return;
+    }
+
     const timeout = new Promise((resolve) => setTimeout(resolve, MAX_SPLASH_MS));
     Promise.race([ready, timeout]).then(hideSplash);
 }

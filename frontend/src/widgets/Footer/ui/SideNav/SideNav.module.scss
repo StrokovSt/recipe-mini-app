@@ -51,10 +51,13 @@
     }
 }
 
+// Под кнопкой «Добавить рецепт» черта, как над остальными группами
 .nav {
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
 }
 
 .link {
@@ -65,10 +68,10 @@
     padding: 0 var(--space-3);
     border: 1px solid transparent;
     border-left-width: var(--size-side-active-line);
-    border-radius: var(--radius-md);
+    border-radius: calc(var(--size-side-link) / 2);
     background: none;
     color: var(--color-text-soft);
-    font: var(--font-ui-sm);
+    font: var(--font-md);
     text-align: left;
     text-decoration: none;
     cursor: pointer;
@@ -159,12 +162,11 @@
     font: var(--font-ui-xs);
 }
 
-// Пункты меню: отдельная группа под чертой, прижата к низу
+// Пункты меню: отдельная группа под чертой, сразу под «Библиотекой» (в рейке прижата к низу)
 .menu {
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
-    margin-top: auto;
     padding-top: var(--space-4);
     border-top: 1px solid var(--color-border);
 }
@@ -177,21 +179,34 @@
     justify-content: center;
     gap: var(--space-2);
     min-height: var(--size-side-link);
-    border-radius: var(--radius-md);
+    border-radius: calc(var(--size-side-link) / 2);
     background: var(--color-active);
+    box-shadow: var(--shadow-md);
     color: var(--color-active-text);
-    font: var(--font-ui-sm);
+    font: var(--font-md);
     font-weight: var(--font-weight-bold);
     text-decoration: none;
-    transition: background-color var(--transition-base);
+    transition: var(--transition-base);
+    transition-property: background-color, box-shadow, transform;
 
     svg {
         width: var(--size-side-icon);
         height: var(--size-side-icon);
     }
 
-    @include states.hover {
+    // Отзывается, как карточки: при наведении приподнимается, при нажатии сжимается
+    @media (hover: hover) {
+        &:hover {
+            background-color: var(--color-active-hover);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+    }
+
+    @include states.active {
         background-color: var(--color-active-hover);
+        box-shadow: var(--shadow-sm);
+        transform: scale(0.97);
     }
 }
 
@@ -232,10 +247,16 @@
         min-width: var(--size-rail-item);
     }
 
+    .menu {
+        margin-top: auto;
+    }
+
     // Черта под навигацией и в свёрнутой рейке, на том же месте, что над категориями в раскрытой.
     // Отступы как у черты на компьютере: сверху промежуток колонки, снизу --space-4
     .nav {
+        padding-top: 0;
         padding-bottom: var(--space-5);
+        border-top: none;
         border-bottom: 1px solid var(--color-border);
     }
 
@@ -252,12 +273,14 @@
 
     // Иконка по центру квадрата и на том же месте в раскрытой рейке. Подпись в свёрнутой прячется за краем кнопки,
     // в раскрытой справа такой же отступ, как на компьютере
+    // Квадратные кнопки, как раньше
     .link {
         min-width: var(--size-rail-item);
         min-height: var(--size-rail-item);
         padding: 0 var(--space-3) 0
             calc((var(--size-rail-item) - var(--size-rail-icon)) / 2 - var(--size-side-active-line));
         overflow: hidden;
+        border-radius: var(--radius-md);
         white-space: nowrap;
     }
 

@@ -16,14 +16,12 @@ interface CategoryItemProps {
     category: Category;
     // Куда ведёт плитка
     to: string;
-    // Форма мазка гуашью по месту в списке (shared/lib/brush)
-    brush: number;
     onEdit: (category: Category) => void;
     onDelete: (category: Category) => void;
 }
 
 const CategoryItem = (props: CategoryItemProps) => {
-    const { category, to, brush, onEdit, onDelete } = props;
+    const { category, to, onEdit, onDelete } = props;
     const { t } = useTranslation(['sections', 'common']);
     const Icon = getCategoryIcon(category.iconName);
     // Цвет плитки под картинку: класс с ключом картинки (CategoryItem.module.scss)
@@ -42,8 +40,6 @@ const CategoryItem = (props: CategoryItemProps) => {
             title={category.name}
             subtitle={subtitle}
             to={to}
-            brush={brush}
-            row
             menuLabel={t('categories.actions', { name: category.name })}
             menu={[
                 { label: t('common:edit'), icon: <EditIcon />, onClick: () => onEdit(category) },

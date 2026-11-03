@@ -15,6 +15,36 @@
     clip-path: inset(50%);
 }
 
+// Сетка и котик с лупой на её месте, пока грузится новый список
+.stage {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    transition: opacity var(--transition-base);
+}
+
+// Быстрый ответ проходит незаметно: сетка прячется, только если ждать дольше --delay-loader
+.updating {
+    opacity: 0;
+
+    transition-delay: var(--delay-loader);
+}
+
+// Котик с лупой поверх спрятанной сетки
+.loader {
+    position: absolute;
+    inset: 0;
+}
+
 // Пустой список: сообщение с котом занимает всё свободное место под поиском
 .empty {
     display: flex;
@@ -44,10 +74,11 @@
         grid-template-columns: minmax(0, 1fr);
     }
 
-    // Карточка растягивается на всю ячейку, как раньше без обёртки
+    // Карточка растягивается на всю ячейку, как раньше без обёртки. Тень листа по его рваному краю
     .item {
         display: grid;
         min-width: 0;
+        filter: var(--shadow-paint);
     }
 }
 

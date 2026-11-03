@@ -33,6 +33,8 @@ const loaderReady = preloadLoader()
 hideSplashWhen(firstPageShown)
 firstPageShown.then(preloadOnFirstAction)
 firstPageShown.then(warmUpNumberFormat)
+// Котик с лупой (смена фильтров, распознавание рецепта): первое же действие может быть сменой фильтра
+firstPageShown.then(() => preloadLoader('catMagnifier'))
 initOnboarding()
 
 // Тема и язык могут браться из Telegram, поэтому определяем их после его SDK (на сайте он не качается)

@@ -1,13 +1,12 @@
 @use "@/shared/styles/category-colors" as *;
 
-// Плитка категории гуашью: крупная картинка слева, краска в цвет картинки (Tile берёт её из --tile-paint*)
+// Плитка категории: крупная картинка и свои цвета под неё (Tile берёт их из --tile-*)
 .tile {
-    --size-tile-icon: var(--size-category-tile-picture);
-    --size-tile-min-height: var(--size-category-tile-height);
-    --tile-paint: var(--category-paint);
-    --tile-paint-dark: var(--category-paint-dark);
-    --tile-paint-light: var(--category-paint-light);
-    --tile-paint-edge: var(--category-paint-edge);
+    --size-tile-icon: var(--size-category-picture);
+    --tile-bg: var(--category-bg);
+    --tile-border: var(--category-border);
+    --tile-accent: var(--category-accent);
+    --tile-hover-bg: color-mix(in srgb, var(--tile-accent) 8%, var(--tile-bg));
 
     @include category-color-vars;
 }

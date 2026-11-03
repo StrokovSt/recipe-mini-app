@@ -46,6 +46,14 @@ $category-colors: (
     burger: (#F4E3C6, #E3CCA4, #A35A1E),
 );
 
+// Краска подложки гуашью (shared/ui/BrushPaint) в цвет категории. Подключается рядом с category-color-vars
+@mixin category-paint-vars {
+    --paint: var(--category-paint);
+    --paint-dark: var(--category-paint-dark);
+    --paint-light: var(--category-paint-light);
+    --paint-edge: var(--category-paint-edge);
+}
+
 // Цвета категории классом с ключом картинки: подложка, рамка и акцент в --category-bg/-border/-accent.
 // Ими красятся плитка категории и подпись категории на карточке рецепта
 @mixin category-color-vars {

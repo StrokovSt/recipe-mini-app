@@ -1,6 +1,11 @@
 .trigger {
     position: relative;
 
+    .label {
+        color: var(--tg-text);
+        font: var(--font-md);
+    }
+
     .badge {
         position: absolute;
         top: -6px;

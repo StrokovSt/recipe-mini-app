@@ -34,30 +34,16 @@
         height: var(--size-icon-xl);
         color: var(--color-accent);
 
-        transition: color var(--transition-base), stroke-width var(--transition-base);
+        transition: color var(--transition-base);
     }
 
     &:not([aria-pressed="true"]) {
         &:focus-visible {
             background: color-mix(in srgb, var(--category-accent) 8%, var(--category-bg));
-
-            svg {
-                transform: scale(1.2);
-                animation: icon-tilt var(--transition-slow);
-            }
         }
 
         @include states.hover {
             background: color-mix(in srgb, var(--category-accent) 8%, var(--category-bg));
-
-            svg {
-                transform: scale(1.2);
-                animation: icon-tilt var(--transition-slow);
-            }
-        }
-
-        &:focus svg {
-            transform: scale(1.2);
         }
     }
 
@@ -83,24 +69,4 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-
-@keyframes icon-tilt {
-    100% {
-        transform: rotate(0);
-        transform: scale(1.2);
-    }
-
-    60% {
-        transform: rotate(5deg);
-    }
-
-    30% {
-        transform: rotate(5deg);
-    }
-
-    0% {
-        transform: rotate(0);
-        transform: scale(1);
-    }
 }

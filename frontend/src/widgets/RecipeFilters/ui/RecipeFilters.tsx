@@ -155,7 +155,8 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
             />
 
             <FilterButton
-                className={styles.filter}
+                className={clsx(styles.filter, barContainer && styles.labelled)}
+                withLabel={!!barContainer}
                 activeCount={activeCount}
                 onClick={() => onOpenChange(true)}
                 disabled={disabled}

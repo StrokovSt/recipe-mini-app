@@ -166,22 +166,12 @@
         animation: none;
       }
 
-      /* Компьютер (мышь и экран шире колонки приложения): анимация печати там неуместна. Печать просто стоит,
-         заставка гаснет. Планшеты и телефоны (палец) анимацию оставляют, в том числе айпэд с клавиатурой и трекпадом:
-         у него есть сенсорный экран (any-pointer: coarse) */
+      /* Компьютер (мышь и экран шире колонки приложения): заставки нет, страница появляется сразу, как у сайта.
+         Планшеты и телефоны (палец) заставку оставляют, в том числе айпэд с клавиатурой и трекпадом:
+         у него есть сенсорный экран (any-pointer: coarse). Тот же запрос — в shared/lib/splash (NO_SPLASH_QUERY) */
       @media (pointer: fine) and (min-width: 1025px) and (not (any-pointer: coarse)) {
-        #splash:is(.in, .out) .splash-seal {
-          opacity: 1;
-          transform: rotate(-3deg);
-          animation: none;
-        }
-
-        #splash:is(.in, .out) :is(.splash-stamp, .splash-ring, .splash-glow) {
-          animation: none;
-        }
-
-        #splash.out {
-          animation: splash-fade 0.3s ease forwards;
+        #splash {
+          display: none;
         }
       }
 
@@ -236,9 +226,6 @@
         0% { --splash-hole: 0px; opacity: 1; }
         80% { opacity: 1; }
         100% { --splash-hole: 101%; opacity: 0; }
-      }
-      @keyframes splash-fade {
-        to { opacity: 0; }
       }
     </style>
   </head>

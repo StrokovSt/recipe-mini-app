@@ -24,9 +24,9 @@ interface Capacity<T> {
     value: number;
 }
 
-// Анимация высоты обёртки; на время анимации обрезаем содержимое
+// Анимация высоты обёртки; на время анимации обрезаем содержимое (data-animating, ExpandableList.module.scss)
 const animateHeight = (element: HTMLElement, from: number, to: number) => {
-    element.style.overflow = 'hidden';
+    element.dataset.animating = '';
 
     return animate(element, { height: [from, to] }, TRANSITION_BASE);
 };
@@ -36,7 +36,7 @@ const resetHeight = (element: HTMLElement | null) => {
     if (!element) return;
 
     element.style.height = '';
-    element.style.overflow = '';
+    delete element.dataset.animating;
 };
 
 // Сколько элементов помещается в первые rows рядов: ряды определяем по offsetTop детей
@@ -85,11 +85,17 @@ export const ExpandableList = <T,>(props: ExpandableListProps<T>) => {
         return () => observer.disconnect();
     }, []);
 
-    // Замер: все элементы отрисованы, считаем сколько влезает в rows рядов (до отрисовки на экране)
+    // Замер: все элементы отрисованы, считаем сколько влезает в rows рядов (до отрисовки на экране).
+    // Первую ширину берём сразу из разметки: ResizeObserver сообщает её уже после отрисовки,
+    // и на первом кадре мелькал бы весь список
     useLayoutEffect(() => {
-        if (isMeasured || width === 0) return;
+        if (isMeasured) return;
 
-        setMeasured({ items, rows, width, value: countInRows(listRef.current!, rows) - leadingCount });
+        const currentWidth = width || viewportRef.current!.clientWidth;
+        if (currentWidth === 0) return;
+
+        if (width === 0) setWidth(currentWidth);
+        setMeasured({ items, rows, width: currentWidth, value: countInRows(listRef.current!, rows) - leadingCount });
     }, [isMeasured, items, rows, width, leadingCount]);
 
     // Раскрытие: все элементы уже отрисованы, анимируем от прежней высоты до полной

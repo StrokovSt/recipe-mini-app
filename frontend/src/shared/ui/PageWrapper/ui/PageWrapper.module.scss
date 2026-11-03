@@ -5,17 +5,20 @@
     flex-direction: column;
     gap: var(--space-5);
 
-    // Сверху и снизу место под общие шапку и футер, которые лежат поверх main.
+    // Сверху и снизу место под общие шапку и футер, которые лежат поверх main, и отступ, чтобы контент не лип к краю.
     // Снизу ещё запас на сдвиг контента при въезде (y 8px в PageWrapper.tsx): контент растянут на всю высоту,
     // и без запаса на время анимации у main появлялась бы прокрутка
     padding: calc(var(--size-page-header) + var(--space-5)) var(--space-page)
-        calc(var(--size-page-footer) + var(--space-2));
+        calc(var(--size-page-footer) + var(--space-6));
     overflow: hidden auto;
     font-family: var(--font-family-main);
 
     // Планшет и компьютер: контент не шире --size-content-max-width, по центру места правее навигации
     @include media.tablet {
         padding-inline: max(var(--space-page), calc((100% - var(--size-content-max-width)) / 2));
+
+        // Место под полосу прокрутки всегда занято: контент не прыгает, когда прокрутка появляется и пропадает
+        scrollbar-gutter: stable;
     }
 
     // Компьютер: контент во всю ширину, края как у шапки

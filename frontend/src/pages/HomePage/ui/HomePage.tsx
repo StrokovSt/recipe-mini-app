@@ -8,7 +8,7 @@ import { useRecipes } from '@/entities/recipe';
 import type { GetRecipesProps } from '@/entities/recipe/types';
 import { useTags } from '@/entities/tag';
 import { Onboarding } from '@/features/onboarding';
-import CloseIcon from '@/shared/assets/icons/icon-close.svg?react';
+import ResetIcon from '@/shared/assets/icons/icon-reset.svg?react';
 import { TRANSITION_BASE } from '@/shared/config/animation';
 import { useIsHiddenBehind } from '@/shared/lib/hooks';
 import { useLayoutMode } from '@/shared/lib/layout';
@@ -56,12 +56,13 @@ const HomePage = () => {
         if (params.toString() !== searchParams.toString()) setSearchParams(params, { replace: true });
     };
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-    const { t } = useTranslation('home');
+    const { t } = useTranslation(['home', 'sections', 'filters']);
     // Компьютер: поиск в шапке, под ней ряд категорий, заголовок раздела и живая сетка
     const mode = useLayoutMode();
     const isDesktop = mode === 'desktop' || mode === 'wide';
     const [searchSlot, setSearchSlot] = useState<HTMLDivElement | null>(null);
-    const { data: recipes, isLoading, isPlaceholderData, isError, isPaused, isFetching, refetch } = useRecipes(filters);
+    const { data: recipes, isLoading, isPlaceholderData, isError, isPaused, isFetching, refetch } =
+        useRecipes(filters);
     const { data: categories = [] } = useCategories();
     const { data: tags = [] } = useTags();
 
@@ -73,8 +74,8 @@ const HomePage = () => {
     // Список не пришёл (сервер не ответил или нет сети): вместо «Рецептов пока нет» — ошибка и «Повторить»
     const isFailed = !recipes && (isError || isPaused);
 
-    // Первая загрузка списка: страница ждёт за глобальным котиком. Смена фильтров котика не зовёт (keepPreviousData).
-    // «Повторить» после ошибки тоже показывает котика
+    // Глобальный котик: первая загрузка списка (страница ждёт за ним) и «Повторить» после ошибки.
+    // Смену фильтров показывает сам список: котик с лупой на месте сетки, шапка и фильтры остаются
     useLoader(isLoading || (isFailed && isFetching));
     if (isLoading) return null;
 
@@ -83,6 +84,7 @@ const HomePage = () => {
 
     return (
         <PageWrapper
+            className={styles.page}
             header={
                 isDesktop ? (
                     <PageHeader search={<div ref={setSearchSlot} className={styles.searchSlot} />} />
@@ -115,18 +117,23 @@ const HomePage = () => {
         >
             {isDesktop && (
                 <div className={styles.titleRow}>
-                    <h1 className={styles.title}>
-                        {t('yourCollection')}
-                        {activeCategory && <span className={styles.titleCategory}> — {activeCategory.name}</span>}
-                    </h1>
+                    <div>
+                        <h1 className={styles.title}>
+                            {t('yourCollection')}
+                            {activeCategory && <span className={styles.titleCategory}> — {activeCategory.name}</span>}
+                        </h1>
+                        {/* Строка под заголовком есть всегда: пока рецепты грузятся, место занято и контент ниже не прыгает */}
+                        <p className={styles.total}>
+                            {recipes ? t('sections:recipeCount', { count: recipes.length }) : '\u00A0'}
+                        </p>
+                    </div>
                     {/* Сброс виден, только пока что-то выбрано: категория, теги или поиск */}
                     {hasFilters && (
                         <button type="button" className={styles.reset} onClick={() => setFilters({})}>
-                            <CloseIcon aria-hidden />
-                            {t('resetFilters')}
+                            <ResetIcon aria-hidden />
+                            {t('filters:reset')}
                         </button>
                     )}
-                    {recipes && <span className={styles.total}>{t('total', { count: recipes.length })}</span>}
                 </div>
             )}
             {/* Категории и теги одной группой: между ними отступ меньше, чем между блоками страницы */}
@@ -151,7 +158,7 @@ const HomePage = () => {
             ) : (
                 <RecipeList
                     recipes={recipes ?? []}
-                    isDimmed={isPlaceholderData}
+                    isUpdating={isPlaceholderData && isFetching}
                     isFiltered={hasFilters}
                     emptyAction={EMPTY_ACTIONS}
                     isBento={isDesktop}
