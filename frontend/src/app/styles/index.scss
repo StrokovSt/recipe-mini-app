@@ -2,7 +2,10 @@
 @use "./variables";
 @use "@/shared/styles/media";
 
-:root {
+// Тема задаётся на <html>. [data-theme] у вложенного элемента (превью темы в настройках) повторяет все переменные,
+// чтобы цвета внутри пересчитались из палитры этой темы
+:root,
+[data-theme] {
     /* ─── Палитра бренда (из макета Figma) ─────────────── */
     --color-brand-sand: #F0E7CC;
     --color-brand-sand-light: #FAF6EC;

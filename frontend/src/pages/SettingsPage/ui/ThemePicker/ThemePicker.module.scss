@@ -1,0 +1,101 @@
+@use "@/shared/styles/states";
+
+.picker {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+}
+
+// Карточка темы: превью и подпись, выбранная обведена акцентом
+.option {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-app-bg);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition-base);
+    transition-property: border-color, box-shadow;
+
+    @include states.hover {
+        border-color: var(--color-active);
+    }
+
+    &[aria-checked="true"] {
+        border-color: var(--color-active);
+        box-shadow: 0 0 0 1px var(--color-active);
+    }
+
+    &:focus-visible {
+        outline: var(--size-focus-ring) solid var(--color-active);
+        outline-offset: var(--space-1);
+    }
+}
+
+// Маленькая страница: шапка, заголовок, три плитки и кнопка «+», всё в цветах своей темы
+.preview {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    height: var(--size-theme-preview);
+    padding: var(--space-2);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-app-bg);
+}
+
+.bar {
+    height: var(--space-4);
+    margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-2)) 0;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+}
+
+.line {
+    width: 40%;
+    height: var(--space-2);
+    border-radius: var(--radius-sm);
+    background: var(--color-text);
+}
+
+.cards {
+    display: grid;
+    flex: 1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+}
+
+.card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+}
+
+.fab {
+    position: absolute;
+    right: var(--space-3);
+    bottom: var(--space-3);
+    width: var(--space-5);
+    height: var(--space-5);
+    border-radius: 50%;
+    background: var(--color-active);
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font: var(--font-ui-sm);
+    font-weight: var(--font-weight-bold);
+
+    svg {
+        width: var(--size-icon-md);
+        height: var(--size-icon-md);
+    }
+}

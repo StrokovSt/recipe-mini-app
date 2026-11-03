@@ -21,3 +21,71 @@
         font-style: italic;
     }
 }
+
+// Компьютер: карточки слева, справа листок бумаги о приложении на всю их высоту (как блок «Создать» в разделах)
+.layout {
+    display: grid;
+    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr) var(--size-sections-aside);
+    gap: var(--space-6);
+}
+
+// Оформление на всю ширину, язык и движение рядом
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: var(--space-5);
+}
+
+.wide {
+    grid-column: 1 / -1;
+}
+
+.aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-6) var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--texture-paper) center / var(--size-paper-texture), var(--color-surface);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+.picture {
+    width: var(--size-sections-aside-picture);
+    height: var(--size-sections-aside-picture);
+    margin-bottom: var(--space-2);
+    object-fit: contain;
+}
+
+.asideTitle {
+    margin: 0;
+    font: var(--font-header-lg);
+    font-weight: var(--font-weight-bold);
+}
+
+.version {
+    color: var(--color-text-muted);
+    font: var(--font-ui-xs);
+}
+
+.text {
+    margin: var(--space-2) 0 0;
+    color: var(--color-text-soft);
+    font: var(--font-md);
+    font-style: italic;
+}
+
+.about {
+    height: var(--size-search-height);
+    margin-top: var(--space-3);
+    padding: 0 var(--space-6);
+    border-radius: calc(var(--size-search-height) / 2);
+    font: var(--font-md);
+    font-weight: var(--font-weight-bold);
+}
