@@ -67,3 +67,35 @@
     transition: transform var(--transition-base);
     transform: translateX(calc(var(--index) * (100% + var(--space-1))));
 }
+
+// Отдельные пилюли с рамкой по ширине подписи, выбранная залита винным. Плашки, которая переезжает, нет
+.pills {
+    gap: var(--space-2);
+    padding: 0;
+    border: none;
+    background: none;
+
+    .option {
+        flex: none;
+        height: var(--size-search-height);
+        padding: 0 var(--space-5);
+        border: 1px solid var(--color-border);
+        border-radius: calc(var(--size-search-height) / 2);
+        background: var(--color-surface);
+        font: var(--font-md);
+
+        svg {
+            width: var(--size-side-icon);
+            height: var(--size-side-icon);
+        }
+    }
+
+    .optionActive {
+        border-color: var(--color-active);
+        background: var(--color-active);
+
+        @include states.hover {
+            background: var(--color-active-hover);
+        }
+    }
+}

@@ -6,7 +6,10 @@ import type { DraftSummary } from "@recipe/common";
 import DeleteIcon from "@/shared/assets/icons/icon-delete.svg?react";
 import FormIcon from "@/shared/assets/icons/icon-form.svg?react";
 import ImageIcon from "@/shared/assets/icons/icon-image.svg?react";
+import { useLayoutMode } from "@/shared/lib/layout";
 import { Tile } from "@/shared/ui/Tile";
+
+import styles from "./DraftItem.module.scss";
 
 interface DraftItemProps {
     draft: DraftSummary;
@@ -18,6 +21,8 @@ interface DraftItemProps {
 const DraftItem = (props: DraftItemProps) => {
     const { draft, to, onDelete } = props;
     const { t, i18n } = useTranslation(["recipeForm", "common"]);
+    const mode = useLayoutMode();
+    const isDesktop = mode === "desktop" || mode === "wide";
     const title = draft.title || t("drafts.untitled");
 
     // Сегодняшний черновик подписываем временем, остальные датой
@@ -34,7 +39,9 @@ const DraftItem = (props: DraftItemProps) => {
             title={title}
             subtitle={subtitle}
             to={to}
-            row
+            // На компьютере черновики — листки в сетке: иконка сверху, название, дата
+            row={!isDesktop}
+            className={styles.draft}
             menuLabel={t("drafts.actions", { name: title })}
             menu={[
                 { label: t("common:delete"), icon: <DeleteIcon />, danger: true, onClick: () => onDelete(draft) },

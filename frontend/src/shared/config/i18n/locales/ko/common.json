@@ -1,5 +1,6 @@
 {
     "appName": "Kokoro",
+    "breadcrumbs": "페이지 경로",
     "notFound": {
         "title": "페이지를 찾을 수 없어요",
         "text": "없는 페이지예요. 링크를 확인해 주세요."

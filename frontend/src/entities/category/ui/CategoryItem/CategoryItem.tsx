@@ -40,6 +40,8 @@ const CategoryItem = (props: CategoryItemProps) => {
             title={category.name}
             subtitle={subtitle}
             to={to}
+            // Картинка слева, название с подписью, стрелка справа
+            row
             menuLabel={t('categories.actions', { name: category.name })}
             menu={[
                 { label: t('common:edit'), icon: <EditIcon />, onClick: () => onEdit(category) },

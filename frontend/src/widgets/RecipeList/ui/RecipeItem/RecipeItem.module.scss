@@ -15,14 +15,6 @@
     // Оттенок мазков карточки, по форме мазка меняется ниже
     --brush-accent: var(--category-accent);
 
-    // Лист бумаги со стороны фото: прозрачный до середины фото, плавно проявляется и целиком виден чуть раньше края фото.
-    // Так край карточки у фото — мазок под фото, а стык листа не виден ни через фото, ни через мазок.
-    // Фото сверху: высота фото из ширины карточки (cqw), у остальных видов карточки ниже свой переход
-    --photo-height: calc((100cqw - 2 * var(--space-1)) * 3 / 4);
-    --paper-fade: linear-gradient(
-        transparent calc(var(--space-1) + var(--photo-height) / 2),
-        #000 calc(var(--space-1) + var(--photo-height) - var(--size-paper-under-photo))
-    );
 
     position: relative;
 
@@ -31,55 +23,47 @@
     min-width: 0;
 
     isolation: isolate;
-    container-type: inline-size;
 
     color: var(--tg-text);
     text-decoration: none;
     transition: var(--transition-base);
     transition-property: transform;
 
-    // Лист бумаги с рваным краем, как на референсе: отдельным слоем под содержимым, чтобы маска не срезала
-    // мазки, выходящие за край карточки. Тень у обёртки карточки в RecipeList (на слое с маской она обрезалась бы)
+    // Лист бумаги отдельным слоем под содержимым: при наведении меняется только он
     &::before {
         content: "";
         position: absolute;
         z-index: -1;
-        border-radius: var(--radius-lg);
+        border-radius: var(--radius-md);
         background: var(--color-surface);
+        box-shadow: var(--shadow-md);
         transition: background var(--transition-base);
         inset: 0;
-
-        @include brush.paper-tear(var(--paper-fade));
     }
 
-    // Цвета категории (category-colors.scss) на всю карточку: ими красятся мазок под фото и росчерк под временем
+    // Цвета категории (category-colors.scss) на всю карточку: ими красятся заглушка без фото и росчерк под временем
     @include category-color-vars;
 
     // Оттенок мазка по его форме (data-brush): у карточек одной категории подряд цвет чуть разный —
     // светлее, темнее, теплее или холоднее. Браузер без относительных цветов красит всё акцентом категории
     @supports (color: oklch(from red l c h)) {
         &[data-brush="2"] {
-            --tear-shift: 53px;
             --brush-accent: oklch(from var(--category-accent) calc(l + 0.07) c calc(h + 20));
         }
 
         &[data-brush="3"] {
-            --tear-shift: 117px;
             --brush-accent: oklch(from var(--category-accent) calc(l - 0.05) calc(c * 1.1) calc(h - 15));
         }
 
         &[data-brush="4"] {
-            --tear-shift: 31px;
             --brush-accent: oklch(from var(--category-accent) calc(l + 0.12) calc(c * 0.8) h);
         }
 
         &[data-brush="5"] {
-            --tear-shift: 149px;
             --brush-accent: oklch(from var(--category-accent) calc(l - 0.08) c calc(h + 10));
         }
 
         &[data-brush="6"] {
-            --tear-shift: 89px;
             --brush-accent: oklch(from var(--category-accent) calc(l + 0.03) c calc(h - 25));
         }
     }
@@ -101,20 +85,16 @@
         transform: scale(0.98);
     }
 
-    // Фото с краем сухой кисти на мазке цвета категории: основной темнее, дополнительный светлее.
-    // Мазок слегка выходит за край карточки, поэтому без overflow: размер обёртке задают aspect-ratio и сетка,
-    // а фото лежит поверх абсолютно и не растягивает её
+    // Фото во всю ширину карточки, без отступов, углы скруглены по карточке. Размер обёртке задают aspect-ratio
+    // и сетка, а фото лежит поверх абсолютно и не растягивает её
     .media {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius-md) var(--radius-md) 0 0;
         aspect-ratio: 4 / 3;
-        margin: var(--space-1) var(--space-1) 0;
-
-        @include brush.brush-wash(
-            color-mix(in srgb, color-mix(in srgb, var(--brush-accent) 80%, black) 80%, transparent),
-            color-mix(in srgb, color-mix(in srgb, var(--brush-accent) 45%, var(--category-bg)) 80%, transparent)
-        );
     }
 
-    // Без фото: картинка категории на пустом мазке той же формы, что и фото
+    // Без фото: картинка категории на фоне цвета категории
     .placeholder {
         position: absolute;
         inset: 0;
@@ -123,8 +103,6 @@
         padding: 22% 30%;
         background: var(--category-bg);
         color: var(--color-accent);
-
-        @include brush.brush-photo;
     }
 
     .image {
@@ -134,8 +112,6 @@
         height: 100%;
         object-fit: cover;
         transition: transform var(--transition-slow);
-
-        @include brush.brush-photo;
     }
 
     .badge {
@@ -198,24 +174,18 @@
 
     // Узкий телефон, карточка одна в ряду: фото слева, текст справа
     @include media.narrow {
-        --paper-fade: linear-gradient(
-            to right,
-            transparent calc(var(--space-3) + 20%),
-            #000 calc(var(--space-3) + 40% - var(--size-paper-under-photo))
-        );
-
         flex-direction: row;
 
+        // Фото слева во всю высоту карточки
         .media {
             flex: 0 0 40%;
-            align-self: flex-start;
-            aspect-ratio: 1;
-            margin: var(--space-3) 0 var(--space-3) var(--space-3);
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+            aspect-ratio: auto;
         }
     }
 
     // Малая карточка в живой сетке: фото одной высоты на любой ширине, строки сетки ровные
-    // Высоту карточек живой сетки задаёт строка: лишний текст обрезается, а не растягивает её. Мазок под карточкой виден
+    // Высоту карточек живой сетки задаёт строка: лишний текст обрезается, а не растягивает её.
     &.small,
     &.wide,
     &.tall {
@@ -228,8 +198,6 @@
     }
 
     &.small {
-        --photo-height: var(--size-bento-image);
-
         .media {
             flex-shrink: 0;
             height: var(--size-bento-image);
@@ -239,16 +207,11 @@
 
     // Широкая карточка в живой сетке: фото слева на всю высоту, текст справа крупнее
     &.wide {
-        --paper-fade: linear-gradient(
-            to right,
-            transparent calc(var(--space-1) + 27.5%),
-            #000 calc(var(--space-1) + 55% - var(--size-paper-under-photo))
-        );
-
         flex-direction: row;
 
         .media {
             flex: 0 0 55%;
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
             aspect-ratio: auto;
         }
 
@@ -264,10 +227,7 @@
     }
 
     // Высокая карточка на две строки сетки: фото растягивается, название крупнее
-    // Фото занимает всё, что не занял текст, — примерно четыре пятых карточки
     &.tall {
-        --paper-fade: linear-gradient(transparent 40%, #000 70%);
-
         .media {
             flex: 1;
             aspect-ratio: auto;

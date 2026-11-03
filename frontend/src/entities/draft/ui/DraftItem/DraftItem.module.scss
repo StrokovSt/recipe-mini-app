@@ -1,0 +1,9 @@
+// Черновик — листок бумаги с текстурой. Слоёв всегда три, меняется только верхний оттенок:
+// при разном числе слоёв фон при наведении «плывёт»
+.draft {
+    --tile-paper: var(--texture-paper) center / var(--size-paper-texture), var(--color-surface);
+    --tile-bg: linear-gradient(transparent 0 0), var(--tile-paper);
+    --tile-hover-bg: linear-gradient(color-mix(in srgb, var(--color-active) 8%, transparent) 0 0), var(--tile-paper);
+
+    box-shadow: var(--shadow-sm);
+}

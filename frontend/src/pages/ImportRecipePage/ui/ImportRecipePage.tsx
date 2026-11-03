@@ -3,15 +3,19 @@ import { type FormEvent, useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import { AppRoute } from "@/app/router";
 import { getImportRoute, type ImportResult, type ImportSource, useImportRecipe } from "@/features/recipe-form";
 import { ApiError } from "@/shared/api";
 import { getErrorMessage } from "@/shared/lib/errors";
+import { useLayoutMode } from "@/shared/lib/layout";
+import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 import { IconButton, RegularButton } from "@/shared/ui/Buttons";
 import { ErrorMessage } from "@/shared/ui/ErrorMessage";
 import { useLoader } from "@/shared/ui/GlobalLoader";
 import { Input } from "@/shared/ui/Input";
 import { PageFooter } from "@/shared/ui/PageFooter";
 import { PageHeader } from "@/shared/ui/PageHeader";
+import { PageTitle } from "@/shared/ui/PageTitle";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 
 import PhotoZone, { type Photo } from "./PhotoZone/PhotoZone";
@@ -23,7 +27,9 @@ const URL_REGEX = /^https?:\/\/\S+\.\S+$/i;
 // Распознавание по ссылке или фото. Запускается только кнопкой, чтобы не тратить запрос на случайный файл.
 // Черновик открывается в обычной форме создания. С экрана можно уйти: распознавание идёт дальше (useImportRecipe)
 const ImportRecipePage = () => {
-    const { t } = useTranslation(["recipeForm", "common"]);
+    const { t } = useTranslation(["recipeForm", "common", "footer"]);
+    const mode = useLayoutMode();
+    const isDesktop = mode === "desktop" || mode === "wide";
     const navigate = useNavigate();
     const [url, setUrl] = useState("");
     // Кнопка «Распознать» в футере, вне формы: связана с ней через атрибут form
@@ -72,6 +78,12 @@ const ImportRecipePage = () => {
     return (
         <PageWrapper
             header={
+                // Компьютер: путь к странице в шапке, заголовок в контенте. Телефон и планшет: заголовок в шапке
+                isDesktop ? (
+                    <PageHeader>
+                        <Breadcrumbs label={t("common:breadcrumbs")} items={[{ label: t("footer:collection"), to: AppRoute.Home }, { label: t("choose.title"), to: AppRoute.AddRecipe }, { label: t("import.title") }]} />
+                    </PageHeader>
+                ) : (
                 <PageHeader className={styles.header}>
                     <div>
                         <h1 className={styles.title}>{t("import.title")}</h1>
@@ -86,8 +98,10 @@ const ImportRecipePage = () => {
                         onClick={() => navigate(-1)}
                     />
                 </PageHeader>
+                )
             }
         >
+            {isDesktop && <PageTitle title={t("import.title")} hint={t("import.subtitle")} />}
             <form id={formId} className={clsx(styles.form, isParsing && styles.parsing)} onSubmit={handleSubmit}>
                 <div className={styles.card}>
                     <Input

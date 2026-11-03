@@ -1,5 +1,6 @@
 {
     "appName": "Kokoro",
+    "breadcrumbs": "Sayfa yolu",
     "notFound": {
         "title": "Sayfa bulunamadı",
         "text": "Böyle bir sayfa yok. Bağlantıyı kontrol edin."

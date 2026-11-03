@@ -89,8 +89,6 @@
 
     // Высота общей шапки: кнопка меню + отступы сверху и снизу + нижняя граница
     --size-page-header: calc(var(--size-menu-button) + 2 * var(--space-3) + 1px);
-    --size-brush-height: 10px;
-    --size-brush-offset: 6px;
     --size-brush-rule: 7px; /* сухой росчерк под временем и порциями карточки */
     --size-focus-ring: 2px; /* обводка элемента гуашью при фокусе с клавиатуры */
     --size-brush-bleed: 8px; /* мазок под фото карточки выходит за обёртку фото, чуть дальше края карточки */
@@ -132,6 +130,11 @@
 
     // Круг с иконкой в карточке выбора способа добавления рецепта
     --size-option-icon: 52px;
+    --size-draft-card-min-width: 280px; /* черновик-листок в сетке на компьютере */
+    --size-draft-card-min-height: 120px;
+    --size-paper-texture: 512px; /* плитка текстуры бумаги: картинка 1024px, на экранах с двойной плотностью чёткая */
+    --size-option-icon-lg: 96px; /* иконка способа на большой карточке на компьютере */
+    --size-option-card-min-height: 200px; /* высота карточки способа на компьютере */
 
     // Цветная полоса слева у плашки-предупреждения
     --size-banner-stripe: 3px;
@@ -152,15 +155,12 @@
     --size-category-tile-picture-pair: 40px; /* она же на телефоне, где плитки по две в ряд */
     --size-strip-item: 196px; /* карточка в ряду категорий на компьютере */
     --size-strip-picture: 48px;
-    --size-paper-tear: 3px; /* глубина рваного края карточки рецепта */
-    --size-paper-tear-length: 200px; /* длина узора рваного края, дальше он повторяется */
-    --size-paper-under-photo: 12px; /* лист карточки рецепта проявляется под фото и целиком виден чуть раньше его края */
     --size-inline-loader-area: 60dvh; /* котик на месте содержимого центруется в этой высоте: середина первого экрана */
     --size-bento-column: 300px; /* колонка живой сетки: на широком экране колонок больше, широкая карточка не шире 800px */
     --size-bento-min-columns: 4; /* меньше колонок не бывает: узор сетки держится на четырёх */
     --size-bento-row: 332px; /* строка живой сетки: высокая карточка на две строки — 680px */
     --size-bento-image: 170px; /* фото малой карточки живой сетки */
-    --size-header-search: 560px; /* поиск в шапке на компьютере */
+    --size-header-search: clamp(560px, 50vw, 960px); /* поиск в шапке на компьютере, шире на большом экране */
     --size-icon-picker-option: 56px;
     --size-icon-picker-icon: 40px;
     --size-icon-picker-max-height: 40dvh;
@@ -187,6 +187,7 @@
     --size-footer-action-max-width: 320px; /* кнопка формы в футере на широком экране */
     --size-card-min-width: 160px;
     --size-category-min-width: 150px;
+    --size-category-row-min-width: 200px; /* плитка категории в строку: картинка, название, стрелка */
     --size-category-tile-min-width: 240px; /* плитка категории гуашью: шире экран — больше плиток в строке */
     --size-category-tile-height: 104px;
 

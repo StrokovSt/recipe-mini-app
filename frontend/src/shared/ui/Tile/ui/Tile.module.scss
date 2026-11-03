@@ -4,13 +4,13 @@
 @use "@/shared/styles/tap-area";
 
 .tile {
-    @include brush.brush-underline;
+    position: relative;
 
     // Свой контекст наложения: кнопка «⋯» поднимается над ссылкой, но не над шапкой страницы
     isolation: isolate;
     display: grid;
     align-items: start;
-    grid-template: "icon more" auto "title title" auto "subtitle arrow" 1fr / 1fr auto;
+    grid-template: "icon icon" auto "title title" auto "subtitle arrow" 1fr / 1fr auto;
     column-gap: var(--space-2);
     min-width: 0;
     padding: var(--space-3);
@@ -25,15 +25,11 @@
 
     // Плитка подсвечивается только от работы с ней самой, нажатие на «⋯» её не трогает
     &:has(.title:focus-visible) {
-        @include brush.brush-underline-active;
-
         border-color: var(--tile-accent, var(--color-active));
         background: var(--tile-hover-bg, var(--color-hover-bg));
     }
 
-    @include states.hover(":not(:has(.more:hover, .more:active, .seal:hover, .seal:active))") {
-        @include brush.brush-underline-active;
-
+    @include states.hover(":not(:has(.seal:hover, .seal:active))") {
         border-color: var(--tile-accent, var(--color-active));
         background: var(--tile-hover-bg, var(--color-hover-bg));
     }
@@ -51,20 +47,7 @@
         }
     }
 
-    .more {
-        position: relative;
-        z-index: 1;
-        grid-area: more;
-        width: var(--size-tile-action);
-        height: var(--size-tile-action);
-
-        svg {
-            width: 60%;
-            height: 60%;
-        }
-    }
-
-    // ⋯ пилюлей на верхней рамке низкой плитки, как у шагов рецепта. Фон плитки перекрывает рамку под пилюлей.
+    // ⋯ пилюлей на верхней рамке плитки, как у шагов рецепта. Фон плитки перекрывает рамку под пилюлей.
     // Поверх ссылки, растянутой на всю плитку, иначе нажатие на нижнюю половину уходит в неё
     .seal {
         @include tap-area.tap-area;
@@ -145,9 +128,10 @@
         color: var(--color-active);
     }
 
+    // В строку: картинка, название с подписью, стрелка
     &.row {
         align-items: center;
-        grid-template: "icon title more" auto "icon subtitle more" auto / auto minmax(0, 1fr) auto;
+        grid-template: "icon title arrow" auto "icon subtitle arrow" auto / auto minmax(0, 1fr) auto;
         column-gap: var(--space-3);
         padding: var(--space-2) var(--space-3);
 
@@ -161,7 +145,7 @@
     }
 
     // Плитка гуашью: вместо рамки и фона мазок краски, при наведении плитка просто приподнимается.
-    // Фокус с клавиатуры отмечает винный мазок поверх (brush-underline-active выше)
+    // Фокус с клавиатуры отмечает обводка вокруг плитки
     &.painted {
         align-content: center;
         min-height: var(--size-tile-min-height, auto);
@@ -187,7 +171,7 @@
         }
 
         // Наведение: краска насыщеннее (BrushPaint)
-        @include states.hover(":not(:has(.more:hover, .more:active, .seal:hover, .seal:active))") {
+        @include states.hover(":not(:has(.seal:hover, .seal:active))") {
             --paint-hover: 1;
 
             border-color: transparent;
@@ -195,7 +179,7 @@
         }
 
         // Нажатие: плитка чуть сжимается, как обычная кнопка. Нажатие на «⋯» её не трогает
-        @include states.active(":not(:has(.more:active, .seal:active))") {
+        @include states.active(":not(:has(.seal:active))") {
             transform: scale(0.97);
         }
 
@@ -233,17 +217,6 @@
                 font: var(--font-header-md);
                 font-weight: var(--font-weight-bold);
             }
-        }
-
-        // «⋯» отдельным бумажным кружком поверх краски: светлый фон, тонкая рамка, значок в цвет акцента
-        .more {
-            --icon-button-bg: color-mix(in srgb, var(--color-surface) 85%, transparent);
-
-            position: absolute;
-            top: var(--space-2);
-            right: var(--space-2);
-            border-color: var(--color-border);
-            color: var(--color-active);
         }
     }
 

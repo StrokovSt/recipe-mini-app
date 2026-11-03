@@ -13,13 +13,15 @@ interface SegmentedControlProps<T extends string> {
     options: SegmentedOption<T>[];
     value: T;
     onChange: (id: T) => void;
+    // pills — отдельные пилюли без общей подложки (заголовок раздела на компьютере)
+    variant?: "tray" | "pills";
     className?: string;
 }
 
 // Переключатель из нескольких вариантов (тема, категории/теги):
 // выбранный подсвечен винной плашкой, которая переезжает между вариантами
 export const SegmentedControl = <T extends string>(props: SegmentedControlProps<T>) => {
-    const { options, value, onChange, className } = props;
+    const { options, value, onChange, variant = "tray", className } = props;
 
     // Плашка одна и сдвигается на индекс выбранного варианта. Без layoutId: он мерил позицию на экране
     // и на телефоне плашка прилетала снизу, когда под переключателем менялась высота контента
@@ -27,8 +29,8 @@ export const SegmentedControl = <T extends string>(props: SegmentedControlProps<
     const pillStyle = { "--count": options.length, "--index": index } as CSSProperties;
 
     return (
-        <div className={clsx(styles.wrap, className)} role="radiogroup">
-            {index >= 0 && <span className={styles.pill} style={pillStyle} />}
+        <div className={clsx(styles.wrap, variant === "pills" && styles.pills, className)} role="radiogroup">
+            {index >= 0 && variant === "tray" && <span className={styles.pill} style={pillStyle} />}
             {options.map((option) => {
                 const isActive = option.id === value;
 

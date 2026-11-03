@@ -1,5 +1,19 @@
+@use "@/shared/styles/media";
+
 .list {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
+
+    // Компьютер: черновики — листки бумаги в сетке, а не полосы во всю ширину
+    @include media.desktop {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(var(--size-draft-card-min-width), 1fr));
+        gap: var(--space-4);
+
+        > * {
+            min-height: var(--size-draft-card-min-height);
+            padding: var(--space-4);
+        }
+    }
 }

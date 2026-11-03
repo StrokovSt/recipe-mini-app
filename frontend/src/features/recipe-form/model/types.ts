@@ -1,5 +1,7 @@
 import type { DraftOrigin, ParsedRecipe } from "@recipe/common";
 
+import type { BreadcrumbItem } from "@/shared/ui/Breadcrumbs";
+
 import type { RecipeFormValues } from "./schema";
 
 // Откуда рецепт, если его распознал ИИ; без него «other» и пустая ссылка
@@ -33,6 +35,8 @@ export interface RecipeFormProps {
     source?: RecipeFormSource;
     // Только для нового рецепта: форма автоматически сохраняется в черновик
     draft?: RecipeFormDraft;
+    // Путь к странице в шапке на компьютере
+    breadcrumbs: BreadcrumbItem[];
 }
 
 // Состояние роутера при переходе с импорта на форму создания, если черновик создать не удалось

@@ -1,6 +1,10 @@
+@use "@/shared/styles/media";
 @use "@/shared/styles/states";
 
 .card {
+    // Цвет способа: рамка, иконка, подпись-действие и лёгкая заливка
+    --option-color: var(--color-active);
+
     display: grid;
     align-items: center;
     grid-template-columns: var(--size-option-icon) 1fr;
@@ -19,8 +23,8 @@
     column-gap: var(--space-4);
 
     @include states.hover(":not(:disabled)") {
-        border-color: var(--color-active);
-        background: var(--color-hover-bg);
+        border-color: var(--option-color);
+        background: color-mix(in srgb, var(--option-color) 8%, var(--color-surface));
     }
 
     &:disabled {
@@ -35,7 +39,7 @@
         border: 1px solid var(--color-border-strong);
         border-radius: var(--radius-full);
         background: var(--color-app-bg);
-        color: var(--color-active);
+        color: var(--option-color);
         place-items: center;
 
         svg {
@@ -57,12 +61,68 @@
 
     .action {
         margin-top: var(--space-2);
-        color: var(--color-active);
+        color: var(--option-color);
         font: var(--font-ui-xs);
         font-weight: var(--font-weight-bold);
 
         &::after {
             content: " →";
+        }
+    }
+
+    &.import {
+        --option-color: var(--color-success);
+    }
+
+    // Компьютер: карточка залита цветом способа, большая иконка слева, действие — светлая пилюля
+    @include media.desktop {
+        grid-template-columns: var(--size-option-icon-lg) minmax(0, 1fr);
+        align-content: center;
+        min-height: var(--size-option-card-min-height);
+        padding: var(--space-6);
+        border-color: var(--option-color);
+        background: var(--option-color);
+        color: var(--color-active-text);
+        column-gap: var(--space-5);
+
+        @include states.hover(":not(:disabled)") {
+            border-color: var(--option-color);
+            background: color-mix(in srgb, var(--option-color) 88%, var(--color-text));
+        }
+
+        .icon {
+            width: var(--size-option-icon-lg);
+            height: var(--size-option-icon-lg);
+            border-color: transparent;
+            background: var(--color-surface);
+        }
+
+        .title {
+            font: var(--font-header-lg);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .description {
+            opacity: 0.85;
+            color: inherit;
+            font: var(--font-md);
+        }
+
+        .action {
+            display: inline-flex;
+            align-items: center;
+            justify-self: start;
+            height: var(--size-search-height);
+            margin-top: var(--space-4);
+            padding: 0 var(--space-5);
+            border-radius: calc(var(--size-search-height) / 2);
+            background: var(--color-surface);
+            font: var(--font-md);
+            font-weight: var(--font-weight-bold);
+        }
+
+        &.locked {
+            --option-color: var(--color-text-muted);
         }
     }
 

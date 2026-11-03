@@ -84,7 +84,11 @@
     // Светлый мазок из другого набора, чтобы он не повторял тёмный
     $light: brush.tile-brush(pattern, ($i + 1) % 6 + 1, brush.$tile-patterns);
     $edge: brush.tile-brush(edge, $i, brush.$tile-edges);
-    $place: if($i == 1, "", ":nth-child(6n + #{$i}) > .brush ");
+    $place: "";
+
+    @if $i > 1 {
+        $place: ":nth-child(6n + #{$i}) > .brush ";
+    }
 
     #{$place}.fill {
         mask-image: $shape;

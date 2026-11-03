@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
 import { buildRoute } from "@/app/router/routes";
@@ -10,6 +10,7 @@ import DeleteIcon from "@/shared/assets/icons/icon-delete.svg?react";
 import EditIcon from "@/shared/assets/icons/icon-edit.svg?react";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { shareLink } from "@/shared/lib/share";
+import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 import { IconButton } from "@/shared/ui/Buttons";
 import { Dropdown } from "@/shared/ui/Dropdown";
 import { useLoader } from "@/shared/ui/GlobalLoader";
@@ -70,7 +71,7 @@ const RecipePage = () => {
     // 404 — рецепта нет. Другая ошибка или нет сети — рецепт есть, но не загрузился
     if (!recipe) {
         return (
-            <PageWrapper className={styles.page} header={<PageHeader className={styles.header}>{backButton}</PageHeader>}>
+            <PageWrapper className={styles.page} header={<PageHeader className={styles.header}>{!isDesktop && backButton}</PageHeader>}>
                 {error instanceof ApiError && error.status === 404 ? (
                     <Message illustration="warning" title={t("notFound.title")} text={t("notFound.text")} />
                 ) : (
@@ -126,7 +127,8 @@ const RecipePage = () => {
                     { label: t("common:delete"), icon: <DeleteIcon />, danger: true, onClick: () => setIsConfirmOpen(true) },
                 ]}
             />
-            {backButton}
+            {/* На компьютере назад ведёт путь в шапке */}
+            {!isDesktop && backButton}
         </>
     );
 
@@ -137,13 +139,14 @@ const RecipePage = () => {
                 // Компьютер: путь к рецепту слева в шапке, кнопки в своей зоне справа. Телефон и планшет: только кнопки
                 <PageHeader className={styles.header} actions={isDesktop && headerButtons}>
                     {isDesktop ? (
-                        <nav className={styles.breadcrumbs} aria-label={t("breadcrumbs")}>
-                            <Link to={AppRoute.Home}>{t("footer:collection")}</Link>
-                            <span aria-hidden>/</span>
-                            <Link to={`${AppRoute.Home}?category=${recipe.categoryId}`}>{recipe.category.name}</Link>
-                            <span aria-hidden>/</span>
-                            <span className={styles.current} aria-current="page">{recipe.title}</span>
-                        </nav>
+                        <Breadcrumbs
+                            label={t("breadcrumbs")}
+                            items={[
+                                { label: t("footer:collection"), to: AppRoute.Home },
+                                { label: recipe.category.name, to: `${AppRoute.Home}?category=${recipe.categoryId}` },
+                                { label: recipe.title },
+                            ]}
+                        />
                     ) : (
                         headerButtons
                     )}

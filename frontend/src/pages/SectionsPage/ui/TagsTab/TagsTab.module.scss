@@ -1,6 +1,13 @@
+@use "@/shared/styles/media";
+
 .list {
     --list-gap: var(--space-3);
     --list-max-columns: 4;
+
+    // Компьютер: места больше, плиток в строке тоже
+    @include media.desktop {
+        --list-max-columns: 6;
+    }
 
     display: grid;
     grid-template-columns: repeat(

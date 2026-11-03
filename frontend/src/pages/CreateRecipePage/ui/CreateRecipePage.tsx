@@ -10,7 +10,7 @@ import { PageWrapper } from "@/shared/ui/PageWrapper";
 // Форма нового рецепта: пустая, открытый черновик или распознанное ИИ, если черновик создать не удалось.
 // Форма сама сохраняется в черновик
 const CreateRecipePage = () => {
-    const { t } = useTranslation("recipeForm");
+    const { t } = useTranslation(["recipeForm", "footer"]);
     const { id } = useParams<{ id: string }>();
     const { parsed, isImported } = (useLocation().state as RecipeDraftState | null) ?? {};
     const { data: draft, isLoading, isError } = useDraft<RecipeDraftData>(id);
@@ -31,6 +31,11 @@ const CreateRecipePage = () => {
                 source={draft ? { source: draft.source, sourceUrl: draft.data.sourceUrl } : parsed}
                 draft={{ id: draft?.id, origin: isAi ? "ai" : "manual", isImported: !!draft && isImported }}
                 submitLabel={t("submitAdd")}
+                breadcrumbs={[
+                    { label: t("footer:collection"), to: AppRoute.Home },
+                    { label: t("choose.title"), to: AppRoute.AddRecipe },
+                    { label: isAi ? t("choose.import.title") : t("choose.manual.title") },
+                ]}
             />
         </PageWrapper>
     );

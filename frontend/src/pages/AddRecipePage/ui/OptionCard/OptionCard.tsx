@@ -6,6 +6,8 @@ import LockIcon from "@/shared/assets/icons/icon-lock.svg?react";
 import styles from "./OptionCard.module.scss";
 
 interface OptionCardProps {
+    // Цвет карточки: вручную — винный, распознать — зелёный
+    tone: "manual" | "import";
     icon: ReactNode;
     title: string;
     description: string;
@@ -19,12 +21,12 @@ interface OptionCardProps {
 
 // Большая карточка-кнопка способа добавления рецепта
 export const OptionCard = (props: OptionCardProps) => {
-    const { icon, title, description, action, locked, disabled, onClick } = props;
+    const { tone, icon, title, description, action, locked, disabled, onClick } = props;
 
     return (
         <button
             type="button"
-            className={clsx(styles.card, locked && styles.locked)}
+            className={clsx(styles.card, styles[tone], locked && styles.locked)}
             disabled={disabled}
             onClick={onClick}
         >

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { buildRoute } from "@/app/router/routes";
+import { AppRoute, buildRoute } from "@/app/router/routes";
 import { useRecipe, useUpdateRecipe } from "@/entities/recipe";
 import { EMPTY_FORM_VALUES, getCover, getVideo, RecipeForm, type RecipeFormValues, toMedia } from "@/features/recipe-form";
 import { ApiError } from "@/shared/api";
@@ -12,7 +12,7 @@ import { PageWrapper } from "@/shared/ui/PageWrapper";
 const EditRecipePage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const { t } = useTranslation(["recipeForm", "recipe"]);
+    const { t } = useTranslation(["recipeForm", "recipe", "footer"]);
 
     const { data: recipe, isLoading, error, isFetching, refetch } = useRecipe(id!);
     useLoader(isLoading || (!recipe && isFetching));
@@ -60,6 +60,11 @@ const EditRecipePage = () => {
             <RecipeForm
                 title={t("form.editTitle")}
                 subtitle={recipe.title}
+                breadcrumbs={[
+                    { label: t("footer:collection"), to: AppRoute.Home },
+                    { label: recipe.title, to: buildRoute.recipe(recipe.id) },
+                    { label: t("form.editTitle") },
+                ]}
                 defaultValues={{
                     title: recipe.title,
                     description: recipe.description,

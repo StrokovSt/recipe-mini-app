@@ -12,11 +12,14 @@ import { useCreateRecipe, useUploadMedia } from "@/entities/recipe";
 import { ApiError } from "@/shared/api";
 import { getAnimations } from "@/shared/lib/animations";
 import { getErrorMessage } from "@/shared/lib/errors";
+import { useLayoutMode } from "@/shared/lib/layout";
+import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 import { IconButton, RegularButton } from "@/shared/ui/Buttons";
 import { ImageInput } from "@/shared/ui/ImageInput";
 import { Modal } from "@/shared/ui/Modal";
 import { PageFooter } from "@/shared/ui/PageFooter";
 import { PageHeader } from "@/shared/ui/PageHeader";
+import { PageTitle } from "@/shared/ui/PageTitle";
 
 import { toMedia } from "../model/cover";
 import { dropEmptyRows, EMPTY_FORM_VALUES, type RecipeFormValues, recipeSchema } from "../model/schema";
@@ -40,7 +43,10 @@ const RecipeForm = (props: RecipeFormProps) => {
         isPending: isPendingProp,
         source,
         draft,
+        breadcrumbs,
     } = props;
+    const mode = useLayoutMode();
+    const isDesktop = mode === "desktop" || mode === "wide";
     const navigate = useNavigate();
     const methods = useForm<RecipeFormValues>({
         resolver: zodResolver(recipeSchema) as Resolver<RecipeFormValues>,
@@ -180,6 +186,12 @@ const RecipeForm = (props: RecipeFormProps) => {
 
     return (
         <FormProvider {...methods}>
+            {/* Компьютер: путь к странице в шапке, заголовок в контенте. Телефон и планшет: заголовок в шапке */}
+            {isDesktop ? (
+                <PageHeader>
+                    <Breadcrumbs label={t("common:breadcrumbs")} items={breadcrumbs} />
+                </PageHeader>
+            ) : (
             <PageHeader className={styles.header}>
                 <div className={styles.heading}>
                     <h1 className={styles.title}>{title}</h1>
@@ -194,6 +206,9 @@ const RecipeForm = (props: RecipeFormProps) => {
                     onClick={() => navigate(-1)}
                 />
             </PageHeader>
+            )}
+
+            {isDesktop && <PageTitle title={title} hint={subtitle} />}
 
             {/* Проверяет схема, а не браузер: иначе недописанная ссылка на обложку (поле type="url")
                 останавливала бы сохранение всплывающей подсказкой браузера */}

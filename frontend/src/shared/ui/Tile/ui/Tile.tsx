@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import ForwardIcon from "@/shared/assets/icons/icon-forward.svg?react";
 import MoreIcon from "@/shared/assets/icons/icon-more.svg?react";
 import { BrushPaint } from "@/shared/ui/BrushPaint";
-import { IconButton } from "@/shared/ui/Buttons";
 import { Dropdown, type DropdownItem } from "@/shared/ui/Dropdown";
 
 import styles from "./Tile.module.scss";
@@ -35,40 +34,24 @@ export const Tile = (props: TileProps) => {
         <article className={clsx(styles.tile, row && styles.row, compact && styles.compact, painted && styles.painted, className)}>
             {painted && <BrushPaint />}
             <span className={styles.icon} aria-hidden>{icon}</span>
-            {/* Одно действие — сразу кнопка, меню из одного пункта не нужно */}
-            {single && !compact && (
-                <IconButton
-                    round
-                    variant={single.danger ? "danger" : "default"}
-                    className={styles.more}
-                    aria-label={single.label}
-                    onClick={single.onClick}
-                >
-                    {single.icon}
-                </IconButton>
-            )}
-            {single && compact && (
+            {/* «⋯» пилюлей на верхней рамке. Одно действие — сразу кнопка, меню из одного пункта не нужно */}
+            {single ? (
                 <button type="button" className={styles.seal} aria-label={single.label} onClick={single.onClick}>
                     {single.icon}
                 </button>
-            )}
-            {!single && (
+            ) : (
                 <Dropdown
                     trigger={
-                        compact ? (
-                            <button type="button" className={styles.seal} aria-label={menuLabel}>
-                                <MoreIcon />
-                            </button>
-                        ) : (
-                            <IconButton icon="more" round className={styles.more} aria-label={menuLabel} />
-                        )
+                        <button type="button" className={styles.seal} aria-label={menuLabel}>
+                            <MoreIcon />
+                        </button>
                     }
                     items={menu}
                 />
             )}
             <Link to={to} className={styles.title}>{title}</Link>
             {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-            {!row && <ForwardIcon className={styles.arrow} aria-hidden />}
+            <ForwardIcon className={styles.arrow} aria-hidden />
         </article>
     );
 };

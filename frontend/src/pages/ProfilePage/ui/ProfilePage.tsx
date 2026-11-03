@@ -1,12 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import { AppRoute } from "@/app/router";
 import { useCategories } from "@/entities/category";
 import { useRecipes } from "@/entities/recipe";
 import { LANGUAGES } from "@/shared/config/i18n";
+import { useLayoutMode } from "@/shared/lib/layout";
 import { getTelegram } from "@/shared/lib/telegram";
+import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 import { IconButton } from "@/shared/ui/Buttons";
 import { PageHeader } from "@/shared/ui/PageHeader";
+import { PageTitle } from "@/shared/ui/PageTitle";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 
 import { formatTelegramId } from "../lib/formatTelegramId";
@@ -15,7 +19,9 @@ import styles from "./ProfilePage.module.scss";
 
 const ProfilePage = () => {
     const navigate = useNavigate();
-    const { t, i18n } = useTranslation(["profile", "common", "menu"]);
+    const { t, i18n } = useTranslation(["profile", "common", "menu", "footer"]);
+    const mode = useLayoutMode();
+    const isDesktop = mode === "desktop" || mode === "wide";
     const { data: recipes = [] } = useRecipes({});
     const { data: categories = [] } = useCategories();
 
@@ -28,6 +34,12 @@ const ProfilePage = () => {
         <PageWrapper
             className={styles.page}
             header={
+                // Компьютер: путь к странице в шапке, заголовок в контенте. Телефон и планшет: заголовок в шапке
+                isDesktop ? (
+                    <PageHeader>
+                        <Breadcrumbs label={t("common:breadcrumbs")} items={[{ label: t("footer:collection"), to: AppRoute.Home }, { label: t("title") }]} />
+                    </PageHeader>
+                ) : (
                 <PageHeader className={styles.header}>
                     <div>
                         <h1 className={styles.title}>{t("title")}</h1>
@@ -42,8 +54,10 @@ const ProfilePage = () => {
                         onClick={() => navigate(-1)}
                     />
                 </PageHeader>
+                )
             }
         >
+            {isDesktop && <PageTitle title={t("title")} hint={t("subtitle")} />}
             <section className={styles.user}>
                 {user?.photo_url ? (
                     <img className={styles.avatar} src={user.photo_url} alt="" />

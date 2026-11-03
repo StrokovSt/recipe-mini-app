@@ -15,6 +15,7 @@ import { useLayoutMode } from '@/shared/lib/layout';
 import { useLoader } from '@/shared/ui/GlobalLoader';
 import { LoadErrorMessage } from '@/shared/ui/Message';
 import { PageHeader, usePageHeaderBar } from '@/shared/ui/PageHeader';
+import { PageTitle } from '@/shared/ui/PageTitle';
 import { PageWrapper } from '@/shared/ui/PageWrapper';
 import { FilterButton, getActiveFilterCount, RecipeFilters } from '@/widgets/RecipeFilters';
 import { RecipeList } from '@/widgets/RecipeList';
@@ -116,17 +117,16 @@ const HomePage = () => {
             }
         >
             {isDesktop && (
-                <div className={styles.titleRow}>
-                    <div>
-                        <h1 className={styles.title}>
+                // Строка под заголовком есть всегда: пока рецепты грузятся, место занято и контент ниже не прыгает
+                <PageTitle
+                    title={
+                        <>
                             {t('yourCollection')}
                             {activeCategory && <span className={styles.titleCategory}> — {activeCategory.name}</span>}
-                        </h1>
-                        {/* Строка под заголовком есть всегда: пока рецепты грузятся, место занято и контент ниже не прыгает */}
-                        <p className={styles.total}>
-                            {recipes ? t('sections:recipeCount', { count: recipes.length }) : '\u00A0'}
-                        </p>
-                    </div>
+                        </>
+                    }
+                    hint={recipes ? t('sections:recipeCount', { count: recipes.length }) : '\u00A0'}
+                >
                     {/* Сброс виден, только пока что-то выбрано: категория, теги или поиск */}
                     {hasFilters && (
                         <button type="button" className={styles.reset} onClick={() => setFilters({})}>
@@ -134,7 +134,7 @@ const HomePage = () => {
                             {t('filters:reset')}
                         </button>
                     )}
-                </div>
+                </PageTitle>
             )}
             {/* Категории и теги одной группой: между ними отступ меньше, чем между блоками страницы */}
             {isDesktop && (

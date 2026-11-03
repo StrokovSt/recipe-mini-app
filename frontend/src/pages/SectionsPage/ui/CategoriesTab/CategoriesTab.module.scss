@@ -1,13 +1,20 @@
+@use "@/shared/styles/media";
+
 .list {
     --list-gap: var(--space-3);
     --list-max-columns: 4;
+
+    // Компьютер: места больше, плиток в строке тоже
+    @include media.desktop {
+        --list-max-columns: 6;
+    }
 
     display: grid;
     grid-template-columns: repeat(
         auto-fill,
         minmax(
             max(
-                var(--size-category-min-width),
+                var(--size-category-row-min-width),
                 calc((100% - (var(--list-max-columns) - 1) * var(--list-gap)) / var(--list-max-columns))
             ),
             1fr
@@ -15,4 +22,7 @@
     );
     grid-auto-rows: 1fr;
     gap: var(--list-gap);
+
+    // Между рядами место под пилюлю ⋯ на рамке плитки
+    row-gap: var(--space-5);
 }

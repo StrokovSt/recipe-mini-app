@@ -1,3 +1,5 @@
+@use "@/shared/styles/media";
+
 .header {
     flex-direction: row;
     align-items: center;
@@ -35,6 +37,13 @@
         --color-surface: var(--color-app-bg);
     }
 
+    // Компьютер: две карточки способов рядом
+    .options {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-4);
+    }
+
     // Плашка с винной полосой слева
     .limit {
         padding: var(--space-3) var(--space-4);
@@ -54,6 +63,18 @@
         flex-direction: column;
         gap: var(--space-3);
         margin-top: var(--space-4);
+
+        // Компьютер: «Все черновики» — пилюля по размеру текста по центру, не полоса во всю ширину
+        .allDrafts {
+            @include media.desktop {
+                align-self: center;
+                height: var(--size-search-height);
+                padding: 0 var(--space-6);
+                border-radius: calc(var(--size-search-height) / 2);
+                font: var(--font-md);
+                font-weight: var(--font-weight-bold);
+            }
+        }
     }
 }
 
