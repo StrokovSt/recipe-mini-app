@@ -28,10 +28,53 @@ const focusNextField = (input: HTMLInputElement) => {
     fields[fields.indexOf(input) + 1]?.focus();
 };
 
+interface UnitOptionsProps {
+    value: UnitCode | null;
+    onSelect: (unit: UnitCode | null) => void;
+}
+
+// Список единиц — отдельный компонент: он строится, только когда шторка открыта,
+// а не при каждой отрисовке каждой строки ингредиента
+const UnitOptions = ({ value, onSelect }: UnitOptionsProps) => {
+    const { t, i18n } = useTranslation(["recipeForm", "units"]);
+
+    return (
+        <>
+            {UNIT_KINDS.map((kind) => (
+                <section key={kind} className={styles.group}>
+                    <h3 className={styles.title}>{t(`units:kind.${kind}`)}</h3>
+                    <div className={styles.list}>
+                        {getUnitsByKind(kind, i18n.language).map((unit) => (
+                            <button
+                                key={unit}
+                                type="button"
+                                className={styles.option}
+                                aria-pressed={unit === value}
+                                onClick={() => onSelect(unit)}
+                            >
+                                {t(`units:label.${unit}`)}
+                            </button>
+                        ))}
+                    </div>
+                </section>
+            ))}
+
+            <button
+                type="button"
+                className={styles.option}
+                aria-pressed={value === null}
+                onClick={() => onSelect(null)}
+            >
+                {t("ingredients.noUnit")}
+            </button>
+        </>
+    );
+};
+
 // Поле с единицей ингредиента (выглядит как остальные поля строки, без видимой подписи), по тапу или фокусу шторка со всеми единицами по группам.
 // Поле не readOnly, иначе «Далее» на клавиатуре его пропускает; печатать в нём нельзя: inputMode none и значение не меняется
 const UnitSelect = ({ value, onChange, className }: UnitSelectProps) => {
-    const { t, i18n } = useTranslation(["recipeForm", "units"]);
+    const { t } = useTranslation(["recipeForm", "units"]);
     const [isOpen, setIsOpen] = useState(false);
     // Шторка при закрытии возвращает фокус в поле: после выбора передаём его дальше, после отмены оставляем
     const afterCloseRef = useRef<"next" | "stay" | null>(null);
@@ -76,33 +119,7 @@ const UnitSelect = ({ value, onChange, className }: UnitSelectProps) => {
             />
 
             <BottomSheet isOpen={isOpen} onClose={() => close("stay")} title={t("ingredients.unitTitle")}>
-                {UNIT_KINDS.map((kind) => (
-                    <section key={kind} className={styles.group}>
-                        <h3 className={styles.title}>{t(`units:kind.${kind}`)}</h3>
-                        <div className={styles.list}>
-                            {getUnitsByKind(kind, i18n.language).map((unit) => (
-                                <button
-                                    key={unit}
-                                    type="button"
-                                    className={styles.option}
-                                    aria-pressed={unit === value}
-                                    onClick={() => select(unit)}
-                                >
-                                    {t(`units:label.${unit}`)}
-                                </button>
-                            ))}
-                        </div>
-                    </section>
-                ))}
-
-                <button
-                    type="button"
-                    className={styles.option}
-                    aria-pressed={value === null}
-                    onClick={() => select(null)}
-                >
-                    {t("ingredients.noUnit")}
-                </button>
+                <UnitOptions value={value} onSelect={select} />
             </BottomSheet>
         </>
     );

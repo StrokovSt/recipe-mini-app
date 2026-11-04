@@ -7,6 +7,7 @@ import { AppRoute } from "@/app/router";
 import { getImportRoute, type ImportResult, type ImportSource, useImportRecipe } from "@/features/recipe-form";
 import { ApiError } from "@/shared/api";
 import { getErrorMessage } from "@/shared/lib/errors";
+import { useGoBack } from "@/shared/lib/hooks";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 import { IconButton, RegularButton } from "@/shared/ui/Buttons";
@@ -31,6 +32,7 @@ const ImportRecipePage = () => {
     const mode = useLayoutMode();
     const isDesktop = mode === "desktop" || mode === "wide";
     const navigate = useNavigate();
+    const goBack = useGoBack(AppRoute.Home);
     const [url, setUrl] = useState("");
     // Кнопка «Распознать» в футере, вне формы: связана с ней через атрибут form
     const formId = useId();
@@ -95,7 +97,7 @@ const ImportRecipePage = () => {
                         className={styles.back}
                         type="button"
                         aria-label={t("common:back")}
-                        onClick={() => navigate(-1)}
+                        onClick={goBack}
                     />
                 </PageHeader>
                 )

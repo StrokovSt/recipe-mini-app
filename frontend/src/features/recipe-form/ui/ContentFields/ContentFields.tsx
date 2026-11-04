@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import { useFormState } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -64,4 +64,5 @@ const ContentFields = ({ tab, onTabChange }: ContentFieldsProps) => {
     );
 };
 
-export default ContentFields;
+// memo: статус черновика и вкладки формы меняются часто, поля от них не зависят
+export default memo(ContentFields);

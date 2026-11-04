@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from "react";
 
 import { splashHidden } from "@/shared/lib/splash";
+import { storage } from "@/shared/lib/storage";
 
 import { ONBOARDING_STEPS } from "../config/steps";
 
@@ -25,7 +26,7 @@ const subscribe = (listener: () => void) => {
 
 export const useOnboardingStep = () => useSyncExternalStore(subscribe, () => step);
 
-export const isOnboardingDone = () => localStorage.getItem(DONE_STORAGE_KEY) !== null;
+export const isOnboardingDone = () => storage.get(DONE_STORAGE_KEY) !== null;
 
 // С начала: при первом входе и из меню («Как пользоваться»)
 export const startOnboarding = () => setStep(0);
@@ -38,7 +39,7 @@ export const nextOnboardingStep = () => {
 
 // Пройдено до конца или пропущено: больше само не запускается
 export const finishOnboarding = () => {
-    localStorage.setItem(DONE_STORAGE_KEY, "1");
+    storage.set(DONE_STORAGE_KEY, "1");
     setStep(null);
 };
 

@@ -28,7 +28,7 @@
     transition: var(--transition-base);
     transition-property: border-color, background, box-shadow;
 
-    svg {
+    :is(svg, img) {
         flex-shrink: 0;
         width: var(--size-icon-xl);
         height: var(--size-icon-xl);

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { AnimatePresence, m, type MotionStyle, type Variants } from 'motion/react';
-import { memo, type ReactNode, useState } from 'react';
+import { memo, type ReactNode, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { Recipe } from '@recipe/common';
@@ -71,7 +71,8 @@ const RecipeList = (props: RecipeListProps) => {
     const placements = isBento && bentoColumns > 0 ? getBentoPlacements(recipes.length, bentoColumns) : [];
 
     // Колонки считаем, как только список появился (до отрисовки на экране), и при каждой смене его ширины
-    const observeBento = (list: HTMLDivElement | null) => {
+    // useCallback: с новой функцией на каждой отрисовке React отключал и заново подключал ResizeObserver
+    const observeBento = useCallback((list: HTMLDivElement | null) => {
         if (!list || !isBento) return;
 
         setBentoColumns(countBentoColumns(list));
@@ -79,7 +80,7 @@ const RecipeList = (props: RecipeListProps) => {
         observer.observe(list);
 
         return () => observer.disconnect();
-    };
+    }, [isBento]);
 
     return (
         <div className={styles.stage}>

@@ -1,5 +1,7 @@
 import { useSyncExternalStore } from "react";
 
+import { storage } from "@/shared/lib/storage";
+
 import { addQuery } from "../lib/addQuery";
 
 // История поиска на главной. Пока на устройстве, позже можно перенести в /api/me
@@ -7,7 +9,7 @@ const STORAGE_KEY = "searchHistory";
 
 function readHistory(): string[] {
     try {
-        const saved: unknown = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
+        const saved: unknown = JSON.parse(storage.get(STORAGE_KEY) ?? "[]");
 
         return Array.isArray(saved) ? saved.filter((item): item is string => typeof item === "string") : [];
     } catch {
@@ -21,7 +23,7 @@ const listeners = new Set<() => void>();
 function setHistory(next: string[]) {
     if (next === history) return;
     history = next;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    storage.set(STORAGE_KEY, JSON.stringify(next));
     listeners.forEach((listener) => listener());
 }
 

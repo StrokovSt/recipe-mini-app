@@ -1,4 +1,3 @@
-import { Reorder } from "motion/react";
 import { type KeyboardEvent, useRef, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -10,7 +9,6 @@ import { collapseAndRemove, insertAndExpand } from "@/shared/lib/animations";
 import { AddButton } from "@/shared/ui/Buttons";
 
 import { EMPTY_INGREDIENT, isEmptyIngredient, type RecipeFormValues } from "../../model/schema";
-import { useReorderList } from "../../model/useReorderList";
 import { useUndoToast } from "../../model/useUndoToast";
 import PasteSheet from "../PasteSheet/PasteSheet";
 import IngredientRow from "./IngredientRow";
@@ -25,14 +23,13 @@ interface GroupItemsProps {
 const GroupItems = ({ groupIndex }: GroupItemsProps) => {
     const { t } = useTranslation("recipeForm");
     const { control, setFocus, getValues } = useFormContext<RecipeFormValues>();
-    const { fields, append, insert, update, move, remove, replace } = useFieldArray({
+    const { fields, append, insert, update, remove, replace } = useFieldArray({
         control,
         name: `ingredients.${groupIndex}.items`,
     });
     const showUndo = useUndoToast();
     const [isPasteOpen, setIsPasteOpen] = useState(false);
     const listRef = useRef<HTMLUListElement>(null);
-    const { groupProps, getItem } = useReorderList(fields, move, listRef);
 
     // Строка плавно схлопывается и удаляется, непустую можно вернуть из уведомления.
     // Единственная строка группы не пропадает, а очищается
@@ -83,19 +80,17 @@ const GroupItems = ({ groupIndex }: GroupItemsProps) => {
 
     return (
         <>
-            <Reorder.Group ref={listRef} as="ul" {...groupProps} className={styles.list}>
+            <ul ref={listRef} className={styles.list}>
                 {fields.map((field, index) => (
                     <IngredientRow
                         key={field.id}
                         groupIndex={groupIndex}
                         index={index}
-                        count={fields.length}
-                        reorder={getItem(field, index)}
                         onRemove={removeRow}
                         onKeyDown={(event) => handleRowKeyDown(event, index)}
                     />
                 ))}
-            </Reorder.Group>
+            </ul>
             <div className={styles.actions}>
                 <AddButton label={t("ingredients.add")} onClick={() => append(EMPTY_INGREDIENT)} />
                 <button type="button" className={styles.paste} onClick={() => setIsPasteOpen(true)}>

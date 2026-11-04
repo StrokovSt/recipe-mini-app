@@ -1,5 +1,7 @@
 import { MotionGlobalConfig } from "motion/react";
 
+import { storage } from "@/shared/lib/storage";
+
 export const ANIMATIONS_STORAGE_KEY = "animations";
 
 export function getAnimations(): boolean {
@@ -8,12 +10,12 @@ export function getAnimations(): boolean {
 
 // Выбор, сохранённый на устройстве, null — по системной настройке
 export function getSavedAnimations(): boolean | null {
-    const saved = localStorage.getItem(ANIMATIONS_STORAGE_KEY);
+    const saved = storage.get(ANIMATIONS_STORAGE_KEY);
     return saved === null ? null : saved === "on";
 }
 
 export function setAnimations(enabled: boolean) {
-    localStorage.setItem(ANIMATIONS_STORAGE_KEY, enabled ? "on" : "off");
+    storage.set(ANIMATIONS_STORAGE_KEY, enabled ? "on" : "off");
     applyAnimations(enabled);
 }
 

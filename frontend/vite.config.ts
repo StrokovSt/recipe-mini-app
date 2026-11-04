@@ -26,6 +26,51 @@ const inlineEntryCss = (): Plugin => ({
   },
 });
 
+// Код приложения начинает качаться, когда печать на заставке уже на экране: браузер отметил её как LCP
+// (в Safari такой отметки нет — когда печать загрузилась). Иначе код (около 150 КБ) делит сеть с печатью,
+// и она появляется позже. Без заставки (компьютер) — сразу. 1500 мс — как MAX_SEAL_WAIT_MS в shared/lib/splash
+const startAppScript = (src: string) => `(() => {
+  let isStarted = false;
+  const start = () => {
+    if (isStarted) return;
+    isStarted = true;
+    const script = document.createElement("script");
+    script.type = "module";
+    script.crossOrigin = "";
+    script.src = "${src}";
+    document.head.append(script);
+  };
+  const splash = document.getElementById("splash");
+  const seal = splash && splash.querySelector(".splash-seal");
+  if (!seal || getComputedStyle(splash).display === "none") return start();
+  if ((PerformanceObserver.supportedEntryTypes || []).includes("largest-contentful-paint")) {
+    new PerformanceObserver(start).observe({ type: "largest-contentful-paint", buffered: true });
+  } else {
+    if (seal.complete) start();
+    seal.addEventListener("load", start);
+  }
+  seal.addEventListener("error", start);
+  setTimeout(start, 1500);
+})()`;
+
+// Только для сборки: на dev-сервере main.tsx подключается как обычно
+const startAppAfterSeal = (): Plugin => ({
+  name: "start-app-after-seal",
+  apply: "build",
+  enforce: "post",
+  generateBundle(_, bundle) {
+    const html = bundle["index.html"];
+    if (html?.type !== "asset") return;
+
+    const source = String(html.source);
+    const entry = source.match(/<script type="module" crossorigin src="([^"]+)"><\/script>/);
+    if (!entry) return;
+
+    const [tag, src] = entry;
+    html.source = source.replace(tag, "").replace("</body>", `<script>${startAppScript(src)}</script></body>`);
+  },
+});
+
 const MONTH = 60 * 60 * 24 * 30;
 
 // Service worker: код приложения хранится на устройстве (повторный запуск без сети и почти мгновенно),
@@ -78,7 +123,12 @@ const pwa = () => VitePWA({
 });
 
 export default defineConfig({
-  plugins: [svgr(), react(), inlineEntryCss(), pwa()],
+  plugins: [svgr({
+    svgrOptions: {
+      plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
+      svgoConfig: { plugins: [{ name: "preset-default", params: { overrides: { removeViewBox: false } } }, "prefixIds"] },
+    },
+  }), react(), inlineEntryCss(), startAppAfterSeal(), pwa()],
   css: {
     devSourcemap: true,
   },

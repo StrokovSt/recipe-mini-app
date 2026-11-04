@@ -8,6 +8,7 @@ import { useMe } from "@/entities/user";
 import { useImportsInProgress } from "@/features/recipe-form";
 import FormIcon from "@/shared/assets/icons/icon-form.svg?react";
 import ImageIcon from "@/shared/assets/icons/icon-image.svg?react";
+import { useGoBack } from "@/shared/lib/hooks";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { BottomSheet } from "@/shared/ui/BottomSheet";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
@@ -34,6 +35,7 @@ const LIMIT_WARNING_LEFT = 5;
 const AddRecipePage = () => {
     const { t } = useTranslation(["recipeForm", "common", "footer"]);
     const navigate = useNavigate();
+    const goBack = useGoBack(AppRoute.Home);
     const mode = useLayoutMode();
     const isDesktop = mode === "desktop" || mode === "wide";
     const { data: user } = useMe({ fresh: true });
@@ -108,7 +110,7 @@ const AddRecipePage = () => {
                             className={styles.back}
                             type="button"
                             aria-label={t("common:back")}
-                            onClick={() => navigate(-1)}
+                            onClick={goBack}
                         />
                     </PageHeader>
                 )

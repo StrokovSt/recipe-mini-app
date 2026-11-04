@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'motion/react';
-import type { FC, SVGProps } from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TRANSITION_BASE } from '@/shared/config/animation';
@@ -10,7 +10,8 @@ import styles from './IconPicker.module.scss';
 export interface IconOption {
     name: string;
     label: string;
-    Icon: FC<SVGProps<SVGSVGElement>>;
+    // Любая картинка-компонент: SVG-иконка или картинка категории файлом
+    Icon: FC;
 }
 
 interface IconPickerProps {

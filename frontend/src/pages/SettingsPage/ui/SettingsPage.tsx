@@ -9,6 +9,7 @@ import MoonIcon from "@/shared/assets/icons/icon-moon.svg?react";
 import SunIcon from "@/shared/assets/icons/icon-sun.svg?react";
 import seal from "@/shared/assets/images/seal.webp";
 import { getAnimations, setAnimations } from "@/shared/lib/animations";
+import { useGoBack } from "@/shared/lib/hooks";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { getTheme, setTheme, type Theme } from "@/shared/lib/theme";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
@@ -30,6 +31,7 @@ const SettingsPage = () => {
     const mode = useLayoutMode();
     const isDesktop = mode === "desktop" || mode === "wide";
     const navigate = useNavigate();
+    const goBack = useGoBack(AppRoute.Home);
     const [theme, setThemeState] = useState<Theme>(getTheme);
     const [animations, setAnimationsState] = useState(getAnimations);
     const { mutate: updateSettings } = useUpdateSettings();
@@ -88,7 +90,7 @@ const SettingsPage = () => {
                         className={styles.back}
                         type="button"
                         aria-label={t("common:back")}
-                        onClick={() => navigate(-1)}
+                        onClick={goBack}
                     />
                 </PageHeader>
                 )

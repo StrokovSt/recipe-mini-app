@@ -107,7 +107,7 @@
     display: flex;
     flex-shrink: 0;
 
-    svg {
+    :is(svg, img) {
         width: var(--size-side-icon);
         height: var(--size-side-icon);
         stroke-width: var(--size-nav-icon-stroke);
@@ -284,7 +284,7 @@
         white-space: nowrap;
     }
 
-    .icon svg {
+    .icon :is(svg, img) {
         width: var(--size-rail-icon);
         height: var(--size-rail-icon);
     }

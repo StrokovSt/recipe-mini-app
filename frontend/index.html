@@ -61,6 +61,8 @@
         background:
           linear-gradient(rgb(240 231 204 / 50%), rgb(240 231 204 / 50%)),
           url("/src/shared/assets/images/background_list.webp") center / cover no-repeat;
+        /* Как у #root::before: для пустого content браузер всё равно качает шрифт элемента, а системный качать не нужно */
+        font-family: sans-serif;
       }
 
       [data-theme="dark"] #splash {
@@ -175,8 +177,10 @@
         }
       }
 
+      /* Старт с прозрачности 0.01, а не 0: полностью прозрачную картинку Chrome не считает показанной и засчитывает печать
+         как LCP позже, уже после загрузки приложения. Lighthouse из-за этого показывал LCP 5–7 с вместо 3 */
       @keyframes splash-stamp {
-        0% { opacity: 0; transform: scale(1.4) rotate(-12deg); filter: blur(6px); }
+        0% { opacity: 0.01; transform: scale(1.4) rotate(-12deg); filter: blur(6px); }
         55% { opacity: 1; transform: scale(0.94) rotate(-3deg); filter: blur(0); }
         78% { transform: scale(1.02) rotate(-3deg); }
         100% { opacity: 1; transform: scale(1) rotate(-3deg); filter: none; }

@@ -47,34 +47,20 @@ $row-split-width: 300px;
         }
     }
 
-    // ⋮⋮, название, количество, единица и крестик в одну строку. Иконки стоят вплотную к полям,
+    // Название, количество, единица и крестик в одну строку. Крестик стоит вплотную к единице,
     // а между полями отступ шире (margin), чтобы их линии не сливались: так названию остаётся больше места
     .row {
         display: grid;
         align-items: end;
-        grid-template-columns:
-            var(--size-row-grip) minmax(0, 1fr) var(--size-amount-field) var(--size-unit-field)
-            var(--size-row-remove);
+        grid-template-columns: minmax(0, 1fr) var(--size-amount-field) var(--size-unit-field) var(--size-row-remove);
         column-gap: var(--space-1);
-        border-radius: var(--radius-sm);
-        transition: box-shadow var(--transition-base), background-color var(--transition-base);
-
-        // Строку тянут: она приподнята над остальными
-        &.dragging {
-            background: var(--color-surface);
-            box-shadow: var(--shadow-md);
-        }
 
         // В узкой группе название на всю строку, количество и единица делят вторую пополам
         @container (width < #{$row-split-width}) {
             grid-template-areas:
-                "grip name name remove"
-                ". amount unit .";
-            grid-template-columns: var(--size-row-grip) minmax(0, 1fr) minmax(0, 1fr) var(--size-row-remove);
-
-            .grip {
-                grid-area: grip;
-            }
+                "name name remove"
+                "amount unit .";
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) var(--size-row-remove);
 
             .name {
                 grid-area: name;
@@ -102,45 +88,6 @@ $row-split-width: 300px;
 
     .remove {
         @include compact.remove;
-    }
-
-    // ⋮⋮ высотой с поле, значок на уровне текста. Тянуть можно и пальцем: прокрутка страницы на нём выключена
-    .grip {
-        @include tap-area.tap-area;
-
-        position: relative;
-        display: grid;
-        width: var(--size-row-grip);
-        height: var(--size-line-field-compact);
-        padding: 0;
-        border: none;
-        border-radius: var(--radius-sm);
-        outline: none;
-        background: none;
-        color: var(--color-text-muted);
-        cursor: grab;
-        touch-action: none;
-        user-select: none;
-        place-items: center;
-        transition: color var(--transition-base);
-
-        svg {
-            width: var(--size-row-grip);
-            height: var(--size-row-grip);
-        }
-
-        @include states.hover {
-            color: var(--color-active);
-        }
-
-        &:focus-visible {
-            box-shadow: 0 0 0 3px var(--color-accent-shadow);
-            color: var(--color-active);
-        }
-
-        &:active {
-            cursor: grabbing;
-        }
     }
 
     // «+ Ингредиент» слева, «Вставить списком» справа

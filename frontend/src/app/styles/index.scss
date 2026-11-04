@@ -199,6 +199,10 @@ button, input, textarea, select {
             linear-gradient(var(--color-app-image-veil), var(--color-app-image-veil)),
             var(--color-app-image-bg) url("@/shared/assets/images/background_list.webp") center / cover no-repeat;
 
+        // Текста здесь нет, но и для пустого content браузер качает шрифт элемента: Literata грузилась до старта приложения
+        // и отнимала сеть у печати на заставке. Системный шрифт качать не нужно
+        font-family: sans-serif;
+
         @include media.tablet {
             max-width: none;
         }

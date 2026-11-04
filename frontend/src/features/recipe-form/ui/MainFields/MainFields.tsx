@@ -1,5 +1,5 @@
 import { AnimatePresence, m } from "motion/react";
-import { useId, useState } from "react";
+import { memo, useId, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -115,4 +115,5 @@ const MainFields = () => {
     );
 };
 
-export default MainFields;
+// memo: статус черновика и вкладки формы меняются часто, поля от них не зависят
+export default memo(MainFields);

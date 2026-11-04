@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { type Ingredient, UNIT_CODES } from "@recipe/common";
@@ -25,8 +25,11 @@ const PasteSheet = ({ isOpen, onClose, onAdd }: PasteSheetProps) => {
     const formatQuantity = useFormatQuantity();
     const [text, setText] = useState("");
 
-    const labels = Object.fromEntries(UNIT_CODES.map((unit) => [unit, t(`units:label.${unit}`)])) as UnitLabels;
-    const items = parseIngredientList(text, labels);
+    // Разбор только при смене текста: шторка лежит в форме и перерисовывается вместе с ней, даже закрытая
+    const items = useMemo(() => {
+        const labels = Object.fromEntries(UNIT_CODES.map((unit) => [unit, t(`units:label.${unit}`)])) as UnitLabels;
+        return parseIngredientList(text, labels);
+    }, [text, t]);
 
     const add = () => {
         onAdd(items);

@@ -30,7 +30,6 @@ initInstallPrompt()
 
 // Заставка с печатью из index.html закрывает загрузку целиком: интерфейс появляется сразу весь, а не по частям
 const loaderReady = preloadLoader()
-hideSplashWhen(firstPageShown)
 firstPageShown.then(preloadOnFirstAction)
 firstPageShown.then(warmUpNumberFormat)
 // Котик с лупой (смена фильтров, распознавание рецепта): первое же действие может быть сменой фильтра
@@ -43,12 +42,17 @@ const settingsReady = loadTelegram().then(() => {
   return initI18n()
 })
 
-// Рендерим после загрузки словарей выбранного языка, шрифтов, постера котика и движка анимаций,
-// чтобы не мелькали ключи, текст не перескакивал, котик был виден с первой же загрузки данных и страница сразу проявлялась
-Promise.all([settingsReady, loadFonts(), loaderReady, loadMotionFeatures()]).then(() => {
+// Рендерим после загрузки словарей выбранного языка, постера котика и движка анимаций,
+// чтобы не мелькали ключи, котик был виден с первой же загрузки данных и страница сразу проявлялась
+const appReady = Promise.all([settingsReady, loaderReady, loadMotionFeatures()])
+appReady.then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <App />
     </StrictMode>,
   )
 })
+
+// Шрифты качаются после старта, чтобы не отнимать сеть у кода и словарей. Заставка ждёт и их:
+// под ней текст сменит шрифт незаметно
+hideSplashWhen(Promise.all([firstPageShown, appReady.then(loadFonts)]))

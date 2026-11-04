@@ -37,7 +37,7 @@
         transition: var(--transition-base);
         transition-property: border-color, background;
 
-        svg {
+        :is(svg, img) {
             width: var(--size-icon-picker-icon);
             height: var(--size-icon-picker-icon);
         }

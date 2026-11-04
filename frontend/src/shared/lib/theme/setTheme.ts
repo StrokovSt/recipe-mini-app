@@ -1,4 +1,5 @@
 import { getAnimations } from "@/shared/lib/animations";
+import { storage } from "@/shared/lib/storage";
 
 export type Theme = "light" | "dark";
 
@@ -10,7 +11,7 @@ export function getTheme(): Theme {
 
 // Выбор, сохранённый на устройстве, null — тема берётся из Telegram
 export function getSavedTheme(): Theme | null {
-    const saved = localStorage.getItem(THEME_STORAGE_KEY);
+    const saved = storage.get(THEME_STORAGE_KEY);
     return saved === "light" || saved === "dark" ? saved : null;
 }
 
@@ -26,7 +27,7 @@ export function setTheme(theme: Theme) {
         syncThemeColor();
     };
 
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    storage.set(THEME_STORAGE_KEY, theme);
 
     if ("startViewTransition" in document && getAnimations()) {
         document.startViewTransition(apply);

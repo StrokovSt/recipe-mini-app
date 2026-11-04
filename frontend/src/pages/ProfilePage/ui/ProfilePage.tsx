@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
 import { useCategories } from "@/entities/category";
 import { useRecipes } from "@/entities/recipe";
 import { LANGUAGES } from "@/shared/config/i18n";
+import { useGoBack } from "@/shared/lib/hooks";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { getTelegram } from "@/shared/lib/telegram";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
@@ -18,7 +18,7 @@ import { formatTelegramId } from "../lib/formatTelegramId";
 import styles from "./ProfilePage.module.scss";
 
 const ProfilePage = () => {
-    const navigate = useNavigate();
+    const goBack = useGoBack(AppRoute.Home);
     const { t, i18n } = useTranslation(["profile", "common", "menu", "footer"]);
     const mode = useLayoutMode();
     const isDesktop = mode === "desktop" || mode === "wide";
@@ -51,7 +51,7 @@ const ProfilePage = () => {
                         className={styles.back}
                         type="button"
                         aria-label={t("common:back")}
-                        onClick={() => navigate(-1)}
+                        onClick={goBack}
                     />
                 </PageHeader>
                 )

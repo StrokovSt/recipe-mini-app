@@ -1,4 +1,5 @@
 import { FALLBACK_LANGUAGE, type Language, LANGUAGES } from "@/shared/config/i18n";
+import { storage } from "@/shared/lib/storage";
 import { getTelegram } from "@/shared/lib/telegram";
 
 import { LANGUAGE_STORAGE_KEY } from "./setLanguage";
@@ -13,7 +14,7 @@ function toLanguage(code: string | null | undefined): Language | undefined {
 // Сохранённый выбор, иначе язык Телеграма, иначе языки браузера по порядку
 export function detectLanguage(): Language {
     const candidates = [
-        localStorage.getItem(LANGUAGE_STORAGE_KEY),
+        storage.get(LANGUAGE_STORAGE_KEY),
         getTelegram()?.initDataUnsafe?.user?.language_code,
         ...navigator.languages,
     ];

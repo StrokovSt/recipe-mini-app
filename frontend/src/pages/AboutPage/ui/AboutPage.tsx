@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
 import seal from "@/shared/assets/images/seal.webp";
+import { useGoBack } from "@/shared/lib/hooks";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 import { IconButton } from "@/shared/ui/Buttons";
@@ -19,7 +19,7 @@ const FEATURES = ["import", "sources", "nutrition"] as const;
 
 // Коротко о приложении: печать с названием, описание, версия и что умеет
 const AboutPage = () => {
-    const navigate = useNavigate();
+    const goBack = useGoBack(AppRoute.Home);
     const { t } = useTranslation(["about", "common", "footer"]);
     const mode = useLayoutMode();
     const isDesktop = mode === "desktop" || mode === "wide";
@@ -45,7 +45,7 @@ const AboutPage = () => {
                         className={styles.back}
                         type="button"
                         aria-label={t("common:back")}
-                        onClick={() => navigate(-1)}
+                        onClick={goBack}
                     />
                 </PageHeader>
                 )

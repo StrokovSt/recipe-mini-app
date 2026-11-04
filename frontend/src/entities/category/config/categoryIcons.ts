@@ -1,48 +1,22 @@
-import type { FC, SVGProps } from "react";
+import { createElement, type FC, type ImgHTMLAttributes } from "react";
 
-import BakingIcon from "@/shared/assets/icons/category/baking.svg?react";
-import BentoIcon from "@/shared/assets/icons/category/bento.svg?react";
-import BerriesIcon from "@/shared/assets/icons/category/berries.svg?react";
-import BreakfastIcon from "@/shared/assets/icons/category/breakfast.svg?react";
-import BurgerIcon from "@/shared/assets/icons/category/burger.svg?react";
-import CheeseIcon from "@/shared/assets/icons/category/cheese.svg?react";
-import CitrusIcon from "@/shared/assets/icons/category/citrus.svg?react";
-import CoffeeIcon from "@/shared/assets/icons/category/coffee.svg?react";
-import DessertsIcon from "@/shared/assets/icons/category/desserts.svg?react";
-import DrinksIcon from "@/shared/assets/icons/category/drinks.svg?react";
-import DumplingsIcon from "@/shared/assets/icons/category/dumplings.svg?react";
-import FishIcon from "@/shared/assets/icons/category/fish.svg?react";
-import FruitsIcon from "@/shared/assets/icons/category/fruits.svg?react";
-import GrillIcon from "@/shared/assets/icons/category/grill.svg?react";
-import MeatIcon from "@/shared/assets/icons/category/meat.svg?react";
-import MiscIcon from "@/shared/assets/icons/category/misc.svg?react";
-import MochiIcon from "@/shared/assets/icons/category/mochi.svg?react";
-import MushroomsIcon from "@/shared/assets/icons/category/mushrooms.svg?react";
-import OnigiriIcon from "@/shared/assets/icons/category/onigiri.svg?react";
-import PastaIcon from "@/shared/assets/icons/category/pasta.svg?react";
-import PicklesIcon from "@/shared/assets/icons/category/pickles.svg?react";
-import PiesIcon from "@/shared/assets/icons/category/pies.svg?react";
-import PizzaIcon from "@/shared/assets/icons/category/pizza.svg?react";
-import PorridgeIcon from "@/shared/assets/icons/category/porridge.svg?react";
-import PoultryIcon from "@/shared/assets/icons/category/poultry.svg?react";
-import PreservesIcon from "@/shared/assets/icons/category/preserves.svg?react";
-import PumpkinIcon from "@/shared/assets/icons/category/pumpkin.svg?react";
-import RamenIcon from "@/shared/assets/icons/category/ramen.svg?react";
-import RiceIcon from "@/shared/assets/icons/category/rice.svg?react";
-import SaladsIcon from "@/shared/assets/icons/category/salads.svg?react";
-import SaucesIcon from "@/shared/assets/icons/category/sauces.svg?react";
-import SeafoodIcon from "@/shared/assets/icons/category/seafood.svg?react";
-import SnacksIcon from "@/shared/assets/icons/category/snacks.svg?react";
-import SoupsIcon from "@/shared/assets/icons/category/soups.svg?react";
-import SpicesIcon from "@/shared/assets/icons/category/spices.svg?react";
-import StewIcon from "@/shared/assets/icons/category/stew.svg?react";
-import StreetfoodIcon from "@/shared/assets/icons/category/streetfood.svg?react";
-import SushiIcon from "@/shared/assets/icons/category/sushi.svg?react";
-import TeaIcon from "@/shared/assets/icons/category/tea.svg?react";
-import VegIcon from "@/shared/assets/icons/category/veg.svg?react";
-import WokIcon from "@/shared/assets/icons/category/wok.svg?react";
+// Картинки категорий — отдельные файлы, а не код: в начальном JS их нет, браузер качает только показанные
+// и хранит каждую в кэше. ?no-inline: даже маленькие файлы не встраиваются в JS
+const ICON_URLS = import.meta.glob<string>("@/shared/assets/icons/category/*.svg", {
+    eager: true,
+    query: "?no-inline",
+    import: "default",
+});
 
-type SvgIcon = FC<SVGProps<SVGSVGElement>>;
+const getIconUrl = (file: string) => ICON_URLS[`/src/shared/assets/icons/category/${file}.svg`];
+
+type SvgIcon = FC<ImgHTMLAttributes<HTMLImageElement>>;
+
+// Картинка категории как компонент: места, где она стоит, не меняются (<Icon className=… />)
+const icon = (file: string): SvgIcon => {
+    const src = getIconUrl(file);
+    return (props) => createElement("img", { src, alt: "", draggable: false, decoding: "async", ...props });
+};
 
 interface CategoryIconConfig {
     Icon: SvgIcon;
@@ -52,47 +26,47 @@ interface CategoryIconConfig {
 // Ключи базовых категорий совпадают с backend/src/config/defaults.ts (DEFAULT_CATEGORIES).
 // Подписи картинок — в словаре sections (icons.<ключ>), цвета плиток — в shared/styles/category-colors.scss
 export const CATEGORY_ICONS = {
-    Misc: { Icon: MiscIcon },
-    Soups: { Icon: SoupsIcon },
-    Baking: { Icon: BakingIcon },
-    Desserts: { Icon: DessertsIcon },
-    Salads: { Icon: SaladsIcon },
-    Snacks: { Icon: SnacksIcon },
-    Pasta: { Icon: PastaIcon },
-    Pizza: { Icon: PizzaIcon },
-    Burger: { Icon: BurgerIcon },
-    Meat: { Icon: MeatIcon },
-    Fish: { Icon: FishIcon },
-    Seafood: { Icon: SeafoodIcon },
-    Breakfast: { Icon: BreakfastIcon },
-    Veg: { Icon: VegIcon },
-    Drinks: { Icon: DrinksIcon },
-    Ramen: { Icon: RamenIcon },
-    Rice: { Icon: RiceIcon },
-    Porridge: { Icon: PorridgeIcon },
-    Onigiri: { Icon: OnigiriIcon },
-    Dumplings: { Icon: DumplingsIcon },
-    Bento: { Icon: BentoIcon },
-    Sushi: { Icon: SushiIcon },
-    Stew: { Icon: StewIcon },
-    Wok: { Icon: WokIcon },
-    Poultry: { Icon: PoultryIcon },
-    Grill: { Icon: GrillIcon },
-    Sauces: { Icon: SaucesIcon },
-    Pickles: { Icon: PicklesIcon },
-    Mochi: { Icon: MochiIcon },
-    Tea: { Icon: TeaIcon },
-    Coffee: { Icon: CoffeeIcon },
-    Fruits: { Icon: FruitsIcon },
-    Mushrooms: { Icon: MushroomsIcon },
-    Pies: { Icon: PiesIcon },
-    Cheese: { Icon: CheeseIcon },
-    Spices: { Icon: SpicesIcon },
-    Streetfood: { Icon: StreetfoodIcon },
-    Berries: { Icon: BerriesIcon },
-    Citrus: { Icon: CitrusIcon },
-    Preserves: { Icon: PreservesIcon },
-    Pumpkin: { Icon: PumpkinIcon },
+    Misc: { Icon: icon("misc") },
+    Soups: { Icon: icon("soups") },
+    Baking: { Icon: icon("baking") },
+    Desserts: { Icon: icon("desserts") },
+    Salads: { Icon: icon("salads") },
+    Snacks: { Icon: icon("snacks") },
+    Pasta: { Icon: icon("pasta") },
+    Pizza: { Icon: icon("pizza") },
+    Burger: { Icon: icon("burger") },
+    Meat: { Icon: icon("meat") },
+    Fish: { Icon: icon("fish") },
+    Seafood: { Icon: icon("seafood") },
+    Breakfast: { Icon: icon("breakfast") },
+    Veg: { Icon: icon("veg") },
+    Drinks: { Icon: icon("drinks") },
+    Ramen: { Icon: icon("ramen") },
+    Rice: { Icon: icon("rice") },
+    Porridge: { Icon: icon("porridge") },
+    Onigiri: { Icon: icon("onigiri") },
+    Dumplings: { Icon: icon("dumplings") },
+    Bento: { Icon: icon("bento") },
+    Sushi: { Icon: icon("sushi") },
+    Stew: { Icon: icon("stew") },
+    Wok: { Icon: icon("wok") },
+    Poultry: { Icon: icon("poultry") },
+    Grill: { Icon: icon("grill") },
+    Sauces: { Icon: icon("sauces") },
+    Pickles: { Icon: icon("pickles") },
+    Mochi: { Icon: icon("mochi") },
+    Tea: { Icon: icon("tea") },
+    Coffee: { Icon: icon("coffee") },
+    Fruits: { Icon: icon("fruits") },
+    Mushrooms: { Icon: icon("mushrooms") },
+    Pies: { Icon: icon("pies") },
+    Cheese: { Icon: icon("cheese") },
+    Spices: { Icon: icon("spices") },
+    Streetfood: { Icon: icon("streetfood") },
+    Berries: { Icon: icon("berries") },
+    Citrus: { Icon: icon("citrus") },
+    Preserves: { Icon: icon("preserves") },
+    Pumpkin: { Icon: icon("pumpkin") },
 } as const satisfies Record<string, CategoryIconConfig>;
 
 export type CategoryIconName = keyof typeof CATEGORY_ICONS;

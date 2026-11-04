@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useLayoutEffect, useRef } from "react";
 
 import type { TextareaProps } from "../../lib/types";
 
@@ -18,7 +18,8 @@ export const Textarea = (props: TextareaProps) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const isLine = variant === "line";
 
-    useEffect(() => {
+    // До отрисовки: иначе после переноса строки один кадр поле старой высоты, и текст прыгает
+    useLayoutEffect(() => {
         if (textareaRef.current) fitHeight(textareaRef.current);
     }, [rest.value]);
 

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
 import { useDrafts } from "@/entities/draft";
+import { useGoBack } from "@/shared/lib/hooks";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 import { IconButton } from "@/shared/ui/Buttons";
@@ -20,7 +20,7 @@ const DraftsPage = () => {
     const { t } = useTranslation(["recipeForm", "common", "footer"]);
     const mode = useLayoutMode();
     const isDesktop = mode === "desktop" || mode === "wide";
-    const navigate = useNavigate();
+    const goBack = useGoBack(AppRoute.Home);
     const { data: drafts = [], isLoading } = useDrafts();
 
     useLoader(isLoading);
@@ -46,7 +46,7 @@ const DraftsPage = () => {
                         className={styles.back}
                         type="button"
                         aria-label={t("common:back")}
-                        onClick={() => navigate(-1)}
+                        onClick={goBack}
                     />
                 </PageHeader>
                 )

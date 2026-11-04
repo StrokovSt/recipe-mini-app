@@ -12,6 +12,7 @@ import { useCreateRecipe, useUploadMedia } from "@/entities/recipe";
 import { ApiError } from "@/shared/api";
 import { getAnimations } from "@/shared/lib/animations";
 import { getErrorMessage } from "@/shared/lib/errors";
+import { useGoBack } from "@/shared/lib/hooks";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 import { IconButton, RegularButton } from "@/shared/ui/Buttons";
@@ -48,6 +49,7 @@ const RecipeForm = (props: RecipeFormProps) => {
     const mode = useLayoutMode();
     const isDesktop = mode === "desktop" || mode === "wide";
     const navigate = useNavigate();
+    const goBack = useGoBack(AppRoute.Home);
     const methods = useForm<RecipeFormValues>({
         resolver: zodResolver(recipeSchema) as Resolver<RecipeFormValues>,
         // Фокус сразу открыл бы клавиатуру и сбил прокрутку, к ошибке ведём сами
@@ -203,7 +205,7 @@ const RecipeForm = (props: RecipeFormProps) => {
                     className={styles.back}
                     type="button"
                     aria-label={t("common:back")}
-                    onClick={() => navigate(-1)}
+                    onClick={goBack}
                 />
             </PageHeader>
             )}

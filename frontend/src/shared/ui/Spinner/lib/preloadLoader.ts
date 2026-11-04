@@ -1,3 +1,5 @@
+import { splashHidden } from "@/shared/lib/splash";
+
 import { DEFAULT_LOADER, type LoaderName, LOADERS } from "../config/loaders";
 import { getVideoUrl, isApple, setLoaded } from "./getLoaderSrc";
 
@@ -29,8 +31,7 @@ const startPreload = (name: LoaderName) => {
     });
 
     // Видео после постера: на медленной сети они не делят её, и неподвижный котик виден раньше
-    poster
-        .catch(() => undefined)
+    Promise.all([poster.catch(() => undefined), splashHidden])
         .then(() => preloadVideo(name))
         .catch(() => undefined);
 

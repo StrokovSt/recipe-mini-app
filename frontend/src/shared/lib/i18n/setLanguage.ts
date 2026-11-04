@@ -1,6 +1,7 @@
 import i18next from "i18next";
 
 import { type Language, LANGUAGES } from "@/shared/config/i18n";
+import { storage } from "@/shared/lib/storage";
 
 import { loadDictionaries } from "./loadDictionaries";
 
@@ -12,13 +13,13 @@ export function isLanguage(code: string | null | undefined): code is Language {
 
 // Выбор, сохранённый на устройстве, null — язык определяется автоматически
 export function getSavedLanguage(): Language | null {
-    const saved = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    const saved = storage.get(LANGUAGE_STORAGE_KEY);
     return isLanguage(saved) ? saved : null;
 }
 
 // Сохраняет выбор, догружает словари языка, если их ещё нет, и переключает интерфейс без перезагрузки
 export async function setLanguage(language: Language) {
-    localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+    storage.set(LANGUAGE_STORAGE_KEY, language);
 
     if (!i18next.hasResourceBundle(language, "common")) {
         const dictionaries = await loadDictionaries(language);
