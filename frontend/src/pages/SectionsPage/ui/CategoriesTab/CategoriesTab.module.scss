@@ -37,6 +37,11 @@
 
     // Между рядами место под пилюлю ⋯ на рамке плитки
     row-gap: var(--space-4);
+
+    // Компьютер: плитка не шире --size-category-tile-max-width, в строке сколько влезет
+    @include media.desktop {
+        grid-template-columns: repeat(auto-fill, minmax(var(--size-category-row-min-width), var(--size-category-tile-max-width)));
+    }
 }
 
 // «Новая …» на компьютере не нужна: её заменяет блок «Создать» справа

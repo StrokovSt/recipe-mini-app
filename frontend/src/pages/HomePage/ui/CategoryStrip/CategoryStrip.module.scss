@@ -34,16 +34,6 @@
     cursor: pointer;
 
     @include category-color-vars;
-
-    // «Все рецепты»: иконка коллекции в цвете акцента
-    &.all .picture {
-        color: var(--color-active);
-
-        svg {
-            width: 60%;
-            height: 60%;
-        }
-    }
 }
 
 .picture {

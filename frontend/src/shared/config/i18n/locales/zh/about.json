@@ -8,7 +8,8 @@
         "description": "核心功能",
         "import": "借助 AI 从链接或照片识别食谱",
         "sources": "保存 Pinterest 和 Telegram 的食谱及视频",
-        "nutrition": "显示每份的热量和营养素"
+        "nutrition": "显示每份的热量和营养素",
+        "search": "按标题和食材查找食谱"
     },
     "madeWith": "用心打磨每一个细节"
 }

@@ -6,13 +6,14 @@ import type { Category } from "@recipe/common";
 
 import { getCategoryIcon, getCategoryIconName } from "@/entities/category";
 import type { GetRecipesProps } from "@/entities/recipe/types";
-import CollectionIcon from "@/shared/assets/icons/icon-collection.svg?react";
 import { ExpandableList } from "@/shared/ui/ExpandableList";
 
 import styles from "./CategoryStrip.module.scss";
 
 // Сколько рядов категорий видно, пока список свёрнут
 const COLLAPSED_ROWS = 1;
+// У «Все рецепты» картинка и цвета как у «Разного», чтобы плитка не выбивалась из ряда
+const AllIcon = getCategoryIcon("Misc");
 
 interface CategoryStripProps {
     categories: Category[];
@@ -40,12 +41,12 @@ export function CategoryStrip(props: CategoryStripProps) {
                 leading={
                     <button
                         type="button"
-                        className={clsx(styles.item, styles.all, !filters.categoryId && styles.active)}
+                        className={clsx(styles.item, styles.misc, !filters.categoryId && styles.active)}
                         aria-pressed={!filters.categoryId}
                         onClick={() => select(undefined)}
                     >
                         <span className={styles.picture}>
-                            <CollectionIcon />
+                            <AllIcon />
                         </span>
                         <span className={styles.text}>
                             <span className={styles.name}>{t("allRecipes")}</span>

@@ -8,7 +8,8 @@
         "description": "Kısaca",
         "import": "Yapay zekâ ile bağlantıdan veya fotoğraftan tarifi tanır",
         "sources": "Pinterest ve Telegram tariflerini videosuyla kaydeder",
-        "nutrition": "Porsiyon başına kalori ve besin değerlerini gösterir"
+        "nutrition": "Porsiyon başına kalori ve besin değerlerini gösterir",
+        "search": "Tarifleri başlığa ve malzemelere göre bulur"
     },
     "madeWith": "Her ayrıntıya özen gösterilerek yapıldı"
 }

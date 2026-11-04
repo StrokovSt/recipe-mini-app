@@ -1,8 +1,10 @@
+import { m } from "motion/react";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
-import catIdea from "@/shared/assets/images/messages/cat-idea.webp";
+import catThinking from "@/shared/assets/images/messages/cat-thinking.webp";
 import seal from "@/shared/assets/images/seal.webp";
+import { TAB_HIDDEN, TAB_VISIBLE, TRANSITION_PAGE } from "@/shared/config/animation";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { RegularButton } from "@/shared/ui/Buttons";
 
@@ -28,17 +30,25 @@ export const SectionsLayout = (props: SectionsLayoutProps) => {
 
     return (
         <div className={styles.layout}>
-            <div className={styles.list}>{children}</div>
+            {/* При смене вкладки проявляется только сетка, остальное стоит на месте */}
+            <m.div className={styles.list} initial={TAB_HIDDEN} animate={TAB_VISIBLE} transition={TRANSITION_PAGE}>
+                {children}
+            </m.div>
             <p className={styles.quote}>
                 <img className={styles.seal} src={seal} alt="" />
                 {t("quote")}
             </p>
 
             <aside className={styles.aside}>
-                <img className={styles.picture} src={catIdea} alt="" />
-                <h2 className={styles.title}>{createTitle}</h2>
-                <p className={styles.text}>{createText}</p>
-                <RegularButton type="button" className={styles.create} label={t("create.action")} onClick={onCreate} />
+                {/* Содержимое по центру видимой части блока: при длинной сетке едет вместе с прокруткой */}
+                <div className={styles.asideContent}>
+                    <img className={styles.picture} src={catThinking} alt="" />
+                    <div className={styles.copy}>
+                        <h2 className={styles.title}>{createTitle}</h2>
+                        <p className={styles.text}>{createText}</p>
+                        <RegularButton type="button" className={styles.create} label={t("create.action")} onClick={onCreate} />
+                    </div>
+                </div>
             </aside>
         </div>
     );

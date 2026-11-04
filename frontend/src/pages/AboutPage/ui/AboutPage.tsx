@@ -1,6 +1,12 @@
+import type { ComponentType, SVGProps } from "react";
 import { useTranslation } from "react-i18next";
 
 import { AppRoute } from "@/app/router";
+import ImageIcon from "@/shared/assets/icons/icon-image.svg?react";
+import InfoIcon from "@/shared/assets/icons/icon-info.svg?react";
+import LinkIcon from "@/shared/assets/icons/icon-link.svg?react";
+import SearchIcon from "@/shared/assets/icons/icon-search.svg?react";
+import aboutPicture from "@/shared/assets/images/about-cat.webp";
 import seal from "@/shared/assets/images/seal.webp";
 import { useGoBack } from "@/shared/lib/hooks";
 import { useLayoutMode } from "@/shared/lib/layout";
@@ -15,7 +21,15 @@ import { version } from "../../../../package.json";
 
 import styles from "./AboutPage.module.scss";
 
-const FEATURES = ["import", "sources", "nutrition"] as const;
+const FEATURES = ["import", "sources", "nutrition", "search"] as const;
+
+// Иконки возможностей на компьютере
+const FEATURE_ICONS: Record<(typeof FEATURES)[number], ComponentType<SVGProps<SVGSVGElement>>> = {
+    import: ImageIcon,
+    sources: LinkIcon,
+    nutrition: InfoIcon,
+    search: SearchIcon,
+};
 
 // Коротко о приложении: печать с названием, описание, версия и что умеет
 const AboutPage = () => {
@@ -52,22 +66,65 @@ const AboutPage = () => {
             }
         >
             {isDesktop && <PageTitle title={t("title")} hint={t("subtitle")} />}
-            <section className={styles.hero}>
-                {/* Название уже на печати, отдельной подписью не дублируем */}
-                <img className={styles.stamp} src={seal} alt={t("common:appName")} />
-                <p className={styles.description}>{t("description")}</p>
-                <span className={styles.version}>{t("version", { version })}</span>
-            </section>
 
-            <SectionCard mark="一" title={t("features.title")} description={t("features.description")}>
-                <ul className={styles.features}>
-                    {FEATURES.map((feature) => (
-                        <li key={feature}>{t(`features.${feature}`)}</li>
-                    ))}
-                </ul>
-            </SectionCard>
+            {/* Компьютер: карточка, возможности плитками, фраза. Очень широкий экран: это слева, справа котик. Телефон и планшет: всё в колонку */}
+            {isDesktop ? (
+                <div className={styles.layout}>
+                    <section className={styles.intro}>
+                        <img className={styles.stamp} src={seal} alt="" />
+                        <div className={styles.introText}>
+                            <h2 className={styles.appName}>{t("common:appName")}</h2>
+                            <p className={styles.description}>{t("description")}</p>
+                            <span className={styles.version}>{t("version", { version })}</span>
+                        </div>
+                    </section>
 
-            <p className={styles.madeWith}>{t("madeWith")}</p>
+                    <section className={styles.featuresBlock}>
+                        <h2 className={styles.featuresTitle}>{t("features.title")}</h2>
+                        <ul className={styles.featureTiles}>
+                            {FEATURES.map((feature) => {
+                                const Icon = FEATURE_ICONS[feature];
+
+                                return (
+                                    <li key={feature} className={styles.featureTile}>
+                                        <span className={styles.featureIcon}>
+                                            <Icon aria-hidden />
+                                        </span>
+                                        {t(`features.${feature}`)}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </section>
+
+                    <p className={styles.quote}>
+                        <img className={styles.quoteSeal} src={seal} alt="" />
+                        {t("madeWith")}
+                    </p>
+
+                    {/* Котик только на очень широком экране: на обычном компьютере содержимое на всю ширину */}
+                    {mode === "wide" && <img className={styles.picture} src={aboutPicture} alt="" />}
+                </div>
+            ) : (
+                <>
+                    <section className={styles.hero}>
+                        {/* Название уже на печати, отдельной подписью не дублируем */}
+                        <img className={styles.stamp} src={seal} alt={t("common:appName")} />
+                        <p className={styles.description}>{t("description")}</p>
+                        <span className={styles.version}>{t("version", { version })}</span>
+                    </section>
+
+                    <SectionCard mark="一" title={t("features.title")} description={t("features.description")}>
+                        <ul className={styles.features}>
+                            {FEATURES.map((feature) => (
+                                <li key={feature}>{t(`features.${feature}`)}</li>
+                            ))}
+                        </ul>
+                    </SectionCard>
+
+                    <p className={styles.madeWith}>{t("madeWith")}</p>
+                </>
+            )}
         </PageWrapper>
     );
 };

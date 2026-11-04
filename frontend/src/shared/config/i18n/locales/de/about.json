@@ -8,7 +8,8 @@
         "description": "Das Wichtigste",
         "import": "Erkennt Rezepte aus Links oder Fotos mit KI",
         "sources": "Speichert Rezepte aus Pinterest und Telegram samt Video",
-        "nutrition": "Zeigt Kalorien und Nährwerte pro Portion"
+        "nutrition": "Zeigt Kalorien und Nährwerte pro Portion",
+        "search": "Findet Rezepte nach Titel und Zutaten"
     },
     "madeWith": "Mit Liebe zum Detail gemacht"
 }

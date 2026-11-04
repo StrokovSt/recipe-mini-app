@@ -8,7 +8,8 @@
         "description": "L’essentiel",
         "import": "Reconnaît une recette à partir d’un lien ou d’une photo grâce à l’IA",
         "sources": "Enregistre les recettes de Pinterest et Telegram, vidéo comprise",
-        "nutrition": "Affiche les calories et macros par portion"
+        "nutrition": "Affiche les calories et macros par portion",
+        "search": "Trouve les recettes par titre et ingrédients"
     },
     "madeWith": "Conçue avec soin, jusque dans les détails"
 }

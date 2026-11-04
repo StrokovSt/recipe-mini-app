@@ -47,7 +47,6 @@ const PasteSheet = ({ isOpen, onClose, onAdd }: PasteSheetProps) => {
                 <RegularButton
                     type="button"
                     label={t("ingredients.pasteSubmit", { count: items.length })}
-                    className={styles.submit}
                     disabled={items.length === 0}
                     onClick={add}
                 />

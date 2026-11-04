@@ -51,7 +51,7 @@
     --color-accent-shadow: color-mix(in srgb, var(--color-active) 24%, transparent);
     --color-hover-bg: color-mix(in srgb, var(--color-active) 8%, var(--color-category-bg));
     --color-hover-tint: color-mix(in srgb, var(--color-active) 8%, transparent); /* hover у прозрачных элементов: фон страницы просвечивает */
-    --color-side-nav-bg: color-mix(in srgb, var(--color-surface) 92%, transparent); /* боковая навигация светлее полосы шапки, чтобы они не сливались */
+    --color-side-nav-bg: color-mix(in srgb, var(--color-surface) 92%, var(--color-app-bg)); /* боковая навигация и шапка на компьютере: один сплошной цвет, рамка вокруг контента */
     --color-side-active-border: color-mix(in srgb, var(--color-active) 20%, transparent); /* рамка выбранного пункта навигации */
     --color-field-focus-bg: color-mix(in srgb, var(--color-text) 5%, transparent); /* фон поля «строкой» в фокусе */
     --color-add-tile-bg: color-mix(in srgb, var(--color-surface) 70%, transparent); /* подложка плитки «Новая категория»: текст не теряется на картинке фона */
@@ -78,7 +78,7 @@
     --color-media-badge-hover-bg: color-mix(in srgb, var(--color-shadow) 75%, transparent);
     --color-video-bg: rgb(0 0 0); /* фон развёрнутого видео, страница под ним не просвечивает */
     --color-scrollbar-thumb: color-mix(in srgb, var(--color-brand-ink-muted) 40%, transparent);
-    --texture-paper: url("@/shared/assets/images/textures/paper-light.webp"); /* текстура бумаги для плиток */
+    --texture-paper: url("@/shared/assets/images/textures/parchment-light.webp"); /* текстура бумаги для плиток */
     --color-sakura: #E68EA6; /* ветка сакуры на плитке категории при наведении */
 }
 

@@ -8,7 +8,8 @@
         "description": "The essentials",
         "import": "Recognizes a recipe from a link or photo with AI",
         "sources": "Saves recipes from Pinterest and Telegram, video included",
-        "nutrition": "Shows calories and macros per serving"
+        "nutrition": "Shows calories and macros per serving",
+        "search": "Finds recipes by title and ingredients"
     },
     "madeWith": "Made with attention to every detail"
 }

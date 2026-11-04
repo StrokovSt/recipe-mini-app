@@ -20,15 +20,15 @@ $empty-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
         pointer-events: none;
     }
 
-    // Ветка с туманом на всю плитку, ветка в левом верхнем углу. Форму задаёт маска.
+    // Ветка с туманом на всю плитку: ветка слева, горы справа (картинка под широкие плитки). Форму задаёт маска.
     // В покое под маской бледный полупрозрачный цвет, при наведении цвет уходит, а цветная картинка проявляется
     &::before {
         inset: 0;
         border-radius: inherit;
-        background: $empty-image left top / cover no-repeat color-mix(in srgb, var(--color-text-muted) 12%, transparent);
+        background: $empty-image center / cover no-repeat color-mix(in srgb, var(--color-text-muted) 12%, transparent);
         transition: var(--transition-slow);
         transition-property: background-color, background-image;
-        mask: url("@/shared/assets/images/tile/sakura-color-mask.webp") left top / cover no-repeat;
+        mask: url("@/shared/assets/images/tile/sakura-wide-mask.webp") center / cover no-repeat;
     }
 
     &::after {
@@ -54,7 +54,7 @@ $empty-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAA
 
     &::before {
         background-color: transparent;
-        background-image: url("@/shared/assets/images/tile/sakura-color.webp");
+        background-image: url("@/shared/assets/images/tile/sakura-wide.webp");
     }
 
     &::after {

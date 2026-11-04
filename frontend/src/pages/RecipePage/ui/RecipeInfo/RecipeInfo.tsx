@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useLayoutEffect, useRef, useState } from "react";
+import { type ReactNode, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { Recipe, Tag } from "@recipe/common";
@@ -19,16 +19,18 @@ interface RecipeInfoProps {
     time: number;
     tags: Tag[];
     nutrition: Pick<Recipe, Nutrient>;
+    // Кнопки рецепта внизу карточки
+    actions?: ReactNode;
 }
 
 type Nutrient = "calories" | "protein" | "fat" | "carbs";
 
 const NUTRIENTS: Nutrient[] = ["calories", "protein", "fat", "carbs"];
 
-// Под обложкой: категория, название, описание, время, КБЖУ на порцию и теги.
+// Под обложкой: категория, название, описание, время, КБЖУ на порцию, теги и кнопки рецепта.
 // Длинное описание свёрнуто до трёх строк, чтобы не отодвигать ингредиенты
 export function RecipeInfo(props: RecipeInfoProps) {
-    const { title, category, description, time, tags, nutrition } = props;
+    const { title, category, description, time, tags, nutrition, actions } = props;
     const { t } = useTranslation(["recipe", "common"]);
     const descriptionRef = useRef<HTMLParagraphElement>(null);
     const [isExpanded, setIsExpanded] = useState(false);
@@ -91,6 +93,8 @@ export function RecipeInfo(props: RecipeInfoProps) {
                     ))}
                 </div>
             )}
+
+            {actions}
         </div>
     );
 }

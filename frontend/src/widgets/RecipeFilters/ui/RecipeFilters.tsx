@@ -193,7 +193,6 @@ const RecipeFilters = (props: RecipeFiltersProps) => {
                         />
                         <RegularButton
                             label={t('apply')}
-                            className={styles.apply}
                             onClick={handleApply}
                             // Активна, только когда в шторке что-то поменяли
                             disabled={isSameFilters(draft, filters)}

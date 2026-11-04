@@ -8,7 +8,8 @@
         "description": "主な機能",
         "import": "AIでリンクや写真からレシピを読み取ります",
         "sources": "PinterestやTelegramのレシピを動画ごと保存します",
-        "nutrition": "1人分のカロリーと栄養素を表示します"
+        "nutrition": "1人分のカロリーと栄養素を表示します",
+        "search": "タイトルや材料からレシピを探せます"
     },
     "madeWith": "細部までこだわって作りました"
 }

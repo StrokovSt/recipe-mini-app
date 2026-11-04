@@ -1,9 +1,10 @@
 @use "@/shared/styles/states";
 
-// Блок «Создать» тянется на высоту сетки вместе с фразой, фраза сразу под сеткой на её ширину.
-// Если блок выше сетки, лишнее место уходит под фразу, а не между сеткой и фразой
+// Блок «Создать» тянется на всю высоту страницы, котик и текст в нём по центру. Фраза сразу под сеткой на её ширину,
+// свободное место уходит под фразу, а не между сеткой и фразой
 .layout {
     display: grid;
+    flex-grow: 1;
     grid-template:
         "list aside" auto
         "quote aside" 1fr / minmax(0, 1fr) var(--size-sections-aside);
@@ -18,7 +19,7 @@
 .quote {
     display: flex;
     align-items: center;
-    align-self: start;
+    place-self: start;
     gap: var(--space-3);
     margin: 0;
     grid-area: quote;
@@ -37,14 +38,9 @@
     height: var(--size-quote-seal);
 }
 
-// Блок «Создать»: листок бумаги, содержимое по центру
+// Блок «Создать»: листок бумаги на всю высоту рядом с сеткой
 .aside {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     grid-area: aside;
-    gap: var(--space-3);
     padding: var(--space-6) var(--space-5);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -53,22 +49,46 @@
     text-align: center;
 }
 
+// Котик, текст и кнопка по центру блока. Если сетка длиннее экрана, блок тоже длинный:
+// тогда содержимое не выше видимой части и прилипает под шапкой, оставаясь по центру экрана при прокрутке
+.asideContent {
+    position: sticky;
+    top: calc(var(--size-page-header) + var(--space-5) + var(--space-6));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    height: min(100%, calc(100dvh - var(--size-page-header) - var(--space-5) - var(--space-6) * 3));
+}
+
 .picture {
+    flex-shrink: 0;
     width: var(--size-sections-aside-picture);
     height: var(--size-sections-aside-picture);
     object-fit: contain;
 }
 
+// Заголовок, текст и кнопка в блоке постоянной высоты: на «Категориях» и «Тегах» текст разной длины,
+// а котик стоит на одном месте
+.copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: var(--size-sections-aside-copy);
+}
+
 .title {
     margin: 0;
-    font: var(--font-header-md);
+    font: var(--font-size-xl) / var(--font-line-xl) var(--font-family-header);
     font-weight: var(--font-weight-bold);
 }
 
 .text {
     margin: 0;
     color: var(--color-text-muted);
-    font: var(--font-sm);
+    font: var(--font-md);
 }
 
 .create {

@@ -8,7 +8,8 @@
         "description": "핵심 기능",
         "import": "AI로 링크나 사진에서 레시피를 인식합니다",
         "sources": "Pinterest와 Telegram 레시피를 영상과 함께 저장합니다",
-        "nutrition": "1인분 칼로리와 영양소를 보여줍니다"
+        "nutrition": "1인분 칼로리와 영양소를 보여줍니다",
+        "search": "제목과 재료로 레시피를 찾아줍니다"
     },
     "madeWith": "모든 디테일에 정성을 담았습니다"
 }

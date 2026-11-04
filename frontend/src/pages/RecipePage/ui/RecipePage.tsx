@@ -3,32 +3,24 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
-import { buildRoute } from "@/app/router/routes";
-import { getRecipeSource, useDeleteRecipe, useRecipe } from "@/entities/recipe";
+import { getRecipeSource, useRecipe } from "@/entities/recipe";
 import { ApiError } from "@/shared/api";
-import DeleteIcon from "@/shared/assets/icons/icon-delete.svg?react";
-import EditIcon from "@/shared/assets/icons/icon-edit.svg?react";
 import { useLayoutMode } from "@/shared/lib/layout";
-import { shareLink } from "@/shared/lib/share";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 import { IconButton } from "@/shared/ui/Buttons";
-import { Dropdown } from "@/shared/ui/Dropdown";
 import { useLoader } from "@/shared/ui/GlobalLoader";
 import { MediaLightbox } from "@/shared/ui/MediaLightbox";
 import { LoadErrorMessage, Message } from "@/shared/ui/Message";
-import { ConfirmModal } from "@/shared/ui/Modal";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 
+import { RecipeActions } from "./RecipeActions/RecipeActions";
 import { RecipeContent } from "./RecipeContent/RecipeContent";
 import { RecipeHero } from "./RecipeHero/RecipeHero";
 import { RecipeInfo } from "./RecipeInfo/RecipeInfo";
 import { SourceBadge } from "./SourceBadge/SourceBadge";
 
 import styles from "./RecipePage.module.scss";
-
-// Сколько висит галочка «Ссылка скопирована» на кнопке «Поделиться»
-const COPIED_HINT_MS = 2000;
 
 const RecipePage = () => {
     const { id } = useParams<{ id: string }>();
@@ -41,11 +33,8 @@ const RecipePage = () => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
     const [lightboxIndex, setLightboxIndex] = useState(0);
-    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-    const [isLinkCopied, setIsLinkCopied] = useState(false);
 
     const { data: recipe, isLoading, error, isFetching, refetch } = useRecipe(id!);
-    const { mutate: deleteRecipe } = useDeleteRecipe();
     // «Повторить» после ошибки тоже показывает котика
     useLoader(isLoading || (!recipe && isFetching));
 
@@ -87,10 +76,6 @@ const RecipePage = () => {
     const source = getRecipeSource(recipe);
     const totalTime = (recipe.prepTime ?? 0) + (recipe.cookTime ?? 0);
 
-    const handleDelete = () => {
-        deleteRecipe(recipe.id, { onSuccess: () => navigate(AppRoute.Home) });
-    };
-
     // Обложка или фото одного шага на весь экран
     const openLightbox = (photos: string[], index: number) => {
         setLightboxPhotos(photos);
@@ -98,46 +83,12 @@ const RecipePage = () => {
         setIsLightboxOpen(true);
     };
 
-    // Делимся публичной Telegraph-страницей: сам рецепт в приложении видит только автор
-    const handleShare = async () => {
-        if (!recipe.telegraphUrl) return;
-
-        const result = await shareLink(recipe.telegraphUrl, recipe.title);
-        if (result === "copied") {
-            setIsLinkCopied(true);
-            setTimeout(() => setIsLinkCopied(false), COPIED_HINT_MS);
-        }
-    };
-
-    const headerButtons = (
-        <>
-            {recipe.telegraphUrl && (
-                <IconButton
-                    icon={isLinkCopied ? "check" : "share"}
-                    round
-                    type="button"
-                    aria-label={t(isLinkCopied ? "shareCopied" : "share")}
-                    onClick={handleShare}
-                />
-            )}
-            <Dropdown
-                trigger={<IconButton icon="more" round type="button" aria-label={t("actions")} />}
-                items={[
-                    { label: t("common:edit"), icon: <EditIcon />, onClick: () => navigate(buildRoute.editRecipe(recipe.id)) },
-                    { label: t("common:delete"), icon: <DeleteIcon />, danger: true, onClick: () => setIsConfirmOpen(true) },
-                ]}
-            />
-            {/* На компьютере назад ведёт путь в шапке */}
-            {!isDesktop && backButton}
-        </>
-    );
-
     return (
         <PageWrapper
             className={styles.page}
             header={
-                // Компьютер: путь к рецепту слева в шапке, кнопки в своей зоне справа. Телефон и планшет: только кнопки
-                <PageHeader className={styles.header} actions={isDesktop && headerButtons}>
+                // Компьютер: путь к рецепту в шапке. Телефон и планшет: только «Назад». Кнопки рецепта — в карточке
+                <PageHeader className={styles.header}>
                     {isDesktop ? (
                         <Breadcrumbs
                             label={t("breadcrumbs")}
@@ -148,7 +99,7 @@ const RecipePage = () => {
                             ]}
                         />
                     ) : (
-                        headerButtons
+                        backButton
                     )}
                 </PageHeader>
             }
@@ -175,6 +126,7 @@ const RecipePage = () => {
                         time={totalTime}
                         tags={recipe.tags.map(({ tag }) => tag)}
                         nutrition={recipe}
+                        actions={<RecipeActions recipe={recipe} />}
                     />
 
                     <RecipeContent
@@ -185,14 +137,6 @@ const RecipePage = () => {
                     />
                 </div>
             </div>
-
-            <ConfirmModal
-                isOpen={isConfirmOpen}
-                onClose={() => setIsConfirmOpen(false)}
-                onConfirm={handleDelete}
-                title={t("deleteTitle", { title: recipe.title })}
-                text={t("deleteText")}
-            />
 
             <MediaLightbox
                 isOpen={isLightboxOpen}

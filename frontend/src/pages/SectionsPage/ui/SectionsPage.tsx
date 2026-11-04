@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { AppRoute } from "@/app/router";
 import SectionsIcon from "@/shared/assets/icons/icon-sections.svg?react";
 import TagIcon from "@/shared/assets/icons/icon-tag.svg?react";
-import { TRANSITION_PAGE } from "@/shared/config/animation";
+import { TAB_HIDDEN, TAB_VISIBLE, TRANSITION_PAGE } from "@/shared/config/animation";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 import { PageHeader } from "@/shared/ui/PageHeader";
@@ -21,10 +21,6 @@ import { TagsTab } from "./TagsTab/TagsTab";
 import styles from "./SectionsPage.module.scss";
 
 type Tab = "categories" | "tags";
-
-// Смена вкладки как переход между страницами: старая гаснет, новая проявляется
-const HIDDEN = { opacity: 0, transform: "translateY(8px)" };
-const VISIBLE = { opacity: 1, transform: "translateY(0px)", transitionEnd: { transform: "none" } };
 
 const SectionsPage = () => {
     const { t } = useTranslation(["sections", "footer"]);
@@ -71,17 +67,17 @@ const SectionsPage = () => {
             ) : (
                 <SegmentedControl options={tabs} value={tab} onChange={setTab} />
             )}
-            <AnimatePresence mode="wait" initial={false}>
-                <m.div
-                    key={tab}
-                    initial={HIDDEN}
-                    animate={VISIBLE}
-                    exit={HIDDEN}
-                    transition={TRANSITION_PAGE}
-                >
-                    {tab === "categories" ? <CategoriesTab /> : <TagsTab />}
-                </m.div>
-            </AnimatePresence>
+            {/* Компьютер: заголовок и блок «Создать» стоят на месте, проявляется только сетка (SectionsLayout).
+                Телефон и планшет: вкладка целиком гаснет и проявляется, как переход между страницами */}
+            {isDesktop ? (
+                tab === "categories" ? <CategoriesTab /> : <TagsTab />
+            ) : (
+                <AnimatePresence mode="wait" initial={false}>
+                    <m.div key={tab} initial={TAB_HIDDEN} animate={TAB_VISIBLE} exit={TAB_HIDDEN} transition={TRANSITION_PAGE}>
+                        {tab === "categories" ? <CategoriesTab /> : <TagsTab />}
+                    </m.div>
+                </AnimatePresence>
+            )}
         </PageWrapper>
     );
 }

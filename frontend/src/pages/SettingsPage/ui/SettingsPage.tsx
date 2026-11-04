@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
 import { useUpdateSettings } from "@/entities/user";
 import { LanguageSelect } from "@/features/select-language";
 import MoonIcon from "@/shared/assets/icons/icon-moon.svg?react";
 import SunIcon from "@/shared/assets/icons/icon-sun.svg?react";
-import seal from "@/shared/assets/images/seal.webp";
+import aboutPicture from "@/shared/assets/images/about-cat.webp";
 import { getAnimations, setAnimations } from "@/shared/lib/animations";
 import { useGoBack } from "@/shared/lib/hooks";
 import { useLayoutMode } from "@/shared/lib/layout";
 import { getTheme, setTheme, type Theme } from "@/shared/lib/theme";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
-import { IconButton, RegularButton } from "@/shared/ui/Buttons";
+import { IconButton } from "@/shared/ui/Buttons";
 import { PageHeader } from "@/shared/ui/PageHeader";
 import { PageTitle } from "@/shared/ui/PageTitle";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
@@ -21,16 +20,14 @@ import { SectionCard } from "@/shared/ui/SectionCard";
 import { SegmentedControl, type SegmentedOption } from "@/shared/ui/SegmentedControl";
 import { Switch } from "@/shared/ui/Switch";
 
-import { version } from "../../../../package.json";
 import { ThemePicker } from "./ThemePicker/ThemePicker";
 
 import styles from "./SettingsPage.module.scss";
 
 const SettingsPage = () => {
-    const { t } = useTranslation(["settings", "common", "footer", "about", "menu"]);
+    const { t } = useTranslation(["settings", "common", "footer"]);
     const mode = useLayoutMode();
     const isDesktop = mode === "desktop" || mode === "wide";
-    const navigate = useNavigate();
     const goBack = useGoBack(AppRoute.Home);
     const [theme, setThemeState] = useState<Theme>(getTheme);
     const [animations, setAnimationsState] = useState(getAnimations);
@@ -98,7 +95,7 @@ const SettingsPage = () => {
         >
             {isDesktop && <PageTitle title={t("title")} hint={t("subtitle")} />}
 
-            {/* Компьютер: карточки слева (оформление на всю ширину, язык и движение рядом), справа блок о приложении */}
+            {/* Компьютер: карточки (оформление на всю ширину, язык и движение рядом). Очень широкий экран: карточки слева, справа декоративный котик */}
             {isDesktop ? (
                 <div className={styles.layout}>
                     <div className={styles.cards}>
@@ -119,18 +116,8 @@ const SettingsPage = () => {
                         {motionCard}
                     </div>
 
-                    <aside className={styles.aside}>
-                        <img className={styles.picture} src={seal} alt="" />
-                        <h2 className={styles.asideTitle}>{t("common:appName")}</h2>
-                        <span className={styles.version}>{t("about:version", { version })}</span>
-                        <p className={styles.text}>{t("aside")}</p>
-                        <RegularButton
-                            type="button"
-                            className={styles.about}
-                            label={t("menu:about.title")}
-                            onClick={() => navigate(AppRoute.About)}
-                        />
-                    </aside>
+                    {/* Котик только на очень широком экране: на обычном компьютере карточки на всю ширину */}
+                    {mode === "wide" && <img className={styles.picture} src={aboutPicture} alt="" />}
                 </div>
             ) : (
                 <>

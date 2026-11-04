@@ -7,9 +7,11 @@
     gap: var(--space-5);
     padding-block: var(--space-2);
 
+    // Кнопки по ширине текста, прижаты вправо
     .actions {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
         gap: var(--space-3);
     }
 }

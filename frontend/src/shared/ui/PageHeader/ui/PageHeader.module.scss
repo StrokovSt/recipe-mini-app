@@ -38,6 +38,22 @@
         padding-inline: var(--space-6);
         background: var(--color-side-nav-bg);
 
+        // Сплошной цвет, как у панели: размытие под ним не видно
+        backdrop-filter: none;
+
+        // Справа ветка сакуры, растёт от края экрана и чуть свисает за нижний край шапки; за кнопками
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: -1;
+            height: var(--size-header-branch);
+            aspect-ratio: 420 / 200;
+            background: url("@/shared/assets/images/header-branch.webp") right center / contain no-repeat;
+            pointer-events: none;
+        }
+
         // Без поиска (форма, рецепт): заголовку всё место до кнопок, длинный не переносится
         &:not(:has(.search)) {
             grid-template-areas: "title actions profile";

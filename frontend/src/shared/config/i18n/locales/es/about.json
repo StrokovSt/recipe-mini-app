@@ -8,7 +8,8 @@
         "description": "Lo esencial",
         "import": "Reconoce una receta desde un enlace o una foto con IA",
         "sources": "Guarda recetas de Pinterest y Telegram, con vídeo incluido",
-        "nutrition": "Muestra calorías y macros por porción"
+        "nutrition": "Muestra calorías y macros por porción",
+        "search": "Encuentra recetas por título e ingredientes"
     },
     "madeWith": "Hecha con atención a cada detalle"
 }

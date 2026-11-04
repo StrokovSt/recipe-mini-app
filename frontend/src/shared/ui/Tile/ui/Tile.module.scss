@@ -41,9 +41,12 @@
         height: var(--size-tile-icon);
         color: var(--color-accent);
 
+        // Картинка не сжимается, когда плитка узкая: иначе её плющит
         :is(svg, img) {
+            flex-shrink: 0;
             width: var(--size-tile-icon);
             height: var(--size-tile-icon);
+            object-fit: contain;
         }
     }
 

@@ -12,3 +12,7 @@ export const TRANSITION_PAGE: Transition = {
     duration: 0.2,
     ease: [0.4, 0, 0.2, 1],
 };
+
+// Смена вкладки как переход между страницами: старая гаснет, новая проявляется
+export const TAB_HIDDEN = { opacity: 0, transform: "translateY(8px)" };
+export const TAB_VISIBLE = { opacity: 1, transform: "translateY(0px)", transitionEnd: { transform: "none" } };

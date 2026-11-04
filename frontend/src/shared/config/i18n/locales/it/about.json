@@ -8,7 +8,8 @@
         "description": "L’essenziale",
         "import": "Riconosce una ricetta da un link o da una foto con l’IA",
         "sources": "Salva ricette da Pinterest e Telegram, video compreso",
-        "nutrition": "Mostra calorie e macro per porzione"
+        "nutrition": "Mostra calorie e macro per porzione",
+        "search": "Trova le ricette per titolo e ingredienti"
     },
     "madeWith": "Creata con cura in ogni dettaglio"
 }

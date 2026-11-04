@@ -89,6 +89,7 @@
 
     // Высота общей шапки: кнопка меню + отступы сверху и снизу + нижняя граница
     --size-page-header: calc(var(--size-menu-button) + 2 * var(--space-3) + 1px);
+    --size-header-branch: 110px; /* ветка сакуры справа в шапке на компьютере: выше шапки, свисает вниз */
     --size-brush-rule: 7px; /* сухой росчерк под временем и порциями карточки */
     --size-focus-ring: 2px; /* обводка элемента гуашью при фокусе с клавиатуры */
     --size-brush-bleed: 8px; /* мазок под фото карточки выходит за обёртку фото, чуть дальше края карточки */
@@ -125,6 +126,7 @@
     --size-step-photo-chip: 36px; /* кнопка «Фото» у шага без фото */
     --size-about-stamp: 128px; /* круглая печать на странице «О приложении» */
     --size-about-text: 280px; /* ширина описания под названием */
+    --size-about-feature-icon: 40px; /* круг с иконкой возможности на компьютере */
     --size-message-image: clamp(160px, 20vmin, 280px); /* картинка в сообщении по центру страницы */
     --size-message-text: clamp(280px, 30vmin, 400px); /* ширина текста сообщения */
 
@@ -132,7 +134,7 @@
     --size-option-icon: 52px;
     --size-draft-card-min-width: 280px; /* черновик-листок в сетке на компьютере */
     --size-draft-card-min-height: 120px;
-    --size-paper-texture: 512px; /* плитка текстуры бумаги: картинка 1024px, на экранах с двойной плотностью чёткая */
+    --size-paper-texture: cover; /* текстура бумаги не повторяется, а растягивается на весь блок */
     --size-option-icon-lg: 96px; /* иконка способа на большой карточке на компьютере */
     --size-option-card-min-height: 200px; /* высота карточки способа на компьютере */
 
@@ -153,9 +155,14 @@
     --size-category-picture: 56px;
     --size-category-picture-desktop: 72px; /* крупная картинка категории на компьютере */
     --size-section-tile-min-height: 120px; /* высота плитки категории и тега на компьютере */
-    --size-sections-aside: 340px; /* блок «Создать» справа в разделах */
-    --size-category-row-min-width-desktop: 240px; /* самая узкая плитка категории на компьютере */
-    --size-sections-aside-picture: 140px;
+    --size-sections-aside: clamp(300px, 25vw, 420px); /* блок «Создать» справа в разделах: на узком компьютере уже, чтобы плитки шли хотя бы по две */
+    --size-category-row-min-width-desktop: 230px; /* самая узкая плитка категории на компьютере */
+    --size-category-tile-max-width: 250px; /* самая широкая: лишнее место остаётся справа, плиток в строке сколько влезет */
+    --size-tag-tile-min-width: 170px; /* плитка тега на компьютере: меньше категории */
+    --size-tag-tile-max-width: 190px;
+    --size-tag-tile-min-height: 96px;
+    --size-sections-aside-picture: 200px;
+    --size-sections-aside-copy: calc(2 * var(--font-line-xl) + 3 * var(--font-line-md) + var(--size-search-height) + 2 * var(--space-3) + var(--space-2)); /* место под заголовок в 2 строки, текст в 3 и кнопку: котик не сдвигается, когда текст другой длины */
     --size-theme-preview: 120px; /* превью темы в настройках на компьютере */
     --size-tile-seal-border: 2px; /* рамка пилюли ⋯ у плитки категории на компьютере */
     --size-quote-seal: 40px; /* печать у фразы под сеткой разделов */
@@ -191,7 +198,6 @@
     --size-sheet-top: calc(var(--space-6) + var(--space-1));
 
     // Главная кнопка в футере шторки не растягивается шире этого на больших экранах
-    --size-sheet-action-max-width: 240px;
     --size-footer-action-max-width: 320px; /* кнопка формы в футере на широком экране */
     --size-card-min-width: 160px;
     --size-category-min-width: 150px;

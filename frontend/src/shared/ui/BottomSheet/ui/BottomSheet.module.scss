@@ -154,6 +154,7 @@
     @include bar.bar(top);
 
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-end;
     gap: var(--space-3);
     margin: 0 calc(-1 * var(--space-5)) calc(-1 * (var(--space-5) + env(safe-area-inset-bottom)));

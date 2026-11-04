@@ -8,7 +8,8 @@
         "description": "Intinya",
         "import": "Mengenali resep dari tautan atau foto dengan AI",
         "sources": "Menyimpan resep dari Pinterest dan Telegram beserta videonya",
-        "nutrition": "Menampilkan kalori dan nutrisi per porsi"
+        "nutrition": "Menampilkan kalori dan nutrisi per porsi",
+        "search": "Menemukan resep berdasarkan judul dan bahan"
     },
     "madeWith": "Dibuat dengan perhatian pada setiap detail"
 }

@@ -19,6 +19,7 @@ import UserIcon from "@/shared/assets/icons/icon-user.svg?react";
 import logo from "@/shared/assets/images/logo.webp";
 import logoDark from "@/shared/assets/images/logo-dark.webp";
 import seal from "@/shared/assets/images/seal.webp";
+import sideBranch from "@/shared/assets/images/side-branch.webp";
 import { TRANSITION_BASE, TRANSITION_PAGE } from "@/shared/config/animation";
 import { promptInstall, useInstallMode } from "@/shared/lib/pwa";
 import { Modal } from "@/shared/ui/Modal";
@@ -338,6 +339,9 @@ export function SideNav(props: SideNavProps) {
                         </button>
                     )}
                 </nav>
+
+                {/* Компьютер: веточка сакуры внизу панели, для красоты */}
+                {!isRail && <img className={styles.branch} src={sideBranch} alt="" loading="lazy" />}
 
                 <Modal isOpen={isIosHintOpen} onClose={() => setIsIosHintOpen(false)} title={t("menu:install.iosTitle")}>
                     <p>{t("menu:install.iosText")}</p>

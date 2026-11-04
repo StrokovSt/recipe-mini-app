@@ -29,7 +29,7 @@
             "icon . ." 1fr
             "icon title ." auto
             "icon subtitle arrow" auto
-            / minmax(0, 1fr) fit-content(60%) auto;
+            / minmax(var(--size-tile-icon), 1fr) fit-content(60%) auto;
         --tile-title-font: var(--font-header-md);
         --tile-subtitle-font: var(--font-sm);
         --tile-row-padding: var(--space-3) var(--space-4);

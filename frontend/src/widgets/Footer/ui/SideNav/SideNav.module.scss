@@ -23,8 +23,14 @@
 }
 
 // Логотип ведёт на главную. В тёмной теме тот же логотип со светлыми буквами
+// Высотой с шапку и без верхнего отступа панели: логотип по центру навигации и на одной линии с шапкой
 .brand {
     display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    height: var(--size-page-header);
+    margin-top: calc(var(--space-5) * -1);
     padding: 0 var(--space-2);
 
     // Не сжимаются, пока рейка меняет ширину
@@ -169,6 +175,17 @@
     gap: var(--space-1);
     padding-top: var(--space-4);
     border-top: 1px solid var(--color-border);
+}
+
+// Веточка сакуры в нижнем углу панели: до краёв панели, на невысоком экране сжимается, а не обрезает меню
+.branch {
+    flex-shrink: 1;
+    width: calc(100% + 2 * var(--space-4));
+    min-height: 0;
+    margin: auto calc(-1 * var(--space-4)) calc(-1 * var(--space-5));
+    object-fit: contain;
+    object-position: left bottom;
+    pointer-events: none;
 }
 
 // Компьютер: «Добавить рецепт» — винная кнопка во всю ширину панели, как главное действие

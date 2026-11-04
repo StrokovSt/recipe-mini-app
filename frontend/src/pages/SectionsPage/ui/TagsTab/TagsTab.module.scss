@@ -12,7 +12,7 @@
         row-gap: var(--space-5);
 
         > * {
-            min-height: var(--size-section-tile-min-height);
+            min-height: var(--size-tag-tile-min-height);
         }
     }
 
@@ -32,6 +32,11 @@
 
     // Между рядами место под пилюлю ⋯ на рамке плитки
     row-gap: var(--space-4);
+
+    // Компьютер: плитки тегов меньше категорий, в строке сколько влезет
+    @include media.desktop {
+        grid-template-columns: repeat(auto-fill, minmax(var(--size-tag-tile-min-width), var(--size-tag-tile-max-width)));
+    }
 }
 
 // «Новая …» на компьютере не нужна: её заменяет блок «Создать» справа

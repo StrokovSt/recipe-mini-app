@@ -1,0 +1,37 @@
+@use "@/shared/styles/states";
+
+// Строка пилюль по ширине текста внизу карточки рецепта, отделена линией
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-1);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+}
+
+.button,
+.danger {
+    svg {
+        flex-shrink: 0;
+        width: var(--size-icon-sm);
+        height: var(--size-icon-sm);
+    }
+}
+
+// Удаление справа и красное
+.danger {
+    margin-left: auto;
+    border-color: color-mix(in srgb, var(--color-error) 30%, transparent);
+    color: var(--color-error);
+
+    @include states.hover(":not(:disabled)") {
+        border-color: var(--color-error);
+        background: var(--color-error-light);
+    }
+
+    @include states.active(":not(:disabled)") {
+        border-color: var(--color-error);
+        background: var(--color-error-light);
+    }
+}

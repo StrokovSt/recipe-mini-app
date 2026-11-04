@@ -60,12 +60,6 @@
     gap: var(--space-2);
 }
 
-// На телефоне «Применить» занимает всю ширину рядом со «Сбросить», на больших экранах не шире --size-sheet-action-max-width
-.apply {
-    flex: 1;
-    max-width: var(--size-sheet-action-max-width);
-}
-
 // Поиск на главной — высотой с кнопку фильтров и кнопки шапки
 .search {
     height: var(--size-search-height);
