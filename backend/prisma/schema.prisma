@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  // Адрес с пулом соединений для приложения. Миграции берут DIRECT_URL из prisma.config.ts
+  url      = env("DATABASE_URL")
 }
 
 model Category {
@@ -28,9 +29,9 @@ model Recipe {
   description  String?
   categoryId   String
   category     Category  @relation(fields: [categoryId], references: [id])
-  // JSON: IngredientGroup[] и RecipeStep[] из @recipe/common
-  ingredients  String
-  steps        String
+  // IngredientGroup[] и RecipeStep[] из @recipe/common
+  ingredients  Json
+  steps        Json
   // Время в минутах
   prepTime     Int?
   cookTime     Int?
@@ -90,7 +91,7 @@ model Draft {
   // "ai" | "manual"
   origin    String   @default("manual")
   source    String   @default("other")
-  data      String
+  data      Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

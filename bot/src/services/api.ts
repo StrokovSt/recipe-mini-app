@@ -2,12 +2,18 @@ import type { MediaInput, ParsedRecipe, Recipe } from "@recipe/common";
 
 const API_URL = process.env.API_URL ?? "http://localhost:3000";
 
+// Бэкенд верит x-user-id только вместе с секретом бота
+const authHeaders = (userId: string) => ({
+    "x-bot-secret": process.env.BOT_SECRET ?? "",
+    "x-user-id": userId,
+});
+
 export async function parseFromUrl(url: string, userId: string, existingMedia: MediaInput[] = []): Promise<ParsedRecipe> {
     const res = await fetch(`${API_URL}/api/parse`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "x-user-id": userId,
+            ...authHeaders(userId),
         },
         body: JSON.stringify({ url, existingMedia }), 
     });
@@ -24,7 +30,7 @@ export async function parseFromImage(base64: string, mimeType: string, userId: s
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "x-user-id": userId,
+            ...authHeaders(userId),
         },
         body: JSON.stringify({ base64, mimeType }),
     });
@@ -42,7 +48,7 @@ export async function saveRecipe(recipe: ParsedRecipe, userId: string): Promise<
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "x-user-id": userId,
+            ...authHeaders(userId),
         },
         body: JSON.stringify({
             ...recipe,
@@ -60,7 +66,7 @@ export async function saveRecipe(recipe: ParsedRecipe, userId: string): Promise<
 
 export async function getUserRecipes(userId: string): Promise<Recipe[]> {
     const res = await fetch(`${API_URL}/api/recipes`, {
-        headers: { "x-user-id": userId },
+        headers: authHeaders(userId),
     });
 
     console.log("getUserRecipes status:", res.status, "API_URL:", API_URL);
@@ -75,7 +81,7 @@ export async function parseFromText(text: string, userId: string): Promise<Parse
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "x-user-id": userId,
+            ...authHeaders(userId),
         },
         body: JSON.stringify({ text }),
     });

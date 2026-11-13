@@ -8,7 +8,8 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   engine: "classic",
+  // Миграции идут по прямому адресу, без пула соединений
   datasource: {
-    url: env("DATABASE_URL"),
+    url: env("DIRECT_URL"),
   },
 });

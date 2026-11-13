@@ -33,9 +33,7 @@ const buildUrl = (path: string, params: QueryParams = {}) => {
 // Кто делает запрос: в Телеграме бэкенд проверяет его по initData
 const getAuthHeaders = (): Record<string, string> => {
     const telegram = getTelegram();
-    const headers: Record<string, string> = {
-        "x-user-id": telegram?.initDataUnsafe?.user?.id?.toString() ?? "dev-user",
-    };
+    const headers: Record<string, string> = {};
     if (telegram?.initData) headers["x-init-data"] = telegram.initData;
 
     return headers;

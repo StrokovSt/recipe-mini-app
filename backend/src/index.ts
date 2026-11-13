@@ -24,7 +24,7 @@ app.set('trust proxy', 1);
 const corsOptions = {
     origin: process.env.FRONTEND_URL || "http://localhost:5173",
     methods: ["GET", "POST", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "x-user-id", "x-init-data"],
+    allowedHeaders: ["Content-Type", "x-init-data"],
 };
 
 app.use(cors(corsOptions));
@@ -36,6 +36,7 @@ app.get("/health", (_req, res) => {
     res.json({ ok: true });
 });
 
+app.use(generalLimiter);
 app.use(authMiddleware);
 
 app.use("/api/parse", parseLimiter, requireAi, router);
@@ -45,8 +46,6 @@ app.use("/api/categories", categoriesRouter);
 app.use("/api/drafts", draftsRouter);
 app.use("/api/tags", tagsRouter);
 app.use("/api/upload", uploadLimiter, uploadRouter);
-
-app.use(generalLimiter);
 
 app.use(errorHandler);
 

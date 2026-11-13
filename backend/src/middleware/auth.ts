@@ -35,24 +35,50 @@ function verifyTelegramInitData(initData: string, botToken: string): { id: numbe
     }
 }
 
+// Сравнение без утечки по времени ответа
+function isSameSecret(value: string, secret: string): boolean {
+    const a = Buffer.from(value);
+    const b = Buffer.from(secret);
+    return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+// Бот ходит от имени пользователя: секрет BOT_SECRET + x-user-id
+function getBotUserId(req: Request): string | null {
+    const secret = process.env.BOT_SECRET;
+    const botSecret = req.headers["x-bot-secret"] as string | undefined;
+    const userId = req.headers["x-user-id"] as string | undefined;
+
+    if (!secret || !botSecret || !userId || !isSameSecret(botSecret, secret)) return null;
+    return userId;
+}
+
 export function authMiddleware(req: Request, res: Response, next: NextFunction) {
     const initData = req.headers["x-init-data"] as string | undefined;
     const botToken = process.env.TELEGRAM_TOKEN;
 
-    // Если нет токена или initData — dev режим
-    if (!botToken || !initData) {
-        const userId = req.headers["x-user-id"] as string | undefined;
-        req.userId = userId || "dev-user";
+    if (initData && botToken) {
+        const user = verifyTelegramInitData(initData, botToken);
+
+        if (!user) {
+            res.status(401).json({ error: "Invalid initData" });
+            return;
+        }
+
+        req.userId = user.id.toString();
         return next();
     }
 
-    const user = verifyTelegramInitData(initData, botToken);
-
-    if (!user) {
-        res.status(401).json({ error: "Invalid initData" });
-        return;
+    const botUserId = getBotUserId(req);
+    if (botUserId) {
+        req.userId = botUserId;
+        return next();
     }
 
-    req.userId = user.id.toString();
-    next();
-}
+    // Локально без Телеграма — общий тестовый пользователь
+    if (process.env.NODE_ENV === "development") {
+        req.userId = "dev-user";
+        return next();
+    }
+
+    res.status(401).json({ error: "Unauthorized" });
+}

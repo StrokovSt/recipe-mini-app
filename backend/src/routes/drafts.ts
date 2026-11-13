@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 
 import prisma from "../lib/prisma";
@@ -15,10 +16,6 @@ const SUMMARY_SELECT = {
     createdAt: true,
     updatedAt: true,
 } as const;
-
-function parseDraft<T extends { data: string }>(draft: T) {
-    return { ...draft, data: JSON.parse(draft.data) as unknown };
-}
 
 // GET /api/drafts
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
@@ -48,7 +45,7 @@ router.get("/:id", validateId, async (req: Request, res: Response, next: NextFun
             return;
         }
 
-        res.json(parseDraft(draft));
+        res.json(draft);
     }
     catch (error) {
         next(error);
@@ -71,10 +68,10 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         const { title, origin, source, data } = parsed.data;
 
         const draft = await prisma.draft.create({
-            data: { userId, title, origin, source, data: JSON.stringify(data) },
+            data: { userId, title, origin, source, data: data as Prisma.InputJsonValue },
         });
 
-        res.status(201).json(parseDraft(draft));
+        res.status(201).json(draft);
     }
     catch (error) {
         next(error);
@@ -107,7 +104,7 @@ router.patch("/:id", validateId, async (req: Request, res: Response, next: NextF
             where: { id },
             data: {
                 ...(title !== undefined && { title }),
-                ...(data !== undefined && { data: JSON.stringify(data) }),
+                ...(data !== undefined && { data: data as Prisma.InputJsonValue }),
             },
             select: SUMMARY_SELECT,
         });

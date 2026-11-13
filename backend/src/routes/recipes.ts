@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { NextFunction, Request, Response, Router } from "express";
 
 import { IngredientGroup, MediaInput, RecipeStep, searchRecipes } from "@recipe/common";
@@ -11,11 +12,12 @@ import { createRecipeSchema, updateRecipeSchema } from "../validation/recipe";
 
 const router = Router();
 
-function parseRecipe<T extends { ingredients: string; steps: string }>(recipe: T) {
+// В базе это Json, а наружу отдаём типы из @recipe/common
+function parseRecipe<T extends { ingredients: Prisma.JsonValue; steps: Prisma.JsonValue }>(recipe: T) {
     return {
         ...recipe,
-        ingredients: JSON.parse(recipe.ingredients) as IngredientGroup[],
-        steps: JSON.parse(recipe.steps) as RecipeStep[],
+        ingredients: recipe.ingredients as unknown as IngredientGroup[],
+        steps: recipe.steps as unknown as RecipeStep[],
     };
 }
 
@@ -155,8 +157,8 @@ router.post("/", checkRecipeLimit, async (req: Request, res: Response, next: Nex
                 title,
                 description: description || null,
                 categoryId: await resolveCategoryId(categoryId, userId),
-                ingredients: JSON.stringify(ingredients),
-                steps: JSON.stringify(steps),
+                ingredients,
+                steps,
                 prepTime: prepTime ?? null,
                 cookTime: cookTime ?? null,
                 servings: servings ?? null,
@@ -247,8 +249,8 @@ router.patch("/:id", validateId, async (req: Request, res: Response, next: NextF
                 ...(title && { title }),
                 ...(description !== undefined && { description: description || null }),
                 ...(categoryId !== undefined && { categoryId: await resolveCategoryId(categoryId, userId) }),
-                ...(ingredients && { ingredients: JSON.stringify(ingredients) }),
-                ...(steps && { steps: JSON.stringify(steps) }),
+                ...(ingredients && { ingredients }),
+                ...(steps && { steps }),
                 ...(prepTime !== undefined && { prepTime }),
                 ...(cookTime !== undefined && { cookTime }),
                 ...(servings !== undefined && { servings }),
