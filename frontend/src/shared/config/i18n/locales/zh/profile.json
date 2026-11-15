@@ -10,5 +10,24 @@
         "telegramId": "Telegram ID",
         "language": "语言"
     },
-    "synced": "个人资料与 Telegram 同步"
+    "synced": "个人资料与 Telegram 同步",
+    "accounts": {
+        "title": "登录方式",
+        "description": "一个账号，多种登录方式",
+        "linked": "已关联",
+        "notLinked": "未关联",
+        "link": "关联",
+        "unlink": "解除关联",
+        "onSite": "您可以在网站上关联",
+        "soon": "即将推出",
+        "taken": "此 Google 账号已关联到其他账号",
+        "failed": "操作失败，请您重试"
+    },
+    "signOut": "退出登录",
+    "deleteAccount": "删除账号",
+    "deleteConfirm": {
+        "title": "删除账号？",
+        "text": "所有食谱、分区、标签和草稿将被永久删除，且无法恢复。",
+        "confirm": "永久删除"
+    }
 }

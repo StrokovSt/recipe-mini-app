@@ -62,10 +62,12 @@ const HomePage = () => {
     const mode = useLayoutMode();
     const isDesktop = mode === 'desktop' || mode === 'wide';
     const [searchSlot, setSearchSlot] = useState<HTMLDivElement | null>(null);
-    const { data: recipes, isLoading, isPlaceholderData, isError, isPaused, isFetching, refetch } =
+    const { data: recipes, isLoading: isRecipesLoading, isPlaceholderData, isError, isPaused, isFetching, refetch } =
         useRecipes(filters);
-    const { data: categories = [] } = useCategories();
-    const { data: tags = [] } = useTags();
+    const { data: categories = [], isLoading: isCategoriesLoading } = useCategories();
+    const { data: tags = [], isLoading: isTagsLoading } = useTags();
+    // Страница появляется целиком, когда пришли и рецепты, и разделы с тегами: иначе ряды разделов и тегов вставали бы позже и сдвигали сетку
+    const isLoading = isRecipesLoading || isCategoriesLoading || isTagsLoading;
 
     // Когда поиск с фильтрами уходит под шапку, кнопка фильтров появляется в шапке
     const headerBar = usePageHeaderBar();

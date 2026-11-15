@@ -15,4 +15,11 @@ export const storage = {
             // Не сохранилось: выбор действует до перезагрузки
         }
     },
+    remove(key: string) {
+        try {
+            localStorage.removeItem(key);
+        } catch {
+            // Хранилище недоступно: удалять нечего
+        }
+    },
 };

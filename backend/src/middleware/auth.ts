@@ -1,7 +1,11 @@
+import { fromNodeHeaders } from "better-auth/node";
 import crypto from "crypto";
 import { NextFunction, Request, Response } from "express";
 
-function verifyTelegramInitData(initData: string, botToken: string): { id: number } | null {
+import { auth } from "../lib/auth";
+import { getTelegramUserId, type TelegramUser } from "../services/user";
+
+function verifyTelegramInitData(initData: string, botToken: string): TelegramUser | null {
     try {
         const params = new URLSearchParams(initData);
         const hash = params.get("hash");
@@ -42,7 +46,7 @@ function isSameSecret(value: string, secret: string): boolean {
     return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 
-// Бот ходит от имени пользователя: секрет BOT_SECRET + x-user-id
+// Бот ходит от имени пользователя: секрет BOT_SECRET + x-user-id (Telegram id)
 function getBotUserId(req: Request): string | null {
     const secret = process.env.BOT_SECRET;
     const botSecret = req.headers["x-bot-secret"] as string | undefined;
@@ -52,33 +56,43 @@ function getBotUserId(req: Request): string | null {
     return userId;
 }
 
-export function authMiddleware(req: Request, res: Response, next: NextFunction) {
+// Кто делает запрос: мини-апп (initData), бот (секрет), сайт (кука сессии)
+async function resolveUserId(req: Request, res: Response): Promise<string | null> {
     const initData = req.headers["x-init-data"] as string | undefined;
     const botToken = process.env.TELEGRAM_TOKEN;
 
     if (initData && botToken) {
-        const user = verifyTelegramInitData(initData, botToken);
-
-        if (!user) {
-            res.status(401).json({ error: "Invalid initData" });
-            return;
-        }
-
-        req.userId = user.id.toString();
-        return next();
+        const telegramUser = verifyTelegramInitData(initData, botToken);
+        return telegramUser ? getTelegramUserId(telegramUser) : null;
     }
 
     const botUserId = getBotUserId(req);
-    if (botUserId) {
-        req.userId = botUserId;
-        return next();
-    }
+    if (botUserId) return getTelegramUserId({ id: botUserId });
 
-    // Локально без Телеграма — общий тестовый пользователь
-    if (process.env.NODE_ENV === "development") {
-        req.userId = "dev-user";
-        return next();
-    }
+    // Локально на сайте тоже входим по-настоящему: так видна страница входа.
+    // Better Auth обновляет куку с копией сессии: передаём её браузеру, иначе каждый запрос шёл бы в базу за сессией
+    const { response: session, headers } = await auth.api.getSession({
+        headers: fromNodeHeaders(req.headers),
+        returnHeaders: true,
+    });
+    headers.getSetCookie().forEach((cookie) => res.append("Set-Cookie", cookie));
 
-    res.status(401).json({ error: "Unauthorized" });
-}
+    return session?.user.id ?? null;
+}
+
+export async function authMiddleware(req: Request, res: Response, next: NextFunction) {
+    try {
+        const userId = await resolveUserId(req, res);
+
+        if (!userId) {
+            res.status(401).json({ error: "Unauthorized" });
+            return;
+        }
+
+        req.userId = userId;
+        next();
+    }
+    catch (error) {
+        next(error);
+    }
+}

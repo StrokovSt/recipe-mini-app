@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 
+import { getHost } from "@/entities/recipe";
 import type { ImportSource } from "@/features/recipe-form";
 import ImageIcon from "@/shared/assets/icons/icon-image.svg?react";
 
@@ -15,7 +16,7 @@ export const ImportingItem = (props: ImportingItemProps) => {
     const { source } = props;
     const { t } = useTranslation("recipeForm");
     // Откуда рецепт: сайт из ссылки или имя файла
-    const from = "file" in source ? source.file.name : new URL(source.url).hostname.replace(/^www\./, "");
+    const from = "file" in source ? source.file.name : getHost(source.url) ?? source.url;
 
     return (
         <article className={styles.item} aria-busy>

@@ -25,3 +25,14 @@ export function useUpdateSettings() {
         },
     });
 }
+
+export function useUnlinkProvider() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: userApi.unlinkProvider,
+        onSuccess: (user) => {
+            queryClient.setQueryData(USER_KEYS.me, user);
+        },
+    });
+}

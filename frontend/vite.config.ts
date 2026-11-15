@@ -91,8 +91,9 @@ const pwa = () => VitePWA({
     cleanupOutdatedCaches: true,
     runtimeCaching: [
       {
-        // Данные: всегда свежие из сети, без сети — последний сохранённый ответ
-        urlPattern: ({ url, request }) => request.method === "GET" && url.pathname.startsWith("/api/"),
+        // Данные: всегда свежие из сети, без сети — последний сохранённый ответ. Вход (/api/auth) мимо service worker
+        urlPattern: ({ url, request }) =>
+          request.method === "GET" && url.pathname.startsWith("/api/") && !url.pathname.startsWith("/api/auth/"),
         handler: "NetworkFirst",
         options: {
           cacheName: "api",

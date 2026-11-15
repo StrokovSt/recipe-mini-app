@@ -99,21 +99,80 @@ model Draft {
 }
 
 model User {
-    id          String    @id  // telegram user id
-    plan        Plan      @default(FREE)
-    planExpiry  DateTime?
-    createdAt   DateTime  @default(now())
+    // Старые пользователи из Телеграма сохранили Telegram id, новые получают случайный id
+    id            String    @id
+    name          String    @default("")
+    // Better Auth требует email. У входа только через Телеграм — служебный <id>@telegram.invalid, в интерфейсе не показывается
+    email         String    @unique
+    emailVerified Boolean   @default(false)
+    image         String?
+    plan          Plan      @default(FREE)
+    planExpiry    DateTime?
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
 
     // Настройки интерфейса, null — автоопределение на устройстве
-    language    String?
-    theme       String?   // "light" | "dark"
-    animations  Boolean?
+    language      String?
+    theme         String?   // "light" | "dark"
+    animations    Boolean?
 
     // Можно ли распознавать рецепты через ИИ
-    aiEnabled   Boolean   @default(true)
+    aiEnabled     Boolean   @default(true)
+
+    sessions      Session[]
+    accounts      Account[]
+}
+
+// Сессия входа на сайте (кука). В мини-аппе сессии нет: каждый запрос подписан initData
+model Session {
+    id        String   @id
+    token     String   @unique
+    expiresAt DateTime
+    ipAddress String?
+    userAgent String?
+    userId    String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([userId])
+}
+
+// Способ входа: providerId "telegram" | "google", accountId — id пользователя у этого сервиса
+model Account {
+    id                    String    @id
+    accountId             String
+    providerId            String
+    userId                String
+    user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    accessToken           String?
+    refreshToken          String?
+    idToken               String?
+    accessTokenExpiresAt  DateTime?
+    refreshTokenExpiresAt DateTime?
+    scope                 String?
+    password              String?
+    createdAt             DateTime  @default(now())
+    updatedAt             DateTime  @updatedAt
+
+    // Один Телеграм или Google — только у одного аккаунта
+    @@unique([providerId, accountId])
+    @@index([userId])
+}
+
+// Временные коды Better Auth (state при входе через Google и т.п.)
+model Verification {
+    id         String   @id
+    identifier String
+    value      String
+    expiresAt  DateTime
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    @@index([identifier])
 }
 
 enum Plan {
     FREE
     PRO
-}
+}

@@ -14,8 +14,15 @@
     <script>
       // Тёмная тема и выключенные анимации до старта приложения, чтобы заставка не мигала светлой и не двигалась зря.
       // Полная логика в shared/lib/theme и shared/lib/animations
-      if (localStorage.getItem("theme") === "dark") document.documentElement.setAttribute("data-theme", "dark");
-      const savedAnimations = localStorage.getItem("animations");
+      let savedTheme = null;
+      let savedAnimations = null;
+      try {
+        savedTheme = localStorage.getItem("theme");
+        savedAnimations = localStorage.getItem("animations");
+      } catch {
+        // Данные сайтов запрещены в браузере: тема и анимации как у устройства
+      }
+      if (savedTheme === "dark") document.documentElement.setAttribute("data-theme", "dark");
       const isMotionOff = savedAnimations ? savedAnimations === "off" : matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (isMotionOff) document.documentElement.setAttribute("data-animations", "off");
     </script>

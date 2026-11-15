@@ -30,7 +30,8 @@ export interface RecipeFormProps {
     subtitle?: string;
     defaultValues?: Partial<RecipeFormValues>;
     submitLabel?: string;
-    onSubmit?: (values: RecipeFormValues) => void;
+    // onError — сохранить не удалось: форма объяснит это в окне
+    onSubmit?: (values: RecipeFormValues, onError: (error: unknown) => void) => void;
     isPending?: boolean;
     source?: RecipeFormSource;
     // Только для нового рецепта: форма автоматически сохраняется в черновик

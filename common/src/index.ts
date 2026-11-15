@@ -5,4 +5,4 @@ export type { CreateRecipeDto, Media, ParsedRecipe, Recipe, RecipeSource, Recipe
 export type { UnitCode, UnitInfo, UnitKind } from "./units";
 export { UNIT_CODES, UNITS } from "./units";
 export { normalizeSearch, searchRecipes } from "./search";
-export type { Plan, Theme, UpdateUserSettingsDto, User, UserSettings } from "./user";
+export type { AuthProvider, Plan, Theme, UpdateUserSettingsDto, User, UserSettings } from "./user";

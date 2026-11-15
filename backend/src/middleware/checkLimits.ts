@@ -4,18 +4,15 @@ import { createError, ErrorCode } from "@recipe/common";
 
 import { PLAN_LIMITS } from "../config/limits";
 import prisma from "../lib/prisma";
-import { ensureUser } from "../services/user";
+import { getUser } from "../services/user";
 
 export const checkRecipeLimit = async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.userId as string;
 
-    const user = await ensureUser(userId);
+    const user = await getUser(userId);
 
     const plan = user.plan as keyof typeof PLAN_LIMITS;
     const limit = PLAN_LIMITS[plan].recipes;
-
-    console.log('user: ', user);
-    console.log('limit: ', limit);
 
     if (limit === Infinity) {
         return next();

@@ -10,5 +10,24 @@
         "telegramId": "ID Telegram",
         "language": "Bahasa"
     },
-    "synced": "Data profil disinkronkan dengan Telegram"
+    "synced": "Data profil disinkronkan dengan Telegram",
+    "accounts": {
+        "title": "Metode masuk",
+        "description": "Satu akun, beberapa cara masuk",
+        "linked": "Tertaut",
+        "notLinked": "Belum tertaut",
+        "link": "Tautkan",
+        "unlink": "Lepaskan",
+        "onSite": "Anda dapat menautkannya di situs web",
+        "soon": "Segera",
+        "taken": "Akun Google ini sudah tertaut ke akun lain",
+        "failed": "Gagal. Silakan coba lagi"
+    },
+    "signOut": "Keluar",
+    "deleteAccount": "Hapus akun",
+    "deleteConfirm": {
+        "title": "Hapus akun?",
+        "text": "Semua resep, bagian, tag, dan draf akan dihapus selamanya. Tindakan ini tidak dapat dibatalkan.",
+        "confirm": "Hapus selamanya"
+    }
 }

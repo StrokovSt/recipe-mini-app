@@ -1,0 +1,91 @@
+@use "@/shared/styles/states";
+
+.list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+// Иконка сервиса, название со статусом и кнопка справа. Строки через тонкую линию, как «Имя» и «Язык» выше
+.row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding-block: var(--space-3);
+
+    & + & {
+        border-top: 1px solid var(--color-border);
+    }
+}
+
+.icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: var(--size-about-feature-icon);
+    height: var(--size-about-feature-icon);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
+
+    svg {
+        width: var(--size-icon-md);
+        height: var(--size-icon-md);
+    }
+
+    .telegram {
+        color: var(--color-telegram);
+    }
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.name {
+    font: var(--font-ui-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.status,
+.hint {
+    color: var(--color-text-muted);
+    font: var(--font-ui-xs);
+}
+
+.hint {
+    flex-shrink: 0;
+    font-style: italic;
+}
+
+.error {
+    margin: var(--space-2) 0 0;
+    color: var(--color-error);
+    font: var(--font-ui-xs);
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+}
+
+// «Выйти» и «Удалить аккаунт» по ширине подписи, по центру под карточками
+.actions {
+    // Опасное действие: красная пилюля вместо винной
+    .danger {
+        border-color: color-mix(in srgb, var(--color-error) 30%, transparent);
+        color: var(--color-error);
+
+        @include states.hover(":not(:disabled)") {
+            border-color: var(--color-error);
+            background: var(--color-error-light);
+        }
+    }
+}

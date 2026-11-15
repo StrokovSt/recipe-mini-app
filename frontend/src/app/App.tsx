@@ -1,3 +1,4 @@
+import { AuthGate } from "@/app/providers/AuthGate";
 import { MotionProvider } from "@/app/providers/MotionProvider";
 import { QueryProvider } from "@/app/providers/QueryProvider";
 import { RouterProvider } from "@/app/providers/RouterProvider";
@@ -15,16 +16,18 @@ export default function App() {
             <QueryProvider>
                 <SettingsSync />
                 <RouterProvider>
-                    <PageHeaderProvider>
-                        <PageFooterProvider>
-                            <PageHeaderBar />
-                            <ErrorBoundary>
-                                <AppRouter />
-                            </ErrorBoundary>
-                            <Footer />
-                            <GlobalLoader />
-                        </PageFooterProvider>
-                    </PageHeaderProvider>
+                    <AuthGate>
+                        <PageHeaderProvider>
+                            <PageFooterProvider>
+                                <PageHeaderBar />
+                                <ErrorBoundary>
+                                    <AppRouter />
+                                </ErrorBoundary>
+                                <Footer />
+                                <GlobalLoader />
+                            </PageFooterProvider>
+                        </PageHeaderProvider>
+                    </AuthGate>
                 </RouterProvider>
             </QueryProvider>
         </MotionProvider>

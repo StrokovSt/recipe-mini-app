@@ -10,5 +10,24 @@
         "telegramId": "Telegram ID",
         "language": "言語"
     },
-    "synced": "プロフィール情報はTelegramと同期されます"
+    "synced": "プロフィール情報はTelegramと同期されます",
+    "accounts": {
+        "title": "ログイン方法",
+        "description": "ひとつのアカウントに複数のログイン方法",
+        "linked": "連携済み",
+        "notLinked": "未連携",
+        "link": "連携する",
+        "unlink": "連携解除",
+        "onSite": "ウェブサイトで連携できます",
+        "soon": "近日公開",
+        "taken": "この Google アカウントはすでに別のアカウントに連携されています",
+        "failed": "うまくいきませんでした。もう一度お試しください"
+    },
+    "signOut": "ログアウト",
+    "deleteAccount": "アカウントを削除",
+    "deleteConfirm": {
+        "title": "アカウントを削除しますか？",
+        "text": "すべてのレシピ、セクション、タグ、下書きが完全に削除されます。元に戻すことはできません。",
+        "confirm": "完全に削除"
+    }
 }

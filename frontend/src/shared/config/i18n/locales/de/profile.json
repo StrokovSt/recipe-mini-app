@@ -12,5 +12,24 @@
         "telegramId": "Telegram-ID",
         "language": "Sprache"
     },
-    "synced": "Profildaten werden mit Telegram synchronisiert"
+    "synced": "Profildaten werden mit Telegram synchronisiert",
+    "accounts": {
+        "title": "Anmeldemethoden",
+        "description": "Ein Konto, mehrere Wege zur Anmeldung",
+        "linked": "Verknüpft",
+        "notLinked": "Nicht verknüpft",
+        "link": "Verknüpfen",
+        "unlink": "Trennen",
+        "onSite": "Das können Sie auf der Website verknüpfen",
+        "soon": "Bald",
+        "taken": "Dieses Google-Konto ist bereits mit einem anderen Konto verknüpft",
+        "failed": "Das hat nicht geklappt. Bitte versuchen Sie es erneut"
+    },
+    "signOut": "Abmelden",
+    "deleteAccount": "Konto löschen",
+    "deleteConfirm": {
+        "title": "Konto löschen?",
+        "text": "Alle Rezepte, Bereiche, Tags und Entwürfe werden endgültig gelöscht. Dies kann nicht rückgängig gemacht werden.",
+        "confirm": "Endgültig löschen"
+    }
 }

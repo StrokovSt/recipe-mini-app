@@ -1,6 +1,17 @@
 import { describe, expect, it } from "vitest";
 
-import { getRecipeSource } from "./getRecipeSource";
+import { getHost, getRecipeSource } from "./getRecipeSource";
+
+describe("getHost", () => {
+    it("отдаёт домен без www", () => {
+        expect(getHost("https://www.russianfood.com/recipes/1")).toBe("russianfood.com");
+    });
+
+    it("для строки, которую браузер не разбирает как ссылку, возвращает null", () => {
+        expect(getHost("https://a.b:99999")).toBeNull();
+        expect(getHost("не ссылка")).toBeNull();
+    });
+});
 
 describe("getRecipeSource", () => {
     it("узнаёт площадку по домену ссылки", () => {

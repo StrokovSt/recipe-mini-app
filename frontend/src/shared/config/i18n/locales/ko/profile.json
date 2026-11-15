@@ -10,5 +10,24 @@
         "telegramId": "텔레그램 ID",
         "language": "언어"
     },
-    "synced": "프로필 정보는 텔레그램과 동기화됩니다"
+    "synced": "프로필 정보는 텔레그램과 동기화됩니다",
+    "accounts": {
+        "title": "로그인 방법",
+        "description": "하나의 계정, 여러 로그인 방법",
+        "linked": "연결됨",
+        "notLinked": "연결 안 됨",
+        "link": "연결",
+        "unlink": "연결 해제",
+        "onSite": "웹사이트에서 연결할 수 있습니다",
+        "soon": "곧 제공",
+        "taken": "이 Google 계정은 이미 다른 계정에 연결되어 있습니다",
+        "failed": "실패했습니다. 다시 시도해 주세요"
+    },
+    "signOut": "로그아웃",
+    "deleteAccount": "계정 삭제",
+    "deleteConfirm": {
+        "title": "계정을 삭제하시겠습니까?",
+        "text": "모든 레시피, 섹션, 태그, 임시 저장본이 영구적으로 삭제됩니다. 되돌릴 수 없습니다.",
+        "confirm": "영구 삭제"
+    }
 }

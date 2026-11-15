@@ -12,5 +12,24 @@
         "telegramId": "Telegram ID",
         "language": "Language"
     },
-    "synced": "Profile data is synced with Telegram"
+    "synced": "Profile data is synced with Telegram",
+    "accounts": {
+        "title": "Sign-in methods",
+        "description": "One account, several ways to sign in",
+        "linked": "Linked",
+        "notLinked": "Not linked",
+        "link": "Link",
+        "unlink": "Unlink",
+        "onSite": "You can link it on the website",
+        "soon": "Soon",
+        "taken": "This Google account is already linked to another account",
+        "failed": "Something went wrong. Please try again"
+    },
+    "signOut": "Sign out",
+    "deleteAccount": "Delete account",
+    "deleteConfirm": {
+        "title": "Delete account?",
+        "text": "All recipes, sections, tags and drafts will be deleted forever. This cannot be undone.",
+        "confirm": "Delete forever"
+    }
 }

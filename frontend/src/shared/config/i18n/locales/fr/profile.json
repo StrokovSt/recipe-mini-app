@@ -14,5 +14,24 @@
         "telegramId": "ID Telegram",
         "language": "Langue"
     },
-    "synced": "Les données du profil sont synchronisées avec Telegram"
+    "synced": "Les données du profil sont synchronisées avec Telegram",
+    "accounts": {
+        "title": "Méthodes de connexion",
+        "description": "Un compte, plusieurs façons de se connecter",
+        "linked": "Associé",
+        "notLinked": "Non associé",
+        "link": "Associer",
+        "unlink": "Dissocier",
+        "onSite": "Vous pouvez l'associer sur le site",
+        "soon": "Bientôt",
+        "taken": "Ce compte Google est déjà associé à un autre compte",
+        "failed": "Une erreur s'est produite. Veuillez réessayer"
+    },
+    "signOut": "Se déconnecter",
+    "deleteAccount": "Supprimer le compte",
+    "deleteConfirm": {
+        "title": "Supprimer le compte ?",
+        "text": "Toutes les recettes, rubriques, tags et brouillons seront supprimés définitivement. Cette action est irréversible.",
+        "confirm": "Supprimer définitivement"
+    }
 }

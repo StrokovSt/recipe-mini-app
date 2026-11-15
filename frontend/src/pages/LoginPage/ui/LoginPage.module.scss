@@ -1,0 +1,257 @@
+@use "@/shared/styles/card";
+@use "@/shared/styles/media";
+@use "@/shared/styles/states";
+
+.page {
+    // Ни шапки, ни футера: обычные отступы страницы со всех сторон
+    padding: var(--space-6) var(--space-page);
+
+    // Телефон: логотип, заголовок, вход, затем возможности. Компьютер: о приложении слева, вход справа
+    .layout {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-6);
+        width: 100%;
+        max-width: var(--size-login-card);
+        margin: auto;
+
+        @include media.desktop {
+            display: grid;
+            grid-template:
+                "intro card" auto
+                "cat card" auto / var(--size-login-intro) var(--size-login-card);
+            align-items: center;
+            gap: var(--space-2) calc(4 * var(--space-6));
+            max-width: none;
+        }
+    }
+
+    // display: contents на телефоне: возможности встают после карточки входа (order ниже)
+    .intro {
+        display: contents;
+
+        @include media.desktop {
+            display: flex;
+            flex-direction: column;
+            grid-area: intro;
+            align-items: flex-start;
+            gap: var(--space-4);
+        }
+    }
+
+    .logo,
+    .logoDark {
+        height: var(--size-login-logo);
+
+        @include media.desktop {
+            height: var(--size-login-logo-desktop);
+        }
+    }
+
+    .logoDark {
+        display: none;
+    }
+
+    [data-theme="dark"] & {
+        .logo {
+            display: none;
+        }
+
+        .logoDark {
+            display: block;
+        }
+    }
+
+    .title {
+        margin: 0;
+        font: var(--font-header-2xl);
+        font-weight: var(--font-weight-bold);
+        text-align: center;
+
+        @include media.desktop {
+            text-align: left;
+        }
+    }
+
+    .description {
+        margin: 0;
+        color: var(--color-text-muted);
+        font: var(--font-md);
+        text-align: center;
+
+        @include media.desktop {
+            text-align: left;
+        }
+    }
+
+    .features {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        order: 1;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        @include media.desktop {
+            order: 0;
+            margin-top: var(--space-2);
+        }
+    }
+
+    .feature {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        font: var(--font-ui-sm);
+    }
+
+    // Иконка в круге цвета акцента, как на странице «О приложении»
+    .featureIcon {
+        display: grid;
+        flex-shrink: 0;
+        place-items: center;
+        width: var(--size-about-feature-icon);
+        height: var(--size-about-feature-icon);
+        border-radius: var(--radius-full);
+        background: var(--color-accent-light);
+        color: var(--color-active);
+
+        svg {
+            width: var(--size-icon-md);
+            height: var(--size-icon-md);
+        }
+    }
+
+    // Карточка входа с веточкой сакуры в правом верхнем углу
+    .card {
+        @include card.card;
+
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-2);
+        width: 100%;
+        padding: calc(2 * var(--space-6)) var(--space-6) var(--space-6);
+        overflow: hidden;
+        text-align: center;
+
+        @include media.desktop {
+            grid-area: card;
+            padding: calc(3 * var(--space-6)) calc(2 * var(--space-6)) calc(2 * var(--space-6));
+        }
+    }
+
+    .branch {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: var(--size-login-branch);
+        pointer-events: none;
+    }
+
+    .welcome {
+        margin: 0;
+        font: var(--font-header-lg);
+        font-weight: var(--font-weight-bold);
+
+        @include media.desktop {
+            font: var(--font-header-2xl);
+            font-weight: var(--font-weight-bold);
+        }
+    }
+
+    .hint {
+        margin: 0;
+        color: var(--color-text-muted);
+        font: var(--font-sm);
+    }
+
+    // Кнопки одной ширины — по самой длинной подписи, не на всю карточку
+    .providers {
+        display: grid;
+        gap: var(--space-3);
+        margin-block: var(--space-4) var(--space-2);
+    }
+
+    .provider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-3);
+        padding: var(--space-3) var(--space-6);
+        border: 1px solid var(--color-border-strong);
+        border-radius: var(--radius-lg);
+        background: var(--color-surface);
+        color: var(--color-text);
+        font: var(--font-ui-md);
+        font-weight: var(--font-weight-bold);
+        cursor: pointer;
+        transition: all var(--transition-base);
+
+        @include states.hover(":not(:disabled)") {
+            border-color: var(--color-active);
+            background: var(--color-hover-bg);
+        }
+
+        &:focus-visible {
+            outline: none;
+            border-color: var(--color-active);
+            box-shadow: 0 0 0 3px var(--color-accent-shadow);
+        }
+
+        @include states.active(":not(:disabled)") {
+            background: var(--color-active-bg);
+            transform: scale(0.97);
+        }
+
+        &:disabled {
+            @include states.disabled;
+        }
+    }
+
+    .providerIcon {
+        flex-shrink: 0;
+        width: var(--size-icon-md);
+        height: var(--size-icon-md);
+    }
+
+    // Телеграм в его фирменном синем
+    .provider:last-child .providerIcon {
+        color: var(--color-telegram);
+    }
+
+    .note,
+    .error {
+        margin: 0;
+        font: var(--font-xs);
+    }
+
+    .note {
+        color: var(--color-text-muted);
+    }
+
+    .error {
+        color: var(--color-error);
+    }
+
+    // Котик только на компьютере и в светлой теме: на тёмном фоне светлая картинка смотрится пятном
+    .cat {
+        display: none;
+
+        @include media.desktop {
+            display: block;
+            grid-area: cat;
+            justify-self: center;
+            width: var(--size-login-cat);
+            mask: radial-gradient(closest-side, #000 70%, transparent) center / 100% 100% no-repeat;
+        }
+
+        [data-theme="dark"] & {
+            display: none;
+        }
+    }
+}

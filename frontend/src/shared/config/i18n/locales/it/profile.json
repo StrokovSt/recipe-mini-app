@@ -14,5 +14,24 @@
         "telegramId": "ID Telegram",
         "language": "Lingua"
     },
-    "synced": "I dati del profilo sono sincronizzati con Telegram"
+    "synced": "I dati del profilo sono sincronizzati con Telegram",
+    "accounts": {
+        "title": "Metodi di accesso",
+        "description": "Un account, più modi per accedere",
+        "linked": "Collegato",
+        "notLinked": "Non collegato",
+        "link": "Collega",
+        "unlink": "Scollega",
+        "onSite": "Può collegarlo sul sito",
+        "soon": "Presto",
+        "taken": "Questo account Google è già collegato a un altro account",
+        "failed": "Non è riuscito. Riprovi"
+    },
+    "signOut": "Esci",
+    "deleteAccount": "Elimina account",
+    "deleteConfirm": {
+        "title": "Eliminare l'account?",
+        "text": "Tutte le ricette, le sezioni, i tag e le bozze verranno eliminati per sempre. L'operazione è irreversibile.",
+        "confirm": "Elimina per sempre"
+    }
 }

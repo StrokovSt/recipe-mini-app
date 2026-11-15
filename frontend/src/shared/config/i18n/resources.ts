@@ -1,4 +1,5 @@
 import type about from "./locales/ru/about.json";
+import type auth from "./locales/ru/auth.json";
 import type common from "./locales/ru/common.json";
 import type filters from "./locales/ru/filters.json";
 import type footer from "./locales/ru/footer.json";
@@ -16,6 +17,7 @@ import type units from "./locales/ru/units.json";
 // Новый словарь (страница, виджет) добавляется сюда же
 export interface Resources {
     about: typeof about;
+    auth: typeof auth;
     common: typeof common;
     filters: typeof filters;
     footer: typeof footer;

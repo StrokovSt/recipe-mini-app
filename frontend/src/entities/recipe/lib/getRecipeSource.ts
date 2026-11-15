@@ -30,7 +30,8 @@ const PLATFORMS: { label: string; Icon: SvgIcon; host: RegExp; source?: Recipe["
     { label: "VK", Icon: VkIcon, host: /(^|\.)vk\.(com|ru)$|(^|\.)vkvideo\.ru$/ },
 ];
 
-const getHost = (url: string) => {
+// Домен ссылки без www, null — это не ссылка
+export const getHost = (url: string) => {
     try {
         return new URL(url).hostname.replace(/^www\./, "");
     } catch {

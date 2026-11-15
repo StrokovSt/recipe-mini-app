@@ -12,5 +12,24 @@
         "telegramId": "Telegram kimliği",
         "language": "Dil"
     },
-    "synced": "Profil verileri Telegram ile senkronize edilir"
+    "synced": "Profil verileri Telegram ile senkronize edilir",
+    "accounts": {
+        "title": "Giriş yöntemleri",
+        "description": "Tek hesap, birden fazla giriş yolu",
+        "linked": "Bağlı",
+        "notLinked": "Bağlı değil",
+        "link": "Bağla",
+        "unlink": "Bağlantıyı kaldır",
+        "onSite": "Web sitesinden bağlayabilirsiniz",
+        "soon": "Yakında",
+        "taken": "Bu Google hesabı zaten başka bir hesaba bağlı",
+        "failed": "Olmadı. Lütfen tekrar deneyin"
+    },
+    "signOut": "Çıkış yap",
+    "deleteAccount": "Hesabı sil",
+    "deleteConfirm": {
+        "title": "Hesap silinsin mi?",
+        "text": "Tüm tarifler, bölümler, etiketler ve taslaklar kalıcı olarak silinecek. Bu işlem geri alınamaz.",
+        "confirm": "Kalıcı olarak sil"
+    }
 }

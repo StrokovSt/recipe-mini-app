@@ -9,9 +9,16 @@ export interface UserSettings {
     animations: boolean | null;
 }
 
+// Способы входа в аккаунт
+export type AuthProvider = "telegram" | "google";
+
 // GET /api/me
 export interface User extends UserSettings {
     id: string;
+    // Имя и фото из Google или Телеграма. Пустое имя — не указано
+    name: string;
+    image: string | null;
+    providers: AuthProvider[];
     plan: Plan;
     // Сколько рецептов можно создать, null — без ограничений
     recipeLimit: number | null;

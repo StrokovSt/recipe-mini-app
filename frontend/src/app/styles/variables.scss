@@ -127,6 +127,12 @@
     --size-about-stamp: 128px; /* круглая печать на странице «О приложении» */
     --size-about-text: 280px; /* ширина описания под названием */
     --size-about-feature-icon: 40px; /* круг с иконкой возможности на компьютере */
+    --size-login-logo: 48px; /* логотип на странице входа */
+    --size-login-logo-desktop: 64px;
+    --size-login-intro: 460px; /* колонка «о приложении» слева от входа на компьютере */
+    --size-login-card: 460px; /* карточка входа */
+    --size-login-branch: 160px; /* веточка сакуры в углу карточки входа */
+    --size-login-cat: 320px; /* котик под колонкой «о приложении» */
     --size-message-image: clamp(160px, 20vmin, 280px); /* картинка в сообщении по центру страницы */
     --size-message-text: clamp(280px, 30vmin, 400px); /* ширина текста сообщения */
 

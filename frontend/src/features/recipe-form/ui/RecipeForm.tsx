@@ -80,6 +80,8 @@ const RecipeForm = (props: RecipeFormProps) => {
     // Рецепт не сохранился (лимит рецептов, нет сети): объясняем в окне. Текст отдельно от isOpen,
     // чтобы он не сменился, пока окно закрывается
     const [saveError, setSaveError] = useState({ isOpen: false, message: "" });
+    const showSaveError = (error: unknown) =>
+        setSaveError({ isOpen: true, message: getErrorMessage(error instanceof ApiError ? error.code : undefined) });
 
     const uploadCover = async (file: File) => (await uploadMedia(file)).url;
 
@@ -134,7 +136,7 @@ const RecipeForm = (props: RecipeFormProps) => {
         isLeavingRef.current = true;
 
         if (onSubmitProp) {
-            onSubmitProp(values);
+            onSubmitProp(values, showSaveError);
             return;
         }
 
@@ -168,10 +170,7 @@ const RecipeForm = (props: RecipeFormProps) => {
                 onError: (error) => {
                     isLeavingRef.current = false;
                     autosave.resume();
-                    setSaveError({
-                        isOpen: true,
-                        message: getErrorMessage(error instanceof ApiError ? error.code : undefined),
-                    });
+                    showSaveError(error);
                 },
             }
         );

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { AppRoute } from "@/app/router";
 import { useCategories } from "@/entities/category";
 import { useRecipes } from "@/entities/recipe";
+import { useMe } from "@/entities/user";
 import { LANGUAGES } from "@/shared/config/i18n";
 import { useGoBack } from "@/shared/lib/hooks";
 import { useLayoutMode } from "@/shared/lib/layout";
@@ -14,6 +15,7 @@ import { PageTitle } from "@/shared/ui/PageTitle";
 import { PageWrapper } from "@/shared/ui/PageWrapper";
 
 import { formatTelegramId } from "../lib/formatTelegramId";
+import { AccountSection } from "./AccountSection/AccountSection";
 
 import styles from "./ProfilePage.module.scss";
 
@@ -25,9 +27,12 @@ const ProfilePage = () => {
     const { data: recipes = [] } = useRecipes({});
     const { data: categories = [] } = useCategories();
 
-    // Вне Телеграма данных пользователя нет: гость «Шеф», без ника и ID
+    const { data: me } = useMe();
+
+    // В Телеграме имя и фото из Телеграма, на сайте — из аккаунта (Google). Нет имени — гость «Шеф»
     const user = getTelegram()?.initDataUnsafe?.user;
-    const name = user?.first_name ?? t("menu:guest");
+    const name = user?.first_name ?? (me?.name || t("menu:guest"));
+    const photo = user?.photo_url ?? me?.image;
     const language = LANGUAGES.find(({ code }) => code === i18n.language) ?? LANGUAGES[0];
 
     return (
@@ -59,8 +64,8 @@ const ProfilePage = () => {
         >
             {isDesktop && <PageTitle title={t("title")} hint={t("subtitle")} />}
             <section className={styles.user}>
-                {user?.photo_url ? (
-                    <img className={styles.avatar} src={user.photo_url} alt="" />
+                {photo ? (
+                    <img className={styles.avatar} src={photo} alt="" referrerPolicy="no-referrer" />
                 ) : (
                     <span className={styles.avatar} aria-hidden>{name[0]}</span>
                 )}
@@ -95,6 +100,8 @@ const ProfilePage = () => {
                     <dd>{language.nativeName}</dd>
                 </div>
             </dl>
+
+            {me && <AccountSection user={me} isTelegram={Boolean(user)} />}
 
             {user && <p className={styles.synced}>{t("synced")}</p>}
         </PageWrapper>

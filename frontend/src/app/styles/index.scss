@@ -63,6 +63,7 @@
     --color-error: var(--color-brand-vermillion);
     --color-error-light: color-mix(in srgb, var(--color-error) 8%, transparent);
     --color-error-text: var(--color-surface);
+    --color-telegram: #2AABEE; /* фирменный синий Телеграма: иконка на кнопке входа */
     --color-border: var(--color-brand-border-light);
     --color-border-strong: var(--color-brand-border);
     --color-border-field: var(--color-brand-rule); /* линия под полем «строкой» и пунктир пустых зон: контраст 3:1 с карточкой */

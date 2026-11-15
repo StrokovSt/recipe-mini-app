@@ -32,7 +32,7 @@ const EditRecipePage = () => {
         );
     }
 
-    const handleSubmit = (values: RecipeFormValues) => {
+    const handleSubmit = (values: RecipeFormValues, onError: (error: unknown) => void) => {
         updateRecipe(
             {
                 id: recipe.id,
@@ -51,7 +51,7 @@ const EditRecipePage = () => {
                 tags: values.tagIds,
                 media: toMedia(values.cover, values.video),
             },
-            { onSuccess: () => navigate(buildRoute.recipe(recipe.id)) }
+            { onSuccess: () => navigate(buildRoute.recipe(recipe.id)), onError }
         );
     };
 

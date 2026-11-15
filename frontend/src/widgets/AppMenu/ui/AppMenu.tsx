@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
 import { AppRoute } from "@/app/router";
+import { useMe } from "@/entities/user";
 import { startOnboarding } from "@/features/onboarding";
 import ChevronIcon from "@/shared/assets/icons/icon-chevron-right.svg?react";
 import HelpIcon from "@/shared/assets/icons/icon-help.svg?react";
@@ -42,8 +43,12 @@ export function AppMenu(props: AppMenuProps) {
         { to: AppRoute.About, icon: <InfoIcon />, title: t("about.title"), hint: t("about.hint") },
     ];
 
+    const { data: me } = useMe();
+
+    // В Телеграме имя и фото из Телеграма, на сайте — из аккаунта (Google). Нет имени — гость «Шеф»
     const user = getTelegram()?.initDataUnsafe?.user;
-    const name = user?.first_name ?? t("guest");
+    const name = user?.first_name ?? (me?.name || t("guest"));
+    const photo = user?.photo_url ?? me?.image;
 
     // На iPhone нет системного окна установки: закрываем меню и показываем, где эта кнопка в Safari
     const handleInstall = () => {
@@ -66,8 +71,8 @@ export function AppMenu(props: AppMenuProps) {
                 onClose={onClose}
                 header={
                     <article className={styles.greeting}>
-                        {user?.photo_url ? (
-                            <img className={styles.avatar} src={user.photo_url} alt="" />
+                        {photo ? (
+                            <img className={styles.avatar} src={photo} alt="" referrerPolicy="no-referrer" />
                         ) : (
                             <span className={styles.avatar} aria-hidden>{name[0]}</span>
                         )}
