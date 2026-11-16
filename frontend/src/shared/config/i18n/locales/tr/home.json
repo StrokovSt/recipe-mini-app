@@ -13,9 +13,7 @@
     "categories": "Kategoriler",
     "tags": "Etiketler",
     "yourCollection": "Koleksiyonunuz",
-    "resetFilters": "Filtreleri sıfırla",
     "allRecipes": "Tüm tarifler",
     "recipeCount": "{{count}} tarif",
-    "noRecipes": "Boş",
-    "total": "Toplam: {{count}}"
+    "noRecipes": "Boş"
 }

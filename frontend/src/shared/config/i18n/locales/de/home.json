@@ -13,9 +13,7 @@
     "categories": "Kategorien",
     "tags": "Tags",
     "yourCollection": "Ihre Sammlung",
-    "resetFilters": "Filter zurücksetzen",
     "allRecipes": "Alle Rezepte",
     "recipeCount": "{{count}} Rez.",
-    "noRecipes": "Leer",
-    "total": "Gesamt: {{count}}"
+    "noRecipes": "Leer"
 }

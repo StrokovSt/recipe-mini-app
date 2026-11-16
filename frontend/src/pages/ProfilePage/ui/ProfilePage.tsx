@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 
 import { AppRoute } from "@/app/router";
 import { useCategories } from "@/entities/category";
-import { useRecipes } from "@/entities/recipe";
 import { useMe } from "@/entities/user";
 import { LANGUAGES } from "@/shared/config/i18n";
 import { useGoBack } from "@/shared/lib/hooks";
@@ -24,10 +23,11 @@ const ProfilePage = () => {
     const { t, i18n } = useTranslation(["profile", "common", "menu", "footer"]);
     const mode = useLayoutMode();
     const isDesktop = mode === "desktop" || mode === "wide";
-    const { data: recipes = [] } = useRecipes({});
     const { data: categories = [] } = useCategories();
 
     const { data: me } = useMe();
+    // Число рецептов приходит с профилем: ради него весь список рецептов не грузим
+    const recipeCount = me?.recipeCount ?? 0;
 
     // В Телеграме имя и фото из Телеграма, на сайте — из аккаунта (Google). Нет имени — гость «Шеф»
     const user = getTelegram()?.initDataUnsafe?.user;
@@ -75,8 +75,8 @@ const ProfilePage = () => {
 
             <div className={styles.stats}>
                 <p className={styles.stat}>
-                    <span className={styles.value}>{recipes.length}</span>
-                    {t("stats.recipes", { count: recipes.length })}
+                    <span className={styles.value}>{recipeCount}</span>
+                    {t("stats.recipes", { count: recipeCount })}
                 </p>
                 <p className={styles.stat}>
                     <span className={styles.value}>{categories.length}</span>

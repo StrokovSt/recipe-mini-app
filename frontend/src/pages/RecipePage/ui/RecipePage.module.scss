@@ -1,5 +1,4 @@
 @use "@/shared/styles/media";
-@use "@/shared/styles/states";
 
 .page {
     min-height: 100%;
@@ -7,27 +6,6 @@
     // Снизу место под футер, который лежит поверх страницы, и запас больше обычного
     padding-bottom: calc(var(--size-page-footer) + var(--space-6));
     font-family: var(--font-family-main);
-}
-
-.danger {
-    padding: 0 var(--space-5);
-}
-
-.deleteBtn {
-    width: 100%;
-    padding: var(--space-3);
-    border: 2px solid #e53935;
-    border-radius: var(--radius-md);
-    background: transparent;
-    color: #e53935;
-    font: var(--font-ui-sm);
-    font-weight: var(--font-weight-bold);
-    cursor: pointer;
-    transition: background var(--transition-fast);
-
-    @include states.active {
-        background: rgb(229 57 53 / 8%);
-    }
 }
 
 .header {

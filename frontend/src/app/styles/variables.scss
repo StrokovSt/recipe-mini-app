@@ -172,8 +172,6 @@
     --size-theme-preview: 120px; /* превью темы в настройках на компьютере */
     --size-tile-seal-border: 2px; /* рамка пилюли ⋯ у плитки категории на компьютере */
     --size-quote-seal: 40px; /* печать у фразы под сеткой разделов */
-    --size-category-tile-picture: 64px; /* картинка на плитке категории гуашью */
-    --size-category-tile-picture-pair: 40px; /* она же на телефоне, где плитки по две в ряд */
     --size-strip-item: 196px; /* карточка в ряду категорий на компьютере */
     --size-strip-picture: 48px;
     --size-inline-loader-area: 60dvh; /* котик на месте содержимого центруется в этой высоте: середина первого экрана */
@@ -208,12 +206,9 @@
     --size-card-min-width: 160px;
     --size-category-min-width: 150px;
     --size-category-row-min-width: 200px; /* плитка категории в строку: картинка, название, стрелка */
-    --size-category-tile-min-width: 240px; /* плитка категории гуашью: шире экран — больше плиток в строке */
-    --size-category-tile-height: 104px;
 
     // Плитка-чип категории в шторке фильтров и в форме рецепта
     --size-category-chip-min-width: 112px;
-    --size-category-chip-picture: 40px;
 
     // Строка ингредиента: ширина количества, единицы и крестика
     --size-amount-field: 44px;
@@ -222,7 +217,6 @@
     --size-tap-area: 44px; /* меньшая зона нажатия маленьких кнопок на телефоне (совет Apple) */
 
     // Плюс в кнопке-пилюле «+ Группа», «+ Ингредиент»
-    --size-pill-icon: 14px;
     --size-add-button-icon: 18px; /* «+» в кнопках «Ингредиент», «Шаг», «Группа» */
     --size-toggle-icon: 20px; /* стрелка у сворачиваемой строки («КБЖУ на порцию») */
 

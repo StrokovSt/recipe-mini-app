@@ -13,9 +13,7 @@
     "categories": "分类",
     "tags": "标签",
     "yourCollection": "您的收藏",
-    "resetFilters": "重置筛选",
     "allRecipes": "全部食谱",
     "recipeCount": "{{count}} 个",
-    "noRecipes": "空",
-    "total": "共 {{count}} 个"
+    "noRecipes": "空"
 }

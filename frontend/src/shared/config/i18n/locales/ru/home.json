@@ -13,9 +13,7 @@
     "categories": "Категории",
     "tags": "Теги",
     "yourCollection": "Ваша коллекция",
-    "resetFilters": "Сбросить фильтры",
     "allRecipes": "Все рецепты",
     "recipeCount": "{{count}} рец.",
-    "noRecipes": "Пусто",
-    "total": "Всего: {{count}}"
+    "noRecipes": "Пусто"
 }

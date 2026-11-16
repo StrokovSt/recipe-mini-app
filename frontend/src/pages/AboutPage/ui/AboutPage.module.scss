@@ -75,7 +75,8 @@
         }
     }
 
-    // Компьютер: всё в колонку на всю ширину. Очень широкий экран: пополам — слева содержимое, справа котик на всю его высоту
+    // Компьютер: всё в колонку не шире --size-content-max-width, по центру. Очень широкий экран: пополам — слева содержимое,
+    // справа котик на всю его высоту
     .layout {
         display: grid;
         align-items: start;
@@ -84,6 +85,9 @@
             "features" auto
             "quote" 1fr / minmax(0, 1fr);
         gap: var(--space-6);
+        width: 100%;
+        max-width: var(--size-content-max-width);
+        margin-inline: auto;
 
         @include media.wide {
             grid-template:

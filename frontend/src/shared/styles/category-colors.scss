@@ -46,14 +46,6 @@ $category-colors: (
     burger: (#F4E3C6, #E3CCA4, #A35A1E),
 );
 
-// Краска подложки гуашью (shared/ui/BrushPaint) в цвет категории. Подключается рядом с category-color-vars
-@mixin category-paint-vars {
-    --paint: var(--category-paint);
-    --paint-dark: var(--category-paint-dark);
-    --paint-light: var(--category-paint-light);
-    --paint-edge: var(--category-paint-edge);
-}
-
 // Цвета категории классом с ключом картинки: подложка, рамка и акцент в --category-bg/-border/-accent.
 // Ими красятся плитка категории и подпись категории на карточке рецепта
 @mixin category-color-vars {
@@ -65,21 +57,11 @@ $category-colors: (
             --category-border: #{list.nth($colors, 2)};
             --category-accent: #{$accent};
 
-            // Плитка гуашью: заливка, тёмный и светлый мазки, кромка (shared/styles/brush.scss brush-tile)
-            --category-paint: color-mix(in srgb, #{$accent} 48%, #{list.nth($colors, 1)});
-            --category-paint-dark: color-mix(in srgb, #{$accent} 22%, var(--category-paint));
-            --category-paint-light: color-mix(in srgb, var(--category-paint) 85%, white);
-            --category-paint-edge: color-mix(in srgb, #{$accent} 40%, var(--category-paint));
-
             // В тёмной теме тот же оттенок поверх тёмной карточки
             [data-theme="dark"] & {
                 --category-bg: color-mix(in srgb, #{$accent} 24%, var(--color-surface));
                 --category-border: color-mix(in srgb, #{$accent} 60%, var(--color-surface));
                 --category-accent: color-mix(in srgb, #{$accent} 50%, var(--color-text));
-                --category-paint: color-mix(in srgb, #{$accent} 84%, var(--color-surface));
-                --category-paint-dark: color-mix(in srgb, var(--category-paint) 84%, black);
-                --category-paint-light: color-mix(in srgb, var(--category-paint) 90%, white);
-                --category-paint-edge: color-mix(in srgb, var(--category-paint) 66%, black);
             }
         }
     }

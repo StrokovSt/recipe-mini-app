@@ -13,9 +13,7 @@
     "categories": "Kategori",
     "tags": "Tag",
     "yourCollection": "Koleksi Anda",
-    "resetFilters": "Atur ulang filter",
     "allRecipes": "Semua resep",
     "recipeCount": "{{count}} resep",
-    "noRecipes": "Kosong",
-    "total": "Total: {{count}}"
+    "noRecipes": "Kosong"
 }

@@ -49,8 +49,9 @@ const LoginPage = () => {
         <PageWrapper className={styles.page}>
             <div className={styles.layout}>
                 <section className={styles.intro}>
-                    <img className={styles.logo} src={logo} alt={t("common:appName")} />
-                    <img className={styles.logoDark} src={logoDark} alt={t("common:appName")} />
+                    {/* lazy: логотип другой темы спрятан в CSS, такой браузер не качает */}
+                    <img className={styles.logo} src={logo} alt={t("common:appName")} loading="lazy" />
+                    <img className={styles.logoDark} src={logoDark} alt={t("common:appName")} loading="lazy" />
                     <h1 className={styles.title}>{t("title")}</h1>
                     <p className={styles.description}>{t("description")}</p>
 

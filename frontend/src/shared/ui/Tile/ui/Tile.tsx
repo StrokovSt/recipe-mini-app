@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import ForwardIcon from "@/shared/assets/icons/icon-forward.svg?react";
 import MoreIcon from "@/shared/assets/icons/icon-more.svg?react";
-import { BrushPaint } from "@/shared/ui/BrushPaint";
 import { Dropdown, type DropdownItem } from "@/shared/ui/Dropdown";
 
 import styles from "./Tile.module.scss";
@@ -20,19 +19,16 @@ interface TileProps {
     row?: boolean;
     // Низкая плитка: иконка рядом с названием, ⋯ пилюлей на верхней рамке, как у шагов рецепта
     compact?: boolean;
-    // Плитка гуашью (shared/ui/BrushPaint): цвет краски задаёт родитель через --paint*
-    painted?: boolean;
     className?: string;
 }
 
 // Плитка раздела: вся плитка ведёт по ссылке, в углу меню действий
 export const Tile = (props: TileProps) => {
-    const { icon, title, to, subtitle, menu, menuLabel, row, compact, painted, className } = props;
+    const { icon, title, to, subtitle, menu, menuLabel, row, compact, className } = props;
     const single = menu.length === 1 ? menu[0] : undefined;
 
     return (
-        <article className={clsx(styles.tile, row && styles.row, compact && styles.compact, painted && styles.painted, className)}>
-            {painted && <BrushPaint />}
+        <article className={clsx(styles.tile, row && styles.row, compact && styles.compact, className)}>
             <span className={styles.icon} aria-hidden>{icon}</span>
             {/* «⋯» пилюлей на верхней рамке. Одно действие — сразу кнопка, меню из одного пункта не нужно */}
             {single ? (

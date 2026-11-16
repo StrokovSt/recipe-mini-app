@@ -13,9 +13,7 @@
     "categories": "Categorias",
     "tags": "Tags",
     "yourCollection": "Sua coleção",
-    "resetFilters": "Redefinir filtros",
     "allRecipes": "Todas as receitas",
     "recipeCount": "{{count}} rec.",
-    "noRecipes": "Vazio",
-    "total": "Total: {{count}}"
+    "noRecipes": "Vazio"
 }

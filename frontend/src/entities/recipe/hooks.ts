@@ -18,6 +18,8 @@ export const RECIPE_KEYS = {
 // Ключи списков тегов и категорий: у них есть счётчик рецептов, его нужно обновлять после изменений рецептов
 const TAGS_KEY = ["tags"] as const;
 const CATEGORIES_KEY = ["categories"] as const;
+// Ключ профиля: в нём число рецептов пользователя, оно меняется при добавлении и удалении
+const ME_KEY = ["me"] as const;
 
 // После добавления и удаления рецепта открывается главная. Если перейти сразу, она покажет старый список
 // из кэша, а через мгновение новый, и список моргнёт. Поэтому mutation ждёт свежие списки (onSuccess возвращает
@@ -41,11 +43,26 @@ export function useRecipes(filters: GetRecipesProps) {
     });
 }
 
+// Рецепт из уже загруженного списка (списки отдают рецепты целиком) и время, когда список получен.
+// Список, который ждёт обновления после изменений, не подходит: рецепт в нём мог устареть
+const findInLists = (queryClient: QueryClient, id: string) => {
+    for (const [queryKey, recipes] of queryClient.getQueriesData<Recipe[]>({ queryKey: RECIPE_KEYS.lists() })) {
+        const recipe = recipes?.find((item) => item.id === id);
+        const state = queryClient.getQueryState(queryKey);
+        if (recipe && state && !state.isInvalidated) return { recipe, updatedAt: state.dataUpdatedAt };
+    }
+};
+
 export function useRecipe(id: string) {
+    const queryClient = useQueryClient();
+
     return useQuery({
         queryKey: RECIPE_KEYS.detail(id),
         queryFn: () => recipeApi.getById(id),
         enabled: !!id,
+        // Рецепт из списка открывается сразу, без запроса и без сети. Его свежесть считается от загрузки списка
+        initialData: () => findInLists(queryClient, id)?.recipe,
+        initialDataUpdatedAt: () => findInLists(queryClient, id)?.updatedAt,
     });
 }
 
@@ -58,6 +75,7 @@ export function useCreateRecipe() {
             queryClient.invalidateQueries({ queryKey: RECIPE_KEYS.categories() });
             queryClient.invalidateQueries({ queryKey: TAGS_KEY });
             queryClient.invalidateQueries({ queryKey: CATEGORIES_KEY });
+            queryClient.invalidateQueries({ queryKey: ME_KEY });
             return refetchRecipeLists(queryClient);
         },
     });
@@ -86,6 +104,7 @@ export function useDeleteRecipe() {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: TAGS_KEY });
             queryClient.invalidateQueries({ queryKey: CATEGORIES_KEY });
+            queryClient.invalidateQueries({ queryKey: ME_KEY });
             return refetchRecipeLists(queryClient);
         },
     });

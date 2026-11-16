@@ -12,9 +12,10 @@
     color: var(--color-accent);
 }
 
+// По центру места под контент: слева от него боковая навигация (на телефоне её нет, --size-side-nav = 0)
 .overlay {
     position: fixed;
-    inset: 0;
+    inset: 0 0 0 var(--size-side-nav);
     z-index: var(--z-above);
     display: flex;
     flex-direction: column;

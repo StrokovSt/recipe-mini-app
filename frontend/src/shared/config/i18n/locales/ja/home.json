@@ -13,9 +13,7 @@
     "categories": "カテゴリー",
     "tags": "タグ",
     "yourCollection": "あなたのコレクション",
-    "resetFilters": "フィルターをリセット",
     "allRecipes": "すべてのレシピ",
     "recipeCount": "{{count}}件",
-    "noRecipes": "なし",
-    "total": "合計: {{count}}"
+    "noRecipes": "なし"
 }

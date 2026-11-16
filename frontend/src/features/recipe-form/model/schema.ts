@@ -61,7 +61,6 @@ export const recipeSchema = z.object({
 });
 
 export type RecipeFormValues = z.infer<typeof recipeSchema>;
-export type IngredientGroupFormValue = z.infer<typeof ingredientGroupSchema>;
 
 // Пустая форма нового рецепта
 export const EMPTY_FORM_VALUES: RecipeFormValues = {

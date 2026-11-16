@@ -6,6 +6,11 @@
     // Ни шапки, ни футера: обычные отступы страницы со всех сторон
     padding: var(--space-6) var(--space-page);
 
+    // Боковой навигации на странице входа нет: занимаем и её место, чтобы стоять по центру экрана
+    @include media.tablet {
+        margin-left: calc(-1 * var(--size-side-nav));
+    }
+
     // Телефон: логотип, заголовок, вход, затем возможности. Компьютер: о приложении слева, вход справа
     .layout {
         display: flex;
@@ -22,6 +27,7 @@
                 "intro card" auto
                 "cat card" auto / var(--size-login-intro) var(--size-login-card);
             align-items: center;
+            justify-content: center;
             gap: var(--space-2) calc(4 * var(--space-6));
             max-width: none;
         }
