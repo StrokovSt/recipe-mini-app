@@ -4,8 +4,15 @@ import { createError, ErrorCode } from "@recipe/common";
 
 import { parseRecipeFromImage, parseRecipeFromText, parseRecipeFromUrl } from "../services/parser";
 import { isPinterestUrl } from "../services/pinterest";
+import { getUser } from "../services/user";
 
 const router = Router();
+
+// Язык рецепта: язык из настроек пользователя, иначе язык браузера, иначе русский (бот языка не присылает)
+async function getRecipeLanguage(req: Request) {
+    const { language } = await getUser(req.userId as string);
+    return language ?? req.get("accept-language")?.match(/^[a-z]{2,3}/i)?.[0].toLowerCase() ?? "ru";
+}
 
 function detectSource(url: string): "pinterest" | "telegram" | "other" {
     if (isPinterestUrl(url)) return "pinterest";
@@ -48,7 +55,7 @@ router.post("/", async (req: Request, res: Response) => {
     }
 
     try {
-        const recipe = await parseRecipeFromUrl(url, req.userId as string);
+        const recipe = await parseRecipeFromUrl(url, req.userId as string, await getRecipeLanguage(req));
         const source = detectSource(url);
         const combinedMedia = [...existingMedia, ...(recipe.media || [])];
 
@@ -69,7 +76,7 @@ router.post("/image", async (req: Request, res: Response) => {
     }
 
     try {
-        const recipe = await parseRecipeFromImage(base64, mimeType, req.userId as string);
+        const recipe = await parseRecipeFromImage(base64, mimeType, req.userId as string, await getRecipeLanguage(req));
         res.json({ ...recipe, source: "other", sourceUrl: "" });
     } catch (error) {
         handleParseError(error, res);
@@ -86,7 +93,7 @@ router.post("/text", async (req: Request, res: Response) => {
     }
 
     try {
-        const parsed = await parseRecipeFromText(text, req.userId as string);
+        const parsed = await parseRecipeFromText(text, req.userId as string, await getRecipeLanguage(req));
         res.json({ ...parsed, source: "telegram", sourceUrl: "" });
     } catch (error) {
         handleParseError(error, res);

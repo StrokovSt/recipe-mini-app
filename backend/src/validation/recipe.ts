@@ -11,6 +11,7 @@ const ingredientSchema = z.object({
     name: z.string().trim().min(1).max(200),
     amount: z.number().positive().max(100000).nullable().default(null),
     unit: z.enum(UNIT_CODES).nullable().default(null),
+    approx: z.boolean().optional(),
 });
 
 const ingredientGroupSchema = z.object({

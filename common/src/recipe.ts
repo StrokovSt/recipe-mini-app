@@ -15,11 +15,13 @@ export interface MediaInput {
 }
 
 // amount — число (диапазон «2–3» хранится нижним числом), unit — код из UNITS.
-// «По вкусу» — unit "to_taste" без amount
+// «По вкусу» — unit "to_taste" без amount.
+// approx — количество оценил ИИ, в источнике его не было (в интерфейсе «~»)
 export interface Ingredient {
     name: string;
     amount: number | null;
     unit: UnitCode | null;
+    approx?: boolean;
 }
 
 export interface IngredientGroup {

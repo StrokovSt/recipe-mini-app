@@ -62,26 +62,120 @@ export function extractJsonLd(html: string): PinterestJsonLd[] {
     return results;
 }
 
-export function extractText(html: string): string {
-    const $ = cheerio.load(html);
+type JsonLdNode = Record<string, unknown>;
 
-    const jsonLdItems = extractJsonLd(html);
+const asArray = <T>(value: T | T[] | null | undefined): T[] => (Array.isArray(value) ? value : value == null ? [] : [value]);
 
-    for (const item of jsonLdItems) {
-        const body = item.articleBody || item.description;
-        if (body && body.length > 100) {
-        return body.trim();
-        }
+const asText = (value: unknown): string =>
+    typeof value === "string" || typeof value === "number" ? cheerio.load(`<i>${value}</i>`)("i").text().replace(/\s+/g, " ").trim() : "";
+
+const isType = (node: JsonLdNode, type: string) => asArray(node["@type"]).includes(type);
+
+// Рецепт в разметке schema.org лежит где угодно: на верхнем уровне, в массиве или в @graph (WordPress)
+function findRecipeNode(items: unknown[]): JsonLdNode | null {
+    for (const item of items.flatMap((entry) => asArray(entry))) {
+        if (!item || typeof item !== "object") continue;
+
+        const node = item as JsonLdNode;
+        if (isType(node, "Recipe")) return node;
+
+        const nested = findRecipeNode(asArray(node["@graph"]));
+        if (nested) return nested;
     }
 
-    $("script, style, nav, footer, header, aside, iframe").remove();
+    return null;
+}
 
-    const content =
-        $("main, article").first().text() ||
-        $("body").text();
+// PT1H30M → 90 (минуты)
+const toMinutes = (value: unknown) => {
+    const match = typeof value === "string" ? value.match(/^P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?/) : null;
+    const minutes = match ? Number(match[1] ?? 0) * 1440 + Number(match[2] ?? 0) * 60 + Number(match[3] ?? 0) : 0;
+    return minutes > 0 ? `${minutes} min` : "";
+};
 
-    // С запасом: на старых сайтах рецепт идёт после длинного меню
-    return content.replace(/\s+/g, " ").trim().slice(0, 15000);
+// Шаги: строка, HowToStep или раздел HowToSection со своими шагами
+const toStepLines = (value: unknown): string[] =>
+    asArray(value).flatMap((step) => {
+        if (typeof step === "string") return asText(step) ? [asText(step)] : [];
+        if (!step || typeof step !== "object") return [];
+
+        const node = step as JsonLdNode;
+        if (node.itemListElement) return [asText(node.name) && `[${asText(node.name)}]`, ...toStepLines(node.itemListElement)].filter(Boolean) as string[];
+
+        const text = asText(node.text) || asText(node.name);
+        return text ? [text] : [];
+    });
+
+const NUTRITION_FIELDS = ["servingSize", "calories", "proteinContent", "fatContent", "carbohydrateContent"];
+
+// Рецепт из разметки schema.org → чистый текст для ИИ. null — разметки нет или в ней нет ингредиентов
+export function extractRecipeText(html: string): { text: string; complete: boolean } | null {
+    const recipe = findRecipeNode(extractJsonLd(html));
+    if (!recipe) return null;
+
+    const ingredients = asArray(recipe.recipeIngredient ?? recipe.ingredients).map(asText).filter(Boolean);
+    if (ingredients.length === 0) return null;
+
+    const steps = toStepLines(recipe.recipeInstructions);
+    const nutrition = (recipe.nutrition ?? {}) as JsonLdNode;
+    const nutritionLine = NUTRITION_FIELDS.map((field) => asText(nutrition[field]) && `${field}: ${asText(nutrition[field])}`).filter(Boolean).join(", ");
+
+    const lines = [
+        ["Title", asText(recipe.name)],
+        ["Description", asText(recipe.description)],
+        ["Category", asArray(recipe.recipeCategory).map(asText).join(", ")],
+        ["Cuisine", asArray(recipe.recipeCuisine).map(asText).join(", ")],
+        ["Keywords", asArray(recipe.keywords).map(asText).join(", ")],
+        ["Servings", asArray(recipe.recipeYield).map(asText).join(", ")],
+        ["Prep time", toMinutes(recipe.prepTime)],
+        ["Cook time", toMinutes(recipe.cookTime)],
+        ["Total time", toMinutes(recipe.totalTime)],
+        ["Nutrition", nutritionLine],
+        ["Ingredients", `\n${ingredients.map((line) => `- ${line}`).join("\n")}`],
+        ["Steps", steps.length ? `\n${steps.map((line) => (line.startsWith("[") ? line : `- ${line}`)).join("\n")}` : ""],
+    ];
+
+    return {
+        text: lines.filter(([, value]) => value).map(([label, value]) => `${label}: ${value}`).join("\n"),
+        complete: steps.length > 0,
+    };
+}
+
+const PAGE_TEXT_LIMIT = 15000;
+
+// Текст статьи со строками: списки ингредиентов не слипаются в одну строку
+function extractPageText(html: string): string {
+    const $ = cheerio.load(html);
+
+    $("script, style, noscript, svg, nav, footer, header, aside, iframe, form, button, [class*='comment'], #comments").remove();
+    $("br").replaceWith("\n");
+    $("p, li, div, tr, h1, h2, h3, h4, h5, h6").append("\n");
+    $("td, th").append(" ");
+
+    const content = $("main, article").first().text() || $("body").text();
+
+    return content
+        .split("\n")
+        .map((line) => line.replace(/\s+/g, " ").trim())
+        .filter(Boolean)
+        .join("\n")
+        // С запасом: на старых сайтах рецепт идёт после длинного меню
+        .slice(0, PAGE_TEXT_LIMIT);
+}
+
+// Текст страницы для ИИ. Сначала разметка рецепта schema.org: в ней нет мусора, ингредиенты и шаги уже списками.
+// Если в разметке нет шагов — добавляем текст страницы. Разметки нет — только текст страницы
+export function extractText(html: string): string {
+    const recipe = extractRecipeText(html);
+    if (recipe?.complete) return recipe.text;
+
+    const page = extractPageText(html);
+    if (recipe) return `${recipe.text}\n\nPAGE TEXT:\n${page}`.slice(0, PAGE_TEXT_LIMIT);
+
+    // Страница собирается скриптами, а текст статьи лежит только в разметке
+    const article = extractJsonLd(html).map((item) => item.articleBody?.trim() ?? "").find((body) => body.length > page.length);
+
+    return article ?? page;
 }
 
 // pageUrl нужен для относительных ссылок: «//site.com/img.jpg», «/img.jpg»

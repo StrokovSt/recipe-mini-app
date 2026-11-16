@@ -1,26 +1,37 @@
-import type { GenerativeModel, Part } from "@google/generative-ai";
+import type { Part } from "@google/genai";
 import axios from "axios";
 
-import { type IngredientGroup, UNIT_CODES, type UnitCode } from "@recipe/common";
+import { type Ingredient, type IngredientGroup, UNIT_CODES, type UnitCode } from "@recipe/common";
 
 import cloudinary from "../api/cloudinary";
-import { model, videoModel } from "../api/gemeni";
+import { generateJson, isBadRequest, STRONG_MODEL, toVideoPart } from "../api/gemeni";
 import prisma from "../lib/prisma";
-import { nutritionPrompt, type PromptContext, recipeImagePrompt, recipePrompt, recipeVideoPrompt } from "../prompts/recipe";
+import {
+    amountsPrompt,
+    amountsSchema,
+    nutritionPrompt,
+    nutritionSchema,
+    type PromptContext,
+    recipeImagePrompt,
+    recipePrompt,
+    recipeSchema,
+    recipeVideoPrompt,
+} from "../prompts/recipe";
 import { MediaItem, ParsedRecipeAI } from "../types/pinterest";
 import { formatIngredient } from "../utils/formatIngredient";
 import { extractMedia, extractText, fetchPage } from "../utils/scraper";
 import { extractPin, fetchCaptions, isPinterestUrl, pinToText, toPlayableVideo } from "./pinterest";
 import { ensureCategories, ensureTags, getFallbackCategory } from "./userDefaults";
+import { fetchYoutubeVideo, getYoutubeId, youtubeToText } from "./youtube";
 
-const MAX_RETRIES = 3;
-const RETRY_DELAY = 2000;
 // Видео длиннее ~3 минут (720p) в Gemini не отправляем
 const MAX_VIDEO_BYTES = 60 * 1024 * 1024;
-// Больше этого видео не влезет внутрь запроса к Gemini
-const MAX_INLINE_VIDEO_BYTES = 20 * 1024 * 1024;
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// Ролики YouTube длиннее часа ИИ не смотрит: рецепт берём только из описания
+const MAX_YOUTUBE_SECONDS = 60 * 60;
+// Короче этого в тексте рецепта быть не может
+const MIN_TEXT_LENGTH = 50;
+// Больше такой доли ингредиентов без количества или с количеством «на глаз» — результат слабый
+const WEAK_SHARE = 1 / 3;
 
 // Ответ Gemini как есть: категория и теги — названия, поля могут быть не того типа
 interface RawRecipeAI {
@@ -45,29 +56,70 @@ interface UserLists {
     fallbackCategoryId: string;
 }
 
-export async function parseRecipeFromUrl(url: string, userId: string) {
+export async function parseRecipeFromUrl(url: string, userId: string, language: string) {
+    const youtubeId = getYoutubeId(url);
+    if (youtubeId) return parseYoutube(youtubeId, userId, language);
+
     const html = await fetchPage(url);
 
-    if (isPinterestUrl(url)) return parsePin(html, userId);
+    if (isPinterestUrl(url)) return parsePin(html, userId, language);
 
     const text = extractText(html);
 
-    if (!text || text.length < 50) {
+    if (!text || text.length < MIN_TEXT_LENGTH) {
         throw new Error("Не удалось извлечь текст со страницы");
     }
 
     const lists = await getUserLists(userId);
-    const raw = await generateWithRetry(text, toPromptContext(lists));
+    const recipe = await recognizeText(text, toPromptContext(lists, language), lists);
     const media = extractMedia(html, url);
     const cover = await storeImage(media.find((item) => item.type === "image")?.url ?? null);
     const video = media.find((item) => item.type === "video")?.url ?? null;
 
-    return { ...(await withNutrition(normalizeRecipe(raw, lists))), media: toMediaList(cover, video) };
+    return { ...(await complete(recipe)), media: toMediaList(cover, video) };
 }
 
-// Пин: название, описание и субтитры видео → ИИ. Если в тексте нет ингредиентов или шагов — ИИ смотрит само видео.
+// YouTube: сначала описание под роликом и комментарии автора, там часто лежит весь рецепт. Если рецепт из него неполный
+// или количества «на глаз» — ИИ смотрит сам ролик вместе с описанием. Видео в рецепт не кладём: ссылка остаётся в источнике
+async function parseYoutube(id: string, userId: string, language: string) {
+    const video = await fetchYoutubeVideo(id);
+    const text = youtubeToText(video);
+    const lists = await getUserLists(userId);
+    const context = toPromptContext(lists, language);
+
+    const fromText =
+        video.description.length + video.comments.length >= MIN_TEXT_LENGTH
+            ? await recognizeText(text, context, lists).catch((error) => {
+                  if (isNotFound(error)) return null;
+                  throw error;
+              })
+            : null;
+
+    const fromVideo =
+        isWeak(fromText) && video.duration <= MAX_YOUTUBE_SECONDS
+            ? await generateFromVideoPart({ fileData: { fileUri: video.url } }, text, context)
+                  .then((raw) => normalizeRecipe(raw, lists))
+                  .catch((error) => {
+                      // Рецепт из описания уже есть — ошибка видео импорт не ломает
+                      if (!fromText) throw error;
+                      console.warn("Не удалось распознать видео YouTube:", error instanceof Error ? error.message : error);
+                      return null;
+                  })
+            : null;
+
+    const found = pickBetter(fromText, fromVideo);
+    if (!found) throw new Error("Рецепт не найден");
+
+    const recipe = await complete(found);
+    const cover = await storeImage(video.cover);
+
+    return { ...recipe, title: recipe.title || video.title, media: toMediaList(cover, null) };
+}
+
+// Пин: название, описание и субтитры видео → ИИ. Если рецепт из текста неполный или количества в нём «на глаз» —
+// ИИ смотрит само видео вместе с этим текстом.
 // Видео и превью берём всегда: пин с видео без рецепта сохраняется как рецепт-видео с пустыми ингредиентами и шагами
-async function parsePin(html: string, userId: string) {
+async function parsePin(html: string, userId: string, language: string) {
     const pin = extractPin(html);
     const [captions, video] = await Promise.all([
         pin.captionsUrl ? fetchCaptions(pin.captionsUrl) : "",
@@ -75,16 +127,16 @@ async function parsePin(html: string, userId: string) {
     ]);
     const text = pinToText(pin, captions);
     const lists = await getUserLists(userId);
-    const context = toPromptContext(lists);
+    const context = toPromptContext(lists, language);
 
     const fromText = await recognizePin(text, video ? null : pin.cover, context, lists).catch((error) => {
         if (video && isNotFound(error)) return null;
         throw error;
     });
 
-    const fromVideo = video && !isComplete(fromText) ? await recognizeVideo(video, context, lists) : null;
-    const found = fromVideo ?? fromText;
-    const recipe = found ? await withNutrition(found) : emptyRecipe(lists);
+    const fromVideo = video && isWeak(fromText) ? await recognizeVideo(video, text, context, lists) : null;
+    const found = pickBetter(fromText, fromVideo);
+    const recipe = found ? await complete(found) : emptyRecipe(lists);
 
     // Обложку заливаем только после распознавания, чтобы при ошибке не оставлять файлы в Cloudinary
     const cover = await storeImage(pin.cover);
@@ -92,46 +144,100 @@ async function parsePin(html: string, userId: string) {
     return { ...recipe, title: recipe.title || pin.title, media: toMediaList(cover, video) };
 }
 
-const isComplete = (recipe: ParsedRecipeAI | null) => !!recipe && recipe.ingredients.length > 0 && recipe.steps.length > 0;
+const allItems = (recipe: ParsedRecipeAI) => recipe.ingredients.flatMap((group) => group.items);
+
+// Ингредиент без точного количества: пусто или оценка ИИ. «По вкусу» количеством не считается
+const isVague = (item: Ingredient) => item.unit !== "to_taste" && (item.amount === null || !!item.approx);
+
+const vagueShare = (recipe: ParsedRecipeAI) => {
+    const items = allItems(recipe).filter((item) => item.unit !== "to_taste");
+    return items.length ? items.filter(isVague).length / items.length : 0;
+};
+
+// Слабый результат: нет ингредиентов или шагов, либо у многих ингредиентов нет точного количества
+const isWeak = (recipe: ParsedRecipeAI | null) =>
+    !recipe || recipe.ingredients.length === 0 || recipe.steps.length === 0 || vagueShare(recipe) > WEAK_SHARE;
+
+// Чем полнее рецепт и чем больше точных количеств, тем выше оценка
+const score = (recipe: ParsedRecipeAI | null) =>
+    recipe ? (recipe.ingredients.length ? 2 : 0) + (recipe.steps.length ? 2 : 0) + (1 - vagueShare(recipe)) : -1;
+
+// При равной оценке остаётся первый
+const pickBetter = (first: ParsedRecipeAI | null, second: ParsedRecipeAI | null) => (score(second) > score(first) ? second : first);
+
+// «200 г», «2 ст. л.», «1 cup», «½ tsp»: количество с единицей в исходном тексте
+const QUANTITY_PATTERN = /[\d½¼¾⅓⅔]\s*(?:г|гр|кг|мл|л|ст|ч|шт|стак|зуб|g|kg|ml|l|oz|lb|cups?|tbsp|tsp|pcs|cloves?)(?![\p{L}])/giu;
+
+const countQuantities = (text: string) => text.match(QUANTITY_PATTERN)?.length ?? 0;
+
+// Текст → рецепт. Быстрая модель пропустила количества, которые в тексте есть, — вторая попытка на сильной
+async function recognizeText(text: string, context: PromptContext, lists: UserLists) {
+    const parts = [{ text: recipePrompt(text, context) }];
+    const fast = normalizeRecipe(await generateRecipe(parts, context), lists);
+
+    const missed = allItems(fast).filter(isVague).length;
+    if (!isWeak(fast) || countQuantities(text) < missed) return fast;
+
+    try {
+        return pickBetter(fast, normalizeRecipe(await generateRecipe(parts, context, STRONG_MODEL), lists)) ?? fast;
+    } catch (error) {
+        console.warn("Вторая попытка распознавания не удалась:", error instanceof Error ? error.message : error);
+        return fast;
+    }
+}
 
 // Видео → рецепт. Любая ошибка импорт не ломает: остаётся то, что нашлось в тексте
-async function recognizeVideo(url: string, context: PromptContext, lists: UserLists) {
+async function recognizeVideo(url: string, text: string, context: PromptContext, lists: UserLists) {
     // HLS (.m3u8) Gemini не читает
     if (!url.endsWith(".mp4")) return null;
 
     try {
-        const { headers } = await axios.head(url, { timeout: 5000 });
-        const size = Number(headers["content-length"]) || 0;
+        // Размер узнать не вышло (хостинг видео отвечает медленно) — пробуем скачать, лишнее отсечёт maxContentLength
+        const size = await axios
+            .head(url, { timeout: 15000 })
+            .then(({ headers }) => Number(headers["content-length"]) || 0)
+            .catch(() => 0);
         if (size > MAX_VIDEO_BYTES) return null;
 
-        return normalizeRecipe(await generateFromVideo(url, size, context), lists);
+        return normalizeRecipe(await generateFromVideo(url, text, context), lists);
     } catch (error) {
         console.warn("Не удалось распознать видео:", error instanceof Error ? error.message : error);
         return null;
     }
 }
 
-// Сначала даём Gemini ссылку: файл он скачает сам. Не взял по ссылке — скачиваем и отправляем внутри запроса
-async function generateFromVideo(url: string, size: number, context: PromptContext) {
-    const prompt = { text: recipeVideoPrompt(context) };
+// Видео скачиваем сами и отдаём Gemini файлом: по чужой ссылке он его не открывает
+async function generateFromVideo(url: string, text: string, context: PromptContext) {
+    const { data } = await axios.get<ArrayBuffer>(url, { responseType: "arraybuffer", timeout: 60000, maxContentLength: MAX_VIDEO_BYTES });
+    const { part, remove } = await toVideoPart(Buffer.from(data), "video/mp4");
 
     try {
-        return await generatePartsWithRetry(videoModel, [{ fileData: { fileUri: url, mimeType: "video/mp4" } }, prompt]);
-    } catch (error) {
-        const message = error instanceof Error ? error.message : String(error);
-        if (!size || size > MAX_INLINE_VIDEO_BYTES || message.startsWith("QUOTA_EXCEEDED")) throw error;
+        return await generateFromVideoPart(part, text, context);
+    } finally {
+        await remove();
+    }
+}
 
-        console.warn("Gemini не взял видео по ссылке, отправляем файлом:", message);
-        const { base64, mimeType } = await downloadFile(url);
-        return generatePartsWithRetry(videoModel, [{ inlineData: { mimeType, data: base64 } }, prompt]);
+// Видео смотрит сильная модель: быстрая пропускает шаги и количества. text — подпись, описание или субтитры
+async function generateFromVideoPart(video: Part, text: string, context: PromptContext) {
+    const parts = [video, { text: recipeVideoPrompt(context, text) }];
+
+    try {
+        return await generateRecipe(parts, context, STRONG_MODEL, true);
+    } catch (error) {
+        if (!isBadRequest(error)) throw error;
+
+        // Не каждая модель принимает низкое разрешение видео
+        console.warn("Gemini не принял видео в низком разрешении, отправляем в обычном");
+        return generateRecipe(parts, context, STRONG_MODEL);
     }
 }
 
 // Сначала текст пина. Если рецепта в нём нет — картинка пина: часто рецепт написан прямо на ней
 async function recognizePin(text: string, image: string | null, context: PromptContext, lists: UserLists) {
-    if (text.length >= 50) {
+    if (text.length >= MIN_TEXT_LENGTH) {
         try {
-            return normalizeRecipe(await generateWithRetry(text, context), lists);
+            return await recognizeText(text, context, lists);
         } catch (error) {
             if (!image || !isNotFound(error)) throw error;
         }
@@ -140,7 +246,7 @@ async function recognizePin(text: string, image: string | null, context: PromptC
     if (!image) throw new Error("Рецепт не найден");
 
     const { base64, mimeType } = await downloadFile(image);
-    return normalizeRecipe(await generateFromImageWithRetry(base64, mimeType, context), lists);
+    return normalizeRecipe(await generateFromImage(base64, mimeType, context), lists);
 }
 
 const isNotFound = (error: unknown) => error instanceof Error && error.message.includes("Рецепт не найден");
@@ -187,16 +293,16 @@ const toMediaList = (cover: string | null, video: string | null): MediaItem[] =>
     ...(video ? [{ url: video, type: "video" as const }] : []),
 ];
 
-export async function parseRecipeFromImage(base64: string, mimeType: string, userId: string) {
+export async function parseRecipeFromImage(base64: string, mimeType: string, userId: string, language: string) {
     const lists = await getUserLists(userId);
-    const raw = await generateFromImageWithRetry(base64, mimeType, toPromptContext(lists));
-    return { ...(await withNutrition(normalizeRecipe(raw, lists))), media: [] };
+    const raw = await generateFromImage(base64, mimeType, toPromptContext(lists, language));
+    return { ...(await complete(normalizeRecipe(raw, lists))), media: [] };
 }
 
-export async function parseRecipeFromText(text: string, userId: string) {
+export async function parseRecipeFromText(text: string, userId: string, language: string) {
     const lists = await getUserLists(userId);
-    const raw = await generateWithRetry(text, toPromptContext(lists));
-    return { ...(await withNutrition(normalizeRecipe(raw, lists))), media: [] };
+    const recipe = await recognizeText(text, toPromptContext(lists, language), lists);
+    return { ...(await complete(recipe)), media: [] };
 }
 
 async function getUserLists(userId: string): Promise<UserLists> {
@@ -211,9 +317,10 @@ async function getUserLists(userId: string): Promise<UserLists> {
     return { categories, tags, fallbackCategoryId: fallback.id };
 }
 
-const toPromptContext = (lists: UserLists): PromptContext => ({
+const toPromptContext = (lists: UserLists, language: string): PromptContext => ({
     categories: lists.categories.map((category) => category.name),
     tags: lists.tags.map((tag) => tag.name),
+    language,
 });
 
 // Сравнение названий без учёта регистра и лишних пробелов
@@ -255,17 +362,18 @@ function normalizeRecipe(raw: RawRecipeAI, lists: UserLists): ParsedRecipeAI {
             title: toText(group?.title) || null,
             items: (Array.isArray(group?.items) ? group.items : [])
                 .map((item: unknown) => {
-                    // Старый формат ответа: ингредиент строкой
-                    if (typeof item === "string") return { name: item.trim(), amount: null, unit: null };
+                    const { name, amount, unit, approx } = (item ?? {}) as Record<string, unknown>;
+                    const value = toNumber(amount);
 
-                    const { name, amount, unit } = (item ?? {}) as Record<string, unknown>;
                     return {
                         name: toText(name),
-                        amount: toNumber(amount),
+                        amount: value,
                         unit: isUnitCode(unit) ? unit : null,
+                        // Пометка «~» только там, где количество есть и его оценил ИИ
+                        ...(approx === true && value !== null && { approx: true }),
                     };
                 })
-                .filter((item: { name: string }) => item.name),
+                .filter((item: Ingredient) => item.name),
         }))
         .filter((group) => group.items.length > 0);
 
@@ -296,15 +404,54 @@ function normalizeRecipe(raw: RawRecipeAI, lists: UserLists): ParsedRecipeAI {
     };
 }
 
+// Доводим рецепт: сначала недостающие количества, потом КБЖУ (ему количества нужны)
+const complete = async (recipe: ParsedRecipeAI) => withNutrition(await withAmounts(recipe));
+
+// ИИ оставил ингредиенты без количества — оцениваем их отдельным запросом и помечаем «~». Не вышло — оставляем пустыми
+async function withAmounts(recipe: ParsedRecipeAI): Promise<ParsedRecipeAI> {
+    const items = allItems(recipe);
+    const missing = items.flatMap((item, index) => (item.amount === null && item.unit !== "to_taste" ? [index + 1] : []));
+    if (missing.length === 0) return recipe;
+
+    try {
+        const raw = await generateJson<{ items?: { index?: unknown; amount?: unknown; unit?: unknown }[] }>({
+            parts: [{ text: amountsPrompt(recipe.title, recipe.servings, items.map(formatIngredient), missing) }],
+            schema: amountsSchema,
+        });
+        const estimates = new Map((raw.items ?? []).map((item) => [Number(item.index), item]));
+        let number = 0;
+
+        return {
+            ...recipe,
+            ingredients: recipe.ingredients.map((group) => ({
+                ...group,
+                items: group.items.map((item) => {
+                    number += 1;
+                    const estimate = missing.includes(number) ? estimates.get(number) : undefined;
+                    const amount = toNumber(estimate?.amount);
+                    if (amount === null) return item;
+
+                    return { ...item, amount, unit: isUnitCode(estimate?.unit) && estimate.unit !== "to_taste" ? estimate.unit : item.unit, approx: true };
+                }),
+            })),
+        };
+    } catch (error) {
+        console.warn("Не удалось оценить количества:", error instanceof Error ? error.message : error);
+        return recipe;
+    }
+}
+
 // КБЖУ не пришло вместе с рецептом — досчитываем отдельным запросом. Не вышло — оставляем пустым
 async function withNutrition(recipe: ParsedRecipeAI): Promise<ParsedRecipeAI> {
     if (recipe.calories !== null || recipe.ingredients.length === 0) return recipe;
 
-    const ingredients = recipe.ingredients.flatMap((group) => group.items.map(formatIngredient));
+    const ingredients = allItems(recipe).map(formatIngredient);
 
     try {
-        const result = await model.generateContent(nutritionPrompt(recipe.title, recipe.servings, ingredients));
-        const raw = parseJson(result.response.text());
+        const raw = await generateJson<RawRecipeAI>({
+            parts: [{ text: nutritionPrompt(recipe.title, recipe.servings, ingredients) }],
+            schema: nutritionSchema,
+        });
         return {
             ...recipe,
             calories: toNutrition(raw.calories),
@@ -318,47 +465,8 @@ async function withNutrition(recipe: ParsedRecipeAI): Promise<ParsedRecipeAI> {
     }
 }
 
-async function generateWithRetry(text: string, context: PromptContext, attempt = 1): Promise<RawRecipeAI> {
-    try {
-        const result = await model.generateContent(recipePrompt(text, context));
-        return parseJson(result.response.text());
-    } catch (error) {
-        return handleRetry(error, attempt, () => generateWithRetry(text, context, attempt + 1));
-    }
-}
+const generateRecipe = (parts: Part[], context: PromptContext, model?: string, lowResolution?: boolean) =>
+    generateJson<RawRecipeAI>({ parts, schema: recipeSchema(context), model, lowResolution });
 
-const generateFromImageWithRetry = (base64: string, mimeType: string, context: PromptContext) =>
-    generatePartsWithRetry(model, [{ inlineData: { mimeType, data: base64 } }, { text: recipeImagePrompt(context) }]);
-
-async function generatePartsWithRetry(target: GenerativeModel, parts: Part[], attempt = 1): Promise<RawRecipeAI> {
-    try {
-        const result = await target.generateContent(parts);
-        return parseJson(result.response.text());
-    } catch (error) {
-        return handleRetry(error, attempt, () => generatePartsWithRetry(target, parts, attempt + 1));
-    }
-}
-
-function parseJson(raw: string) {
-    const cleaned = raw.replace(/^```json\n?/, "").replace(/\n?```$/, "").trim();
-    return JSON.parse(cleaned) as RawRecipeAI;
-}
-
-function handleRetry<T>(error: unknown, attempt: number, retry: () => Promise<T>): Promise<T> {
-    const message = error instanceof Error ? error.message : "";
-    const is503 = message.includes("503");
-    const is429 = message.includes("429");
-
-    if (is503 && attempt < MAX_RETRIES) {
-        console.warn(`Gemini 503, повтор ${attempt}/${MAX_RETRIES} через ${RETRY_DELAY * attempt}ms...`);
-        return sleep(RETRY_DELAY * attempt).then(retry);
-    }
-
-    if (is429) {
-        const retryMatch = message.match(/retryDelay.*?(\d+)s/);
-        const retryAfter = retryMatch ? parseInt(retryMatch[1]) * 1000 : 60000;
-        throw new Error(`QUOTA_EXCEEDED:${retryAfter}`);
-    }
-
-    throw error;
-}
+const generateFromImage = (base64: string, mimeType: string, context: PromptContext) =>
+    generateRecipe([{ inlineData: { mimeType, data: base64 } }, { text: recipeImagePrompt(context) }], context);

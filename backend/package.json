@@ -11,6 +11,7 @@
     "db:migrate": "npx prisma migrate dev",
     "test:scraper": "tsx src/utils/test-scraper.ts",
     "test:parser": "tsx src/utils/test-parser.ts",
+    "test:models": "tsx src/scripts/list-models.ts",
     "test:save": "tsx src/utils/test-save.ts"
   },
   "keywords": [],
@@ -19,7 +20,7 @@
   "description": "",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
-    "@google/generative-ai": "^0.24.1",
+    "@google/genai": "^3.3.0",
     "@prisma/client": "^6.19.2",
     "@recipe/common": "*",
     "axios": "^1.13.6",
